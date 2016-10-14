@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://linw1995.github.io/"/>
-  <updated>2016-10-14T17:15:20.035Z</updated>
+  <updated>2016-10-14T17:16:26.254Z</updated>
   <id>http://linw1995.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://linw1995.github.io/2016/10/15/%E5%A6%82%E4%BD%95%E9%85%8D%E7%BD%AEVisual-Studio-Code-MinGW%E4%B8%8B%E7%9A%84C-%E7%8E%AF%E5%A2%83/"/>
     <id>http://linw1995.github.io/2016/10/15/如何配置Visual-Studio-Code-MinGW下的C-环境/</id>
     <published>2016-10-14T16:39:06.000Z</published>
-    <updated>2016-10-14T17:15:20.035Z</updated>
+    <updated>2016-10-14T17:16:26.254Z</updated>
     
     <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>官方文档至今还没翻译成中文，足足琢磨了好几天明白了一些VS Code的功能。<br>现在给大家分享以下。<br> <a id="more"></a> </p>
 <h2 id="工具介绍"><a href="#工具介绍" class="headerlink" title="工具介绍"></a>工具介绍</h2><h3 id="VS-Code-–-Visual-Studio-Code"><a href="#VS-Code-–-Visual-Studio-Code" class="headerlink" title="VS Code – Visual Studio Code"></a>VS Code – Visual Studio Code</h3><img src="/2016/10/15/如何配置Visual-Studio-Code-MinGW下的C-环境/2016-10-14_061710.470637_Visual_Studio_Code_0.10.1_icon.png" alt="2016-10-14_061710.470637_Visual_Studio_Code_0.10.1_icon.png" title="">

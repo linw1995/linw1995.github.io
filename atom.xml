@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://linw1995.github.io/"/>
-  <updated>2016-10-15T01:17:10.042Z</updated>
+  <updated>2016-10-15T01:19:52.977Z</updated>
   <id>http://linw1995.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://linw1995.github.io/2016/10/14/%E5%A6%82%E4%BD%95%E9%85%8D%E7%BD%AEVisual-Studio-Code-MinGW%E4%B8%8B%E7%9A%84C-%E7%8E%AF%E5%A2%83/"/>
     <id>http://linw1995.github.io/2016/10/14/如何配置Visual-Studio-Code-MinGW下的C-环境/</id>
     <published>2016-10-14T09:49:06.000Z</published>
-    <updated>2016-10-15T01:17:10.042Z</updated>
+    <updated>2016-10-15T01:19:52.977Z</updated>
     
     <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>官方文档至今还没翻译成中文，足足琢磨了好几天明白了一些VS Code的功能。<br>现在给大家分享以下。</p>
 <a id="more"></a>
@@ -31,22 +31,15 @@
 <blockquote><p>Visual Studio Code支持多种编程语言。与其他编辑器不同的是，Code的许多功能并不在菜单中显示，而是通过“命令面板”来调用。用户可以在命令面板中搜索和输入命令，从而实现指定功能，例如安装插件、设置属性等。<br>Code具备了现代文本编辑器所具有的功能，例如更改字符编码、更换换行符等。</p>
 <footer><strong>wikipedia</strong><cite><a href="https://zh.wikipedia.org/wiki/Visual_Studio_Code" target="_blank" rel="external">Visual Studio Code</a></cite></footer></blockquote>
 <h3 id="MinGW"><a href="#MinGW" class="headerlink" title="MinGW"></a>MinGW</h3><p>提供了G++编译器<br><blockquote><p>MinGW（Minimalist GNU for Windows），又称mingw32，是将GCC编译器和GNU Binutils移植到Win32平台下的产物，包括一系列头文件（Win32API）、库和可执行文件。<br>另有可用于产生32位及64位Windows可执行文件的MinGW-w64项目，是从原本MinGW产生的分支。如今已经独立发展。</p>
-<footer><strong>wikipedia</strong><cite><a href="https://zh.wikipedia.org/wiki/Visual_Studio_Code" target="_blank" rel="external">Visual Studio Code</a></cite></footer></blockquote></p>
+<footer><strong>wikipedia</strong><cite><a href="https://zh.wikipedia.org/wiki/MinGW" target="_blank" rel="external">MinGW</a></cite></footer></blockquote></p>
 <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><ul>
-<li><p>VS Code<br>按照安装提示一步步进行即可</p>
-</li>
-<li><p>MinGW<br>按照安装提示一步步进行，安装完成后。<br>会弹出以下界面</p>
-
-<p>照图片选择，然后在菜单栏Installation中选择Apply changes，然后等待程序下载安装编译器。<br>以上步骤结束后，设置系统变量<br>右键我的电脑，选择属性</p>
-
-<p>选择高级系统设置，再选择环境变量</p>
-
-<p>再Path变量中添加MinGW根目录下的bin文件夹的路径</p>
-
-<p>打开CMD，输入<code>g++ -v</code>出现以下信息安装就成功咯</p>
-
-</li>
+<li>VS Code</li>
 </ul>
+<p>按照安装提示一步步进行即可</p>
+<ul>
+<li>MinGW</li>
+</ul>
+<p>按照安装提示一步步进行，安装完成后。<br>会弹出以下界面<br><br>照图片选择，然后在菜单栏Installation中选择Apply changes，然后等待程序下载安装编译器。<br>以上步骤结束后，设置系统变量<br>右键我的电脑，选择属性<br><br>选择高级系统设置，再选择环境变量<br><br>再Path变量中添加MinGW根目录下的bin文件夹的路径<br><br>打开CMD，输入<code>g++ -v</code>出现以下信息安装就成功咯<br></p>
 <h2 id="配置VS-Code"><a href="#配置VS-Code" class="headerlink" title="配置VS Code"></a>配置VS Code</h2><p>在码配置流程前先贴出官方的不完全配置文档<br><a href="https://code.visualstudio.com/docs/languages/cpp" title="external C/C++ for VS Code (Preview)" target="_blank" rel="external">C/C++ for VS Code (Preview)</a></p>
 <ol>
 <li>打开 VS Code。</li>

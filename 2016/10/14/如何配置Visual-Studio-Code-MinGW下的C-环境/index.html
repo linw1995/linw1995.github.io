@@ -1,32 +1,29 @@
-<!DOCTYPE html><html lang="zh"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="author" content="linw"><meta name="description" content="前言官方文档至今还没翻译成中文，足足琢磨了好几天明白了一些VSCode的功能。现在给大家分享以下。"><meta name="keywords" content="C++"><title>如何配置Visual Studio Code + MinGW下的C++环境 · linw1995</title><link rel="icon" href="/favicon.ico"><link rel="canonical" href="http://linw1995.github.io/2016/10/15/如何配置Visual-Studio-Code-MinGW下的C-环境/"><link rel="alternate" href="/atom.xml" title="linw1995"><link rel="stylesheet" href="/fonts/iconfont/iconfont.css"><link rel="stylesheet" href="/css/style.css"></head><body><div id="main"><header><a href="/." class="logo">linw1995</a><ul class="nav"><li class="nav-link"><a href="/" target="_self">Home</a></li><li class="nav-link"><a href="/archives/" target="_self">Archives</a></li><li class="nav-link"><a href="/categories/" target="_self">Categories</a></li><li class="nav-link"><a href="/tags/" target="_self">Tags</a></li><li class="nav-link"><a href="/about/" target="_self">About</a></li></ul></header><section id="container"><article class="post"><h1 class="post-title">如何配置Visual Studio Code + MinGW下的C++环境</h1><span class="post-time">Oct 15, 2016</span><div id="sidebar" class="post-sidebar"><h3 class="heading">Contents</h3><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#工具介绍"><span class="toc-text">工具介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#VS-Code-–-Visual-Studio-Code"><span class="toc-text">VS Code – Visual Studio Code</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MinGW"><span class="toc-text">MinGW</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装"><span class="toc-text">安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#配置VS-Code"><span class="toc-text">配置VS Code</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用"><span class="toc-text">使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#编译"><span class="toc-text">编译</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#运行"><span class="toc-text">运行</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Debug-配置"><span class="toc-text">Debug 配置</span></a></li></ol></div><div class="post-content"><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>官方文档至今还没翻译成中文，足足琢磨了好几天明白了一些VS Code的功能。<br>现在给大家分享以下。<br> <a id="more"></a> </p>
-<h2 id="工具介绍"><a href="#工具介绍" class="headerlink" title="工具介绍"></a>工具介绍</h2><h3 id="VS-Code-–-Visual-Studio-Code"><a href="#VS-Code-–-Visual-Studio-Code" class="headerlink" title="VS Code – Visual Studio Code"></a>VS Code – Visual Studio Code</h3><img src="/2016/10/15/如何配置Visual-Studio-Code-MinGW下的C-环境/2016-10-14_061710.470637_Visual_Studio_Code_0.10.1_icon.png" alt="2016-10-14_061710.470637_Visual_Studio_Code_0.10.1_icon.png" title="">
+<!DOCTYPE html><html lang="zh"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="author" content="linw"><meta name="description" content="前言官方文档至今还没翻译成中文，足足琢磨了好几天明白了一些VSCode的功能。现在给大家分享以下。"><meta name="keywords" content="C++"><title>如何配置Visual Studio Code + MinGW下的C++环境 · linw1995</title><link rel="icon" href="/favicon.ico"><link rel="canonical" href="http://linw1995.github.io/2016/10/14/如何配置Visual-Studio-Code-MinGW下的C-环境/"><link rel="alternate" href="/atom.xml" title="linw1995"><link rel="stylesheet" href="/fonts/iconfont/iconfont.css"><link rel="stylesheet" href="/css/style.css"></head><body><div id="main"><header><a href="/." class="logo">linw1995</a><ul class="nav"><li class="nav-link"><a href="/" target="_self">Home</a></li><li class="nav-link"><a href="/archives/" target="_self">Archives</a></li><li class="nav-link"><a href="/categories/" target="_self">Categories</a></li><li class="nav-link"><a href="/tags/" target="_self">Tags</a></li><li class="nav-link"><a href="/about/" target="_self">About</a></li></ul></header><section id="container"><article class="post"><h1 class="post-title">如何配置Visual Studio Code + MinGW下的C++环境</h1><span class="post-time">Oct 14, 2016</span><div id="sidebar" class="post-sidebar"><h3 class="heading">Contents</h3><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#工具介绍"><span class="toc-text">工具介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#VS-Code-–-Visual-Studio-Code"><span class="toc-text">VS Code – Visual Studio Code</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MinGW"><span class="toc-text">MinGW</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装"><span class="toc-text">安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#配置VS-Code"><span class="toc-text">配置VS Code</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用"><span class="toc-text">使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#编译"><span class="toc-text">编译</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#运行"><span class="toc-text">运行</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Debug-配置"><span class="toc-text">Debug 配置</span></a></li></ol></div><div class="post-content"><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>官方文档至今还没翻译成中文，足足琢磨了好几天明白了一些VS Code的功能。<br>现在给大家分享以下。</p>
+<a id="more"></a>
+<h2 id="工具介绍"><a href="#工具介绍" class="headerlink" title="工具介绍"></a>工具介绍</h2><h3 id="VS-Code-–-Visual-Studio-Code"><a href="#VS-Code-–-Visual-Studio-Code" class="headerlink" title="VS Code – Visual Studio Code"></a>VS Code – Visual Studio Code</h3>
 <p>文本编辑器</p>
-<blockquote>
-<p>在2015 Build大会上宣布微软将开发 Visual Studio Code。<br>2015年4月29日，第一个预览版本发布。<br>2015年11月18日，Code团队将其在GitHub上面开源，并采用MIT许可证，同时宣布将支持扩展功能。<br>2016年4月14日，Visual Studio Code发布正式版，版本号1.0.0。<br>—- 维基百科</p>
-<p>Visual Studio Code支持多种编程语言。与其他编辑器不同的是，Code的许多功能并不在菜单中显示，而是通过“命令面板”来调用。用户可以在命令面板中搜索和输入命令，从而实现指定功能，例如安装插件、设置属性等。<br>Code具备了现代文本编辑器所具有的功能，例如更改字符编码、更换换行符等。<br>—- 维基百科</p>
-</blockquote>
-<h3 id="MinGW"><a href="#MinGW" class="headerlink" title="MinGW"></a>MinGW</h3><p>提供了G++编译器</p>
-<blockquote>
-<p>MinGW（Minimalist GNU for Windows），又称mingw32，是将GCC编译器和GNU Binutils移植到Win32平台下的产物，包括一系列头文件（Win32API）、库和可执行文件。<br>另有可用于产生32位及64位Windows可执行文件的MinGW-w64项目，是从原本MinGW产生的分支。如今已经独立发展。<br>—- 维基百科</p>
-</blockquote>
+<blockquote><p>在2015 Build大会上宣布微软将开发 Visual Studio Code。<br>2015年4月29日，第一个预览版本发布。<br>2015年11月18日，Code团队将其在GitHub上面开源，并采用MIT许可证，同时宣布将支持扩展功能。<br>2016年4月14日，Visual Studio Code发布正式版，版本号1.0.0。</p>
+<footer><strong>wikipedia</strong><cite><a href="https://zh.wikipedia.org/wiki/Visual_Studio_Code" target="_blank" rel="external">Visual Studio Code</a></cite></footer></blockquote>
+<blockquote><p>Visual Studio Code支持多种编程语言。与其他编辑器不同的是，Code的许多功能并不在菜单中显示，而是通过“命令面板”来调用。用户可以在命令面板中搜索和输入命令，从而实现指定功能，例如安装插件、设置属性等。<br>Code具备了现代文本编辑器所具有的功能，例如更改字符编码、更换换行符等。</p>
+<footer><strong>wikipedia</strong><cite><a href="https://zh.wikipedia.org/wiki/Visual_Studio_Code" target="_blank" rel="external">Visual Studio Code</a></cite></footer></blockquote>
+<h3 id="MinGW"><a href="#MinGW" class="headerlink" title="MinGW"></a>MinGW</h3><p>提供了G++编译器<br><blockquote><p>MinGW（Minimalist GNU for Windows），又称mingw32，是将GCC编译器和GNU Binutils移植到Win32平台下的产物，包括一系列头文件（Win32API）、库和可执行文件。<br>另有可用于产生32位及64位Windows可执行文件的MinGW-w64项目，是从原本MinGW产生的分支。如今已经独立发展。</p>
+<footer><strong>wikipedia</strong><cite><a href="https://zh.wikipedia.org/wiki/Visual_Studio_Code" target="_blank" rel="external">Visual Studio Code</a></cite></footer></blockquote></p>
 <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><ul>
-<li>VS Code</li>
-</ul>
-<p>按照安装提示一步步进行即可</p>
-<ul>
-<li>MinGW</li>
-</ul>
-<p>按照安装提示一步步进行，安装完成后。<br>会弹出以下界面</p>
-<img src="/2016/10/15/如何配置Visual-Studio-Code-MinGW下的C-环境/2016-10-14_062200.698190_cl_MinGWInstall.png" alt="2016-10-14_062200.698190_cl_MinGWInstall.png" title="">
+<li><p>VS Code<br>按照安装提示一步步进行即可</p>
+</li>
+<li><p>MinGW<br>按照安装提示一步步进行，安装完成后。<br>会弹出以下界面</p>
+
 <p>照图片选择，然后在菜单栏Installation中选择Apply changes，然后等待程序下载安装编译器。<br>以上步骤结束后，设置系统变量<br>右键我的电脑，选择属性</p>
-<img src="/2016/10/15/如何配置Visual-Studio-Code-MinGW下的C-环境/2016-10-14_062655.852040_QQ20161014142609.png" alt="2016-10-14_062655.852040_QQ20161014142609.png" title="">
+
 <p>选择高级系统设置，再选择环境变量</p>
-<img src="/2016/10/15/如何配置Visual-Studio-Code-MinGW下的C-环境/2016-10-14_062813.682885_QQ20161014142747.png" alt="2016-10-14_062813.682885_QQ20161014142747.png" title="">
+
 <p>再Path变量中添加MinGW根目录下的bin文件夹的路径</p>
-<img src="/2016/10/15/如何配置Visual-Studio-Code-MinGW下的C-环境/2016-10-14_063037.967301_QQ20161014142952.png" alt="2016-10-14_063037.967301_QQ20161014142952.png" title="">
+
 <p>打开CMD，输入<code>g++ -v</code>出现以下信息安装就成功咯</p>
-<img src="/2016/10/15/如何配置Visual-Studio-Code-MinGW下的C-环境/2016-10-14_063248.965706_QQ20161014143235.png" alt="2016-10-14_063248.965706_QQ20161014143235.png" title="">
-<h2 id="配置VS-Code"><a href="#配置VS-Code" class="headerlink" title="配置VS Code"></a>配置VS Code</h2><p>在码配置流程前先贴出官方的不完全配置文档<br><a href="https://code.visualstudio.com/docs/languages/cpp" title="C/C++ for VS Code (Preview)" target="_blank" rel="external">C/C++ for VS Code (Preview)</a></p>
+
+</li>
+</ul>
+<h2 id="配置VS-Code"><a href="#配置VS-Code" class="headerlink" title="配置VS Code"></a>配置VS Code</h2><p>在码配置流程前先贴出官方的不完全配置文档<br><a href="https://code.visualstudio.com/docs/languages/cpp" title="external C/C++ for VS Code (Preview)" target="_blank" rel="external">text</a></p>
 <ol>
 <li>打开 VS Code。</li>
 <li>选择侧边栏的扩展图标打开扩展栏。</li>
@@ -47,9 +44,9 @@
 <h2 id="Debug-配置"><a href="#Debug-配置" class="headerlink" title="Debug 配置"></a>Debug 配置</h2><blockquote>
 <p>暂无</p>
 </blockquote>
-</div></article><div class="tags"><a href="/tags/C/">C++</a></div><div class="paginator"></div><section id="comments"><div id="disqus_thread"></div></section><script type="text/javascript">var disqus_config = function () {
-    this.page.url = 'http://linw1995.github.io/2016/10/15/如何配置Visual-Studio-Code-MinGW下的C-环境/';
-    this.page.identifier = '2016/10/15/如何配置Visual-Studio-Code-MinGW下的C-环境/';
+</div></article><div class="tags"><a href="/tags/C/">C++</a></div><div class="paginator"><a href="/2016/10/02/搭梯子-简单教程/" class="next"><span>Next</span><i class="iconfont icon-right"></i></a></div><section id="comments"><div id="disqus_thread"></div></section><script type="text/javascript">var disqus_config = function () {
+    this.page.url = 'http://linw1995.github.io/2016/10/14/如何配置Visual-Studio-Code-MinGW下的C-环境/';
+    this.page.identifier = '2016/10/14/如何配置Visual-Studio-Code-MinGW下的C-环境/';
     this.page.title = '如何配置Visual Studio Code + MinGW下的C++环境';
 };
 (function() {

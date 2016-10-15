@@ -1,164 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom">
-  <title>linw1995</title>
-  
-  <link href="/atom.xml" rel="self"/>
-  
-  <link href="http://linw1995.github.io/"/>
-  <updated>2016-10-15T01:19:52.977Z</updated>
-  <id>http://linw1995.github.io/</id>
-  
-  <author>
-    <name>linw</name>
-    
-  </author>
-  
-  <generator uri="http://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>如何配置Visual Studio Code + MinGW下的C++环境</title>
-    <link href="http://linw1995.github.io/2016/10/14/%E5%A6%82%E4%BD%95%E9%85%8D%E7%BD%AEVisual-Studio-Code-MinGW%E4%B8%8B%E7%9A%84C-%E7%8E%AF%E5%A2%83/"/>
-    <id>http://linw1995.github.io/2016/10/14/如何配置Visual-Studio-Code-MinGW下的C-环境/</id>
-    <published>2016-10-14T09:49:06.000Z</published>
-    <updated>2016-10-15T01:19:52.977Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>官方文档至今还没翻译成中文，足足琢磨了好几天明白了一些VS Code的功能。<br>现在给大家分享以下。</p>
-<a id="more"></a>
-<h2 id="工具介绍"><a href="#工具介绍" class="headerlink" title="工具介绍"></a>工具介绍</h2><h3 id="VS-Code-–-Visual-Studio-Code"><a href="#VS-Code-–-Visual-Studio-Code" class="headerlink" title="VS Code – Visual Studio Code"></a>VS Code – Visual Studio Code</h3>
-<p>文本编辑器</p>
-<blockquote><p>在2015 Build大会上宣布微软将开发 Visual Studio Code。<br>2015年4月29日，第一个预览版本发布。<br>2015年11月18日，Code团队将其在GitHub上面开源，并采用MIT许可证，同时宣布将支持扩展功能。<br>2016年4月14日，Visual Studio Code发布正式版，版本号1.0.0。</p>
-<footer><strong>wikipedia</strong><cite><a href="https://zh.wikipedia.org/wiki/Visual_Studio_Code" target="_blank" rel="external">Visual Studio Code</a></cite></footer></blockquote>
-<blockquote><p>Visual Studio Code支持多种编程语言。与其他编辑器不同的是，Code的许多功能并不在菜单中显示，而是通过“命令面板”来调用。用户可以在命令面板中搜索和输入命令，从而实现指定功能，例如安装插件、设置属性等。<br>Code具备了现代文本编辑器所具有的功能，例如更改字符编码、更换换行符等。</p>
-<footer><strong>wikipedia</strong><cite><a href="https://zh.wikipedia.org/wiki/Visual_Studio_Code" target="_blank" rel="external">Visual Studio Code</a></cite></footer></blockquote>
-<h3 id="MinGW"><a href="#MinGW" class="headerlink" title="MinGW"></a>MinGW</h3><p>提供了G++编译器<br><blockquote><p>MinGW（Minimalist GNU for Windows），又称mingw32，是将GCC编译器和GNU Binutils移植到Win32平台下的产物，包括一系列头文件（Win32API）、库和可执行文件。<br>另有可用于产生32位及64位Windows可执行文件的MinGW-w64项目，是从原本MinGW产生的分支。如今已经独立发展。</p>
-<footer><strong>wikipedia</strong><cite><a href="https://zh.wikipedia.org/wiki/MinGW" target="_blank" rel="external">MinGW</a></cite></footer></blockquote></p>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><ul>
-<li>VS Code</li>
-</ul>
-<p>按照安装提示一步步进行即可</p>
-<ul>
-<li>MinGW</li>
-</ul>
-<p>按照安装提示一步步进行，安装完成后。<br>会弹出以下界面<br><br>照图片选择，然后在菜单栏Installation中选择Apply changes，然后等待程序下载安装编译器。<br>以上步骤结束后，设置系统变量<br>右键我的电脑，选择属性<br><br>选择高级系统设置，再选择环境变量<br><br>再Path变量中添加MinGW根目录下的bin文件夹的路径<br><br>打开CMD，输入<code>g++ -v</code>出现以下信息安装就成功咯<br></p>
-<h2 id="配置VS-Code"><a href="#配置VS-Code" class="headerlink" title="配置VS Code"></a>配置VS Code</h2><p>在码配置流程前先贴出官方的不完全配置文档<br><a href="https://code.visualstudio.com/docs/languages/cpp" title="external C/C++ for VS Code (Preview)" target="_blank" rel="external">C/C++ for VS Code (Preview)</a></p>
-<ol>
-<li>打开 VS Code。</li>
-<li>选择侧边栏的扩展图标打开扩展栏。</li>
-<li>搜索cpptools。</li>
-<li>点击安装，安装完成后点击启用，重启后静待cpptools完成最后一步安装。</li>
-<li>完成后打开一个文件夹。（空文件夹也行）</li>
-<li>设置#include路径，按住<code>ctrl</code>+<code>shift</code>+<code>P</code>呼出命令窗口，输入<code>C/Cpp: Edit Configurations</code>回车，在变量name为Win32的字典里的includePath中的值，修改或添加为<code>&quot;D:/MinGW/include&quot;</code>。</li>
-<li>按住<code>ctrl</code>+<code>shift</code>+<code>P</code>呼出命令窗口，输入<code>C/Cpp: Switch a Configuration</code>回车，选择<code>Win32</code>。</li>
-<li>设置task,按住<code>ctrl</code>+<code>shift</code>+<code>P</code>呼出命令窗口，输入<code>Tasks: Configure Task Runner</code>回车，选择<code>Others</code>。把tasks.json修改为以下形式：<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">&#123; </div><div class="line">    <span class="attr">"version"</span>: <span class="string">"0.1.0"</span>,</div><div class="line">    <span class="attr">"command"</span>: <span class="string">"cmd"</span>,</div><div class="line">    <span class="attr">"isShellCommand"</span>: <span class="literal">false</span>,</div><div class="line">    <span class="attr">"showOutput"</span>: <span class="string">"always"</span>,</div><div class="line">    <span class="attr">"args"</span>: [<span class="string">"/C"</span>],</div><div class="line">    <span class="attr">"tasks"</span>: [</div><div class="line">        &#123;</div><div class="line">            <span class="attr">"taskName"</span>: <span class="string">"build"</span>,</div><div class="line">            <span class="attr">"suppressTaskName"</span>: <span class="literal">true</span>,</div><div class="line">            <span class="attr">"echoCommand"</span>: <span class="literal">true</span>,</div><div class="line">            <span class="attr">"args"</span>: [<span class="string">"g++"</span>, <span class="string">"-g"</span>, <span class="string">"$&#123;fileBasename&#125;"</span>, <span class="string">"-o"</span>, <span class="string">"$&#123;fileBasename&#125;.out"</span>],</div><div class="line">            <span class="attr">"showOutput"</span>: <span class="string">"silent"</span>,</div><div class="line">            <span class="attr">"isBuildCommand"</span>: <span class="literal">true</span>,</div><div class="line">            <span class="attr">"problemMatcher"</span>: &#123;</div><div class="line">                <span class="attr">"owner"</span>: <span class="string">"cpp"</span>,</div><div class="line">                <span class="attr">"fileLocation"</span>: [<span class="string">"relative"</span>, <span class="string">"$&#123;workspaceRoot&#125;"</span>],</div><div class="line">                <span class="attr">"pattern"</span>: &#123;</div><div class="line">                    <span class="attr">"regexp"</span>: <span class="string">"^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$"</span>,</div><div class="line">                    <span class="attr">"file"</span>: <span class="number">1</span>,</div><div class="line">                    <span class="attr">"line"</span>: <span class="number">2</span>,</div><div class="line">                    <span class="attr">"column"</span>: <span class="number">3</span>,</div><div class="line">                    <span class="attr">"severity"</span>: <span class="number">4</span>,</div><div class="line">                    <span class="attr">"message"</span>: <span class="number">5</span></div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;,</div><div class="line">        &#123;</div><div class="line">            <span class="attr">"taskName"</span>: <span class="string">"clear"</span>,</div><div class="line">            <span class="attr">"suppressTaskName"</span>: <span class="literal">true</span>,</div><div class="line">            <span class="attr">"args"</span>: [<span class="string">"del"</span>, <span class="string">"*.out"</span>],</div><div class="line">            <span class="attr">"showOutput"</span>: <span class="string">"never"</span></div><div class="line">        &#125;</div><div class="line">    ]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-</ol>
-<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>写一个简单的C++代码，新建一个hello.cpp文件<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Hello world"</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h3 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h3><p>按住<code>ctrl</code>+<code>P</code>,输入<code>task build</code>回车，就能编译成功了。若是编译失败，错误信息会出现在左下角。</p>
-<h3 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h3><p>按住<code>ctrl</code>+<code>~</code>弹出CMD窗口，输入<code>hello.cpp.out</code>即可运行编译成功的程序</p>
-<blockquote>
-<p>每次编译完成都会在目录下生成<code>同文件名</code>+<code>.out</code>的可执行程序，但想重新编译就要先运行<code>task clear</code>命令清除所有<code>.out</code>文件，再运行<code>task build</code>命令编译。</p>
-</blockquote>
-<h2 id="Debug-配置"><a href="#Debug-配置" class="headerlink" title="Debug 配置"></a>Debug 配置</h2><blockquote>
-<p>暂无</p>
-</blockquote>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;官方文档至今还没翻译成中文，足足琢磨了好几天明白了一些VS Code的功能。&lt;br&gt;现在给大家分享以下。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Others" scheme="http://linw1995.github.io/categories/Others/"/>
-    
-    
-      <category term="C++" scheme="http://linw1995.github.io/tags/C/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>搭梯子 - 简单教程</title>
-    <link href="http://linw1995.github.io/2016/10/02/%E6%90%AD%E6%A2%AF%E5%AD%90-%E7%AE%80%E5%8D%95%E6%95%99%E7%A8%8B/"/>
-    <id>http://linw1995.github.io/2016/10/02/搭梯子-简单教程/</id>
-    <published>2016-10-02T01:36:00.000Z</published>
-    <updated>2016-10-15T01:17:56.512Z</updated>
-    
-    <content type="html"><![CDATA[<p>我知道比较简单的搭梯子方法就两个：</p>
-<ol>
-<li>Lantern 蓝灯</li>
-<li>Shadowsocks 影梭</li>
-</ol>
-<a id="more"></a>
-<h1 id="Lantern-蓝灯"><a href="#Lantern-蓝灯" class="headerlink" title="Lantern 蓝灯"></a>Lantern 蓝灯</h1><img src="/2016/10/02/搭梯子-简单教程/Lantern.png" alt="Lantern.png" title="">
-<h2 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h2><p>蓝灯是个开源项目，在程序员交友平台GitHub上就能下载。<br>传送门：</p>
-<ul>
-<li><a href="https://github.com/getlantern/lantern" title="external github" target="_blank" rel="external">github</a></li>
-<li><a href="https://getlantern.org/" title="lantern" target="_blank" rel="external">lantern</a>
-</li>
-</ul>
-<h2 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h2><p>非常简单，只需要打开该软件就好。<br>虽说免费用户有800m的月流量，但网速不够支持看视频；<br>专业用户虽然一年很便宜，但不适合一些不经常用梯子的人。</p>
-<h1 id="Shadowsocks-影梭"><a href="#Shadowsocks-影梭" class="headerlink" title="Shadowsocks 影梭"></a>Shadowsocks 影梭</h1><img src="/2016/10/02/搭梯子-简单教程/shadowsocks.png" alt="shadowsocks.png" title="">
-<h2 id="下载-1"><a href="#下载-1" class="headerlink" title="下载"></a>下载</h2><ul>
-<li><a href="https://github.com/shadowsocks/shadowsocks-windows/wiki/Shadowsocks-Windows-%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E" title="external github-wiki" target="_blank" rel="external">github-wiki</a>
-</li>
-</ul>
-<h2 id="使用方法-1"><a href="#使用方法-1" class="headerlink" title="使用方法"></a>使用方法</h2><ol>
-<li>下载解压后即可打开使用</li>
-<li>在任务栏中找到图标，右键打开菜单，选中启用系统代理<img src="/2016/10/02/搭梯子-简单教程/2016-10-02_013628.603141_.png" alt="2016-10-02_013628.603141_.png" title=""></li>
-<li>选用适合的服务器<br>完成第二步后还没办法看墙外的风景，需要添加一些代理服务器。<br>那么如何添加代理服务器呢？<br>有两种方式：<ul>
-<li>网上搜索一些免费的代理服务器，但这些免费的代理服务器不仅慢还有安全隐患。</li>
-<li>去正规的服务器运营商购买这类服务</li>
-</ul>
-</li>
-<li>添加代理服务器<br>双击任务栏中的图标，弹出以下窗口<img src="/2016/10/02/搭梯子-简单教程/2016-10-02_014621.955391_.png" alt="2016-10-02_014621.955391_.png" title="">
-手动填入信息<br>或者扫描服务器运营商提供的二维码<img src="/2016/10/02/搭梯子-简单教程/2016-10-02_014836.541634_.png" alt="2016-10-02_014836.541634_.png" title=""></li>
-<li>完成以上步骤，就可以在<strong><em>系统代理模式==》全局代理模式</em></strong>愉快地观赏墙外的世界</li>
-</ol>
-<h2 id="PCA模式"><a href="#PCA模式" class="headerlink" title="PCA模式"></a>PCA模式</h2><p>全局代理模式下，上墙内网站也会使用你的服务器流量。这就需要使用<strong><em>系统代理模式==》PAC模式</em></strong>来智能代理。<br><img src="/2016/10/02/搭梯子-简单教程/2016-10-02_020200.445407_.png" alt="2016-10-02_020200.445407_.png" title=""><br>系统代理模式中选择PAC代理，然后在PAC中选择从GFWList更新本地PAC。<br>这样就可以智能地搭梯子了。</p>
-<h2 id="什么！你说你浏览器还是打不开墙外的世界"><a href="#什么！你说你浏览器还是打不开墙外的世界" class="headerlink" title="什么！你说你浏览器还是打不开墙外的世界"></a>什么！你说你浏览器还是打不开墙外的世界</h2><p>原因：</p>
-<ol>
-<li>在绝大数浏览器设置里都有一项选择代理方式地选项，只要更改为使用系统代理设置，就可以解决问题。</li>
-<li>有些浏览器像FireFox、Chrome等，都需要安装代理插件才能使用系统代理。</li>
-</ol>
-<p>下面只讲FireFox浏览器的配置方法</p>
-<ul>
-<li>首先安装代理组件FoxyProxy<img src="/2016/10/02/搭梯子-简单教程/2016-10-02_021657.563661_.png" alt="2016-10-02_021657.563661_.png" title=""></li>
-<li>新建或编辑已有的代理服务器选项<img src="/2016/10/02/搭梯子-简单教程/2016-10-02_021902.822020_.png" alt="2016-10-02_021902.822020_.png" title=""></li>
-<li>添加本地PAC文件的位置，点击测试看是否通过<img src="/2016/10/02/搭梯子-简单教程/2016-10-02_022020.691221_.png" alt="2016-10-02_022020.691221_.png" title=""></li>
-<li>通过后，修改下PAC文件<img src="/2016/10/02/搭梯子-简单教程/2016-10-02_022300.004308_.png" alt="2016-10-02_022300.004308_.png" title=""></li>
-<li>重新测试PAC文件是否通过</li>
-<li>现在可以试着打开墙外的世界<img src="/2016/10/02/搭梯子-简单教程/2016-10-02_022617.197844_QQ20161002102602.png" alt="2016-10-02_022617.197844_QQ20161002102602.png" title="">
-一个旋转的FoxyProxy图标，和一个正在打开的墙外世界。</li>
-</ul>
-<h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><ul>
-<li>可以在Shadowsocks服务器选项中选择不同的服务器来满足不同的需求，平时选择<strong><em>高可用</em></strong> 就行</li>
-<li>最后，谨慎了解墙外的信息</li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;我知道比较简单的搭梯子方法就两个：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;Lantern 蓝灯&lt;/li&gt;
-&lt;li&gt;Shadowsocks 影梭&lt;/li&gt;
-&lt;/ol&gt;
-    
-    </summary>
-    
-      <category term="Others" scheme="http://linw1995.github.io/categories/Others/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>python中面向对象编程</title>
-    <link href="http://linw1995.github.io/2016/07/31/python%E4%B8%AD%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B/"/>
-    <id>http://linw1995.github.io/2016/07/31/python中面向对象编程/</id>
-    <published>2016-07-31T12:00:13.000Z</published>
-    <updated>2016-10-15T01:26:44.089Z</updated>
-    
-    <content type="html"><![CDATA[<p><strong>对象(Object)</strong>基本上可以看作数据（特性）以及由一系列可以存取、操作这些数据的方法所组成的集合。且有以下优点：</p>
+<!DOCTYPE html><html lang="zh"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="author" content="linw"><meta name="description" content="对象(Object)基本上可以看作数据（特性）以及由一系列可以存取、操作这些数据的方法所组成的集合。且有以下优点：多态（Polymorphism）：意味着可以对不同类的对象使用同样的操作，他们会像被“试了魔法那般”工作。封装（Encapsulation）：对外部世界隐藏对象"><meta name="keywords" content="Python"><title>python中面向对象编程 · linw1995</title><link rel="icon" href="/favicon.ico"><link rel="canonical" href="http://linw1995.github.io/2016/07/31/python中面向对象编程/"><link rel="alternate" href="/atom.xml" title="linw1995"><link rel="stylesheet" href="/fonts/iconfont/iconfont.css"><link rel="stylesheet" href="/css/style.css"></head><body><div id="main"><header><a href="/." class="logo">linw1995</a><ul class="nav"><li class="nav-link"><a href="/" target="_self">Home</a></li><li class="nav-link"><a href="/archives/" target="_self">Archives</a></li><li class="nav-link"><a href="/categories/" target="_self">Categories</a></li><li class="nav-link"><a href="/tags/" target="_self">Tags</a></li><li class="nav-link"><a href="/about/" target="_self">About</a></li></ul></header><section id="container"><article class="post"><h1 class="post-title">python中面向对象编程</h1><span class="post-time">Jul 31, 2016</span><div id="sidebar" class="post-sidebar"><h3 class="heading">Contents</h3><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、一个简单的类"><span class="toc-text">一、一个简单的类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、定义"><span class="toc-text">1、定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、调用"><span class="toc-text">2、调用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、成员"><span class="toc-text">二、成员</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、类型："><span class="toc-text">1、类型：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1、实例属性"><span class="toc-text">1.1、实例属性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2、类属性"><span class="toc-text">1.2、类属性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-3、私有属性、方法"><span class="toc-text">1.3、私有属性、方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-4、特殊属性"><span class="toc-text">1.4、特殊属性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-5-示例"><span class="toc-text">1.5 示例</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、深入理解类的属性"><span class="toc-text">三、深入理解类的属性</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、同名的类属性与实例属性"><span class="toc-text">1、同名的类属性与实例属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、属性访问的特殊方法（反射）"><span class="toc-text">2、属性访问的特殊方法（反射）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3、属性包装"><span class="toc-text">3、属性包装</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#示例"><span class="toc-text">示例</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4、描述符"><span class="toc-text">4、描述符</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#4-1、协议方法"><span class="toc-text">4.1、协议方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-2、分类"><span class="toc-text">4.2、分类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-3、示例"><span class="toc-text">4.3、示例</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5、让实例能像函数一样使用"><span class="toc-text">5、让实例能像函数一样使用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#示例-1"><span class="toc-text">示例</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四、类方法与静态方法"><span class="toc-text">四、类方法与静态方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、静态方法（staticmethod）"><span class="toc-text">1、静态方法（staticmethod）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1、定义方法"><span class="toc-text">1.1、定义方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2、特性"><span class="toc-text">1.2、特性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-3、调用方法"><span class="toc-text">1.3、调用方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-4、本质"><span class="toc-text">1.4、本质</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-5、用法"><span class="toc-text">1.5、用法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-6、示例"><span class="toc-text">1.6、示例</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、类方法（classmethod）"><span class="toc-text">2、类方法（classmethod）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1、定义方法"><span class="toc-text">2.1、定义方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2、访问特性"><span class="toc-text">2.2、访问特性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3、调用方法"><span class="toc-text">2.3、调用方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-4、继承特性"><span class="toc-text">2.4、继承特性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-5、用法"><span class="toc-text">2.5、用法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-6、示例"><span class="toc-text">2.6、示例</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#五、类的特殊方法"><span class="toc-text">五、类的特殊方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、深入理解类"><span class="toc-text">1、深入理解类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、元类（type）"><span class="toc-text">2、元类（type）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1、类的实例化过程"><span class="toc-text">2.1、类的实例化过程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2、自定义元类"><span class="toc-text">2.2、自定义元类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3、应用元类"><span class="toc-text">2.3、应用元类</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3、构造序列"><span class="toc-text">3、构造序列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4、构造iter"><span class="toc-text">4、构造iter</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5、构造可比较类"><span class="toc-text">5、构造可比较类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6、构造可运算类"><span class="toc-text">6、构造可运算类</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#六、类的继承与方法重载"><span class="toc-text">六、类的继承与方法重载</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#七、鸭子类型与多态"><span class="toc-text">七、鸭子类型与多态</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#八、设计模式"><span class="toc-text">八、设计模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#九、如何通过组合来构建复杂对象"><span class="toc-text">九、如何通过组合来构建复杂对象</span></a></li></ol></div><div class="post-content"><p><strong>对象(Object)</strong>基本上可以看作数据（特性）以及由一系列可以存取、操作这些数据的方法所组成的集合。且有以下优点：</p>
 <ul>
 <li><strong>多态（Polymorphism）</strong>：意味着可以对不同类的对象使用同样的操作，他们会像被“试了魔法那般”工作。</li>
 <li><strong>封装（Encapsulation）</strong>：对外部世界隐藏对象的工作细节，减少代码重复。</li>
@@ -307,24 +147,16 @@
 <li><p><code>__div__()</code></p>
 </li>
 </ul>
-<h2 id="六、类的继承与方法重载"><a href="#六、类的继承与方法重载" class="headerlink" title="六、类的继承与方法重载"></a>六、类的继承与方法重载</h2><h2 id="七、鸭子类型与多态"><a href="#七、鸭子类型与多态" class="headerlink" title="七、鸭子类型与多态"></a>七、鸭子类型与多态</h2><h2 id="八、设计模式"><a href="#八、设计模式" class="headerlink" title="八、设计模式"></a>八、设计模式</h2><h2 id="九、如何通过组合来构建复杂对象"><a href="#九、如何通过组合来构建复杂对象" class="headerlink" title="九、如何通过组合来构建复杂对象"></a>九、如何通过组合来构建复杂对象</h2>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;strong&gt;对象(Object)&lt;/strong&gt;基本上可以看作数据（特性）以及由一系列可以存取、操作这些数据的方法所组成的集合。且有以下优点：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;多态（Polymorphism）&lt;/strong&gt;：意味着可以对不同类的对象使用同样的操作，他们会像被“试了魔法那般”工作。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;封装（Encapsulation）&lt;/strong&gt;：对外部世界隐藏对象的工作细节，减少代码重复。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;继承（Inheritance）&lt;/strong&gt;：以通用的类为基础建立专门的类对象。&lt;/li&gt;
-&lt;/ul&gt;
-    
-    </summary>
-    
-      <category term="Coding" scheme="http://linw1995.github.io/categories/Coding/"/>
-    
-    
-      <category term="Python" scheme="http://linw1995.github.io/tags/Python/"/>
-    
-  </entry>
-  
-</feed>
+<h2 id="六、类的继承与方法重载"><a href="#六、类的继承与方法重载" class="headerlink" title="六、类的继承与方法重载"></a>六、类的继承与方法重载</h2><h2 id="七、鸭子类型与多态"><a href="#七、鸭子类型与多态" class="headerlink" title="七、鸭子类型与多态"></a>七、鸭子类型与多态</h2><h2 id="八、设计模式"><a href="#八、设计模式" class="headerlink" title="八、设计模式"></a>八、设计模式</h2><h2 id="九、如何通过组合来构建复杂对象"><a href="#九、如何通过组合来构建复杂对象" class="headerlink" title="九、如何通过组合来构建复杂对象"></a>九、如何通过组合来构建复杂对象</h2></div></article><div class="tags"><a href="/tags/Python/">Python</a></div><div class="paginator"><a href="/2016/10/02/搭梯子-简单教程/" class="prev"><i class="iconfont icon-left"></i><span> Prev</span></a></div><section id="comments"><div id="disqus_thread"></div></section><script type="text/javascript">var disqus_config = function () {
+    this.page.url = 'http://linw1995.github.io/2016/07/31/python中面向对象编程/';
+    this.page.identifier = '2016/07/31/python中面向对象编程/';
+    this.page.title = 'python中面向对象编程';
+};
+(function() {
+var d = document, s = d.createElement('script');
+
+s.src = '//linw1995.disqus.com/embed.js';
+
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();</script></section><footer><div class="copyright"><p class="power">Powered by <a href="https://hexo.io/">Hexo</a> and Theme by <a href="https://github.com/ahonn/hexo-theme-even"> Even</a></p><p class="since">&copy;2016<span class="heart"><i class="iconfont icon-heart"></i></span><span class="author">linw</span></p></div><label id="back2top"><i class="iconfont icon-up"></i></label></footer></div><script src="/js/zepto.min.js"></script><script src="/js/theme.js"></script></body></html>

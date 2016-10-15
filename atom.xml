@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://linw1995.github.io/"/>
-  <updated>2016-10-15T01:05:54.593Z</updated>
+  <updated>2016-10-15T01:17:10.042Z</updated>
   <id>http://linw1995.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://linw1995.github.io/2016/10/14/%E5%A6%82%E4%BD%95%E9%85%8D%E7%BD%AEVisual-Studio-Code-MinGW%E4%B8%8B%E7%9A%84C-%E7%8E%AF%E5%A2%83/"/>
     <id>http://linw1995.github.io/2016/10/14/如何配置Visual-Studio-Code-MinGW下的C-环境/</id>
     <published>2016-10-14T09:49:06.000Z</published>
-    <updated>2016-10-15T01:05:54.593Z</updated>
+    <updated>2016-10-15T01:17:10.042Z</updated>
     
     <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>官方文档至今还没翻译成中文，足足琢磨了好几天明白了一些VS Code的功能。<br>现在给大家分享以下。</p>
 <a id="more"></a>
@@ -47,7 +47,7 @@
 
 </li>
 </ul>
-<h2 id="配置VS-Code"><a href="#配置VS-Code" class="headerlink" title="配置VS Code"></a>配置VS Code</h2><p>在码配置流程前先贴出官方的不完全配置文档<br><a href="https://code.visualstudio.com/docs/languages/cpp" title="external C/C++ for VS Code (Preview)" target="_blank" rel="external">text</a></p>
+<h2 id="配置VS-Code"><a href="#配置VS-Code" class="headerlink" title="配置VS Code"></a>配置VS Code</h2><p>在码配置流程前先贴出官方的不完全配置文档<br><a href="https://code.visualstudio.com/docs/languages/cpp" title="external C/C++ for VS Code (Preview)" target="_blank" rel="external">C/C++ for VS Code (Preview)</a></p>
 <ol>
 <li>打开 VS Code。</li>
 <li>选择侧边栏的扩展图标打开扩展栏。</li>
@@ -88,7 +88,7 @@
     <link href="http://linw1995.github.io/2016/10/02/%E6%90%AD%E6%A2%AF%E5%AD%90-%E7%AE%80%E5%8D%95%E6%95%99%E7%A8%8B/"/>
     <id>http://linw1995.github.io/2016/10/02/搭梯子-简单教程/</id>
     <published>2016-10-02T01:36:00.000Z</published>
-    <updated>2016-10-15T01:15:24.711Z</updated>
+    <updated>2016-10-15T01:17:56.512Z</updated>
     
     <content type="html"><![CDATA[<p>我知道比较简单的搭梯子方法就两个：</p>
 <ol>
@@ -99,14 +99,14 @@
 <h1 id="Lantern-蓝灯"><a href="#Lantern-蓝灯" class="headerlink" title="Lantern 蓝灯"></a>Lantern 蓝灯</h1><img src="/2016/10/02/搭梯子-简单教程/Lantern.png" alt="Lantern.png" title="">
 <h2 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h2><p>蓝灯是个开源项目，在程序员交友平台GitHub上就能下载。<br>传送门：</p>
 <ul>
-<li><a href="https://github.com/getlantern/lantern" title="external github" target="_blank" rel="external">text</a></li>
-<li><a href="https://getlantern.org/" title="lantern" target="_blank" rel="external">text</a>
+<li><a href="https://github.com/getlantern/lantern" title="external github" target="_blank" rel="external">github</a></li>
+<li><a href="https://getlantern.org/" title="lantern" target="_blank" rel="external">lantern</a>
 </li>
 </ul>
 <h2 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h2><p>非常简单，只需要打开该软件就好。<br>虽说免费用户有800m的月流量，但网速不够支持看视频；<br>专业用户虽然一年很便宜，但不适合一些不经常用梯子的人。</p>
 <h1 id="Shadowsocks-影梭"><a href="#Shadowsocks-影梭" class="headerlink" title="Shadowsocks 影梭"></a>Shadowsocks 影梭</h1><img src="/2016/10/02/搭梯子-简单教程/shadowsocks.png" alt="shadowsocks.png" title="">
 <h2 id="下载-1"><a href="#下载-1" class="headerlink" title="下载"></a>下载</h2><ul>
-<li><a href="https://github.com/shadowsocks/shadowsocks-windows/wiki/Shadowsocks-Windows-%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E" title="external github-wiki" target="_blank" rel="external">text</a>
+<li><a href="https://github.com/shadowsocks/shadowsocks-windows/wiki/Shadowsocks-Windows-%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E" title="external github-wiki" target="_blank" rel="external">github-wiki</a>
 </li>
 </ul>
 <h2 id="使用方法-1"><a href="#使用方法-1" class="headerlink" title="使用方法"></a>使用方法</h2><ol>

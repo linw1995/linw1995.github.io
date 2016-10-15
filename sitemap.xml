@@ -2,6 +2,27 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://linw1995.github.io/about/index.html</loc>
+    
+    <lastmod>2016-10-15T01:35:26.377Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://linw1995.github.io/tags/index.html</loc>
+    
+    <lastmod>2016-10-15T01:34:59.788Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://linw1995.github.io/categories/index.html</loc>
+    
+    <lastmod>2016-10-15T01:34:56.494Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://linw1995.github.io/2016/07/31/python%E4%B8%AD%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B/</loc>
     
     <lastmod>2016-10-15T01:32:57.733Z</lastmod>
@@ -19,27 +40,6 @@
     <loc>http://linw1995.github.io/2016/10/02/%E6%90%AD%E6%A2%AF%E5%AD%90-%E7%AE%80%E5%8D%95%E6%95%99%E7%A8%8B/</loc>
     
     <lastmod>2016-10-15T01:17:56.512Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://linw1995.github.io/about/index.html</loc>
-    
-    <lastmod>2016-10-15T00:40:02.597Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://linw1995.github.io/categories/index.html</loc>
-    
-    <lastmod>2016-10-15T00:39:15.083Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://linw1995.github.io/tags/index.html</loc>
-    
-    <lastmod>2016-10-15T00:39:10.557Z</lastmod>
     
   </url>
   

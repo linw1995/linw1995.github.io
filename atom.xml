@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://linw1995.github.io/"/>
-  <updated>2016-10-15T03:02:18.143Z</updated>
+  <updated>2016-10-15T11:35:32.953Z</updated>
   <id>http://linw1995.github.io/</id>
   
   <author>
@@ -20,9 +20,9 @@
     <link href="http://linw1995.github.io/2016/10/14/%E5%A6%82%E4%BD%95%E9%85%8D%E7%BD%AEVisual-Studio-Code-MinGW%E4%B8%8B%E7%9A%84C-%E7%8E%AF%E5%A2%83/"/>
     <id>http://linw1995.github.io/2016/10/14/如何配置Visual-Studio-Code-MinGW下的C-环境/</id>
     <published>2016-10-14T09:49:06.000Z</published>
-    <updated>2016-10-15T03:02:18.143Z</updated>
+    <updated>2016-10-15T11:35:32.953Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>官方文档至今还没翻译成中文，足足琢磨了好几天明白了一些VS Code的功能。<br>现在给大家分享以下。</p>
+    <content type="html"><![CDATA[<p>官方文档至今还没翻译成中文，足足琢磨了好几天明白了一些VS Code的功能。<br>现在给大家分享以下。</p>
 <a id="more"></a>
 <h2 id="工具介绍"><a href="#工具介绍" class="headerlink" title="工具介绍"></a>工具介绍</h2><h3 id="VS-Code-–-Visual-Studio-Code"><a href="#VS-Code-–-Visual-Studio-Code" class="headerlink" title="VS Code – Visual Studio Code"></a>VS Code – Visual Studio Code</h3><img src="/2016/10/14/如何配置Visual-Studio-Code-MinGW下的C-环境/2016-10-14_061710.470637_Visual_Studio_Code_0.10.1_icon.png" alt="2016-10-14_061710.470637_Visual_Studio_Code_0.10.1_icon.png" title="">
 <p>文本编辑器</p>
@@ -68,7 +68,7 @@
     
     <summary type="html">
     
-      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;官方文档至今还没翻译成中文，足足琢磨了好几天明白了一些VS Code的功能。&lt;br&gt;现在给大家分享以下。&lt;/p&gt;
+      &lt;p&gt;官方文档至今还没翻译成中文，足足琢磨了好几天明白了一些VS Code的功能。&lt;br&gt;现在给大家分享以下。&lt;/p&gt;
     
     </summary>
     
@@ -84,9 +84,9 @@
     <link href="http://linw1995.github.io/2016/10/02/%E6%90%AD%E6%A2%AF%E5%AD%90-%E7%AE%80%E5%8D%95%E6%95%99%E7%A8%8B/"/>
     <id>http://linw1995.github.io/2016/10/02/搭梯子-简单教程/</id>
     <published>2016-10-02T01:36:00.000Z</published>
-    <updated>2016-10-15T01:17:56.512Z</updated>
+    <updated>2016-10-15T16:30:58.680Z</updated>
     
-    <content type="html"><![CDATA[<p>我知道比较简单的搭梯子方法就两个：</p>
+    <content type="html"><![CDATA[<p>比较简单的搭梯子方法有两个：</p>
 <ol>
 <li>Lantern 蓝灯</li>
 <li>Shadowsocks 影梭</li>
@@ -141,7 +141,7 @@
     
     <summary type="html">
     
-      &lt;p&gt;我知道比较简单的搭梯子方法就两个：&lt;/p&gt;
+      &lt;p&gt;比较简单的搭梯子方法有两个：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;Lantern 蓝灯&lt;/li&gt;
 &lt;li&gt;Shadowsocks 影梭&lt;/li&gt;

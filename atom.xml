@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://linw1995.github.io/"/>
-  <updated>2016-10-17T14:54:46.901Z</updated>
+  <updated>2016-10-17T14:57:15.269Z</updated>
   <id>http://linw1995.github.io/</id>
   
   <author>
@@ -20,17 +20,17 @@
     <link href="http://linw1995.github.io/2016/10/17/Python-On-Visual-Studio-Code-With-Anaconda/"/>
     <id>http://linw1995.github.io/2016/10/17/Python-On-Visual-Studio-Code-With-Anaconda/</id>
     <published>2016-10-17T12:56:48.000Z</published>
-    <updated>2016-10-17T14:54:46.901Z</updated>
+    <updated>2016-10-17T14:57:15.269Z</updated>
     
     <content type="html"><![CDATA[<p>Python是一门入门容易，且入门后又可以做很多interesting things的语言。<br>想简单的写一些代码，又不想费力去安装体积庞大的IDE，也不想使用Python自带的IDLE。<br>这时候你就需要Python On Visual Studio Code With Anaconda。<br><a id="more"></a></p>
 <h2 id="工具介绍"><a href="#工具介绍" class="headerlink" title="工具介绍"></a>工具介绍</h2><h3 id="Visual-Studio-Code-–-Code-editing-Redefined"><a href="#Visual-Studio-Code-–-Code-editing-Redefined" class="headerlink" title="Visual Studio Code – Code editing. Redefined."></a>Visual Studio Code – Code editing. Redefined.</h3><img src="/2016/10/17/Python-On-Visual-Studio-Code-With-Anaconda/2016-10-14_061710.470637_Visual_Studio_Code_0.10.1_icon.png" alt="2016-10-14_061710.470637_Visual_Studio_Code_0.10.1_icon.png" title="">
-<p>文本编辑器<br><blockquote><p>在2015 Build大会上宣布微软将开发 Visual Studio Code。<br>2015年4月29日，第一个预览版本发布。<br>2015年11月18日，Code团队将其在GitHub上面开源，并采用MIT许可证，同时宣布将支持扩展功能。<br>2016年4月14日，Visual Studio Code发布正式版，版本号1.0.0。</p>
-<footer><strong>wikipedia</strong><cite><a href="https://zh.wikipedia.org/wiki/Visual_Studio_Code" target="_blank" rel="external">Visual Studio Code</a></cite></footer></blockquote><br><blockquote><p>Visual Studio Code支持多种编程语言。与其他编辑器不同的是，Code的许多功能并不在菜单中显示，而是通过“命令面板”来调用。用户可以在命令面板中搜索和输入命令，从而实现指定功能，例如安装插件、设置属性等。<br>Code具备了现代文本编辑器所具有的功能，例如更改字符编码、更换换行符等。</p>
-<footer><strong>wikipedia</strong><cite><a href="https://zh.wikipedia.org/wiki/Visual_Studio_Code" target="_blank" rel="external">Visual Studio Code</a></cite></footer></blockquote><br><a href="https://code.visualstudio.com/Download" title="external Download Visual Studio Code" target="_blank" rel="external">VS Code Download link</a></p>
+<a href="https://code.visualstudio.com/Download" title="Download Visual Studio Code" target="_blank" rel="external">VS Code Download link</a>
+<blockquote><p>在2015 Build大会上宣布微软将开发 Visual Studio Code。<br>2015年4月29日，第一个预览版本发布。<br>2015年11月18日，Code团队将其在GitHub上面开源，并采用MIT许可证，同时宣布将支持扩展功能。<br>2016年4月14日，Visual Studio Code发布正式版，版本号1.0.0。<br>Visual Studio Code支持多种编程语言。与其他编辑器不同的是，Code的许多功能并不在菜单中显示，而是通过“命令面板”来调用。用户可以在命令面板中搜索和输入命令，从而实现指定功能，例如安装插件、设置属性等。<br>Code具备了现代文本编辑器所具有的功能，例如更改字符编码、更换换行符等。</p>
+<footer><strong>wikipedia</strong><cite><a href="https://zh.wikipedia.org/wiki/Visual_Studio_Code" target="_blank" rel="external">Visual Studio Code</a></cite></footer></blockquote>
 <h3 id="Anaconda-–-Leading-Open-Data-Science-Platform-Powered-by-Python"><a href="#Anaconda-–-Leading-Open-Data-Science-Platform-Powered-by-Python" class="headerlink" title="Anaconda – Leading Open Data Science Platform Powered by Python"></a>Anaconda – Leading Open Data Science Platform Powered by Python</h3><img src="/2016/10/17/Python-On-Visual-Studio-Code-With-Anaconda/AnacondaLogo.png" alt="AnacondaLogo.png" title="">
 <blockquote><p>Where packages, notebooks, and environments are shared.<br>Powerful collaboration and package management for open source and private projects.<br>Public projects and notebooks are always free.</p>
 <footer><strong>Anaconda</strong><cite><a href="https://www.continuum.io/anaconda-overview" target="_blank" rel="external">overview</a></cite></footer></blockquote>
-<p>对我们来说，Anaconda方便了我们对Python packages和Python environment的管理。<br>以及超方便的Jupyter Notebooks等工具，以后会一一介绍。<br><a href="https://www.continuum.io/downloads" title="external Anaconda Download link" target="_blank" rel="external">Anaconda Download link</a></p>
+<p>对我们来说，Anaconda方便了我们对Python packages和Python environment的管理。<br>以及超方便的Jupyter Notebooks等工具，以后会一一介绍。<br><a href="https://www.continuum.io/downloads" title="Anaconda Download link" target="_blank" rel="external">Anaconda Download link</a></p>
 <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><h2 id="创建一个新的conda环境"><a href="#创建一个新的conda环境" class="headerlink" title="创建一个新的conda环境"></a>创建一个新的conda环境</h2><h2 id="VS-Code-基本配置"><a href="#VS-Code-基本配置" class="headerlink" title="VS Code 基本配置"></a>VS Code 基本配置</h2><h2 id="VS-Code-高级设置"><a href="#VS-Code-高级设置" class="headerlink" title="VS Code 高级设置"></a>VS Code 高级设置</h2><h2 id="Python-debug-配置"><a href="#Python-debug-配置" class="headerlink" title="Python debug 配置"></a>Python debug 配置</h2><h2 id="VS-Code-中使用Jupyter-Notebooks"><a href="#VS-Code-中使用Jupyter-Notebooks" class="headerlink" title="VS Code 中使用Jupyter Notebooks"></a>VS Code 中使用Jupyter Notebooks</h2>]]></content>
     
     <summary type="html">
@@ -51,14 +51,14 @@
     <link href="http://linw1995.github.io/2016/10/14/%E5%A6%82%E4%BD%95%E9%85%8D%E7%BD%AEVisual-Studio-Code-MinGW%E4%B8%8B%E7%9A%84C-%E7%8E%AF%E5%A2%83/"/>
     <id>http://linw1995.github.io/2016/10/14/如何配置Visual-Studio-Code-MinGW下的C-环境/</id>
     <published>2016-10-14T09:49:06.000Z</published>
-    <updated>2016-10-17T14:44:41.453Z</updated>
+    <updated>2016-10-17T14:58:07.702Z</updated>
     
     <content type="html"><![CDATA[<p>官方文档至今还没翻译成中文，足足琢磨了好几天明白了一些VS Code的功能。<br>现在给大家分享以下。</p>
 <a id="more"></a>
 <h2 id="工具介绍"><a href="#工具介绍" class="headerlink" title="工具介绍"></a>工具介绍</h2><h3 id="Visual-Studio-Code-–-Code-editing-Redefined"><a href="#Visual-Studio-Code-–-Code-editing-Redefined" class="headerlink" title="Visual Studio Code – Code editing. Redefined."></a>Visual Studio Code – Code editing. Redefined.</h3><img src="/2016/10/14/如何配置Visual-Studio-Code-MinGW下的C-环境/2016-10-14_061710.470637_Visual_Studio_Code_0.10.1_icon.png" alt="2016-10-14_061710.470637_Visual_Studio_Code_0.10.1_icon.png" title="">
-<p>文本编辑器<br><blockquote><p>在2015 Build大会上宣布微软将开发 Visual Studio Code。<br>2015年4月29日，第一个预览版本发布。<br>2015年11月18日，Code团队将其在GitHub上面开源，并采用MIT许可证，同时宣布将支持扩展功能。<br>2016年4月14日，Visual Studio Code发布正式版，版本号1.0.0。</p>
-<footer><strong>wikipedia</strong><cite><a href="https://zh.wikipedia.org/wiki/Visual_Studio_Code" target="_blank" rel="external">Visual Studio Code</a></cite></footer></blockquote><br><blockquote><p>Visual Studio Code支持多种编程语言。与其他编辑器不同的是，Code的许多功能并不在菜单中显示，而是通过“命令面板”来调用。用户可以在命令面板中搜索和输入命令，从而实现指定功能，例如安装插件、设置属性等。<br>Code具备了现代文本编辑器所具有的功能，例如更改字符编码、更换换行符等。</p>
-<footer><strong>wikipedia</strong><cite><a href="https://zh.wikipedia.org/wiki/Visual_Studio_Code" target="_blank" rel="external">Visual Studio Code</a></cite></footer></blockquote><br><a href="https://code.visualstudio.com/Download" title="external Download Visual Studio Code" target="_blank" rel="external">VS Code Download link</a></p>
+<a href="https://code.visualstudio.com/Download" title="Download Visual Studio Code" target="_blank" rel="external">VS Code Download link</a>
+<blockquote><p>在2015 Build大会上宣布微软将开发 Visual Studio Code。<br>2015年4月29日，第一个预览版本发布。<br>2015年11月18日，Code团队将其在GitHub上面开源，并采用MIT许可证，同时宣布将支持扩展功能。<br>2016年4月14日，Visual Studio Code发布正式版，版本号1.0.0。<br>Visual Studio Code支持多种编程语言。与其他编辑器不同的是，Code的许多功能并不在菜单中显示，而是通过“命令面板”来调用。用户可以在命令面板中搜索和输入命令，从而实现指定功能，例如安装插件、设置属性等。<br>Code具备了现代文本编辑器所具有的功能，例如更改字符编码、更换换行符等。</p>
+<footer><strong>wikipedia</strong><cite><a href="https://zh.wikipedia.org/wiki/Visual_Studio_Code" target="_blank" rel="external">Visual Studio Code</a></cite></footer></blockquote>
 <h3 id="MinGW"><a href="#MinGW" class="headerlink" title="MinGW"></a>MinGW</h3><p>提供了G++编译器<br><blockquote><p>MinGW（Minimalist GNU for Windows），又称mingw32，是将GCC编译器和GNU Binutils移植到Win32平台下的产物，包括一系列头文件（Win32API）、库和可执行文件。<br>另有可用于产生32位及64位Windows可执行文件的MinGW-w64项目，是从原本MinGW产生的分支。如今已经独立发展。</p>
 <footer><strong>wikipedia</strong><cite><a href="https://zh.wikipedia.org/wiki/MinGW" target="_blank" rel="external">MinGW</a></cite></footer></blockquote></p>
 <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><ul>
@@ -69,7 +69,7 @@
 <li>MinGW</li>
 </ul>
 <p>按照安装提示一步步进行，安装完成后。<br>会弹出以下界面<br><img src="/2016/10/14/如何配置Visual-Studio-Code-MinGW下的C-环境/2016-10-14_062200.698190_cl_MinGWInstall.png" alt="2016-10-14_062200.698190_cl_MinGWInstall.png" title=""><br>照图片选择，然后在菜单栏Installation中选择Apply changes，然后等待程序下载安装编译器。<br>以上步骤结束后，设置系统变量<br>右键我的电脑，选择属性<br><img src="/2016/10/14/如何配置Visual-Studio-Code-MinGW下的C-环境/2016-10-14_062655.852040_QQ20161014142609.png" alt="2016-10-14_062655.852040_QQ20161014142609.png" title=""><br>选择高级系统设置，再选择环境变量<br><img src="/2016/10/14/如何配置Visual-Studio-Code-MinGW下的C-环境/2016-10-14_062813.682885_QQ20161014142747.png" alt="2016-10-14_062813.682885_QQ20161014142747.png" title=""><br>再Path变量中添加MinGW根目录下的bin文件夹的路径<br><img src="/2016/10/14/如何配置Visual-Studio-Code-MinGW下的C-环境/2016-10-14_063037.967301_QQ20161014142952.png" alt="2016-10-14_063037.967301_QQ20161014142952.png" title=""><br>打开CMD，输入<code>g++ -v</code>出现以下信息安装就成功咯<br><img src="/2016/10/14/如何配置Visual-Studio-Code-MinGW下的C-环境/2016-10-14_063248.965706_QQ20161014143235.png" alt="2016-10-14_063248.965706_QQ20161014143235.png" title=""></p>
-<h2 id="配置VS-Code"><a href="#配置VS-Code" class="headerlink" title="配置VS Code"></a>配置VS Code</h2><p>在码配置流程前先贴出官方的不完全配置文档<br><a href="https://code.visualstudio.com/docs/languages/cpp" title="external C/C++ for VS Code (Preview)" target="_blank" rel="external">C/C++ for VS Code (Preview)</a></p>
+<h2 id="配置VS-Code"><a href="#配置VS-Code" class="headerlink" title="配置VS Code"></a>配置VS Code</h2><p>在码配置流程前先贴出官方的不完全配置文档<br><a href="https://code.visualstudio.com/docs/languages/cpp" title="C/C++ for VS Code (Preview)" target="_blank" rel="external">C/C++ for VS Code (Preview)</a></p>
 <ol>
 <li>打开 VS Code。</li>
 <li>选择侧边栏的扩展图标打开扩展栏。</li>
@@ -113,7 +113,7 @@
     <link href="http://linw1995.github.io/2016/10/02/%E6%90%AD%E6%A2%AF%E5%AD%90-%E7%AE%80%E5%8D%95%E6%95%99%E7%A8%8B/"/>
     <id>http://linw1995.github.io/2016/10/02/搭梯子-简单教程/</id>
     <published>2016-10-02T01:36:00.000Z</published>
-    <updated>2016-10-15T16:30:58.680Z</updated>
+    <updated>2016-10-17T14:58:25.456Z</updated>
     
     <content type="html"><![CDATA[<p>比较简单的搭梯子方法有两个：</p>
 <ol>
@@ -124,14 +124,14 @@
 <h1 id="Lantern-蓝灯"><a href="#Lantern-蓝灯" class="headerlink" title="Lantern 蓝灯"></a>Lantern 蓝灯</h1><img src="/2016/10/02/搭梯子-简单教程/Lantern.png" alt="Lantern.png" title="">
 <h2 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h2><p>蓝灯是个开源项目，在程序员交友平台GitHub上就能下载。<br>传送门：</p>
 <ul>
-<li><a href="https://github.com/getlantern/lantern" title="external github" target="_blank" rel="external">github</a></li>
+<li><a href="https://github.com/getlantern/lantern" title="github" target="_blank" rel="external">github</a></li>
 <li><a href="https://getlantern.org/" title="lantern" target="_blank" rel="external">lantern</a>
 </li>
 </ul>
 <h2 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h2><p>非常简单，只需要打开该软件就好。<br>虽说免费用户有800m的月流量，但网速不够支持看视频；<br>专业用户虽然一年很便宜，但不适合一些不经常用梯子的人。</p>
 <h1 id="Shadowsocks-影梭"><a href="#Shadowsocks-影梭" class="headerlink" title="Shadowsocks 影梭"></a>Shadowsocks 影梭</h1><img src="/2016/10/02/搭梯子-简单教程/shadowsocks.png" alt="shadowsocks.png" title="">
 <h2 id="下载-1"><a href="#下载-1" class="headerlink" title="下载"></a>下载</h2><ul>
-<li><a href="https://github.com/shadowsocks/shadowsocks-windows/wiki/Shadowsocks-Windows-%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E" title="external github-wiki" target="_blank" rel="external">github-wiki</a>
+<li><a href="https://github.com/shadowsocks/shadowsocks-windows/wiki/Shadowsocks-Windows-%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E" title="github-wiki" target="_blank" rel="external">github-wiki</a>
 </li>
 </ul>
 <h2 id="使用方法-1"><a href="#使用方法-1" class="headerlink" title="使用方法"></a>使用方法</h2><ol>

@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://linw1995.github.io/2016/10/17/Python-On-Visual-Studio-Code-With-Anaconda/</loc>
+    
+    <lastmod>2016-10-30T06:01:10.858Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://linw1995.github.io/2016/10/02/%E6%90%AD%E6%A2%AF%E5%AD%90-%E7%AE%80%E5%8D%95%E6%95%99%E7%A8%8B/</loc>
     
     <lastmod>2016-10-17T14:58:25.456Z</lastmod>
@@ -12,13 +19,6 @@
     <loc>http://linw1995.github.io/2016/10/14/%E5%A6%82%E4%BD%95%E9%85%8D%E7%BD%AEVisual-Studio-Code-MinGW%E4%B8%8B%E7%9A%84C-%E7%8E%AF%E5%A2%83/</loc>
     
     <lastmod>2016-10-17T14:58:07.702Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://linw1995.github.io/2016/10/17/Python-On-Visual-Studio-Code-With-Anaconda/</loc>
-    
-    <lastmod>2016-10-17T14:57:15.269Z</lastmod>
     
   </url>
   

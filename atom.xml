@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://linw1995.github.io/"/>
-  <updated>2016-10-17T14:57:15.269Z</updated>
+  <updated>2016-10-30T06:01:10.858Z</updated>
   <id>http://linw1995.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://linw1995.github.io/2016/10/17/Python-On-Visual-Studio-Code-With-Anaconda/"/>
     <id>http://linw1995.github.io/2016/10/17/Python-On-Visual-Studio-Code-With-Anaconda/</id>
     <published>2016-10-17T12:56:48.000Z</published>
-    <updated>2016-10-17T14:57:15.269Z</updated>
+    <updated>2016-10-30T06:01:10.858Z</updated>
     
     <content type="html"><![CDATA[<p>Python是一门入门容易，且入门后又可以做很多interesting things的语言。<br>想简单的写一些代码，又不想费力去安装体积庞大的IDE，也不想使用Python自带的IDLE。<br>这时候你就需要Python On Visual Studio Code With Anaconda。<br><a id="more"></a></p>
 <h2 id="工具介绍"><a href="#工具介绍" class="headerlink" title="工具介绍"></a>工具介绍</h2><h3 id="Visual-Studio-Code-–-Code-editing-Redefined"><a href="#Visual-Studio-Code-–-Code-editing-Redefined" class="headerlink" title="Visual Studio Code – Code editing. Redefined."></a>Visual Studio Code – Code editing. Redefined.</h3><img src="/2016/10/17/Python-On-Visual-Studio-Code-With-Anaconda/2016-10-14_061710.470637_Visual_Studio_Code_0.10.1_icon.png" alt="2016-10-14_061710.470637_Visual_Studio_Code_0.10.1_icon.png" title="">
@@ -31,7 +31,12 @@
 <blockquote><p>Where packages, notebooks, and environments are shared.<br>Powerful collaboration and package management for open source and private projects.<br>Public projects and notebooks are always free.</p>
 <footer><strong>Anaconda</strong><cite><a href="https://www.continuum.io/anaconda-overview" target="_blank" rel="external">overview</a></cite></footer></blockquote>
 <p>对我们来说，Anaconda方便了我们对Python packages和Python environment的管理。<br>以及超方便的Jupyter Notebooks等工具，以后会一一介绍。<br><a href="https://www.continuum.io/downloads" title="Anaconda Download link" target="_blank" rel="external">Anaconda Download link</a></p>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><h2 id="创建一个新的conda环境"><a href="#创建一个新的conda环境" class="headerlink" title="创建一个新的conda环境"></a>创建一个新的conda环境</h2><h2 id="VS-Code-基本配置"><a href="#VS-Code-基本配置" class="headerlink" title="VS Code 基本配置"></a>VS Code 基本配置</h2><h2 id="VS-Code-高级设置"><a href="#VS-Code-高级设置" class="headerlink" title="VS Code 高级设置"></a>VS Code 高级设置</h2><h2 id="Python-debug-配置"><a href="#Python-debug-配置" class="headerlink" title="Python debug 配置"></a>Python debug 配置</h2><h2 id="VS-Code-中使用Jupyter-Notebooks"><a href="#VS-Code-中使用Jupyter-Notebooks" class="headerlink" title="VS Code 中使用Jupyter Notebooks"></a>VS Code 中使用Jupyter Notebooks</h2>]]></content>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>两个软件的安装教程到处都是，这里就略过了。</p>
+<h2 id="创建一个新的conda环境"><a href="#创建一个新的conda环境" class="headerlink" title="创建一个新的conda环境"></a>创建一个新的conda环境</h2><p>Python拥有众多的模块可供使用，但我们在某些情况下需要同个模块但不同版本，甚至不同的Python版本。<br>这就需要我们对这些不同的Python环境进行管理。<br>庆幸的是Anaconda提供了一个优良的环境管理功能。</p>
+<h3 id="创建新环境"><a href="#创建新环境" class="headerlink" title="创建新环境"></a>创建新环境</h3><p>Python3.5: <code>conda create --name py35 python=3.5</code><br>Python2.7: <code>conda create --name py27 python=2.7</code></p>
+<h3 id="激活环境"><a href="#激活环境" class="headerlink" title="激活环境"></a>激活环境</h3><p>Linux, OS X: <code>source activate py27</code><br>Windows: <code>activate py27</code></p>
+<h2 id="VS-Code-基本配置"><a href="#VS-Code-基本配置" class="headerlink" title="VS Code 基本配置"></a>VS Code 基本配置</h2><p>按住<code>ctrl</code>+<code>shift</code>+<code>p</code>,输入<code>&gt;Python:Select Workspace Interpreter</code><br>选择需要的python环境。</p>
+<h2 id="VS-Code-高级设置"><a href="#VS-Code-高级设置" class="headerlink" title="VS Code 高级设置"></a>VS Code 高级设置</h2><h2 id="Python-debug-配置"><a href="#Python-debug-配置" class="headerlink" title="Python debug 配置"></a>Python debug 配置</h2><h2 id="VS-Code-中使用Jupyter-Notebooks"><a href="#VS-Code-中使用Jupyter-Notebooks" class="headerlink" title="VS Code 中使用Jupyter Notebooks"></a>VS Code 中使用Jupyter Notebooks</h2>]]></content>
     
     <summary type="html">
     

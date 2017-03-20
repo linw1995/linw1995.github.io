@@ -1,0 +1,193 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="author" content="linw"><meta name="description" content="怎么用python完美地处理有关时间的问题"><meta name="keywords" content="Python"><title>用python来handle复杂的时间 · linw1995</title><link rel="icon" href="/favicon.ico"><link rel="canonical" href="http://linw1995.github.io/2017/03/20/用python来handle复杂的时间/"><link rel="alternate" href="/atom.xml" title="linw1995"><link rel="stylesheet" href="/fonts/iconfont/iconfont.css"><link rel="stylesheet" href="/css/style.css"><script type="text/javascript">(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-86170223-1', 'auto');
+ga('send', 'pageview');</script></head><body><div id="main"><header><a href="/." class="logo">linw1995</a><ul class="nav"><li class="nav-link"><a href="/" target="_self">Home</a></li><li class="nav-link"><a href="/archives/" target="_self">Archives</a></li><li class="nav-link"><a href="/categories/" target="_self">Categories</a></li><li class="nav-link"><a href="/tags/" target="_self">Tags</a></li></ul></header><section id="container"><article class="post"><h1 class="post-title">用python来handle复杂的时间</h1><span class="post-time">Mar 20, 2017</span><div id="sidebar" class="post-sidebar"><h3 class="heading">Contents</h3><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#时间处理"><span class="toc-text">时间处理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#datetime-–-Basic-date-and-types"><span class="toc-text">datetime – Basic date and types</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#时间字符串解析与生成"><span class="toc-text">时间字符串解析与生成</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#格式化符号表"><span class="toc-text">格式化符号表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#本地化"><span class="toc-text">本地化</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#时间换算、计算"><span class="toc-text">时间换算、计算</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#date"><span class="toc-text">date</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#time"><span class="toc-text">time</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#datetime"><span class="toc-text">datetime</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#timedelta"><span class="toc-text">timedelta</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#tzinfo"><span class="toc-text">tzinfo</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#timezone"><span class="toc-text">timezone</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#类型间的关系"><span class="toc-text">类型间的关系</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#迭代日期"><span class="toc-text">迭代日期</span></a></li></ol></li></ol></li></ol></div><div class="post-content"><p>怎么用python完美地处理有关时间的问题</p>
+<a id="more"></a>
+<h1 id="时间处理"><a href="#时间处理" class="headerlink" title="时间处理"></a>时间处理</h1><h2 id="datetime-–-Basic-date-and-types"><a href="#datetime-–-Basic-date-and-types" class="headerlink" title="datetime – Basic date and types"></a>datetime – Basic date and types</h2><p>这个库用来解析时间字符串、时间换算、计算，特别好</p>
+<h3 id="时间字符串解析与生成"><a href="#时间字符串解析与生成" class="headerlink" title="时间字符串解析与生成"></a>时间字符串解析与生成</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> datetime <span class="keyword">import</span> datetime</div><div class="line">t = datetime.strptime(<span class="string">"2017-03-17"</span>, <span class="string">"%Y-%m-%d"</span>)</div><div class="line">print(t)</div><div class="line"><span class="comment"># 2017-03-17 00:00:00</span></div><div class="line">t.strftime(<span class="string">"%A, %d. %B %Y %I:%M%p"</span>)</div><div class="line"><span class="comment"># 'Friday, 17. March 2017 12:00AM'</span></div><div class="line"><span class="string">'&#123;0:%B&#125;-&#123;0:%d&#125;-&#123;0:%I:%M%p&#125;'</span>.format(dt)</div><div class="line"><span class="comment"># 'March-17-12:00AM'</span></div></pre></td></tr></table></figure>
+<h4 id="格式化符号表"><a href="#格式化符号表" class="headerlink" title="格式化符号表"></a>格式化符号表</h4><table>
+<thead>
+<tr>
+<th>符号</th>
+<th>描述</th>
+<th>例子</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>%a</td>
+<td>Weekday as locale’s abbreviated name.</td>
+<td>Sun, Mon, …, Sat (en_US)</td>
+</tr>
+<tr>
+<td>%A</td>
+<td>Weekday as locale’s full name.</td>
+<td>Sunday, Monday, …, Saturday (en_US)</td>
+</tr>
+<tr>
+<td>%w</td>
+<td>Weekday as a decimal number, where 0 is Sunday and 6 is Saturday.</td>
+<td>0, 1, …, 6</td>
+</tr>
+<tr>
+<td>%d</td>
+<td>Day of the month as a zero-padded decimal number.</td>
+<td>01, 02, …, 31</td>
+</tr>
+<tr>
+<td>%b</td>
+<td>Month as locale’s abbreviated name.</td>
+<td>Jan, Feb, …, Dec (en_US)</td>
+</tr>
+<tr>
+<td>%B</td>
+<td>Month as locale’s full name.</td>
+<td>January, February, …, December (en_US)</td>
+</tr>
+<tr>
+<td>%m</td>
+<td>Month as a zero-padded decimal number.</td>
+<td>01, 02, …, 12</td>
+</tr>
+<tr>
+<td>%y</td>
+<td>Year without century as a zero-padded decimal number.</td>
+<td>00, 01, …, 99</td>
+</tr>
+<tr>
+<td>%Y</td>
+<td>Year with century as a decimal number.</td>
+<td>0001, 0002, …, 2013, 2014, …, 9998, 9999</td>
+</tr>
+<tr>
+<td>%H</td>
+<td>Hour (24-hour clock) as a zero-padded decimal number.</td>
+<td>00, 01, …, 23</td>
+</tr>
+<tr>
+<td>%I</td>
+<td>Hour (12-hour clock) as a zero-padded decimal number.</td>
+<td>01, 02, …, 12</td>
+</tr>
+<tr>
+<td>%p</td>
+<td>Locale’s equivalent of either AM or PM.</td>
+<td>AM, PM (en_US)</td>
+</tr>
+<tr>
+<td>%M</td>
+<td>Minute as a zero-padded decimal number.</td>
+<td>00, 01, …, 59</td>
+</tr>
+<tr>
+<td>%S</td>
+<td>Second as a zero-padded decimal number.</td>
+<td>00, 01, …, 59</td>
+</tr>
+<tr>
+<td>%f</td>
+<td>Microsecond as a decimal number, zero-padded on the left.</td>
+<td>000000, 000001, …, 999999</td>
+</tr>
+<tr>
+<td>%z</td>
+<td>UTC offset in the form +HHMM or -HHMM (empty string if the object is naive).</td>
+<td>(empty), +0000, -0400, +1030</td>
+</tr>
+<tr>
+<td>%Z</td>
+<td>Time zone name (empty string if the object is naive).</td>
+<td>(empty), UTC, EST, CST</td>
+</tr>
+<tr>
+<td>%j</td>
+<td>Day of the year as a zero-padded decimal number.</td>
+<td>001, 002, …, 366</td>
+</tr>
+<tr>
+<td>%U</td>
+<td>Week number of the year (Sunday as the first day of the week) as a zero padded decimal number. All days in a new year preceding the first Sunday are considered to be in week 0.</td>
+<td>00, 01, …, 53</td>
+</tr>
+<tr>
+<td>%W</td>
+<td>Week number of the year (Monday as the first day of the week) as a decimal number. All days in a new year preceding the first Monday are considered to be in week 0.</td>
+<td>00, 01, …, 53</td>
+</tr>
+<tr>
+<td>%c</td>
+<td>Locale’s appropriate date and time representation.</td>
+<td>Tue Aug 16 21:30:00 1988 (en_US);</td>
+</tr>
+<tr>
+<td>%x</td>
+<td>Locale’s appropriate date representation.</td>
+<td>08/16/88 (None); 08/16/1988 (en_US);</td>
+</tr>
+<tr>
+<td>%X</td>
+<td>Locale’s appropriate time representation.</td>
+<td>21:30:00 (en_US)</td>
+</tr>
+<tr>
+<td>%%</td>
+<td>A literal ‘%’ character.</td>
+<td>%</td>
+</tr>
+<tr>
+<td>%G</td>
+<td>ISO 8601 year with century representing the year that contains the greater part of the ISO week (%V).</td>
+<td>0001, 0002, …, 2013, 2014, …, 9998, 9999</td>
+</tr>
+<tr>
+<td>%u</td>
+<td>ISO 8601 weekday as a decimal number where 1 is Monday.</td>
+<td>1, 2, …, 7</td>
+</tr>
+<tr>
+<td>%V</td>
+<td>ISO 8601 week as a decimal number with Monday as the first day of the week. Week 01 is the week containing Jan 4.</td>
+<td>01, 02, …, 53</td>
+</tr>
+</tbody>
+</table>
+<h4 id="本地化"><a href="#本地化" class="headerlink" title="本地化"></a>本地化</h4><p>可这些都是英文的，要其他语言的怎么办？</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> locale</div><div class="line"><span class="keyword">from</span> datetime <span class="keyword">import</span> datetime</div><div class="line">locale.setlocale(locale.LC_ALL, <span class="string">"Chinese"</span>)</div><div class="line">datetime.today().strftime(<span class="string">'%a, %x %X'</span>)</div><div class="line"><span class="comment"># '周一, 2017/3/20 12:23:54'</span></div></pre></td></tr></table></figure>
+<h3 id="时间换算、计算"><a href="#时间换算、计算" class="headerlink" title="时间换算、计算"></a>时间换算、计算</h3><p>datetime库有六种数据类型，分别为</p>
+<h4 id="date"><a href="#date" class="headerlink" title="date"></a>date</h4><p>属性：year, month, day</p>
+<p>常量：min, max, resolution</p>
+<p>常用方法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> datetime</div><div class="line">date = datetime.date.today()</div><div class="line">date</div><div class="line"><span class="comment"># datetime.date(2017, 3, 20)</span></div><div class="line"></div><div class="line">date.timetuple()</div><div class="line"><span class="comment"># time.struct_time(tm_year=2017, tm_mon=3, tm_mday=20, tm_hour=0, tm_min=0, tm_sec=0, tm_wday=0, tm_yday=79, tm_isdst=-1)</span></div><div class="line"></div><div class="line">date.toordinal()</div><div class="line"><span class="comment"># 736408</span></div><div class="line"></div><div class="line">datetime.date.fromordinal(<span class="number">736408</span>)</div><div class="line"><span class="comment"># datetime.datetime(2017, 3, 20)</span></div><div class="line"></div><div class="line">date.weekday()</div><div class="line"><span class="comment"># 0</span></div><div class="line"></div><div class="line">date.isoweekday()</div><div class="line"><span class="comment"># 1</span></div><div class="line"></div><div class="line">date.isocalendar()</div><div class="line"><span class="comment"># (2017, 12, 1)</span></div><div class="line"></div><div class="line">date.ctime()</div><div class="line"><span class="comment"># 'Mon Mar 20 00:00:00 2017'</span></div><div class="line"></div><div class="line">date.strftime(<span class="string">"%Y-%m-%d"</span>)</div><div class="line"><span class="comment"># '2017-03-20'</span></div><div class="line"></div><div class="line">date.isoformat()</div><div class="line"><span class="comment"># '2017-03-20'</span></div></pre></td></tr></table></figure>
+<h4 id="time"><a href="#time" class="headerlink" title="time"></a>time</h4><p>属性：hour, minute, second, microsecond, tzinfo</p>
+<p>常量：min, max, resolution</p>
+<p>常用方法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> datetime</div><div class="line">now = datetime.datetime.now().time()</div><div class="line">now</div><div class="line"><span class="comment"># datetime.time(13, 4, 33, 84464)</span></div><div class="line"></div><div class="line">now.strftime(<span class="string">"%H:%M:%S.%f"</span>)</div><div class="line"><span class="comment"># '13:04:33.084464'</span></div><div class="line"></div><div class="line">now.isoformat()</div><div class="line"><span class="comment"># '13:04:33.084464'</span></div></pre></td></tr></table></figure>
+<h4 id="datetime"><a href="#datetime" class="headerlink" title="datetime"></a>datetime</h4><p>属性：year, month, day, hour, minute, second, microsecond, tzinfo, fold</p>
+<p>常用方法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> datetime</div><div class="line">dt_local = datetime.datetime.now()</div><div class="line">dt_local</div><div class="line"><span class="comment"># datetime.datetime(2017, 3, 20, 13, 20, 58, 609540)</span></div><div class="line"></div><div class="line">dt_utc = datetime.datetime.utcnow() <span class="comment"># almost eq datetime.datetime.now(datetime.utc)</span></div><div class="line">dt_utc</div><div class="line"><span class="comment"># datetime.datetime(2017, 3, 20, 5, 20, 58, 609540)</span></div><div class="line"></div><div class="line">dt = dt_local - dt_utc</div><div class="line">dt</div><div class="line"><span class="comment"># datetime.timedelta(0, 28800, 0)</span></div><div class="line"></div><div class="line">dt.seconds / <span class="number">60</span> / <span class="number">60</span></div><div class="line"><span class="comment"># 8.0</span></div></pre></td></tr></table></figure>
+<h4 id="timedelta"><a href="#timedelta" class="headerlink" title="timedelta"></a>timedelta</h4><p>属性：days, seconds, microseconds</p>
+<p>常量：min, max, resolution</p>
+<p>常用方法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># dt = datetime.timedelta(weeks=0, days=0, hours=8, ...)</span></div><div class="line">dt = datetime.datetime.now() - datetime.datetime.utcnow()</div><div class="line">dt</div><div class="line"><span class="comment"># datetime.timedelta(0, 28800)</span></div><div class="line"></div><div class="line">dt_2 = dt / <span class="number">2</span></div><div class="line">dt_2</div><div class="line"><span class="comment"># datetime.timedelta(0, 14400)</span></div><div class="line"></div><div class="line">dt_2 -= datetime.timedelta(seconds=<span class="number">1</span>)</div><div class="line">dt_2</div><div class="line"><span class="comment"># datetime.timedelta(0, 14399)</span></div><div class="line"></div><div class="line">q, r = divmod(dt, dt_2)</div><div class="line">q</div><div class="line"><span class="comment"># 2</span></div><div class="line">r</div><div class="line"><span class="comment"># datetime.timedelta(0, 2)</span></div><div class="line"></div><div class="line">dt.total_seconds()</div><div class="line"><span class="comment"># 28800.0</span></div></pre></td></tr></table></figure>
+<h4 id="tzinfo"><a href="#tzinfo" class="headerlink" title="tzinfo"></a>tzinfo</h4><p>作为timezone的父类</p>
+<h4 id="timezone"><a href="#timezone" class="headerlink" title="timezone"></a>timezone</h4><p>常量：utc, min, max</p>
+<h4 id="类型间的关系"><a href="#类型间的关系" class="headerlink" title="类型间的关系"></a>类型间的关系</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">object</div><div class="line">  |--timedelta</div><div class="line">  |--tzinfo</div><div class="line">  |    |</div><div class="line">  |     --timezone</div><div class="line">  |--time</div><div class="line">   --date</div><div class="line">       |</div><div class="line">        --datetime</div></pre></td></tr></table></figure>
+<p>除了直接通过用timezone来处理各种不同时区间时间的换算和比较，也可以继承tzinfo来定义自己的timezone类，来满足复杂的需求</p>
+<h3 id="迭代日期"><a href="#迭代日期" class="headerlink" title="迭代日期"></a>迭代日期</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> calendar</div><div class="line"><span class="keyword">import</span> locale</div><div class="line">locale.setlocale(locale.LC_ALL, <span class="string">"Chinese"</span>)</div><div class="line">cal = calendar.Calendar(firstweekday=<span class="number">0</span>)</div><div class="line"><span class="keyword">for</span> day <span class="keyword">in</span> cal.itermonthdates(<span class="number">2017</span>, <span class="number">3</span>):</div><div class="line">    print(day.strftime(<span class="string">"%m-%d %A"</span>))</div><div class="line"><span class="string">"""</span></div><div class="line">02-27 星期一</div><div class="line">02-28 星期二</div><div class="line">03-01 星期三</div><div class="line">03-02 星期四</div><div class="line">...</div><div class="line">03-31 星期五</div><div class="line">04-01 星期六</div><div class="line">04-02 星期日</div><div class="line">"""</div></pre></td></tr></table></figure>
+<p>这个函数会迭代出完整的星期，所以要在循环中判断一下</p>
+</div></article><div class="tags"><a href="/tags/Python/">Python</a></div><div class="paginator"><a href="/2017/03/19/Python-On-Visual-Studio-Code-With-Anaconda/" class="next"><span>Next</span><i class="iconfont icon-right"></i></a></div><section id="comments"><div id="disqus_thread"></div></section><script type="text/javascript">var disqus_config = function () {
+    this.page.url = 'http://linw1995.github.io/2017/03/20/用python来handle复杂的时间/';
+    this.page.identifier = '2017/03/20/用python来handle复杂的时间/';
+    this.page.title = '用python来handle复杂的时间';
+};
+(function() {
+var d = document, s = d.createElement('script');
+
+s.src = '//linw1995.disqus.com/embed.js';
+
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();</script></section><footer><div class="copyright"><p class="power">Powered by <a href="https://hexo.io/">Hexo</a> and Theme by <a href="https://github.com/ahonn/hexo-theme-even"> Even</a></p><p class="since">&copy;2017<span class="heart"><i class="iconfont icon-heart"></i></span><span class="author">linw</span></p></div><label id="back2top"><i class="iconfont icon-up"></i></label></footer></div><script src="/js/zepto.min.js"></script><script src="/js/theme.js"></script></body></html>

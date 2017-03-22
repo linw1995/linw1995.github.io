@@ -31,22 +31,22 @@
 
 
 
-<link rel="canonical" href="http://linw1995.github.io/2017/03/22/Python-Unitest/"/>
+<link rel="canonical" href="http://linw1995.github.io/2017/03/22/Python-Unittest/"/>
 
 
 <meta name="description" content="测试在持续集成开发中非常重要，写单元测试有助于定位bug，方便在未来重构代码。本文简单介绍了下Python标准库中的Unittest">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Python Unittest">
-<meta property="og:url" content="http://linw1995.github.io/2017/03/22/Python-Unitest/index.html">
+<meta property="og:url" content="http://linw1995.github.io/2017/03/22/Python-Unittest/index.html">
 <meta property="og:site_name" content="linw1995">
 <meta property="og:description" content="测试在持续集成开发中非常重要，写单元测试有助于定位bug，方便在未来重构代码。本文简单介绍了下Python标准库中的Unittest">
-<meta property="og:image" content="http://linw1995.github.io/2017/03/22/Python-Unitest/01.png">
-<meta property="og:image" content="http://linw1995.github.io/2017/03/22/Python-Unitest/02.png">
-<meta property="og:updated_time" content="2017-03-22T08:47:56.891Z">
+<meta property="og:image" content="http://linw1995.github.io/2017/03/22/Python-Unittest/01.png">
+<meta property="og:image" content="http://linw1995.github.io/2017/03/22/Python-Unittest/02.png">
+<meta property="og:updated_time" content="2017-03-22T23:32:51.200Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python Unittest">
 <meta name="twitter:description" content="测试在持续集成开发中非常重要，写单元测试有助于定位bug，方便在未来重构代码。本文简单介绍了下Python标准库中的Unittest">
-<meta name="twitter:image" content="http://linw1995.github.io/2017/03/22/Python-Unitest/01.png">
+<meta name="twitter:image" content="http://linw1995.github.io/2017/03/22/Python-Unittest/01.png">
 
 
 <link rel="stylesheet" type="text/css" href="/css/style.css?v=2.3.x" />
@@ -235,7 +235,7 @@
       
         <p>测试在持续集成开发中非常重要，写单元测试有助于定位bug，方便在未来重构代码。<br>本文简单介绍了下Python标准库中的Unittest</p>
 <a id="more"></a>
-<h1 id="Unittest"><a href="#Unittest" class="headerlink" title="Unittest"></a>Unittest</h1><p>该测试框架有一下特性</p>
+<h1 id="Unittest"><a href="#Unittest" class="headerlink" title="Unittest"></a>Unittest</h1><p>该测试框架特性有</p>
 <ul>
 <li><p>fixture 初始化和清理测试环境</p>
 </li>
@@ -369,7 +369,7 @@
 <h2 id="VSCode的测试配置"><a href="#VSCode的测试配置" class="headerlink" title="VSCode的测试配置"></a>VSCode的测试配置</h2><p>首先要安装这个插件<a href="https://github.com/DonJayamanne/pythonVSCode" target="_blank" rel="external">pythonVSCode</a><br>按<code>ctrl</code>+<code>shift</code>+<code>p</code>输入<code>ext install python</code></p>
 <p>在<code>setting.json</code>中加入</p>
 <figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    <span class="attr">"python.unitTest.unittestEnabled"</span>: <span class="literal">true</span>,</div><div class="line">    <span class="attr">"python.unitTest.unittestArgs"</span>: [</div><div class="line">        <span class="string">"-v"</span>,</div><div class="line">        <span class="string">"-s"</span>,</div><div class="line">        <span class="string">"."</span>,</div><div class="line">        <span class="string">"-p"</span>,</div><div class="line">        <span class="string">"test_*.py"</span></div><div class="line">    ]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>这样就会在工作路径中寻找测试<br>若VSCode左下方出现Run Tests，即测试导入完毕<br><img src="/2017/03/22/Python-Unitest/01.png" alt="01.png" title=""><br>点击Run Tests，可选择进行所有测试，也可以进行某个测试方法<br>也可以进行上一次失败的测试<br><img src="/2017/03/22/Python-Unitest/02.png" alt="02.png" title=""><br>也可以到测试文件中，在TestMethod或TestCase运行测试</p>
+<p>这样就会在工作路径中寻找测试<br>若VSCode左下方出现Run Tests，即测试导入完毕<br><img src="/2017/03/22/Python-Unittest/01.png" alt="01.png" title=""><br>点击Run Tests，可选择进行所有测试，也可以进行某个测试方法<br>也可以进行上一次失败的测试<br><img src="/2017/03/22/Python-Unittest/02.png" alt="02.png" title=""><br>也可以到测试文件中，在TestMethod或TestCase运行测试</p>
 <blockquote>
 <p>参考链接<br><a href="https://docs.python.org/3.6/library/unittest.html" target="_blank" rel="external">unittest — Unit testing framework</a><br>pythonVSCode配置详情<br><a href="https://github.com/DonJayamanne/pythonVSCode/wiki/Unitest:-More-Options" target="_blank" rel="external">unittest: More Options</a><br><a href="https://github.com/DonJayamanne/pythonVSCode/wiki/unitest-(Standard-Unit-testing)-Framework" target="_blank" rel="external">unittest (Standard Unit testing) Framework</a></p>
 </blockquote>
@@ -392,7 +392,7 @@
     </p>
     <p class="copyright-item">
       <span>Link: </span>
-      <a href="http://linw1995.github.io/2017/03/22/Python-Unitest/">http://linw1995.github.io/2017/03/22/Python-Unitest/</a>
+      <a href="http://linw1995.github.io/2017/03/22/Python-Unittest/">http://linw1995.github.io/2017/03/22/Python-Unittest/</a>
     </p>
 
     <p class="copyright-item lincese">
@@ -544,8 +544,8 @@
   
   <script type="text/javascript">
     var disqus_config = function () {
-        this.page.url = 'http://linw1995.github.io/2017/03/22/Python-Unitest/';
-        this.page.identifier = '2017/03/22/Python-Unitest/';
+        this.page.url = 'http://linw1995.github.io/2017/03/22/Python-Unittest/';
+        this.page.identifier = '2017/03/22/Python-Unittest/';
         this.page.title = 'Python Unittest';
     };
     (function() {

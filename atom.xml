@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://linw1995.github.io/"/>
-  <updated>2017-03-22T23:32:51.200Z</updated>
+  <updated>2017-03-25T16:05:58.047Z</updated>
   <id>http://linw1995.github.io/</id>
   
   <author>
@@ -14,6 +14,84 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>编码问题 ~ Python</title>
+    <link href="http://linw1995.github.io/2017/03/25/%E7%BC%96%E7%A0%81%E9%97%AE%E9%A2%98-Python/"/>
+    <id>http://linw1995.github.io/2017/03/25/编码问题-Python/</id>
+    <published>2017-03-25T12:33:12.000Z</published>
+    <updated>2017-03-25T16:05:58.047Z</updated>
+    
+    <content type="html"><![CDATA[<p>用Python处理中文时候经常出现乱码，或者代码经常因为编码的问题而出现各种错误，<br>比如说从网路上爬取数据，文本文件处理等等</p>
+<a id="more"></a>
+<h1 id="py2-to-py3"><a href="#py2-to-py3" class="headerlink" title="py2 to py3"></a>py2 to py3</h1><h2 id="Python2"><a href="#Python2" class="headerlink" title="Python2"></a><strong>Python2</strong></h2><ul>
+<li>str</li>
+<li>unicode</li>
+</ul>
+<p>在<strong>cmd</strong>中使用<strong>Python2.7 Interpreter</strong>，输入以下代码</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">my_unicode = <span class="string">u"Python之禅"</span></div><div class="line">my_unicode</div><div class="line"><span class="comment"># u'Python\u4e4b\u7985'</span></div><div class="line">len(my_unicode)</div><div class="line"><span class="comment"># 8</span></div><div class="line">my_str = <span class="string">"Python之禅"</span></div><div class="line">my_str</div><div class="line"><span class="comment"># 'Python\xd6\xae\xec\xf8'</span></div><div class="line">len(my_str)</div><div class="line"><span class="comment"># 10</span></div><div class="line">my_unicode.encode(<span class="string">"GBK"</span>) == my_str</div><div class="line"><span class="comment"># True</span></div></pre></td></tr></table></figure>
+<p><strong>cmd</strong>的默认编码是<strong>GBK</strong>, 所以str的编码就是<strong>GBK</strong></p>
+<p>可以用<code>sys.getdefaultencoding()</code>得知,<br>代码文件中str的编码默认是<strong>ASCII</strong>,<br>若要改变只需要在代码文件头加上一行<code># -*- coding: utf-8 -*-</code>,<br>且用相应的编码保存文件<br>这样编码就改变成<strong>UTF8</strong></p>
+<blockquote>
+<a href="https://www.python.org/dev/peps/pep-0263/" target="_blank" rel="external">PEP 263 -- Defining Python Source Code Encodings</a>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># -*- coding: utf-8 -*-</span></div><div class="line">u = <span class="string">u"Python之禅"</span></div><div class="line">s = <span class="string">"Python之禅"</span></div><div class="line"></div><div class="line"><span class="keyword">assert</span> s.decode(<span class="string">"utf-8"</span>) == u</div><div class="line"><span class="keyword">assert</span> s == u.encode(<span class="string">"utf-8"</span>)</div><div class="line"><span class="keyword">assert</span> s != u.encode(<span class="string">"gbk"</span>)</div></pre></td></tr></table></figure>
+<blockquote>
+<p>如同<a href="http://farmdev.com/talks/unicode/" target="_blank" rel="external">Unicode In Python, Completely Demystified</a>建议的，记住三个原则：</p>
+<ul>
+<li>Decode early</li>
+<li>Unicode everywhere</li>
+<li>Encode late</li>
+</ul>
+<p>就是输入时一定要<strong>decode</strong>成<strong>unicode</strong>，<br>输出就<strong>encode</strong>成所需要的编码</p>
+</blockquote>
+<h2 id="Python3"><a href="#Python3" class="headerlink" title="Python3"></a><strong>Python3</strong></h2><ul>
+<li>str (unicode)</li>
+<li>bytes (py2’s str)</li>
+</ul>
+<p>就完全反过来了</p>
+<p>在<strong>cmd</strong>中使用<strong>Python3.6 Interpreter</strong>，输入以下代码</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">u = <span class="string">"Python之禅"</span></div><div class="line">u</div><div class="line"><span class="comment"># 'Python之禅'</span></div><div class="line">len(u)</div><div class="line"><span class="comment"># 8</span></div><div class="line">gbk = u.encode(<span class="string">"GBK"</span>)</div><div class="line">gbk</div><div class="line"><span class="comment"># b'Python\xd6\xae\xec\xf8'</span></div><div class="line">len(gbk)</div><div class="line"><span class="comment"># 10</span></div></pre></td></tr></table></figure>
+<p>用<code>sys.getdefaultencoding()</code>得知，<br>默认编码为<strong>utf-8</strong>，所以就没必要在文件头加上<code># -*- coding: utf-8 -*-</code>，<br>若是要用到其他编码保存文件，那就有必要</p>
+<h1 id="爬虫巨坑"><a href="#爬虫巨坑" class="headerlink" title="爬虫巨坑"></a>爬虫<strong>巨坑</strong></h1><p>以前在写爬虫时，总是会出现乱码的现象<br>这是因为从网页得到的字符串格式是<strong>encode</strong>后的带编码的文本</p>
+<p>若得到的是<strong>UTF8</strong>编码<br>你在<strong>cmd</strong>里用<strong>Python3</strong>的<strong>print</strong>函数就有可能得到一个<strong>UnicodeDecodeError</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># python3.6</span></div><div class="line"><span class="keyword">import</span> requests</div><div class="line">resp = requests.get(<span class="string">"https://www.baidu.com"</span>)</div><div class="line">content = resp.content <span class="comment"># 未decode的bytes</span></div><div class="line">content[<span class="number">0</span>:<span class="number">10</span>]</div><div class="line"><span class="comment"># b'&lt;!DOCTYPE'</span></div><div class="line">text = resp.text <span class="comment"># decode后的unicode即str</span></div><div class="line">text[<span class="number">0</span>:<span class="number">10</span>]</div><div class="line"><span class="comment"># '&lt;!DOCTYPE'</span></div></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># python2.7</span></div><div class="line"><span class="keyword">import</span> requests</div><div class="line">resp = requests.get(<span class="string">"https://www.baidu.com"</span>)</div><div class="line">content = resp.content <span class="comment"># 未decode的str</span></div><div class="line">content[<span class="number">0</span>:<span class="number">10</span>]</div><div class="line"><span class="comment"># '&lt;!DOCTYPE'</span></div><div class="line">text = resp.text <span class="comment"># decode后的unicode</span></div><div class="line">text[<span class="number">0</span>:<span class="number">10</span>]</div><div class="line"><span class="comment"># u'&lt;!DOCTYPE'</span></div></pre></td></tr></table></figure>
+<p>一般网页文本的编码都在<strong>headers</strong>中<strong>charset</strong>字段，或者<strong>html</strong>中<strong>head</strong>里含有<strong>charset</strong>的<strong>meta</strong>标签来获得</p>
+<p>若是实在不知道文本的编码，可以用<strong>chardet</strong>这个库来判断字符串的编码</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># Python2.7</span></div><div class="line">type(s)</div><div class="line"><span class="comment"># &lt;type 'str'&gt;</span></div><div class="line">chardet.detect(s)</div><div class="line"><span class="comment"># &#123;'confidence': 0.5081280157397734, 'encoding': 'windows-1255'&#125;</span></div></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># Python3.6</span></div><div class="line">type(s)</div><div class="line"><span class="comment"># &lt;class 'bytes'&gt;</span></div><div class="line">chardet.detect(s)</div><div class="line"><span class="comment"># &#123;'encoding': 'utf-8', 'confidence': 0.99&#125;</span></div></pre></td></tr></table></figure>
+<h1 id="文本文件处理"><a href="#文本文件处理" class="headerlink" title="文本文件处理"></a>文本文件处理</h1><p>除了爬虫会遇到这类问题，文本文件读取也会经常遇到<strong>UnicodeDecodeError</strong></p>
+<p><strong>Python3</strong>中的<strong>open</strong>函数中有<strong>encoding</strong>这个参数，默认是<strong>None</strong>，其实就是按照<strong>utf-8</strong>编码来<strong>decode</strong>获取<strong>unicode str</strong><br>若使用了错误了<strong>encoding</strong>参数，就会抛出<strong>UnicodeDecodeError</strong>错误</p>
+<p>这样可以使用<strong>mode=’rb’</strong>参数，就可以读入<strong>bytes</strong>,用<strong>chardet.detect</strong>函数来获得编码，再用<strong>decode</strong>函数来得到<strong>unicode</strong>,即<strong>str</strong></p>
+<h1 id="其它要注意的地方"><a href="#其它要注意的地方" class="headerlink" title="其它要注意的地方"></a>其它要注意的地方</h1><ul>
+<li><strong>Unicode</strong>是一种字符集，<strong>utf-8</strong>、<strong>utf-16</strong>和<strong>utf-32</strong>是其实现</li>
+<li><strong>Python3</strong>中的<strong>str</strong>没有<strong>decode</strong>函数， that make sence</li>
+<li><strong>Python2</strong>中的<strong>unicode</strong>有<strong>decode</strong>函数 …</li>
+<li><strong>sys.stdin</strong>和<strong>sys.stdout</strong>是带有编码的</li>
+</ul>
+<blockquote>
+<p>参考链接</p>
+<ul>
+<li><a href="http://farmdev.com/talks/unicode/" target="_blank" rel="external">Unicode In Python, Completely Demystified</a></li>
+<li><a href="https://nedbatchelder.com/text/unipain.html" target="_blank" rel="external">Pragmatic Unicode|Ned Batchelder</a>
+</li>
+</ul>
+</blockquote>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;用Python处理中文时候经常出现乱码，或者代码经常因为编码的问题而出现各种错误，&lt;br&gt;比如说从网路上爬取数据，文本文件处理等等&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Python" scheme="http://linw1995.github.io/categories/Python/"/>
+    
+    
+      <category term="Python" scheme="http://linw1995.github.io/tags/Python/"/>
+    
+  </entry>
   
   <entry>
     <title>Python Unittest</title>

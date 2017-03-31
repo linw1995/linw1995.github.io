@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://linw1995.com/"/>
-  <updated>2017-03-30T14:57:27.679Z</updated>
+  <updated>2017-03-31T10:00:31.207Z</updated>
   <id>http://linw1995.com/</id>
   
   <author>
@@ -16,11 +16,77 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Python object的可变与不可变</title>
+    <link href="http://linw1995.com/2017/03/31/%E5%8F%AF%E5%8F%98%E4%B8%8E%E4%B8%8D%E5%8F%AF%E5%8F%98/"/>
+    <id>http://linw1995.com/2017/03/31/可变与不可变/</id>
+    <published>2017-03-31T07:59:12.000Z</published>
+    <updated>2017-03-31T10:00:31.207Z</updated>
+    
+    <content type="html"><![CDATA[<p><strong>Python object</strong>可以分为两大类型，<strong>可变mutable</strong>与<strong>不可变immutable</strong>。<br>可变与不可变究竟意味着什么？<br><a id="more"></a></p>
+<p>对象是<strong>Python</strong>对数据的抽象化，在<strong>Python</strong>中，数据被表现成对象或者对象间的关系。<br>在<strong>Python</strong>中一切皆为对象，每个对象各含有<strong>identity</strong>、<strong>type</strong>和<strong>value</strong></p>
+<ul>
+<li><strong>identity</strong> 在对象创建之后就不会改变，可想作是对象在内存中的地址。<br>  使用<strong>id(obj)</strong>可以得到一个对象的<strong>identity</strong>。</li>
+<li><strong>type</strong> 可想而知，类型在创建后也不会被改变。</li>
+<li><strong>value</strong> 保存了对象的值。<br>  对于有的对象这个值在创建对象之后还是可变的，那么称这种对象为<strong>可变对象mutable object</strong>；<br>而有的反之，自创建对象之后不可变，那么称这种对象为<strong>不可变对象immutable object</strong>。</li>
+</ul>
+<h1 id="常见的mutable和immutable对象"><a href="#常见的mutable和immutable对象" class="headerlink" title="常见的mutable和immutable对象"></a>常见的mutable和immutable对象</h1><p><strong>Python</strong>的主要类型有：</p>
+<ul>
+<li><p>不可变 <strong>immutable</strong></p>
+<ul>
+<li>数值类型 <strong>int</strong> <strong>float</strong> <strong>complex</strong> <strong>str</strong></li>
+<li>数组类型 <strong>tuple</strong> <strong>frozenset</strong> <strong>bytes</strong></li>
+</ul>
+<p>以上类型的对象都是不可变的</p>
+</li>
+<li><p>可变 <strong>mutable</strong></p>
+<ul>
+<li>数组类型 <strong>list</strong> <strong>bytearray</strong> <strong>set</strong></li>
+<li>映射类型 <strong>dict</strong></li>
+</ul>
+<p>以上类型的对象都是可变的</p>
+</li>
+</ul>
+<h1 id="用id函数来判断对象是可变还是不可变"><a href="#用id函数来判断对象是可变还是不可变" class="headerlink" title="用id函数来判断对象是可变还是不可变"></a>用id函数来判断对象是可变还是不可变</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>x = <span class="number">1</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>type(x)</div><div class="line">int</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>x = <span class="number">2</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>x</div><div class="line"><span class="number">2</span></div></pre></td></tr></table></figure>
+<p><strong>int</strong>明明讲的是不可变对象，但怎么变化呢？<br>其实x是一个新的<strong>int</strong>对象</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>x = <span class="number">1</span>; id(x)</div><div class="line"><span class="number">1560852944</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>x = <span class="number">2</span>; id(x)</div><div class="line"><span class="number">1560852976</span></div></pre></td></tr></table></figure>
+<p>每当<strong>int</strong>对象的值需要变化，总是会生成一个新的对象，旧的应该就会被销毁。<br>其实在<strong>Python</strong>中会缓存值为-5~256的<strong>int</strong>对象</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="function"><span class="keyword">def</span> <span class="title">check_id</span><span class="params">(x)</span>:</span></div><div class="line"><span class="meta">... </span>    i = id(x)</div><div class="line"><span class="meta">... </span>    x += <span class="number">1</span>; x -= <span class="number">1</span></div><div class="line">        <span class="keyword">return</span> i == id(x)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>len(list(filter(check_id, range(<span class="number">10</span>**<span class="number">3</span>))))</div><div class="line"><span class="number">257</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>len(list(filter(check_id, range(<span class="number">-10</span>**<span class="number">3</span>, <span class="number">0</span>))))</div><div class="line"><span class="number">5</span></div></pre></td></tr></table></figure>
+<blockquote>
+<a href="http://stackoverflow.com/questions/15171695/whats-with-the-integer-cache-inside-python" target="_blank" rel="external">What's with the Integer Cache inside Python? [stackoverflow]</a>
+</blockquote>
+<h1 id="Tuple之谜"><a href="#Tuple之谜" class="headerlink" title="Tuple之谜"></a>Tuple之谜</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>t = tuple([<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, []])</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>t</div><div class="line">(<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, [])</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>t[<span class="number">0</span>] = <span class="number">1</span></div><div class="line">TypeError: <span class="string">'tuple'</span> object does <span class="keyword">not</span> support item assignment</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>t_id = id(t)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>t[<span class="number">3</span>].append(<span class="string">"some"</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>t</div><div class="line">(<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, [<span class="string">"some"</span>])</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>t_id == id(t)</div><div class="line"><span class="keyword">True</span></div></pre></td></tr></table></figure>
+<p>当要改变<strong>tuple</strong>中的值时，抛出<strong>TypeError</strong>错误，因为<strong>tuple</strong>是不可变的对象<br>可接下来<code>t[3].append(&quot;some&quot;)</code>，却成功的改变了<strong>tuple</strong>的内容。<br>其实保存在<strong>tuple</strong>中的只是<strong>list</strong>的<strong>identity</strong>, <strong>list</strong>是可变的，但其<strong>identity</strong>是不变的。</p>
+<h1 id="hashable"><a href="#hashable" class="headerlink" title="hashable"></a>hashable</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>mutable = [list, bytearray, set, dict]</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>immutable = [int, float, complex, str, tuple, frozenset, bytes]</div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="function"><span class="keyword">def</span> <span class="title">check_hashable</span><span class="params">(t)</span>:</span></div><div class="line"><span class="meta">... </span>    <span class="keyword">try</span>:</div><div class="line"><span class="meta">... </span>        hash(t)</div><div class="line"><span class="meta">... </span>    <span class="keyword">except</span>:</div><div class="line"><span class="meta">... </span>        <span class="keyword">return</span> <span class="keyword">False</span></div><div class="line"><span class="meta">... </span>    <span class="keyword">return</span> <span class="keyword">True</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>all(map(check_hashable, immutable))</div><div class="line"><span class="keyword">True</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>any(map(check_hashable, mutable))</div><div class="line"><span class="keyword">False</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>hash(tuple([<span class="number">1</span>, list()))</div><div class="line">TypeError: unhashable type: <span class="string">'list'</span></div></pre></td></tr></table></figure>
+<p>结论：<strong>mutable object</strong>都是<strong>unhashable</strong>的，纯<strong>immutable object</strong>都是<strong>hashable</strong>。</p>
+<blockquote>
+<p>参考链接</p>
+<ul>
+<li><a href="https://docs.python.org/3.6/reference/datamodel.html#objects-values-and-types" target="_blank" rel="external">Objects, values and types - Data model [python doc]</a></li>
+<li><a href="http://stackoverflow.com/questions/15171695/whats-with-the-integer-cache-inside-python" target="_blank" rel="external">What's with the Integer Cache inside Python? [stackoverflow]</a>
+</li>
+</ul>
+</blockquote>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;strong&gt;Python object&lt;/strong&gt;可以分为两大类型，&lt;strong&gt;可变mutable&lt;/strong&gt;与&lt;strong&gt;不可变immutable&lt;/strong&gt;。&lt;br&gt;可变与不可变究竟意味着什么？&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Python" scheme="http://linw1995.com/categories/Python/"/>
+    
+    
+      <category term="Python" scheme="http://linw1995.com/tags/Python/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Python collections</title>
     <link href="http://linw1995.com/2017/03/30/Python-collections/"/>
     <id>http://linw1995.com/2017/03/30/Python-collections/</id>
     <published>2017-03-30T14:53:14.000Z</published>
-    <updated>2017-03-30T14:57:27.679Z</updated>
+    <updated>2017-03-31T07:54:25.000Z</updated>
     
     <content type="html"><![CDATA[<p><strong>Python</strong>内置了一组高性能的容器类型，满足了所有基本的需求，<br>这个库就叫做<strong>collections</strong><br><a id="more"></a></p>
 <h1 id="py2与py3的区别"><a href="#py2与py3的区别" class="headerlink" title="py2与py3的区别"></a>py2与py3的区别</h1><table>
@@ -208,6 +274,8 @@
     
       <category term="Python" scheme="http://linw1995.com/categories/Python/"/>
     
+    
+      <category term="Python" scheme="http://linw1995.com/tags/Python/"/>
     
   </entry>
   

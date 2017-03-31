@@ -4,9 +4,9 @@
   
   <link href="/atom.xml" rel="self"/>
   
-  <link href="http://linw1995.github.io/"/>
+  <link href="http://linw1995.com/"/>
   <updated>2017-03-30T14:57:27.679Z</updated>
-  <id>http://linw1995.github.io/</id>
+  <id>http://linw1995.com/</id>
   
   <author>
     <name>linw</name>
@@ -17,8 +17,8 @@
   
   <entry>
     <title>Python collections</title>
-    <link href="http://linw1995.github.io/2017/03/30/Python-collections/"/>
-    <id>http://linw1995.github.io/2017/03/30/Python-collections/</id>
+    <link href="http://linw1995.com/2017/03/30/Python-collections/"/>
+    <id>http://linw1995.com/2017/03/30/Python-collections/</id>
     <published>2017-03-30T14:53:14.000Z</published>
     <updated>2017-03-30T14:57:27.679Z</updated>
     
@@ -206,15 +206,15 @@
     
     </summary>
     
-      <category term="Python" scheme="http://linw1995.github.io/categories/Python/"/>
+      <category term="Python" scheme="http://linw1995.com/categories/Python/"/>
     
     
   </entry>
   
   <entry>
     <title>Python functools</title>
-    <link href="http://linw1995.github.io/2017/03/29/Python-functools/"/>
-    <id>http://linw1995.github.io/2017/03/29/Python-functools/</id>
+    <link href="http://linw1995.com/2017/03/29/Python-functools/"/>
+    <id>http://linw1995.com/2017/03/29/Python-functools/</id>
     <published>2017-03-29T08:30:08.000Z</published>
     <updated>2017-03-29T15:22:55.674Z</updated>
     
@@ -351,19 +351,19 @@
     
     </summary>
     
-      <category term="Python" scheme="http://linw1995.github.io/categories/Python/"/>
+      <category term="Python" scheme="http://linw1995.com/categories/Python/"/>
     
     
-      <category term="Functional Programming" scheme="http://linw1995.github.io/tags/Functional-Programming/"/>
+      <category term="Python" scheme="http://linw1995.com/tags/Python/"/>
     
-      <category term="Python" scheme="http://linw1995.github.io/tags/Python/"/>
+      <category term="Functional Programming" scheme="http://linw1995.com/tags/Functional-Programming/"/>
     
   </entry>
   
   <entry>
     <title>编码问题 ~ Python</title>
-    <link href="http://linw1995.github.io/2017/03/25/%E7%BC%96%E7%A0%81%E9%97%AE%E9%A2%98-Python/"/>
-    <id>http://linw1995.github.io/2017/03/25/编码问题-Python/</id>
+    <link href="http://linw1995.com/2017/03/25/%E7%BC%96%E7%A0%81%E9%97%AE%E9%A2%98-Python/"/>
+    <id>http://linw1995.com/2017/03/25/编码问题-Python/</id>
     <published>2017-03-25T12:33:12.000Z</published>
     <updated>2017-03-29T11:55:19.854Z</updated>
     
@@ -432,23 +432,23 @@
     
     </summary>
     
-      <category term="Python" scheme="http://linw1995.github.io/categories/Python/"/>
+      <category term="Python" scheme="http://linw1995.com/categories/Python/"/>
     
     
-      <category term="Python" scheme="http://linw1995.github.io/tags/Python/"/>
+      <category term="Python" scheme="http://linw1995.com/tags/Python/"/>
     
   </entry>
   
   <entry>
     <title>我的CV</title>
-    <link href="http://linw1995.github.io/2017/03/24/%E6%88%91%E7%9A%84CV/"/>
-    <id>http://linw1995.github.io/2017/03/24/我的CV/</id>
+    <link href="http://linw1995.com/2017/03/24/%E6%88%91%E7%9A%84CV/"/>
+    <id>http://linw1995.com/2017/03/24/我的CV/</id>
     <published>2017-03-24T15:25:35.000Z</published>
     <updated>2017-03-29T12:34:10.653Z</updated>
     
     <content type="html"><![CDATA[<p>花了三小时写了这份简历，保存一下以后当作回忆:)</p>
 <a id="more"></a>
-<a href="https://linw1995.github.io/CV/">传送门</a>
+<a href="https://linw1995.github.io/CV/" target="_blank" rel="external">传送门</a>
 ]]></content>
     
     <summary type="html">
@@ -457,15 +457,15 @@
     
     </summary>
     
-      <category term="Others" scheme="http://linw1995.github.io/categories/Others/"/>
+      <category term="Others" scheme="http://linw1995.com/categories/Others/"/>
     
     
   </entry>
   
   <entry>
     <title>Python Unittest</title>
-    <link href="http://linw1995.github.io/2017/03/22/Python-Unittest/"/>
-    <id>http://linw1995.github.io/2017/03/22/Python-Unittest/</id>
+    <link href="http://linw1995.com/2017/03/22/Python-Unittest/"/>
+    <id>http://linw1995.com/2017/03/22/Python-Unittest/</id>
     <published>2017-03-22T06:34:01.000Z</published>
     <updated>2017-03-26T04:20:13.771Z</updated>
     
@@ -619,21 +619,21 @@
     
     </summary>
     
-      <category term="Python" scheme="http://linw1995.github.io/categories/Python/"/>
+      <category term="Python" scheme="http://linw1995.com/categories/Python/"/>
     
     
-      <category term="Python" scheme="http://linw1995.github.io/tags/Python/"/>
+      <category term="Python" scheme="http://linw1995.com/tags/Python/"/>
     
-      <category term="Test" scheme="http://linw1995.github.io/tags/Test/"/>
+      <category term="Test" scheme="http://linw1995.com/tags/Test/"/>
     
-      <category term="VSCode" scheme="http://linw1995.github.io/tags/VSCode/"/>
+      <category term="VSCode" scheme="http://linw1995.com/tags/VSCode/"/>
     
   </entry>
   
   <entry>
     <title>用python来handle复杂的时间</title>
-    <link href="http://linw1995.github.io/2017/03/20/%E7%94%A8python%E6%9D%A5handle%E5%A4%8D%E6%9D%82%E7%9A%84%E6%97%B6%E9%97%B4/"/>
-    <id>http://linw1995.github.io/2017/03/20/用python来handle复杂的时间/</id>
+    <link href="http://linw1995.com/2017/03/20/%E7%94%A8python%E6%9D%A5handle%E5%A4%8D%E6%9D%82%E7%9A%84%E6%97%B6%E9%97%B4/"/>
+    <id>http://linw1995.com/2017/03/20/用python来handle复杂的时间/</id>
     <published>2017-03-20T08:21:38.000Z</published>
     <updated>2017-03-26T04:28:20.687Z</updated>
     
@@ -819,17 +819,17 @@
     
     </summary>
     
-      <category term="Python" scheme="http://linw1995.github.io/categories/Python/"/>
+      <category term="Python" scheme="http://linw1995.com/categories/Python/"/>
     
     
-      <category term="Python" scheme="http://linw1995.github.io/tags/Python/"/>
+      <category term="Python" scheme="http://linw1995.com/tags/Python/"/>
     
   </entry>
   
   <entry>
     <title>Python On Visual Studio Code With Anaconda</title>
-    <link href="http://linw1995.github.io/2017/03/19/Python-On-Visual-Studio-Code-With-Anaconda/"/>
-    <id>http://linw1995.github.io/2017/03/19/Python-On-Visual-Studio-Code-With-Anaconda/</id>
+    <link href="http://linw1995.com/2017/03/19/Python-On-Visual-Studio-Code-With-Anaconda/"/>
+    <id>http://linw1995.com/2017/03/19/Python-On-Visual-Studio-Code-With-Anaconda/</id>
     <published>2017-03-19T08:28:48.000Z</published>
     <updated>2017-03-19T08:32:24.647Z</updated>
     
@@ -884,21 +884,21 @@
     
     </summary>
     
-      <category term="Python" scheme="http://linw1995.github.io/categories/Python/"/>
+      <category term="Python" scheme="http://linw1995.com/categories/Python/"/>
     
-      <category term="Others" scheme="http://linw1995.github.io/categories/Python/Others/"/>
+      <category term="Others" scheme="http://linw1995.com/categories/Python/Others/"/>
     
     
-      <category term="Python" scheme="http://linw1995.github.io/tags/Python/"/>
+      <category term="Python" scheme="http://linw1995.com/tags/Python/"/>
     
-      <category term="VSCode" scheme="http://linw1995.github.io/tags/VSCode/"/>
+      <category term="VSCode" scheme="http://linw1995.com/tags/VSCode/"/>
     
   </entry>
   
   <entry>
     <title>Matplotlib 中文显示参数设置</title>
-    <link href="http://linw1995.github.io/2017/03/15/Matplotlib-%E4%B8%AD%E6%96%87%E6%98%BE%E7%A4%BA%E5%8F%82%E6%95%B0%E8%AE%BE%E7%BD%AE/"/>
-    <id>http://linw1995.github.io/2017/03/15/Matplotlib-中文显示参数设置/</id>
+    <link href="http://linw1995.com/2017/03/15/Matplotlib-%E4%B8%AD%E6%96%87%E6%98%BE%E7%A4%BA%E5%8F%82%E6%95%B0%E8%AE%BE%E7%BD%AE/"/>
+    <id>http://linw1995.com/2017/03/15/Matplotlib-中文显示参数设置/</id>
     <published>2017-03-15T01:16:42.000Z</published>
     <updated>2017-03-19T08:29:52.331Z</updated>
     
@@ -924,19 +924,19 @@
     
     </summary>
     
-      <category term="Python" scheme="http://linw1995.github.io/categories/Python/"/>
+      <category term="Python" scheme="http://linw1995.com/categories/Python/"/>
     
     
-      <category term="Python" scheme="http://linw1995.github.io/tags/Python/"/>
+      <category term="Python" scheme="http://linw1995.com/tags/Python/"/>
     
-      <category term="Matplotlib" scheme="http://linw1995.github.io/tags/Matplotlib/"/>
+      <category term="Matplotlib" scheme="http://linw1995.com/tags/Matplotlib/"/>
     
   </entry>
   
   <entry>
     <title>如何配置Visual Studio Code + MinGW下的C++环境</title>
-    <link href="http://linw1995.github.io/2016/10/14/%E5%A6%82%E4%BD%95%E9%85%8D%E7%BD%AEVisual-Studio-Code-MinGW%E4%B8%8B%E7%9A%84C-%E7%8E%AF%E5%A2%83/"/>
-    <id>http://linw1995.github.io/2016/10/14/如何配置Visual-Studio-Code-MinGW下的C-环境/</id>
+    <link href="http://linw1995.com/2016/10/14/%E5%A6%82%E4%BD%95%E9%85%8D%E7%BD%AEVisual-Studio-Code-MinGW%E4%B8%8B%E7%9A%84C-%E7%8E%AF%E5%A2%83/"/>
+    <id>http://linw1995.com/2016/10/14/如何配置Visual-Studio-Code-MinGW下的C-环境/</id>
     <published>2016-10-14T09:49:06.000Z</published>
     <updated>2017-03-19T08:26:59.856Z</updated>
     
@@ -988,19 +988,19 @@
     
     </summary>
     
-      <category term="Others" scheme="http://linw1995.github.io/categories/Others/"/>
+      <category term="Others" scheme="http://linw1995.com/categories/Others/"/>
     
     
-      <category term="VSCode" scheme="http://linw1995.github.io/tags/VSCode/"/>
+      <category term="VSCode" scheme="http://linw1995.com/tags/VSCode/"/>
     
-      <category term="C++" scheme="http://linw1995.github.io/tags/C/"/>
+      <category term="C++" scheme="http://linw1995.com/tags/C/"/>
     
   </entry>
   
   <entry>
     <title>搭梯子 - 简单教程</title>
-    <link href="http://linw1995.github.io/2016/10/02/%E6%90%AD%E6%A2%AF%E5%AD%90-%E7%AE%80%E5%8D%95%E6%95%99%E7%A8%8B/"/>
-    <id>http://linw1995.github.io/2016/10/02/搭梯子-简单教程/</id>
+    <link href="http://linw1995.com/2016/10/02/%E6%90%AD%E6%A2%AF%E5%AD%90-%E7%AE%80%E5%8D%95%E6%95%99%E7%A8%8B/"/>
+    <id>http://linw1995.com/2016/10/02/搭梯子-简单教程/</id>
     <published>2016-10-02T01:36:00.000Z</published>
     <updated>2017-03-12T07:36:05.867Z</updated>
     
@@ -1080,7 +1080,7 @@
     
     </summary>
     
-      <category term="Others" scheme="http://linw1995.github.io/categories/Others/"/>
+      <category term="Others" scheme="http://linw1995.com/categories/Others/"/>
     
     
   </entry>

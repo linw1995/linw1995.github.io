@@ -86,7 +86,7 @@
     <link href="http://linw1995.com/2017/03/30/Python-collections/"/>
     <id>http://linw1995.com/2017/03/30/Python-collections/</id>
     <published>2017-03-30T14:53:14.000Z</published>
-    <updated>2017-03-31T07:54:25.000Z</updated>
+    <updated>2017-04-05T13:36:15.728Z</updated>
     
     <content type="html"><![CDATA[<p><strong>Python</strong>内置了一组高性能的容器类型，满足了所有基本的需求，<br>这个库就叫做<strong>collections</strong><br><a id="more"></a></p>
 <h1 id="py2与py3的区别"><a href="#py2与py3的区别" class="headerlink" title="py2与py3的区别"></a>py2与py3的区别</h1><table>
@@ -203,7 +203,7 @@
 </li>
 </ul>
 </blockquote>
-<h2 id="missing-factory-function"><a href="#missing-factory-function" class="headerlink" title="missing factory function"></a>missing factory function</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>s = [(<span class="string">'yellow'</span>, <span class="number">1</span>), (<span class="string">'blue'</span>, <span class="number">2</span>), (<span class="string">'yellow'</span>, <span class="number">3</span>), (<span class="string">'blue'</span>, <span class="number">4</span>), (<span class="string">'red'</span>, <span class="number">1</span>)]</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>d = defaultdict(list)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> k, v <span class="keyword">in</span> s:</div><div class="line"><span class="meta">... </span>    d[k].append(v)</div><div class="line">...</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>d.items()</div><div class="line">dict_items([(<span class="string">'blue'</span>, [<span class="number">2</span>, <span class="number">4</span>]), (<span class="string">'red'</span>, [<span class="number">1</span>]), (<span class="string">'yellow'</span>, [<span class="number">1</span>, <span class="number">3</span>])])</div></pre></td></tr></table></figure>
+<h3 id="missing-factory-function"><a href="#missing-factory-function" class="headerlink" title="missing factory function"></a>missing factory function</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>s = [(<span class="string">'yellow'</span>, <span class="number">1</span>), (<span class="string">'blue'</span>, <span class="number">2</span>), (<span class="string">'yellow'</span>, <span class="number">3</span>), (<span class="string">'blue'</span>, <span class="number">4</span>), (<span class="string">'red'</span>, <span class="number">1</span>)]</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>d = defaultdict(list)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> k, v <span class="keyword">in</span> s:</div><div class="line"><span class="meta">... </span>    d[k].append(v)</div><div class="line">...</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>d.items()</div><div class="line">dict_items([(<span class="string">'blue'</span>, [<span class="number">2</span>, <span class="number">4</span>]), (<span class="string">'red'</span>, [<span class="number">1</span>]), (<span class="string">'yellow'</span>, [<span class="number">1</span>, <span class="number">3</span>])])</div></pre></td></tr></table></figure>
 <p>与<strong>dict.setdefault</strong>似乎差别不大</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>d = dict()</div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> k, v <span class="keyword">in</span> s:</div><div class="line"><span class="meta">... </span>    d.setdefault(k, []).append(v)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>d.items()</div><div class="line">dict_items([(<span class="string">'blue'</span>, [<span class="number">2</span>, <span class="number">4</span>]), (<span class="string">'red'</span>, [<span class="number">1</span>]), (<span class="string">'yellow'</span>, [<span class="number">1</span>, <span class="number">3</span>])])</div></pre></td></tr></table></figure>
 <p>其实，<strong>dict.setdefault</strong>用提供的变量来生成新值，而<strong>defaultdict</strong>使用函数来生成<strong>missing key</strong>的新值</p>
@@ -243,10 +243,10 @@
 <li><p><strong>maps</strong>，一个可修改的列表，存储映射顺序</p>
  <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>len(pylookup.maps)</div><div class="line"><span class="number">3</span></div></pre></td></tr></table></figure>
 </li>
-<li><p><strong>new_child(m=None)</strong>，返回一个新的<strong>ChainMap</strong>。<br>当m指定，则把指定的<strong>mapping</strong>对象插到映射顺序最前；<br>若m不指定，则创建一个新字典插到映射顺序最前， 像这样<code>ChainMap({}, *d.maps)</code>。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>n = pylookup.new_child()</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>n.maps[<span class="number">0</span>]</div><div class="line">&#123;&#125;</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>n.maps[<span class="number">1</span>:] == pylookup.maps</div><div class="line"><span class="keyword">True</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>n = pylookup.newchild(<span class="number">1</span>)</div></pre></td></tr></table></figure>
+<li><p><strong>new_child(m=None)</strong>，返回一个新的<strong>ChainMap</strong>。<br> 当m指定，则把指定的<strong>mapping</strong>对象插到映射顺序最前；<br>若m不指定，则创建一个新字典插到映射顺序最前， 像这样<code>ChainMap({}, *d.maps)</code>。</p>
+ <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>n = pylookup.new_child()</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>n.maps[<span class="number">0</span>]</div><div class="line">&#123;&#125;</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>n.maps[<span class="number">1</span>:] == pylookup.maps</div><div class="line"><span class="keyword">True</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>n = pylookup.newchild(<span class="number">1</span>)</div></pre></td></tr></table></figure>
 </li>
-<li><p><strong>parents</strong>，返回复制版本,除了映射顺序最前的对象，就像这样<code>ChainMap(*d.maps[1:])</code>。<br>通常用来搜索，<strong>super()</strong>差不多是这样实现的。</p>
+<li><p><strong>parents</strong>，返回复制版本,除了映射顺序最前的对象，就像这样<code>ChainMap(*d.maps[1:])</code>。<br> 通常用来搜索，<strong>super()</strong>差不多是这样实现的。</p>
  <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>p = pylookup.parents</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>p.maps == pylookup.maps[<span class="number">1</span>:]</div><div class="line"><span class="keyword">True</span></div></pre></td></tr></table></figure>
 </li>
 </ol>
@@ -692,9 +692,9 @@
     
       <category term="Python" scheme="http://linw1995.com/tags/Python/"/>
     
-      <category term="Test" scheme="http://linw1995.com/tags/Test/"/>
-    
       <category term="VSCode" scheme="http://linw1995.com/tags/VSCode/"/>
+    
+      <category term="Test" scheme="http://linw1995.com/tags/Test/"/>
     
   </entry>
   

@@ -12,12 +12,12 @@
 
 
 
-  <meta name="description" content="Matplotlib 中文显示参数设置"/>
+  <meta name="description" content="折腾VSCode记 一 · Python Traceback Jumper"/>
 
 
 
 
-  <meta name="keywords" content="Python,Matplotlib," />
+  <meta name="keywords" content="Python,VSCode,TypeScript," />
 
 
 
@@ -31,21 +31,21 @@
 
 
 
-<link rel="canonical" href="http://linw1995.com/2017/03/15/Matplotlib-中文显示参数设置/"/>
+<link rel="canonical" href="http://linw1995.com/2017/04/09/折腾VSCode记-一-·-Python-Traceback-Jumper/"/>
 
 
-<meta name="description" content="在用Matplotlib库可视化时，难免会需要加上中文信息，可总是显示乱码出来。。。">
+<meta name="description" content="因为Pycharm到期了，就开始折腾VSCode。使用中，写一些Python代码时，觉得缺少一个功能，就是Traceback点击跳转。所以就花了一整天翻看VSCode官方文档，写了个插件python traceback jumper">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Matplotlib 中文显示参数设置">
-<meta property="og:url" content="http://linw1995.com/2017/03/15/Matplotlib-中文显示参数设置/index.html">
+<meta property="og:title" content="折腾VSCode记 一 · Python Traceback Jumper">
+<meta property="og:url" content="http://linw1995.com/2017/04/09/折腾VSCode记-一-·-Python-Traceback-Jumper/index.html">
 <meta property="og:site_name" content="linw1995">
-<meta property="og:description" content="在用Matplotlib库可视化时，难免会需要加上中文信息，可总是显示乱码出来。。。">
-<meta property="og:image" content="http://linw1995.com/2017/03/15/Matplotlib-中文显示参数设置/figure_1.png">
-<meta property="og:updated_time" content="2017-04-09T14:07:27.794Z">
+<meta property="og:description" content="因为Pycharm到期了，就开始折腾VSCode。使用中，写一些Python代码时，觉得缺少一个功能，就是Traceback点击跳转。所以就花了一整天翻看VSCode官方文档，写了个插件python traceback jumper">
+<meta property="og:image" content="http://linw1995.com/2017/04/09/折腾VSCode记-一-·-Python-Traceback-Jumper/python%20traceback%20jumper%20logo.svg">
+<meta property="og:updated_time" content="2017-04-09T14:08:02.327Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Matplotlib 中文显示参数设置">
-<meta name="twitter:description" content="在用Matplotlib库可视化时，难免会需要加上中文信息，可总是显示乱码出来。。。">
-<meta name="twitter:image" content="http://linw1995.com/2017/03/15/Matplotlib-中文显示参数设置/figure_1.png">
+<meta name="twitter:title" content="折腾VSCode记 一 · Python Traceback Jumper">
+<meta name="twitter:description" content="因为Pycharm到期了，就开始折腾VSCode。使用中，写一些Python代码时，觉得缺少一个功能，就是Traceback点击跳转。所以就花了一整天翻看VSCode官方文档，写了个插件python traceback jumper">
+<meta name="twitter:image" content="http://linw1995.com/2017/04/09/折腾VSCode记-一-·-Python-Traceback-Jumper/python%20traceback%20jumper%20logo.svg">
 
 
 <link rel="stylesheet" type="text/css" href="/css/style.css?v=2.3.x" />
@@ -84,7 +84,7 @@
 
 
 
-    <title> Matplotlib 中文显示参数设置 · linw1995 </title>
+    <title> 折腾VSCode记 一 · Python Traceback Jumper · linw1995 </title>
   </head>
 
   <body><div id="mobile-navbar" class="mobile-navbar">
@@ -209,39 +209,45 @@
     <header class="post-header">
       <h1 class="post-title">
         
-          Matplotlib 中文显示参数设置
+          折腾VSCode记 一 · Python Traceback Jumper
         
       </h1>
 
       <div class="post-meta">
         <span class="post-time">
-          Mar 15, 2017
+          Apr 9, 2017
         </span>
       </div>
     </header>
 
     
     
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#项目传送门"><span class="toc-text">项目传送门</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#如何使用"><span class="toc-text">如何使用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#安装"><span class="toc-text">安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#配置"><span class="toc-text">配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#吐槽"><span class="toc-text">吐槽</span></a></li></ol></li></ol>
+    </div>
+  </div>
+
 
     <div class="post-content">
       
-        <p>在用Matplotlib库可视化时，难免会需要加上中文信息，可总是显示乱码出来。。。</p>
+        <p>因为<strong>Pycharm</strong>到期了，就开始折腾<strong>VSCode</strong>。<br>使用中，写一些<strong>Python</strong>代码时，觉得缺少一个功能，就是<strong>Traceback点击跳转</strong>。<br>所以就花了一整天翻看<strong>VSCode</strong>官方文档，写了个插件<br><img src="/2017/04/09/折腾VSCode记-一-·-Python-Traceback-Jumper/python%20traceback%20jumper%20logo.svg" alt="python traceback jumper logo.svg" title=""><strong>python traceback jumper</strong></p>
 <a id="more"></a>
-<p>给图加上中文信息时总是会出现中文乱码，这是因为matplotlib库里没有安装中文字体。</p>
-<ul>
-<li><p>我们可以通过在代码头插入以下代码来，对matplotlib所用字体进行设置</p>
-  <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#coding:utf-8</span></div><div class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</div><div class="line">plt.rcParams[<span class="string">'font.sans-serif'</span>]=[<span class="string">'SimHei'</span>] <span class="comment">#用来正常显示中文标签</span></div><div class="line">plt.rcParams[<span class="string">'axes.unicode_minus'</span>]=<span class="keyword">False</span> <span class="comment">#用来正常显示负号</span></div><div class="line"><span class="comment">#有中文出现的情况，需要u'内容' py3就不需要加u</span></div></pre></td></tr></table></figure>
-</li>
-<li><p>一劳永逸</p>
-<p>  通过以下命令得到matplotlib库的配置文件的地址</p>
-<pre><code>python -c print(__import__(&apos;matplotlib&apos;).matplotlib_fname())
-</code></pre><p>  然后打开它，修改以下那一行</p>
-<pre><code>#font.serif: DejaVu Serif, Bitstream Vera Serif, New Century Schoolbook, Century Schoolbook L, Utopia, ITC Bookman, Bookman, Nimbus Roman No9 L, Times New Roman, Times, Palatino, Charter, serif
-</code></pre><p>  去掉注释<code>#</code>符号，在<code>DejaVu Serif</code>前加入<code>SimHei,</code>,<br>  对下列<code>#font.sans-serif</code>也是如此操作</p>
+<p>从三月18号发布，截止到今天四月9号，下载量已经<strong>1K</strong>了。<br>写之前也没想很多，觉得不需要写很多代码，也不知道要用<strong>TypeScript</strong>写，也不会 = =。<br>翻了一遍官方文档，看了下<strong>VSCode</strong>部分源码，相关的<strong>Github issue</strong>，凭着一腔热血给做出来了。<br>代码也就50多行 果然:），利用了<strong>Regex正则表达式</strong>和<strong>VSCode</strong>提供的Api，就实现了这个功能。</p>
+<h1 id="项目传送门"><a href="#项目传送门" class="headerlink" title="项目传送门"></a>项目传送门</h1><ul>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=linw1995.python-traceback-jumper" target="_blank" rel="external">VSCode marketplace - python traceback jumper</a></li>
+<li><a href="https://github.com/linw1995/python-traceback-jumper" target="_blank" rel="external">Github - python-traceback-jumper</a>
 </li>
 </ul>
-<p>然后运行一下包含中文字符的代码，见证奇迹时候到了</p>
-<img src="/2017/03/15/Matplotlib-中文显示参数设置/figure_1.png" alt="figure_1.png" title="">
+<h1 id="如何使用"><a href="#如何使用" class="headerlink" title="如何使用"></a>如何使用</h1><p>首先要安装</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>在<strong>VSCode</strong>中按下<code>Ctrl</code> + <code>P</code> 输入</p>
+<pre><code>ext install python-traceback-jumper
+</code></pre><h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>在工作区下的<code>setting.json</code>中添加</p>
+<pre><code>&quot;python.tracebackJumper.enable&quot;: true
+</code></pre><p>目前只能在<strong>output</strong>输出栏下使用。所以必须配置<strong>task</strong>。<br>编辑 <code>task.json</code></p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    <span class="attr">"command"</span>: <span class="string">"$&#123;config.python.pythonPath&#125;"</span>,</div><div class="line">    <span class="attr">"isShellCommand"</span>: <span class="literal">true</span>,</div><div class="line">    <span class="attr">"args"</span>: [<span class="string">"$&#123;file&#125;"</span>],</div><div class="line">    <span class="attr">"showOutput"</span>: <span class="string">"always"</span> // 一定要showOutput</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="吐槽"><a href="#吐槽" class="headerlink" title="吐槽"></a>吐槽</h2><p>其实在<strong>terminal</strong>中会通过<strong>Regex</strong>来提供跳转链接，不过这是<strong>VSCode</strong>内建的。。。:)<br>为啥不连<strong>Output</strong>输出栏也搞了，还有<strong>DEBUG</strong>输出栏。</p>
 
       
     </div>
@@ -261,7 +267,7 @@
     </p>
     <p class="copyright-item">
       <span>Link: </span>
-      <a href="http://linw1995.com/2017/03/15/Matplotlib-中文显示参数设置/">http://linw1995.com/2017/03/15/Matplotlib-中文显示参数设置/</a>
+      <a href="http://linw1995.com/2017/04/09/折腾VSCode记-一-·-Python-Traceback-Jumper/">http://linw1995.com/2017/04/09/折腾VSCode记-一-·-Python-Traceback-Jumper/</a>
     </p>
 
     <p class="copyright-item lincese">
@@ -297,7 +303,9 @@
             
               <a href="/tags/Python/">Python</a>
             
-              <a href="/tags/Matplotlib/">Matplotlib</a>
+              <a href="/tags/VSCode/">VSCode</a>
+            
+              <a href="/tags/TypeScript/">TypeScript</a>
             
           </div>
         
@@ -305,15 +313,9 @@
         
   <nav class="post-nav">
     
-      <a class="prev" href="/2017/03/19/Python-On-Visual-Studio-Code-With-Anaconda/">
-        <i class="iconfont icon-left"></i>
-        <span class="prev-text nav-default">Python On Visual Studio Code With Anaconda</span>
-        <span class="prev-text nav-mobile">Prev</span>
-      </a>
     
-    
-      <a class="next" href="/2016/10/14/如何配置Visual-Studio-Code-MinGW下的C-环境/">
-        <span class="next-text nav-default">如何配置Visual Studio Code + MinGW下的C++环境</span>
+      <a class="next" href="/2017/04/08/成为一个DictionaryKey的条件/">
+        <span class="next-text nav-default">成为一个DictionaryKey的条件</span>
         <span class="prev-text nav-mobile">Next</span>
         <i class="iconfont icon-right"></i>
       </a>
@@ -423,9 +425,9 @@
   
   <script type="text/javascript">
     var disqus_config = function () {
-        this.page.url = 'http://linw1995.com/2017/03/15/Matplotlib-中文显示参数设置/';
-        this.page.identifier = '2017/03/15/Matplotlib-中文显示参数设置/';
-        this.page.title = 'Matplotlib 中文显示参数设置';
+        this.page.url = 'http://linw1995.com/2017/04/09/折腾VSCode记-一-·-Python-Traceback-Jumper/';
+        this.page.identifier = '2017/04/09/折腾VSCode记-一-·-Python-Traceback-Jumper/';
+        this.page.title = '折腾VSCode记 一 · Python Traceback Jumper';
     };
     (function() {
     var d = document, s = d.createElement('script');

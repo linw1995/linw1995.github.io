@@ -34,17 +34,17 @@
 <link rel="canonical" href="http://linw1995.com/2017/04/09/折腾VSCode记-一-·-Python-Traceback-Jumper/"/>
 
 
-<meta name="description" content="因为Pycharm到期了，就开始折腾VSCode。使用中，写一些Python代码时，觉得缺少一个功能，就是Traceback点击跳转。所以就花了一整天翻看VSCode官方文档，写了个插件python traceback jumper">
+<meta name="description" content="因为Pycharm到期了，就开始折腾VSCode。使用中，写一些Python代码时，觉得缺少一个功能 Traceback点击跳转。所以就花了一整天翻看VSCode官方文档，写了个插件python traceback jumper">
 <meta property="og:type" content="article">
 <meta property="og:title" content="折腾VSCode记 一 · Python Traceback Jumper">
 <meta property="og:url" content="http://linw1995.com/2017/04/09/折腾VSCode记-一-·-Python-Traceback-Jumper/index.html">
 <meta property="og:site_name" content="linw1995">
-<meta property="og:description" content="因为Pycharm到期了，就开始折腾VSCode。使用中，写一些Python代码时，觉得缺少一个功能，就是Traceback点击跳转。所以就花了一整天翻看VSCode官方文档，写了个插件python traceback jumper">
+<meta property="og:description" content="因为Pycharm到期了，就开始折腾VSCode。使用中，写一些Python代码时，觉得缺少一个功能 Traceback点击跳转。所以就花了一整天翻看VSCode官方文档，写了个插件python traceback jumper">
 <meta property="og:image" content="http://linw1995.com/2017/04/09/折腾VSCode记-一-·-Python-Traceback-Jumper/python%20traceback%20jumper%20logo.svg">
-<meta property="og:updated_time" content="2017-04-09T14:08:02.327Z">
+<meta property="og:updated_time" content="2017-04-09T14:58:53.027Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="折腾VSCode记 一 · Python Traceback Jumper">
-<meta name="twitter:description" content="因为Pycharm到期了，就开始折腾VSCode。使用中，写一些Python代码时，觉得缺少一个功能，就是Traceback点击跳转。所以就花了一整天翻看VSCode官方文档，写了个插件python traceback jumper">
+<meta name="twitter:description" content="因为Pycharm到期了，就开始折腾VSCode。使用中，写一些Python代码时，觉得缺少一个功能 Traceback点击跳转。所以就花了一整天翻看VSCode官方文档，写了个插件python traceback jumper">
 <meta name="twitter:image" content="http://linw1995.com/2017/04/09/折腾VSCode记-一-·-Python-Traceback-Jumper/python%20traceback%20jumper%20logo.svg">
 
 
@@ -225,14 +225,14 @@
   <div class="post-toc" id="post-toc">
     <h2 class="post-toc-title">Contents</h2>
     <div class="post-toc-content">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#项目传送门"><span class="toc-text">项目传送门</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#如何使用"><span class="toc-text">如何使用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#安装"><span class="toc-text">安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#配置"><span class="toc-text">配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#吐槽"><span class="toc-text">吐槽</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#项目传送门"><span class="toc-text">项目传送门</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#如何使用"><span class="toc-text">如何使用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#安装"><span class="toc-text">安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#配置"><span class="toc-text">配置</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#吐槽"><span class="toc-text">吐槽</span></a></li></ol>
     </div>
   </div>
 
 
     <div class="post-content">
       
-        <p>因为<strong>Pycharm</strong>到期了，就开始折腾<strong>VSCode</strong>。<br>使用中，写一些<strong>Python</strong>代码时，觉得缺少一个功能，就是<strong>Traceback点击跳转</strong>。<br>所以就花了一整天翻看<strong>VSCode</strong>官方文档，写了个插件<br><img src="/2017/04/09/折腾VSCode记-一-·-Python-Traceback-Jumper/python%20traceback%20jumper%20logo.svg" alt="python traceback jumper logo.svg" title=""><strong>python traceback jumper</strong></p>
+        <p>因为<strong>Pycharm</strong>到期了，就开始折腾<strong>VSCode</strong>。<br>使用中，写一些<strong>Python</strong>代码时，觉得缺少一个功能 <strong>Traceback点击跳转</strong>。<br>所以就花了一整天翻看<strong>VSCode</strong>官方文档，写了个插件<br><img src="/2017/04/09/折腾VSCode记-一-·-Python-Traceback-Jumper/python%20traceback%20jumper%20logo.svg" alt="python traceback jumper logo.svg" title=""><strong>python traceback jumper</strong></p>
 <a id="more"></a>
 <p>从三月18号发布，截止到今天四月9号，下载量已经<strong>1K</strong>了。<br>写之前也没想很多，觉得不需要写很多代码，也不知道要用<strong>TypeScript</strong>写，也不会 = =。<br>翻了一遍官方文档，看了下<strong>VSCode</strong>部分源码，相关的<strong>Github issue</strong>，凭着一腔热血给做出来了。<br>代码也就50多行 果然:），利用了<strong>Regex正则表达式</strong>和<strong>VSCode</strong>提供的Api，就实现了这个功能。</p>
 <h1 id="项目传送门"><a href="#项目传送门" class="headerlink" title="项目传送门"></a>项目传送门</h1><ul>
@@ -247,7 +247,7 @@
 <pre><code>&quot;python.tracebackJumper.enable&quot;: true
 </code></pre><p>目前只能在<strong>output</strong>输出栏下使用。所以必须配置<strong>task</strong>。<br>编辑 <code>task.json</code></p>
 <figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    <span class="attr">"command"</span>: <span class="string">"$&#123;config.python.pythonPath&#125;"</span>,</div><div class="line">    <span class="attr">"isShellCommand"</span>: <span class="literal">true</span>,</div><div class="line">    <span class="attr">"args"</span>: [<span class="string">"$&#123;file&#125;"</span>],</div><div class="line">    <span class="attr">"showOutput"</span>: <span class="string">"always"</span> // 一定要showOutput</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="吐槽"><a href="#吐槽" class="headerlink" title="吐槽"></a>吐槽</h2><p>其实在<strong>terminal</strong>中会通过<strong>Regex</strong>来提供跳转链接，不过这是<strong>VSCode</strong>内建的。。。:)<br>为啥不连<strong>Output</strong>输出栏也搞了，还有<strong>DEBUG</strong>输出栏。</p>
+<h1 id="吐槽"><a href="#吐槽" class="headerlink" title="吐槽"></a>吐槽</h1><p>其实在<strong>terminal</strong>中会通过<strong>Regex</strong>来提供跳转链接，不过这是<strong>VSCode</strong>内建的。。。:)<br>为啥不连<strong>Output</strong>输出栏也搞了，还有<strong>DEBUG</strong>输出栏。</p>
 
       
     </div>
@@ -312,6 +312,12 @@
         
         
   <nav class="post-nav">
+    
+      <a class="prev" href="/2017/04/10/分享-你就不要想起我-Cover-张杰/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">分享 你就不要想起我(Cover 张杰)</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
     
     
       <a class="next" href="/2017/04/08/成为一个DictionaryKey的条件/">

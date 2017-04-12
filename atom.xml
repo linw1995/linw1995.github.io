@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://linw1995.com/"/>
-  <updated>2017-04-10T23:22:00.000Z</updated>
+  <updated>2017-04-12T15:27:08.766Z</updated>
   <id>http://linw1995.com/</id>
   
   <author>
@@ -14,6 +14,51 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>折腾VSCode记 二 · Settings Sync</title>
+    <link href="http://linw1995.com/2017/04/12/%E6%8A%98%E8%85%BEVSCode%E8%AE%B0-%E4%BA%8C-%C2%B7-Settings-Sync/"/>
+    <id>http://linw1995.com/2017/04/12/折腾VSCode记-二-·-Settings-Sync/</id>
+    <published>2017-04-12T15:03:42.000Z</published>
+    <updated>2017-04-12T15:27:08.766Z</updated>
+    
+    <content type="html"><![CDATA[<p>假如有一天你重装系统了，或者换电脑了，或者有多台电脑，每次重新配置<strong>VSCode</strong>也太麻烦了。<br><img src="/2017/04/12/折腾VSCode记-二-·-Settings-Sync/cloud.png" alt="cloud.png" title=""> <strong>Setting Sync</strong><br>这个插件就完美的解决了这个问题。<br><a id="more"></a></p>
+<p>利用了<strong>Github Gist服务</strong>来保存<strong>VSCode</strong>的状态（设置、插件等等），<br>除了自己可用外，还可以分享自己的配置给别人。</p>
+<h1 id="项目传送门"><a href="#项目传送门" class="headerlink" title="项目传送门"></a>项目传送门</h1><ul>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=Shan.code-settings-sync" target="_blank" rel="external">VSCode marketplac - Settings Sync</a>
+</li>
+<li><a href="https://github.com/shanalikhan/code-settings-sync" target="_blank" rel="external">Github - code-settings-sync</a>
+</li>
+</ul>
+<h1 id="可同步内容"><a href="#可同步内容" class="headerlink" title="可同步内容"></a>可同步内容</h1><p>All the extensions and complete User Folder that Contains</p>
+<ol>
+<li>Settings File</li>
+<li>Keybinding File</li>
+<li>Launch File</li>
+<li>Snippets Folder</li>
+<li>VSCode Extensions Settings</li>
+<li>Workspaces</li>
+</ol>
+<h1 id="如何使用"><a href="#如何使用" class="headerlink" title="如何使用"></a>如何使用</h1><p>首先要安装</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>在<strong>VSCode</strong>中按下<code>Ctrl</code> + <code>P</code> 输入<br>    <code>ext install code-settings-sync</code></p>
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><h3 id="Github-personal-access-tokens"><a href="#Github-personal-access-tokens" class="headerlink" title="Github personal access tokens"></a>Github personal access tokens</h3><p>先到<strong>Github</strong>个人设置页面，生成有生成<strong>Gist</strong>权限的密钥</p>
+<h3 id="第一次上传"><a href="#第一次上传" class="headerlink" title="第一次上传"></a>第一次上传</h3><p>在<strong>VSCode</strong>按下<code>Shift</code>+<code>Alt</code>+<code>U</code>, 编辑器上方会弹出输入框，<br>输入生成的密钥，即可。</p>
+<h3 id="其它设置"><a href="#其它设置" class="headerlink" title="其它设置"></a>其它设置</h3><p>手动下载配置，按下<code>Shift</code>+<code>Alt</code>+<code>D</code>。<br>还可以设置自动同步，每次打开时都会检查自动下载新版本，真棒！<br>也支持自定同步内容。</p>
+<h1 id="分享"><a href="#分享" class="headerlink" title="分享"></a>分享</h1><p>我的 <a href="https://gist.github.com/linw1995/5abf184e66bf7615f72b069bc704fa0b" target="_blank" rel="external">Visual Studio Code Sync Settings Gist</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;假如有一天你重装系统了，或者换电脑了，或者有多台电脑，每次重新配置&lt;strong&gt;VSCode&lt;/strong&gt;也太麻烦了。&lt;br&gt;&lt;img src=&quot;/2017/04/12/折腾VSCode记-二-·-Settings-Sync/cloud.png&quot; alt=&quot;cloud.png&quot; title=&quot;&quot;&gt; &lt;strong&gt;Setting Sync&lt;/strong&gt;&lt;br&gt;这个插件就完美的解决了这个问题。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Others" scheme="http://linw1995.com/categories/Others/"/>
+    
+    
+      <category term="VSCode" scheme="http://linw1995.com/tags/VSCode/"/>
+    
+  </entry>
   
   <entry>
     <title>分享 你就不要想起我(Cover 张杰)-唯默</title>
@@ -803,9 +848,9 @@
     
       <category term="Python" scheme="http://linw1995.com/tags/Python/"/>
     
-      <category term="VSCode" scheme="http://linw1995.com/tags/VSCode/"/>
-    
       <category term="Test" scheme="http://linw1995.com/tags/Test/"/>
+    
+      <category term="VSCode" scheme="http://linw1995.com/tags/VSCode/"/>
     
   </entry>
   

@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://linw1995.com/"/>
-  <updated>2017-04-17T04:46:02.151Z</updated>
+  <updated>2017-04-17T14:59:59.747Z</updated>
   <id>http://linw1995.com/</id>
   
   <author>
@@ -14,6 +14,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>分享 Way Back Into Love - Haley Bennett/Hugh Grant</title>
+    <link href="http://linw1995.com/2017/04/17/%E5%88%86%E4%BA%AB-Way-Back-Into-Love-Haley-Bennett-Hugh-Grant/"/>
+    <id>http://linw1995.com/2017/04/17/分享-Way-Back-Into-Love-Haley-Bennett-Hugh-Grant/</id>
+    <published>2017-04-17T14:33:23.000Z</published>
+    <updated>2017-04-17T14:59:59.747Z</updated>
+    
+    <content type="html"><![CDATA[<p><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="100%" height="86" src="//music.163.com/outchain/player?type=2&id=5046372&auto=0&height=66"></iframe><br><a id="more"></a></p>
+<div class="video-container"><iframe src="//www.youtube.com/embed/2qrkapxFihM" frameborder="0" allowfullscreen></iframe></div>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;iframe frameborder=&quot;no&quot; border=&quot;0&quot; marginwidth=&quot;0&quot; marginheight=&quot;0&quot; width=100% height=86 src=&quot;//music.163.com/outchain/player?type=2&amp;id=5046372&amp;auto=0&amp;height=66&quot;&gt;&lt;/iframe&gt;&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Music" scheme="http://linw1995.com/categories/Music/"/>
+    
+    
+      <category term="Share" scheme="http://linw1995.com/tags/Share/"/>
+    
+      <category term="YouTube" scheme="http://linw1995.com/tags/YouTube/"/>
+    
+  </entry>
   
   <entry>
     <title>Scrapy学习日记 一 · run many spiders</title>
@@ -147,7 +173,7 @@ myprojec/
     <link href="http://linw1995.com/2017/04/10/%E5%88%86%E4%BA%AB-%E4%BD%A0%E5%B0%B1%E4%B8%8D%E8%A6%81%E6%83%B3%E8%B5%B7%E6%88%91-Cover-%E5%BC%A0%E6%9D%B0/"/>
     <id>http://linw1995.com/2017/04/10/分享-你就不要想起我-Cover-张杰/</id>
     <published>2017-04-10T14:27:41.000Z</published>
-    <updated>2017-04-10T23:22:00.000Z</updated>
+    <updated>2017-04-17T14:34:54.043Z</updated>
     
     <content type="html"><![CDATA[
 <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="100%" height="86" src="//music.163.com/outchain/player?type=2&id=465576914&auto=0&height=66"></iframe>
@@ -930,9 +956,9 @@ myprojec/
     
       <category term="Python" scheme="http://linw1995.com/tags/Python/"/>
     
-      <category term="Test" scheme="http://linw1995.com/tags/Test/"/>
-    
       <category term="VSCode" scheme="http://linw1995.com/tags/VSCode/"/>
+    
+      <category term="Test" scheme="http://linw1995.com/tags/Test/"/>
     
   </entry>
   

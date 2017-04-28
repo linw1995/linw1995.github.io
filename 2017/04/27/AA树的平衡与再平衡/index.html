@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta content="yes" name="apple-mobile-web-app-capable">
+  <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style">
+  <meta content="telephone=no" name="format-detection">
+  <meta name="description" content="Personal Blog">
+  <title>AA树的平衡与再平衡 | linw1995</title>
+  <link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0">
+  <link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/normalize/6.0.0/normalize.min.css">
+  <link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/0.6.2/pure-min.css">
+  <link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/0.6.2/grids-responsive-min.css">
+  <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script type="text/javascript" src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png">
+  <link rel="alternate" type="application/atom+xml" href="/atom.xml">
+  <script>
+    (function(i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r;
+      i[r] = i[r] || function() {
+        (i[r].q = i[r].q || []).push(arguments)
+      }, i[r].l = 1 * new Date();
+      a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0];
+      a.async = 1;
+      a.src = g;
+      m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+    ga('create', 'UA-86170223-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+</head>
+
+<body>
+  <div class="body_container">
+    <div id="header">
+      <div class="site-name">
+        <h1 class="hidden">AA树的平衡与再平衡</h1><a id="logo" href="/.">linw1995</a>
+        <p class="description"></p>
+      </div>
+      <div id="nav-menu"><a href="/." class="current"><i class="fa fa-home"> Home</i></a><a href="/archives/"><i class="fa fa-archive"> Archive</i></a><a href="/atom.xml"><i class="fa fa-rss"> RSS</i></a></div>
+    </div>
+    <div id="layout" class="pure-g">
+      <div class="pure-u-1 pure-u-md-3-4">
+        <div class="content_container">
+          <div class="post">
+            <h1 class="post-title">AA树的平衡与再平衡</h1>
+            <div class="post-meta">Apr 27, 2017<span> | </span><span class="category"><a href="/categories/Algorithms/">Algorithms</a></span>
+              <script src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js" async></script><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"></span><span> Hits</span></span>
+            </div>
+            <a data-disqus-identifier="2017/04/27/AA树的平衡与再平衡/" href="/2017/04/27/AA树的平衡与再平衡/#disqus_thread" class="disqus-comment-count"></a>
+            <div class="clear">
+              <div id="toc" class="toc-article">
+                <div class="toc-title">Contents</div>
+                <ol class="toc">
+                  <li class="toc-item toc-level-2"><a class="toc-link" href="#介绍"><span class="toc-number">1.</span> <span class="toc-text">
+  介绍</span></a></li>
+                  <li class="toc-item toc-level-2"><a class="toc-link" href="#平衡条件"><span class="toc-number">2.</span> <span class="toc-text">
+  平衡条件</span></a></li>
+                  <li class="toc-item toc-level-2"><a class="toc-link" href="#Skew-amp-Split"><span class="toc-number">3.</span> <span class="toc-text">
+  Skew & Split</span></a></li>
+                  <li class="toc-item toc-level-2"><a class="toc-link" href="#Insert-amp-Remove"><span class="toc-number">4.</span> <span class="toc-text">
+  Insert & Remove</span></a>
+                    <ol class="toc-child">
+                      <li class="toc-item toc-level-3"><a class="toc-link" href="#Insert-插入操作"><span class="toc-number">4.1.</span> <span class="toc-text">
+  Insert 插入操作</span></a>
+                        <ol class="toc-child">
+                          <li class="toc-item toc-level-4"><a class="toc-link" href="#算法步骤"><span class="toc-number">4.1.1.</span> <span class="toc-text">
+  算法步骤</span></a></li>
+                          <li class="toc-item toc-level-4"><a class="toc-link" href="#示例"><span class="toc-number">4.1.2.</span> <span class="toc-text">
+  示例</span></a></li>
+                        </ol>
+                      </li>
+                      <li class="toc-item toc-level-3"><a class="toc-link" href="#Remove-删除操作"><span class="toc-number">4.2.</span> <span class="toc-text">
+  Remove 删除操作</span></a>
+                        <ol class="toc-child">
+                          <li class="toc-item toc-level-4"><a class="toc-link" href="#算法步骤-1"><span class="toc-number">4.2.1.</span> <span class="toc-text">
+  算法步骤</span></a></li>
+                          <li class="toc-item toc-level-4"><a class="toc-link" href="#示例-1"><span class="toc-number">4.2.2.</span> <span class="toc-text">
+  示例</span></a></li>
+                        </ol>
+                      </li>
+                    </ol>
+                  </li>
+                  <li class="toc-item toc-level-2"><a class="toc-link" href="#结论"><span class="toc-number">5.</span> <span class="toc-text">
+  结论</span></a></li>
+                  <li class="toc-item toc-level-2"><a class="toc-link" href="#剩余代码"><span class="toc-number">6.</span> <span class="toc-text">
+  剩余代码</span></a></li>
+                  <li class="toc-item toc-level-2"><a class="toc-link" href="#参考"><span class="toc-number">7.</span> <span class="toc-text">
+  参考</span></a></li>
+                </ol>
+              </div>
+            </div>
+            <div class="post-content">
+              <h2 id="介绍">
+                <a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2>
+              <blockquote>
+                <p><strong>AA树</strong>在计算机科学一种形式的自平衡二叉查找树用于高效存储和检索序数据。<strong>AA树</strong>的名称是由它的发明者<em>Arne Andersson</em>而来。<br><strong>AA树</strong>是<strong>红黑树</strong>的一种变种，是<em>Arne Andersson</em>教授在1993年年在他的论文<em>“Balanced search trees made simple”</em>中介绍，设计的目的是减少<strong>红黑树</strong>考虑的不同情况，区别于<strong>红黑树</strong>的是，<strong>AA树</strong>的红节点只能作为右叶子。换句话说，没有红节点可以是一个左子儿。这导致代替<strong>2-3-4树</strong>，从而大大简化了维护<strong>2-3树</strong>的模拟。维护<strong>红黑树</strong>的平衡需要考虑7种不同的情况:<br>                  <img src="/2017/04/27/AA树的平衡与再平衡/360px-Red_Black_Shape_Cases.svg.png" alt="360px-Red_Black_Shape_Cases.svg.png" title=""><br>因为<strong>AA树</strong>有严格的条件(红节点只能为右节点)，故只需考虑2种情形:<br><img src="/2017/04/27/AA树的平衡与再平衡/105px-AA_Tree_Shape_Cases.svg.png"
+                    alt="105px-AA_Tree_Shape_Cases.svg.png" title=""></p>
+                <footer><strong>维基百科</strong><cite><a href="https://zh.wikipedia.org/wiki/AA%E6%A0%91#firstHeading" target="_blank" rel="external">Wikipedia</a></cite></footer>
+              </blockquote>
+              <p><strong>AA树</strong>是<strong>2-3树</strong>的模拟，<strong>2-3树</strong>和<strong>AA树</strong>是<strong>等距同构</strong>的。其节点类型如下</p> <img src="/2017/04/27/AA树的平衡与再平衡/IMG_01.JPG" alt="IMG_01.JPG" title="">
+              <h2 id="平衡条件">
+                <a href="#平衡条件" class="headerlink" title="平衡条件"></a>平衡条件</h2>
+              <p>树是用与高效的存储和检索数据的，为了维持其效率，必须维持其平衡结构。<br>平衡一颗<strong>红黑树</strong>需记录其颜色，而<strong>AA树</strong>是在每个节点记录其<strong>level</strong>这相当于<strong>红黑树</strong>节点的黑高度</p>
+              <ol>
+                <li>所有叶节点的<strong>level</strong>都是1</li>
+                <li>每个左孩子的<strong>level</strong>恰好为其父亲的<strong>level</strong>减一</li>
+                <li>每个右孩子的<strong>level</strong>等于其父亲的<strong>level</strong>或为其父亲的<strong>level</strong>减一</li>
+                <li>每个右孙子的<strong>level</strong>严格小于其祖父节点的<strong>level</strong></li>
+                <li>每一个<strong>level</strong>大于1的节点有两个子节点</li>
+              </ol>
+              <h2 id="Skew-amp-Split">
+                <a href="#Skew-amp-Split" class="headerlink" title="Skew &amp; Split"></a>Skew &amp; Split</h2>
+              <p>对于<strong>AA树</strong>，维持其平衡的基本操作如下：</p>
+              <ol>
+                <li>
+                  <p><strong>偏斜Skew</strong>：使得子树中向左的水平边变成向右的。</p> <img src="/2017/04/27/AA树的平衡与再平衡/IMG_02.JPG" alt="IMG_02.JPG" title="">
+                  <p> 不满足平衡条件：2</p>
+                  <figure class="highlight python">
+                    <table>
+                      <tr>
+                        <td class="gutter">
+                          <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre> </td>
+                        <td class="code">
+                          <pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">skew</span><span class="params">(node)</span>:</span></div><div class="line">    <span class="keyword">if</span> node <span class="keyword">is</span> <span class="keyword">None</span> <span class="keyword">or</span> node.left <span class="keyword">is</span> <span class="keyword">None</span>:</div><div class="line">        <span class="keyword">return</span> node</div><div class="line">    <span class="keyword">if</span> node.left.level != node.level:</div><div class="line">        <span class="keyword">return</span> node</div><div class="line">    lft = node.left</div><div class="line">    node.left = lft.right   <span class="comment">#   B =&gt; C change to D =&gt; C</span></div><div class="line">    lft.right = node        <span class="comment">#   D =&gt; B change to B =&gt; D</span></div><div class="line">    <span class="keyword">return</span> lft              <span class="comment"># top =&gt; D change to top =&gt; B</span></div></pre> </td>
+                      </tr>
+                    </table>
+                  </figure>
+                  <ol>
+                    <li>判断是否是偏斜<br> i. 是否为空节点，是则不执行<br> ii. 是否存在左节点，不存在则不执行<br> iii. 是否不满足平衡条件 2，满足则不执行</li>
+                    <li>右旋转操作</li>
+                    <li>返回新的节点</li>
+                  </ol>
+                </li>
+                <li>
+                  <p><strong>分割Split</strong>：对溢出子节点进行分割，将三个值中的中间值向上移到父节点，如果让父节点溢出了，就继续分割下去。</p> <img src="/2017/04/27/AA树的平衡与再平衡/IMG_03.JPG" alt="IMG_03.JPG" title="">
+                  <p> 不满足平衡条件：4</p>
+                  <figure class="highlight python">
+                    <table>
+                      <tr>
+                        <td class="gutter">
+                          <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre> </td>
+                        <td class="code">
+                          <pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">split</span><span class="params">(node)</span>:</span></div><div class="line">    <span class="keyword">if</span> node <span class="keyword">is</span> <span class="keyword">None</span> <span class="keyword">or</span> node.right <span class="keyword">is</span> <span class="keyword">None</span> <span class="keyword">or</span> node.right.right <span class="keyword">is</span> <span class="keyword">None</span>:</div><div class="line">        <span class="keyword">return</span> node</div><div class="line">    <span class="keyword">if</span> node.right.right.level != node.level:</div><div class="line">        <span class="keyword">return</span> node</div><div class="line">    rgt = node.right</div><div class="line">    node.right = rgt.left   <span class="comment">#   C =&gt; E change to C =&gt; D</span></div><div class="line">    rgt.left = node         <span class="comment">#   E =&gt; D change to E =&gt; C</span></div><div class="line">    rgt.level += <span class="number">1</span>          <span class="comment">#   let E's level == A's level</span></div><div class="line">    <span class="keyword">return</span> rgt              <span class="comment">#   A =&gt; C change to A =&gt; E</span></div></pre> </td>
+                      </tr>
+                    </table>
+                  </figure>
+                  <ol>
+                    <li>判断是否要执行分割<br> i. 是否为空节点，是则不执行<br> ii. 是否存在右子节点，右孙节点，不存在则不执行<br> iii. 是否满足平衡条件 4，满足则不执行</li>
+                    <li>分割（左旋转）操作</li>
+                    <li>返回新的节点</li>
+                  </ol>
+                </li>
+              </ol>
+              <p>尽管各种树结构及其再平衡方法都不尽相同，但他们通常是由以上两类基本操作发展来的。</p>
+              <h2 id="Insert-amp-Remove">
+                <a href="#Insert-amp-Remove" class="headerlink" title="Insert &amp; Remove"></a>Insert &amp; Remove</h2>
+              <p>作为一种数据结构，必须拥有<strong>Insert</strong>与<strong>Remove</strong>等基本操作吧。那么，如何在操作中保持树的平衡？</p>
+              <h3 id="Insert-插入操作">
+                <a href="#Insert-插入操作" class="headerlink" title="Insert 插入操作"></a>Insert 插入操作</h3>
+              <p>在一棵已平衡的<strong>AA树</strong>插入一个新的节点，如果他是个左子节点，那么可采用<strong>偏斜Skew</strong>操作；如果他是个右子节点，那啥事情都不用干；但它是右孙节点的话，就成为了一个溢出的节点（四节点型结构），那样就要执行<strong>分割Split</strong>操作。</p>
+              <h4 id="算法步骤">
+                <a href="#算法步骤" class="headerlink" title="算法步骤"></a>算法步骤</h4>
+              <figure class="highlight python">
+                <table>
+                  <tr>
+                    <td class="gutter">
+                      <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre> </td>
+                    <td class="code">
+                      <pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">insert</span><span class="params">(node, key, val)</span>:</span></div><div class="line">    <span class="keyword">if</span> node <span class="keyword">is</span> <span class="keyword">None</span>:</div><div class="line">        <span class="keyword">return</span> Node(key, val)</div><div class="line">    <span class="keyword">if</span> node.key == key:</div><div class="line">        node.val = val</div><div class="line">    <span class="keyword">elif</span> key &lt; node.key:</div><div class="line">        node.left = insert(node.left, key, val)</div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        node.right = insert(node.right, key, val)</div><div class="line">    node = skew(node)</div><div class="line">    node = split(node)</div><div class="line">    <span class="keyword">return</span> node</div></pre> </td>
+                  </tr>
+                </table>
+              </figure>
+              <ol>
+                <li>判断节点是否是空，空则返回新建一个节点</li>
+                <li>判断节点的键与待插入的键
+                  <ol>
+                    <li>相等则更新值</li>
+                    <li>大于则执行左子树的插入操作</li>
+                    <li>小于则执行右子树的插入操作</li>
+                  </ol>
+                </li>
+                <li>执行翻转Skew操作</li>
+                <li>执行分割Split操作</li>
+              </ol>
+              <h4 id="示例">
+                <a href="#示例" class="headerlink" title="示例"></a>示例</h4>
+              <figure class="highlight plain">
+                <table>
+                  <tr>
+                    <td class="gutter">
+                      <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre> </td>
+                    <td class="code">
+                      <pre><div class="line">current tree:</div><div class="line"></div><div class="line">       /-?</div><div class="line">-A(Lv.1)</div><div class="line">      |       /-?</div><div class="line">       \C(Lv.1)</div><div class="line">              \-?</div><div class="line"></div><div class="line">insert B</div><div class="line"></div><div class="line">before skew:</div><div class="line"></div><div class="line">              /-?</div><div class="line">       /B(Lv.1)</div><div class="line">      |       \-?</div><div class="line">-C(Lv.1)</div><div class="line">      |</div><div class="line">       \-?</div><div class="line"></div><div class="line">after skew:</div><div class="line"></div><div class="line">       /-?</div><div class="line">-B(Lv.1)</div><div class="line">      |       /-?</div><div class="line">       \C(Lv.1)</div><div class="line">              \-?</div><div class="line"></div><div class="line">before split:</div><div class="line"></div><div class="line">       /-?</div><div class="line">-A(Lv.1)</div><div class="line">      |       /-?</div><div class="line">       \B(Lv.1)</div><div class="line">             |       /-?</div><div class="line">              \C(Lv.1)</div><div class="line">                     \-?</div><div class="line"></div><div class="line">after split:</div><div class="line"></div><div class="line">          /-?</div><div class="line">   /A(Lv.1)</div><div class="line">  |       \-?</div><div class="line">-B(Lv.2)</div><div class="line">  |</div><div class="line">  |       /-?</div><div class="line">   \C(Lv.1)</div><div class="line">          \-?</div></pre> </td>
+                  </tr>
+                </table>
+              </figure>
+              <h3 id="Remove-删除操作">
+                <a href="#Remove-删除操作" class="headerlink" title="Remove 删除操作"></a>Remove 删除操作</h3>
+              <p>在一棵平衡的树删除一个叶节点的过程十分简单，可删除处于结构内部的节点的过程就没那么简单了。所以接下来没讲清楚请见谅。结合代码和示例能更好的明白这个过程。</p>
+              <p>为了在这个过程中平衡树结构，删除一个内部节点可以转换成交换内部节点与其后继节点,删除后第一件事就要降低其<strong>level</strong>（如果可以的话），然后再对整个level执行<strong>Skew</strong>和<strong>Split</strong>操作。这个方法是最受欢迎的，因为这个方法容易理解。</p>
+              <h4 id="算法步骤-1">
+                <a href="#算法步骤-1" class="headerlink" title="算法步骤"></a>算法步骤</h4>
+              <figure class="highlight python">
+                <table>
+                  <tr>
+                    <td class="gutter">
+                      <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre> </td>
+                    <td class="code">
+                      <pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">decrease_level</span><span class="params">(node)</span>:</span></div><div class="line">    should_be = min(node.left.level <span class="keyword">if</span> node.left <span class="keyword">else</span> <span class="number">0</span>,</div><div class="line">                    node.right.level <span class="keyword">if</span> node.right <span class="keyword">else</span> <span class="number">0</span>) + <span class="number">1</span></div><div class="line">    <span class="keyword">if</span> should_be &lt; node.level:</div><div class="line">        node.level = should_be</div><div class="line">        <span class="keyword">if</span> node.right <span class="keyword">and</span> should_be &lt; node.right.level:</div><div class="line">            node.right.level = should_be</div><div class="line">    <span class="keyword">return</span> node</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">remove</span><span class="params">(node, key)</span>:</span></div><div class="line">    <span class="keyword">if</span> node <span class="keyword">is</span> <span class="keyword">None</span>:</div><div class="line">        <span class="keyword">return</span> node</div><div class="line">    <span class="keyword">if</span> key &gt; node.key:</div><div class="line">        node.right = remove(node.right, key)</div><div class="line">    <span class="keyword">elif</span> key &lt; node.key:</div><div class="line">        node.left = remove(node.left, key)</div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        <span class="keyword">if</span> node.left <span class="keyword">is</span> <span class="keyword">None</span> <span class="keyword">and</span> node.right <span class="keyword">is</span> <span class="keyword">None</span>:</div><div class="line">            <span class="keyword">return</span> <span class="keyword">None</span></div><div class="line">        <span class="keyword">elif</span> node.left <span class="keyword">is</span> <span class="keyword">None</span>:</div><div class="line">            heir = node.right</div><div class="line">            node.right = remove(heir, heir.key)</div><div class="line">            node.key = heir.key</div><div class="line">            node.val = heir.val</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            heir = node.left</div><div class="line">            node.left = remove(heir, heir.key)</div><div class="line">            node.key = heir.key</div><div class="line">            node.val = heir.val</div><div class="line">    node = decrease_level(node)</div><div class="line">    node = skew(node)</div><div class="line">    node.right = skew(node.right)</div><div class="line">    <span class="keyword">if</span> node.right <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</div><div class="line">        node.right.right = skew(node.right.right)</div><div class="line">    node = split(node)</div><div class="line">    node.right = split(node.right)</div><div class="line">    <span class="keyword">return</span> node</div></pre> </td>
+                  </tr>
+                </table>
+              </figure>
+              <ol>
+                <li>删除节点<br> i. 判断节点是否为空节点，是则返回自身<br> ii. 判断目标键与当前节点的键，执行对应操作<br> &nbsp;&nbsp;&nbsp;&nbsp;大于，对右子树执行删除操作；<br> &nbsp;&nbsp;&nbsp;&nbsp;小于，对左子树执行删除操作；<br> &nbsp;&nbsp;&nbsp;&nbsp;等于，判断是否为叶节点，是则返回空节点，完成删除操作，否则与后继节点交换</li>
+                <li>降低节点的<strong>level</strong></li>
+                <li>对同<strong>level</strong>的后继与其本身执行<strong>Skew</strong>操作，再执行<strong>Split</strong>操作</li>
+              </ol>
+              <h4 id="示例-1">
+                <a href="#示例-1" class="headerlink" title="示例"></a>示例</h4>
+              <figure class="highlight plain">
+                <table>
+                  <tr>
+                    <td class="gutter">
+                      <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div></pre> </td>
+                    <td class="code">
+                      <pre><div class="line">current tree:</div><div class="line"></div><div class="line">          /-?</div><div class="line">   /A(Lv.1)</div><div class="line">  |       \-?</div><div class="line">  |</div><div class="line">-B(Lv.2)</div><div class="line">  |          /-?</div><div class="line">  |   /C(Lv.1)</div><div class="line">  |  |       \-?</div><div class="line">   \D(Lv.2)</div><div class="line">     |</div><div class="line">     |       /-?</div><div class="line">      \E(Lv.1)</div><div class="line">            |       /-?</div><div class="line">             \F(Lv.1)</div><div class="line">                    \-?</div><div class="line"></div><div class="line">remove B</div><div class="line"></div><div class="line">before skew:</div><div class="line"></div><div class="line">          /-?</div><div class="line">   /C(Lv.1)</div><div class="line">  |       \-?</div><div class="line">-D(Lv.1)</div><div class="line">  |</div><div class="line">  |       /-?</div><div class="line">   \E(Lv.1)</div><div class="line">         |       /-?</div><div class="line">          \F(Lv.1)</div><div class="line">                 \-?</div><div class="line"></div><div class="line">after skew:</div><div class="line"></div><div class="line">       /-?</div><div class="line">-C(Lv.1)</div><div class="line">      |       /-?</div><div class="line">       \D(Lv.1)</div><div class="line">             |       /-?</div><div class="line">              \E(Lv.1)</div><div class="line">                    |       /-?</div><div class="line">                     \F(Lv.1)</div><div class="line">                            \-?</div><div class="line"></div><div class="line">before split:</div><div class="line"></div><div class="line">       /-?</div><div class="line">-A(Lv.1)</div><div class="line">      |       /-?</div><div class="line">       \C(Lv.1)</div><div class="line">             |       /-?</div><div class="line">              \D(Lv.1)</div><div class="line">                    |       /-?</div><div class="line">                     \E(Lv.1)</div><div class="line">                           |       /-?</div><div class="line">                            \F(Lv.1)</div><div class="line">                                   \-?</div><div class="line"></div><div class="line">after split:</div><div class="line"></div><div class="line">          /-?</div><div class="line">   /A(Lv.1)</div><div class="line">  |       \-?</div><div class="line">-C(Lv.2)</div><div class="line">  |</div><div class="line">  |       /-?</div><div class="line">   \D(Lv.1)</div><div class="line">         |       /-?</div><div class="line">          \E(Lv.1)</div><div class="line">                |       /-?</div><div class="line">                 \F(Lv.1)</div><div class="line">                        \-?</div><div class="line"></div><div class="line">before split:</div><div class="line"></div><div class="line">       /-?</div><div class="line">-D(Lv.1)</div><div class="line">      |       /-?</div><div class="line">       \E(Lv.1)</div><div class="line">             |       /-?</div><div class="line">              \F(Lv.1)</div><div class="line">                     \-?</div><div class="line"></div><div class="line">after split:</div><div class="line"></div><div class="line">          /-?</div><div class="line">   /D(Lv.1)</div><div class="line">  |       \-?</div><div class="line">-E(Lv.2)</div><div class="line">  |</div><div class="line">  |       /-?</div><div class="line">   \F(Lv.1)</div><div class="line">          \-?</div><div class="line"></div><div class="line">current tree:</div><div class="line"></div><div class="line">          /-?</div><div class="line">   /A(Lv.1)</div><div class="line">  |       \-?</div><div class="line">  |</div><div class="line">-C(Lv.2)</div><div class="line">  |          /-?</div><div class="line">  |   /D(Lv.1)</div><div class="line">  |  |       \-?</div><div class="line">   \E(Lv.2)</div><div class="line">     |</div><div class="line">     |       /-?</div><div class="line">      \F(Lv.1)</div><div class="line">             \-?</div></pre> </td>
+                  </tr>
+                </table>
+              </figure>
+              <p>由于Skew和Split操作都是在递归性回溯部分中执行的。这样一来，错误的节点型结构就会在其回溯路径上被修复。</p>
+              <h2 id="结论">
+                <a href="#结论" class="headerlink" title="结论"></a>结论</h2>
+              <p><strong>AA树</strong>是我第一个了解的二分搜索树,再接再厉:)</p>
+              <h2 id="剩余代码">
+                <a href="#剩余代码" class="headerlink" title="剩余代码"></a>剩余代码</h2>
+              <figure class="highlight python">
+                <table>
+                  <tr>
+                    <td class="gutter">
+                      <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre> </td>
+                    <td class="code">
+                      <pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Node</span>:</span></div><div class="line">    __slots__ = (<span class="string">'left'</span>, <span class="string">'right'</span>, <span class="string">'level'</span>, <span class="string">'key'</span>, <span class="string">'val'</span>)</div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, key, val)</span>:</span></div><div class="line">        self.left = <span class="keyword">None</span></div><div class="line">        self.right = <span class="keyword">None</span></div><div class="line">        self.level = <span class="number">1</span></div><div class="line">        self.key = key</div><div class="line">        self.val = val</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__repr__</span><span class="params">(self)</span>:</span></div><div class="line">        rv = <span class="string">'Node(key=&#123;k&#125;, val=&#123;v&#125;, lvl=&#123;l&#125;)'</span>.format(</div><div class="line">            k=self.key, v=self.val, l=self.level</div><div class="line">        )</div><div class="line">        <span class="keyword">return</span> f<span class="string">'&#123;rv!r&#125;'</span></div></pre> </td>
+                  </tr>
+                </table>
+              </figure>
+              <h2 id="参考">
+                <a href="#参考" class="headerlink" title="参考"></a>参考</h2>
+              <blockquote class="pullquote">
+                <ul>
+                  <li>Magnus Lie Hetland.(2014).Tree Balance … and Balancing.In <em>Python Algorithms: Mastering Basic Algorithms in the Python Language,Second Edition</em>,pages 143-149.</li>
+                  <li>Magnus Lie Hetland.(2015).树的平衡与再平衡.In <em>Python算法教程</em>,pages 145-152.</li>
+                  <li><a href="http://user.it.uu.se/~arnea/abs/simp.html" target="_blank" rel="external">Andersson, A.(1993).Balanced search trees made simple.In <em>Proceedings of the Workshop on Algorithms and Data Structures</em>(WADS),pages 60-71.</a></li>
+                </ul>
+              </blockquote>
+            </div>
+            <script type="text/javascript" src="/js/share.js?v=0.0.0" async></script><a data-url="http://linw1995.com/2017/04/27/AA树的平衡与再平衡/" data-id="cj223untg0000usitiq651o70" class="article-share-link">Share</a>
+            <div class="tags"><a href="/tags/Data-Structrue/">Data Structrue</a><a href="/tags/Python/">Python</a></div>
+            <div class="post-nav"><a href="/2017/04/24/分享-Better-Me-AGA/" class="next">分享 Better Me - AGA</a></div>
+            <div id="disqus_thread">
+              <div class="btn_click_load"><button class="disqus_click_btn">阅读评论 「请确保 disqus.com 可以正常加载」</button></div>
+              <script>
+                var disqus_shortname = 'linw1995';
+                var disqus_identifier = '2017/04/27/AA树的平衡与再平衡/';
+                var disqus_title = 'AA树的平衡与再平衡';
+                var disqus_url = 'http://linw1995.com/2017/04/27/AA树的平衡与再平衡/';
+                $('.btn_click_load').click(function() {
+                  (function() {
+                    var dsq = document.createElement('script');
+                    dsq.type = 'text/javascript';
+                    dsq.async = true;
+                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                  })();
+                  $('.btn_click_load').css('display', 'none');
+                });
+                $.ajax({
+                  url: 'https://disqus.com/favicon.ico',
+                  timeout: 3000,
+                  type: 'GET',
+                  success: (function() {
+                    var dsq = document.createElement('script');
+                    dsq.type = 'text/javascript';
+                    dsq.async = true;
+                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                    $('.btn_click_load').css('display', 'none');
+                  })(),
+                  error: function() {
+                    $('.btn_click_load').css('display', 'block');
+                  }
+                });
+              </script>
+              <script id="dsq-count-scr" src="//linw1995.disqus.com/count.js" async></script>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="pure-u-1-4 hidden_mid_and_down">
+        <div id="sidebar">
+          <div class="widget">
+            <form action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank" class="search-form"><input type="text" name="q" maxlength="20" placeholder="Search" /><input type="hidden" name="sitesearch" value="http://linw1995.com" /></form>
+          </div>
+          <div class="widget">
+            <div class="widget-title"><i class="fa fa-folder-o"> Categories</i></div>
+            <ul class="category-list">
+              <li class="category-list-item"><a class="category-list-link" href="/categories/Algorithms/">Algorithms</a><span class="category-list-count">1</span></li>
+              <li class="category-list-item"><a class="category-list-link" href="/categories/Others/">Others</a><span class="category-list-count">5</span></li>
+              <li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">11</span>
+                <ul class="category-list-child">
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Python/Others/">Others</a><span class="category-list-count">1</span></li>
+                </ul>
+              </li>
+              <li class="category-list-item"><a class="category-list-link" href="/categories/Share/">Share</a><span class="category-list-count">3</span></li>
+            </ul>
+          </div>
+          <div class="widget">
+            <div class="widget-title"><i class="fa fa-star-o"> Tags</i></div>
+            <div class="tagcloud"><a href="/tags/Selenium/" style="font-size: 15px;">Selenium</a> <a href="/tags/Data-Structrue/" style="font-size: 15px;">Data Structrue</a> <a href="/tags/Matplotlib/" style="font-size: 15px;">Matplotlib</a> <a href="/tags/VSCode/" style="font-size: 15px;">VSCode</a>              <a href="/tags/Test/" style="font-size: 15px;">Test</a> <a href="/tags/Functional-Programming/" style="font-size: 15px;">Functional Programming</a> <a href="/tags/Scrapy/" style="font-size: 15px;">Scrapy</a> <a href="/tags/Python/" style="font-size: 15px;">Python</a>              <a href="/tags/PhantomJS/" style="font-size: 15px;">PhantomJS</a> <a href="/tags/Music/" style="font-size: 15px;">Music</a> <a href="/tags/YouTube/" style="font-size: 15px;">YouTube</a> <a href="/tags/C/" style="font-size: 15px;">C++</a>              <a href="/tags/Python黑魔法/" style="font-size: 15px;">Python黑魔法</a> <a href="/tags/TypeScript/" style="font-size: 15px;">TypeScript</a></div>
+          </div>
+          <div class="widget">
+            <div class="widget-title"><i class="fa fa-comment-o"> Recent Comments</i></div>
+            <script type="text/javascript" src="//linw1995.disqus.com/recent_comments_widget.js?num_items=5&amp;hide_avatars=1&amp;avatar_size=32&amp;excerpt_length=20&amp;hide_mods=1"></script>
+          </div>
+        </div>
+      </div>
+      <div class="pure-u-1 pure-u-md-3-4">
+        <div id="footer">Copyright © 2017 <a href="/." rel="nofollow">linw1995.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow"
+            target="_blank" href="https://github.com/pagecho"> Cho.</a></div>
+      </div>
+    </div>
+    <a id="rocket" href="#top" class="show"></a>
+    <script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script>
+    <script type="text/javascript" src="//cdn.bootcss.com/fancybox/3.0.47/jquery.fancybox.min.js" async></script>
+    <script type="text/javascript" src="/js/fancybox.js?v=0.0.0" async></script>
+    <link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/fancybox/3.0.47/jquery.fancybox.min.css">
+    <script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script>
+    <script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script>
+  </div>
+</body>
+
+</html>

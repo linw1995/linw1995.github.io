@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://linw1995.com/"/>
-  <updated>2017-04-28T16:53:34.816Z</updated>
+  <updated>2017-04-30T15:42:56.821Z</updated>
   <id>http://linw1995.com/</id>
   
   <author>
@@ -20,15 +20,15 @@
     <link href="http://linw1995.com/2017/04/27/AA%E6%A0%91%E7%9A%84%E5%B9%B3%E8%A1%A1%E4%B8%8E%E5%86%8D%E5%B9%B3%E8%A1%A1/"/>
     <id>http://linw1995.com/2017/04/27/AA树的平衡与再平衡/</id>
     <published>2017-04-27T04:38:13.000Z</published>
-    <updated>2017-04-28T16:53:34.816Z</updated>
+    <updated>2017-04-30T15:42:56.821Z</updated>
     
     <content type="html"><![CDATA[<h2 id="介绍">
   <a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2>
 <blockquote>
-  <p><strong>AA树</strong>在计算机科学一种形式的自平衡二叉查找树用于高效存储和检索序数据。<strong>AA树</strong>的名称是由它的发明者<em>Arne Andersson</em>而来。<br><strong>AA树</strong>是<strong>红黑树</strong>的一种变种，是<em>Arne Andersson</em>教授在1993年年在他的论文<em>“Balanced search trees made simple”</em>中介绍，设计的目的是减少<strong>红黑树</strong>考虑的不同情况，区别于<strong>红黑树</strong>的是，<strong>AA树</strong>的红节点只能作为右叶子。换句话说，没有红节点可以是一个左子儿。这导致代替<strong>2-3-4树</strong>，从而大大简化了维护<strong>2-3树</strong>的模拟。维护<strong>红黑树</strong>的平衡需要考虑7种不同的情况:<br>    <img src="/2017/04/27/AA树的平衡与再平衡/360px-Red_Black_Shape_Cases.svg.png" alt="360px-Red_Black_Shape_Cases.svg.png" title=""><br>因为<strong>AA树</strong>有严格的条件(红节点只能为右节点)，故只需考虑2种情形:<br><img src="/2017/04/27/AA树的平衡与再平衡/105px-AA_Tree_Shape_Cases.svg.png" alt="105px-AA_Tree_Shape_Cases.svg.png" title=""></p>
+  <p><strong>AA树</strong>在计算机科学一种形式的自平衡二叉查找树用于高效存储和检索序数据。<strong>AA树</strong>的名称是由它的发明者<em>Arne Andersson</em>而来。<br><strong>AA树</strong>是<strong>红黑树</strong>的一种变种，是<em>Arne Andersson</em>教授在1993年年在他的论文<em>“Balanced search trees made simple”</em>中介绍，设计的目的是减少<strong>红黑树</strong>考虑的不同情况，区别于<strong>红黑树</strong>的是，<strong>AA树</strong>的红节点只能作为右叶子。换句话说，没有红节点可以是一个左子儿。这导致代替<strong>2-3-4树</strong>，从而大大简化了维护<strong>2-3树</strong>的模拟。维护<strong>红黑树</strong>的平衡需要考虑7种不同的情况:<br>    <img src="/2017/04/27/AA树的平衡与再平衡/360px-Red_Black_Shape_Cases.svg.png" alt="Red-Black-Shape-Cases" title="Red-Black-Shape-Cases"><br>因为<strong>AA树</strong>有严格的条件(红节点只能为右节点)，故只需考虑2种情形:<br><img src="/2017/04/27/AA树的平衡与再平衡/105px-AA_Tree_Shape_Cases.svg.png" alt="AA-Tree-Shape-Cases" title="AA-Tree-Shape-Cases"></p>
   <footer><strong>维基百科</strong><cite><a href="https://zh.wikipedia.org/wiki/AA%E6%A0%91#firstHeading" target="_blank" rel="external">Wikipedia</a></cite></footer>
 </blockquote>
-<p><strong>AA树</strong>是<strong>2-3树</strong>的模拟，<strong>2-3树</strong>和<strong>AA树</strong>是<strong>等距同构</strong>的。其节点类型如下</p> <img src="/2017/04/27/AA树的平衡与再平衡/IMG_01.JPG" alt="IMG_01.JPG" title="">
+<p><strong>AA树</strong>是<strong>2-3树</strong>的模拟，<strong>2-3树</strong>和<strong>AA树</strong>是<strong>等距同构</strong>的。其节点类型如下</p> <img src="/2017/04/27/AA树的平衡与再平衡/IMG_01.JPG" alt="2-3tree&1-2tree" title="2-3tree&1-2tree">
 <h2 id="平衡条件">
   <a href="#平衡条件" class="headerlink" title="平衡条件"></a>平衡条件</h2>
 <p>树是用与高效的存储和检索数据的，为了维持其效率，必须维持其平衡结构。<br>平衡一颗<strong>红黑树</strong>需记录其颜色，而<strong>AA树</strong>是在每个节点记录其<strong>level</strong>这相当于<strong>红黑树</strong>节点的黑高度</p>
@@ -44,7 +44,7 @@
 <p>对于<strong>AA树</strong>，维持其平衡的基本操作如下：</p>
 <ol>
   <li>
-    <p><strong>偏斜Skew</strong>：使得子树中向左的水平边变成向右的。</p> <img src="/2017/04/27/AA树的平衡与再平衡/IMG_02.JPG" alt="IMG_02.JPG" title="">
+    <p><strong>偏斜Skew</strong>：使得子树中向左的水平边变成向右的。</p> <img src="/2017/04/27/AA树的平衡与再平衡/IMG_02.JPG" alt="Skew" title="Skew">
     <p> 不满足平衡条件：2</p>
     <figure class="highlight python">
       <table>
@@ -65,7 +65,7 @@
     </ol>
   </li>
   <li>
-    <p><strong>分割Split</strong>：对溢出子节点进行分割，将三个值中的中间值向上移到父节点，如果让父节点溢出了，就继续分割下去。</p> <img src="/2017/04/27/AA树的平衡与再平衡/IMG_03.JPG" alt="IMG_03.JPG" title="">
+    <p><strong>分割Split</strong>：对溢出子节点进行分割，将三个值中的中间值向上移到父节点，如果让父节点溢出了，就继续分割下去。</p> <img src="/2017/04/27/AA树的平衡与再平衡/IMG_03.JPG" alt="Split" title="Split">
     <p> 不满足平衡条件：4</p>
     <figure class="highlight python">
       <table>
@@ -551,9 +551,9 @@ myprojec/
     <link href="http://linw1995.com/2017/04/12/%E6%8A%98%E8%85%BEVSCode%E8%AE%B0-%E4%BA%8C-%C2%B7-Settings-Sync/"/>
     <id>http://linw1995.com/2017/04/12/折腾VSCode记-二-·-Settings-Sync/</id>
     <published>2017-04-12T15:03:42.000Z</published>
-    <updated>2017-04-28T17:05:31.299Z</updated>
+    <updated>2017-04-30T15:41:11.021Z</updated>
     
-    <content type="html"><![CDATA[<p>假如有一天你重装系统了，或者换电脑了，或者有多台电脑，每次重新配置<strong>VSCode</strong>也太麻烦了。<br><img src="/2017/04/12/折腾VSCode记-二-·-Settings-Sync/cloud.png" alt="cloud.png" title=""> <strong>Setting Sync</strong><br>这个插件就完美的解决了这个问题。<br>
+    <content type="html"><![CDATA[<p>假如有一天你重装系统了，或者换电脑了，或者有多台电脑，每次重新配置<strong>VSCode</strong>也太麻烦了。<br><img src="/2017/04/12/折腾VSCode记-二-·-Settings-Sync/cloud.png" alt="SettingSync-Logo" title="SettingSync-Logo"> <strong>Setting Sync</strong><br>这个插件就完美的解决了这个问题。<br>
   <a id="more"></a>
 </p>
 <p>利用了<strong>Github Gist服务</strong>来保存<strong>VSCode</strong>的状态（设置、插件等等），<br>除了自己可用外，还可以分享自己的配置给别人。</p>
@@ -599,7 +599,7 @@ myprojec/
     
     <summary type="html">
     
-      &lt;p&gt;假如有一天你重装系统了，或者换电脑了，或者有多台电脑，每次重新配置&lt;strong&gt;VSCode&lt;/strong&gt;也太麻烦了。&lt;br&gt;&lt;img src=&quot;/2017/04/12/折腾VSCode记-二-·-Settings-Sync/cloud.png&quot; alt=&quot;cloud.png&quot; title=&quot;&quot;&gt; &lt;strong&gt;Setting Sync&lt;/strong&gt;&lt;br&gt;这个插件就完美的解决了这个问题。&lt;br&gt;
+      &lt;p&gt;假如有一天你重装系统了，或者换电脑了，或者有多台电脑，每次重新配置&lt;strong&gt;VSCode&lt;/strong&gt;也太麻烦了。&lt;br&gt;&lt;img src=&quot;/2017/04/12/折腾VSCode记-二-·-Settings-Sync/cloud.png&quot; alt=&quot;SettingSync-Logo&quot; title=&quot;SettingSync-Logo&quot;&gt; &lt;strong&gt;Setting Sync&lt;/strong&gt;&lt;br&gt;这个插件就完美的解决了这个问题。&lt;br&gt;
     
     </summary>
     
@@ -637,7 +637,7 @@ myprojec/
     <link href="http://linw1995.com/2017/04/09/%E6%8A%98%E8%85%BEVSCode%E8%AE%B0-%E4%B8%80-%C2%B7-Python-Traceback-Jumper/"/>
     <id>http://linw1995.com/2017/04/09/折腾VSCode记-一-·-Python-Traceback-Jumper/</id>
     <published>2017-04-09T13:58:44.000Z</published>
-    <updated>2017-04-28T17:05:38.917Z</updated>
+    <updated>2017-04-30T15:41:37.878Z</updated>
     
     <content type="html"><![CDATA[<p>因为<strong>Pycharm</strong>到期了，就开始折腾<strong>VSCode</strong>。<br>使用中，写一些<strong>Python</strong>代码时，觉得缺少一个功能 <strong>Traceback点击跳转</strong>。<br>所以就花了一整天翻看<strong>VSCode</strong>官方文档，写了个插件<br><img src="/2017/04/09/折腾VSCode记-一-·-Python-Traceback-Jumper/python%20traceback%20jumper%20logo.svg" alt="python traceback jumper logo.svg" title=""><strong>python traceback jumper</strong></p>
 <a id="more"></a>
@@ -1950,7 +1950,7 @@ myprojec/
     <link href="http://linw1995.com/2017/03/22/Python-Unittest/"/>
     <id>http://linw1995.com/2017/03/22/Python-Unittest/</id>
     <published>2017-03-22T06:34:01.000Z</published>
-    <updated>2017-04-28T17:08:40.083Z</updated>
+    <updated>2017-04-30T15:45:58.246Z</updated>
     
     <content type="html"><![CDATA[<p>测试在持续集成开发中非常重要，写单元测试有助于定位bug，方便在未来重构代码。<br>本文简单介绍了下<strong>Python标准库</strong>中的<strong>Unittest</strong></p>
 <a id="more"></a>
@@ -2174,7 +2174,7 @@ myprojec/
     </tr>
   </table>
 </figure>
-<p>这样就会在工作路径中寻找测试<br>若VSCode左下方出现Run Tests，即测试导入完毕<br><img src="/2017/03/22/Python-Unittest/01.png" alt="01.png" title=""><br>点击Run Tests，可选择进行所有测试，也可以进行某个测试方法<br>也可以进行上一次失败的测试<br><img src="/2017/03/22/Python-Unittest/02.png" alt="02.png" title=""><br>也可以到测试文件中，在<strong>TestMethod</strong>或<strong>TestCase</strong>运行测试</p>
+<p>这样就会在工作路径中寻找测试<br>若VSCode左下方出现Run Tests，即测试导入完毕<br><img src="/2017/03/22/Python-Unittest/01.png" alt="Status" title="Status"><br>点击Run Tests，可选择进行所有测试，也可以进行某个测试方法<br>也可以进行上一次失败的测试<br><img src="/2017/03/22/Python-Unittest/02.png" alt="Contrl" title="Contrl"><br>也可以到测试文件中，在<strong>TestMethod</strong>或<strong>TestCase</strong>运行测试</p>
 <h1 id="参考链接">
   <a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h1>
 <blockquote class="pullquote">
@@ -2202,9 +2202,9 @@ myprojec/
     
       <category term="Python" scheme="http://linw1995.com/tags/Python/"/>
     
-      <category term="VSCode" scheme="http://linw1995.com/tags/VSCode/"/>
-    
       <category term="Test" scheme="http://linw1995.com/tags/Test/"/>
+    
+      <category term="VSCode" scheme="http://linw1995.com/tags/VSCode/"/>
     
   </entry>
   
@@ -2524,7 +2524,7 @@ myprojec/
     <link href="http://linw1995.com/2017/03/19/Python-On-Visual-Studio-Code-With-Anaconda/"/>
     <id>http://linw1995.com/2017/03/19/Python-On-Visual-Studio-Code-With-Anaconda/</id>
     <published>2017-03-19T08:28:48.000Z</published>
-    <updated>2017-04-28T17:08:19.497Z</updated>
+    <updated>2017-04-30T15:45:27.151Z</updated>
     
     <content type="html"><![CDATA[<p>Python是一门入门容易，且入门后又可以做很多interesting things的语言。<br>想简单的写一些代码，又不想费力去安装体积庞大的IDE，也不想使用Python自带的IDLE。<br>这时候你就需要Python On Visual Studio Code With Anaconda。<br>
   <a id="more"></a>
@@ -2532,13 +2532,13 @@ myprojec/
 <h1 id="工具介绍">
   <a href="#工具介绍" class="headerlink" title="工具介绍"></a>工具介绍</h1>
 <h2 id="Visual-Studio-Code-–-Code-editing-Redefined">
-  <a href="#Visual-Studio-Code-–-Code-editing-Redefined" class="headerlink" title="Visual Studio Code – Code editing. Redefined."></a>Visual Studio Code – Code editing. Redefined.</h2><img src="/2017/03/19/Python-On-Visual-Studio-Code-With-Anaconda/2016-10-14_061710.470637_Visual_Studio_Code_0.10.1_icon.png" alt="2016-10-14_061710.470637_Visual_Studio_Code_0.10.1_icon.png" title=""><a href="https://code.visualstudio.com/Download" title="Download Visual Studio Code" target="_blank" rel="external">VS Code Download link</a>
+  <a href="#Visual-Studio-Code-–-Code-editing-Redefined" class="headerlink" title="Visual Studio Code – Code editing. Redefined."></a>Visual Studio Code – Code editing. Redefined.</h2><img src="/2017/03/19/Python-On-Visual-Studio-Code-With-Anaconda/2016-10-14_061710.470637_Visual_Studio_Code_0.10.1_icon.png" alt="VSCode-Logo" title="VSCode-Logo"> <a href="https://code.visualstudio.com/Download" title="Download Visual Studio Code" target="_blank" rel="external">VS Code Download link</a>
 <blockquote>
   <p>在2015 Build大会上宣布微软将开发 Visual Studio Code。<br>2015年4月29日，第一个预览版本发布。<br>2015年11月18日，Code团队将其在GitHub上面开源，并采用MIT许可证，同时宣布将支持扩展功能。<br>2016年4月14日，Visual Studio Code发布正式版，版本号1.0.0。<br>Visual Studio Code支持多种编程语言。与其他编辑器不同的是，Code的许多功能并不在菜单中显示，而是通过“命令面板”来调用。用户可以在命令面板中搜索和输入命令，从而实现指定功能，例如安装插件、设置属性等。<br>Code具备了现代文本编辑器所具有的功能，例如更改字符编码、更换换行符等。</p>
   <footer><strong>wikipedia</strong><cite><a href="https://zh.wikipedia.org/wiki/Visual_Studio_Code" target="_blank" rel="external">Visual Studio Code</a></cite></footer>
 </blockquote>
 <h2 id="Anaconda-–-Leading-Open-Data-Science-Platform-Powered-by-Python">
-  <a href="#Anaconda-–-Leading-Open-Data-Science-Platform-Powered-by-Python" class="headerlink" title="Anaconda – Leading Open Data Science Platform Powered by Python"></a>Anaconda – Leading Open Data Science Platform Powered by Python</h2><img src="/2017/03/19/Python-On-Visual-Studio-Code-With-Anaconda/AnacondaLogo.png" alt="AnacondaLogo.png" title="">
+  <a href="#Anaconda-–-Leading-Open-Data-Science-Platform-Powered-by-Python" class="headerlink" title="Anaconda – Leading Open Data Science Platform Powered by Python"></a>Anaconda – Leading Open Data Science Platform Powered by Python</h2><img src="/2017/03/19/Python-On-Visual-Studio-Code-With-Anaconda/AnacondaLogo.png" alt="Anaconda-Logo" title="Anaconda-Logo">
 <blockquote>
   <p>Where packages, notebooks, and environments are shared.<br>Powerful collaboration and package management for open source and private projects.<br>Public projects and notebooks are always free.</p>
   <footer><strong>Anaconda</strong><cite><a href="https://www.continuum.io/anaconda-overview" target="_blank" rel="external">overview</a></cite></footer>
@@ -2564,7 +2564,7 @@ myprojec/
 <ul>
   <li><a href="https://marketplace.visualstudio.com/items?itemName=donjayamanne.python" target="_blank" rel="external">python</a></li>
   <li><a href="https://marketplace.visualstudio.com/items?itemName=linw1995.python-traceback-jumper" target="_blank" rel="external">python traceback jumper</a> </li>
-</ul> <img src="/2017/03/19/Python-On-Visual-Studio-Code-With-Anaconda/pythonVSCode.png" alt="pythonVSCode.png" title=""> <img src="/2017/03/19/Python-On-Visual-Studio-Code-With-Anaconda/python%20traceback%20jumper.png" alt="python traceback jumper.png" title="">
+</ul> <img src="/2017/03/19/Python-On-Visual-Studio-Code-With-Anaconda/pythonVSCode.png" alt="PythonVSCode-Logo" title="PythonVSCode-Logo"> <img src="/2017/03/19/Python-On-Visual-Studio-Code-With-Anaconda/python%20traceback%20jumper.png" alt="Python-Traceback-Jumper-Logo" title="Python-Traceback-Jumper-Logo">
 <p>安装完成后，按住<code>ctrl</code>+<code>shift</code>+<code>p</code>,输入<code>&gt;Python:Select Workspace Interpreter</code>选择需要的python环境<br>然后你会发现它目录下会多出一个目录<code>.vscode</code>，打开其中的<code>settings.json</code></p>
 <figure class="highlight json">
   <table>
@@ -2638,12 +2638,12 @@ myprojec/
     </tr>
   </table>
 </figure>
-<p>按住<code>ctrl</code>+<code>shift</code>+<code>p</code>输入reload重载整个编辑器后就可以，继续刚才的操作<br><img src="/2017/03/19/Python-On-Visual-Studio-Code-With-Anaconda/traceback.png" alt="traceback.png" title=""></p>
+<p>按住<code>ctrl</code>+<code>shift</code>+<code>p</code>输入reload重载整个编辑器后就可以，继续刚才的操作<br><img src="/2017/03/19/Python-On-Visual-Studio-Code-With-Anaconda/traceback.png" alt="traceback" title="traceback"></p>
 <p>是不是十分方便呢</p>
 <h2 id="Debug-launcher">
   <a href="#Debug-launcher" class="headerlink" title="Debug launcher"></a>Debug launcher</h2>
 <p>Task功能很方便，但是并不能满足debug的需求<br>所以接下来要这样配置</p>
-<p>进入调试面板，打开<code>launch.json</code>文件<br><img src="/2017/03/19/Python-On-Visual-Studio-Code-With-Anaconda/debug.png" alt="debug.png" title=""></p>
+<p>进入调试面板，打开<code>launch.json</code>文件<br><img src="/2017/03/19/Python-On-Visual-Studio-Code-With-Anaconda/debug.png" alt="debug" title="debug"></p>
 <figure class="highlight json">
   <table>
     <tr>
@@ -2656,7 +2656,7 @@ myprojec/
     </tr>
   </table>
 </figure>
-<p>然后按住<code>F5</code>就可以进入debug模式了<br>点击要调试的代码行左侧边框上，添加“红点”<br>之后程序运行到此行就会停下，即可在调试控制台输入框上进行交互式调试</p> <img src="/2017/03/19/Python-On-Visual-Studio-Code-With-Anaconda/debugContrl.png" alt="debugContrl.png" title="">]]></content>
+<p>然后按住<code>F5</code>就可以进入debug模式了<br>点击要调试的代码行左侧边框上，添加“红点”<br>之后程序运行到此行就会停下，即可在调试控制台输入框上进行交互式调试</p> <img src="/2017/03/19/Python-On-Visual-Studio-Code-With-Anaconda/debugContrl.png" alt="debugContrl" title="debugContrl">]]></content>
     
     <summary type="html">
     
@@ -2665,8 +2665,6 @@ myprojec/
     </summary>
     
       <category term="Python" scheme="http://linw1995.com/categories/Python/"/>
-    
-      <category term="Others" scheme="http://linw1995.com/categories/Python/Others/"/>
     
     
       <category term="Python" scheme="http://linw1995.com/tags/Python/"/>
@@ -2680,7 +2678,7 @@ myprojec/
     <link href="http://linw1995.com/2017/03/15/Matplotlib-%E4%B8%AD%E6%96%87%E6%98%BE%E7%A4%BA%E5%8F%82%E6%95%B0%E8%AE%BE%E7%BD%AE/"/>
     <id>http://linw1995.com/2017/03/15/Matplotlib-中文显示参数设置/</id>
     <published>2017-03-15T01:16:42.000Z</published>
-    <updated>2017-04-27T04:45:06.481Z</updated>
+    <updated>2017-04-30T15:43:09.804Z</updated>
     
     <content type="html"><![CDATA[<p>在用Matplotlib库可视化时，难免会需要加上中文信息，可总是显示乱码出来。</p>
 <a id="more"></a>
@@ -2712,7 +2710,7 @@ myprojec/
     <p> 去掉注释<code>#</code>符号，在<code>DejaVu Serif</code>前加入<code>SimHei,</code>，<br> 对下列<code>#font.sans-serif</code>也是如此操作。<br> 同样地对<code>axes.unicode_minus</code>也是如此修改，去掉注释<code>#</code>符号，把<code>True</code>改为<code>False</code>。</p>
   </li>
 </ul>
-<p>然后运行一下包含中文字符的代码,见证奇迹时候到了。</p> <img src="/2017/03/15/Matplotlib-中文显示参数设置/figure_1.png" alt="figure_1.png" title="">]]></content>
+<p>然后运行一下包含中文字符的代码,见证奇迹时候到了。</p> <img src="/2017/03/15/Matplotlib-中文显示参数设置/figure_1.png" alt="figure" title="figure">]]></content>
     
     <summary type="html">
     
@@ -2734,113 +2732,112 @@ myprojec/
     <link href="http://linw1995.com/2016/10/14/%E5%A6%82%E4%BD%95%E9%85%8D%E7%BD%AEVisual-Studio-Code-MinGW%E4%B8%8B%E7%9A%84C-%E7%8E%AF%E5%A2%83/"/>
     <id>http://linw1995.com/2016/10/14/如何配置Visual-Studio-Code-MinGW下的C-环境/</id>
     <published>2016-10-14T09:49:06.000Z</published>
-    <updated>2017-04-28T17:05:13.271Z</updated>
+    <updated>2017-04-30T15:40:33.524Z</updated>
     
     <content type="html"><![CDATA[<p>官方文档至今还没翻译成中文，足足琢磨了好几天明白了一些VS Code的功能。<br>现在给大家分享以下。</p>
 <a id="more"></a>
 <h1 id="工具介绍">
   <a href="#工具介绍" class="headerlink" title="工具介绍"></a>工具介绍</h1>
 <h2 id="Visual-Studio-Code-–-Code-editing-Redefined">
-  <a href="#Visual-Studio-Code-–-Code-editing-Redefined" class="headerlink" title="Visual Studio Code – Code editing. Redefined."></a>Visual Studio Code – Code editing. Redefined.</h2><img src="/2016/10/14/如何配置Visual-Studio-Code-MinGW下的C-环境/2016-10-14_061710.470637_Visual_Studio_Code_0.10.1_icon.png" alt="2016-10-14_061710.470637_Visual_Studio_Code_0.10.1_icon.png" title="">
-<a href="https://code.visualstudio.com/Download" title="Download Visual Studio Code" target="_blank" rel="external">VS Code Download link</a>
+  <a href="#Visual-Studio-Code-–-Code-editing-Redefined" class="headerlink" title="Visual Studio Code – Code editing. Redefined."></a>Visual Studio Code – Code editing. Redefined.</h2><img src="/2016/10/14/如何配置Visual-Studio-Code-MinGW下的C-环境/2016-10-14_061710.470637_Visual_Studio_Code_0.10.1_icon.png" alt="VSCode-Logo" title="VSCode-Logo"> <a href="https://code.visualstudio.com/Download" title="Download Visual Studio Code" target="_blank" rel="external">VS Code Download link</a>
+<blockquote>
+  <p>在2015 Build大会上宣布微软将开发 Visual Studio Code。<br>2015年4月29日，第一个预览版本发布。<br>2015年11月18日，Code团队将其在GitHub上面开源，并采用MIT许可证，同时宣布将支持扩展功能。<br>2016年4月14日，Visual Studio Code发布正式版，版本号1.0.0。<br>Visual Studio Code支持多种编程语言。与其他编辑器不同的是，Code的许多功能并不在菜单中显示，而是通过“命令面板”来调用。用户可以在命令面板中搜索和输入命令，从而实现指定功能，例如安装插件、设置属性等。<br>Code具备了现代文本编辑器所具有的功能，例如更改字符编码、更换换行符等。</p>
+  <footer><strong>wikipedia</strong><cite><a href="https://zh.wikipedia.org/wiki/Visual_Studio_Code" target="_blank" rel="external">Visual Studio Code</a></cite></footer>
+</blockquote>
+<h2 id="MinGW">
+  <a href="#MinGW" class="headerlink" title="MinGW"></a>MinGW</h2>
+<p>提供了G++编译器<br>
   <blockquote>
-    <p>在2015 Build大会上宣布微软将开发 Visual Studio Code。<br>2015年4月29日，第一个预览版本发布。<br>2015年11月18日，Code团队将其在GitHub上面开源，并采用MIT许可证，同时宣布将支持扩展功能。<br>2016年4月14日，Visual Studio Code发布正式版，版本号1.0.0。<br>Visual Studio Code支持多种编程语言。与其他编辑器不同的是，Code的许多功能并不在菜单中显示，而是通过“命令面板”来调用。用户可以在命令面板中搜索和输入命令，从而实现指定功能，例如安装插件、设置属性等。<br>Code具备了现代文本编辑器所具有的功能，例如更改字符编码、更换换行符等。</p>
-    <footer><strong>wikipedia</strong><cite><a href="https://zh.wikipedia.org/wiki/Visual_Studio_Code" target="_blank" rel="external">Visual Studio Code</a></cite></footer>
+    <p>MinGW（Minimalist GNU for Windows），又称mingw32，是将GCC编译器和GNU Binutils移植到Win32平台下的产物，包括一系列头文件（Win32API）、库和可执行文件。<br>另有可用于产生32位及64位Windows可执行文件的MinGW-w64项目，是从原本MinGW产生的分支。如今已经独立发展。</p>
+    <footer><strong>wikipedia</strong><cite><a href="https://zh.wikipedia.org/wiki/MinGW" target="_blank" rel="external">MinGW</a></cite></footer>
   </blockquote>
-  <h2 id="MinGW">
-    <a href="#MinGW" class="headerlink" title="MinGW"></a>MinGW</h2>
-  <p>提供了G++编译器<br>
-    <blockquote>
-      <p>MinGW（Minimalist GNU for Windows），又称mingw32，是将GCC编译器和GNU Binutils移植到Win32平台下的产物，包括一系列头文件（Win32API）、库和可执行文件。<br>另有可用于产生32位及64位Windows可执行文件的MinGW-w64项目，是从原本MinGW产生的分支。如今已经独立发展。</p>
-      <footer><strong>wikipedia</strong><cite><a href="https://zh.wikipedia.org/wiki/MinGW" target="_blank" rel="external">MinGW</a></cite></footer>
-    </blockquote>
-  </p>
-  <h1 id="安装">
-    <a href="#安装" class="headerlink" title="安装"></a>安装</h1>
-  <ul>
-    <li>VS Code</li>
-  </ul>
-  <p>按照安装提示一步步进行即可</p>
-  <ul>
-    <li>MinGW</li>
-  </ul>
-  <p>按照安装提示一步步进行，安装完成后。<br>会弹出以下界面<br><img src="/2016/10/14/如何配置Visual-Studio-Code-MinGW下的C-环境/2016-10-14_062200.698190_cl_MinGWInstall.png" alt="2016-10-14_062200.698190_cl_MinGWInstall.png" title=""><br>照图片选择，然后在菜单栏Installation中选择Apply changes，然后等待程序下载安装编译器。<br>以上步骤结束后，设置系统变量<br>右键我的电脑，选择属性<br>
-    <img src="/2016/10/14/如何配置Visual-Studio-Code-MinGW下的C-环境/2016-10-14_062655.852040_QQ20161014142609.png" alt="2016-10-14_062655.852040_QQ20161014142609.png" title=""><br>选择高级系统设置，再选择环境变量<br><img src="/2016/10/14/如何配置Visual-Studio-Code-MinGW下的C-环境/2016-10-14_062813.682885_QQ20161014142747.png" alt="2016-10-14_062813.682885_QQ20161014142747.png" title=""><br>再Path变量中添加MinGW根目录下的bin文件夹的路径<br><img src="/2016/10/14/如何配置Visual-Studio-Code-MinGW下的C-环境/2016-10-14_063037.967301_QQ20161014142952.png" alt="2016-10-14_063037.967301_QQ20161014142952.png" title=""><br>打开CMD，输入<code>g++ -v</code>出现以下信息安装就成功咯<br><img src="/2016/10/14/如何配置Visual-Studio-Code-MinGW下的C-环境/2016-10-14_063248.965706_QQ20161014143235.png" alt="2016-10-14_063248.965706_QQ20161014143235.png" title=""></p>
-  <h1 id="配置VS-Code">
-    <a href="#配置VS-Code" class="headerlink" title="配置VS Code"></a>配置VS Code</h1>
-  <p>在码配置流程前先贴出官方的不完全配置文档<br><a href="https://code.visualstudio.com/docs/languages/cpp" title="C/C++ for VS Code (Preview)" target="_blank" rel="external">C/C++ for VS Code (Preview)</a></p>
-  <ol>
-    <li>打开 VS Code。</li>
-    <li>选择侧边栏的扩展图标打开扩展栏。</li>
-    <li>搜索cpptools。</li>
-    <li>点击安装，安装完成后点击启用，重启后静待cpptools完成最后一步安装。</li>
-    <li>完成后打开一个文件夹。（空文件夹也行）</li>
-    <li>设置#include路径，按住<code>ctrl</code>+<code>shift</code>+<code>P</code>呼出命令窗口，输入<code>C/Cpp: Edit Configurations</code>回车，在变量name为Win32的字典里的includePath中的值，修改或添加为<code>&quot;D:/MinGW/include&quot;</code>。</li>
-    <li>按住<code>ctrl</code>+<code>shift</code>+<code>P</code>呼出命令窗口，输入<code>C/Cpp: Switch a Configuration</code>回车，选择<code>Win32</code>。</li>
-    <li>设置task,按住<code>ctrl</code>+<code>shift</code>+<code>P</code>呼出命令窗口，输入<code>Tasks: Configure Task Runner</code>回车，选择<code>Others</code>。把tasks.json修改为以下形式：</li>
-  </ol>
-  <figure class="highlight">
-    <table>
-      <tr>
-        <td class="gutter">
-          <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre>
-        </td>
-        <td class="code">
-          <pre><div class="line">&#123;</div><div class="line">    "version": "0.1.0",</div><div class="line">    "command": "cmd",</div><div class="line">    "isShellCommand": false,</div><div class="line">    "showOutput": "always",</div><div class="line">    "args": ["/C"],</div><div class="line">    "tasks": [</div><div class="line">        &#123;</div><div class="line">            "taskName": "build",</div><div class="line">            "suppressTaskName": true,</div><div class="line">            "echoCommand": true,</div><div class="line">            "args": ["g++", "-g", "$&#123;fileBasename&#125;", "-o", "$&#123;fileBasenameNoExtension&#125;.out"],</div><div class="line">            "showOutput": "silent",</div><div class="line">            "isBuildCommand": true, // 绑定 Ctrl+Shift+B 快捷键</div><div class="line">            "problemMatcher": &#123;</div><div class="line">                "owner": "cpp",</div><div class="line">                "fileLocation": ["relative", "$&#123;workspaceRoot&#125;"],</div><div class="line">                "pattern": &#123;</div><div class="line">                    "regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",</div><div class="line">                    "file": 1,</div><div class="line">                    "line": 2,</div><div class="line">                    "column": 3,</div><div class="line">                    "severity": 4,</div><div class="line">                    "message": 5</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;,</div><div class="line">        &#123;</div><div class="line">            "taskName": "clear",</div><div class="line">            "suppressTaskName": true,</div><div class="line">            "args": ["del", "*.out"],</div><div class="line">            "showOutput": "never"</div><div class="line">        &#125;</div><div class="line">    ]</div><div class="line">&#125;</div></pre>
-        </td>
-      </tr>
-    </table>
-  </figure>
-  <h1 id="使用">
-    <a href="#使用" class="headerlink" title="使用"></a>使用</h1>
-  <p>写一个简单的C++代码，新建一个hello.cpp文件</p>
-  <figure class="highlight cpp">
-    <table>
-      <tr>
-        <td class="gutter">
-          <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre>
-        </td>
-        <td class="code">
-          <pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Hello world"</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre>
-        </td>
-      </tr>
-    </table>
-  </figure>
-  <h2 id="编译">
-    <a href="#编译" class="headerlink" title="编译"></a>编译</h2>
-  <p>按住<code>ctrl</code>+<code>P</code>,输入<code>task build</code>回车，就能编译成功了。若是编译失败，错误信息会出现在左下角。</p>
-  <blockquote>
-    <p>按住<code>ctrl</code>+<code>shift</code>+<code>b</code>也可以执行编译命令</p>
-  </blockquote>
-  <h2 id="运行">
-    <a href="#运行" class="headerlink" title="运行"></a>运行</h2>
-  <p>按住<code>ctrl</code>+<code>~</code>弹出CMD窗口，输入<code>hello.cpp.out</code>即可运行编译成功的程序</p>
-  <blockquote>
-    <p>每次编译完成都会在目录下生成<code>同文件名</code>+<code>.out</code>的可执行程序，<br>运行<code>task clear</code>命令可以清除所有<code>.out</code>文件，<br>运行<code>task build</code>命令编译。</p>
-  </blockquote>
-  <h2 id="Debug-配置">
-    <a href="#Debug-配置" class="headerlink" title="Debug 配置"></a>Debug 配置</h2>
-  <p>在<code>.vscode</code>下添加<code>launch.json</code>文件</p>
-  <figure class="highlight">
-    <table>
-      <tr>
-        <td class="gutter">
-          <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre>
-        </td>
-        <td class="code">
-          <pre><div class="line">&#123;</div><div class="line">    "version": "0.2.0",</div><div class="line">    "configurations": [</div><div class="line">        &#123;</div><div class="line">            "name": "C++ Launch",</div><div class="line">            "type": "cppdbg",</div><div class="line">            "request": "launch",</div><div class="line">            "program": "$&#123;cwd&#125;/$&#123;fileBasenameNoExtension&#125;.out",</div><div class="line">            "args": ["&lt;", "in.ini", "&gt;", "out.txt"], // 通常为空</div><div class="line">            "stopAtEntry": true, //当程序启动时，debug cursor停止在文件首行</div><div class="line">            "cwd": "$&#123;workspaceRoot&#125;",</div><div class="line">            "environment": [],</div><div class="line">            "externalConsole": true,</div><div class="line">            "MIMode": "gdb",</div><div class="line">            "miDebuggerPath": "gdb.exe",</div><div class="line">            "preLaunchTask": "build"</div><div class="line">        &#125;</div><div class="line">    ]</div><div class="line">&#125;</div></pre>
-        </td>
-      </tr>
-    </table>
-  </figure>
-  <p>窗口焦点返回到<code>hello.cpp</code>文件上，在编辑器行号旁点击鼠标左键添加断点<br>或者按<code>F9</code>添加行断点，<code>shift</code>+<code>F9</code>添加列断点<br>右击断点编辑断点条件</p>
-  <p>按住<code>F5</code>进入<strong>DEBUG</strong>模式<br>按住<code>ctrl</code>+<code>shift</code>+<code>D</code>显示调试侧边栏，<br>按住<code>ctrl</code>+<code>shift</code>+<code>Y</code>显示调试控制台，</p>
-  <ul>
-    <li><code>F5</code> 继续运行</li>
-    <li><code>F11</code> 单步调试</li>
-    <li><code>shift</code>+<code>F11</code> 单步跳出</li>
-    <li><code>F10</code> 单步跳过</li>
-  </ul>]]></content>
+</p>
+<h1 id="安装">
+  <a href="#安装" class="headerlink" title="安装"></a>安装</h1>
+<ul>
+  <li>VS Code</li>
+</ul>
+<p>按照安装提示一步步进行即可</p>
+<ul>
+  <li>MinGW</li>
+</ul>
+<p>按照安装提示一步步进行，安装完成后。<br>会弹出以下界面<br><img src="/2016/10/14/如何配置Visual-Studio-Code-MinGW下的C-环境/2016-10-14_062200.698190_cl_MinGWInstall.png" alt="MinGWInstall" title="MinGWInstall"><br>照图片选择，然后在菜单栏Installation中选择Apply changes，然后等待程序下载安装编译器。<br>以上步骤结束后，设置系统变量<br>右键我的电脑，选择属性<br>
+  <img src="/2016/10/14/如何配置Visual-Studio-Code-MinGW下的C-环境/2016-10-14_062655.852040_QQ20161014142609.png" alt="step-1" title="step-1"><br>选择高级系统设置，再选择环境变量<br><img src="/2016/10/14/如何配置Visual-Studio-Code-MinGW下的C-环境/2016-10-14_062813.682885_QQ20161014142747.png" alt="step-2" title="step-2"><br>再Path变量中添加MinGW根目录下的bin文件夹的路径<br><img src="/2016/10/14/如何配置Visual-Studio-Code-MinGW下的C-环境/2016-10-14_063037.967301_QQ20161014142952.png" alt="step-3" title="step-3"><br>打开CMD，输入<code>g++ -v</code>出现以下信息安装就成功咯<br><img src="/2016/10/14/如何配置Visual-Studio-Code-MinGW下的C-环境/2016-10-14_063248.965706_QQ20161014143235.png" alt="step-4" title="step-4"></p>
+<h1 id="配置VS-Code">
+  <a href="#配置VS-Code" class="headerlink" title="配置VS Code"></a>配置VS Code</h1>
+<p>在码配置流程前先贴出官方的不完全配置文档<br><a href="https://code.visualstudio.com/docs/languages/cpp" title="C/C++ for VS Code (Preview)" target="_blank" rel="external">C/C++ for VS Code (Preview)</a></p>
+<ol>
+  <li>打开 VS Code。</li>
+  <li>选择侧边栏的扩展图标打开扩展栏。</li>
+  <li>搜索cpptools。</li>
+  <li>点击安装，安装完成后点击启用，重启后静待cpptools完成最后一步安装。</li>
+  <li>完成后打开一个文件夹。（空文件夹也行）</li>
+  <li>设置#include路径，按住<code>ctrl</code>+<code>shift</code>+<code>P</code>呼出命令窗口，输入<code>C/Cpp: Edit Configurations</code>回车，在变量name为Win32的字典里的includePath中的值，修改或添加为<code>&quot;D:/MinGW/include&quot;</code>。</li>
+  <li>按住<code>ctrl</code>+<code>shift</code>+<code>P</code>呼出命令窗口，输入<code>C/Cpp: Switch a Configuration</code>回车，选择<code>Win32</code>。</li>
+  <li>设置task,按住<code>ctrl</code>+<code>shift</code>+<code>P</code>呼出命令窗口，输入<code>Tasks: Configure Task Runner</code>回车，选择<code>Others</code>。把tasks.json修改为以下形式：</li>
+</ol>
+<figure class="highlight">
+  <table>
+    <tr>
+      <td class="gutter">
+        <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre>
+      </td>
+      <td class="code">
+        <pre><div class="line">&#123;</div><div class="line">    "version": "0.1.0",</div><div class="line">    "command": "cmd",</div><div class="line">    "isShellCommand": false,</div><div class="line">    "showOutput": "always",</div><div class="line">    "args": ["/C"],</div><div class="line">    "tasks": [</div><div class="line">        &#123;</div><div class="line">            "taskName": "build",</div><div class="line">            "suppressTaskName": true,</div><div class="line">            "echoCommand": true,</div><div class="line">            "args": ["g++", "-g", "$&#123;fileBasename&#125;", "-o", "$&#123;fileBasenameNoExtension&#125;.out"],</div><div class="line">            "showOutput": "silent",</div><div class="line">            "isBuildCommand": true, // 绑定 Ctrl+Shift+B 快捷键</div><div class="line">            "problemMatcher": &#123;</div><div class="line">                "owner": "cpp",</div><div class="line">                "fileLocation": ["relative", "$&#123;workspaceRoot&#125;"],</div><div class="line">                "pattern": &#123;</div><div class="line">                    "regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",</div><div class="line">                    "file": 1,</div><div class="line">                    "line": 2,</div><div class="line">                    "column": 3,</div><div class="line">                    "severity": 4,</div><div class="line">                    "message": 5</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;,</div><div class="line">        &#123;</div><div class="line">            "taskName": "clear",</div><div class="line">            "suppressTaskName": true,</div><div class="line">            "args": ["del", "*.out"],</div><div class="line">            "showOutput": "never"</div><div class="line">        &#125;</div><div class="line">    ]</div><div class="line">&#125;</div></pre>
+      </td>
+    </tr>
+  </table>
+</figure>
+<h1 id="使用">
+  <a href="#使用" class="headerlink" title="使用"></a>使用</h1>
+<p>写一个简单的C++代码，新建一个hello.cpp文件</p>
+<figure class="highlight cpp">
+  <table>
+    <tr>
+      <td class="gutter">
+        <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre>
+      </td>
+      <td class="code">
+        <pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Hello world"</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre>
+      </td>
+    </tr>
+  </table>
+</figure>
+<h2 id="编译">
+  <a href="#编译" class="headerlink" title="编译"></a>编译</h2>
+<p>按住<code>ctrl</code>+<code>P</code>,输入<code>task build</code>回车，就能编译成功了。若是编译失败，错误信息会出现在左下角。</p>
+<blockquote>
+  <p>按住<code>ctrl</code>+<code>shift</code>+<code>b</code>也可以执行编译命令</p>
+</blockquote>
+<h2 id="运行">
+  <a href="#运行" class="headerlink" title="运行"></a>运行</h2>
+<p>按住<code>ctrl</code>+<code>~</code>弹出CMD窗口，输入<code>hello.cpp.out</code>即可运行编译成功的程序</p>
+<blockquote>
+  <p>每次编译完成都会在目录下生成<code>同文件名</code>+<code>.out</code>的可执行程序，<br>运行<code>task clear</code>命令可以清除所有<code>.out</code>文件，<br>运行<code>task build</code>命令编译。</p>
+</blockquote>
+<h2 id="Debug-配置">
+  <a href="#Debug-配置" class="headerlink" title="Debug 配置"></a>Debug 配置</h2>
+<p>在<code>.vscode</code>下添加<code>launch.json</code>文件</p>
+<figure class="highlight">
+  <table>
+    <tr>
+      <td class="gutter">
+        <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre>
+      </td>
+      <td class="code">
+        <pre><div class="line">&#123;</div><div class="line">    "version": "0.2.0",</div><div class="line">    "configurations": [</div><div class="line">        &#123;</div><div class="line">            "name": "C++ Launch",</div><div class="line">            "type": "cppdbg",</div><div class="line">            "request": "launch",</div><div class="line">            "program": "$&#123;cwd&#125;/$&#123;fileBasenameNoExtension&#125;.out",</div><div class="line">            "args": ["&lt;", "in.ini", "&gt;", "out.txt"], // 通常为空</div><div class="line">            "stopAtEntry": true, //当程序启动时，debug cursor停止在文件首行</div><div class="line">            "cwd": "$&#123;workspaceRoot&#125;",</div><div class="line">            "environment": [],</div><div class="line">            "externalConsole": true,</div><div class="line">            "MIMode": "gdb",</div><div class="line">            "miDebuggerPath": "gdb.exe",</div><div class="line">            "preLaunchTask": "build"</div><div class="line">        &#125;</div><div class="line">    ]</div><div class="line">&#125;</div></pre>
+      </td>
+    </tr>
+  </table>
+</figure>
+<p>窗口焦点返回到<code>hello.cpp</code>文件上，在编辑器行号旁点击鼠标左键添加断点<br>或者按<code>F9</code>添加行断点，<code>shift</code>+<code>F9</code>添加列断点<br>右击断点编辑断点条件</p>
+<p>按住<code>F5</code>进入<strong>DEBUG</strong>模式<br>按住<code>ctrl</code>+<code>shift</code>+<code>D</code>显示调试侧边栏，<br>按住<code>ctrl</code>+<code>shift</code>+<code>Y</code>显示调试控制台，</p>
+<ul>
+  <li><code>F5</code> 继续运行</li>
+  <li><code>F11</code> 单步调试</li>
+  <li><code>shift</code>+<code>F11</code> 单步跳出</li>
+  <li><code>F10</code> 单步跳过</li>
+</ul>]]></content>
     
     <summary type="html">
     
@@ -2862,7 +2859,7 @@ myprojec/
     <link href="http://linw1995.com/2016/10/02/%E6%90%AD%E6%A2%AF%E5%AD%90-%E7%AE%80%E5%8D%95%E6%95%99%E7%A8%8B/"/>
     <id>http://linw1995.com/2016/10/02/搭梯子-简单教程/</id>
     <published>2016-10-02T01:36:00.000Z</published>
-    <updated>2017-04-28T17:04:44.766Z</updated>
+    <updated>2017-04-30T15:24:04.003Z</updated>
     
     <content type="html"><![CDATA[<p>比较简单的搭梯子方法有两个：</p>
 <ol>
@@ -2870,73 +2867,75 @@ myprojec/
   <li>Shadowsocks 影梭</li>
 </ol>
 <a id="more"></a>
-<h1 id="Lantern-蓝灯">
-  <a href="#Lantern-蓝灯" class="headerlink" title="Lantern 蓝灯"></a>Lantern 蓝灯</h1><img src="/2016/10/02/搭梯子-简单教程/Lantern.png" alt="Lantern.png" title="">
-<h2 id="下载">
-  <a href="#下载" class="headerlink" title="下载"></a>下载</h2>
+<h2 id="Lantern-蓝灯">
+  <a href="#Lantern-蓝灯" class="headerlink" title="Lantern 蓝灯"></a>Lantern 蓝灯</h2><img src="/2016/10/02/搭梯子-简单教程/Lantern.png" alt="Lantern" title="Lantern">
+<h3 id="下载">
+  <a href="#下载" class="headerlink" title="下载"></a>下载</h3>
 <p>蓝灯是个开源项目，在程序员交友平台GitHub上就能下载。<br>传送门：</p>
 <ul>
   <li><a href="https://github.com/getlantern/lantern" title="github" target="_blank" rel="external">github</a></li>
   <li><a href="https://getlantern.org/" title="lantern" target="_blank" rel="external">lantern</a> </li>
 </ul>
-<h2 id="使用方法">
-  <a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h2>
+<h3 id="使用方法">
+  <a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h3>
 <p>非常简单，只需要打开该软件就好。<br>虽说免费用户有800m的月流量，但网速不够支持看视频；<br>专业用户虽然一年很便宜，但不适合一些不经常用梯子的人。</p>
-<h1 id="Shadowsocks-影梭">
-  <a href="#Shadowsocks-影梭" class="headerlink" title="Shadowsocks 影梭"></a>Shadowsocks 影梭</h1><img src="/2016/10/02/搭梯子-简单教程/shadowsocks.png" alt="shadowsocks.png" title="">
-<h2 id="下载-1">
-  <a href="#下载-1" class="headerlink" title="下载"></a>下载</h2>
+<h2 id="Shadowsocks-影梭">
+  <a href="#Shadowsocks-影梭" class="headerlink" title="Shadowsocks 影梭"></a>Shadowsocks 影梭</h2><img src="/2016/10/02/搭梯子-简单教程/shadowsocks.png" alt="shadowsocks" title="shadowsocks">
+<h3 id="下载-1">
+  <a href="#下载-1" class="headerlink" title="下载"></a>下载</h3>
 <ul>
   <li><a href="https://github.com/shadowsocks/shadowsocks-windows/wiki/Shadowsocks-Windows-%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E" title="github-wiki" target="_blank" rel="external">github-wiki</a> </li>
 </ul>
-<h2 id="使用方法-1">
-  <a href="#使用方法-1" class="headerlink" title="使用方法"></a>使用方法</h2>
+<h3 id="使用方法-1">
+  <a href="#使用方法-1" class="headerlink" title="使用方法"></a>使用方法</h3>
 <ol>
   <li>下载解压后即可打开使用</li>
-  <li>在任务栏中找到图标，右键打开菜单，选中启用系统代理 <img src="/2016/10/02/搭梯子-简单教程/2016-10-02_013628.603141_.png" alt="2016-10-02_013628.603141_.png" title=""></li>
+  <li>在任务栏中找到图标，右键打开菜单，选中启用系统代理 <img src="/2016/10/02/搭梯子-简单教程/2016-10-02_013628.603141_.png" alt="step-2" title="step-2"></li>
   <li>选用适合的服务器<br> 完成第二步后还没办法看墙外的风景，需要添加一些代理服务器。<br> 那么如何添加代理服务器呢？<br> 有两种方式：
     <ul>
       <li>网上搜索一些免费的代理服务器，但这些免费的代理服务器不仅慢还有安全隐患。</li>
       <li>去正规的服务器运营商<a href="https://billing.sscloud.org/aff.php?aff=187" title="sscloud" target="_blank" rel="external">sscloud</a>购买这类服务</li>
     </ul>
   </li>
-  <li>添加代理服务器<br> 双击任务栏中的图标，弹出以下窗口 <img src="/2016/10/02/搭梯子-简单教程/2016-10-02_014621.955391_.png" alt="2016-10-02_014621.955391_.png" title=""> 手动填入信息<br> 或者扫描服务器运营商提供的二维码 <img src="/2016/10/02/搭梯子-简单教程/2016-10-02_014836.541634_.png" alt="2016-10-02_014836.541634_.png" title=""></li>
+  <li>添加代理服务器<br> 双击任务栏中的图标，弹出以下窗口 <img src="/2016/10/02/搭梯子-简单教程/2016-10-02_014621.955391_.png" alt="step-4-01" title="step-4-01"> 手动填入信息<br> 或者扫描服务器运营商提供的二维码 <img src="/2016/10/02/搭梯子-简单教程/2016-10-02_014836.541634_.png" alt="step-4-02" title="step-4-02"></li>
   <li>完成以上步骤，就可以在<strong><em>系统代理模式==》全局代理模式</em></strong>愉快地观赏墙外的世界</li>
 </ol>
-<h2 id="PCA模式">
-  <a href="#PCA模式" class="headerlink" title="PCA模式"></a>PCA模式</h2>
-<p>全局代理模式下，上墙内网站也会使用你的服务器流量。这就需要使用<strong><em>系统代理模式==》PAC模式</em></strong>来智能代理。<br><img src="/2016/10/02/搭梯子-简单教程/2016-10-02_020200.445407_.png" alt="2016-10-02_020200.445407_.png" title=""><br>系统代理模式中选择PAC代理，然后在PAC中选择从GFWList更新本地PAC。<br>这样就可以智能地搭梯子了。</p>
-<h2 id="什么！你说你浏览器还是打不开墙外的世界">
-  <a href="#什么！你说你浏览器还是打不开墙外的世界" class="headerlink" title="什么！你说你浏览器还是打不开墙外的世界"></a>什么！你说你浏览器还是打不开墙外的世界</h2>
+<h3 id="PCA模式">
+  <a href="#PCA模式" class="headerlink" title="PCA模式"></a>PCA模式</h3>
+<p>全局代理模式下，上墙内网站也会使用你的服务器流量。这就需要使用<strong><em>系统代理模式==》PAC模式</em></strong>来智能代理。<br><img src="/2016/10/02/搭梯子-简单教程/2016-10-02_020200.445407_.png" alt="PCA mode" title="PCA mode"><br>系统代理模式中选择PAC代理，然后在PAC中选择从GFWList更新本地PAC。<br>这样就可以智能地搭梯子了。</p>
+<h3 id="什么！你说你浏览器还是打不开墙外的世界">
+  <a href="#什么！你说你浏览器还是打不开墙外的世界" class="headerlink" title="什么！你说你浏览器还是打不开墙外的世界"></a>什么！你说你浏览器还是打不开墙外的世界</h3>
 <p>原因：</p>
 <ol>
   <li>在绝大数浏览器设置里都有一项选择代理方式地选项，只要更改为使用系统代理设置，就可以解决问题。</li>
   <li>有些浏览器像FireFox、Chrome等，都需要安装代理插件才能使用系统代理。</li>
 </ol>
-<p>FireFox浏览器的配置方法</p>
-<ul>
-  <li>首先安装代理组件FoxyProxy <img src="/2016/10/02/搭梯子-简单教程/2016-10-02_021657.563661_.png" alt="2016-10-02_021657.563661_.png" title=""></li>
-  <li>新建或编辑已有的代理服务器选项 <img src="/2016/10/02/搭梯子-简单教程/2016-10-02_021902.822020_.png" alt="2016-10-02_021902.822020_.png" title=""></li>
-  <li>添加本地PAC文件的位置，点击测试看是否通过 <img src="/2016/10/02/搭梯子-简单教程/2016-10-02_022020.691221_.png" alt="2016-10-02_022020.691221_.png" title=""></li>
-  <li>通过后，修改下PAC文件 <img src="/2016/10/02/搭梯子-简单教程/2016-10-02_022300.004308_.png" alt="2016-10-02_022300.004308_.png" title=""></li>
+<h4 id="FireFox浏览器的配置方法">
+  <a href="#FireFox浏览器的配置方法" class="headerlink" title="FireFox浏览器的配置方法"></a>FireFox浏览器的配置方法</h4>
+<ol>
+  <li>首先安装代理组件FoxyProxy <img src="/2016/10/02/搭梯子-简单教程/2016-10-02_021657.563661_.png" alt="step-1" title="step-1"></li>
+  <li>新建或编辑已有的代理服务器选项 <img src="/2016/10/02/搭梯子-简单教程/2016-10-02_021902.822020_.png" alt="step-2" title="step-2"></li>
+  <li>添加本地PAC文件的位置，点击测试看是否通过 <img src="/2016/10/02/搭梯子-简单教程/2016-10-02_022020.691221_.png" alt="step-3" title="step-3"></li>
+  <li>通过后，修改下PAC文件 <img src="/2016/10/02/搭梯子-简单教程/2016-10-02_022300.004308_.png" alt="step-4" title="step-4"></li>
   <li>重新测试PAC文件是否通过</li>
-  <li>现在可以试着打开墙外的世界 <img src="/2016/10/02/搭梯子-简单教程/2016-10-02_022617.197844_QQ20161002102602.png" alt="2016-10-02_022617.197844_QQ20161002102602.png" title=""> 一个旋转的FoxyProxy图标，和一个正在打开的墙外世界。</li>
-</ul>
-<p>Chrome浏览器的配置方法</p>
-<ul>
+  <li>现在可以试着打开墙外的世界 <img src="/2016/10/02/搭梯子-简单教程/2016-10-02_022617.197844_QQ20161002102602.png" alt="step-6" title="step-6"> 一个旋转的FoxyProxy图标，和一个正在打开的墙外世界。</li>
+</ol>
+<h4 id="Chrome浏览器的配置方法">
+  <a href="#Chrome浏览器的配置方法" class="headerlink" title="Chrome浏览器的配置方法"></a>Chrome浏览器的配置方法</h4>
+<ol>
   <li>
     <p>首先安装<a href="https://chrome.google.com/webstore/detail/proxy-switchyomega/padekgcemlokbadohgkifijomclgjgif" title="Proxy SwitchyOmega" target="_blank" rel="external">Proxy SwitchyOmega</a></p>
   </li>
   <li>
-    <p>进入<a href="chrome-extension://padekgcemlokbadohgkifijomclgjgif/options.html#/profile/proxy" title="SwitchyOmega 选项" target="_blank" rel="external">SwitchyOmega 选项</a>·情景模式中的proxy添加代理服务器</p> <img src="/2016/10/02/搭梯子-简单教程/20170312_153143.png" alt="20170312_153143.png" title="">    </li>
+    <p>进入<a href="chrome-extension://padekgcemlokbadohgkifijomclgjgif/options.html#/profile/proxy" title="SwitchyOmega 选项" target="_blank" rel="external">SwitchyOmega 选项</a>·情景模式中的proxy添加代理服务器</p> <img src="/2016/10/02/搭梯子-简单教程/20170312_153143.png" alt="step-2" title="step-2"> </li>
   <li>
-    <p>自定需代理的网站，点击浏览器右上角的小图标</p> <img src="/2016/10/02/搭梯子-简单教程/20170312_153316.png" alt="20170312_153316.png" title=""> </li>
+    <p>自定需代理的网站，点击浏览器右上角的小图标</p> <img src="/2016/10/02/搭梯子-简单教程/20170312_153316.png" alt="step-3" title="step-3"> </li>
   <li>
     <p>也可以开启全局模式，把auto switch改成proxy即可</p>
   </li>
-</ul>
-<h2 id="注意">
-  <a href="#注意" class="headerlink" title="注意"></a>注意</h2>
+</ol>
+<h3 id="注意">
+  <a href="#注意" class="headerlink" title="注意"></a>注意</h3>
 <ul>
   <li>可以在Shadowsocks服务器选项中选择不同的服务器来满足不同的需求，平时选择<strong><em>高可用</em></strong> 就行</li>
   <li>最后，谨慎了解墙外的信息</li>

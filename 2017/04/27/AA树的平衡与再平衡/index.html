@@ -100,11 +100,11 @@
               <h2 id="介绍">
                 <a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2>
               <blockquote>
-                <p><strong>AA树</strong>在计算机科学一种形式的自平衡二叉查找树用于高效存储和检索序数据。<strong>AA树</strong>的名称是由它的发明者<em>Arne Andersson</em>而来。<br><strong>AA树</strong>是<strong>红黑树</strong>的一种变种，是<em>Arne Andersson</em>教授在1993年年在他的论文<em>“Balanced search trees made simple”</em>中介绍，设计的目的是减少<strong>红黑树</strong>考虑的不同情况，区别于<strong>红黑树</strong>的是，<strong>AA树</strong>的红节点只能作为右叶子。换句话说，没有红节点可以是一个左子儿。这导致代替<strong>2-3-4树</strong>，从而大大简化了维护<strong>2-3树</strong>的模拟。维护<strong>红黑树</strong>的平衡需要考虑7种不同的情况:<br>                  <img src="/2017/04/27/AA树的平衡与再平衡/360px-Red_Black_Shape_Cases.svg.png" alt="360px-Red_Black_Shape_Cases.svg.png" title=""><br>因为<strong>AA树</strong>有严格的条件(红节点只能为右节点)，故只需考虑2种情形:<br><img src="/2017/04/27/AA树的平衡与再平衡/105px-AA_Tree_Shape_Cases.svg.png"
-                    alt="105px-AA_Tree_Shape_Cases.svg.png" title=""></p>
+                <p><strong>AA树</strong>在计算机科学一种形式的自平衡二叉查找树用于高效存储和检索序数据。<strong>AA树</strong>的名称是由它的发明者<em>Arne Andersson</em>而来。<br><strong>AA树</strong>是<strong>红黑树</strong>的一种变种，是<em>Arne Andersson</em>教授在1993年年在他的论文<em>“Balanced search trees made simple”</em>中介绍，设计的目的是减少<strong>红黑树</strong>考虑的不同情况，区别于<strong>红黑树</strong>的是，<strong>AA树</strong>的红节点只能作为右叶子。换句话说，没有红节点可以是一个左子儿。这导致代替<strong>2-3-4树</strong>，从而大大简化了维护<strong>2-3树</strong>的模拟。维护<strong>红黑树</strong>的平衡需要考虑7种不同的情况:<br>                  <img src="/2017/04/27/AA树的平衡与再平衡/360px-Red_Black_Shape_Cases.svg.png" alt="Red-Black-Shape-Cases" title="Red-Black-Shape-Cases"><br>因为<strong>AA树</strong>有严格的条件(红节点只能为右节点)，故只需考虑2种情形:<br><img src="/2017/04/27/AA树的平衡与再平衡/105px-AA_Tree_Shape_Cases.svg.png"
+                    alt="AA-Tree-Shape-Cases" title="AA-Tree-Shape-Cases"></p>
                 <footer><strong>维基百科</strong><cite><a href="https://zh.wikipedia.org/wiki/AA%E6%A0%91#firstHeading" target="_blank" rel="external">Wikipedia</a></cite></footer>
               </blockquote>
-              <p><strong>AA树</strong>是<strong>2-3树</strong>的模拟，<strong>2-3树</strong>和<strong>AA树</strong>是<strong>等距同构</strong>的。其节点类型如下</p> <img src="/2017/04/27/AA树的平衡与再平衡/IMG_01.JPG" alt="IMG_01.JPG" title="">
+              <p><strong>AA树</strong>是<strong>2-3树</strong>的模拟，<strong>2-3树</strong>和<strong>AA树</strong>是<strong>等距同构</strong>的。其节点类型如下</p> <img src="/2017/04/27/AA树的平衡与再平衡/IMG_01.JPG" alt="2-3tree&1-2tree" title="2-3tree&1-2tree">
               <h2 id="平衡条件">
                 <a href="#平衡条件" class="headerlink" title="平衡条件"></a>平衡条件</h2>
               <p>树是用与高效的存储和检索数据的，为了维持其效率，必须维持其平衡结构。<br>平衡一颗<strong>红黑树</strong>需记录其颜色，而<strong>AA树</strong>是在每个节点记录其<strong>level</strong>这相当于<strong>红黑树</strong>节点的黑高度</p>
@@ -120,7 +120,7 @@
               <p>对于<strong>AA树</strong>，维持其平衡的基本操作如下：</p>
               <ol>
                 <li>
-                  <p><strong>偏斜Skew</strong>：使得子树中向左的水平边变成向右的。</p> <img src="/2017/04/27/AA树的平衡与再平衡/IMG_02.JPG" alt="IMG_02.JPG" title="">
+                  <p><strong>偏斜Skew</strong>：使得子树中向左的水平边变成向右的。</p> <img src="/2017/04/27/AA树的平衡与再平衡/IMG_02.JPG" alt="Skew" title="Skew">
                   <p> 不满足平衡条件：2</p>
                   <figure class="highlight python">
                     <table>
@@ -139,7 +139,7 @@
                   </ol>
                 </li>
                 <li>
-                  <p><strong>分割Split</strong>：对溢出子节点进行分割，将三个值中的中间值向上移到父节点，如果让父节点溢出了，就继续分割下去。</p> <img src="/2017/04/27/AA树的平衡与再平衡/IMG_03.JPG" alt="IMG_03.JPG" title="">
+                  <p><strong>分割Split</strong>：对溢出子节点进行分割，将三个值中的中间值向上移到父节点，如果让父节点溢出了，就继续分割下去。</p> <img src="/2017/04/27/AA树的平衡与再平衡/IMG_03.JPG" alt="Split" title="Split">
                   <p> 不满足平衡条件：4</p>
                   <figure class="highlight python">
                     <table>
@@ -260,7 +260,7 @@
                 </ul>
               </blockquote>
             </div>
-            <script type="text/javascript" src="/js/share.js?v=0.0.0" async></script><a data-url="http://linw1995.com/2017/04/27/AA树的平衡与再平衡/" data-id="cj223untg0000usitiq651o70" class="article-share-link">Share</a>
+            <script type="text/javascript" src="/js/share.js?v=0.0.0" async></script><a data-url="http://linw1995.com/2017/04/27/AA树的平衡与再平衡/" data-id="cj24vd0tq0000asitqaj4sli0" class="article-share-link">Share</a>
             <div class="tags"><a href="/tags/Data-Structrue/">Data Structrue</a><a href="/tags/Python/">Python</a></div>
             <div class="post-nav"><a href="/2017/04/24/分享-Better-Me-AGA/" class="next">分享 Better Me - AGA</a></div>
             <div id="disqus_thread">
@@ -305,24 +305,17 @@
       <div class="pure-u-1-4 hidden_mid_and_down">
         <div id="sidebar">
           <div class="widget">
-            <form action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank" class="search-form"><input type="text" name="q" maxlength="20" placeholder="Search" /><input type="hidden" name="sitesearch" value="http://linw1995.com" /></form>
-          </div>
-          <div class="widget">
             <div class="widget-title"><i class="fa fa-folder-o"> Categories</i></div>
             <ul class="category-list">
               <li class="category-list-item"><a class="category-list-link" href="/categories/Algorithms/">Algorithms</a><span class="category-list-count">1</span></li>
               <li class="category-list-item"><a class="category-list-link" href="/categories/Others/">Others</a><span class="category-list-count">5</span></li>
-              <li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">11</span>
-                <ul class="category-list-child">
-                  <li class="category-list-item"><a class="category-list-link" href="/categories/Python/Others/">Others</a><span class="category-list-count">1</span></li>
-                </ul>
-              </li>
+              <li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">11</span></li>
               <li class="category-list-item"><a class="category-list-link" href="/categories/Share/">Share</a><span class="category-list-count">3</span></li>
             </ul>
           </div>
           <div class="widget">
             <div class="widget-title"><i class="fa fa-star-o"> Tags</i></div>
-            <div class="tagcloud"><a href="/tags/Selenium/" style="font-size: 15px;">Selenium</a> <a href="/tags/Data-Structrue/" style="font-size: 15px;">Data Structrue</a> <a href="/tags/Matplotlib/" style="font-size: 15px;">Matplotlib</a> <a href="/tags/VSCode/" style="font-size: 15px;">VSCode</a>              <a href="/tags/Test/" style="font-size: 15px;">Test</a> <a href="/tags/Functional-Programming/" style="font-size: 15px;">Functional Programming</a> <a href="/tags/Scrapy/" style="font-size: 15px;">Scrapy</a> <a href="/tags/Python/" style="font-size: 15px;">Python</a>              <a href="/tags/PhantomJS/" style="font-size: 15px;">PhantomJS</a> <a href="/tags/Music/" style="font-size: 15px;">Music</a> <a href="/tags/YouTube/" style="font-size: 15px;">YouTube</a> <a href="/tags/C/" style="font-size: 15px;">C++</a>              <a href="/tags/Python黑魔法/" style="font-size: 15px;">Python黑魔法</a> <a href="/tags/TypeScript/" style="font-size: 15px;">TypeScript</a></div>
+            <div class="tagcloud"><a href="/tags/Selenium/" style="font-size: 15px;">Selenium</a> <a href="/tags/Data-Structrue/" style="font-size: 15px;">Data Structrue</a> <a href="/tags/Matplotlib/" style="font-size: 15px;">Matplotlib</a> <a href="/tags/Test/" style="font-size: 15px;">Test</a>              <a href="/tags/VSCode/" style="font-size: 15px;">VSCode</a> <a href="/tags/Functional-Programming/" style="font-size: 15px;">Functional Programming</a> <a href="/tags/Scrapy/" style="font-size: 15px;">Scrapy</a> <a href="/tags/Python/" style="font-size: 15px;">Python</a>              <a href="/tags/PhantomJS/" style="font-size: 15px;">PhantomJS</a> <a href="/tags/Music/" style="font-size: 15px;">Music</a> <a href="/tags/YouTube/" style="font-size: 15px;">YouTube</a> <a href="/tags/Python黑魔法/" style="font-size: 15px;">Python黑魔法</a>              <a href="/tags/C/" style="font-size: 15px;">C++</a> <a href="/tags/TypeScript/" style="font-size: 15px;">TypeScript</a></div>
           </div>
           <div class="widget">
             <div class="widget-title"><i class="fa fa-comment-o"> Recent Comments</i></div>
@@ -337,9 +330,6 @@
     </div>
     <a id="rocket" href="#top" class="show"></a>
     <script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script>
-    <script type="text/javascript" src="//cdn.bootcss.com/fancybox/3.0.47/jquery.fancybox.min.js" async></script>
-    <script type="text/javascript" src="/js/fancybox.js?v=0.0.0" async></script>
-    <link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/fancybox/3.0.47/jquery.fancybox.min.css">
     <script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script>
     <script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script>
   </div>

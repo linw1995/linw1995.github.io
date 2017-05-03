@@ -46,53 +46,10 @@
       <div id="nav-menu"><a href="/." class="current"><i class="fa fa-home"> Home</i></a><a href="/archives/"><i class="fa fa-archive"> Archive</i></a><a href="/atom.xml"><i class="fa fa-rss"> RSS</i></a></div>
     </div>
     <div id="layout" class="pure-g">
-      <div class="pure-u-1 pure-u-md-3-4">
+      <div class="pure-u-1 pure-u-md-4-4">
         <div class="content_container">
           <div class="post">
             <h1 class="post-title">Python functools</h1>
-            <div class="post-meta">Mar 29, 2017<span> | </span><span class="category"><a href="/categories/Python/">Python</a></span>
-              <script src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js" async></script><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"></span><span> Hits</span></span>
-            </div>
-            <a data-disqus-identifier="2017/03/29/Python-functools/" href="/2017/03/29/Python-functools/#disqus_thread" class="disqus-comment-count"></a>
-            <div class="clear">
-              <div id="toc" class="toc-article">
-                <div class="toc-title">Contents</div>
-                <ol class="toc">
-                  <li class="toc-item toc-level-1"><a class="toc-link" href="#py2与py3的区别"><span class="toc-number">1.</span> <span class="toc-text">
-  py2与py3的区别</span></a></li>
-                  <li class="toc-item toc-level-1"><a class="toc-link" href="#同"><span class="toc-number">2.</span> <span class="toc-text">
-  同</span></a>
-                    <ol class="toc-child">
-                      <li class="toc-item toc-level-2"><a class="toc-link" href="#cmp-to-key"><span class="toc-number">2.1.</span> <span class="toc-text">
-  cmp_to_key</span></a></li>
-                      <li class="toc-item toc-level-2"><a class="toc-link" href="#total-ordering"><span class="toc-number">2.2.</span> <span class="toc-text">
-  total_ordering</span></a></li>
-                      <li class="toc-item toc-level-2"><a class="toc-link" href="#reduce"><span class="toc-number">2.3.</span> <span class="toc-text">
-  reduce</span></a></li>
-                      <li class="toc-item toc-level-2"><a class="toc-link" href="#partial"><span class="toc-number">2.4.</span> <span class="toc-text">
-  partial</span></a></li>
-                      <li class="toc-item toc-level-2"><a class="toc-link" href="#update-wrapper"><span class="toc-number">2.5.</span> <span class="toc-text">
-  update_wrapper</span></a></li>
-                      <li class="toc-item toc-level-2"><a class="toc-link" href="#wraps"><span class="toc-number">2.6.</span> <span class="toc-text">
-  wraps</span></a></li>
-                    </ol>
-                  </li>
-                  <li class="toc-item toc-level-1"><a class="toc-link" href="#异"><span class="toc-number">3.</span> <span class="toc-text">
-  异</span></a>
-                    <ol class="toc-child">
-                      <li class="toc-item toc-level-2"><a class="toc-link" href="#partialmethod"><span class="toc-number">3.1.</span> <span class="toc-text">
-  partialmethod</span></a></li>
-                      <li class="toc-item toc-level-2"><a class="toc-link" href="#lru-cache"><span class="toc-number">3.2.</span> <span class="toc-text">
-  lru_cache</span></a></li>
-                      <li class="toc-item toc-level-2"><a class="toc-link" href="#singledispatch"><span class="toc-number">3.3.</span> <span class="toc-text">
-  singledispatch</span></a></li>
-                    </ol>
-                  </li>
-                  <li class="toc-item toc-level-1"><a class="toc-link" href="#参考链接"><span class="toc-number">4.</span> <span class="toc-text">
-  参考链接</span></a></li>
-                </ol>
-              </div>
-            </div>
             <div class="post-content">
               <p><strong>Python</strong>也是支持<strong>函数式编程Functional Programming</strong>，<br>支持函数当参数，当返回变量，拥有<strong>闭包Closure</strong>这一特性，<br>而<strong>functools</strong>这个库是用来更好地生成<strong>高阶函数higher-order function</strong>的<br>
                 <a id="more"></a>
@@ -360,70 +317,46 @@
                 </ul>
               </blockquote>
             </div>
-            <script type="text/javascript" src="/js/share.js?v=0.0.0" async></script><a data-url="http://linw1995.com/2017/03/29/Python-functools/" data-id="cj24vd0y6000basitx645vb6u" class="article-share-link">Share</a>
-            <div class="tags"><a href="/tags/Python/">Python</a><a href="/tags/Functional-Programming/">Functional Programming</a></div>
-            <div class="post-nav"><a href="/2017/03/30/Python-collections/" class="pre">Python collections</a><a href="/2017/03/25/编码问题-Python/" class="next">编码问题 ~ Python</a></div>
-            <div id="disqus_thread">
-              <div class="btn_click_load"><button class="disqus_click_btn">阅读评论 「请确保 disqus.com 可以正常加载」</button></div>
-              <script>
-                var disqus_shortname = 'linw1995';
-                var disqus_identifier = '2017/03/29/Python-functools/';
-                var disqus_title = 'Python functools';
-                var disqus_url = 'http://linw1995.com/2017/03/29/Python-functools/';
-                $('.btn_click_load').click(function() {
-                  (function() {
-                    var dsq = document.createElement('script');
-                    dsq.type = 'text/javascript';
-                    dsq.async = true;
-                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-                  })();
+          </div>
+          <div id="disqus_thread">
+            <div class="btn_click_load"><button class="disqus_click_btn">阅读评论 「请确保 disqus.com 可以正常加载」</button></div>
+            <script>
+              var disqus_shortname = 'linw1995';
+              var disqus_identifier = '2017/03/29/Python-functools/';
+              var disqus_title = 'Python functools';
+              var disqus_url = 'http://linw1995.com/2017/03/29/Python-functools/';
+              $('.btn_click_load').click(function() {
+                (function() {
+                  var dsq = document.createElement('script');
+                  dsq.type = 'text/javascript';
+                  dsq.async = true;
+                  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                })();
+                $('.btn_click_load').css('display', 'none');
+              });
+              $.ajax({
+                url: 'https://disqus.com/favicon.ico',
+                timeout: 3000,
+                type: 'GET',
+                success: (function() {
+                  var dsq = document.createElement('script');
+                  dsq.type = 'text/javascript';
+                  dsq.async = true;
+                  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
                   $('.btn_click_load').css('display', 'none');
-                });
-                $.ajax({
-                  url: 'https://disqus.com/favicon.ico',
-                  timeout: 3000,
-                  type: 'GET',
-                  success: (function() {
-                    var dsq = document.createElement('script');
-                    dsq.type = 'text/javascript';
-                    dsq.async = true;
-                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-                    $('.btn_click_load').css('display', 'none');
-                  })(),
-                  error: function() {
-                    $('.btn_click_load').css('display', 'block');
-                  }
-                });
-              </script>
-              <script id="dsq-count-scr" src="//linw1995.disqus.com/count.js" async></script>
-            </div>
+                })(),
+                error: function() {
+                  $('.btn_click_load').css('display', 'block');
+                }
+              });
+            </script>
+            <script id="dsq-count-scr" src="//linw1995.disqus.com/count.js" async></script>
           </div>
         </div>
       </div>
-      <div class="pure-u-1-4 hidden_mid_and_down">
-        <div id="sidebar">
-          <div class="widget">
-            <div class="widget-title"><i class="fa fa-folder-o"> Categories</i></div>
-            <ul class="category-list">
-              <li class="category-list-item"><a class="category-list-link" href="/categories/Algorithms/">Algorithms</a><span class="category-list-count">1</span></li>
-              <li class="category-list-item"><a class="category-list-link" href="/categories/Others/">Others</a><span class="category-list-count">5</span></li>
-              <li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">11</span></li>
-              <li class="category-list-item"><a class="category-list-link" href="/categories/Share/">Share</a><span class="category-list-count">3</span></li>
-            </ul>
-          </div>
-          <div class="widget">
-            <div class="widget-title"><i class="fa fa-star-o"> Tags</i></div>
-            <div class="tagcloud"><a href="/tags/Selenium/" style="font-size: 15px;">Selenium</a> <a href="/tags/Data-Structrue/" style="font-size: 15px;">Data Structrue</a> <a href="/tags/Matplotlib/" style="font-size: 15px;">Matplotlib</a> <a href="/tags/Test/" style="font-size: 15px;">Test</a>              <a href="/tags/VSCode/" style="font-size: 15px;">VSCode</a> <a href="/tags/Functional-Programming/" style="font-size: 15px;">Functional Programming</a> <a href="/tags/Scrapy/" style="font-size: 15px;">Scrapy</a> <a href="/tags/Python/" style="font-size: 15px;">Python</a>              <a href="/tags/PhantomJS/" style="font-size: 15px;">PhantomJS</a> <a href="/tags/Music/" style="font-size: 15px;">Music</a> <a href="/tags/YouTube/" style="font-size: 15px;">YouTube</a> <a href="/tags/Python黑魔法/" style="font-size: 15px;">Python黑魔法</a>              <a href="/tags/C/" style="font-size: 15px;">C++</a> <a href="/tags/TypeScript/" style="font-size: 15px;">TypeScript</a></div>
-          </div>
-          <div class="widget">
-            <div class="widget-title"><i class="fa fa-comment-o"> Recent Comments</i></div>
-            <script type="text/javascript" src="//linw1995.disqus.com/recent_comments_widget.js?num_items=5&amp;hide_avatars=1&amp;avatar_size=32&amp;excerpt_length=20&amp;hide_mods=1"></script>
-          </div>
-        </div>
-      </div>
-      <div class="pure-u-1 pure-u-md-3-4">
+      <div class="pure-u-1 pure-u-md-4-4">
         <div id="footer">Copyright © 2017 <a href="/." rel="nofollow">linw1995.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow"
             target="_blank" href="https://github.com/pagecho"> Cho.</a></div>
       </div>

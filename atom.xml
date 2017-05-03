@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://linw1995.com/"/>
-  <updated>2017-04-30T15:42:56.821Z</updated>
+  <updated>2017-05-03T13:39:12.145Z</updated>
   <id>http://linw1995.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://linw1995.com/2017/04/27/AA%E6%A0%91%E7%9A%84%E5%B9%B3%E8%A1%A1%E4%B8%8E%E5%86%8D%E5%B9%B3%E8%A1%A1/"/>
     <id>http://linw1995.com/2017/04/27/AA树的平衡与再平衡/</id>
     <published>2017-04-27T04:38:13.000Z</published>
-    <updated>2017-04-30T15:42:56.821Z</updated>
+    <updated>2017-05-03T13:39:12.145Z</updated>
     
     <content type="html"><![CDATA[<h2 id="介绍">
   <a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2>
@@ -183,7 +183,7 @@
         <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre>
       </td>
       <td class="code">
-        <pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Node</span>:</span></div><div class="line">    __slots__ = (<span class="string">'left'</span>, <span class="string">'right'</span>, <span class="string">'level'</span>, <span class="string">'key'</span>, <span class="string">'val'</span>)</div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, key, val)</span>:</span></div><div class="line">        self.left = <span class="keyword">None</span></div><div class="line">        self.right = <span class="keyword">None</span></div><div class="line">        self.level = <span class="number">1</span></div><div class="line">        self.key = key</div><div class="line">        self.val = val</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__repr__</span><span class="params">(self)</span>:</span></div><div class="line">        rv = <span class="string">'Node(key=&#123;k&#125;, val=&#123;v&#125;, lvl=&#123;l&#125;)'</span>.format(</div><div class="line">            k=self.key, v=self.val, l=self.level</div><div class="line">        )</div><div class="line">        <span class="keyword">return</span> f<span class="string">'&#123;rv!r&#125;'</span></div></pre>
+        <pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Node</span>:</span></div><div class="line">    __slots__ = (<span class="string">'left'</span>, <span class="string">'right'</span>, <span class="string">'level'</span>, <span class="string">'key'</span>, <span class="string">'val'</span>)</div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, key, val)</span>:</span></div><div class="line">        self.left = <span class="keyword">None</span></div><div class="line">        self.right = <span class="keyword">None</span></div><div class="line">        self.level = <span class="number">1</span></div><div class="line">        self.key = key</div><div class="line">        self.val = val</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__repr__</span><span class="params">(self)</span>:</span></div><div class="line">        rv = <span class="string">'Node(key=&#123;k!r&#125;, val=&#123;v!r&#125;, lvl=&#123;l!r&#125;)'</span>.format(</div><div class="line">            k=self.key, v=self.val, l=self.level</div><div class="line">        )</div><div class="line">        <span class="keyword">return</span> f<span class="string">'&#123;rv&#125;'</span></div></pre>
       </td>
     </tr>
   </table>
@@ -242,7 +242,7 @@
     <link href="http://linw1995.com/2017/04/23/Scrapy%E5%AD%A6%E4%B9%A0%E6%97%A5%E8%AE%B0-%E4%BA%8C-%C2%B7-Selenium-PhantomJS/"/>
     <id>http://linw1995.com/2017/04/23/Scrapy学习日记-二-·-Selenium-PhantomJS/</id>
     <published>2017-04-23T12:40:27.000Z</published>
-    <updated>2017-04-28T17:09:20.072Z</updated>
+    <updated>2017-05-03T13:45:26.210Z</updated>
     
     <content type="html"><![CDATA[<p>现在爬虫文章一大堆，内容却千遍一律。<br>我想写和这些不一样的，可为啥还要讲<strong>Selenium</strong>和<strong>PhantomJS</strong>呢？<br>
   <a id="more"></a><br>因为，我这可是技术文:)</p>
@@ -363,7 +363,7 @@
     <link href="http://linw1995.com/2017/04/15/Scrapy%E5%AD%A6%E4%B9%A0%E6%97%A5%E8%AE%B0-%E4%B8%80-%C2%B7-run-many-spiders/"/>
     <id>http://linw1995.com/2017/04/15/Scrapy学习日记-一-·-run-many-spiders/</id>
     <published>2017-04-15T02:32:50.000Z</published>
-    <updated>2017-04-28T17:09:33.392Z</updated>
+    <updated>2017-05-03T13:45:29.934Z</updated>
     
     <content type="html"><![CDATA[<p>这两周都在学习使用这个爬虫框架，略有收获。<br>把一些小技巧分享给大家。<br>
   <a id="more"></a>
@@ -551,7 +551,7 @@ myprojec/
     <link href="http://linw1995.com/2017/04/12/%E6%8A%98%E8%85%BEVSCode%E8%AE%B0-%E4%BA%8C-%C2%B7-Settings-Sync/"/>
     <id>http://linw1995.com/2017/04/12/折腾VSCode记-二-·-Settings-Sync/</id>
     <published>2017-04-12T15:03:42.000Z</published>
-    <updated>2017-04-30T15:41:11.021Z</updated>
+    <updated>2017-05-03T13:44:32.395Z</updated>
     
     <content type="html"><![CDATA[<p>假如有一天你重装系统了，或者换电脑了，或者有多台电脑，每次重新配置<strong>VSCode</strong>也太麻烦了。<br><img src="/2017/04/12/折腾VSCode记-二-·-Settings-Sync/cloud.png" alt="SettingSync-Logo" title="SettingSync-Logo"> <strong>Setting Sync</strong><br>这个插件就完美的解决了这个问题。<br>
   <a id="more"></a>
@@ -637,7 +637,7 @@ myprojec/
     <link href="http://linw1995.com/2017/04/09/%E6%8A%98%E8%85%BEVSCode%E8%AE%B0-%E4%B8%80-%C2%B7-Python-Traceback-Jumper/"/>
     <id>http://linw1995.com/2017/04/09/折腾VSCode记-一-·-Python-Traceback-Jumper/</id>
     <published>2017-04-09T13:58:44.000Z</published>
-    <updated>2017-04-30T15:41:37.878Z</updated>
+    <updated>2017-05-03T13:44:37.667Z</updated>
     
     <content type="html"><![CDATA[<p>因为<strong>Pycharm</strong>到期了，就开始折腾<strong>VSCode</strong>。<br>使用中，写一些<strong>Python</strong>代码时，觉得缺少一个功能 <strong>Traceback点击跳转</strong>。<br>所以就花了一整天翻看<strong>VSCode</strong>官方文档，写了个插件<br><img src="/2017/04/09/折腾VSCode记-一-·-Python-Traceback-Jumper/python%20traceback%20jumper%20logo.svg" alt="python traceback jumper logo.svg" title=""><strong>python traceback jumper</strong></p>
 <a id="more"></a>
@@ -701,7 +701,7 @@ myprojec/
     <link href="http://linw1995.com/2017/04/08/%E6%88%90%E4%B8%BA%E4%B8%80%E4%B8%AADictionaryKey%E7%9A%84%E6%9D%A1%E4%BB%B6/"/>
     <id>http://linw1995.com/2017/04/08/成为一个DictionaryKey的条件/</id>
     <published>2017-04-08T07:50:51.000Z</published>
-    <updated>2017-04-28T17:04:32.305Z</updated>
+    <updated>2017-05-03T13:43:47.977Z</updated>
     
     <content type="html"><![CDATA[<p>一个dict的键不就是字符串嘛，No!No!No!</p>
 <a id="more"></a>
@@ -771,7 +771,7 @@ myprojec/
     <link href="http://linw1995.com/2017/03/31/%E5%8F%AF%E5%8F%98%E4%B8%8E%E4%B8%8D%E5%8F%AF%E5%8F%98/"/>
     <id>http://linw1995.com/2017/03/31/可变与不可变/</id>
     <published>2017-03-31T07:59:12.000Z</published>
-    <updated>2017-04-28T17:05:03.073Z</updated>
+    <updated>2017-05-03T13:44:03.988Z</updated>
     
     <content type="html"><![CDATA[<p><strong>Python object</strong>可以分为两大类型，<strong>可变mutable</strong>与<strong>不可变immutable</strong>。<br>可变与不可变究竟意味着什么？<br>
   <a id="more"></a>
@@ -1450,7 +1450,7 @@ myprojec/
     <link href="http://linw1995.com/2017/03/29/Python-functools/"/>
     <id>http://linw1995.com/2017/03/29/Python-functools/</id>
     <published>2017-03-29T08:30:08.000Z</published>
-    <updated>2017-04-28T17:07:48.867Z</updated>
+    <updated>2017-05-03T13:45:13.913Z</updated>
     
     <content type="html"><![CDATA[<p><strong>Python</strong>也是支持<strong>函数式编程Functional Programming</strong>，<br>支持函数当参数，当返回变量，拥有<strong>闭包Closure</strong>这一特性，<br>而<strong>functools</strong>这个库是用来更好地生成<strong>高阶函数higher-order function</strong>的<br>
   <a id="more"></a>
@@ -1764,7 +1764,7 @@ myprojec/
     <link href="http://linw1995.com/2017/03/25/%E7%BC%96%E7%A0%81%E9%97%AE%E9%A2%98-Python/"/>
     <id>http://linw1995.com/2017/03/25/编码问题-Python/</id>
     <published>2017-03-25T12:33:12.000Z</published>
-    <updated>2017-04-28T17:04:20.564Z</updated>
+    <updated>2017-05-03T13:43:42.472Z</updated>
     
     <content type="html"><![CDATA[<p>用Python处理中文时候经常出现乱码，或者代码经常因为编码的问题而出现各种错误，<br>比如说从网路上爬取数据，文本文件处理等等</p>
 <a id="more"></a>
@@ -1929,7 +1929,7 @@ myprojec/
     <link href="http://linw1995.com/2017/03/24/%E6%88%91%E7%9A%84CV/"/>
     <id>http://linw1995.com/2017/03/24/我的CV/</id>
     <published>2017-03-24T15:25:35.000Z</published>
-    <updated>2017-04-27T10:12:04.898Z</updated>
+    <updated>2017-05-03T13:44:19.874Z</updated>
     
     <content type="html"><![CDATA[<p>花了三小时写了这份简历，保存一下以后当作回忆:)</p>
 <a id="more"></a><a href="https://linw1995.github.io/CV/" target="_blank" rel="external">传送门</a>]]></content>
@@ -1950,7 +1950,7 @@ myprojec/
     <link href="http://linw1995.com/2017/03/22/Python-Unittest/"/>
     <id>http://linw1995.com/2017/03/22/Python-Unittest/</id>
     <published>2017-03-22T06:34:01.000Z</published>
-    <updated>2017-04-30T15:45:58.246Z</updated>
+    <updated>2017-05-03T13:45:21.955Z</updated>
     
     <content type="html"><![CDATA[<p>测试在持续集成开发中非常重要，写单元测试有助于定位bug，方便在未来重构代码。<br>本文简单介绍了下<strong>Python标准库</strong>中的<strong>Unittest</strong></p>
 <a id="more"></a>
@@ -2213,7 +2213,7 @@ myprojec/
     <link href="http://linw1995.com/2017/03/20/%E7%94%A8python%E6%9D%A5handle%E5%A4%8D%E6%9D%82%E7%9A%84%E6%97%B6%E9%97%B4/"/>
     <id>http://linw1995.com/2017/03/20/用python来handle复杂的时间/</id>
     <published>2017-03-20T08:21:38.000Z</published>
-    <updated>2017-04-28T17:05:24.902Z</updated>
+    <updated>2017-05-03T13:44:28.039Z</updated>
     
     <content type="html"><![CDATA[<p>怎么用python完美地处理有关时间的问题</p>
 <a id="more"></a>
@@ -2524,7 +2524,7 @@ myprojec/
     <link href="http://linw1995.com/2017/03/19/Python-On-Visual-Studio-Code-With-Anaconda/"/>
     <id>http://linw1995.com/2017/03/19/Python-On-Visual-Studio-Code-With-Anaconda/</id>
     <published>2017-03-19T08:28:48.000Z</published>
-    <updated>2017-04-30T15:45:27.151Z</updated>
+    <updated>2017-05-03T13:45:37.147Z</updated>
     
     <content type="html"><![CDATA[<p>Python是一门入门容易，且入门后又可以做很多interesting things的语言。<br>想简单的写一些代码，又不想费力去安装体积庞大的IDE，也不想使用Python自带的IDLE。<br>这时候你就需要Python On Visual Studio Code With Anaconda。<br>
   <a id="more"></a>
@@ -2678,7 +2678,7 @@ myprojec/
     <link href="http://linw1995.com/2017/03/15/Matplotlib-%E4%B8%AD%E6%96%87%E6%98%BE%E7%A4%BA%E5%8F%82%E6%95%B0%E8%AE%BE%E7%BD%AE/"/>
     <id>http://linw1995.com/2017/03/15/Matplotlib-中文显示参数设置/</id>
     <published>2017-03-15T01:16:42.000Z</published>
-    <updated>2017-04-30T15:43:09.804Z</updated>
+    <updated>2017-05-03T13:44:56.685Z</updated>
     
     <content type="html"><![CDATA[<p>在用Matplotlib库可视化时，难免会需要加上中文信息，可总是显示乱码出来。</p>
 <a id="more"></a>
@@ -2732,7 +2732,7 @@ myprojec/
     <link href="http://linw1995.com/2016/10/14/%E5%A6%82%E4%BD%95%E9%85%8D%E7%BD%AEVisual-Studio-Code-MinGW%E4%B8%8B%E7%9A%84C-%E7%8E%AF%E5%A2%83/"/>
     <id>http://linw1995.com/2016/10/14/如何配置Visual-Studio-Code-MinGW下的C-环境/</id>
     <published>2016-10-14T09:49:06.000Z</published>
-    <updated>2017-04-30T15:40:33.524Z</updated>
+    <updated>2017-05-03T13:44:13.577Z</updated>
     
     <content type="html"><![CDATA[<p>官方文档至今还没翻译成中文，足足琢磨了好几天明白了一些VS Code的功能。<br>现在给大家分享以下。</p>
 <a id="more"></a>
@@ -2859,7 +2859,7 @@ myprojec/
     <link href="http://linw1995.com/2016/10/02/%E6%90%AD%E6%A2%AF%E5%AD%90-%E7%AE%80%E5%8D%95%E6%95%99%E7%A8%8B/"/>
     <id>http://linw1995.com/2016/10/02/搭梯子-简单教程/</id>
     <published>2016-10-02T01:36:00.000Z</published>
-    <updated>2017-04-30T15:24:04.003Z</updated>
+    <updated>2017-05-03T13:43:57.755Z</updated>
     
     <content type="html"><![CDATA[<p>比较简单的搭梯子方法有两个：</p>
 <ol>

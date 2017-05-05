@@ -1,28 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom">
-  <title>linw1995</title>
+<search> 
   
-  <link href="/atom.xml" rel="self"/>
-  
-  <link href="http://linw1995.com/"/>
-  <updated>2017-05-05T14:50:37.849Z</updated>
-  <id>http://linw1995.com/</id>
-  
-  <author>
-    <name>linw</name>
     
-  </author>
-  
-  <generator uri="http://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>伪随机数</title>
-    <link href="http://linw1995.com/2017/05/05/%E4%BC%AA%E9%9A%8F%E6%9C%BA%E6%95%B0/"/>
-    <id>http://linw1995.com/2017/05/05/伪随机数/</id>
-    <published>2017-05-05T14:42:12.000Z</published>
-    <updated>2017-05-05T14:50:37.849Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="序">
+    <entry>
+      <title><![CDATA[伪随机数]]></title>
+      <url>/2017/05/05/%E4%BC%AA%E9%9A%8F%E6%9C%BA%E6%95%B0/</url>
+      <content type="html"><![CDATA[<h2 id="序">
   <a href="#序" class="headerlink" title="序"></a>序</h2>
 <blockquote>
   <p><strong>伪随机性</strong>（英语：Pseudorandomness）是指一个过程似乎是随机的，但实际上并不是。例如<strong>伪随机数</strong>（或称<strong>伪乱数</strong>），是使用一个确定性的算法计算出来的似乎是随机的数序，因此伪随机数实际上并不随机。在计算伪随机数时假如使用的开始值不变的话，那么伪随机数的数序也不变。伪随机数的随机性可以用它的统计特性来衡量，其主要特征是每个数出现的可能性和它出现时与数序中其它数的关系。伪随机数的优点是它的计算比较简单，而且只使用少数数值很难推算出计算它的算法。一般人们使用一个假的随机数，比如电脑上的时间作为计算伪随机数的开始值。</p>
@@ -140,28 +123,26 @@
     <li><a href="https://en.wikipedia.org/wiki/Inverse_transform_sampling" target="_blank" rel="external">反变换法Inverse transform sampling</a></li>
   </ul>
 </blockquote>]]></content>
+      
+        <categories>
+            
+            <category> Algorithms </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Python </tag>
+            
+        </tags>
+        
+    </entry>
     
-    <summary type="html">
-    
-      一般计算机产生的随机数都是伪随机数
-    
-    </summary>
-    
-      <category term="Algorithms" scheme="http://linw1995.com/categories/Algorithms/"/>
-    
-    
-      <category term="Python" scheme="http://linw1995.com/tags/Python/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>AA树的平衡与再平衡</title>
-    <link href="http://linw1995.com/2017/04/27/AA%E6%A0%91%E7%9A%84%E5%B9%B3%E8%A1%A1%E4%B8%8E%E5%86%8D%E5%B9%B3%E8%A1%A1/"/>
-    <id>http://linw1995.com/2017/04/27/AA树的平衡与再平衡/</id>
-    <published>2017-04-27T04:38:13.000Z</published>
-    <updated>2017-05-05T14:46:51.880Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="介绍">
+    <entry>
+      <title><![CDATA[AA树的平衡与再平衡]]></title>
+      <url>/2017/04/27/AA%E6%A0%91%E7%9A%84%E5%B9%B3%E8%A1%A1%E4%B8%8E%E5%86%8D%E5%B9%B3%E8%A1%A1/</url>
+      <content type="html"><![CDATA[<h2 id="介绍">
   <a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2>
 <blockquote>
   <p><strong>AA树</strong>在计算机科学一种形式的自平衡二叉查找树用于高效存储和检索序数据。<strong>AA树</strong>的名称是由它的发明者<em>Arne Andersson</em>而来。<br><strong>AA树</strong>是<strong>红黑树</strong>的一种变种，是<em>Arne Andersson</em>教授在1993年年在他的论文<em>“Balanced search trees made simple”</em>中介绍，设计的目的是减少<strong>红黑树</strong>考虑的不同情况，区别于<strong>红黑树</strong>的是，<strong>AA树</strong>的红节点只能作为右叶子。换句话说，没有红节点可以是一个左子儿。这导致代替<strong>2-3-4树</strong>，从而大大简化了维护<strong>2-3树</strong>的模拟。维护<strong>红黑树</strong>的平衡需要考虑7种不同的情况:<br>    <img src="/2017/04/27/AA树的平衡与再平衡/360px-Red_Black_Shape_Cases.svg.png" alt="Red-Black-Shape-Cases" title="Red-Black-Shape-Cases"><br>因为<strong>AA树</strong>有严格的条件(红节点只能为右节点)，故只需考虑2种情形:<br><img src="/2017/04/27/AA树的平衡与再平衡/105px-AA_Tree_Shape_Cases.svg.png" alt="AA-Tree-Shape-Cases" title="AA-Tree-Shape-Cases"></p>
@@ -336,54 +317,50 @@
     <li><a href="http://user.it.uu.se/~arnea/abs/simp.html" target="_blank" rel="external">Andersson, A.(1993).Balanced search trees made simple.In <em>Proceedings of the Workshop on Algorithms and Data Structures</em>(WADS),pages 60-71.</a></li>
   </ul>
 </blockquote>]]></content>
+      
+        <categories>
+            
+            <category> Algorithms </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Data Structrue </tag>
+            
+            <tag> Python </tag>
+            
+        </tags>
+        
+    </entry>
     
-    <summary type="html">
+    <entry>
+      <title><![CDATA[分享 Better Me - AGA]]></title>
+      <url>/2017/04/24/%E5%88%86%E4%BA%AB-Better-Me-AGA/</url>
+      <content type="html"><![CDATA[<div class="video-container"><iframe src="//www.youtube.com/embed/ejkHrp5uxQg" frameborder="0" allowfullscreen></iframe></div>]]></content>
+      
+        <categories>
+            
+            <category> Share </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Music </tag>
+            
+            <tag> YouTube </tag>
+            
+        </tags>
+        
+    </entry>
     
-      &lt;strong&gt;AA树&lt;/strong&gt;是一种&lt;strong&gt;自平衡二叉查找树&lt;/strong&gt;用于高效存储和检索序数据
-    
-    </summary>
-    
-      <category term="Algorithms" scheme="http://linw1995.com/categories/Algorithms/"/>
-    
-    
-      <category term="Data Structrue" scheme="http://linw1995.com/tags/Data-Structrue/"/>
-    
-      <category term="Python" scheme="http://linw1995.com/tags/Python/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>分享 Better Me - AGA</title>
-    <link href="http://linw1995.com/2017/04/24/%E5%88%86%E4%BA%AB-Better-Me-AGA/"/>
-    <id>http://linw1995.com/2017/04/24/分享-Better-Me-AGA/</id>
-    <published>2017-04-24T11:08:15.000Z</published>
-    <updated>2017-04-27T10:19:51.825Z</updated>
-    
-    <content type="html"><![CDATA[<div class="video-container"><iframe src="//www.youtube.com/embed/ejkHrp5uxQg" frameborder="0" allowfullscreen></iframe></div>]]></content>
-    
-    <summary type="html">
-    
-      &lt;iframe frameborder=no border=0 marginwidth=0 marginheight=0 width=100% height=86 src=//music.163.com/outchain/player?type=2&amp;id=28453009&amp;auto=0&amp;height=66&gt;&lt;/iframe&gt;
-    
-    </summary>
-    
-      <category term="Share" scheme="http://linw1995.com/categories/Share/"/>
-    
-    
-      <category term="Music" scheme="http://linw1995.com/tags/Music/"/>
-    
-      <category term="YouTube" scheme="http://linw1995.com/tags/YouTube/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Scrapy学习日记 二 · Selenium+PhantomJS</title>
-    <link href="http://linw1995.com/2017/04/23/Scrapy%E5%AD%A6%E4%B9%A0%E6%97%A5%E8%AE%B0-%E4%BA%8C-%C2%B7-Selenium-PhantomJS/"/>
-    <id>http://linw1995.com/2017/04/23/Scrapy学习日记-二-·-Selenium-PhantomJS/</id>
-    <published>2017-04-23T12:40:27.000Z</published>
-    <updated>2017-05-03T13:45:26.210Z</updated>
-    
-    <content type="html"><![CDATA[<p>现在爬虫文章一大堆，内容却千遍一律。<br>我想写和这些不一样的，可为啥还要讲<strong>Selenium</strong>和<strong>PhantomJS</strong>呢？<br>
+    <entry>
+      <title><![CDATA[Scrapy学习日记 二 · Selenium+PhantomJS]]></title>
+      <url>/2017/04/23/Scrapy%E5%AD%A6%E4%B9%A0%E6%97%A5%E8%AE%B0-%E4%BA%8C-%C2%B7-Selenium-PhantomJS/</url>
+      <content type="html"><![CDATA[<p>现在爬虫文章一大堆，内容却千遍一律。<br>我想写和这些不一样的，可为啥还要讲<strong>Selenium</strong>和<strong>PhantomJS</strong>呢？<br>
   <a id="more"></a><br>因为，我这可是技术文:)</p>
 <h1 id="介绍">
   <a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1>
@@ -453,58 +430,54 @@
     <li><a href="/2017/04/23/Scrapy学习日记-二-·-Selenium-PhantomJS/" title="Scrapy学习日记 二 · Selenium+PhantomJS">Scrapy学习日记 二 · Selenium+PhantomJS</a></li>
   </ol>
 </blockquote>]]></content>
+      
+        <categories>
+            
+            <category> Python </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Python </tag>
+            
+            <tag> Scrapy </tag>
+            
+            <tag> Selenium </tag>
+            
+            <tag> PhantomJS </tag>
+            
+        </tags>
+        
+    </entry>
     
-    <summary type="html">
+    <entry>
+      <title><![CDATA[分享 Way Back Into Love - Haley Bennett/Hugh Grant]]></title>
+      <url>/2017/04/17/%E5%88%86%E4%BA%AB-Way-Back-Into-Love-Haley-Bennett-Hugh-Grant/</url>
+      <content type="html"><![CDATA[<div class="video-container"><iframe src="//www.youtube.com/embed/2qrkapxFihM" frameborder="0" allowfullscreen></iframe></div>]]></content>
+      
+        <categories>
+            
+            <category> Share </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Music </tag>
+            
+            <tag> YouTube </tag>
+            
+        </tags>
+        
+    </entry>
     
-      &lt;p&gt;现在爬虫文章一大堆，内容却千遍一律。&lt;br&gt;我想写和这些不一样的，可为啥还要讲&lt;strong&gt;Selenium&lt;/strong&gt;和&lt;strong&gt;PhantomJS&lt;/strong&gt;呢？&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Python" scheme="http://linw1995.com/categories/Python/"/>
-    
-    
-      <category term="Python" scheme="http://linw1995.com/tags/Python/"/>
-    
-      <category term="Scrapy" scheme="http://linw1995.com/tags/Scrapy/"/>
-    
-      <category term="Selenium" scheme="http://linw1995.com/tags/Selenium/"/>
-    
-      <category term="PhantomJS" scheme="http://linw1995.com/tags/PhantomJS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>分享 Way Back Into Love - Haley Bennett/Hugh Grant</title>
-    <link href="http://linw1995.com/2017/04/17/%E5%88%86%E4%BA%AB-Way-Back-Into-Love-Haley-Bennett-Hugh-Grant/"/>
-    <id>http://linw1995.com/2017/04/17/分享-Way-Back-Into-Love-Haley-Bennett-Hugh-Grant/</id>
-    <published>2017-04-17T14:33:23.000Z</published>
-    <updated>2017-04-27T10:30:29.116Z</updated>
-    
-    <content type="html"><![CDATA[<div class="video-container"><iframe src="//www.youtube.com/embed/2qrkapxFihM" frameborder="0" allowfullscreen></iframe></div>]]></content>
-    
-    <summary type="html">
-    
-      &lt;iframe frameborder=no border=0 marginwidth=0 marginheight=0 width=100% height=86 src=//music.163.com/outchain/player?type=2&amp;id=5046372&amp;auto=0&amp;height=66&gt;&lt;/iframe&gt;
-    
-    </summary>
-    
-      <category term="Share" scheme="http://linw1995.com/categories/Share/"/>
-    
-    
-      <category term="Music" scheme="http://linw1995.com/tags/Music/"/>
-    
-      <category term="YouTube" scheme="http://linw1995.com/tags/YouTube/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Scrapy学习日记 一 · run many spiders</title>
-    <link href="http://linw1995.com/2017/04/15/Scrapy%E5%AD%A6%E4%B9%A0%E6%97%A5%E8%AE%B0-%E4%B8%80-%C2%B7-run-many-spiders/"/>
-    <id>http://linw1995.com/2017/04/15/Scrapy学习日记-一-·-run-many-spiders/</id>
-    <published>2017-04-15T02:32:50.000Z</published>
-    <updated>2017-05-03T13:45:29.934Z</updated>
-    
-    <content type="html"><![CDATA[<p>这两周都在学习使用这个爬虫框架，略有收获。<br>把一些小技巧分享给大家。<br>
+    <entry>
+      <title><![CDATA[Scrapy学习日记 一 · run many spiders]]></title>
+      <url>/2017/04/15/Scrapy%E5%AD%A6%E4%B9%A0%E6%97%A5%E8%AE%B0-%E4%B8%80-%C2%B7-run-many-spiders/</url>
+      <content type="html"><![CDATA[<p>这两周都在学习使用这个爬虫框架，略有收获。<br>把一些小技巧分享给大家。<br>
   <a id="more"></a>
 </p>
 <h1 id="template-自定模板">
@@ -669,30 +642,28 @@ myprojec/
     <li><a href="/2017/04/23/Scrapy学习日记-二-·-Selenium-PhantomJS/" title="Scrapy学习日记 二 · Selenium+PhantomJS">Scrapy学习日记 二 · Selenium+PhantomJS</a></li>
   </ol>
 </blockquote>]]></content>
+      
+        <categories>
+            
+            <category> Python </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Python </tag>
+            
+            <tag> Scrapy </tag>
+            
+        </tags>
+        
+    </entry>
     
-    <summary type="html">
-    
-      &lt;p&gt;这两周都在学习使用这个爬虫框架，略有收获。&lt;br&gt;把一些小技巧分享给大家。&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Python" scheme="http://linw1995.com/categories/Python/"/>
-    
-    
-      <category term="Python" scheme="http://linw1995.com/tags/Python/"/>
-    
-      <category term="Scrapy" scheme="http://linw1995.com/tags/Scrapy/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>折腾VSCode记 二 · Settings Sync</title>
-    <link href="http://linw1995.com/2017/04/12/%E6%8A%98%E8%85%BEVSCode%E8%AE%B0-%E4%BA%8C-%C2%B7-Settings-Sync/"/>
-    <id>http://linw1995.com/2017/04/12/折腾VSCode记-二-·-Settings-Sync/</id>
-    <published>2017-04-12T15:03:42.000Z</published>
-    <updated>2017-05-03T13:44:32.395Z</updated>
-    
-    <content type="html"><![CDATA[<p>假如有一天你重装系统了，或者换电脑了，或者有多台电脑，每次重新配置<strong>VSCode</strong>也太麻烦了。<br><img src="/2017/04/12/折腾VSCode记-二-·-Settings-Sync/cloud.png" alt="SettingSync-Logo" title="SettingSync-Logo"> <strong>Setting Sync</strong><br>这个插件就完美的解决了这个问题。<br>
+    <entry>
+      <title><![CDATA[折腾VSCode记 二 · Settings Sync]]></title>
+      <url>/2017/04/12/%E6%8A%98%E8%85%BEVSCode%E8%AE%B0-%E4%BA%8C-%C2%B7-Settings-Sync/</url>
+      <content type="html"><![CDATA[<p>假如有一天你重装系统了，或者换电脑了，或者有多台电脑，每次重新配置<strong>VSCode</strong>也太麻烦了。<br><img src="/2017/04/12/折腾VSCode记-二-·-Settings-Sync/cloud.png" alt="SettingSync-Logo" title="SettingSync-Logo"> <strong>Setting Sync</strong><br>这个插件就完美的解决了这个问题。<br>
   <a id="more"></a>
 </p>
 <p>利用了<strong>Github Gist服务</strong>来保存<strong>VSCode</strong>的状态（设置、插件等等），<br>除了自己可用外，还可以分享自己的配置给别人。</p>
@@ -735,50 +706,46 @@ myprojec/
 <h1 id="分享">
   <a href="#分享" class="headerlink" title="分享"></a>分享</h1>
 <p>我的 <a href="https://gist.github.com/linw1995/5abf184e66bf7615f72b069bc704fa0b" target="_blank" rel="external">Visual Studio Code Sync Settings Gist</a></p>]]></content>
+      
+        <categories>
+            
+            <category> Others </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> VSCode </tag>
+            
+        </tags>
+        
+    </entry>
     
-    <summary type="html">
+    <entry>
+      <title><![CDATA[分享 你就不要想起我(Cover 张杰)-唯默]]></title>
+      <url>/2017/04/10/%E5%88%86%E4%BA%AB-%E4%BD%A0%E5%B0%B1%E4%B8%8D%E8%A6%81%E6%83%B3%E8%B5%B7%E6%88%91-Cover-%E5%BC%A0%E6%9D%B0/</url>
+      <content type="html"><![CDATA[<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="100%" height="86" src="//music.163.com/outchain/player?type=2&id=465576914&auto=0&height=66"></iframe>]]></content>
+      
+        <categories>
+            
+            <category> Share </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Music </tag>
+            
+        </tags>
+        
+    </entry>
     
-      &lt;p&gt;假如有一天你重装系统了，或者换电脑了，或者有多台电脑，每次重新配置&lt;strong&gt;VSCode&lt;/strong&gt;也太麻烦了。&lt;br&gt;&lt;img src=&quot;/2017/04/12/折腾VSCode记-二-·-Settings-Sync/cloud.png&quot; alt=&quot;SettingSync-Logo&quot; title=&quot;SettingSync-Logo&quot;&gt; &lt;strong&gt;Setting Sync&lt;/strong&gt;&lt;br&gt;这个插件就完美的解决了这个问题。&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Others" scheme="http://linw1995.com/categories/Others/"/>
-    
-    
-      <category term="VSCode" scheme="http://linw1995.com/tags/VSCode/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>分享 你就不要想起我(Cover 张杰)-唯默</title>
-    <link href="http://linw1995.com/2017/04/10/%E5%88%86%E4%BA%AB-%E4%BD%A0%E5%B0%B1%E4%B8%8D%E8%A6%81%E6%83%B3%E8%B5%B7%E6%88%91-Cover-%E5%BC%A0%E6%9D%B0/"/>
-    <id>http://linw1995.com/2017/04/10/分享-你就不要想起我-Cover-张杰/</id>
-    <published>2017-04-10T14:27:41.000Z</published>
-    <updated>2017-04-27T10:18:02.153Z</updated>
-    
-    <content type="html"><![CDATA[<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="100%" height="86" src="//music.163.com/outchain/player?type=2&id=465576914&auto=0&height=66"></iframe>]]></content>
-    
-    <summary type="html">
-    
-      &lt;iframe frameborder=&quot;no&quot; border=&quot;0&quot; marginwidth=&quot;0&quot; marginheight=&quot;0&quot; width=&quot;100%&quot; height=&quot;86&quot; src=&quot;//music.163.com/outchain/player?type=2&amp;id
-    
-    </summary>
-    
-      <category term="Share" scheme="http://linw1995.com/categories/Share/"/>
-    
-    
-      <category term="Music" scheme="http://linw1995.com/tags/Music/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>折腾VSCode记 一 · Python Traceback Jumper</title>
-    <link href="http://linw1995.com/2017/04/09/%E6%8A%98%E8%85%BEVSCode%E8%AE%B0-%E4%B8%80-%C2%B7-Python-Traceback-Jumper/"/>
-    <id>http://linw1995.com/2017/04/09/折腾VSCode记-一-·-Python-Traceback-Jumper/</id>
-    <published>2017-04-09T13:58:44.000Z</published>
-    <updated>2017-05-03T13:44:37.667Z</updated>
-    
-    <content type="html"><![CDATA[<p>因为<strong>Pycharm</strong>到期了，就开始折腾<strong>VSCode</strong>。<br>使用中，写一些<strong>Python</strong>代码时，觉得缺少一个功能 <strong>Traceback点击跳转</strong>。<br>所以就花了一整天翻看<strong>VSCode</strong>官方文档，写了个插件<br><img src="/2017/04/09/折腾VSCode记-一-·-Python-Traceback-Jumper/python%20traceback%20jumper%20logo.svg" alt="python traceback jumper logo.svg" title=""><strong>python traceback jumper</strong></p>
+    <entry>
+      <title><![CDATA[折腾VSCode记 一 · Python Traceback Jumper]]></title>
+      <url>/2017/04/09/%E6%8A%98%E8%85%BEVSCode%E8%AE%B0-%E4%B8%80-%C2%B7-Python-Traceback-Jumper/</url>
+      <content type="html"><![CDATA[<p>因为<strong>Pycharm</strong>到期了，就开始折腾<strong>VSCode</strong>。<br>使用中，写一些<strong>Python</strong>代码时，觉得缺少一个功能 <strong>Traceback点击跳转</strong>。<br>所以就花了一整天翻看<strong>VSCode</strong>官方文档，写了个插件<br><img src="/2017/04/09/折腾VSCode记-一-·-Python-Traceback-Jumper/python%20traceback%20jumper%20logo.svg" alt="python traceback jumper logo.svg" title=""><strong>python traceback jumper</strong></p>
 <a id="more"></a>
 <p>从三月18号发布，截止到今天四月9号，下载量已经<strong>1K</strong>了。<br>写之前也没想很多，觉得不需要写很多代码，也不知道要用<strong>TypeScript</strong>写，也不会 = =。<br>翻了一遍官方文档，看了下<strong>VSCode</strong>部分源码，相关的<strong>Github issue</strong>，凭着一腔热血给做出来了。<br>代码也就50多行 果然:），利用了<strong>Regex正则表达式</strong>和<strong>VSCode</strong>提供的Api，就实现了这个功能。</p>
 <h1 id="项目传送门">
@@ -816,33 +783,30 @@ myprojec/
 <h1 id="吐槽">
   <a href="#吐槽" class="headerlink" title="吐槽"></a>吐槽</h1>
 <p>其实在<strong>terminal</strong>中会通过<strong>Regex</strong>来提供跳转链接，不过这是<strong>VSCode</strong>内建的。。。:)<br>为啥不连<strong>Output</strong>输出栏也搞了，还有<strong>DEBUG</strong>输出栏。</p>]]></content>
+      
+        <categories>
+            
+            <category> Others </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Python </tag>
+            
+            <tag> VSCode </tag>
+            
+            <tag> TypeScript </tag>
+            
+        </tags>
+        
+    </entry>
     
-    <summary type="html">
-    
-      &lt;p&gt;因为&lt;strong&gt;Pycharm&lt;/strong&gt;到期了，就开始折腾&lt;strong&gt;VSCode&lt;/strong&gt;。&lt;br&gt;使用中，写一些&lt;strong&gt;Python&lt;/strong&gt;代码时，觉得缺少一个功能 &lt;strong&gt;Traceback点击跳转&lt;/strong&gt;。&lt;br&gt;所以就花了一整天翻看&lt;strong&gt;VSCode&lt;/strong&gt;官方文档，写了个插件&lt;br&gt;&lt;img src=&quot;/2017/04/09/折腾VSCode记-一-·-Python-Traceback-Jumper/python%20traceback%20jumper%20logo.svg&quot;
-    alt=&quot;python traceback jumper logo.svg&quot; title=&quot;&quot;&gt;&lt;strong&gt;python traceback jumper&lt;/strong&gt;&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Others" scheme="http://linw1995.com/categories/Others/"/>
-    
-    
-      <category term="Python" scheme="http://linw1995.com/tags/Python/"/>
-    
-      <category term="VSCode" scheme="http://linw1995.com/tags/VSCode/"/>
-    
-      <category term="TypeScript" scheme="http://linw1995.com/tags/TypeScript/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>成为一个DictionaryKey的条件</title>
-    <link href="http://linw1995.com/2017/04/08/%E6%88%90%E4%B8%BA%E4%B8%80%E4%B8%AADictionaryKey%E7%9A%84%E6%9D%A1%E4%BB%B6/"/>
-    <id>http://linw1995.com/2017/04/08/成为一个DictionaryKey的条件/</id>
-    <published>2017-04-08T07:50:51.000Z</published>
-    <updated>2017-05-05T14:51:36.918Z</updated>
-    
-    <content type="html"><![CDATA[<p>一个dict的键不就是字符串嘛，No!No!No!</p>
+    <entry>
+      <title><![CDATA[成为一个DictionaryKey的条件]]></title>
+      <url>/2017/04/08/%E6%88%90%E4%B8%BA%E4%B8%80%E4%B8%AADictionaryKey%E7%9A%84%E6%9D%A1%E4%BB%B6/</url>
+      <content type="html"><![CDATA[<p>一个dict的键不就是字符串嘛，No!No!No!</p>
 <a id="more"></a>
 <h1 id="需求">
   <a href="#需求" class="headerlink" title="需求"></a>需求</h1>
@@ -889,28 +853,26 @@ myprojec/
     <li><a href="http://www.laurentluce.com/posts/python-dictionary-implementation/" target="_blank" rel="external">Python dictionary implementation</a></li>
   </ul>
 </blockquote>]]></content>
+      
+        <categories>
+            
+            <category> Python </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Python </tag>
+            
+        </tags>
+        
+    </entry>
     
-    <summary type="html">
-    
-      &lt;p&gt;一个dict的键不就是字符串嘛，No!No!No!&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Python" scheme="http://linw1995.com/categories/Python/"/>
-    
-    
-      <category term="Python" scheme="http://linw1995.com/tags/Python/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Python object的可变与不可变</title>
-    <link href="http://linw1995.com/2017/03/31/%E5%8F%AF%E5%8F%98%E4%B8%8E%E4%B8%8D%E5%8F%AF%E5%8F%98/"/>
-    <id>http://linw1995.com/2017/03/31/可变与不可变/</id>
-    <published>2017-03-31T07:59:12.000Z</published>
-    <updated>2017-05-05T14:52:43.693Z</updated>
-    
-    <content type="html"><![CDATA[<p><strong>Python object</strong>可以分为两大类型，<strong>可变mutable</strong>与<strong>不可变immutable</strong>。<br>可变与不可变究竟意味着什么？<br>
+    <entry>
+      <title><![CDATA[Python object的可变与不可变]]></title>
+      <url>/2017/03/31/%E5%8F%AF%E5%8F%98%E4%B8%8E%E4%B8%8D%E5%8F%AF%E5%8F%98/</url>
+      <content type="html"><![CDATA[<p><strong>Python object</strong>可以分为两大类型，<strong>可变mutable</strong>与<strong>不可变immutable</strong>。<br>可变与不可变究竟意味着什么？<br>
   <a id="more"></a>
 </p>
 <p>对象是<strong>Python</strong>对数据的抽象化，在<strong>Python</strong>中，数据被表现成对象或者对象间的关系。<br>在<strong>Python</strong>中一切皆为对象，每个对象各含有<strong>identity</strong>、<strong>type</strong>和<strong>value</strong></p>
@@ -1020,28 +982,26 @@ myprojec/
     <li><a href="http://stackoverflow.com/questions/15171695/whats-with-the-integer-cache-inside-python" target="_blank" rel="external">What’s with the Integer Cache inside Python? [stackoverflow]</a></li>
   </ul>
 </blockquote>]]></content>
+      
+        <categories>
+            
+            <category> Python </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Python </tag>
+            
+        </tags>
+        
+    </entry>
     
-    <summary type="html">
-    
-      &lt;p&gt;&lt;strong&gt;Python object&lt;/strong&gt;可以分为两大类型，&lt;strong&gt;可变mutable&lt;/strong&gt;与&lt;strong&gt;不可变immutable&lt;/strong&gt;。&lt;br&gt;可变与不可变究竟意味着什么？&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Python" scheme="http://linw1995.com/categories/Python/"/>
-    
-    
-      <category term="Python" scheme="http://linw1995.com/tags/Python/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Python collections</title>
-    <link href="http://linw1995.com/2017/03/30/Python-collections/"/>
-    <id>http://linw1995.com/2017/03/30/Python-collections/</id>
-    <published>2017-03-30T14:53:14.000Z</published>
-    <updated>2017-04-28T17:07:20.042Z</updated>
-    
-    <content type="html"><![CDATA[<p><strong>Python</strong>内置了一组高性能的容器类型，满足了所有基本的需求，<br>这个库就叫做<strong>collections</strong><br>
+    <entry>
+      <title><![CDATA[Python collections]]></title>
+      <url>/2017/03/30/Python-collections/</url>
+      <content type="html"><![CDATA[<p><strong>Python</strong>内置了一组高性能的容器类型，满足了所有基本的需求，<br>这个库就叫做<strong>collections</strong><br>
   <a id="more"></a>
 </p>
 <h1 id="py2与py3的区别">
@@ -1568,28 +1528,26 @@ myprojec/
     <li><a href="http://stackoverflow.com/questions/25464647/list-vs-userlist-and-dict-vs-userdict" target="_blank" rel="external">list vs UserList and dict vs UserDict [stackoverflow]</a></li>
   </ul>
 </blockquote>]]></content>
+      
+        <categories>
+            
+            <category> Python </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Python </tag>
+            
+        </tags>
+        
+    </entry>
     
-    <summary type="html">
-    
-      &lt;p&gt;&lt;strong&gt;Python&lt;/strong&gt;内置了一组高性能的容器类型，满足了所有基本的需求，&lt;br&gt;这个库就叫做&lt;strong&gt;collections&lt;/strong&gt;&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Python" scheme="http://linw1995.com/categories/Python/"/>
-    
-    
-      <category term="Python" scheme="http://linw1995.com/tags/Python/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Python functools</title>
-    <link href="http://linw1995.com/2017/03/29/Python-functools/"/>
-    <id>http://linw1995.com/2017/03/29/Python-functools/</id>
-    <published>2017-03-29T08:30:08.000Z</published>
-    <updated>2017-05-03T13:45:13.913Z</updated>
-    
-    <content type="html"><![CDATA[<p><strong>Python</strong>也是支持<strong>函数式编程Functional Programming</strong>，<br>支持函数当参数，当返回变量，拥有<strong>闭包Closure</strong>这一特性，<br>而<strong>functools</strong>这个库是用来更好地生成<strong>高阶函数higher-order function</strong>的<br>
+    <entry>
+      <title><![CDATA[Python functools]]></title>
+      <url>/2017/03/29/Python-functools/</url>
+      <content type="html"><![CDATA[<p><strong>Python</strong>也是支持<strong>函数式编程Functional Programming</strong>，<br>支持函数当参数，当返回变量，拥有<strong>闭包Closure</strong>这一特性，<br>而<strong>functools</strong>这个库是用来更好地生成<strong>高阶函数higher-order function</strong>的<br>
   <a id="more"></a>
 </p>
 <h1 id="py2与py3的区别">
@@ -1880,30 +1838,28 @@ myprojec/
     <li><a href="https://husless.github.io/2015/09/08/generic-functions-with-single-dispatch/" target="_blank" rel="external">Generic Functions with Single Dispatch</a></li>
   </ul>
 </blockquote>]]></content>
+      
+        <categories>
+            
+            <category> Python </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Python </tag>
+            
+            <tag> Functional Programming </tag>
+            
+        </tags>
+        
+    </entry>
     
-    <summary type="html">
-    
-      &lt;p&gt;&lt;strong&gt;Python&lt;/strong&gt;也是支持&lt;strong&gt;函数式编程Functional Programming&lt;/strong&gt;，&lt;br&gt;支持函数当参数，当返回变量，拥有&lt;strong&gt;闭包Closure&lt;/strong&gt;这一特性，&lt;br&gt;而&lt;strong&gt;functools&lt;/strong&gt;这个库是用来更好地生成&lt;strong&gt;高阶函数higher-order function&lt;/strong&gt;的&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Python" scheme="http://linw1995.com/categories/Python/"/>
-    
-    
-      <category term="Python" scheme="http://linw1995.com/tags/Python/"/>
-    
-      <category term="Functional Programming" scheme="http://linw1995.com/tags/Functional-Programming/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>编码问题 ~ Python</title>
-    <link href="http://linw1995.com/2017/03/25/%E7%BC%96%E7%A0%81%E9%97%AE%E9%A2%98-Python/"/>
-    <id>http://linw1995.com/2017/03/25/编码问题-Python/</id>
-    <published>2017-03-25T12:33:12.000Z</published>
-    <updated>2017-05-03T13:43:42.472Z</updated>
-    
-    <content type="html"><![CDATA[<p>用Python处理中文时候经常出现乱码，或者代码经常因为编码的问题而出现各种错误，<br>比如说从网路上爬取数据，文本文件处理等等</p>
+    <entry>
+      <title><![CDATA[编码问题 ~ Python]]></title>
+      <url>/2017/03/25/%E7%BC%96%E7%A0%81%E9%97%AE%E9%A2%98-Python/</url>
+      <content type="html"><![CDATA[<p>用Python处理中文时候经常出现乱码，或者代码经常因为编码的问题而出现各种错误，<br>比如说从网路上爬取数据，文本文件处理等等</p>
 <a id="more"></a>
 <h1 id="py2-to-py3">
   <a href="#py2-to-py3" class="headerlink" title="py2 to py3"></a>py2 to py3</h1>
@@ -2047,49 +2003,41 @@ myprojec/
     <li><a href="https://nedbatchelder.com/text/unipain.html" target="_blank" rel="external">Pragmatic Unicode|Ned Batchelder</a></li>
   </ul>
 </blockquote>]]></content>
+      
+        <categories>
+            
+            <category> Python </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Python </tag>
+            
+        </tags>
+        
+    </entry>
     
-    <summary type="html">
-    
-      &lt;p&gt;用Python处理中文时候经常出现乱码，或者代码经常因为编码的问题而出现各种错误，&lt;br&gt;比如说从网路上爬取数据，文本文件处理等等&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Python" scheme="http://linw1995.com/categories/Python/"/>
-    
-    
-      <category term="Python" scheme="http://linw1995.com/tags/Python/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>我的CV</title>
-    <link href="http://linw1995.com/2017/03/24/%E6%88%91%E7%9A%84CV/"/>
-    <id>http://linw1995.com/2017/03/24/我的CV/</id>
-    <published>2017-03-24T15:25:35.000Z</published>
-    <updated>2017-05-03T13:44:19.874Z</updated>
-    
-    <content type="html"><![CDATA[<p>花了三小时写了这份简历，保存一下以后当作回忆:)</p>
+    <entry>
+      <title><![CDATA[我的CV]]></title>
+      <url>/2017/03/24/%E6%88%91%E7%9A%84CV/</url>
+      <content type="html"><![CDATA[<p>花了三小时写了这份简历，保存一下以后当作回忆:)</p>
 <a id="more"></a><a href="https://linw1995.github.io/CV/" target="_blank" rel="external">传送门</a>]]></content>
+      
+        <categories>
+            
+            <category> Others </category>
+            
+        </categories>
+        
+        
+    </entry>
     
-    <summary type="html">
-    
-      &lt;p&gt;花了三小时写了这份简历，保存一下以后当作回忆:)&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Others" scheme="http://linw1995.com/categories/Others/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Python Unittest</title>
-    <link href="http://linw1995.com/2017/03/22/Python-Unittest/"/>
-    <id>http://linw1995.com/2017/03/22/Python-Unittest/</id>
-    <published>2017-03-22T06:34:01.000Z</published>
-    <updated>2017-05-03T13:45:21.955Z</updated>
-    
-    <content type="html"><![CDATA[<p>测试在持续集成开发中非常重要，写单元测试有助于定位bug，方便在未来重构代码。<br>本文简单介绍了下<strong>Python标准库</strong>中的<strong>Unittest</strong></p>
+    <entry>
+      <title><![CDATA[Python Unittest]]></title>
+      <url>/2017/03/22/Python-Unittest/</url>
+      <content type="html"><![CDATA[<p>测试在持续集成开发中非常重要，写单元测试有助于定位bug，方便在未来重构代码。<br>本文简单介绍了下<strong>Python标准库</strong>中的<strong>Unittest</strong></p>
 <a id="more"></a>
 <h1 id="Unittest">
   <a href="#Unittest" class="headerlink" title="Unittest"></a>Unittest</h1>
@@ -2327,32 +2275,30 @@ myprojec/
     <li><a href="https://github.com/DonJayamanne/pythonVSCode/wiki/unitest-(Standard-Unit-testing)-Framework" target="_blank" rel="external">unittest (Standard Unit testing) Framework</a></li>
   </ul>
 </blockquote>]]></content>
+      
+        <categories>
+            
+            <category> Python </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Python </tag>
+            
+            <tag> Test </tag>
+            
+            <tag> VSCode </tag>
+            
+        </tags>
+        
+    </entry>
     
-    <summary type="html">
-    
-      &lt;p&gt;测试在持续集成开发中非常重要，写单元测试有助于定位bug，方便在未来重构代码。&lt;br&gt;本文简单介绍了下&lt;strong&gt;Python标准库&lt;/strong&gt;中的&lt;strong&gt;Unittest&lt;/strong&gt;&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Python" scheme="http://linw1995.com/categories/Python/"/>
-    
-    
-      <category term="Python" scheme="http://linw1995.com/tags/Python/"/>
-    
-      <category term="Test" scheme="http://linw1995.com/tags/Test/"/>
-    
-      <category term="VSCode" scheme="http://linw1995.com/tags/VSCode/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>用python来handle复杂的时间</title>
-    <link href="http://linw1995.com/2017/03/20/%E7%94%A8python%E6%9D%A5handle%E5%A4%8D%E6%9D%82%E7%9A%84%E6%97%B6%E9%97%B4/"/>
-    <id>http://linw1995.com/2017/03/20/用python来handle复杂的时间/</id>
-    <published>2017-03-20T08:21:38.000Z</published>
-    <updated>2017-05-03T13:44:28.039Z</updated>
-    
-    <content type="html"><![CDATA[<p>怎么用python完美地处理有关时间的问题</p>
+    <entry>
+      <title><![CDATA[用python来handle复杂的时间]]></title>
+      <url>/2017/03/20/%E7%94%A8python%E6%9D%A5handle%E5%A4%8D%E6%9D%82%E7%9A%84%E6%97%B6%E9%97%B4/</url>
+      <content type="html"><![CDATA[<p>怎么用python完美地处理有关时间的问题</p>
 <a id="more"></a>
 <h1 id="时间处理">
   <a href="#时间处理" class="headerlink" title="时间处理"></a>时间处理</h1>
@@ -2642,28 +2588,26 @@ myprojec/
   </table>
 </figure>
 <p>这个函数会迭代出完整的星期，所以要在循环中判断一下</p>]]></content>
+      
+        <categories>
+            
+            <category> Python </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Python </tag>
+            
+        </tags>
+        
+    </entry>
     
-    <summary type="html">
-    
-      &lt;p&gt;怎么用python完美地处理有关时间的问题&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Python" scheme="http://linw1995.com/categories/Python/"/>
-    
-    
-      <category term="Python" scheme="http://linw1995.com/tags/Python/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Python On Visual Studio Code With Anaconda</title>
-    <link href="http://linw1995.com/2017/03/19/Python-On-Visual-Studio-Code-With-Anaconda/"/>
-    <id>http://linw1995.com/2017/03/19/Python-On-Visual-Studio-Code-With-Anaconda/</id>
-    <published>2017-03-19T08:28:48.000Z</published>
-    <updated>2017-05-03T13:45:37.147Z</updated>
-    
-    <content type="html"><![CDATA[<p>Python是一门入门容易，且入门后又可以做很多interesting things的语言。<br>想简单的写一些代码，又不想费力去安装体积庞大的IDE，也不想使用Python自带的IDLE。<br>这时候你就需要Python On Visual Studio Code With Anaconda。<br>
+    <entry>
+      <title><![CDATA[Python On Visual Studio Code With Anaconda]]></title>
+      <url>/2017/03/19/Python-On-Visual-Studio-Code-With-Anaconda/</url>
+      <content type="html"><![CDATA[<p>Python是一门入门容易，且入门后又可以做很多interesting things的语言。<br>想简单的写一些代码，又不想费力去安装体积庞大的IDE，也不想使用Python自带的IDLE。<br>这时候你就需要Python On Visual Studio Code With Anaconda。<br>
   <a id="more"></a>
 </p>
 <h1 id="工具介绍">
@@ -2794,30 +2738,28 @@ myprojec/
   </table>
 </figure>
 <p>然后按住<code>F5</code>就可以进入debug模式了<br>点击要调试的代码行左侧边框上，添加“红点”<br>之后程序运行到此行就会停下，即可在调试控制台输入框上进行交互式调试</p> <img src="/2017/03/19/Python-On-Visual-Studio-Code-With-Anaconda/debugContrl.png" alt="debugContrl" title="debugContrl">]]></content>
+      
+        <categories>
+            
+            <category> Python </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Python </tag>
+            
+            <tag> VSCode </tag>
+            
+        </tags>
+        
+    </entry>
     
-    <summary type="html">
-    
-      &lt;p&gt;Python是一门入门容易，且入门后又可以做很多interesting things的语言。&lt;br&gt;想简单的写一些代码，又不想费力去安装体积庞大的IDE，也不想使用Python自带的IDLE。&lt;br&gt;这时候你就需要Python On Visual Studio Code With Anaconda。&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Python" scheme="http://linw1995.com/categories/Python/"/>
-    
-    
-      <category term="Python" scheme="http://linw1995.com/tags/Python/"/>
-    
-      <category term="VSCode" scheme="http://linw1995.com/tags/VSCode/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Matplotlib 中文显示参数设置</title>
-    <link href="http://linw1995.com/2017/03/15/Matplotlib-%E4%B8%AD%E6%96%87%E6%98%BE%E7%A4%BA%E5%8F%82%E6%95%B0%E8%AE%BE%E7%BD%AE/"/>
-    <id>http://linw1995.com/2017/03/15/Matplotlib-中文显示参数设置/</id>
-    <published>2017-03-15T01:16:42.000Z</published>
-    <updated>2017-05-03T13:44:56.685Z</updated>
-    
-    <content type="html"><![CDATA[<p>在用Matplotlib库可视化时，难免会需要加上中文信息，可总是显示乱码出来。</p>
+    <entry>
+      <title><![CDATA[Matplotlib 中文显示参数设置]]></title>
+      <url>/2017/03/15/Matplotlib-%E4%B8%AD%E6%96%87%E6%98%BE%E7%A4%BA%E5%8F%82%E6%95%B0%E8%AE%BE%E7%BD%AE/</url>
+      <content type="html"><![CDATA[<p>在用Matplotlib库可视化时，难免会需要加上中文信息，可总是显示乱码出来。</p>
 <a id="more"></a>
 <p>给图加上中文信息时总是会出现中文乱码，这是因为matplotlib库里没有安装中文字体。</p>
 <ul>
@@ -2848,30 +2790,28 @@ myprojec/
   </li>
 </ul>
 <p>然后运行一下包含中文字符的代码,见证奇迹时候到了。</p> <img src="/2017/03/15/Matplotlib-中文显示参数设置/figure_1.png" alt="figure" title="figure">]]></content>
+      
+        <categories>
+            
+            <category> Python </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Python </tag>
+            
+            <tag> Matplotlib </tag>
+            
+        </tags>
+        
+    </entry>
     
-    <summary type="html">
-    
-      &lt;p&gt;在用Matplotlib库可视化时，难免会需要加上中文信息，可总是显示乱码出来。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Python" scheme="http://linw1995.com/categories/Python/"/>
-    
-    
-      <category term="Python" scheme="http://linw1995.com/tags/Python/"/>
-    
-      <category term="Matplotlib" scheme="http://linw1995.com/tags/Matplotlib/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>如何配置Visual Studio Code + MinGW下的C++环境</title>
-    <link href="http://linw1995.com/2016/10/14/%E5%A6%82%E4%BD%95%E9%85%8D%E7%BD%AEVisual-Studio-Code-MinGW%E4%B8%8B%E7%9A%84C-%E7%8E%AF%E5%A2%83/"/>
-    <id>http://linw1995.com/2016/10/14/如何配置Visual-Studio-Code-MinGW下的C-环境/</id>
-    <published>2016-10-14T09:49:06.000Z</published>
-    <updated>2017-05-03T13:44:13.577Z</updated>
-    
-    <content type="html"><![CDATA[<p>官方文档至今还没翻译成中文，足足琢磨了好几天明白了一些VS Code的功能。<br>现在给大家分享以下。</p>
+    <entry>
+      <title><![CDATA[如何配置Visual Studio Code + MinGW下的C++环境]]></title>
+      <url>/2016/10/14/%E5%A6%82%E4%BD%95%E9%85%8D%E7%BD%AEVisual-Studio-Code-MinGW%E4%B8%8B%E7%9A%84C-%E7%8E%AF%E5%A2%83/</url>
+      <content type="html"><![CDATA[<p>官方文档至今还没翻译成中文，足足琢磨了好几天明白了一些VS Code的功能。<br>现在给大家分享以下。</p>
 <a id="more"></a>
 <h1 id="工具介绍">
   <a href="#工具介绍" class="headerlink" title="工具介绍"></a>工具介绍</h1>
@@ -2975,20 +2915,116 @@ myprojec/
   <li><code>shift</code>+<code>F11</code> 单步跳出</li>
   <li><code>F10</code> 单步跳过</li>
 </ul>]]></content>
+      
+        <categories>
+            
+            <category> Others </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> VSCode </tag>
+            
+            <tag> C++ </tag>
+            
+        </tags>
+        
+    </entry>
     
-    <summary type="html">
+    <entry>
+      <title><![CDATA[搭梯子 - 简单教程]]></title>
+      <url>/2016/10/02/%E6%90%AD%E6%A2%AF%E5%AD%90-%E7%AE%80%E5%8D%95%E6%95%99%E7%A8%8B/</url>
+      <content type="html"><![CDATA[<p>比较简单的搭梯子方法有两个：</p>
+<ol>
+  <li>Lantern 蓝灯</li>
+  <li>Shadowsocks 影梭</li>
+</ol>
+<a id="more"></a>
+<h2 id="Lantern-蓝灯">
+  <a href="#Lantern-蓝灯" class="headerlink" title="Lantern 蓝灯"></a>Lantern 蓝灯</h2><img src="/2016/10/02/搭梯子-简单教程/Lantern.png" alt="Lantern" title="Lantern">
+<h3 id="下载">
+  <a href="#下载" class="headerlink" title="下载"></a>下载</h3>
+<p>蓝灯是个开源项目，在程序员交友平台GitHub上就能下载。<br>传送门：</p>
+<ul>
+  <li><a href="https://github.com/getlantern/lantern" title="github" target="_blank" rel="external">github</a></li>
+  <li><a href="https://getlantern.org/" title="lantern" target="_blank" rel="external">lantern</a> </li>
+</ul>
+<h3 id="使用方法">
+  <a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h3>
+<p>非常简单，只需要打开该软件就好。<br>虽说免费用户有800m的月流量，但网速不够支持看视频；<br>专业用户虽然一年很便宜，但不适合一些不经常用梯子的人。</p>
+<h2 id="Shadowsocks-影梭">
+  <a href="#Shadowsocks-影梭" class="headerlink" title="Shadowsocks 影梭"></a>Shadowsocks 影梭</h2><img src="/2016/10/02/搭梯子-简单教程/shadowsocks.png" alt="shadowsocks" title="shadowsocks">
+<h3 id="下载-1">
+  <a href="#下载-1" class="headerlink" title="下载"></a>下载</h3>
+<ul>
+  <li><a href="https://github.com/shadowsocks/shadowsocks-windows/wiki/Shadowsocks-Windows-%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E" title="github-wiki" target="_blank" rel="external">github-wiki</a> </li>
+</ul>
+<h3 id="使用方法-1">
+  <a href="#使用方法-1" class="headerlink" title="使用方法"></a>使用方法</h3>
+<ol>
+  <li>下载解压后即可打开使用</li>
+  <li>在任务栏中找到图标，右键打开菜单，选中启用系统代理 <img src="/2016/10/02/搭梯子-简单教程/2016-10-02_013628.603141_.png" alt="step-2" title="step-2"></li>
+  <li>选用适合的服务器<br> 完成第二步后还没办法看墙外的风景，需要添加一些代理服务器。<br> 那么如何添加代理服务器呢？<br> 有两种方式：
+    <ul>
+      <li>网上搜索一些免费的代理服务器，但这些免费的代理服务器不仅慢还有安全隐患。</li>
+      <li>去正规的服务器运营商<a href="https://billing.sscloud.org/aff.php?aff=187" title="sscloud" target="_blank" rel="external">sscloud</a>购买这类服务</li>
+    </ul>
+  </li>
+  <li>添加代理服务器<br> 双击任务栏中的图标，弹出以下窗口 <img src="/2016/10/02/搭梯子-简单教程/2016-10-02_014621.955391_.png" alt="step-4-01" title="step-4-01"> 手动填入信息<br> 或者扫描服务器运营商提供的二维码 <img src="/2016/10/02/搭梯子-简单教程/2016-10-02_014836.541634_.png" alt="step-4-02" title="step-4-02"></li>
+  <li>完成以上步骤，就可以在<strong><em>系统代理模式==》全局代理模式</em></strong>愉快地观赏墙外的世界</li>
+</ol>
+<h3 id="PCA模式">
+  <a href="#PCA模式" class="headerlink" title="PCA模式"></a>PCA模式</h3>
+<p>全局代理模式下，上墙内网站也会使用你的服务器流量。这就需要使用<strong><em>系统代理模式==》PAC模式</em></strong>来智能代理。<br><img src="/2016/10/02/搭梯子-简单教程/2016-10-02_020200.445407_.png" alt="PCA mode" title="PCA mode"><br>系统代理模式中选择PAC代理，然后在PAC中选择从GFWList更新本地PAC。<br>这样就可以智能地搭梯子了。</p>
+<h3 id="什么！你说你浏览器还是打不开墙外的世界">
+  <a href="#什么！你说你浏览器还是打不开墙外的世界" class="headerlink" title="什么！你说你浏览器还是打不开墙外的世界"></a>什么！你说你浏览器还是打不开墙外的世界</h3>
+<p>原因：</p>
+<ol>
+  <li>在绝大数浏览器设置里都有一项选择代理方式地选项，只要更改为使用系统代理设置，就可以解决问题。</li>
+  <li>有些浏览器像FireFox、Chrome等，都需要安装代理插件才能使用系统代理。</li>
+</ol>
+<h4 id="FireFox浏览器的配置方法">
+  <a href="#FireFox浏览器的配置方法" class="headerlink" title="FireFox浏览器的配置方法"></a>FireFox浏览器的配置方法</h4>
+<ol>
+  <li>首先安装代理组件FoxyProxy <img src="/2016/10/02/搭梯子-简单教程/2016-10-02_021657.563661_.png" alt="step-1" title="step-1"></li>
+  <li>新建或编辑已有的代理服务器选项 <img src="/2016/10/02/搭梯子-简单教程/2016-10-02_021902.822020_.png" alt="step-2" title="step-2"></li>
+  <li>添加本地PAC文件的位置，点击测试看是否通过 <img src="/2016/10/02/搭梯子-简单教程/2016-10-02_022020.691221_.png" alt="step-3" title="step-3"></li>
+  <li>通过后，修改下PAC文件 <img src="/2016/10/02/搭梯子-简单教程/2016-10-02_022300.004308_.png" alt="step-4" title="step-4"></li>
+  <li>重新测试PAC文件是否通过</li>
+  <li>现在可以试着打开墙外的世界 <img src="/2016/10/02/搭梯子-简单教程/2016-10-02_022617.197844_QQ20161002102602.png" alt="step-6" title="step-6"> 一个旋转的FoxyProxy图标，和一个正在打开的墙外世界。</li>
+</ol>
+<h4 id="Chrome浏览器的配置方法">
+  <a href="#Chrome浏览器的配置方法" class="headerlink" title="Chrome浏览器的配置方法"></a>Chrome浏览器的配置方法</h4>
+<ol>
+  <li>
+    <p>首先安装<a href="https://chrome.google.com/webstore/detail/proxy-switchyomega/padekgcemlokbadohgkifijomclgjgif" title="Proxy SwitchyOmega" target="_blank" rel="external">Proxy SwitchyOmega</a></p>
+  </li>
+  <li>
+    <p>进入<a href="chrome-extension://padekgcemlokbadohgkifijomclgjgif/options.html#/profile/proxy" title="SwitchyOmega 选项" target="_blank" rel="external">SwitchyOmega 选项</a>·情景模式中的proxy添加代理服务器</p> <img src="/2016/10/02/搭梯子-简单教程/20170312_153143.png" alt="step-2" title="step-2"> </li>
+  <li>
+    <p>自定需代理的网站，点击浏览器右上角的小图标</p> <img src="/2016/10/02/搭梯子-简单教程/20170312_153316.png" alt="step-3" title="step-3"> </li>
+  <li>
+    <p>也可以开启全局模式，把auto switch改成proxy即可</p>
+  </li>
+</ol>
+<h3 id="注意">
+  <a href="#注意" class="headerlink" title="注意"></a>注意</h3>
+<ul>
+  <li>可以在Shadowsocks服务器选项中选择不同的服务器来满足不同的需求，平时选择<strong><em>高可用</em></strong> 就行</li>
+  <li>最后，谨慎了解墙外的信息</li>
+</ul>]]></content>
+      
+        <categories>
+            
+            <category> Others </category>
+            
+        </categories>
+        
+        
+    </entry>
     
-      &lt;p&gt;官方文档至今还没翻译成中文，足足琢磨了好几天明白了一些VS Code的功能。&lt;br&gt;现在给大家分享以下。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Others" scheme="http://linw1995.com/categories/Others/"/>
-    
-    
-      <category term="VSCode" scheme="http://linw1995.com/tags/VSCode/"/>
-    
-      <category term="C++" scheme="http://linw1995.com/tags/C/"/>
-    
-  </entry>
   
-</feed>
+  
+</search>

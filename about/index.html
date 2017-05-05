@@ -8,7 +8,7 @@
   <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style">
   <meta content="telephone=no" name="format-detection">
   <meta name="description" content="Personal Blog">
-  <title>about | linw1995</title>
+  <title>林玮 | linw1995</title>
   <link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0">
   <link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/normalize/6.0.0/normalize.min.css">
   <link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/0.6.2/pure-min.css">
@@ -40,24 +40,33 @@
   <div class="body_container">
     <div id="header">
       <div class="site-name">
-        <h1 class="hidden">about</h1><a id="logo" href="/.">linw1995</a>
+        <h1 class="hidden">林玮</h1><a id="logo" href="/.">linw1995</a>
         <p class="description"></p>
       </div>
-      <div id="nav-menu"><a href="/."><i class="fa fa-home"> Home</i></a><a href="/archives/"><i class="fa fa-archive"> Archive</i></a><a href="/atom.xml"><i class="fa fa-rss"> RSS</i></a></div>
+      <div id="nav-menu"><a href="/."><i class="fa fa-home"> Home</i></a><a href="/archives/"><i class="fa fa-archive"> Archive</i></a><a href="/about/" class="current"><i class="fa fa-user"> About</i></a><a href="/atom.xml"><i class="fa fa-rss"> RSS</i></a></div>
     </div>
     <div id="layout" class="pure-g">
       <div class="pure-u-1 pure-u-md-3-4">
         <div class="content_container">
           <div class="post">
-            <h1 class="post-title">about</h1>
-            <div class="post-content"></div>
+            <h1 class="post-title">林玮</h1>
+            <div class="post-content">
+              <p>现在是一名大三学生，就读于集美大学。</p>
+              <p><img src="index/avatar.png" width="300px"></p>
+              <h3 id="联系方式：">
+                <a href="#联系方式：" class="headerlink" title="联系方式："></a>联系方式：</h3>
+              <p><a href="http://weibo.com/R34DM3" target="_blank"><i class="fa fa-weibo fa-3x" aria-hidden="true"></i></a>&nbsp;&nbsp;&nbsp;<a href="https://github.com/linw1995" target="_blank"><i class="fa fa-github fa-3x" aria-hidden="true"></i></a></p>
+              <h3 id="赞助：">
+                <a href="#赞助：" class="headerlink" title="赞助："></a>赞助：</h3>
+              <p><img src="index/wechat.png" width="300px"></p>
+            </div>
           </div>
           <div id="disqus_thread">
             <div class="btn_click_load"><button class="disqus_click_btn">阅读评论 「请确保 disqus.com 可以正常加载」</button></div>
             <script>
               var disqus_shortname = 'linw1995';
               var disqus_identifier = 'about/index.html';
-              var disqus_title = 'about';
+              var disqus_title = '林玮';
               var disqus_url = 'http://linw1995.com/about/index.html';
               $('.btn_click_load').click(function() {
                 (function() {
@@ -93,9 +102,14 @@
       <div class="pure-u-1-4 hidden_mid_and_down">
         <div id="sidebar">
           <div class="widget">
+            <div class="search-form"><input id="local-search-input" placeholder="Search" type="text" name="q" results="0" />
+              <div id="local-search-result"></div>
+            </div>
+          </div>
+          <div class="widget">
             <div class="widget-title"><i class="fa fa-folder-o"> Categories</i></div>
             <ul class="category-list">
-              <li class="category-list-item"><a class="category-list-link" href="/categories/Algorithms/">Algorithms</a><span class="category-list-count">1</span></li>
+              <li class="category-list-item"><a class="category-list-link" href="/categories/Algorithms/">Algorithms</a><span class="category-list-count">2</span></li>
               <li class="category-list-item"><a class="category-list-link" href="/categories/Others/">Others</a><span class="category-list-count">5</span></li>
               <li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">11</span></li>
               <li class="category-list-item"><a class="category-list-link" href="/categories/Share/">Share</a><span class="category-list-count">3</span></li>
@@ -103,10 +117,7 @@
           </div>
           <div class="widget">
             <div class="widget-title"><i class="fa fa-star-o"> Tags</i></div>
-            <div class="tagcloud"><a href="/tags/YouTube/" style="font-size: 15px;">YouTube</a> <a href="/tags/Data-Structrue/" style="font-size: 15px;">Data Structrue</a> <a href="/tags/Matplotlib/" style="font-size: 15px;">Matplotlib</a> <a href="/tags/Functional-Programming/"
-                style="font-size: 15px;">Functional Programming</a> <a href="/tags/Test/" style="font-size: 15px;">Test</a> <a href="/tags/VSCode/" style="font-size: 15px;">VSCode</a> <a href="/tags/Music/" style="font-size: 15px;">Music</a> <a href="/tags/Python/"
-                style="font-size: 15px;">Python</a> <a href="/tags/Scrapy/" style="font-size: 15px;">Scrapy</a> <a href="/tags/C/" style="font-size: 15px;">C++</a> <a href="/tags/Selenium/" style="font-size: 15px;">Selenium</a> <a href="/tags/PhantomJS/"
-                style="font-size: 15px;">PhantomJS</a> <a href="/tags/Python黑魔法/" style="font-size: 15px;">Python黑魔法</a> <a href="/tags/TypeScript/" style="font-size: 15px;">TypeScript</a></div>
+            <div class="tagcloud"><a href="/tags/PhantomJS/" style="font-size: 15px;">PhantomJS</a> <a href="/tags/Data-Structrue/" style="font-size: 15px;">Data Structrue</a> <a href="/tags/Matplotlib/" style="font-size: 15px;">Matplotlib</a> <a href="/tags/Test/" style="font-size: 15px;">Test</a>              <a href="/tags/VSCode/" style="font-size: 15px;">VSCode</a> <a href="/tags/Scrapy/" style="font-size: 15px;">Scrapy</a> <a href="/tags/Selenium/" style="font-size: 15px;">Selenium</a> <a href="/tags/Python/" style="font-size: 15px;">Python</a>              <a href="/tags/Music/" style="font-size: 15px;">Music</a> <a href="/tags/YouTube/" style="font-size: 15px;">YouTube</a> <a href="/tags/Functional-Programming/" style="font-size: 15px;">Functional Programming</a> <a href="/tags/C/" style="font-size: 15px;">C++</a>              <a href="/tags/TypeScript/" style="font-size: 15px;">TypeScript</a></div>
           </div>
           <div class="widget">
             <div class="widget-title"><i class="fa fa-comment-o"> Recent Comments</i></div>
@@ -121,6 +132,18 @@
     </div>
     <a id="rocket" href="#top" class="show"></a>
     <script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script>
+    <script type="text/javascript" src="//cdn.bootcss.com/fancybox/3.0.47/jquery.fancybox.min.js" async></script>
+    <script type="text/javascript" src="/js/fancybox.js?v=0.0.0" async></script>
+    <link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/fancybox/3.0.47/jquery.fancybox.min.css">
+    <script type="text/javascript" src="/js/search.js?v=0.0.0"></script>
+    <script>
+      var search_path = 'search.xml';
+      if (search_path.length == 0) {
+        search_path = 'search.xml';
+      }
+      var path = '/' + search_path;
+      searchFunc(path, 'local-search-input', 'local-search-result');
+    </script>
     <script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script>
     <script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script>
   </div>

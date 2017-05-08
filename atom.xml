@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://linw1995.com/"/>
-  <updated>2017-05-05T14:50:37.849Z</updated>
+  <updated>2017-05-08T10:38:29.189Z</updated>
   <id>http://linw1995.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://linw1995.com/2017/05/05/%E4%BC%AA%E9%9A%8F%E6%9C%BA%E6%95%B0/"/>
     <id>http://linw1995.com/2017/05/05/伪随机数/</id>
     <published>2017-05-05T14:42:12.000Z</published>
-    <updated>2017-05-05T14:50:37.849Z</updated>
+    <updated>2017-05-08T10:38:29.189Z</updated>
     
     <content type="html"><![CDATA[<h2 id="序">
   <a href="#序" class="headerlink" title="序"></a>序</h2>
@@ -98,10 +98,10 @@
   <table>
     <tr>
       <td class="gutter">
-        <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre>
+        <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre>
       </td>
       <td class="code">
-        <pre><div class="line">random = Random(A=<span class="number">65539</span>, C=<span class="number">0</span>, M=<span class="number">2</span>**<span class="number">31</span>, seed=<span class="number">1</span>)</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">uniformDistributionFactory</span><span class="params">(a, b)</span>:</span></div><div class="line">    <span class="keyword">if</span> a &gt; b:</div><div class="line">        <span class="keyword">raise</span> ValueError(<span class="string">'a must be smaller than b'</span>)</div><div class="line"></div><div class="line">    diff = b - a</div><div class="line">    left = a / diff</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">uniform_distribution</span><span class="params">()</span>:</span></div><div class="line">        x = random()</div><div class="line">        <span class="keyword">return</span> (x + left) * diff</div><div class="line"></div><div class="line">    <span class="keyword">return</span> uniform_distribution</div></pre>
+        <pre><div class="line">random = Random(A=<span class="number">65539</span>, C=<span class="number">0</span>, M=<span class="number">2</span>**<span class="number">31</span>, seed=<span class="number">1</span>)</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">uniformDistributionFactory</span><span class="params">(a, b)</span>:</span></div><div class="line">    <span class="keyword">if</span> a &gt; b:</div><div class="line">        <span class="keyword">raise</span> ValueError(<span class="string">'a must be smaller than b'</span>)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">uniform_distribution</span><span class="params">()</span>:</span></div><div class="line">        p = random()</div><div class="line">        <span class="keyword">return</span> a + (b - a) * p</div><div class="line"></div><div class="line">    <span class="keyword">return</span> uniform_distribution</div></pre>
       </td>
     </tr>
   </table>
@@ -120,7 +120,7 @@
         <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre>
       </td>
       <td class="code">
-        <pre><div class="line"><span class="keyword">import</span> math</div><div class="line"></div><div class="line">random = Random(A=<span class="number">65539</span>, C=<span class="number">0</span>, M=<span class="number">2</span>**<span class="number">31</span>, seed=<span class="number">1</span>)</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">exponentialDistributionFactory</span><span class="params">(lam)</span>:</span></div><div class="line">    <span class="keyword">if</span> <span class="keyword">not</span> lam &gt; <span class="number">0</span>:</div><div class="line">        <span class="keyword">raise</span> ValueError(<span class="string">'lambda must be bigger than 0'</span>)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">exponential_distribution</span><span class="params">()</span>:</span></div><div class="line">        x = random()</div><div class="line">        <span class="keyword">return</span> math.log(<span class="number">1</span> - x, math.e) / (-lam)</div><div class="line"></div><div class="line">    <span class="keyword">return</span> exponential_distribution</div></pre>
+        <pre><div class="line"><span class="keyword">import</span> math</div><div class="line"></div><div class="line">random = Random(A=<span class="number">65539</span>, C=<span class="number">0</span>, M=<span class="number">2</span>**<span class="number">31</span>, seed=<span class="number">1</span>)</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">exponentialDistributionFactory</span><span class="params">(lam)</span>:</span></div><div class="line">    <span class="keyword">if</span> <span class="keyword">not</span> lam &gt; <span class="number">0</span>:</div><div class="line">        <span class="keyword">raise</span> ValueError(<span class="string">'lambda must be bigger than 0'</span>)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">exponential_distribution</span><span class="params">()</span>:</span></div><div class="line">        p = random()</div><div class="line">        <span class="keyword">return</span> - math.log(<span class="number">1</span> - p, math.e) / lam</div><div class="line"></div><div class="line">    <span class="keyword">return</span> exponential_distribution</div></pre>
       </td>
     </tr>
   </table>

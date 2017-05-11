@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://linw1995.com/"/>
-  <updated>2017-05-08T10:38:29.189Z</updated>
+  <updated>2017-05-11T13:20:06.577Z</updated>
   <id>http://linw1995.com/</id>
   
   <author>
@@ -14,6 +14,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>分享 No One But You - Doug Paisley</title>
+    <link href="http://linw1995.com/2017/05/11/%E5%88%86%E4%BA%AB-No-One-But-You-Doug-Paisley/"/>
+    <id>http://linw1995.com/2017/05/11/分享-No-One-But-You-Doug-Paisley/</id>
+    <published>2017-05-11T13:17:39.000Z</published>
+    <updated>2017-05-11T13:20:06.577Z</updated>
+    
+    <content type="html"><![CDATA[<div class="video-container"><iframe src="//www.youtube.com/embed/v8-X-1wZfos" frameborder="0" allowfullscreen></iframe></div>]]></content>
+    
+    <summary type="html">
+    
+      &lt;iframe frameborder=no border=0 marginwidth=0 marginheight=0 width=100% height=86 src=//music.163.com/outchain/player?type=2&amp;id=19673369&amp;auto=0&amp;height=66&gt;&lt;/iframe&gt;
+    
+    </summary>
+    
+      <category term="Share" scheme="http://linw1995.com/categories/Share/"/>
+    
+    
+      <category term="Music" scheme="http://linw1995.com/tags/Music/"/>
+    
+      <category term="YouTube" scheme="http://linw1995.com/tags/YouTube/"/>
+    
+  </entry>
   
   <entry>
     <title>伪随机数</title>
@@ -346,9 +370,9 @@
       <category term="Algorithms" scheme="http://linw1995.com/categories/Algorithms/"/>
     
     
-      <category term="Data Structrue" scheme="http://linw1995.com/tags/Data-Structrue/"/>
-    
       <category term="Python" scheme="http://linw1995.com/tags/Python/"/>
+    
+      <category term="Data Structrue" scheme="http://linw1995.com/tags/Data-Structrue/"/>
     
   </entry>
   
@@ -2861,133 +2885,6 @@ myprojec/
       <category term="Python" scheme="http://linw1995.com/tags/Python/"/>
     
       <category term="Matplotlib" scheme="http://linw1995.com/tags/Matplotlib/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>如何配置Visual Studio Code + MinGW下的C++环境</title>
-    <link href="http://linw1995.com/2016/10/14/%E5%A6%82%E4%BD%95%E9%85%8D%E7%BD%AEVisual-Studio-Code-MinGW%E4%B8%8B%E7%9A%84C-%E7%8E%AF%E5%A2%83/"/>
-    <id>http://linw1995.com/2016/10/14/如何配置Visual-Studio-Code-MinGW下的C-环境/</id>
-    <published>2016-10-14T09:49:06.000Z</published>
-    <updated>2017-05-03T13:44:13.577Z</updated>
-    
-    <content type="html"><![CDATA[<p>官方文档至今还没翻译成中文，足足琢磨了好几天明白了一些VS Code的功能。<br>现在给大家分享以下。</p>
-<a id="more"></a>
-<h1 id="工具介绍">
-  <a href="#工具介绍" class="headerlink" title="工具介绍"></a>工具介绍</h1>
-<h2 id="Visual-Studio-Code-–-Code-editing-Redefined">
-  <a href="#Visual-Studio-Code-–-Code-editing-Redefined" class="headerlink" title="Visual Studio Code – Code editing. Redefined."></a>Visual Studio Code – Code editing. Redefined.</h2><img src="/2016/10/14/如何配置Visual-Studio-Code-MinGW下的C-环境/2016-10-14_061710.470637_Visual_Studio_Code_0.10.1_icon.png" alt="VSCode-Logo" title="VSCode-Logo"> <a href="https://code.visualstudio.com/Download" title="Download Visual Studio Code" target="_blank" rel="external">VS Code Download link</a>
-<blockquote>
-  <p>在2015 Build大会上宣布微软将开发 Visual Studio Code。<br>2015年4月29日，第一个预览版本发布。<br>2015年11月18日，Code团队将其在GitHub上面开源，并采用MIT许可证，同时宣布将支持扩展功能。<br>2016年4月14日，Visual Studio Code发布正式版，版本号1.0.0。<br>Visual Studio Code支持多种编程语言。与其他编辑器不同的是，Code的许多功能并不在菜单中显示，而是通过“命令面板”来调用。用户可以在命令面板中搜索和输入命令，从而实现指定功能，例如安装插件、设置属性等。<br>Code具备了现代文本编辑器所具有的功能，例如更改字符编码、更换换行符等。</p>
-  <footer><strong>wikipedia</strong><cite><a href="https://zh.wikipedia.org/wiki/Visual_Studio_Code" target="_blank" rel="external">Visual Studio Code</a></cite></footer>
-</blockquote>
-<h2 id="MinGW">
-  <a href="#MinGW" class="headerlink" title="MinGW"></a>MinGW</h2>
-<p>提供了G++编译器<br>
-  <blockquote>
-    <p>MinGW（Minimalist GNU for Windows），又称mingw32，是将GCC编译器和GNU Binutils移植到Win32平台下的产物，包括一系列头文件（Win32API）、库和可执行文件。<br>另有可用于产生32位及64位Windows可执行文件的MinGW-w64项目，是从原本MinGW产生的分支。如今已经独立发展。</p>
-    <footer><strong>wikipedia</strong><cite><a href="https://zh.wikipedia.org/wiki/MinGW" target="_blank" rel="external">MinGW</a></cite></footer>
-  </blockquote>
-</p>
-<h1 id="安装">
-  <a href="#安装" class="headerlink" title="安装"></a>安装</h1>
-<ul>
-  <li>VS Code</li>
-</ul>
-<p>按照安装提示一步步进行即可</p>
-<ul>
-  <li>MinGW</li>
-</ul>
-<p>按照安装提示一步步进行，安装完成后。<br>会弹出以下界面<br><img src="/2016/10/14/如何配置Visual-Studio-Code-MinGW下的C-环境/2016-10-14_062200.698190_cl_MinGWInstall.png" alt="MinGWInstall" title="MinGWInstall"><br>照图片选择，然后在菜单栏Installation中选择Apply changes，然后等待程序下载安装编译器。<br>以上步骤结束后，设置系统变量<br>右键我的电脑，选择属性<br>
-  <img src="/2016/10/14/如何配置Visual-Studio-Code-MinGW下的C-环境/2016-10-14_062655.852040_QQ20161014142609.png" alt="step-1" title="step-1"><br>选择高级系统设置，再选择环境变量<br><img src="/2016/10/14/如何配置Visual-Studio-Code-MinGW下的C-环境/2016-10-14_062813.682885_QQ20161014142747.png" alt="step-2" title="step-2"><br>再Path变量中添加MinGW根目录下的bin文件夹的路径<br><img src="/2016/10/14/如何配置Visual-Studio-Code-MinGW下的C-环境/2016-10-14_063037.967301_QQ20161014142952.png" alt="step-3" title="step-3"><br>打开CMD，输入<code>g++ -v</code>出现以下信息安装就成功咯<br><img src="/2016/10/14/如何配置Visual-Studio-Code-MinGW下的C-环境/2016-10-14_063248.965706_QQ20161014143235.png" alt="step-4" title="step-4"></p>
-<h1 id="配置VS-Code">
-  <a href="#配置VS-Code" class="headerlink" title="配置VS Code"></a>配置VS Code</h1>
-<p>在码配置流程前先贴出官方的不完全配置文档<br><a href="https://code.visualstudio.com/docs/languages/cpp" title="C/C++ for VS Code (Preview)" target="_blank" rel="external">C/C++ for VS Code (Preview)</a></p>
-<ol>
-  <li>打开 VS Code。</li>
-  <li>选择侧边栏的扩展图标打开扩展栏。</li>
-  <li>搜索cpptools。</li>
-  <li>点击安装，安装完成后点击启用，重启后静待cpptools完成最后一步安装。</li>
-  <li>完成后打开一个文件夹。（空文件夹也行）</li>
-  <li>设置#include路径，按住<code>ctrl</code>+<code>shift</code>+<code>P</code>呼出命令窗口，输入<code>C/Cpp: Edit Configurations</code>回车，在变量name为Win32的字典里的includePath中的值，修改或添加为<code>&quot;D:/MinGW/include&quot;</code>。</li>
-  <li>按住<code>ctrl</code>+<code>shift</code>+<code>P</code>呼出命令窗口，输入<code>C/Cpp: Switch a Configuration</code>回车，选择<code>Win32</code>。</li>
-  <li>设置task,按住<code>ctrl</code>+<code>shift</code>+<code>P</code>呼出命令窗口，输入<code>Tasks: Configure Task Runner</code>回车，选择<code>Others</code>。把tasks.json修改为以下形式：</li>
-</ol>
-<figure class="highlight">
-  <table>
-    <tr>
-      <td class="gutter">
-        <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre>
-      </td>
-      <td class="code">
-        <pre><div class="line">&#123;</div><div class="line">    "version": "0.1.0",</div><div class="line">    "command": "cmd",</div><div class="line">    "isShellCommand": false,</div><div class="line">    "showOutput": "always",</div><div class="line">    "args": ["/C"],</div><div class="line">    "tasks": [</div><div class="line">        &#123;</div><div class="line">            "taskName": "build",</div><div class="line">            "suppressTaskName": true,</div><div class="line">            "echoCommand": true,</div><div class="line">            "args": ["g++", "-g", "$&#123;fileBasename&#125;", "-o", "$&#123;fileBasenameNoExtension&#125;.out"],</div><div class="line">            "showOutput": "silent",</div><div class="line">            "isBuildCommand": true, // 绑定 Ctrl+Shift+B 快捷键</div><div class="line">            "problemMatcher": &#123;</div><div class="line">                "owner": "cpp",</div><div class="line">                "fileLocation": ["relative", "$&#123;workspaceRoot&#125;"],</div><div class="line">                "pattern": &#123;</div><div class="line">                    "regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",</div><div class="line">                    "file": 1,</div><div class="line">                    "line": 2,</div><div class="line">                    "column": 3,</div><div class="line">                    "severity": 4,</div><div class="line">                    "message": 5</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;,</div><div class="line">        &#123;</div><div class="line">            "taskName": "clear",</div><div class="line">            "suppressTaskName": true,</div><div class="line">            "args": ["del", "*.out"],</div><div class="line">            "showOutput": "never"</div><div class="line">        &#125;</div><div class="line">    ]</div><div class="line">&#125;</div></pre>
-      </td>
-    </tr>
-  </table>
-</figure>
-<h1 id="使用">
-  <a href="#使用" class="headerlink" title="使用"></a>使用</h1>
-<p>写一个简单的C++代码，新建一个hello.cpp文件</p>
-<figure class="highlight cpp">
-  <table>
-    <tr>
-      <td class="gutter">
-        <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre>
-      </td>
-      <td class="code">
-        <pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Hello world"</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre>
-      </td>
-    </tr>
-  </table>
-</figure>
-<h2 id="编译">
-  <a href="#编译" class="headerlink" title="编译"></a>编译</h2>
-<p>按住<code>ctrl</code>+<code>P</code>,输入<code>task build</code>回车，就能编译成功了。若是编译失败，错误信息会出现在左下角。</p>
-<blockquote>
-  <p>按住<code>ctrl</code>+<code>shift</code>+<code>b</code>也可以执行编译命令</p>
-</blockquote>
-<h2 id="运行">
-  <a href="#运行" class="headerlink" title="运行"></a>运行</h2>
-<p>按住<code>ctrl</code>+<code>~</code>弹出CMD窗口，输入<code>hello.cpp.out</code>即可运行编译成功的程序</p>
-<blockquote>
-  <p>每次编译完成都会在目录下生成<code>同文件名</code>+<code>.out</code>的可执行程序，<br>运行<code>task clear</code>命令可以清除所有<code>.out</code>文件，<br>运行<code>task build</code>命令编译。</p>
-</blockquote>
-<h2 id="Debug-配置">
-  <a href="#Debug-配置" class="headerlink" title="Debug 配置"></a>Debug 配置</h2>
-<p>在<code>.vscode</code>下添加<code>launch.json</code>文件</p>
-<figure class="highlight">
-  <table>
-    <tr>
-      <td class="gutter">
-        <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre>
-      </td>
-      <td class="code">
-        <pre><div class="line">&#123;</div><div class="line">    "version": "0.2.0",</div><div class="line">    "configurations": [</div><div class="line">        &#123;</div><div class="line">            "name": "C++ Launch",</div><div class="line">            "type": "cppdbg",</div><div class="line">            "request": "launch",</div><div class="line">            "program": "$&#123;cwd&#125;/$&#123;fileBasenameNoExtension&#125;.out",</div><div class="line">            "args": ["&lt;", "in.ini", "&gt;", "out.txt"], // 通常为空</div><div class="line">            "stopAtEntry": true, //当程序启动时，debug cursor停止在文件首行</div><div class="line">            "cwd": "$&#123;workspaceRoot&#125;",</div><div class="line">            "environment": [],</div><div class="line">            "externalConsole": true,</div><div class="line">            "MIMode": "gdb",</div><div class="line">            "miDebuggerPath": "gdb.exe",</div><div class="line">            "preLaunchTask": "build"</div><div class="line">        &#125;</div><div class="line">    ]</div><div class="line">&#125;</div></pre>
-      </td>
-    </tr>
-  </table>
-</figure>
-<p>窗口焦点返回到<code>hello.cpp</code>文件上，在编辑器行号旁点击鼠标左键添加断点<br>或者按<code>F9</code>添加行断点，<code>shift</code>+<code>F9</code>添加列断点<br>右击断点编辑断点条件</p>
-<p>按住<code>F5</code>进入<strong>DEBUG</strong>模式<br>按住<code>ctrl</code>+<code>shift</code>+<code>D</code>显示调试侧边栏，<br>按住<code>ctrl</code>+<code>shift</code>+<code>Y</code>显示调试控制台，</p>
-<ul>
-  <li><code>F5</code> 继续运行</li>
-  <li><code>F11</code> 单步调试</li>
-  <li><code>shift</code>+<code>F11</code> 单步跳出</li>
-  <li><code>F10</code> 单步跳过</li>
-</ul>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;官方文档至今还没翻译成中文，足足琢磨了好几天明白了一些VS Code的功能。&lt;br&gt;现在给大家分享以下。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Others" scheme="http://linw1995.com/categories/Others/"/>
-    
-    
-      <category term="VSCode" scheme="http://linw1995.com/tags/VSCode/"/>
-    
-      <category term="C++" scheme="http://linw1995.com/tags/C/"/>
     
   </entry>
   

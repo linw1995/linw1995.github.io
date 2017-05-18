@@ -44,7 +44,7 @@
     <link href="http://linw1995.com/2017/05/05/%E4%BC%AA%E9%9A%8F%E6%9C%BA%E6%95%B0/"/>
     <id>http://linw1995.com/2017/05/05/伪随机数/</id>
     <published>2017-05-05T14:42:12.000Z</published>
-    <updated>2017-05-08T10:38:29.189Z</updated>
+    <updated>2017-05-18T09:16:29.435Z</updated>
     
     <content type="html"><![CDATA[<h2 id="序">
   <a href="#序" class="headerlink" title="序"></a>序</h2>
@@ -134,7 +134,7 @@
   <a href="#概率密度图像" class="headerlink" title="概率密度图像"></a>概率密度图像</h4><img src="/2017/05/05/伪随机数/t01.png" alt="Probability density" title="Probability density">
 <h3 id="指数分布">
   <a href="#指数分布" class="headerlink" title="指数分布"></a>指数分布</h3>
-<p>指数分布的概率密度函数为：<br>$$<br>p(x)=<br>\begin{cases}<br>\lambda e^{-\lambda x} &amp;,x\gt 0 \\<br>0 \qquad &amp;,x\le 0<br>\end{cases} \qquad (\lambda \gt 0)<br>$$<br>计算累积分布函数：<br>$$<br>F(x)=1-e^{-\lambda x}<br>$$<br>计算逆累积分布函数：<br>$$<br>F^{-1}(p)=\frac{-ln(1-p)}{\lambda}<br>$$<br>利用上面的公式我们就可以产生符合指数分布的随机数。</p>
+<p>指数分布的概率密度函数为：<br>$$<br>p(x)=\lambda e^{-\lambda x} ,x\gt 0 \qquad (\lambda \gt 0)<br>$$<br>计算累积分布函数：<br>$$<br>F(x)=1-e^{-\lambda x}<br>$$<br>计算逆累积分布函数：<br>$$<br>F^{-1}(p)=\frac{-ln(1-p)}{\lambda}<br>$$<br>利用上面的公式我们就可以产生符合指数分布的随机数。</p>
 <h4 id="Python-implementation-2">
   <a href="#Python-implementation-2" class="headerlink" title="Python implementation"></a>Python implementation</h4>
 <figure class="highlight python">
@@ -151,9 +151,40 @@
 </figure>
 <h4 id="概率密度图像-1">
   <a href="#概率密度图像-1" class="headerlink" title="概率密度图像"></a>概率密度图像</h4><img src="/2017/05/05/伪随机数/t02.png" alt="Probability density" title="Probability density">
+<h3 id="正态分布">
+  <a href="#正态分布" class="headerlink" title="正态分布"></a>正态分布</h3>
+<p>正态分布的概率密度函数为<br>$$<br>p(x)=\frac{1}{\sqrt{2\pi\sigma^2}}e^{-\frac{(x-\mu)^2}{2\sigma^2}}<br>$$<br>计算累积分布函数：</p>
+<ul>
+  <li>
+    <p>假设现在有两个独立的标准正态分布$X\sim N(0,1)$和$Y\sim N(0,1)$，由于二者相互独立，则联合概率密度函数为：<br> $$<br> p(x,y)=p(x)\cdot p(y)=\frac{1}{\sqrt{2\pi}}e^{-\frac{x^2}{2}}\cdot \frac{1}{\sqrt{2\pi}}e^{-\frac{y^2}{2}}<br> =\frac{1}{2\pi}e^{-\frac{x^2+y^2}{2}}<br> $$</p>
+  </li>
+  <li>
+    <p>做极坐标变换，则$x=R\cos\theta$，$y=R\sin\theta$，则有：<br> $$<br> \frac{1}{2\pi}e^{-\frac{x^2+y^2}{2}}=\frac{1}{2\pi}e^{-\frac{R^2}{2}}<br> $$</p>
+  </li>
+  <li>这个结果可以看作是两个概率分布的密度函数的乘积，设其中一个是$[0, 2\pi]$上的均匀分布$\theta\sim Unif(0,2\pi)=\frac{1}{2\pi}$，则另外一个密度函数为：<br> $$<br> p(R)=e^{-\frac{R^2}{2}}<br> $$</li>
+  <li>计算其累计分布函数：<br> $$<br> F(r)=1-e^{-\frac{r^2}{2}}<br> $$</li>
+</ul>
+<p>计算逆累积分布函数：<br>$$<br>F^{-1}(p)=\sqrt{-2\ln(1-p)}<br>$$</p>
+<p>根据<strong>反变换法</strong>，我们可以根据上式得出符合$p(R)$的分布，而如果$p$是均匀分布的，则$u_1=1-p$也是均匀分布的，则：<br>$$<br>X = R\cdot\cos\theta=\sqrt{-2\ln u_1}\cdot\cos (2\pi u_2) \\<br>Y = R\cdot\sin\theta=\sqrt{-2\ln u_1}\cdot\sin (2\pi u_2)<br>$$<br>利用以上任意一式即可生成符合正态分布的随机数，这个过程称作<strong>Box-Muller变换</strong>。</p>
+<h4 id="Python-implementation-3">
+  <a href="#Python-implementation-3" class="headerlink" title="Python implementation"></a>Python implementation</h4>
+<figure class="highlight python">
+  <table>
+    <tr>
+      <td class="gutter">
+        <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre>
+      </td>
+      <td class="code">
+        <pre><div class="line"><span class="keyword">import</span> math</div><div class="line"></div><div class="line">random = Random(A=<span class="number">65539</span>, C=<span class="number">0</span>, M=<span class="number">2</span>**<span class="number">31</span>, seed=<span class="number">1</span>)</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">NormalDistributionFactory</span><span class="params">(mu, sigma)</span>:</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">normal_distribution</span><span class="params">()</span>:</span></div><div class="line">        u1 = random()</div><div class="line">        u2 = random()</div><div class="line">        z = math.sqrt(<span class="number">-2</span>*math.log(u1, math.e)) * math.cos(<span class="number">2</span> * math.pi * u2)</div><div class="line">        <span class="comment"># z = math.sqrt(-2*math.log(u1, math.e)) * math.sin(2 * math.pi * u2)</span></div><div class="line">        <span class="keyword">return</span> z * sigma + mu</div><div class="line"></div><div class="line">    <span class="keyword">return</span> normal_distribution</div></pre>
+      </td>
+    </tr>
+  </table>
+</figure>
+<h4 id="概率密度图像-2">
+  <a href="#概率密度图像-2" class="headerlink" title="概率密度图像"></a>概率密度图像</h4><img src="/2017/05/05/伪随机数/t03.png" alt="Probability density" title="Probability density">
 <h2 id="结论">
   <a href="#结论" class="headerlink" title="结论"></a>结论</h2>
-<p>以上简单的讲了如何用<strong>线性同余法</strong>来生成均匀分布在$[0, 1)$间的随机数，再利用<strong>反变换法</strong>生成非均匀分布的伪随机数，例如<strong>指数分布</strong>。<br>还以用可以生成符合<strong>正态分布</strong>、<strong>泊松分布</strong>、<strong>二项式分布</strong>等的随机数。这是本文没用提到的内容，能力有限。 :)</p>
+<p>以上简单的讲了如何用<strong>线性同余法</strong>来生成均匀分布在$[0, 1)$间的随机数，再利用<strong>反变换法</strong>生成非均匀分布的伪随机数，例如<strong>指数分布</strong>,<strong>正态分布</strong>。</p>
 <h2 id="参考">
   <a href="#参考" class="headerlink" title="参考"></a>参考</h2>
 <blockquote class="pullquote">
@@ -162,6 +193,7 @@
     <li><a href="https://zh.wikipedia.org/wiki/%E7%B7%9A%E6%80%A7%E5%90%8C%E9%A4%98%E6%96%B9%E6%B3%95" target="_blank" rel="external">线性同余法</a></li>
     <li><a href="https://en.wikipedia.org/wiki/Spectral_test" target="_blank" rel="external">Spectral test</a></li>
     <li><a href="https://en.wikipedia.org/wiki/Inverse_transform_sampling" target="_blank" rel="external">反变换法Inverse transform sampling</a></li>
+    <li><a href="https://en.wikipedia.org/wiki/Box%E2%80%93Muller_transform" target="_blank" rel="external">Box–Muller transform</a></li>
   </ul>
 </blockquote>]]></content>
     
@@ -2363,9 +2395,9 @@ myprojec/
     
       <category term="Python" scheme="http://linw1995.com/tags/Python/"/>
     
-      <category term="Test" scheme="http://linw1995.com/tags/Test/"/>
-    
       <category term="VSCode" scheme="http://linw1995.com/tags/VSCode/"/>
+    
+      <category term="Test" scheme="http://linw1995.com/tags/Test/"/>
     
   </entry>
   

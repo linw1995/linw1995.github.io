@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://linw1995.com/"/>
-  <updated>2017-05-21T03:39:14.352Z</updated>
+  <updated>2017-05-21T14:33:18.217Z</updated>
   <id>http://linw1995.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://linw1995.com/2017/05/21/%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%96%B9%E6%B3%95%E5%8F%8A%E5%BA%94%E7%94%A8/"/>
     <id>http://linw1995.com/2017/05/21/蒙特卡洛方法及应用/</id>
     <published>2017-05-20T19:03:20.000Z</published>
-    <updated>2017-05-21T03:39:14.352Z</updated>
+    <updated>2017-05-21T14:33:18.217Z</updated>
     
     <content type="html"><![CDATA[<blockquote>
   <p>蒙特卡洛方法（英语：Monte Carlo method），也称统计模拟方法，是1940年代中期由于科学技术的发展和电子计算机的发明，而提出的一种以概率统计理论为指导的数值计算方法。是指使用随机数（或更常见的伪随机数）来解决很多计算问题的方法。<br>20世纪40年代，在冯·诺伊曼，斯塔尼斯拉夫·乌拉姆和尼古拉斯·梅特罗波利斯在洛斯阿拉莫斯国家实验室为核武器计划工作时，发明了蒙特卡洛方法。因为乌拉姆的叔叔经常在摩纳哥的蒙特卡洛赌场输钱得名，而蒙特卡罗方法正是以概率为基础的方法。<br>与它对应的是确定性算法。<br>蒙特卡洛方法在金融工程学，宏观经济学，生物医学，计算物理学（如粒子输运计算、量子热力学计算、空气动力学计算）等领域应用广泛。</p>
@@ -49,9 +49,9 @@
 <p>还有另外一种蒙特卡罗积分方法是基于计算的平均值理论，即函数的积分结果取决被积函数$f(x)$在$a\le x\le b$的平均值。为了确定这个平均值，用随机的$x_i$来取代规律的$x_i$，抽样平均值方法的积分估计值$F_n$为：<br>$$<br>F_n=(b-a)\lt f\gt=\frac{b-a}{n}\sum^n_{i=1}f(x_i)<br>$$</p>
 <h3 id="调制随机数-Metropolis–Hastings算法">
   <a href="#调制随机数-Metropolis–Hastings算法" class="headerlink" title="调制随机数(Metropolis–Hastings算法)"></a>调制随机数(Metropolis–Hastings算法)</h3>
-<p>在1953年Nicholas Metropolis, Arianna W. Rosenbluth, Marshall N. Rosenbluth, Augusta H. Teller, 和 Edward Teller提出了产生任意的非均匀分布的另外一个方法。在1970年被 W. K. Hastings 扩展到更普遍的情况，所以该算法被称作<strong>Metropolis–Hastings算法</strong>。该算法整个过程形成一个马尔科夫链(MCMC)。</p>
-<p>我们常见的概率分布，无论是连续还是离散的分布，都可以基于均匀分布的样本来生成。无论是正态分布、指数分布等等，都可以用数学变换来得到。可当$p(x)$的形式很复杂，或者$p(x)$是一个高维的分布的时候，就很难生成符合该分布的样本了。<strong>而Metropolis-Hastings算法解决了这个问题，给定一个概率分布函数，即可生成符合这一概率分布的样本。</strong></p>
-<p>要想明白<strong>Metropolis–Hastings算法</strong>，就想要明白<strong>马尔可夫链（Markov Chain）</strong>及<strong>马尔可夫收敛定理（Markov Convergence Theore）</strong>。</p>
+<p>在1953年Nicholas Metropolis, Arianna W. Rosenbluth, Marshall N. Rosenbluth, Augusta H. Teller, 和 Edward Teller提出了产生任意的非均匀分布的另外一个方法。在1970年被 W. K. Hastings 扩展到更普遍的情况，所以该算法被称作<strong>Metropolis–Hastings采样算法</strong>。该算法整个过程形成一个马尔科夫链(MCMC)。</p>
+<p>我们常见的概率分布，无论是连续还是离散的分布，都可以基于均匀分布的样本来生成。无论是正态分布、指数分布等等，都可以用数学变换来得到。可当$p(x)$的形式很复杂，或者$p(x)$是一个高维的分布的时候，就很难生成符合该分布的样本了。<strong>而Metropolis-Hastings采样算法解决了这个问题，给定一个概率分布函数，即可生成符合这一概率分布的样本。</strong></p>
+<p>要想明白<strong>Metropolis–Hastings采样算法</strong>，就想要明白<strong>马尔可夫链（Markov Chain）</strong>及<strong>马尔可夫收敛定理（Markov Convergence Theore）</strong>。</p>
 <h4 id="马尔可夫链（Markov-Chain）">
   <a href="#马尔可夫链（Markov-Chain）" class="headerlink" title="马尔可夫链（Markov Chain）"></a>马尔可夫链（Markov Chain）</h4>
 <p>先举个简单的例子，马拉松比赛跑者众多，几万人跑步。假设一万个人一起出发，分为三个梯队，第一梯队1k个人，第二2k个人，第三7k个人。<br>这三个梯队间的转移概率如下<br>$$<br>\begin{array}{c|ccc}<br>状态 &amp; 第一梯队 &amp; 第二梯队 &amp; 第三梯队 \\<br>\hline<br>第一梯队 &amp; 0.65 &amp; 0.30 &amp; 0.05 \\<br>第二梯队 &amp; 0.15 &amp; 0.60 &amp; 0.25
@@ -77,24 +77,41 @@
 <ol>
   <li>该定理中马氏链的状态不要求有限，可以是无穷多个的。</li>
   <li>两个状态$i,j$是联通的，并非指直接一步即可从$i$转移到$j$($P_{ij}\gt0$)，而是值$i$与$j$之间可以通过有限步$n$转移到达($P_{ij}^n\gt0)。<br> 马氏链的任何两个状态<strong>联通</strong>是指存在一个$n$，使得$\forall i,\forall j,\quad P^n_{ij} \gt 0$。</li>
-  <li>我们用$X_i$表示在马氏链上跳转第$i$步后所处的状态，如果$\displaystyle \lim_{n\to\infty}P^n_{ij}=\pi(j)$存在，即可证明以上定理的第二个结论。<br> $<br> \begin{align}<br> P(X_{n+1}=j)&amp;=\sum^\infty_{i=0}P(X_n=i)P(X_{n+1}=j|X_n=i) \\<br> &amp;=\sum^\infty_{i=0}P(X_n=i)P_{ij}<br> \end{align}<br>    $<br> 两边同时对$n$取极限可得，$\displaystyle \pi(j) = \sum_{i=0}^{\infty}\pi(i)P_{ij}$。</li>
+  <li>我们用$X_i$表示在马氏链上跳转第$i$步后所处的状态，如果$\displaystyle \lim_{n\to\infty}P^n_{ij}=\pi(j)$存在，即可证明以上定理的第二个结论。<br> $<br> \begin{align}<br> P(X_{n+1}=j)&amp;=\sum^\infty_{i=0}P(X_n=i)P(X_{n+1}=j\mid X_n=i) \\<br> &amp;=\sum^\infty_{i=0}P(X_n=i)P_{ij}<br> \end{align}<br>    $<br> 两边同时对$n$取极限可得，$\displaystyle \pi(j) = \sum_{i=0}^{\infty}\pi(i)P_{ij}$。</li>
 </ol>
 <p><strong>可以利用MC的平稳分布，来生成符合某些难以生成的概率分布的随机数。</strong>从初始概率分布$\pi_0$出发，每一次在马氏链上做状态转移时，记$X_i$的概率分布为$\pi_i$，则有：<br>$$<br>\begin{align}<br>&amp;X_0\sim\pi_0(x) \\<br>&amp;X_i\sim\pi_i(x), \quad \pi_i(x)=\pi_{i-1}(x)P=\pi_0(x)P^n<br>\end{align}<br>$$<br>由于<strong>马尔可夫收敛定理（Markov Convergence Theore）</strong>，概率分布$\pi_i(x)$将收敛到平稳分布$\pi(x)$。假设到第$n$的时候马氏链收敛，则有：<br>$$<br>\begin{align}<br>X_0
   &amp; \sim \pi_0(x) \\<br>X_1 &amp; \sim \pi_1(x) \\<br>&amp; \cdots \\<br>X_n &amp; \sim \pi_n(x)=\pi(x) \\<br>X_{n+1} &amp; \sim \pi(x) \\<br>X_{n+2}&amp; \sim \pi(x) \\<br>&amp; \cdots<br>\end{align}<br>$$<br>所以$X_n,X_{n+1},X_{n+2},\cdots \sim \pi(x)$都是同分布的随机变量。当然他们并不独立。如果我们从一个具体的初始状态
   x0x0 开始,沿着马氏链按照概率转移矩阵做跳转，那么我们得到一个转移序列$x_0, x_1, x_2, \cdots x_n, x_{n+1}\cdots$，由于马氏链的收敛行为，$x_n, x_{n+1},\cdots$都将是平稳分布$\pi(x)$的样本。</p>
-<h4 id="Metropolis-Hastings算法">
-  <a href="#Metropolis-Hastings算法" class="headerlink" title="Metropolis-Hastings算法"></a>Metropolis-Hastings算法</h4>
-<p>结合蒙特卡罗方法，构造概率转移矩阵，使得马尔可夫链的平稳分布恰好符合我们想要的分布$P(x)$。这个方式被称作<strong>马尔科夫蒙特卡洛（MCMC|Markov Chain Monte Carlo）方法</strong>，而<strong>Metropolis-Hastings算法</strong>为其中的一种常用的改进算法。</p>
-<p>如果非周期马氏链的转移矩阵$P$和分布$\pi(x)$满足<br>$$<br>\pi(i)P_{ij}=\pi(j)P_{ji},\quad \forall i,\forall j<br>$$<br>则$\pi(x)$是马氏链的平稳分布，上式被称为<strong>细致平稳条件(detailed balance condition)</strong></p>
+<h4 id="Metropolis-Hastings采样算法">
+  <a href="#Metropolis-Hastings采样算法" class="headerlink" title="Metropolis-Hastings采样算法"></a>Metropolis-Hastings采样算法</h4>
+<p>结合蒙特卡罗方法，构造概率转移矩阵，使得马尔可夫链的平稳分布恰好符合我们想要的分布$P(x)$。这个方式被称作<strong>马尔科夫蒙特卡洛（MCMC|Markov Chain Monte Carlo）方法</strong>，而<strong>Metropolis-Hastings采样算法</strong>为其中的一种常用的改进算法。</p>
+<p>如果非周期马氏链的转移矩阵$P$和分布$\pi(x)$满足<br>$$<br>\pi(i)P_{ij}=\pi(j)P_{ji},\quad \forall i,\forall j \tag{一}\label{0}<br>$$<br>则$\pi(x)$是马氏链的平稳分布，上式被称为<strong>细致平稳条件(detailed balance condition)</strong>。</p>
+<p>其实这个定理是显而易见的，因为<strong>细致平稳条件</strong>$\eqref{0}$的物理含义就是，对于任何两个状态$i,j$，从$i$转移出去到$j$而丢失的的概率质量，恰好会被从$j$转移回$i$的概率质量补充回来，所以状态$i$上的概率质量$\pi(i)$是稳定的，即$\pi(x)$是马氏链的平稳分布。</p>
+<p>由<strong>细致平稳条件</strong>$\eqref{0}$可得<br>$$<br>\begin{align}<br>&amp; \sum_{i=1}^\infty \pi(i)P_{ij} = \sum_{i=1}^\infty \pi(j)P_{ji}<br>= \pi(j) \sum_{i=1}^\infty P_{ji} = \pi(j) \\<br> \implies \quad &amp;\pi P = \pi<br>\end{align}<br>$$<br>由于$\pi$是方程$\pi
+  P=\pi$的解，所以$\pi$是平稳分布。</p>
+<p>假设我们已经有一个转移矩阵为$Q$的马氏链，显然未收敛时，有<br>$$<br>p(i)q(i,j)\neq p(j)q(j,i)<br>$$<br>其中$q(i,j)$表示从状态$i$转移到状态$j$的概率，也可写作$q(j|i)$或者$q(i\to j)$。<br>上式不满足<strong>细致平稳条件</strong>$\eqref{0}$，所以$p(x)$不可能是这个马氏链的平稳分布。如果我们对马氏链进行改造，使得<strong>细致平稳条件</strong>$\eqref{0}$成立？尝试引入一个$\alpha(i,j)$，使得两边相等<br>$$<br>p(i)q(i,j)\alpha(i,j)=p(j)q(j,i)\alpha(j,j)
+  \tag{二}\label{1}<br>$$<br>我们称$\alpha(i,j)$为接受率，按照对称性，得<br>$$<br>\alpha(i,j)= p(j) q(j,i) \\<br>\alpha(j,i) = p(i) q(i,j)<br>$$<br>所以$\eqref{1}$就成立了，所以有<br>$$<br>p(i) \underbrace{q(i,j)\alpha(i,j)}_{Q’(i,j)}<br>= p(j) \underbrace{q(j,i)\alpha(j,i)}_{Q’(j,i)}
+  \tag{三}\label{2}<br>$$<br>这样就把原来的转移矩阵$Q$的马氏链，改造成一个具有新的转移矩阵$Q’$的马氏链,而$Q’$恰好满足<strong>细致平稳条件</strong>$\eqref{0}$，这样$p(x)$就是这个马氏链$Q’$的平稳分布。<br>$$<br>\require{AMScd}<br>\begin{CD}<br>\cdots @&gt;&gt;&gt; x_i @&gt;q(i,j)&gt;&gt; x_j @&gt;&gt;&gt; \cdots
+  \\<br>\\<br>@. \begin{matrix}1-\alpha(i,j) \\ 拒绝转移\end{matrix} @. \begin{matrix}\alpha(i,j) \\ 接受转移\end{matrix}<br>\end{CD}<br>$$<br>接受率可以这么理解，当马氏链从状态$i$以$q(i,j)$的概率跳转到状态$j$时，以$\alpha(i,j)$的概率去接受这个转移，那么马氏链新的转移概率为$q(i,j)\alpha(i,j)$。</p>
+<p>假设我们已经拥有了一个转移矩阵$Q$，把上面的过程整理一下，我们就得到了如下的用于产生符合概率分布$p(x)$的随机数算法。<br>$$<br>\begin{array}{l}<br>MCMC 采样算法 \\<br>\hline<br>1. 初始化马氏链初始状态X_0=x_0 \\<br>2. 对于t=0,1,2,\cdots，循环以下过程进行采样 \\<br>\qquad \bullet \quad 第t个时刻马氏链状态为X_t=x_t，采样y\sim q(x,x_t) \\<br>\qquad
+  \bullet \quad 从均匀分布采样u\sim Uniform(0,1) \\<br>\qquad \bullet \quad 如果u \lt \alpha(x_t,y) = p(y)q(x_t,y)则接受转移x_t \to y,即X_{t+1} = y \\<br>\qquad \bullet \quad 否则不接受转移，即X_{t+1}=x_t \\<br>\end{array}<br>$$<br>上述过程中$p(x)$，$q(x,y)$说的都是离散的情况，实际上即便是连续的，以上算法仍然有效。</p>
+<p>以上MCMC采样算法还有个小问题，转移过程中若是$\alpha(i,j)$偏小（毕竟是两个分布$p(x)$和$q(x,y)$的乘积），而$u \sim Uniform(0,1)$难以小于$\alpha(i,j)$，这样算法过程中马氏链容易原地踏步，拒绝大量转移，这使得收敛到平稳分布$p(x)$的速度太慢。那如何提高接受率，加快收敛速度？</p>
+<p>假设$\alpha(i,j)=0.1,\alpha(j,i)=0.2$，此时满足<strong>细致平稳条件</strong>$\eqref{0}$，于是<br>$$<br>p(i)q(i,j)\times 0.1 = p(j)q(j,i) \times 0.2<br>$$<br>上式两边同时扩大5倍<br>$$<br>p(i)q(i,j)\times 0.5 = p(j)q(j,i) \times 1<br>$$<br>这样我们把$\alpha(j,i)$提高到$1$，那么从状态$i$到$j$必然会转移，而且<strong>细致平稳条件</strong>$\eqref{0}$没有被打破！这启发我们可以把<strong>细致平稳条件</strong>$\eqref{2}$式中的$\alpha(i,j)$，$\alpha(j,i)$同比例放大，使得两者中最大一个放大到$1$，这样我们就提高了算法中转移的接受率，加快收敛速度。<br>$$<br>\alpha(i,j)
+  = \min \left\{ \frac{p(j)q(j,i)}{p(i)q(i,j)} , 1 \right\}<br>$$<br>于是对上述MCMC采样算法改造，我们就得到了<strong>Metropolis-Hastings算法</strong><br>$$<br>\begin{array}{l}<br>\text{Metropolis-Hastings 采样算法} \\<br>\hline<br>1. 初始化马氏链初始状态X_0=x_0 \\<br>2. 对于t=0,1,2,\cdots，循环以下过程进行采样
+  \\<br>\qquad \bullet \quad 第t个时刻马氏链状态为X_t=x_t，采样y\sim q(x,x_t) \\<br>\qquad \bullet \quad 从均匀分布采样u\sim Uniform(0,1) \\<br>\qquad \bullet \quad 如果u \lt \alpha(x_t,y) = \min\left\{\frac{p(j)q(j,i)}{p(i)q(i,j)},1\right\}则接受转移x_t \to y,即X_{t+1} = y \\<br>\qquad
+  \bullet \quad 否则不接受转移，即X_{t+1}=x_t \\<br>\end{array}<br>$$</p>
+<blockquote>
+  <p>代码<br><a href="https://gist.github.com/linw1995/b078c9cebd7f01aa7bfb46de8c6a8a04" target="_blank" rel="external">Gist | Metropolis-Hasting Algorithm</a></p>
+</blockquote> <img src="/2017/05/21/蒙特卡洛方法及应用/normal-distribution.png" alt="正态分布" title="正态分布"> <img src="/2017/05/21/蒙特卡洛方法及应用/two-dimemsion-somekind-distribution.png" alt="某种二维分布" title="某种二维分布">
+<h2 id="误差分析">
+  <a href="#误差分析" class="headerlink" title="误差分析"></a>误差分析</h2>
 <blockquote>
   <p>to be continued</p>
 </blockquote>
-<h2 id="误差分析">
-  <a href="#误差分析" class="headerlink" title="误差分析"></a>误差分析</h2>
-<h3 id="递归分层抽样-Recursive-stratified-sampling">
-  <a href="#递归分层抽样-Recursive-stratified-sampling" class="headerlink" title="递归分层抽样 Recursive stratified sampling"></a>递归分层抽样 Recursive stratified sampling</h3>
-<h3 id="重要抽样法-Importance-sampling">
-  <a href="#重要抽样法-Importance-sampling" class="headerlink" title="重要抽样法 Importance sampling"></a>重要抽样法 Importance sampling</h3>
+<h3 id="递归分层抽样（Recursive-stratified-sampling）">
+  <a href="#递归分层抽样（Recursive-stratified-sampling）" class="headerlink" title="递归分层抽样（Recursive stratified sampling）"></a>递归分层抽样（Recursive stratified sampling）</h3>
+<h3 id="重要抽样法（Importance-sampling）">
+  <a href="#重要抽样法（Importance-sampling）" class="headerlink" title="重要抽样法（Importance sampling）"></a>重要抽样法（Importance sampling）</h3>
 <h2 id="蒙特卡洛方法的其它应用">
   <a href="#蒙特卡洛方法的其它应用" class="headerlink" title="蒙特卡洛方法的其它应用"></a>蒙特卡洛方法的其它应用</h2>
 <p>Monte Carlo tree search, AI, Alpha go</p>
@@ -106,6 +123,7 @@
     <li><a href="https://en.wikipedia.org/wiki/Monte_Carlo_integration" target="_blank" rel="external">Monte Carlo integration | Wikipedia</a></li>
     <li><a href="https://en.wikipedia.org/wiki/Metropolis%E2%80%93Hastings_algorithm" target="_blank" rel="external">Metropolis–Hastings algorithm | Wikipedia</a></li>
     <li><a href="http://cos.name/2013/01/lda-math-mcmc-and-gibbs-sampling/" target="_blank" rel="external">LDA-math-MCMC 和 Gibbs Sampling | 统计之都</a></li>
+    <li>Rickjin靳志辉，LDA数学八卦，0.4 MCMC⁄Gibbs Sampling</li>
   </ul>
 </blockquote>]]></content>
     
@@ -509,9 +527,9 @@
       <category term="Algorithms" scheme="http://linw1995.com/categories/Algorithms/"/>
     
     
-      <category term="Python" scheme="http://linw1995.com/tags/Python/"/>
-    
       <category term="Data Structrue" scheme="http://linw1995.com/tags/Data-Structrue/"/>
+    
+      <category term="Python" scheme="http://linw1995.com/tags/Python/"/>
     
   </entry>
   
@@ -2502,9 +2520,9 @@ myprojec/
     
       <category term="Python" scheme="http://linw1995.com/tags/Python/"/>
     
-      <category term="Test" scheme="http://linw1995.com/tags/Test/"/>
-    
       <category term="VSCode" scheme="http://linw1995.com/tags/VSCode/"/>
+    
+      <category term="Test" scheme="http://linw1995.com/tags/Test/"/>
     
   </entry>
   

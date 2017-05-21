@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://linw1995.com/"/>
-  <updated>2017-05-11T13:20:06.577Z</updated>
+  <updated>2017-05-21T03:39:14.352Z</updated>
   <id>http://linw1995.com/</id>
   
   <author>
@@ -14,6 +14,113 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>蒙特卡洛方法及应用</title>
+    <link href="http://linw1995.com/2017/05/21/%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%96%B9%E6%B3%95%E5%8F%8A%E5%BA%94%E7%94%A8/"/>
+    <id>http://linw1995.com/2017/05/21/蒙特卡洛方法及应用/</id>
+    <published>2017-05-20T19:03:20.000Z</published>
+    <updated>2017-05-21T03:39:14.352Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote>
+  <p>蒙特卡洛方法（英语：Monte Carlo method），也称统计模拟方法，是1940年代中期由于科学技术的发展和电子计算机的发明，而提出的一种以概率统计理论为指导的数值计算方法。是指使用随机数（或更常见的伪随机数）来解决很多计算问题的方法。<br>20世纪40年代，在冯·诺伊曼，斯塔尼斯拉夫·乌拉姆和尼古拉斯·梅特罗波利斯在洛斯阿拉莫斯国家实验室为核武器计划工作时，发明了蒙特卡洛方法。因为乌拉姆的叔叔经常在摩纳哥的蒙特卡洛赌场输钱得名，而蒙特卡罗方法正是以概率为基础的方法。<br>与它对应的是确定性算法。<br>蒙特卡洛方法在金融工程学，宏观经济学，生物医学，计算物理学（如粒子输运计算、量子热力学计算、空气动力学计算）等领域应用广泛。</p>
+  <footer><strong>蒙特卡罗方法</strong><cite><a href="https://zh.wikipedia.org/wiki/%E8%92%99%E5%9C%B0%E5%8D%A1%E7%BE%85%E6%96%B9%E6%B3%95#firstHeading" target="_blank" rel="external">Wikipedia</a></cite></footer>
+</blockquote>
+<h2 id="基本思想">
+  <a href="#基本思想" class="headerlink" title="基本思想"></a>基本思想</h2>
+<p>把所求解的问题转换为某种随机分布的特征数，例如随机事件出现的概率，或者随机变量的期望值。通过随机抽样的方法，以随机事件出现的频率估计其概率，或者一抽样的数字特征估算随机变量的数学特征，并将其作为问题的解。</p>
+<h2 id="应用">
+  <a href="#应用" class="headerlink" title="应用"></a>应用</h2>
+<h3 id="求解圆周率">
+  <a href="#求解圆周率" class="headerlink" title="求解圆周率"></a>求解圆周率</h3><img src="/2017/05/21/蒙特卡洛方法及应用/pi.gif" alt="圆周率求解" title="圆周率求解">
+<p>圆形的面积为$A_s=\pi r^2$，正方形的面积为$A_q=(2r)^2$, 则产生一对随机数$(x_i, y_i)$落在圆内的概率为：<br>$$<br>p=\frac{A_s}{A_q}=\frac{\pi r^2}{(2r)^2}=\frac{\pi}{4}<br>$$<br>只要不断产生一对对随机数$(x_i, y_i)$，以随机事件（落在圆内）出现的频率估计其概率，再求解$\pi$。</p> <img src="/2017/05/21/蒙特卡洛方法及应用/pi.png" alt="误差与随机抽样次数的关系" title="误差与随机抽样次数的关系">
+<blockquote>
+  <p>代码<br><a href="https://gist.github.com/linw1995/28d70604f8d430177fd0496ae15eb763" target="_blank" rel="external">Gist | Monte Carlo method applied to approximating the value of π.</a></p>
+</blockquote>
+<h3 id="计算定积分">
+  <a href="#计算定积分" class="headerlink" title="计算定积分"></a>计算定积分</h3>
+<p>假设我们要求解$f(x)=x^2$在$[0, 2]$间的积分，即下图函数曲线与$x$轴围成的面积</p> <img src="/2017/05/21/蒙特卡洛方法及应用/x2.png" alt="$f(x)=x^2$在$[0, 2]$间的积分" title="$f(x)=x^2$在$[0, 2]$间的积分">
+<h4 id="偶然命中法">
+  <a href="#偶然命中法" class="headerlink" title="偶然命中法"></a>偶然命中法</h4>
+<p>像求解圆周率那样，只要求解出一对随机数$(x_i,y_i),x_i\in[0,2],y_i\in[0,4]$落在曲线下方的概率，即可求出$f(x)=x^2$在$[0, 2]$间的积分结果。<br>$$H(x, y)=\begin{cases}<br>1\qquad&amp;if\quad y \le f(x) \\<br>0 &amp;else<br>\end{cases}\\<br>F_n=A \frac{1}{n} \sum^{n}_{i=1} H(x_i,y_i) = h(b-a) \frac{1}{n}\sum^{n}_{i=1}
+  H(x_i,y_i)<br>$$</p>
+<h4 id="抽样平均法">
+  <a href="#抽样平均法" class="headerlink" title="抽样平均法"></a>抽样平均法</h4>
+<p>还有另外一种蒙特卡罗积分方法是基于计算的平均值理论，即函数的积分结果取决被积函数$f(x)$在$a\le x\le b$的平均值。为了确定这个平均值，用随机的$x_i$来取代规律的$x_i$，抽样平均值方法的积分估计值$F_n$为：<br>$$<br>F_n=(b-a)\lt f\gt=\frac{b-a}{n}\sum^n_{i=1}f(x_i)<br>$$</p>
+<h3 id="调制随机数-Metropolis–Hastings算法">
+  <a href="#调制随机数-Metropolis–Hastings算法" class="headerlink" title="调制随机数(Metropolis–Hastings算法)"></a>调制随机数(Metropolis–Hastings算法)</h3>
+<p>在1953年Nicholas Metropolis, Arianna W. Rosenbluth, Marshall N. Rosenbluth, Augusta H. Teller, 和 Edward Teller提出了产生任意的非均匀分布的另外一个方法。在1970年被 W. K. Hastings 扩展到更普遍的情况，所以该算法被称作<strong>Metropolis–Hastings算法</strong>。该算法整个过程形成一个马尔科夫链(MCMC)。</p>
+<p>我们常见的概率分布，无论是连续还是离散的分布，都可以基于均匀分布的样本来生成。无论是正态分布、指数分布等等，都可以用数学变换来得到。可当$p(x)$的形式很复杂，或者$p(x)$是一个高维的分布的时候，就很难生成符合该分布的样本了。<strong>而Metropolis-Hastings算法解决了这个问题，给定一个概率分布函数，即可生成符合这一概率分布的样本。</strong></p>
+<p>要想明白<strong>Metropolis–Hastings算法</strong>，就想要明白<strong>马尔可夫链（Markov Chain）</strong>及<strong>马尔可夫收敛定理（Markov Convergence Theore）</strong>。</p>
+<h4 id="马尔可夫链（Markov-Chain）">
+  <a href="#马尔可夫链（Markov-Chain）" class="headerlink" title="马尔可夫链（Markov Chain）"></a>马尔可夫链（Markov Chain）</h4>
+<p>先举个简单的例子，马拉松比赛跑者众多，几万人跑步。假设一万个人一起出发，分为三个梯队，第一梯队1k个人，第二2k个人，第三7k个人。<br>这三个梯队间的转移概率如下<br>$$<br>\begin{array}{c|ccc}<br>状态 &amp; 第一梯队 &amp; 第二梯队 &amp; 第三梯队 \\<br>\hline<br>第一梯队 &amp; 0.65 &amp; 0.30 &amp; 0.05 \\<br>第二梯队 &amp; 0.15 &amp; 0.60 &amp; 0.25
+  \\<br>第三梯队 &amp; 0.20 &amp; 0.10 &amp; 0.70<br>\end{array}<br>$$<br>使用矩阵来表示，概率转移矩阵如下：<br>$$<br>P = \begin{bmatrix}<br>0.65 &amp; 0.30 &amp; 0.05 \\<br>0.15 &amp; 0.60 &amp; 0.25 \\<br>0.30 &amp; 0.40 &amp; 0.30 \\<br>\end{bmatrix}<br>$$<br>假如这一刻的梯队分布为$\pi_0=\begin{bmatrix}\pi_0(0)&amp;\pi_0(1)&amp;\pi_0(2)\end{bmatrix}$，那么下一刻的分布矩阵将是$\pi_1=\pi_0P$，下下一刻的分布矩阵将是$\pi_2=\pi_1P=\pi_0P^2$，…，第$n$刻的分布矩阵将是$\pi_n=\pi_0P^n$。</p>
+<p>初始分布矩阵为$\pi_0=\begin{bmatrix}1.00k&amp;2.00k&amp;7.00k\end{bmatrix}$，则可以计算前n刻的分布情况<br>$$<br>\begin{array}{c|ccc}<br>第n刻 &amp; 第一梯队 &amp; 第二梯队 &amp; 第三梯队 \\<br>\hline<br>0 &amp; 1.00k &amp; 2.00k &amp; 7.00k \\<br>1 &amp; 3.05k &amp; 4.30k &amp; 2.65k
+  \\<br>2 &amp; 3.42k &amp; 4.55k &amp; 2.02k \\<br>3 &amp; 3.51k &amp; 4.57k &amp; 1.92k \\<br>4 &amp; 3.54k &amp; 4.56k &amp; 1.89k \\<br>5 &amp; 3.56k &amp; 4.56k &amp; 1.89k \\<br>6 &amp; 3.56k &amp; 4.56k &amp; 1.88k \\<br>7 &amp; 3.56k &amp; 4.56k
+  &amp; 1.88k \\<br>8 &amp; 3.56k &amp; 4.55k &amp; 1.88k \\<br>\dots &amp; \dots &amp; \dots &amp; \dots<br>\end{array}<br>$$<br>可以发现从第7刻开始，分布矩阵几乎就稳定不变了。这是怎么回事？换个初始分布矩阵$\pi_0=\begin{bmatrix}3.00k&amp;4.00k&amp;3.00k\end{bmatrix}$试试<br>$$<br>\begin{array}{c|ccc}<br>第n刻
+  &amp; 第一梯队 &amp; 第二梯队 &amp; 第三梯队 \\<br>\hline<br>0 &amp; 3.00k &amp; 4.00k &amp; 3.00k \\<br>1 &amp; 3.45k &amp; 4.50k &amp; 2.05k \\<br>2 &amp; 3.53k &amp; 4.55k &amp; 1.91k \\<br>3 &amp; 3.55k &amp; 4.56k &amp; 1.89k \\<br>4 &amp; 3.56k &amp; 4.56k
+  &amp; 1.88k \\<br>5 &amp; 3.56k &amp; 4.56k &amp; 1.88k \\<br>6 &amp; 3.56k &amp; 4.55k &amp; 1.88k \\<br>\dots &amp; \dots &amp; \dots &amp; \dots<br>\end{array}<br>$$<br>这次在第6刻就开始稳定不变了，而且两次给定不同的初始分布矩阵，最终都收敛到概率分布$\pi \times 10k=\begin{bmatrix}0.356&amp;0.455&amp;0.188\end{bmatrix}
+  \times 10k$。其中第二次收敛的速度更快，这是为什么呢？这说明收敛的行为和初始分布$\pi_0$无关，而与概率转移矩阵$P$决定的。<br>$$<br>P^5 = P^6 = \cdots = P^n= \begin{bmatrix}<br>0.356 &amp; 0.455 &amp; 0.188 \\<br>0.356 &amp; 0.455 &amp; 0.188 \\<br>0.356 &amp; 0.455 &amp; 0.188 \\<br>\end{bmatrix}<br>$$<br>显而易见，当$n$足够大时，转移矩阵的每一行都会收敛到$\pi=\begin{bmatrix}0.356
+  &amp; 0.455 &amp; 0.188\end{bmatrix}$。</p>
+<h4 id="马尔可夫收敛定理（Markov-Convergence-Theore）">
+  <a href="#马尔可夫收敛定理（Markov-Convergence-Theore）" class="headerlink" title="马尔可夫收敛定理（Markov Convergence Theore）"></a>马尔可夫收敛定理（Markov Convergence Theore）</h4>
+<p>如果一个非周期马氏链具有转移概率矩阵$P$，且它的任何两个状态是联通的，那么$\displaystyle \lim_{n\to\infty}P^n_{ij}$存在且与$i$无关，即$\displaystyle \lim_{n\to\infty}P^n_{ij}=\pi(j)$</p>
+<ol>
+  <li>$\displaystyle<br> \lim_{n \rightarrow \infty} P^n =\begin{bmatrix}<br> \pi(0) &amp; \pi(1) &amp; \cdots &amp; \pi(j) &amp; \cdots \\<br> \pi(0) &amp; \pi(1) &amp; \cdots &amp; \pi(j) &amp; \cdots \\<br> \cdots &amp; \cdots &amp; \cdots &amp; \cdots
+    &amp; \cdots \\<br> \pi(0) &amp; \pi(1) &amp; \cdots &amp; \pi(j) &amp; \cdots \\<br> \cdots &amp; \cdots &amp; \cdots &amp; \cdots &amp; \cdots \\<br> \end{bmatrix}<br> $</li>
+  <li>$\displaystyle \pi(j) = \sum_{i=0}^{\infty}\pi(i)P_{ij}$</li>
+  <li>$\pi$是方程$\pi P=\pi$的唯一非负解</li>
+</ol>
+<p>其中，$$<br>\pi = \begin{bmatrix}\pi(0) &amp; \pi(1) &amp; \cdots &amp; \pi(j) &amp; \cdots\end{bmatrix}, \quad \sum_{i=0}^{\infty} \pi_i = 1<br>$$$\pi$称为马氏链的平稳分布。</p>
+<p><strong>所有MCMC(Markov Chain Monte Carlo)方法都是以这个收敛定理作为理论基础的。</strong>下列是对定理内容的一些解释说明：</p>
+<ol>
+  <li>该定理中马氏链的状态不要求有限，可以是无穷多个的。</li>
+  <li>两个状态$i,j$是联通的，并非指直接一步即可从$i$转移到$j$($P_{ij}\gt0$)，而是值$i$与$j$之间可以通过有限步$n$转移到达($P_{ij}^n\gt0)。<br> 马氏链的任何两个状态<strong>联通</strong>是指存在一个$n$，使得$\forall i,\forall j,\quad P^n_{ij} \gt 0$。</li>
+  <li>我们用$X_i$表示在马氏链上跳转第$i$步后所处的状态，如果$\displaystyle \lim_{n\to\infty}P^n_{ij}=\pi(j)$存在，即可证明以上定理的第二个结论。<br> $<br> \begin{align}<br> P(X_{n+1}=j)&amp;=\sum^\infty_{i=0}P(X_n=i)P(X_{n+1}=j|X_n=i) \\<br> &amp;=\sum^\infty_{i=0}P(X_n=i)P_{ij}<br> \end{align}<br>    $<br> 两边同时对$n$取极限可得，$\displaystyle \pi(j) = \sum_{i=0}^{\infty}\pi(i)P_{ij}$。</li>
+</ol>
+<p><strong>可以利用MC的平稳分布，来生成符合某些难以生成的概率分布的随机数。</strong>从初始概率分布$\pi_0$出发，每一次在马氏链上做状态转移时，记$X_i$的概率分布为$\pi_i$，则有：<br>$$<br>\begin{align}<br>&amp;X_0\sim\pi_0(x) \\<br>&amp;X_i\sim\pi_i(x), \quad \pi_i(x)=\pi_{i-1}(x)P=\pi_0(x)P^n<br>\end{align}<br>$$<br>由于<strong>马尔可夫收敛定理（Markov Convergence Theore）</strong>，概率分布$\pi_i(x)$将收敛到平稳分布$\pi(x)$。假设到第$n$的时候马氏链收敛，则有：<br>$$<br>\begin{align}<br>X_0
+  &amp; \sim \pi_0(x) \\<br>X_1 &amp; \sim \pi_1(x) \\<br>&amp; \cdots \\<br>X_n &amp; \sim \pi_n(x)=\pi(x) \\<br>X_{n+1} &amp; \sim \pi(x) \\<br>X_{n+2}&amp; \sim \pi(x) \\<br>&amp; \cdots<br>\end{align}<br>$$<br>所以$X_n,X_{n+1},X_{n+2},\cdots \sim \pi(x)$都是同分布的随机变量。当然他们并不独立。如果我们从一个具体的初始状态
+  x0x0 开始,沿着马氏链按照概率转移矩阵做跳转，那么我们得到一个转移序列$x_0, x_1, x_2, \cdots x_n, x_{n+1}\cdots$，由于马氏链的收敛行为，$x_n, x_{n+1},\cdots$都将是平稳分布$\pi(x)$的样本。</p>
+<h4 id="Metropolis-Hastings算法">
+  <a href="#Metropolis-Hastings算法" class="headerlink" title="Metropolis-Hastings算法"></a>Metropolis-Hastings算法</h4>
+<p>结合蒙特卡罗方法，构造概率转移矩阵，使得马尔可夫链的平稳分布恰好符合我们想要的分布$P(x)$。这个方式被称作<strong>马尔科夫蒙特卡洛（MCMC|Markov Chain Monte Carlo）方法</strong>，而<strong>Metropolis-Hastings算法</strong>为其中的一种常用的改进算法。</p>
+<p>如果非周期马氏链的转移矩阵$P$和分布$\pi(x)$满足<br>$$<br>\pi(i)P_{ij}=\pi(j)P_{ji},\quad \forall i,\forall j<br>$$<br>则$\pi(x)$是马氏链的平稳分布，上式被称为<strong>细致平稳条件(detailed balance condition)</strong></p>
+<blockquote>
+  <p>to be continued</p>
+</blockquote>
+<h2 id="误差分析">
+  <a href="#误差分析" class="headerlink" title="误差分析"></a>误差分析</h2>
+<h3 id="递归分层抽样-Recursive-stratified-sampling">
+  <a href="#递归分层抽样-Recursive-stratified-sampling" class="headerlink" title="递归分层抽样 Recursive stratified sampling"></a>递归分层抽样 Recursive stratified sampling</h3>
+<h3 id="重要抽样法-Importance-sampling">
+  <a href="#重要抽样法-Importance-sampling" class="headerlink" title="重要抽样法 Importance sampling"></a>重要抽样法 Importance sampling</h3>
+<h2 id="蒙特卡洛方法的其它应用">
+  <a href="#蒙特卡洛方法的其它应用" class="headerlink" title="蒙特卡洛方法的其它应用"></a>蒙特卡洛方法的其它应用</h2>
+<p>Monte Carlo tree search, AI, Alpha go</p>
+<h2 id="参考">
+  <a href="#参考" class="headerlink" title="参考"></a>参考</h2>
+<blockquote class="pullquote">
+  <ul>
+    <li><a href="https://en.wikipedia.org/wiki/Monte_Carlo_method" target="_blank" rel="external">Monte Carlo method | Wikipedia</a></li>
+    <li><a href="https://en.wikipedia.org/wiki/Monte_Carlo_integration" target="_blank" rel="external">Monte Carlo integration | Wikipedia</a></li>
+    <li><a href="https://en.wikipedia.org/wiki/Metropolis%E2%80%93Hastings_algorithm" target="_blank" rel="external">Metropolis–Hastings algorithm | Wikipedia</a></li>
+    <li><a href="http://cos.name/2013/01/lda-math-mcmc-and-gibbs-sampling/" target="_blank" rel="external">LDA-math-MCMC 和 Gibbs Sampling | 统计之都</a></li>
+  </ul>
+</blockquote>]]></content>
+    
+    <summary type="html">
+    
+      使用随机数来解决问题
+    
+    </summary>
+    
+      <category term="Algorithms" scheme="http://linw1995.com/categories/Algorithms/"/>
+    
+    
+      <category term="Python" scheme="http://linw1995.com/tags/Python/"/>
+    
+  </entry>
   
   <entry>
     <title>分享 No One But You - Doug Paisley</title>
@@ -2395,9 +2502,9 @@ myprojec/
     
       <category term="Python" scheme="http://linw1995.com/tags/Python/"/>
     
-      <category term="VSCode" scheme="http://linw1995.com/tags/VSCode/"/>
-    
       <category term="Test" scheme="http://linw1995.com/tags/Test/"/>
+    
+      <category term="VSCode" scheme="http://linw1995.com/tags/VSCode/"/>
     
   </entry>
   
@@ -2863,60 +2970,6 @@ myprojec/
       <category term="Python" scheme="http://linw1995.com/tags/Python/"/>
     
       <category term="VSCode" scheme="http://linw1995.com/tags/VSCode/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Matplotlib 中文显示参数设置</title>
-    <link href="http://linw1995.com/2017/03/15/Matplotlib-%E4%B8%AD%E6%96%87%E6%98%BE%E7%A4%BA%E5%8F%82%E6%95%B0%E8%AE%BE%E7%BD%AE/"/>
-    <id>http://linw1995.com/2017/03/15/Matplotlib-中文显示参数设置/</id>
-    <published>2017-03-15T01:16:42.000Z</published>
-    <updated>2017-05-03T13:44:56.685Z</updated>
-    
-    <content type="html"><![CDATA[<p>在用Matplotlib库可视化时，难免会需要加上中文信息，可总是显示乱码出来。</p>
-<a id="more"></a>
-<p>给图加上中文信息时总是会出现中文乱码，这是因为matplotlib库里没有安装中文字体。</p>
-<ul>
-  <li>
-    <p>我们可以通过在代码头插入以下代码来，对matplotlib所用字体进行设置。</p>
-    <figure class="highlight python">
-      <table>
-        <tr>
-          <td class="gutter">
-            <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre>
-          </td>
-          <td class="code">
-            <pre><div class="line"><span class="comment">#coding:utf-8</span></div><div class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</div><div class="line">plt.rcParams[<span class="string">'font.sans-serif'</span>]=[<span class="string">'SimHei'</span>] <span class="comment">#用来正常显示中文标签</span></div><div class="line">plt.rcParams[<span class="string">'axes.unicode_minus'</span>]=<span class="keyword">False</span> <span class="comment">#用来正常显示负号</span></div><div class="line"><span class="comment">#有中文出现的情况，需要u'内容' py3就不需要加u</span></div></pre>
-          </td>
-        </tr>
-      </table>
-    </figure>
-  </li>
-  <li>
-    <p>一劳永逸</p>
-    <p> 通过以下命令得到matplotlib库的配置文件的地址</p>
-    <pre><code>python -c print(__import__(&apos;matplotlib&apos;).matplotlib_fname())
-</code></pre>
-    <p> 然后打开它，修改以下那一行</p>
-    <pre><code>#font.serif: DejaVu Serif, Bitstream Vera Serif, New Century Schoolbook, Century Schoolbook L, Utopia, ITC Bookman, Bookman, Nimbus Roman No9 L, Times New Roman, Times, Palatino, Charter, serif
-</code></pre>
-    <p> 去掉注释<code>#</code>符号，在<code>DejaVu Serif</code>前加入<code>SimHei,</code>，<br> 对下列<code>#font.sans-serif</code>也是如此操作。<br> 同样地对<code>axes.unicode_minus</code>也是如此修改，去掉注释<code>#</code>符号，把<code>True</code>改为<code>False</code>。</p>
-  </li>
-</ul>
-<p>然后运行一下包含中文字符的代码,见证奇迹时候到了。</p> <img src="/2017/03/15/Matplotlib-中文显示参数设置/figure_1.png" alt="figure" title="figure">]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;在用Matplotlib库可视化时，难免会需要加上中文信息，可总是显示乱码出来。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Python" scheme="http://linw1995.com/categories/Python/"/>
-    
-    
-      <category term="Python" scheme="http://linw1995.com/tags/Python/"/>
-    
-      <category term="Matplotlib" scheme="http://linw1995.com/tags/Matplotlib/"/>
     
   </entry>
   

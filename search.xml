@@ -59,7 +59,7 @@
 <p><strong>所有MCMC(Markov Chain Monte Carlo)方法都是以这个收敛定理作为理论基础的。</strong>下列是对定理内容的一些解释说明：</p>
 <ol>
   <li>该定理中马氏链的状态不要求有限，可以是无穷多个的。</li>
-  <li>两个状态$i,j$是联通的，并非指直接一步即可从$i$转移到$j$($P_{ij}\gt0$)，而是值$i$与$j$之间可以通过有限步$n$转移到达($P_{ij}^n\gt0)。<br> 马氏链的任何两个状态<strong>联通</strong>是指存在一个$n$，使得$\forall i,\forall j,\quad P^n_{ij} \gt 0$。</li>
+  <li>两个状态$i,j$是联通的，并非指直接一步即可从$i$转移到$j$($P_{ij}\gt0$)，而是值$i$与$j$之间可以通过有限步$n$转移到达($P_{ij}^n\gt0$)。<br> 马氏链的任何两个状态<strong>联通</strong>是指存在一个$n$，使得$\forall i,\forall j,\quad P^n_{ij} \gt 0$。</li>
   <li>我们用$X_i$表示在马氏链上跳转第$i$步后所处的状态，如果$\displaystyle \lim_{n\to\infty}P^n_{ij}=\pi(j)$存在，即可证明以上定理的第二个结论。<br> $<br> \begin{align}<br> P(X_{n+1}=j)&amp;=\sum^\infty_{i=0}P(X_n=i)P(X_{n+1}=j\mid X_n=i) \\<br> &amp;=\sum^\infty_{i=0}P(X_n=i)P_{ij}<br> \end{align}<br>    $<br> 两边同时对$n$取极限可得，$\displaystyle \pi(j) = \sum_{i=0}^{\infty}\pi(i)P_{ij}$。</li>
 </ol>
 <p><strong>可以利用MC的平稳分布，来生成符合某些难以生成的概率分布的随机数。</strong>从初始概率分布$\pi_0$出发，每一次在马氏链上做状态转移时，记$X_i$的概率分布为$\pi_i$，则有：<br>$$<br>\begin{align}<br>&amp;X_0\sim\pi_0(x) \\<br>&amp;X_i\sim\pi_i(x), \quad \pi_i(x)=\pi_{i-1}(x)P=\pi_0(x)P^n<br>\end{align}<br>$$<br>由于<strong>马尔可夫收敛定理（Markov Convergence Theore）</strong>，概率分布$\pi_i(x)$将收敛到平稳分布$\pi(x)$。假设到第$n$的时候马氏链收敛，则有：<br>$$<br>\begin{align}<br>X_0

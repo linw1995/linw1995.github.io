@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://linw1995.com/"/>
-  <updated>2017-05-24T08:41:42.544Z</updated>
+  <updated>2017-05-24T10:42:51.290Z</updated>
   <id>http://linw1995.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://linw1995.com/2017/05/21/%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%96%B9%E6%B3%95%E5%8F%8A%E5%BA%94%E7%94%A8/"/>
     <id>http://linw1995.com/2017/05/21/蒙特卡洛方法及应用/</id>
     <published>2017-05-20T19:03:20.000Z</published>
-    <updated>2017-05-24T08:41:42.544Z</updated>
+    <updated>2017-05-24T10:42:51.290Z</updated>
     
     <content type="html"><![CDATA[<blockquote>
   <p>蒙特卡洛方法（英语：Monte Carlo method），也称统计模拟方法，是1940年代中期由于科学技术的发展和电子计算机的发明，而提出的一种以概率统计理论为指导的数值计算方法。是指使用随机数（或更常见的伪随机数）来解决很多计算问题的方法。<br>20世纪40年代，在冯·诺伊曼，斯塔尼斯拉夫·乌拉姆和尼古拉斯·梅特罗波利斯在洛斯阿拉莫斯国家实验室为核武器计划工作时，发明了蒙特卡洛方法。因为乌拉姆的叔叔经常在摩纳哥的蒙特卡洛赌场输钱得名，而蒙特卡罗方法正是以概率为基础的方法。<br>与它对应的是确定性算法。<br>蒙特卡洛方法在金融工程学，宏观经济学，生物医学，计算物理学（如粒子输运计算、量子热力学计算、空气动力学计算）等领域应用广泛。</p>
@@ -190,7 +190,7 @@
     <link href="http://linw1995.com/2017/05/05/%E4%BC%AA%E9%9A%8F%E6%9C%BA%E6%95%B0/"/>
     <id>http://linw1995.com/2017/05/05/伪随机数/</id>
     <published>2017-05-05T14:42:12.000Z</published>
-    <updated>2017-05-18T09:16:29.435Z</updated>
+    <updated>2017-05-24T10:42:51.198Z</updated>
     
     <content type="html"><![CDATA[<h2 id="序">
   <a href="#序" class="headerlink" title="序"></a>序</h2>
@@ -361,7 +361,7 @@
     <link href="http://linw1995.com/2017/04/27/AA%E6%A0%91%E7%9A%84%E5%B9%B3%E8%A1%A1%E4%B8%8E%E5%86%8D%E5%B9%B3%E8%A1%A1/"/>
     <id>http://linw1995.com/2017/04/27/AA树的平衡与再平衡/</id>
     <published>2017-04-27T04:38:13.000Z</published>
-    <updated>2017-05-05T14:46:51.880Z</updated>
+    <updated>2017-05-24T10:42:50.983Z</updated>
     
     <content type="html"><![CDATA[<h2 id="介绍">
   <a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2>
@@ -548,9 +548,9 @@
       <category term="Algorithms" scheme="http://linw1995.com/categories/Algorithms/"/>
     
     
-      <category term="Python" scheme="http://linw1995.com/tags/Python/"/>
-    
       <category term="Data Structrue" scheme="http://linw1995.com/tags/Data-Structrue/"/>
+    
+      <category term="Python" scheme="http://linw1995.com/tags/Python/"/>
     
   </entry>
   
@@ -583,7 +583,7 @@
     <link href="http://linw1995.com/2017/04/23/Scrapy%E5%AD%A6%E4%B9%A0%E6%97%A5%E8%AE%B0-%E4%BA%8C-%C2%B7-Selenium-PhantomJS/"/>
     <id>http://linw1995.com/2017/04/23/Scrapy学习日记-二-·-Selenium-PhantomJS/</id>
     <published>2017-04-23T12:40:27.000Z</published>
-    <updated>2017-05-03T13:45:26.210Z</updated>
+    <updated>2017-05-24T10:42:51.044Z</updated>
     
     <content type="html"><![CDATA[<p>现在爬虫文章一大堆，内容却千遍一律。<br>我想写和这些不一样的，可为啥还要讲<strong>Selenium</strong>和<strong>PhantomJS</strong>呢？<br>
   <a id="more"></a><br>因为，我这可是技术文:)</p>
@@ -704,7 +704,7 @@
     <link href="http://linw1995.com/2017/04/15/Scrapy%E5%AD%A6%E4%B9%A0%E6%97%A5%E8%AE%B0-%E4%B8%80-%C2%B7-run-many-spiders/"/>
     <id>http://linw1995.com/2017/04/15/Scrapy学习日记-一-·-run-many-spiders/</id>
     <published>2017-04-15T02:32:50.000Z</published>
-    <updated>2017-05-03T13:45:29.934Z</updated>
+    <updated>2017-05-24T10:42:50.983Z</updated>
     
     <content type="html"><![CDATA[<p>这两周都在学习使用这个爬虫框架，略有收获。<br>把一些小技巧分享给大家。<br>
   <a id="more"></a>
@@ -892,7 +892,7 @@ myprojec/
     <link href="http://linw1995.com/2017/04/12/%E6%8A%98%E8%85%BEVSCode%E8%AE%B0-%E4%BA%8C-%C2%B7-Settings-Sync/"/>
     <id>http://linw1995.com/2017/04/12/折腾VSCode记-二-·-Settings-Sync/</id>
     <published>2017-04-12T15:03:42.000Z</published>
-    <updated>2017-05-03T13:44:32.395Z</updated>
+    <updated>2017-05-24T10:42:51.223Z</updated>
     
     <content type="html"><![CDATA[<p>假如有一天你重装系统了，或者换电脑了，或者有多台电脑，每次重新配置<strong>VSCode</strong>也太麻烦了。<br><img src="/2017/04/12/折腾VSCode记-二-·-Settings-Sync/cloud.png" alt="SettingSync-Logo" title="SettingSync-Logo"> <strong>Setting Sync</strong><br>这个插件就完美的解决了这个问题。<br>
   <a id="more"></a>
@@ -978,7 +978,7 @@ myprojec/
     <link href="http://linw1995.com/2017/04/09/%E6%8A%98%E8%85%BEVSCode%E8%AE%B0-%E4%B8%80-%C2%B7-Python-Traceback-Jumper/"/>
     <id>http://linw1995.com/2017/04/09/折腾VSCode记-一-·-Python-Traceback-Jumper/</id>
     <published>2017-04-09T13:58:44.000Z</published>
-    <updated>2017-05-03T13:44:37.667Z</updated>
+    <updated>2017-05-24T10:42:51.148Z</updated>
     
     <content type="html"><![CDATA[<p>因为<strong>Pycharm</strong>到期了，就开始折腾<strong>VSCode</strong>。<br>使用中，写一些<strong>Python</strong>代码时，觉得缺少一个功能 <strong>Traceback点击跳转</strong>。<br>所以就花了一整天翻看<strong>VSCode</strong>官方文档，写了个插件<br><img src="/2017/04/09/折腾VSCode记-一-·-Python-Traceback-Jumper/python%20traceback%20jumper%20logo.svg" alt="python traceback jumper logo.svg" title=""><strong>python traceback jumper</strong></p>
 <a id="more"></a>
@@ -1042,7 +1042,7 @@ myprojec/
     <link href="http://linw1995.com/2017/04/08/%E6%88%90%E4%B8%BA%E4%B8%80%E4%B8%AADictionaryKey%E7%9A%84%E6%9D%A1%E4%BB%B6/"/>
     <id>http://linw1995.com/2017/04/08/成为一个DictionaryKey的条件/</id>
     <published>2017-04-08T07:50:51.000Z</published>
-    <updated>2017-05-05T14:51:36.918Z</updated>
+    <updated>2017-05-24T10:42:51.173Z</updated>
     
     <content type="html"><![CDATA[<p>一个dict的键不就是字符串嘛，No!No!No!</p>
 <a id="more"></a>
@@ -1110,7 +1110,7 @@ myprojec/
     <link href="http://linw1995.com/2017/03/31/%E5%8F%AF%E5%8F%98%E4%B8%8E%E4%B8%8D%E5%8F%AF%E5%8F%98/"/>
     <id>http://linw1995.com/2017/03/31/可变与不可变/</id>
     <published>2017-03-31T07:59:12.000Z</published>
-    <updated>2017-05-05T14:52:43.693Z</updated>
+    <updated>2017-05-24T10:42:51.131Z</updated>
     
     <content type="html"><![CDATA[<p><strong>Python object</strong>可以分为两大类型，<strong>可变mutable</strong>与<strong>不可变immutable</strong>。<br>可变与不可变究竟意味着什么？<br>
   <a id="more"></a>
@@ -1789,7 +1789,7 @@ myprojec/
     <link href="http://linw1995.com/2017/03/29/Python-functools/"/>
     <id>http://linw1995.com/2017/03/29/Python-functools/</id>
     <published>2017-03-29T08:30:08.000Z</published>
-    <updated>2017-05-03T13:45:13.913Z</updated>
+    <updated>2017-05-24T10:42:50.983Z</updated>
     
     <content type="html"><![CDATA[<p><strong>Python</strong>也是支持<strong>函数式编程Functional Programming</strong>，<br>支持函数当参数，当返回变量，拥有<strong>闭包Closure</strong>这一特性，<br>而<strong>functools</strong>这个库是用来更好地生成<strong>高阶函数higher-order function</strong>的<br>
   <a id="more"></a>
@@ -2103,7 +2103,7 @@ myprojec/
     <link href="http://linw1995.com/2017/03/25/%E7%BC%96%E7%A0%81%E9%97%AE%E9%A2%98-Python/"/>
     <id>http://linw1995.com/2017/03/25/编码问题-Python/</id>
     <published>2017-03-25T12:33:12.000Z</published>
-    <updated>2017-05-03T13:43:42.472Z</updated>
+    <updated>2017-05-24T10:42:41.781Z</updated>
     
     <content type="html"><![CDATA[<p>用Python处理中文时候经常出现乱码，或者代码经常因为编码的问题而出现各种错误，<br>比如说从网路上爬取数据，文本文件处理等等</p>
 <a id="more"></a>
@@ -2268,7 +2268,7 @@ myprojec/
     <link href="http://linw1995.com/2017/03/24/%E6%88%91%E7%9A%84CV/"/>
     <id>http://linw1995.com/2017/03/24/我的CV/</id>
     <published>2017-03-24T15:25:35.000Z</published>
-    <updated>2017-05-03T13:44:19.874Z</updated>
+    <updated>2017-05-24T10:42:51.281Z</updated>
     
     <content type="html"><![CDATA[<p>花了三小时写了这份简历，保存一下以后当作回忆:)</p>
 <a id="more"></a><a href="https://linw1995.github.io/CV/" target="_blank" rel="external">传送门</a>]]></content>
@@ -2289,7 +2289,7 @@ myprojec/
     <link href="http://linw1995.com/2017/03/22/Python-Unittest/"/>
     <id>http://linw1995.com/2017/03/22/Python-Unittest/</id>
     <published>2017-03-22T06:34:01.000Z</published>
-    <updated>2017-05-03T13:45:21.955Z</updated>
+    <updated>2017-05-24T10:42:51.044Z</updated>
     
     <content type="html"><![CDATA[<p>测试在持续集成开发中非常重要，写单元测试有助于定位bug，方便在未来重构代码。<br>本文简单介绍了下<strong>Python标准库</strong>中的<strong>Unittest</strong></p>
 <a id="more"></a>
@@ -2552,7 +2552,7 @@ myprojec/
     <link href="http://linw1995.com/2017/03/20/%E7%94%A8python%E6%9D%A5handle%E5%A4%8D%E6%9D%82%E7%9A%84%E6%97%B6%E9%97%B4/"/>
     <id>http://linw1995.com/2017/03/20/用python来handle复杂的时间/</id>
     <published>2017-03-20T08:21:38.000Z</published>
-    <updated>2017-05-03T13:44:28.039Z</updated>
+    <updated>2017-05-24T10:42:51.270Z</updated>
     
     <content type="html"><![CDATA[<p>怎么用python完美地处理有关时间的问题</p>
 <a id="more"></a>
@@ -2863,7 +2863,7 @@ myprojec/
     <link href="http://linw1995.com/2017/03/19/Python-On-Visual-Studio-Code-With-Anaconda/"/>
     <id>http://linw1995.com/2017/03/19/Python-On-Visual-Studio-Code-With-Anaconda/</id>
     <published>2017-03-19T08:28:48.000Z</published>
-    <updated>2017-05-03T13:45:37.147Z</updated>
+    <updated>2017-05-24T10:42:51.073Z</updated>
     
     <content type="html"><![CDATA[<p>Python是一门入门容易，且入门后又可以做很多interesting things的语言。<br>想简单的写一些代码，又不想费力去安装体积庞大的IDE，也不想使用Python自带的IDLE。<br>这时候你就需要Python On Visual Studio Code With Anaconda。<br>
   <a id="more"></a>

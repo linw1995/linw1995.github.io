@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://linw1995.com/"/>
-  <updated>2017-05-21T23:59:38.896Z</updated>
+  <updated>2017-05-24T08:41:42.544Z</updated>
   <id>http://linw1995.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://linw1995.com/2017/05/21/%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%96%B9%E6%B3%95%E5%8F%8A%E5%BA%94%E7%94%A8/"/>
     <id>http://linw1995.com/2017/05/21/蒙特卡洛方法及应用/</id>
     <published>2017-05-20T19:03:20.000Z</published>
-    <updated>2017-05-21T23:59:38.896Z</updated>
+    <updated>2017-05-24T08:41:42.544Z</updated>
     
     <content type="html"><![CDATA[<blockquote>
   <p>蒙特卡洛方法（英语：Monte Carlo method），也称统计模拟方法，是1940年代中期由于科学技术的发展和电子计算机的发明，而提出的一种以概率统计理论为指导的数值计算方法。是指使用随机数（或更常见的伪随机数）来解决很多计算问题的方法。<br>20世纪40年代，在冯·诺伊曼，斯塔尼斯拉夫·乌拉姆和尼古拉斯·梅特罗波利斯在洛斯阿拉莫斯国家实验室为核武器计划工作时，发明了蒙特卡洛方法。因为乌拉姆的叔叔经常在摩纳哥的蒙特卡洛赌场输钱得名，而蒙特卡罗方法正是以概率为基础的方法。<br>与它对应的是确定性算法。<br>蒙特卡洛方法在金融工程学，宏观经济学，生物医学，计算物理学（如粒子输运计算、量子热力学计算、空气动力学计算）等领域应用广泛。</p>
@@ -33,20 +33,31 @@
   <a href="#应用" class="headerlink" title="应用"></a>应用</h2>
 <h3 id="求解圆周率">
   <a href="#求解圆周率" class="headerlink" title="求解圆周率"></a>求解圆周率</h3><img src="/2017/05/21/蒙特卡洛方法及应用/pi.gif" alt="圆周率求解" title="圆周率求解">
-<p>圆形的面积为$A_s=\pi r^2$，正方形的面积为$A_q=(2r)^2$, 则产生一对随机数$(x_i, y_i)$落在圆内的概率为：<br>$$<br>p=\frac{A_s}{A_q}=\frac{\pi r^2}{(2r)^2}=\frac{\pi}{4}<br>$$<br>只要不断产生一对对随机数$(x_i, y_i)$，以随机事件（落在圆内）出现的频率估计其概率，再求解$\pi$。</p> <img src="/2017/05/21/蒙特卡洛方法及应用/pi.png" alt="误差与随机抽样次数的关系" title="误差与随机抽样次数的关系">
+<p>圆形的面积为$A_s=\pi r^2$，正方形的面积为$A_q=(2r)^2$, 则产生一对随机数$(x_i, y_i)$落在圆内的概率为：<br>$$<br>p=\frac{A_s}{A_q}=\frac{\pi r^2}{(2r)^2}=\frac{\pi}{4}<br>$$<br>只要不断产生一对对随机数$(x_i, y_i)$，由于<strong>大数法则（Law of large numbers）</strong>，能以随机事件（落在圆内）出现的频率估计其概率，再求解$\pi$。</p>
+<img src="/2017/05/21/蒙特卡洛方法及应用/pi.png" alt="误差与随机抽样次数的关系" title="误差与随机抽样次数的关系">
 <blockquote>
   <p>代码<br><a href="https://gist.github.com/linw1995/28d70604f8d430177fd0496ae15eb763" target="_blank" rel="external">Gist | Monte Carlo method applied to approximating the value of π.</a></p>
 </blockquote>
 <h3 id="计算定积分">
   <a href="#计算定积分" class="headerlink" title="计算定积分"></a>计算定积分</h3>
 <p>假设我们要求解$f(x)=x^2$在$[0, 2]$间的积分，即下图函数曲线与$x$轴围成的面积</p> <img src="/2017/05/21/蒙特卡洛方法及应用/x2.png" alt="$f(x)=x^2$在$[0, 2]$间的积分" title="$f(x)=x^2$在$[0, 2]$间的积分">
+<p>其实，求解圆周率其实是在求函数$f(x)=4\sqrt{1 - x^2}$在区间$[0, 1]$上的积分。</p>
 <h4 id="偶然命中法">
   <a href="#偶然命中法" class="headerlink" title="偶然命中法"></a>偶然命中法</h4>
 <p>像求解圆周率那样，只要求解出一对随机数$(x_i,y_i),x_i\in[0,2],y_i\in[0,4]$落在曲线下方的概率，即可求出$f(x)=x^2$在$[0, 2]$间的积分结果。<br>$$H(x, y)=\begin{cases}<br>1\qquad&amp;if\quad y \le f(x) \\<br>0 &amp;else<br>\end{cases}\\<br>F_n=A \frac{1}{n} \sum^{n}_{i=1} H(x_i,y_i) = h(b-a) \frac{1}{n}\sum^{n}_{i=1}
   H(x_i,y_i)<br>$$</p>
 <h4 id="抽样平均法">
   <a href="#抽样平均法" class="headerlink" title="抽样平均法"></a>抽样平均法</h4>
-<p>还有另外一种蒙特卡罗积分方法是基于计算的平均值理论，即函数的积分结果取决被积函数$f(x)$在$a\le x\le b$的平均值。为了确定这个平均值，用随机的$x_i$来取代规律的$x_i$，抽样平均值方法的积分估计值$F_n$为：<br>$$<br>F_n=(b-a)\lt f\gt=\frac{b-a}{n}\sum^n_{i=1}f(x_i)<br>$$</p>
+<p>还有另外一种蒙特卡罗积分方法是基于计算的平均值理论，即函数的积分结果取决被积函数$f(x)$在$a\le x\le b$的平均值。为了确定这个平均值，用随机的$x_i$来取代规律的$x_i$，抽样平均值方法的积分估计值$F_n$为：<br>$$<br>F_n=(b-a)\left\lt f\right\gt=\frac{b-a}{n}\sum^n_{i=1}f(x_i)<br>$$</p>
+<h4 id="计算高维定积分">
+  <a href="#计算高维定积分" class="headerlink" title="计算高维定积分"></a>计算高维定积分</h4>
+<p>高维定积分的解析解<br>$\displaystyle \quad<br>I = \int_{ \Omega } f(\overline{x}) d\overline{x}<br>$<br>其中$\Omega$，是$\mathbb{ R }^m$的子集，拥有体积<br>$\displaystyle \quad<br>V = \int_{ \Omega } d\overline{x}<br>$<br>一般的MC方式是从$\Omega$的均匀分布中获取长度为$N$的随机数序列<br>$\displaystyle
+  \quad<br>\overline{x_1},\overline{x_2},\cdots,\overline{x_N} \in \Omega<br>$<br>$N$越大，$I$的值就能被越精确地估计出来<br>$\displaystyle \quad<br>I \approx Q_N \equiv V\left\lt f \right\gt = V \frac{1}{N} \sum^N_{i=1} f(\overline{x_i})<br>$<br>由于<strong>大数法则（Law of large numbers）</strong>，则<br>$\displaystyle
+  \quad<br>\lim_{N \to \infty} Q_N = I<br>$</p>
+<blockquote>
+  <p>高维定积分可参考<a href="#误差分析">误差分析</a></p>
+</blockquote>
+<p>所以用蒙特卡罗方法计算高维定积分是可行</p>
 <h3 id="调制随机数-Metropolis–Hastings算法">
   <a href="#调制随机数-Metropolis–Hastings算法" class="headerlink" title="调制随机数(Metropolis–Hastings算法)"></a>调制随机数(Metropolis–Hastings算法)</h3>
 <p>在1953年Nicholas Metropolis, Arianna W. Rosenbluth, Marshall N. Rosenbluth, Augusta H. Teller, 和 Edward Teller提出了产生任意的非均匀分布的另外一个方法。在1970年被 W. K. Hastings 扩展到更普遍的情况，所以该算法被称作<strong>Metropolis–Hastings采样算法</strong>。该算法整个过程形成一个马尔科夫链(MCMC)。</p>
@@ -61,8 +72,8 @@
   &amp; 1.88k \\<br>8 &amp; 3.56k &amp; 4.55k &amp; 1.88k \\<br>\dots &amp; \dots &amp; \dots &amp; \dots<br>\end{array}<br>$$<br>可以发现从第7刻开始，分布矩阵几乎就稳定不变了。这是怎么回事？换个初始分布矩阵$\pi_0=\begin{bmatrix}3.00k&amp;4.00k&amp;3.00k\end{bmatrix}$试试<br>$$<br>\begin{array}{c|ccc}<br>第n刻
   &amp; 第一梯队 &amp; 第二梯队 &amp; 第三梯队 \\<br>\hline<br>0 &amp; 3.00k &amp; 4.00k &amp; 3.00k \\<br>1 &amp; 3.45k &amp; 4.50k &amp; 2.05k \\<br>2 &amp; 3.53k &amp; 4.55k &amp; 1.91k \\<br>3 &amp; 3.55k &amp; 4.56k &amp; 1.89k \\<br>4 &amp; 3.56k &amp; 4.56k
   &amp; 1.88k \\<br>5 &amp; 3.56k &amp; 4.56k &amp; 1.88k \\<br>6 &amp; 3.56k &amp; 4.55k &amp; 1.88k \\<br>\dots &amp; \dots &amp; \dots &amp; \dots<br>\end{array}<br>$$<br>这次在第6刻就开始稳定不变了，而且两次给定不同的初始分布矩阵，最终都收敛到概率分布$\pi \times 10k=\begin{bmatrix}0.356&amp;0.455&amp;0.188\end{bmatrix}
-  \times 10k$。其中第二次收敛的速度更快，这是为什么呢？这说明收敛的行为和初始分布$\pi_0$无关，而与概率转移矩阵$P$决定的。<br>$$<br>P^5 = P^6 = \cdots = P^n= \begin{bmatrix}<br>0.356 &amp; 0.455 &amp; 0.188 \\<br>0.356 &amp; 0.455 &amp; 0.188 \\<br>0.356 &amp; 0.455 &amp; 0.188 \\<br>\end{bmatrix}<br>$$<br>显而易见，当$n$足够大时，转移矩阵的每一行都会收敛到$\pi=\begin{bmatrix}0.356
-  &amp; 0.455 &amp; 0.188\end{bmatrix}$。</p>
+  \times 10k$, 而且第二次收敛的速度更快，这是为什么呢？这说明收敛的行为和初始分布$\pi_0$无关，而与概率转移矩阵$P$决定的。第二次收敛更快是因为初始分布比第一次更接近收敛后的分布矩阵。<br>$$<br>P^5 = P^6 = \cdots = P^n= \begin{bmatrix}<br>0.356 &amp; 0.455 &amp; 0.188 \\<br>0.356 &amp; 0.455 &amp; 0.188 \\<br>0.356 &amp; 0.455 &amp;
+  0.188 \\<br>\end{bmatrix}<br>$$<br>显而易见，当$n$足够大时，转移矩阵的每一行都会收敛到$\pi=\begin{bmatrix}0.356 &amp; 0.455 &amp; 0.188\end{bmatrix}$。</p>
 <h4 id="马尔可夫收敛定理（Markov-Convergence-Theore）">
   <a href="#马尔可夫收敛定理（Markov-Convergence-Theore）" class="headerlink" title="马尔可夫收敛定理（Markov Convergence Theore）"></a>马尔可夫收敛定理（Markov Convergence Theore）</h4>
 <p>如果一个非周期马氏链具有转移概率矩阵$P$，且它的任何两个状态是联通的，那么$\displaystyle \lim_{n\to\infty}P^n_{ij}$存在且与$i$无关，即$\displaystyle \lim_{n\to\infty}P^n_{ij}=\pi(j)$</p>
@@ -80,8 +91,8 @@
   <li>我们用$X_i$表示在马氏链上跳转第$i$步后所处的状态，如果$\displaystyle \lim_{n\to\infty}P^n_{ij}=\pi(j)$存在，即可证明以上定理的第二个结论。<br> $<br> \begin{align}<br> P(X_{n+1}=j)&amp;=\sum^\infty_{i=0}P(X_n=i)P(X_{n+1}=j\mid X_n=i) \\<br> &amp;=\sum^\infty_{i=0}P(X_n=i)P_{ij}<br> \end{align}<br>    $<br> 两边同时对$n$取极限可得，$\displaystyle \pi(j) = \sum_{i=0}^{\infty}\pi(i)P_{ij}$。</li>
 </ol>
 <p><strong>可以利用MC的平稳分布，来生成符合某些难以生成的概率分布的随机数。</strong>从初始概率分布$\pi_0$出发，每一次在马氏链上做状态转移时，记$X_i$的概率分布为$\pi_i$，则有：<br>$$<br>\begin{align}<br>&amp;X_0\sim\pi_0(x) \\<br>&amp;X_i\sim\pi_i(x), \quad \pi_i(x)=\pi_{i-1}(x)P=\pi_0(x)P^n<br>\end{align}<br>$$<br>由于<strong>马尔可夫收敛定理（Markov Convergence Theore）</strong>，概率分布$\pi_i(x)$将收敛到平稳分布$\pi(x)$。假设到第$n$的时候马氏链收敛，则有：<br>$$<br>\begin{align}<br>X_0
-  &amp; \sim \pi_0(x) \\<br>X_1 &amp; \sim \pi_1(x) \\<br>&amp; \cdots \\<br>X_n &amp; \sim \pi_n(x)=\pi(x) \\<br>X_{n+1} &amp; \sim \pi(x) \\<br>X_{n+2}&amp; \sim \pi(x) \\<br>&amp; \cdots<br>\end{align}<br>$$<br>所以$X_n,X_{n+1},X_{n+2},\cdots \sim \pi(x)$都是同分布的随机变量。当然他们并不独立。如果我们从一个具体的初始状态
-  x0x0 开始,沿着马氏链按照概率转移矩阵做跳转，那么我们得到一个转移序列$x_0, x_1, x_2, \cdots x_n, x_{n+1}\cdots$，由于马氏链的收敛行为，$x_n, x_{n+1},\cdots$都将是平稳分布$\pi(x)$的样本。</p>
+  &amp; \sim \pi_0(x) \\<br>X_1 &amp; \sim \pi_1(x) \\<br>&amp; \cdots \\<br>X_n &amp; \sim \pi_n(x)=\pi(x) \\<br>X_{n+1} &amp; \sim \pi(x) \\<br>X_{n+2}&amp; \sim \pi(x) \\<br>&amp; \cdots<br>\end{align}<br>$$<br>所以$X_n,X_{n+1},X_{n+2},\cdots \sim \pi(x)$都是同分布的随机变量,
+  当然他们并不独立。如果我们从一个具体的初始状态$x_0$开始,沿着马氏链按照概率转移矩阵做跳转，那么我们得到一个转移序列$x_0, x_1, x_2, \cdots x_n, x_{n+1}\cdots$，由于马氏链的收敛行为，$x_n, x_{n+1},\cdots$都将是平稳分布$\pi(x)$的样本。</p>
 <h4 id="Metropolis-Hastings采样算法">
   <a href="#Metropolis-Hastings采样算法" class="headerlink" title="Metropolis-Hastings采样算法"></a>Metropolis-Hastings采样算法</h4>
 <p>结合蒙特卡罗方法，构造概率转移矩阵，使得马尔可夫链的平稳分布恰好符合我们想要的分布$P(x)$。这个方式被称作<strong>马尔科夫蒙特卡洛（MCMC|Markov Chain Monte Carlo）方法</strong>，而<strong>Metropolis-Hastings采样算法</strong>为其中的一种常用的改进算法。</p>
@@ -92,7 +103,7 @@
 <p>假设我们已经有一个转移矩阵为$Q$的马氏链，显然未收敛时，有<br>$$<br>p(i)q(i,j)\neq p(j)q(j,i)<br>$$<br>其中$q(i,j)$表示从状态$i$转移到状态$j$的概率，也可写作$q(j|i)$或者$q(i\to j)$。<br>上式不满足<strong>细致平稳条件</strong>$\eqref{0}$，所以$p(x)$不可能是这个马氏链的平稳分布。如果我们对马氏链进行改造，使得<strong>细致平稳条件</strong>$\eqref{0}$成立？尝试引入一个$\alpha(i,j)$，使得两边相等<br>$$<br>p(i)q(i,j)\alpha(i,j)=p(j)q(j,i)\alpha(j,j)
   \tag{二}\label{1}<br>$$<br>我们称$\alpha(i,j)$为接受率，按照对称性，得<br>$$<br>\alpha(i,j)= p(j) q(j,i) \\<br>\alpha(j,i) = p(i) q(i,j)<br>$$<br>所以$\eqref{1}$就成立了，所以有<br>$$<br>p(i) \underbrace{q(i,j)\alpha(i,j)}_{Q’(i,j)}<br>= p(j) \underbrace{q(j,i)\alpha(j,i)}_{Q’(j,i)}
   \tag{三}\label{2}<br>$$<br>这样就把原来的转移矩阵$Q$的马氏链，改造成一个具有新的转移矩阵$Q’$的马氏链,而$Q’$恰好满足<strong>细致平稳条件</strong>$\eqref{0}$，这样$p(x)$就是这个马氏链$Q’$的平稳分布。<br>$$<br>\require{AMScd}<br>\begin{CD}<br>\cdots @&gt;&gt;&gt; x_i @&gt;q(i,j)&gt;&gt; x_j @&gt;&gt;&gt; \cdots
-  \\<br>\\<br>@. \begin{matrix}1-\alpha(i,j) \\ 拒绝转移\end{matrix} @. \begin{matrix}\alpha(i,j) \\ 接受转移\end{matrix}<br>\end{CD}<br>$$<br>接受率可以这么理解，当马氏链从状态$i$以$q(i,j)$的概率跳转到状态$j$时，以$\alpha(i,j)$的概率去接受这个转移，那么马氏链新的转移概率为$q(i,j)\alpha(i,j)$。</p>
+  \\<br>\\<br>@. \begin{matrix}1-\alpha(i,j) \\ 拒绝转移\end{matrix} @. \begin{matrix}\alpha(i,j) \\ 接受转移\end{matrix}<br>\end{CD}<br>$$<br>接受率可以这么理解，当马氏链从状态$i$以$q(i,j)$的概率跳转到状态$j$时，以$\alpha(i,j)$的概率去接受这个转移，那么马氏链新的转移概率为两者的乘积$q(i,j)\alpha(i,j)$。</p>
 <p>假设我们已经拥有了一个转移矩阵$Q$，把上面的过程整理一下，我们就得到了如下的用于产生符合概率分布$p(x)$的随机数算法。<br>$$<br>\begin{array}{l}<br>MCMC 采样算法 \\<br>\hline<br>1. 初始化马氏链初始状态X_0=x_0 \\<br>2. 对于t=0,1,2,\cdots，循环以下过程进行采样 \\<br>\qquad \bullet \quad 第t个时刻马氏链状态为X_t=x_t，采样y\sim q(x,x_t) \\<br>\qquad
   \bullet \quad 从均匀分布采样u\sim Uniform(0,1) \\<br>\qquad \bullet \quad 如果u \lt \alpha(x_t,y) = p(y)q(x_t,y)则接受转移x_t \to y,即X_{t+1} = y \\<br>\qquad \bullet \quad 否则不接受转移，即X_{t+1}=x_t \\<br>\end{array}<br>$$<br>上述过程中$p(x)$，$q(x,y)$说的都是离散的情况，实际上即便是连续的，以上算法仍然有效。</p>
 <p>以上MCMC采样算法还有个小问题，转移过程中若是$\alpha(i,j)$偏小（毕竟是两个分布$p(x)$和$q(x,y)$的乘积），而$u \sim Uniform(0,1)$难以小于$\alpha(i,j)$，这样算法过程中马氏链容易原地踏步，拒绝大量转移，这使得收敛到平稳分布$p(x)$的速度太慢。那如何提高接受率，加快收敛速度？</p>
@@ -105,6 +116,15 @@
 </blockquote> <img src="/2017/05/21/蒙特卡洛方法及应用/normal-distribution.png" alt="正态分布" title="正态分布"> <img src="/2017/05/21/蒙特卡洛方法及应用/two-dimemsion-somekind-distribution.png" alt="某种二维分布" title="某种二维分布">
 <h2 id="误差分析">
   <a href="#误差分析" class="headerlink" title="误差分析"></a>误差分析</h2>
+<p>蒙特卡罗方法，只是用随机数来解决很多问题的方法统称。无法提出一个对所有蒙特卡罗方法进行误差分析的方法，只能具体问题具体分析。</p>
+<p>比如用MC方法求解$\pi$的数值，用计算定积分的方式计算，也就是计算函数$f(x)=\sqrt{1 - x^2}$在区间$[0, 1]$上的积分。对于一次实验产生的$10^4$随机数的序列，用抽样平均法$\displaystyle F_N=V \frac{1}{N} \sum ^N _{i=1} f(x_i)=V\left\lt f \right\gt$可得$F_N=3.1489$。与准确结果比较，可以发现，这次试验结果误差大约是$0.0073$。</p>
+<p>当然这只是一次实验的误差，没有什么说服力，若是计算随机数序列整体结果的方差<br>$$<br>\operatorname{Var}(f)=\sigma_N^2 = \left\lt f^2 \right\gt - \left\lt f \right\gt^2 \\<br>其中，\left\lt f \right\gt = \frac{1}{N}\sum^N_{i=1}f(x_i)，\left\lt f^2 \right\gt = \frac{1}{N}\sum^N_{i=1}f^2(x_i)$$<br>那么积分结果的方差为:<br>$$\operatorname{Var}(F)=\sigma^2=
+  \frac{V^2}{N^2} \sum ^N _{i=1} \operatorname{Var}(f)=V^2 \frac{\sigma_N^2}{N}<br>$$<br>按照上式计算，结果如下方左图所示<br>$$<br>\begin{array}{c|ccc}<br>n &amp; \sigma &amp; \sigma_N &amp; F_N &amp; | F_n - \pi | \\<br>\hline<br>10^1 &amp; 1.0407 \times 10^{-1} &amp;
+  8.2278 \times 10^{-2} &amp; 3.339699 &amp; 0.198106 \\<br>10^2 &amp; 1.7298 \times 10^{-2} &amp; 4.3244 \times 10^{-2} &amp; 3.190591 &amp; 0.048999 \\<br>10^3 &amp; 2.0576 \times 10^{-3} &amp; 1.6267 \times 10^{-2} &amp; 3.175076 &amp; 0.033483 \\<br>10^4
+  &amp; 2.2095 \times 10^{-4} &amp; 5.5236 \times 10^{-3} &amp; 3.155933 &amp; 0.014341 \\<br>10^5 &amp; 2.5398 \times 10^{-5} &amp; 2.0079 \times 10^{-3} &amp; 3.145450 &amp; 0.003858 \\<br>10^6 &amp; 3.4241 \times 10^{-6} &amp; 8.5602 \times 10^{-4}
+  &amp; 3.142984 &amp; 0.001391 \\<br>10^7 &amp; 4.9500 \times 10^{-7} &amp; 3.9133 \times 10^{-4} &amp; 3.141403 &amp; 0.000189 \\<br>10^8 &amp; 5.0821 \times 10^{-8} &amp; 1.2705 \times 10^{-4} &amp; 3.141461 &amp; 0.000132 \\<br>10^9 &amp; 5.0482 \times
+  10^{-9} &amp; 3.9909 \times 10^{-5} &amp; 3.141595 &amp; 0.000002 \\<br>\cdots &amp; \cdots &amp; \cdots &amp; \cdots &amp; \cdots<br>\end{array}<br>$$</p>
+<p>可以很明显地看出，$\sigma$随着$N$的增大而减少。除了一味的增加$N$来降低误差，还有别的什么方法吗？接下来讲的两种方法从一定程度上降低了误差。</p>
 <blockquote>
   <p>to be continued</p>
 </blockquote>
@@ -119,6 +139,7 @@
   <a href="#参考" class="headerlink" title="参考"></a>参考</h2>
 <blockquote class="pullquote">
   <ul>
+    <li><a href="https://youtu.be/AyBNnkYrSWY" target="_blank" rel="external">What is Monte Carlo? | YouTube</a></li>
     <li><a href="https://en.wikipedia.org/wiki/Monte_Carlo_method" target="_blank" rel="external">Monte Carlo method | Wikipedia</a></li>
     <li><a href="https://en.wikipedia.org/wiki/Monte_Carlo_integration" target="_blank" rel="external">Monte Carlo integration | Wikipedia</a></li>
     <li><a href="https://en.wikipedia.org/wiki/Metropolis%E2%80%93Hastings_algorithm" target="_blank" rel="external">Metropolis–Hastings algorithm | Wikipedia</a></li>
@@ -2520,9 +2541,9 @@ myprojec/
     
       <category term="Python" scheme="http://linw1995.com/tags/Python/"/>
     
-      <category term="Test" scheme="http://linw1995.com/tags/Test/"/>
-    
       <category term="VSCode" scheme="http://linw1995.com/tags/VSCode/"/>
+    
+      <category term="Test" scheme="http://linw1995.com/tags/Test/"/>
     
   </entry>
   

@@ -209,16 +209,34 @@
                 3.4241 \times 10^{-6} &amp; 8.5602 \times 10^{-4} &amp; 3.142984 &amp; 0.001391 \\<br>10^7 &amp; 4.9500 \times 10^{-7} &amp; 3.9133 \times 10^{-4} &amp; 3.141403 &amp; 0.000189 \\<br>10^8 &amp; 5.0821 \times 10^{-8} &amp; 1.2705 \times
                 10^{-4} &amp; 3.141461 &amp; 0.000132 \\<br>10^9 &amp; 5.0482 \times 10^{-9} &amp; 3.9909 \times 10^{-5} &amp; 3.141595 &amp; 0.000002 \\<br>\cdots &amp; \cdots &amp; \cdots &amp; \cdots &amp; \cdots<br>\end{array}<br>$$</p>
               <p>可以很明显地看出，$\sigma$随着$N$的增大而减少。除了一味的增加$N$来降低误差，还有别的什么方法吗？接下来讲的两种方法从一定程度上降低了误差。</p>
-              <blockquote>
-                <p>to be continued</p>
-              </blockquote>
               <h3 id="递归分层抽样（Recursive-stratified-sampling）">
                 <a href="#递归分层抽样（Recursive-stratified-sampling）" class="headerlink" title="递归分层抽样（Recursive stratified sampling）"></a>递归分层抽样（Recursive stratified sampling）</h3>
+              <p>递归分层抽样过程的是：在每个递归步骤中，使用普通蒙特卡罗算法估计积分和误差。当如果误差估计大于所需精度，则其积分区域被分割为子集，并且把算法重新应用于子集中。<br>分层采样算法将采样点集中在函数方差最大的区域，从而减小大差异，使抽样更有效。该思路最热门的实现是<strong>MISER算法</strong>。</p> <img src="/2017/05/21/蒙特卡洛方法及应用/miser.png" alt="$利用MISER\ Monte\ Carlo求解\pi$"
+                title="$利用MISER\ Monte\ Carlo求解\pi$">
+              <p>上图是用<strong>MISER算法</strong>求解$\pi$的采样点分布图。可以看出采样点形成了弧状轮廓。<br>$$<br>H(x, y)=\begin{cases}1, \quad &amp;if\ x^2+y^2 \le 1 \\0, &amp;else \end{cases}\quad x,y\in [0,1) \\<br>F_n=A \frac{1}{n} \sum^{n}_{i=1} H(x_i,y_i) = \frac{1}{n}\sum^{n}_{i=1}
+                H(x_i,y_i)<br>$$<br>这是因为在曲线$y=\sqrt{1-x^2}$附近是方差最大的区域，所以采样点几乎都集中在此曲线附近。</p>
+              <p>$$<br>\begin{array}{c|cccc}<br>n &amp; n_{Real} &amp; \sigma &amp; \sigma_N &amp; F_N &amp; | F_n - \pi | \\<br>\hline<br>10^{3} &amp; 523 &amp; 5.1189 \times 10^{-3} &amp; 4.0468 \times 10^{-2} &amp; 3.195360 &amp; 0.053767 \\<br>10^{4}
+                &amp; 2757 &amp; 2.2615 \times 10^{-4} &amp; 5.6537 \times 10^{-3} &amp; 3.140075 &amp; 0.001518 \\<br>10^{5} &amp; 15964 &amp; 1.2168 \times 10^{-5} &amp; 9.6193 \times 10^{-4} &amp; 3.140571 &amp; 0.001022 \\<br>10^{6} &amp; 92098 &amp;
+                2.2333 \times 10^{-7} &amp; 5.5832 \times 10^{-5} &amp; 3.141635 &amp; 0.000042 \\<br>10^{7} &amp; 522175 &amp; 7.3403 \times 10^{-8} &amp; 5.8030 \times 10^{-5} &amp; 3.141666 &amp; 0.000073 \\<br>10^{8} &amp; 2969563 &amp; 3.7979 \times
+                10^{-10} &amp; 9.4949 \times 10^{-7} &amp; 3.141599 &amp; 0.000006 \\<br>\cdots &amp; \cdots &amp; \cdots &amp; \cdots &amp; \cdots &amp; \cdots<br>\end{array}<br>$$</p>
+              <p>对比之前获得的结果，发现<strong>MISER算法</strong>能用更少的采样点获取到更小的$\sigma$。这样既提高了精度，又减少了所需要的计算时间。</p>
+              <blockquote>
+                <p>代码<br><a href="https://gist.github.com/linw1995/28d70604f8d430177fd0496ae15eb763" target="_blank" rel="external">Gist | Monte Carlo method applied to approximating the value of π.</a></p>
+              </blockquote>
               <h3 id="重要抽样法（Importance-sampling）">
                 <a href="#重要抽样法（Importance-sampling）" class="headerlink" title="重要抽样法（Importance sampling）"></a>重要抽样法（Importance sampling）</h3>
+              <p>重要抽样法是一个能很好地提高蒙特卡罗积分算法精度的方法，即减少方差$\sigma^2$值。<br>做法是，在积分函数中引入一个整函数$p(x)$，则其应满足<br>$$<br>\int^b_{b} p(x)dx = 1<br>$$<br>那么积分函数转变成<br>$$<br>I = \int^a_{b}\left[\frac{f(x)}{p(x)}\right]p(x)dx<br>$$<br>那么积分的估计值$F_n$为<br>$$<br>F_n=\frac{1}{n}\sum^n_{i=1}\frac{f(x_i)}{p(x_i)}<br>$$<br>对于均匀分布的情况$p(x)=\frac{1}{b-a}$<br>$$<br>F_n=\frac{b-a}{n}\sum^n_{i=1}f(x_i)<br>$$<br>这就是一般的蒙特卡罗积分方式，而我们的目的是选择一个$p(x)$使得被积分函数$\frac{f(x)}{p(x)}$的方差最小。<br>比如，我们要求$\displaystyle
+                \int^1_0 e^{-x^2} dx$，比较合理的选择是$p(x)=Ae^{-x}$，其中$A$为归一化常数。</p>
+              <p>$$<br>\begin{array}{ccc}<br>p(x)=\frac{1}{b-a}=1 &amp; \quad &amp; p(x)=Ae^{-x}<br>\\<br>\begin{array}{c|cc}<br>n &amp; \sigma &amp; \sigma_N \\<br>\hline<br>10^{1} &amp; 3.6575 \times 10^{-2} &amp; 1.1566 \times 10^{-1} \\<br>10^{2} &amp;
+                4.0660 \times 10^{-3} &amp; 4.0660 \times 10^{-2} \\<br>10^{3} &amp; 4.4666 \times 10^{-4} &amp; 1.4125 \times 10^{-2} \\<br>10^{4} &amp; 4.6555 \times 10^{-5} &amp; 4.6555 \times 10^{-3} \\<br>10^{5} &amp; 7.1814 \times 10^{-6} &amp;
+                2.2710 \times 10^{-3} \\<br>10^{6} &amp; 1.0165 \times 10^{-6} &amp; 1.0165 \times 10^{-3} \\<br>10^{7} &amp; 1.0675 \times 10^{-7} &amp; 3.3759 \times 10^{-4} \\<br>10^{8} &amp; 1.1489 \times 10^{-8} &amp; 1.1489 \times 10^{-4} \\<br>10^{9}
+                &amp; 1.1608 \times 10^{-9} &amp; 3.6709 \times 10^{-5} \\<br>\cdots &amp; \cdots &amp; \cdots<br>\end{array}<br>&amp;<br>\quad<br>&amp;<br>\begin{array}{c|cc}<br>n &amp; \sigma &amp; \sigma_N \\<br>\hline<br>10^{1} &amp; 7.4557 \times
+                10^{-3} &amp; 2.3577 \times 10^{-2} \\<br>10^{2} &amp; 1.0579 \times 10^{-3} &amp; 1.0579 \times 10^{-2} \\<br>10^{3} &amp; 1.1004 \times 10^{-4} &amp; 3.4796 \times 10^{-3} \\<br>10^{4} &amp; 1.1655 \times 10^{-5} &amp; 1.1655 \times
+                10^{-3} \\<br>10^{5} &amp; 1.4812 \times 10^{-6} &amp; 4.6840 \times 10^{-4} \\<br>10^{6} &amp; 1.6222 \times 10^{-7} &amp; 1.6222 \times 10^{-4} \\<br>10^{7} &amp; 1.7185 \times 10^{-8} &amp; 5.4343 \times 10^{-5} \\<br>10^{8} &amp; 1.9564
+                \times 10^{-9} &amp; 1.9564 \times 10^{-5} \\<br>10^{9} &amp; 9.7523 \times 10^{-10} &amp; 3.0840 \times 10^{-5} \\<br>\cdots &amp; \cdots &amp; \cdots<br>\end{array}<br>\end{array}<br>$$<br>虽然使用非均匀分布$p(x)$加大计算消耗，但提高了精度。在实际使用中要权衡二者，再考虑是否使用。</p>
               <h2 id="蒙特卡洛方法的其它应用">
                 <a href="#蒙特卡洛方法的其它应用" class="headerlink" title="蒙特卡洛方法的其它应用"></a>蒙特卡洛方法的其它应用</h2>
-              <p>Monte Carlo tree search, AI, Alpha go</p>
+              <p>最近<strong>柯洁</strong>对战<strong>AlphaGo</strong>输了，人类在围棋上终究输给了机器。有点小难过，可能我是人类吧 :)<br><strong>AlphaGo</strong>的背后就是使用了<strong>蒙特卡洛树搜索（英语：Monte Carlo tree search；简称：MCTS）</strong>和深度学习。蒙特卡洛树搜索也被用于其他棋盘游戏程序，如六贯棋、三宝棋、亚马逊棋和印度斗兽棋；即时电子游戏，如《吃豆小姐》、《神鬼寓言:传奇》、《罗马II：全面战争》；不确定性游戏，如斯卡特、扑克、万智牌、卡坦岛。</p>
               <h2 id="参考">
                 <a href="#参考" class="headerlink" title="参考"></a>参考</h2>
               <blockquote class="pullquote">
@@ -229,10 +247,13 @@
                   <li><a href="https://en.wikipedia.org/wiki/Metropolis%E2%80%93Hastings_algorithm" target="_blank" rel="external">Metropolis–Hastings algorithm | Wikipedia</a></li>
                   <li><a href="http://cos.name/2013/01/lda-math-mcmc-and-gibbs-sampling/" target="_blank" rel="external">LDA-math-MCMC 和 Gibbs Sampling | 统计之都</a></li>
                   <li>Rickjin靳志辉，LDA数学八卦，0.4 MCMC⁄Gibbs Sampling</li>
+                  <li><a href="http://www.aip.de/groups/soe/local/numres/bookcpdf/c7-8.pdf" title="Recursive Stratified Sampling | WilliamH, Press. NUMERICAL RECIPES-The Art of Scientific Computing Third Edition[M]. Cambridge:Cambridge University Press, 2007. 323-328"
+                      target="_blank" rel="external">Recursive Stratified Sampling | WilliamH, Press. NUMERICAL RECIPES-The Art of Scientific Computing Third Edition[M]. Cambridge:Cambridge University Press, 2007. 323-328</a></li>
+                  <li><a href="https://zh.wikipedia.org/wiki/%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%A0%91%E6%90%9C%E7%B4%A2" target="_blank" rel="external">蒙特卡洛树搜索 | Wikipedia</a></li>
                 </ul>
               </blockquote>
             </div>
-            <script type="text/javascript" src="/js/share.js?v=0.0.0" async></script><a data-url="http://linw1995.com/2017/05/21/蒙特卡洛方法及应用/" data-id="cj32udzka003aq4itl9r93e0o" class="article-share-link">Share</a>
+            <script type="text/javascript" src="/js/share.js?v=0.0.0" async></script><a data-url="http://linw1995.com/2017/05/21/蒙特卡洛方法及应用/" data-id="cj3717do3001yqcitjku1qpmv" class="article-share-link">Share</a>
             <div class="tags"><a href="/tags/Python/">Python</a></div>
             <div class="post-nav"><a href="/2017/05/11/分享-No-One-But-You-Doug-Paisley/" class="next">分享 No One But You - Doug Paisley</a></div>
             <div id="disqus_thread">

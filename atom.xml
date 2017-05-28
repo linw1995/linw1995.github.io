@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://linw1995.com/"/>
-  <updated>2017-05-27T15:00:25.858Z</updated>
+  <updated>2017-05-28T05:59:43.742Z</updated>
   <id>http://linw1995.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://linw1995.com/2017/05/21/%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%96%B9%E6%B3%95%E5%8F%8A%E5%BA%94%E7%94%A8/"/>
     <id>http://linw1995.com/2017/05/21/蒙特卡洛方法及应用/</id>
     <published>2017-05-20T19:03:20.000Z</published>
-    <updated>2017-05-27T15:00:25.858Z</updated>
+    <updated>2017-05-28T05:59:43.742Z</updated>
     
     <content type="html"><![CDATA[<blockquote>
   <p>蒙特卡洛方法（英语：Monte Carlo method），也称统计模拟方法，是1940年代中期由于科学技术的发展和电子计算机的发明，而提出的一种以概率统计理论为指导的数值计算方法。是指使用随机数（或更常见的伪随机数）来解决很多计算问题的方法。<br>20世纪40年代，在冯·诺伊曼，斯塔尼斯拉夫·乌拉姆和尼古拉斯·梅特罗波利斯在洛斯阿拉莫斯国家实验室为核武器计划工作时，发明了蒙特卡洛方法。因为乌拉姆的叔叔经常在摩纳哥的蒙特卡洛赌场输钱得名，而蒙特卡罗方法正是以概率为基础的方法。<br>与它对应的是确定性算法。<br>蒙特卡洛方法在金融工程学，宏观经济学，生物医学，计算物理学（如粒子输运计算、量子热力学计算、空气动力学计算）等领域应用广泛。</p>
@@ -151,6 +151,9 @@
 <h2 id="蒙特卡洛方法的其它应用">
   <a href="#蒙特卡洛方法的其它应用" class="headerlink" title="蒙特卡洛方法的其它应用"></a>蒙特卡洛方法的其它应用</h2>
 <p>最近<strong>柯洁</strong>对战<strong>AlphaGo</strong>输了，人类在围棋上终究输给了机器。有点小难过，可能我是人类吧 :)<br><strong>AlphaGo</strong>的背后就是使用了<strong>蒙特卡洛树搜索（英语：Monte Carlo tree search；简称：MCTS）</strong>和深度学习。蒙特卡洛树搜索也被用于其他棋盘游戏程序，如六贯棋、三宝棋、亚马逊棋和印度斗兽棋；即时电子游戏，如《吃豆小姐》、《神鬼寓言:传奇》、《罗马II：全面战争》；不确定性游戏，如斯卡特、扑克、万智牌、卡坦岛。</p>
+<blockquote>
+  <p>最后用<strong>miser</strong>画了个蝙蝠镖的图，哈哈真好看<br><img src="/2017/05/21/蒙特卡洛方法及应用/batman.png" alt="蝙蝠镖" title="蝙蝠镖"></p>
+</blockquote>
 <h2 id="参考">
   <a href="#参考" class="headerlink" title="参考"></a>参考</h2>
 <blockquote class="pullquote">
@@ -2559,9 +2562,9 @@ myprojec/
     
       <category term="Python" scheme="http://linw1995.com/tags/Python/"/>
     
-      <category term="Test" scheme="http://linw1995.com/tags/Test/"/>
-    
       <category term="VSCode" scheme="http://linw1995.com/tags/VSCode/"/>
+    
+      <category term="Test" scheme="http://linw1995.com/tags/Test/"/>
     
   </entry>
   

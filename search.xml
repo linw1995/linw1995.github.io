@@ -134,6 +134,9 @@
 <h2 id="蒙特卡洛方法的其它应用">
   <a href="#蒙特卡洛方法的其它应用" class="headerlink" title="蒙特卡洛方法的其它应用"></a>蒙特卡洛方法的其它应用</h2>
 <p>最近<strong>柯洁</strong>对战<strong>AlphaGo</strong>输了，人类在围棋上终究输给了机器。有点小难过，可能我是人类吧 :)<br><strong>AlphaGo</strong>的背后就是使用了<strong>蒙特卡洛树搜索（英语：Monte Carlo tree search；简称：MCTS）</strong>和深度学习。蒙特卡洛树搜索也被用于其他棋盘游戏程序，如六贯棋、三宝棋、亚马逊棋和印度斗兽棋；即时电子游戏，如《吃豆小姐》、《神鬼寓言:传奇》、《罗马II：全面战争》；不确定性游戏，如斯卡特、扑克、万智牌、卡坦岛。</p>
+<blockquote>
+  <p>最后用<strong>miser</strong>画了个蝙蝠镖的图，哈哈真好看<br><img src="/2017/05/21/蒙特卡洛方法及应用/batman.png" alt="蝙蝠镖" title="蝙蝠镖"></p>
+</blockquote>
 <h2 id="参考">
   <a href="#参考" class="headerlink" title="参考"></a>参考</h2>
 <blockquote class="pullquote">
@@ -2503,9 +2506,9 @@ myprojec/
             
             <tag> Python </tag>
             
-            <tag> Test </tag>
-            
             <tag> VSCode </tag>
+            
+            <tag> Test </tag>
             
         </tags>
         

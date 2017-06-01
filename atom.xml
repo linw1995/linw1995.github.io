@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://linw1995.com/"/>
-  <updated>2017-05-31T08:33:22.625Z</updated>
+  <updated>2017-06-01T14:42:55.878Z</updated>
   <id>http://linw1995.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://linw1995.com/2017/05/21/%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%96%B9%E6%B3%95%E5%8F%8A%E5%BA%94%E7%94%A8/"/>
     <id>http://linw1995.com/2017/05/21/蒙特卡洛方法及应用/</id>
     <published>2017-05-20T19:03:20.000Z</published>
-    <updated>2017-05-31T08:33:22.625Z</updated>
+    <updated>2017-06-01T14:42:55.878Z</updated>
     
     <content type="html"><![CDATA[<blockquote>
   <p>蒙特卡洛方法（英语：Monte Carlo method），也称统计模拟方法，是1940年代中期由于科学技术的发展和电子计算机的发明，而提出的一种以概率统计理论为指导的数值计算方法。是指使用随机数（或更常见的伪随机数）来解决很多计算问题的方法。<br>20世纪40年代，在冯·诺伊曼，斯塔尼斯拉夫·乌拉姆和尼古拉斯·梅特罗波利斯在洛斯阿拉莫斯国家实验室为核武器计划工作时，发明了蒙特卡洛方法。因为乌拉姆的叔叔经常在摩纳哥的蒙特卡洛赌场输钱得名，而蒙特卡罗方法正是以概率为基础的方法。<br>与它对应的是确定性算法。<br>蒙特卡洛方法在金融工程学，宏观经济学，生物医学，计算物理学（如粒子输运计算、量子热力学计算、空气动力学计算）等领域应用广泛。</p>
@@ -41,7 +41,7 @@
 <h3 id="计算定积分">
   <a href="#计算定积分" class="headerlink" title="计算定积分"></a>计算定积分</h3>
 <p>假设我们要求解$f(x)=x^2$在$[0, 2]$间的积分，即下图函数曲线与$x$轴围成的面积</p> <img src="/2017/05/21/蒙特卡洛方法及应用/x2.png" alt="$f(x)=x^2$在$[0, 2]$间的积分" title="$f(x)=x^2$在$[0, 2]$间的积分">
-<p>其实，求解圆周率其实是在求函数$f(x)=4\sqrt{1 - x^2}$在区间$[0, 1]$上的积分。</p>
+<p>其实，求解圆周率其实是在求函数$f(x)=\sqrt{1 - x^2}$在区间$[0, 1]$上的积分。</p>
 <h4 id="偶然命中法">
   <a href="#偶然命中法" class="headerlink" title="偶然命中法"></a>偶然命中法</h4>
 <p>像求解圆周率那样，只要求解出一对随机数$(x_i,y_i),x_i\in[0,2],y_i\in[0,4]$落在曲线下方的概率，即可求出$f(x)=x^2$在$[0, 2]$间的积分结果。<br>$$H(x, y)=\begin{cases}<br>1\qquad&amp;if\quad y \le f(x) \\<br>0 &amp;else<br>\end{cases}\\<br>F_n=A \frac{1}{n} \sum^{n}_{i=1} H(x_i,y_i) = h(b-a) \frac{1}{n}\sum^{n}_{i=1}
@@ -100,7 +100,7 @@
 <p>其实这个定理是显而易见的，因为<strong>细致平稳条件</strong>$\eqref{0}$的物理含义就是，对于任何两个状态$i,j$，从$i$转移出去到$j$而丢失的的概率质量，恰好会被从$j$转移回$i$的概率质量补充回来，所以状态$i$上的概率质量$\pi(i)$是稳定的，即$\pi(x)$是马氏链的平稳分布。</p>
 <p>由<strong>细致平稳条件</strong>$\eqref{0}$可得<br>$$<br>\begin{align}<br>&amp; \sum_{i=1}^\infty \pi(i)P_{ij} = \sum_{i=1}^\infty \pi(j)P_{ji}<br>= \pi(j) \sum_{i=1}^\infty P_{ji} = \pi(j) \\<br> \implies \quad &amp;\pi P = \pi<br>\end{align}<br>$$<br>由于$\pi$是方程$\pi
   P=\pi$的解，所以$\pi$是平稳分布。</p>
-<p>假设我们已经有一个转移矩阵为$Q$的马氏链，显然未收敛时，有<br>$$<br>p(i)q(i,j)\neq p(j)q(j,i)<br>$$<br>其中$q(i,j)$表示从状态$i$转移到状态$j$的概率，也可写作$q(j|i)$或者$q(i\to j)$。<br>上式不满足<strong>细致平稳条件</strong>$\eqref{0}$，所以$p(x)$不可能是这个马氏链的平稳分布。如果我们对马氏链进行改造，使得<strong>细致平稳条件</strong>$\eqref{0}$成立？尝试引入一个$\alpha(i,j)$，使得两边相等<br>$$<br>p(i)q(i,j)\alpha(i,j)=p(j)q(j,i)\alpha(j,j)
+<p>假设我们已经有一个转移矩阵为$Q$的马氏链，显然未收敛时，有<br>$$<br>p(i)q(i,j)\neq p(j)q(j,i)<br>$$<br>其中$q(i,j)$表示从状态$i$转移到状态$j$的概率，也可写作$q(j|i)$或者$q(i\to j)$。<br>上式不满足<strong>细致平稳条件</strong>$\eqref{0}$，所以$p(x)$不可能是这个马氏链的平稳分布。如果我们对马氏链进行改造，使得<strong>细致平稳条件</strong>$\eqref{0}$成立？尝试引入一个$\alpha(i,j)$，使得两边相等<br>$$<br>p(i)q(i,j)\alpha(i,j)=p(j)q(j,i)\alpha(j,i)
   \tag{二}\label{1}<br>$$<br>我们称$\alpha(i,j)$为接受率，按照对称性，得<br>$$<br>\alpha(i,j)= p(j) q(j,i) \\<br>\alpha(j,i) = p(i) q(i,j)<br>$$<br>所以$\eqref{1}$就成立了，所以有<br>$$<br>p(i) \underbrace{q(i,j)\alpha(i,j)}_{Q’(i,j)}<br>= p(j) \underbrace{q(j,i)\alpha(j,i)}_{Q’(j,i)}
   \tag{三}\label{2}<br>$$<br>这样就把原来的转移矩阵$Q$的马氏链，改造成一个具有新的转移矩阵$Q’$的马氏链,而$Q’$恰好满足<strong>细致平稳条件</strong>$\eqref{0}$，这样$p(x)$就是这个马氏链$Q’$的平稳分布。<br>$$<br>\require{AMScd}<br>\begin{CD}<br>\cdots @&gt;&gt;&gt; x_i @&gt;q(i,j)&gt;&gt; x_j @&gt;&gt;&gt; \cdots
   \\<br>\\<br>@. \begin{matrix}1-\alpha(i,j) \\ 拒绝转移\end{matrix} @. \begin{matrix}\alpha(i,j) \\ 接受转移\end{matrix}<br>\end{CD}<br>$$<br>接受率可以这么理解，当马氏链从状态$i$以$q(i,j)$的概率跳转到状态$j$时，以$\alpha(i,j)$的概率去接受这个转移，那么马氏链新的转移概率为两者的乘积$q(i,j)\alpha(i,j)$。</p>
@@ -213,7 +213,7 @@
     <link href="http://linw1995.com/2017/05/05/%E4%BC%AA%E9%9A%8F%E6%9C%BA%E6%95%B0/"/>
     <id>http://linw1995.com/2017/05/05/伪随机数/</id>
     <published>2017-05-05T14:42:12.000Z</published>
-    <updated>2017-05-24T10:42:51.198Z</updated>
+    <updated>2017-06-01T14:10:54.989Z</updated>
     
     <content type="html"><![CDATA[<h2 id="序">
   <a href="#序" class="headerlink" title="序"></a>序</h2>
@@ -303,7 +303,7 @@
   <a href="#概率密度图像" class="headerlink" title="概率密度图像"></a>概率密度图像</h4><img src="/2017/05/05/伪随机数/t01.png" alt="Probability density" title="Probability density">
 <h3 id="指数分布">
   <a href="#指数分布" class="headerlink" title="指数分布"></a>指数分布</h3>
-<p>指数分布的概率密度函数为：<br>$$<br>p(x)=\lambda e^{-\lambda x} ,x\gt 0 \qquad (\lambda \gt 0)<br>$$<br>计算累积分布函数：<br>$$<br>F(x)=1-e^{-\lambda x}<br>$$<br>计算逆累积分布函数：<br>$$<br>F^{-1}(p)=\frac{-ln(1-p)}{\lambda}<br>$$<br>利用上面的公式我们就可以产生符合指数分布的随机数。</p>
+<p>指数分布的概率密度函数为：<br>$$<br>p(x)=\lambda e^{-\lambda x} ,x\gt 0 \qquad (\lambda \gt 0)<br>$$<br>计算累积分布函数：<br>$$<br>F(x)=1-e^{-\lambda x}<br>$$<br>计算逆累积分布函数：<br>$$<br>F^{-1}(p)=\frac{-ln(1-p)}{\lambda}<br>$$<br>利用上面的公式我们就可以产生符合指数分布的随机数。不过,因为$p$是均匀分布的，则$1-p$也是均匀分布的，所以上式可以简化成下式<br>$$<br>F^{-1}(p)=\frac{-ln(p)}{\lambda}<br>$$</p>
 <h4 id="Python-implementation-2">
   <a href="#Python-implementation-2" class="headerlink" title="Python implementation"></a>Python implementation</h4>
 <figure class="highlight python">
@@ -313,7 +313,7 @@
         <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre>
       </td>
       <td class="code">
-        <pre><div class="line"><span class="keyword">import</span> math</div><div class="line"></div><div class="line">random = Random(A=<span class="number">65539</span>, C=<span class="number">0</span>, M=<span class="number">2</span>**<span class="number">31</span>, seed=<span class="number">1</span>)</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">exponentialDistributionFactory</span><span class="params">(lam)</span>:</span></div><div class="line">    <span class="keyword">if</span> <span class="keyword">not</span> lam &gt; <span class="number">0</span>:</div><div class="line">        <span class="keyword">raise</span> ValueError(<span class="string">'lambda must be bigger than 0'</span>)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">exponential_distribution</span><span class="params">()</span>:</span></div><div class="line">        p = random()</div><div class="line">        <span class="keyword">return</span> - math.log(<span class="number">1</span> - p, math.e) / lam</div><div class="line"></div><div class="line">    <span class="keyword">return</span> exponential_distribution</div></pre>
+        <pre><div class="line"><span class="keyword">import</span> math</div><div class="line"></div><div class="line">random = Random(A=<span class="number">65539</span>, C=<span class="number">0</span>, M=<span class="number">2</span>**<span class="number">31</span>, seed=<span class="number">1</span>)</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">exponentialDistributionFactory</span><span class="params">(lam)</span>:</span></div><div class="line">    <span class="keyword">if</span> <span class="keyword">not</span> lam &gt; <span class="number">0</span>:</div><div class="line">        <span class="keyword">raise</span> ValueError(<span class="string">'lambda must be bigger than 0'</span>)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">exponential_distribution</span><span class="params">()</span>:</span></div><div class="line">        p = random()</div><div class="line">        <span class="keyword">return</span> - math.log(p, math.e) / lam</div><div class="line"></div><div class="line">    <span class="keyword">return</span> exponential_distribution</div></pre>
       </td>
     </tr>
   </table>
@@ -2564,9 +2564,9 @@ myprojec/
     
       <category term="Python" scheme="http://linw1995.com/tags/Python/"/>
     
-      <category term="Test" scheme="http://linw1995.com/tags/Test/"/>
-    
       <category term="VSCode" scheme="http://linw1995.com/tags/VSCode/"/>
+    
+      <category term="Test" scheme="http://linw1995.com/tags/Test/"/>
     
   </entry>
   

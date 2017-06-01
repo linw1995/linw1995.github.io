@@ -24,7 +24,7 @@
 <h3 id="计算定积分">
   <a href="#计算定积分" class="headerlink" title="计算定积分"></a>计算定积分</h3>
 <p>假设我们要求解$f(x)=x^2$在$[0, 2]$间的积分，即下图函数曲线与$x$轴围成的面积</p> <img src="/2017/05/21/蒙特卡洛方法及应用/x2.png" alt="$f(x)=x^2$在$[0, 2]$间的积分" title="$f(x)=x^2$在$[0, 2]$间的积分">
-<p>其实，求解圆周率其实是在求函数$f(x)=4\sqrt{1 - x^2}$在区间$[0, 1]$上的积分。</p>
+<p>其实，求解圆周率其实是在求函数$f(x)=\sqrt{1 - x^2}$在区间$[0, 1]$上的积分。</p>
 <h4 id="偶然命中法">
   <a href="#偶然命中法" class="headerlink" title="偶然命中法"></a>偶然命中法</h4>
 <p>像求解圆周率那样，只要求解出一对随机数$(x_i,y_i),x_i\in[0,2],y_i\in[0,4]$落在曲线下方的概率，即可求出$f(x)=x^2$在$[0, 2]$间的积分结果。<br>$$H(x, y)=\begin{cases}<br>1\qquad&amp;if\quad y \le f(x) \\<br>0 &amp;else<br>\end{cases}\\<br>F_n=A \frac{1}{n} \sum^{n}_{i=1} H(x_i,y_i) = h(b-a) \frac{1}{n}\sum^{n}_{i=1}
@@ -83,7 +83,7 @@
 <p>其实这个定理是显而易见的，因为<strong>细致平稳条件</strong>$\eqref{0}$的物理含义就是，对于任何两个状态$i,j$，从$i$转移出去到$j$而丢失的的概率质量，恰好会被从$j$转移回$i$的概率质量补充回来，所以状态$i$上的概率质量$\pi(i)$是稳定的，即$\pi(x)$是马氏链的平稳分布。</p>
 <p>由<strong>细致平稳条件</strong>$\eqref{0}$可得<br>$$<br>\begin{align}<br>&amp; \sum_{i=1}^\infty \pi(i)P_{ij} = \sum_{i=1}^\infty \pi(j)P_{ji}<br>= \pi(j) \sum_{i=1}^\infty P_{ji} = \pi(j) \\<br> \implies \quad &amp;\pi P = \pi<br>\end{align}<br>$$<br>由于$\pi$是方程$\pi
   P=\pi$的解，所以$\pi$是平稳分布。</p>
-<p>假设我们已经有一个转移矩阵为$Q$的马氏链，显然未收敛时，有<br>$$<br>p(i)q(i,j)\neq p(j)q(j,i)<br>$$<br>其中$q(i,j)$表示从状态$i$转移到状态$j$的概率，也可写作$q(j|i)$或者$q(i\to j)$。<br>上式不满足<strong>细致平稳条件</strong>$\eqref{0}$，所以$p(x)$不可能是这个马氏链的平稳分布。如果我们对马氏链进行改造，使得<strong>细致平稳条件</strong>$\eqref{0}$成立？尝试引入一个$\alpha(i,j)$，使得两边相等<br>$$<br>p(i)q(i,j)\alpha(i,j)=p(j)q(j,i)\alpha(j,j)
+<p>假设我们已经有一个转移矩阵为$Q$的马氏链，显然未收敛时，有<br>$$<br>p(i)q(i,j)\neq p(j)q(j,i)<br>$$<br>其中$q(i,j)$表示从状态$i$转移到状态$j$的概率，也可写作$q(j|i)$或者$q(i\to j)$。<br>上式不满足<strong>细致平稳条件</strong>$\eqref{0}$，所以$p(x)$不可能是这个马氏链的平稳分布。如果我们对马氏链进行改造，使得<strong>细致平稳条件</strong>$\eqref{0}$成立？尝试引入一个$\alpha(i,j)$，使得两边相等<br>$$<br>p(i)q(i,j)\alpha(i,j)=p(j)q(j,i)\alpha(j,i)
   \tag{二}\label{1}<br>$$<br>我们称$\alpha(i,j)$为接受率，按照对称性，得<br>$$<br>\alpha(i,j)= p(j) q(j,i) \\<br>\alpha(j,i) = p(i) q(i,j)<br>$$<br>所以$\eqref{1}$就成立了，所以有<br>$$<br>p(i) \underbrace{q(i,j)\alpha(i,j)}_{Q’(i,j)}<br>= p(j) \underbrace{q(j,i)\alpha(j,i)}_{Q’(j,i)}
   \tag{三}\label{2}<br>$$<br>这样就把原来的转移矩阵$Q$的马氏链，改造成一个具有新的转移矩阵$Q’$的马氏链,而$Q’$恰好满足<strong>细致平稳条件</strong>$\eqref{0}$，这样$p(x)$就是这个马氏链$Q’$的平稳分布。<br>$$<br>\require{AMScd}<br>\begin{CD}<br>\cdots @&gt;&gt;&gt; x_i @&gt;q(i,j)&gt;&gt; x_j @&gt;&gt;&gt; \cdots
   \\<br>\\<br>@. \begin{matrix}1-\alpha(i,j) \\ 拒绝转移\end{matrix} @. \begin{matrix}\alpha(i,j) \\ 接受转移\end{matrix}<br>\end{CD}<br>$$<br>接受率可以这么理解，当马氏链从状态$i$以$q(i,j)$的概率跳转到状态$j$时，以$\alpha(i,j)$的概率去接受这个转移，那么马氏链新的转移概率为两者的乘积$q(i,j)\alpha(i,j)$。</p>
@@ -282,7 +282,7 @@
   <a href="#概率密度图像" class="headerlink" title="概率密度图像"></a>概率密度图像</h4><img src="/2017/05/05/伪随机数/t01.png" alt="Probability density" title="Probability density">
 <h3 id="指数分布">
   <a href="#指数分布" class="headerlink" title="指数分布"></a>指数分布</h3>
-<p>指数分布的概率密度函数为：<br>$$<br>p(x)=\lambda e^{-\lambda x} ,x\gt 0 \qquad (\lambda \gt 0)<br>$$<br>计算累积分布函数：<br>$$<br>F(x)=1-e^{-\lambda x}<br>$$<br>计算逆累积分布函数：<br>$$<br>F^{-1}(p)=\frac{-ln(1-p)}{\lambda}<br>$$<br>利用上面的公式我们就可以产生符合指数分布的随机数。</p>
+<p>指数分布的概率密度函数为：<br>$$<br>p(x)=\lambda e^{-\lambda x} ,x\gt 0 \qquad (\lambda \gt 0)<br>$$<br>计算累积分布函数：<br>$$<br>F(x)=1-e^{-\lambda x}<br>$$<br>计算逆累积分布函数：<br>$$<br>F^{-1}(p)=\frac{-ln(1-p)}{\lambda}<br>$$<br>利用上面的公式我们就可以产生符合指数分布的随机数。不过,因为$p$是均匀分布的，则$1-p$也是均匀分布的，所以上式可以简化成下式<br>$$<br>F^{-1}(p)=\frac{-ln(p)}{\lambda}<br>$$</p>
 <h4 id="Python-implementation-2">
   <a href="#Python-implementation-2" class="headerlink" title="Python implementation"></a>Python implementation</h4>
 <figure class="highlight python">
@@ -292,7 +292,7 @@
         <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre>
       </td>
       <td class="code">
-        <pre><div class="line"><span class="keyword">import</span> math</div><div class="line"></div><div class="line">random = Random(A=<span class="number">65539</span>, C=<span class="number">0</span>, M=<span class="number">2</span>**<span class="number">31</span>, seed=<span class="number">1</span>)</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">exponentialDistributionFactory</span><span class="params">(lam)</span>:</span></div><div class="line">    <span class="keyword">if</span> <span class="keyword">not</span> lam &gt; <span class="number">0</span>:</div><div class="line">        <span class="keyword">raise</span> ValueError(<span class="string">'lambda must be bigger than 0'</span>)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">exponential_distribution</span><span class="params">()</span>:</span></div><div class="line">        p = random()</div><div class="line">        <span class="keyword">return</span> - math.log(<span class="number">1</span> - p, math.e) / lam</div><div class="line"></div><div class="line">    <span class="keyword">return</span> exponential_distribution</div></pre>
+        <pre><div class="line"><span class="keyword">import</span> math</div><div class="line"></div><div class="line">random = Random(A=<span class="number">65539</span>, C=<span class="number">0</span>, M=<span class="number">2</span>**<span class="number">31</span>, seed=<span class="number">1</span>)</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">exponentialDistributionFactory</span><span class="params">(lam)</span>:</span></div><div class="line">    <span class="keyword">if</span> <span class="keyword">not</span> lam &gt; <span class="number">0</span>:</div><div class="line">        <span class="keyword">raise</span> ValueError(<span class="string">'lambda must be bigger than 0'</span>)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">exponential_distribution</span><span class="params">()</span>:</span></div><div class="line">        p = random()</div><div class="line">        <span class="keyword">return</span> - math.log(p, math.e) / lam</div><div class="line"></div><div class="line">    <span class="keyword">return</span> exponential_distribution</div></pre>
       </td>
     </tr>
   </table>
@@ -2508,9 +2508,9 @@ myprojec/
             
             <tag> Python </tag>
             
-            <tag> Test </tag>
-            
             <tag> VSCode </tag>
+            
+            <tag> Test </tag>
             
         </tags>
         

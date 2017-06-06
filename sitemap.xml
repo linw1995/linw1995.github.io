@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://linw1995.com/2017/06/06/Use-go-to-manipulate-gif/</loc>
+    
+    <lastmod>2017-06-06T05:38:31.718Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://linw1995.com/2017/05/21/%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%96%B9%E6%B3%95%E5%8F%8A%E5%BA%94%E7%94%A8/</loc>
     
     <lastmod>2017-06-01T14:42:55.878Z</lastmod>
@@ -86,14 +93,14 @@
   </url>
   
   <url>
-    <loc>http://linw1995.com/2017/03/22/Python-Unittest/</loc>
+    <loc>http://linw1995.com/2017/04/23/Scrapy%E5%AD%A6%E4%B9%A0%E6%97%A5%E8%AE%B0-%E4%BA%8C-%C2%B7-Selenium-PhantomJS/</loc>
     
     <lastmod>2017-05-24T10:42:51.044Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://linw1995.com/2017/04/23/Scrapy%E5%AD%A6%E4%B9%A0%E6%97%A5%E8%AE%B0-%E4%BA%8C-%C2%B7-Selenium-PhantomJS/</loc>
+    <loc>http://linw1995.com/2017/03/22/Python-Unittest/</loc>
     
     <lastmod>2017-05-24T10:42:51.044Z</lastmod>
     

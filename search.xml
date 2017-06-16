@@ -3,6 +3,89 @@
   
     
     <entry>
+      <title><![CDATA[iOS字体安装和使用]]></title>
+      <url>/2017/06/16/iOS%E5%AD%97%E4%BD%93%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8/</url>
+      <content type="html"><![CDATA[<h2 id="前言">
+  <a href="#前言" class="headerlink" title="前言"></a>前言</h2>
+<p>自7.0版本起iOS系统就支持字体文件的安装，以配置描述文件的形式储存在系统中。安装完成后即可通过各种App使用该字体。</p>
+<h2 id="代码">
+  <a href="#代码" class="headerlink" title="代码"></a>代码</h2>
+<blockquote> <a href="https://gist.github.com/linw1995/7b1b8e88159f18ed18f46629e35ba423" target="_blank" rel="external">Packaging fonts in configuration profiles for installing on iOS | Gist</a> </blockquote>
+<h2 id="使用">
+  <a href="#使用" class="headerlink" title="使用"></a>使用</h2>
+<p>先下载代码重命名为<code>packagingfonts.py</code>，和需要安装的字体文件（.ttf或.otf格式）放在同个目录下</p>
+<p>贡献几个美渣渣的字体来源</p>
+<ul>
+  <li><a href="https://fonts.google.com/" target="_blank" rel="external">Google Fonts</a></li>
+  <li><a href="https://www.google.com/get/noto/" target="_blank" rel="external">Google Noto Fonts</a></li>
+  <li><a href="https://www.zhihu.com/question/20727176" target="_blank" rel="external">有哪些值得推荐的中文字体？ | 知乎</a> </li>
+</ul>
+<p>在<strong>CMD</strong>中运行代码</p>
+<figure class="highlight plain">
+  <table>
+    <tr>
+      <td class="gutter">
+        <pre><div class="line">1</div></pre>
+      </td>
+      <td class="code">
+        <pre><div class="line">python packagingfonts.py SentyMarukoPro.ttf NotoSans-Regular.ttf</div></pre>
+      </td>
+    </tr>
+  </table>
+</figure>
+<p>目录下就会多出两个配置描述文件</p>
+<figure class="highlight plain">
+  <table>
+    <tr>
+      <td class="gutter">
+        <pre><div class="line">1</div><div class="line">2</div></pre>
+      </td>
+      <td class="code">
+        <pre><div class="line">NotoSans-Regular.ttf.mobileconfig</div><div class="line">SentyMarukoPro.ttf.mobileconfig</div></pre>
+      </td>
+    </tr>
+  </table>
+</figure>
+<p>可这个描述文件需要用<strong>Safari</strong>打开才行。<br>把计算机和iOS设备连接到同个Wifi上，在<strong>CMD</strong>中输入以下命令</p>
+<figure class="highlight plain">
+  <table>
+    <tr>
+      <td class="gutter">
+        <pre><div class="line">1</div><div class="line">2</div></pre>
+      </td>
+      <td class="code">
+        <pre><div class="line">&gt;&gt;&gt; python -m http.server -b 192.168.137.1</div><div class="line">Serving HTTP on 192.168.137.1 port 8000 (http://192.168.137.1:8000/) ...</div></pre>
+      </td>
+    </tr>
+  </table>
+</figure>
+<p>然后用<strong>Safari</strong>访问该地址，选择相应的设备描述文件安装字体即可。</p> <img src="/2017/06/16/iOS字体安装和使用/IMG_0695.PNG" alt="Pages" title="Pages">
+<h2 id="参考">
+  <a href="#参考" class="headerlink" title="参考"></a>参考</h2>
+<blockquote class="pullquote">
+  <ul>
+    <li><a href="https://sspai.com/post/36259" target="_blank" rel="external">Workflow：Google Fonts字体下载 &amp; iOS字体安装和使用 | 少数派</a></li>
+    <li><a href="https://developer.apple.com/library/content/featuredarticles/iPhoneConfigurationProfileRef/Introduction/Introduction.html#//apple_ref/doc/uid/TP40010206-CH1-SW43" target="_blank" rel="external">Font Payload | Configuration Profile Reference</a></li>
+    <li><a href="https://gist.github.com/linw1995/7b1b8e88159f18ed18f46629e35ba423" target="_blank" rel="external">Packaging fonts in configuration profiles for installing on iOS | Gist</a></li>
+  </ul>
+</blockquote>]]></content>
+      
+        <categories>
+            
+            <category> Others </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> iOS </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[Use go to manipulate gif]]></title>
       <url>/2017/06/06/Use-go-to-manipulate-gif/</url>
       <content type="html"><![CDATA[<h2 id="简单介绍下image-gif包">
@@ -650,9 +733,9 @@
         
         <tags>
             
-            <tag> Data Structrue </tag>
-            
             <tag> Python </tag>
+            
+            <tag> Data Structrue </tag>
             
         </tags>
         
@@ -2610,9 +2693,9 @@ myprojec/
             
             <tag> Python </tag>
             
-            <tag> VSCode </tag>
-            
             <tag> Test </tag>
+            
+            <tag> VSCode </tag>
             
         </tags>
         

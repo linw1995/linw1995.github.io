@@ -1133,20 +1133,20 @@ myprojec/
     <link href="http://linw1995.com/2017/04/12/%E6%8A%98%E8%85%BEVSCode%E8%AE%B0-%E4%BA%8C-%C2%B7-Settings-Sync/"/>
     <id>http://linw1995.com/2017/04/12/折腾VSCode记-二-·-Settings-Sync/</id>
     <published>2017-04-12T15:03:42.000Z</published>
-    <updated>2017-05-24T10:42:51.223Z</updated>
+    <updated>2017-07-02T05:48:08.660Z</updated>
     
     <content type="html"><![CDATA[<p>假如有一天你重装系统了，或者换电脑了，或者有多台电脑，每次重新配置<strong>VSCode</strong>也太麻烦了。<br><img src="/2017/04/12/折腾VSCode记-二-·-Settings-Sync/cloud.png" alt="SettingSync-Logo" title="SettingSync-Logo"> <strong>Setting Sync</strong><br>这个插件就完美的解决了这个问题。<br>
   <a id="more"></a>
 </p>
 <p>利用了<strong>Github Gist服务</strong>来保存<strong>VSCode</strong>的状态（设置、插件等等），<br>除了自己可用外，还可以分享自己的配置给别人。</p>
-<h1 id="项目传送门">
-  <a href="#项目传送门" class="headerlink" title="项目传送门"></a>项目传送门</h1>
+<h2 id="项目传送门">
+  <a href="#项目传送门" class="headerlink" title="项目传送门"></a>项目传送门</h2>
 <ul>
   <li><a href="https://marketplace.visualstudio.com/items?itemName=Shan.code-settings-sync" target="_blank" rel="external">VSCode marketplac - Settings Sync</a> </li>
   <li><a href="https://github.com/shanalikhan/code-settings-sync" target="_blank" rel="external">Github - code-settings-sync</a> </li>
 </ul>
-<h1 id="可同步内容">
-  <a href="#可同步内容" class="headerlink" title="可同步内容"></a>可同步内容</h1>
+<h2 id="可同步内容">
+  <a href="#可同步内容" class="headerlink" title="可同步内容"></a>可同步内容</h2>
 <p>All the extensions and complete User Folder that Contains</p>
 <ol>
   <li>Settings File</li>
@@ -1156,28 +1156,25 @@ myprojec/
   <li>VSCode Extensions Settings</li>
   <li>Workspaces</li>
 </ol>
-<h1 id="如何使用">
-  <a href="#如何使用" class="headerlink" title="如何使用"></a>如何使用</h1>
+<h2 id="如何使用">
+  <a href="#如何使用" class="headerlink" title="如何使用"></a>如何使用</h2>
 <p>首先要安装</p>
-<h2 id="安装">
-  <a href="#安装" class="headerlink" title="安装"></a>安装</h2>
+<h3 id="安装">
+  <a href="#安装" class="headerlink" title="安装"></a>安装</h3>
 <p>在<strong>VSCode</strong>中按下<code>Ctrl</code> + <code>P</code> 输入</p>
 <pre><code>ext install code-settings-sync
 </code></pre>
-<h2 id="配置">
-  <a href="#配置" class="headerlink" title="配置"></a>配置</h2>
-<h3 id="Github-personal-access-tokens">
-  <a href="#Github-personal-access-tokens" class="headerlink" title="Github personal access tokens"></a>Github personal access tokens</h3>
+<h3 id="配置">
+  <a href="#配置" class="headerlink" title="配置"></a>配置</h3>
+<h4 id="Github-personal-access-tokens">
+  <a href="#Github-personal-access-tokens" class="headerlink" title="Github personal access tokens"></a>Github personal access tokens</h4>
 <p>先到<strong>Github</strong>个人设置页面，生成有生成<strong>Gist</strong>权限的密钥</p>
-<h3 id="第一次上传">
-  <a href="#第一次上传" class="headerlink" title="第一次上传"></a>第一次上传</h3>
+<h4 id="第一次上传">
+  <a href="#第一次上传" class="headerlink" title="第一次上传"></a>第一次上传</h4>
 <p>在<strong>VSCode</strong>按下<code>Shift</code>+<code>Alt</code>+<code>U</code>, 编辑器上方会弹出输入框，<br>输入生成的密钥，即可。</p>
-<h3 id="其它设置">
-  <a href="#其它设置" class="headerlink" title="其它设置"></a>其它设置</h3>
-<p>手动下载配置，按下<code>Shift</code>+<code>Alt</code>+<code>D</code>。<br>还可以设置自动同步，每次打开时都会检查自动下载新版本，真棒！<br>也支持自定同步内容。</p>
-<h1 id="分享">
-  <a href="#分享" class="headerlink" title="分享"></a>分享</h1>
-<p>我的 <a href="https://gist.github.com/linw1995/5abf184e66bf7615f72b069bc704fa0b" target="_blank" rel="external">Visual Studio Code Sync Settings Gist</a></p>]]></content>
+<h4 id="其它设置">
+  <a href="#其它设置" class="headerlink" title="其它设置"></a>其它设置</h4>
+<p>手动下载配置，按下<code>Shift</code>+<code>Alt</code>+<code>D</code>。<br>还可以设置自动同步，每次打开时都会检查自动下载新版本，真棒！<br>也支持自定同步内容。</p>]]></content>
     
     <summary type="html">
     
@@ -2030,85 +2027,15 @@ myprojec/
     <link href="http://linw1995.com/2017/03/29/Python-functools/"/>
     <id>http://linw1995.com/2017/03/29/Python-functools/</id>
     <published>2017-03-29T08:30:08.000Z</published>
-    <updated>2017-05-24T10:42:50.983Z</updated>
+    <updated>2017-07-03T14:14:46.838Z</updated>
     
-    <content type="html"><![CDATA[<p><strong>Python</strong>也是支持<strong>函数式编程Functional Programming</strong>，<br>支持函数当参数，当返回变量，拥有<strong>闭包Closure</strong>这一特性，<br>而<strong>functools</strong>这个库是用来更好地生成<strong>高阶函数higher-order function</strong>的<br>
+    <content type="html"><![CDATA[<p><strong>Python</strong>也是支持<strong>函数式编程FP</strong>，<br>支持函数当参数，当返回变量，拥有<strong>闭包Closure</strong>这一特性，<br>而<strong>functools</strong>这个库是用来更好地构造<strong>高阶函数higher-order function</strong><br>
   <a id="more"></a>
 </p>
-<h1 id="py2与py3的区别">
-  <a href="#py2与py3的区别" class="headerlink" title="py2与py3的区别"></a>py2与py3的区别</h1>
-<p>首先先看下<strong>functools</strong>在<strong>py2</strong>与<strong>py3</strong>间的区别：</p>
-<table>
-  <thead>
-    <tr>
-      <th>函数</th>
-      <th style="text-align:center">py2</th>
-      <th style="text-align:center">py3</th>
-      <th>描述</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>cmp_to_key</td>
-      <td style="text-align:center"><span style="color:green">✔</span></td>
-      <td style="text-align:center"><span style="color:green">✔</span></td>
-      <td>Transform an old-style comparison function to a key function.</td>
-    </tr>
-    <tr>
-      <td>total_ordering</td>
-      <td style="text-align:center"><span style="color:green">✔</span></td>
-      <td style="text-align:center"><span style="color:green">✔</span></td>
-      <td>Given a class defining one or more rich comparison ordering methods, this class decorator supplies the rest.</td>
-    </tr>
-    <tr>
-      <td>reduce</td>
-      <td style="text-align:center"><span style="color:green">✔</span></td>
-      <td style="text-align:center"><span style="color:green">✔</span></td>
-      <td>This is the same function as reduce().</td>
-    </tr>
-    <tr>
-      <td>partial</td>
-      <td style="text-align:center"><span style="color:green">✔</span></td>
-      <td style="text-align:center"><span style="color:green">✔</span></td>
-      <td>Return a new partial object which when called will behave like func called with the positional arguments args and keyword arguments keywords.</td>
-    </tr>
-    <tr>
-      <td>partialmethod</td>
-      <td style="text-align:center"><span style="color:red">✘</span></td>
-      <td style="text-align:center"><span style="color:green">✔</span></td>
-      <td>Return a new partialmethod descriptor which behaves like partial except that it is designed to be used as a method definition rather than being directly callable.</td>
-    </tr>
-    <tr>
-      <td>update_wrapper</td>
-      <td style="text-align:center"><span style="color:green">✔</span></td>
-      <td style="text-align:center"><span style="color:green">✔</span></td>
-      <td>Update a wrapper function to look like the wrapped function.</td>
-    </tr>
-    <tr>
-      <td>wraps</td>
-      <td style="text-align:center"><span style="color:green">✔</span></td>
-      <td style="text-align:center"><span style="color:green">✔</span></td>
-      <td>This is a convenience function for invoking update_wrapper() as a function decorator when defining a wrapper function.</td>
-    </tr>
-    <tr>
-      <td>lru_cache</td>
-      <td style="text-align:center"><span style="color:red">✘</span></td>
-      <td style="text-align:center"><span style="color:green">✔</span></td>
-      <td>Decorator to wrap a function with a memoizing callable that saves up to the maxsize most recent calls.</td>
-    </tr>
-    <tr>
-      <td>singledispatch</td>
-      <td style="text-align:center"><span style="color:red">✘</span></td>
-      <td style="text-align:center"><span style="color:green">✔</span></td>
-      <td>Transforms a function into a single-dispatch generic function.</td>
-    </tr>
-  </tbody>
-</table>
-<p><strong>py3</strong>多了<strong>lru_cache</strong>, <strong>partialmethod</strong>, <strong>singledispatch</strong>这三个函数</p>
-<h1 id="同">
-  <a href="#同" class="headerlink" title="同"></a>同</h1>
-<h2 id="cmp-to-key">
-  <a href="#cmp-to-key" class="headerlink" title="cmp_to_key"></a>cmp_to_key</h2>
+<h2 id="同">
+  <a href="#同" class="headerlink" title="同"></a>同</h2>
+<h3 id="cmp-to-key">
+  <a href="#cmp-to-key" class="headerlink" title="cmp_to_key"></a>cmp_to_key</h3>
 <p>这个函数是用来，搭配像<code>sorted</code>, <code>min</code>, <code>max</code>等，可接受key参数的函数。<br>在很久很久以前在需要为列表排序的时候，总要提供一个<strong>cmp</strong>函数，<br>直到如今，<strong>Python</strong>排序算法都调用其<strong>rich comparison ordering methods</strong>来进行比较，<br>例如<code>__lt__</code>,
   <code>__gt__</code>等等， 所以需要把<strong>cmp</strong>转换成这些方法。</p>
 <p><strong>cmp_to_key</strong>的实现就像这样子：</p>
@@ -2137,8 +2064,8 @@ myprojec/
     </tr>
   </table>
 </figure>
-<h2 id="total-ordering">
-  <a href="#total-ordering" class="headerlink" title="total_ordering"></a>total_ordering</h2>
+<h3 id="total-ordering">
+  <a href="#total-ordering" class="headerlink" title="total_ordering"></a>total_ordering</h3>
 <p><strong>class</strong>装饰器，用来补全<strong>rich comparison ordering methods</strong>，<br>但至少要提供<code>__eq__</code>，和<code>__lt__</code>，<code>__gt__</code>，<code>__le__</code>，<code>__ge__</code>中的一种。</p>
 <p>示例：</p>
 <figure class="highlight python">
@@ -2153,8 +2080,8 @@ myprojec/
     </tr>
   </table>
 </figure>
-<h2 id="reduce">
-  <a href="#reduce" class="headerlink" title="reduce"></a>reduce</h2>
+<h3 id="reduce">
+  <a href="#reduce" class="headerlink" title="reduce"></a>reduce</h3>
 <p>与<strong>py2</strong>内建函数<strong>reduce</strong>一致，而<strong>reduce</strong>在<strong>py3</strong>已不是内建函数</p>
 <p>其实现大概就是这样子的：</p>
 <figure class="highlight python">
@@ -2169,8 +2096,8 @@ myprojec/
     </tr>
   </table>
 </figure>
-<h2 id="partial">
-  <a href="#partial" class="headerlink" title="partial"></a>partial</h2>
+<h3 id="partial">
+  <a href="#partial" class="headerlink" title="partial"></a>partial</h3>
 <p>这就是用来实现<strong>偏函数Partial function</strong>的</p>
 <p>例如：</p>
 <figure class="highlight python">
@@ -2185,8 +2112,8 @@ myprojec/
     </tr>
   </table>
 </figure>
-<h2 id="update-wrapper">
-  <a href="#update-wrapper" class="headerlink" title="update_wrapper"></a>update_wrapper</h2>
+<h3 id="update-wrapper">
+  <a href="#update-wrapper" class="headerlink" title="update_wrapper"></a>update_wrapper</h3>
 <p>我们在用新函数包装旧函数时，就失去了原函数的信息，这对调试时非常不友好</p>
 <figure class="highlight python">
   <table>
@@ -2226,8 +2153,8 @@ myprojec/
     </tr>
   </table>
 </figure>
-<h2 id="wraps">
-  <a href="#wraps" class="headerlink" title="wraps"></a>wraps</h2>
+<h3 id="wraps">
+  <a href="#wraps" class="headerlink" title="wraps"></a>wraps</h3>
 <p>这个就是<strong>update_wrapper</strong>的<strong>partial</strong>版本</p>
 <figure class="highlight python">
   <table>
@@ -2254,11 +2181,11 @@ myprojec/
     </tr>
   </table>
 </figure>
-<h1 id="异">
-  <a href="#异" class="headerlink" title="异"></a>异</h1>
+<h2 id="异">
+  <a href="#异" class="headerlink" title="异"></a>异</h2>
 <p><strong>partialmethod</strong>，<strong>lru_cache</strong>，<strong>singledispatch</strong>是<strong>py3</strong>中新增的函数</p>
-<h2 id="partialmethod">
-  <a href="#partialmethod" class="headerlink" title="partialmethod"></a>partialmethod</h2>
+<h3 id="partialmethod">
+  <a href="#partialmethod" class="headerlink" title="partialmethod"></a>partialmethod</h3>
 <p>用来生成<strong>类方法</strong>的<strong>Partial function</strong></p>
 <figure class="highlight python">
   <table>
@@ -2272,8 +2199,8 @@ myprojec/
     </tr>
   </table>
 </figure>
-<h2 id="lru-cache">
-  <a href="#lru-cache" class="headerlink" title="lru_cache"></a>lru_cache</h2>
+<h3 id="lru-cache">
+  <a href="#lru-cache" class="headerlink" title="lru_cache"></a>lru_cache</h3>
 <blockquote> <a href="https://en.wikipedia.org/wiki/Cache_replacement_policies#Least_Recently_Used_.28LRU.29" target="_blank" rel="external">Least Recently Used(LRU)</a> </blockquote>
 <p>装饰器，用来缓存函数对应不同参数的返回结果。</p>
 <p>可以提供<code>maxsize=None</code>与<code>typed=False</code>这两个参数，<br>参数<strong>maxsize</strong>为最多缓存的次数，如果为<strong>None</strong>，则无限制，设置为<strong>2n</strong>时，性能最佳，特别适合于耗时的函数。<br><strong>typed=True</strong>，则不同参数类型的调用将分别缓存，例如 f(3) 和 f(3.0)。</p>
@@ -2293,8 +2220,8 @@ myprojec/
 </figure>
 <p>从结果可以看出，当第二次调用 add(1, 2) 时，并没有真正执行函数体，而是直接返回缓存的结果。</p>
 <p>有一个用 C 实现的，更快的，同时兼容 Python2 和 Python3 的第三方模块<a href="https://github.com/pbrady/fastcache" target="_blank" rel="external">fastcache</a>能够实现同样的功能。</p>
-<h2 id="singledispatch">
-  <a href="#singledispatch" class="headerlink" title="singledispatch"></a>singledispatch</h2>
+<h3 id="singledispatch">
+  <a href="#singledispatch" class="headerlink" title="singledispatch"></a>singledispatch</h3>
 <blockquote> <a href="https://www.python.org/dev/peps/pep-0443/" target="_blank" rel="external">PEP 443 -- Single-dispatch generic functions</a> </blockquote>
 <p>用来定义函数重载，根据第一个参数类型来使用对应的函数</p>
 <p>使用：</p>
@@ -2310,8 +2237,78 @@ myprojec/
     </tr>
   </table>
 </figure>
-<h1 id="参考链接">
-  <a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h1>
+<h2 id="py2与py3的区别">
+  <a href="#py2与py3的区别" class="headerlink" title="py2与py3的区别"></a>py2与py3的区别</h2>
+<p>首先先看下<strong>functools</strong>在<strong>py2</strong>与<strong>py3</strong>间的区别：</p>
+<table>
+  <thead>
+    <tr>
+      <th>函数</th>
+      <th style="text-align:center">py2</th>
+      <th style="text-align:center">py3</th>
+      <th>描述</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>cmp_to_key</td>
+      <td style="text-align:center"><span style="color:green">✔</span></td>
+      <td style="text-align:center"><span style="color:green">✔</span></td>
+      <td>把老式比较函数转换为新式比较方式（包装 -&gt; 比较 -&gt; 解包）</td>
+    </tr>
+    <tr>
+      <td>total_ordering</td>
+      <td style="text-align:center"><span style="color:green">✔</span></td>
+      <td style="text-align:center"><span style="color:green">✔</span></td>
+      <td>利用类定义中仅有的一或多个比较函数，来补全剩余的比较函数</td>
+    </tr>
+    <tr>
+      <td>reduce</td>
+      <td style="text-align:center"><span style="color:green">✔</span></td>
+      <td style="text-align:center"><span style="color:green">✔</span></td>
+      <td>与reduce函数一致</td>
+    </tr>
+    <tr>
+      <td>partial</td>
+      <td style="text-align:center"><span style="color:green">✔</span></td>
+      <td style="text-align:center"><span style="color:green">✔</span></td>
+      <td>用预先准备的参数包装该函数，以后每次调用只需要补充剩余的参数即可</td>
+    </tr>
+    <tr>
+      <td>partialmethod</td>
+      <td style="text-align:center"><span style="color:red">✘</span></td>
+      <td style="text-align:center"><span style="color:green">✔</span></td>
+      <td>同上，但只适用于类方法</td>
+    </tr>
+    <tr>
+      <td>update_wrapper</td>
+      <td style="text-align:center"><span style="color:green">✔</span></td>
+      <td style="text-align:center"><span style="color:green">✔</span></td>
+      <td>更新包装后的函数，即函数名、文档、等等，有利于调试</td>
+    </tr>
+    <tr>
+      <td>wraps</td>
+      <td style="text-align:center"><span style="color:green">✔</span></td>
+      <td style="text-align:center"><span style="color:green">✔</span></td>
+      <td>以上函数的装饰器版本，更方便使用</td>
+    </tr>
+    <tr>
+      <td>lru_cache</td>
+      <td style="text-align:center"><span style="color:red">✘</span></td>
+      <td style="text-align:center"><span style="color:green">✔</span></td>
+      <td>装饰器，缓存函数的调用结果，有限地（可无限）保存最近的调用结果</td>
+    </tr>
+    <tr>
+      <td>singledispatch</td>
+      <td style="text-align:center"><span style="color:red">✘</span></td>
+      <td style="text-align:center"><span style="color:green">✔</span></td>
+      <td>把函数转换成<strong>单分派泛函数</strong></td>
+    </tr>
+  </tbody>
+</table>
+<p><strong>py3</strong>多了<strong>lru_cache</strong>, <strong>partialmethod</strong>, <strong>singledispatch</strong>这三个函数</p>
+<h2 id="参考链接">
+  <a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2>
 <blockquote class="pullquote">
   <ul>
     <li><a href="https://docs.python.org/2.7/library/functools.html" target="_blank" rel="external">py2.7 functools — Higher-order functions and operations on callable objects</a></li>
@@ -2326,7 +2323,7 @@ myprojec/
     
     <summary type="html">
     
-      &lt;p&gt;&lt;strong&gt;Python&lt;/strong&gt;也是支持&lt;strong&gt;函数式编程Functional Programming&lt;/strong&gt;，&lt;br&gt;支持函数当参数，当返回变量，拥有&lt;strong&gt;闭包Closure&lt;/strong&gt;这一特性，&lt;br&gt;而&lt;strong&gt;functools&lt;/strong&gt;这个库是用来更好地生成&lt;strong&gt;高阶函数higher-order function&lt;/strong&gt;的&lt;br&gt;
+      &lt;p&gt;&lt;strong&gt;Python&lt;/strong&gt;也是支持&lt;strong&gt;函数式编程FP&lt;/strong&gt;，&lt;br&gt;支持函数当参数，当返回变量，拥有&lt;strong&gt;闭包Closure&lt;/strong&gt;这一特性，&lt;br&gt;而&lt;strong&gt;functools&lt;/strong&gt;这个库是用来更好地构造&lt;strong&gt;高阶函数higher-order function&lt;/strong&gt;&lt;br&gt;
     
     </summary>
     
@@ -2335,7 +2332,7 @@ myprojec/
     
       <category term="Python" scheme="http://linw1995.com/tags/Python/"/>
     
-      <category term="Functional Programming" scheme="http://linw1995.com/tags/Functional-Programming/"/>
+      <category term="FP" scheme="http://linw1995.com/tags/FP/"/>
     
   </entry>
   

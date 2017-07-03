@@ -58,119 +58,49 @@
               <div id="toc" class="toc-article">
                 <div class="toc-title">Contents</div>
                 <ol class="toc">
-                  <li class="toc-item toc-level-1"><a class="toc-link" href="#py2与py3的区别"><span class="toc-number">1.</span> <span class="toc-text">
-  py2与py3的区别</span></a></li>
-                  <li class="toc-item toc-level-1"><a class="toc-link" href="#同"><span class="toc-number">2.</span> <span class="toc-text">
+                  <li class="toc-item toc-level-2"><a class="toc-link" href="#同"><span class="toc-number">1.</span> <span class="toc-text">
   同</span></a>
                     <ol class="toc-child">
-                      <li class="toc-item toc-level-2"><a class="toc-link" href="#cmp-to-key"><span class="toc-number">2.1.</span> <span class="toc-text">
+                      <li class="toc-item toc-level-3"><a class="toc-link" href="#cmp-to-key"><span class="toc-number">1.1.</span> <span class="toc-text">
   cmp_to_key</span></a></li>
-                      <li class="toc-item toc-level-2"><a class="toc-link" href="#total-ordering"><span class="toc-number">2.2.</span> <span class="toc-text">
+                      <li class="toc-item toc-level-3"><a class="toc-link" href="#total-ordering"><span class="toc-number">1.2.</span> <span class="toc-text">
   total_ordering</span></a></li>
-                      <li class="toc-item toc-level-2"><a class="toc-link" href="#reduce"><span class="toc-number">2.3.</span> <span class="toc-text">
+                      <li class="toc-item toc-level-3"><a class="toc-link" href="#reduce"><span class="toc-number">1.3.</span> <span class="toc-text">
   reduce</span></a></li>
-                      <li class="toc-item toc-level-2"><a class="toc-link" href="#partial"><span class="toc-number">2.4.</span> <span class="toc-text">
+                      <li class="toc-item toc-level-3"><a class="toc-link" href="#partial"><span class="toc-number">1.4.</span> <span class="toc-text">
   partial</span></a></li>
-                      <li class="toc-item toc-level-2"><a class="toc-link" href="#update-wrapper"><span class="toc-number">2.5.</span> <span class="toc-text">
+                      <li class="toc-item toc-level-3"><a class="toc-link" href="#update-wrapper"><span class="toc-number">1.5.</span> <span class="toc-text">
   update_wrapper</span></a></li>
-                      <li class="toc-item toc-level-2"><a class="toc-link" href="#wraps"><span class="toc-number">2.6.</span> <span class="toc-text">
+                      <li class="toc-item toc-level-3"><a class="toc-link" href="#wraps"><span class="toc-number">1.6.</span> <span class="toc-text">
   wraps</span></a></li>
                     </ol>
                   </li>
-                  <li class="toc-item toc-level-1"><a class="toc-link" href="#异"><span class="toc-number">3.</span> <span class="toc-text">
+                  <li class="toc-item toc-level-2"><a class="toc-link" href="#异"><span class="toc-number">2.</span> <span class="toc-text">
   异</span></a>
                     <ol class="toc-child">
-                      <li class="toc-item toc-level-2"><a class="toc-link" href="#partialmethod"><span class="toc-number">3.1.</span> <span class="toc-text">
+                      <li class="toc-item toc-level-3"><a class="toc-link" href="#partialmethod"><span class="toc-number">2.1.</span> <span class="toc-text">
   partialmethod</span></a></li>
-                      <li class="toc-item toc-level-2"><a class="toc-link" href="#lru-cache"><span class="toc-number">3.2.</span> <span class="toc-text">
+                      <li class="toc-item toc-level-3"><a class="toc-link" href="#lru-cache"><span class="toc-number">2.2.</span> <span class="toc-text">
   lru_cache</span></a></li>
-                      <li class="toc-item toc-level-2"><a class="toc-link" href="#singledispatch"><span class="toc-number">3.3.</span> <span class="toc-text">
+                      <li class="toc-item toc-level-3"><a class="toc-link" href="#singledispatch"><span class="toc-number">2.3.</span> <span class="toc-text">
   singledispatch</span></a></li>
                     </ol>
                   </li>
-                  <li class="toc-item toc-level-1"><a class="toc-link" href="#参考链接"><span class="toc-number">4.</span> <span class="toc-text">
+                  <li class="toc-item toc-level-2"><a class="toc-link" href="#py2与py3的区别"><span class="toc-number">3.</span> <span class="toc-text">
+  py2与py3的区别</span></a></li>
+                  <li class="toc-item toc-level-2"><a class="toc-link" href="#参考链接"><span class="toc-number">4.</span> <span class="toc-text">
   参考链接</span></a></li>
                 </ol>
               </div>
             </div>
             <div class="post-content">
-              <p><strong>Python</strong>也是支持<strong>函数式编程Functional Programming</strong>，<br>支持函数当参数，当返回变量，拥有<strong>闭包Closure</strong>这一特性，<br>而<strong>functools</strong>这个库是用来更好地生成<strong>高阶函数higher-order function</strong>的<br>
+              <p><strong>Python</strong>也是支持<strong>函数式编程FP</strong>，<br>支持函数当参数，当返回变量，拥有<strong>闭包Closure</strong>这一特性，<br>而<strong>functools</strong>这个库是用来更好地构造<strong>高阶函数higher-order function</strong><br>
                 <a id="more"></a>
               </p>
-              <h1 id="py2与py3的区别">
-                <a href="#py2与py3的区别" class="headerlink" title="py2与py3的区别"></a>py2与py3的区别</h1>
-              <p>首先先看下<strong>functools</strong>在<strong>py2</strong>与<strong>py3</strong>间的区别：</p>
-              <table>
-                <thead>
-                  <tr>
-                    <th>函数</th>
-                    <th style="text-align:center">py2</th>
-                    <th style="text-align:center">py3</th>
-                    <th>描述</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>cmp_to_key</td>
-                    <td style="text-align:center"><span style="color:green">✔</span></td>
-                    <td style="text-align:center"><span style="color:green">✔</span></td>
-                    <td>Transform an old-style comparison function to a key function.</td>
-                  </tr>
-                  <tr>
-                    <td>total_ordering</td>
-                    <td style="text-align:center"><span style="color:green">✔</span></td>
-                    <td style="text-align:center"><span style="color:green">✔</span></td>
-                    <td>Given a class defining one or more rich comparison ordering methods, this class decorator supplies the rest.</td>
-                  </tr>
-                  <tr>
-                    <td>reduce</td>
-                    <td style="text-align:center"><span style="color:green">✔</span></td>
-                    <td style="text-align:center"><span style="color:green">✔</span></td>
-                    <td>This is the same function as reduce().</td>
-                  </tr>
-                  <tr>
-                    <td>partial</td>
-                    <td style="text-align:center"><span style="color:green">✔</span></td>
-                    <td style="text-align:center"><span style="color:green">✔</span></td>
-                    <td>Return a new partial object which when called will behave like func called with the positional arguments args and keyword arguments keywords.</td>
-                  </tr>
-                  <tr>
-                    <td>partialmethod</td>
-                    <td style="text-align:center"><span style="color:red">✘</span></td>
-                    <td style="text-align:center"><span style="color:green">✔</span></td>
-                    <td>Return a new partialmethod descriptor which behaves like partial except that it is designed to be used as a method definition rather than being directly callable.</td>
-                  </tr>
-                  <tr>
-                    <td>update_wrapper</td>
-                    <td style="text-align:center"><span style="color:green">✔</span></td>
-                    <td style="text-align:center"><span style="color:green">✔</span></td>
-                    <td>Update a wrapper function to look like the wrapped function.</td>
-                  </tr>
-                  <tr>
-                    <td>wraps</td>
-                    <td style="text-align:center"><span style="color:green">✔</span></td>
-                    <td style="text-align:center"><span style="color:green">✔</span></td>
-                    <td>This is a convenience function for invoking update_wrapper() as a function decorator when defining a wrapper function.</td>
-                  </tr>
-                  <tr>
-                    <td>lru_cache</td>
-                    <td style="text-align:center"><span style="color:red">✘</span></td>
-                    <td style="text-align:center"><span style="color:green">✔</span></td>
-                    <td>Decorator to wrap a function with a memoizing callable that saves up to the maxsize most recent calls.</td>
-                  </tr>
-                  <tr>
-                    <td>singledispatch</td>
-                    <td style="text-align:center"><span style="color:red">✘</span></td>
-                    <td style="text-align:center"><span style="color:green">✔</span></td>
-                    <td>Transforms a function into a single-dispatch generic function.</td>
-                  </tr>
-                </tbody>
-              </table>
-              <p><strong>py3</strong>多了<strong>lru_cache</strong>, <strong>partialmethod</strong>, <strong>singledispatch</strong>这三个函数</p>
-              <h1 id="同">
-                <a href="#同" class="headerlink" title="同"></a>同</h1>
-              <h2 id="cmp-to-key">
-                <a href="#cmp-to-key" class="headerlink" title="cmp_to_key"></a>cmp_to_key</h2>
+              <h2 id="同">
+                <a href="#同" class="headerlink" title="同"></a>同</h2>
+              <h3 id="cmp-to-key">
+                <a href="#cmp-to-key" class="headerlink" title="cmp_to_key"></a>cmp_to_key</h3>
               <p>这个函数是用来，搭配像<code>sorted</code>, <code>min</code>, <code>max</code>等，可接受key参数的函数。<br>在很久很久以前在需要为列表排序的时候，总要提供一个<strong>cmp</strong>函数，<br>直到如今，<strong>Python</strong>排序算法都调用其<strong>rich comparison ordering methods</strong>来进行比较，<br>例如<code>__lt__</code>,
                 <code>__gt__</code>等等， 所以需要把<strong>cmp</strong>转换成这些方法。</p>
               <p><strong>cmp_to_key</strong>的实现就像这样子：</p>
@@ -195,8 +125,8 @@
                   </tr>
                 </table>
               </figure>
-              <h2 id="total-ordering">
-                <a href="#total-ordering" class="headerlink" title="total_ordering"></a>total_ordering</h2>
+              <h3 id="total-ordering">
+                <a href="#total-ordering" class="headerlink" title="total_ordering"></a>total_ordering</h3>
               <p><strong>class</strong>装饰器，用来补全<strong>rich comparison ordering methods</strong>，<br>但至少要提供<code>__eq__</code>，和<code>__lt__</code>，<code>__gt__</code>，<code>__le__</code>，<code>__ge__</code>中的一种。</p>
               <p>示例：</p>
               <figure class="highlight python">
@@ -209,8 +139,8 @@
                   </tr>
                 </table>
               </figure>
-              <h2 id="reduce">
-                <a href="#reduce" class="headerlink" title="reduce"></a>reduce</h2>
+              <h3 id="reduce">
+                <a href="#reduce" class="headerlink" title="reduce"></a>reduce</h3>
               <p>与<strong>py2</strong>内建函数<strong>reduce</strong>一致，而<strong>reduce</strong>在<strong>py3</strong>已不是内建函数</p>
               <p>其实现大概就是这样子的：</p>
               <figure class="highlight python">
@@ -223,8 +153,8 @@
                   </tr>
                 </table>
               </figure>
-              <h2 id="partial">
-                <a href="#partial" class="headerlink" title="partial"></a>partial</h2>
+              <h3 id="partial">
+                <a href="#partial" class="headerlink" title="partial"></a>partial</h3>
               <p>这就是用来实现<strong>偏函数Partial function</strong>的</p>
               <p>例如：</p>
               <figure class="highlight python">
@@ -237,8 +167,8 @@
                   </tr>
                 </table>
               </figure>
-              <h2 id="update-wrapper">
-                <a href="#update-wrapper" class="headerlink" title="update_wrapper"></a>update_wrapper</h2>
+              <h3 id="update-wrapper">
+                <a href="#update-wrapper" class="headerlink" title="update_wrapper"></a>update_wrapper</h3>
               <p>我们在用新函数包装旧函数时，就失去了原函数的信息，这对调试时非常不友好</p>
               <figure class="highlight python">
                 <table>
@@ -272,8 +202,8 @@
                   </tr>
                 </table>
               </figure>
-              <h2 id="wraps">
-                <a href="#wraps" class="headerlink" title="wraps"></a>wraps</h2>
+              <h3 id="wraps">
+                <a href="#wraps" class="headerlink" title="wraps"></a>wraps</h3>
               <p>这个就是<strong>update_wrapper</strong>的<strong>partial</strong>版本</p>
               <figure class="highlight python">
                 <table>
@@ -296,11 +226,11 @@
                   </tr>
                 </table>
               </figure>
-              <h1 id="异">
-                <a href="#异" class="headerlink" title="异"></a>异</h1>
+              <h2 id="异">
+                <a href="#异" class="headerlink" title="异"></a>异</h2>
               <p><strong>partialmethod</strong>，<strong>lru_cache</strong>，<strong>singledispatch</strong>是<strong>py3</strong>中新增的函数</p>
-              <h2 id="partialmethod">
-                <a href="#partialmethod" class="headerlink" title="partialmethod"></a>partialmethod</h2>
+              <h3 id="partialmethod">
+                <a href="#partialmethod" class="headerlink" title="partialmethod"></a>partialmethod</h3>
               <p>用来生成<strong>类方法</strong>的<strong>Partial function</strong></p>
               <figure class="highlight python">
                 <table>
@@ -312,8 +242,8 @@
                   </tr>
                 </table>
               </figure>
-              <h2 id="lru-cache">
-                <a href="#lru-cache" class="headerlink" title="lru_cache"></a>lru_cache</h2>
+              <h3 id="lru-cache">
+                <a href="#lru-cache" class="headerlink" title="lru_cache"></a>lru_cache</h3>
               <blockquote> <a href="https://en.wikipedia.org/wiki/Cache_replacement_policies#Least_Recently_Used_.28LRU.29" target="_blank" rel="external">Least Recently Used(LRU)</a> </blockquote>
               <p>装饰器，用来缓存函数对应不同参数的返回结果。</p>
               <p>可以提供<code>maxsize=None</code>与<code>typed=False</code>这两个参数，<br>参数<strong>maxsize</strong>为最多缓存的次数，如果为<strong>None</strong>，则无限制，设置为<strong>2n</strong>时，性能最佳，特别适合于耗时的函数。<br><strong>typed=True</strong>，则不同参数类型的调用将分别缓存，例如 f(3) 和 f(3.0)。</p>
@@ -331,8 +261,8 @@
               </figure>
               <p>从结果可以看出，当第二次调用 add(1, 2) 时，并没有真正执行函数体，而是直接返回缓存的结果。</p>
               <p>有一个用 C 实现的，更快的，同时兼容 Python2 和 Python3 的第三方模块<a href="https://github.com/pbrady/fastcache" target="_blank" rel="external">fastcache</a>能够实现同样的功能。</p>
-              <h2 id="singledispatch">
-                <a href="#singledispatch" class="headerlink" title="singledispatch"></a>singledispatch</h2>
+              <h3 id="singledispatch">
+                <a href="#singledispatch" class="headerlink" title="singledispatch"></a>singledispatch</h3>
               <blockquote> <a href="https://www.python.org/dev/peps/pep-0443/" target="_blank" rel="external">PEP 443 -- Single-dispatch generic functions</a> </blockquote>
               <p>用来定义函数重载，根据第一个参数类型来使用对应的函数</p>
               <p>使用：</p>
@@ -346,8 +276,78 @@
                   </tr>
                 </table>
               </figure>
-              <h1 id="参考链接">
-                <a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h1>
+              <h2 id="py2与py3的区别">
+                <a href="#py2与py3的区别" class="headerlink" title="py2与py3的区别"></a>py2与py3的区别</h2>
+              <p>首先先看下<strong>functools</strong>在<strong>py2</strong>与<strong>py3</strong>间的区别：</p>
+              <table>
+                <thead>
+                  <tr>
+                    <th>函数</th>
+                    <th style="text-align:center">py2</th>
+                    <th style="text-align:center">py3</th>
+                    <th>描述</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>cmp_to_key</td>
+                    <td style="text-align:center"><span style="color:green">✔</span></td>
+                    <td style="text-align:center"><span style="color:green">✔</span></td>
+                    <td>把老式比较函数转换为新式比较方式（包装 -&gt; 比较 -&gt; 解包）</td>
+                  </tr>
+                  <tr>
+                    <td>total_ordering</td>
+                    <td style="text-align:center"><span style="color:green">✔</span></td>
+                    <td style="text-align:center"><span style="color:green">✔</span></td>
+                    <td>利用类定义中仅有的一或多个比较函数，来补全剩余的比较函数</td>
+                  </tr>
+                  <tr>
+                    <td>reduce</td>
+                    <td style="text-align:center"><span style="color:green">✔</span></td>
+                    <td style="text-align:center"><span style="color:green">✔</span></td>
+                    <td>与reduce函数一致</td>
+                  </tr>
+                  <tr>
+                    <td>partial</td>
+                    <td style="text-align:center"><span style="color:green">✔</span></td>
+                    <td style="text-align:center"><span style="color:green">✔</span></td>
+                    <td>用预先准备的参数包装该函数，以后每次调用只需要补充剩余的参数即可</td>
+                  </tr>
+                  <tr>
+                    <td>partialmethod</td>
+                    <td style="text-align:center"><span style="color:red">✘</span></td>
+                    <td style="text-align:center"><span style="color:green">✔</span></td>
+                    <td>同上，但只适用于类方法</td>
+                  </tr>
+                  <tr>
+                    <td>update_wrapper</td>
+                    <td style="text-align:center"><span style="color:green">✔</span></td>
+                    <td style="text-align:center"><span style="color:green">✔</span></td>
+                    <td>更新包装后的函数，即函数名、文档、等等，有利于调试</td>
+                  </tr>
+                  <tr>
+                    <td>wraps</td>
+                    <td style="text-align:center"><span style="color:green">✔</span></td>
+                    <td style="text-align:center"><span style="color:green">✔</span></td>
+                    <td>以上函数的装饰器版本，更方便使用</td>
+                  </tr>
+                  <tr>
+                    <td>lru_cache</td>
+                    <td style="text-align:center"><span style="color:red">✘</span></td>
+                    <td style="text-align:center"><span style="color:green">✔</span></td>
+                    <td>装饰器，缓存函数的调用结果，有限地（可无限）保存最近的调用结果</td>
+                  </tr>
+                  <tr>
+                    <td>singledispatch</td>
+                    <td style="text-align:center"><span style="color:red">✘</span></td>
+                    <td style="text-align:center"><span style="color:green">✔</span></td>
+                    <td>把函数转换成<strong>单分派泛函数</strong></td>
+                  </tr>
+                </tbody>
+              </table>
+              <p><strong>py3</strong>多了<strong>lru_cache</strong>, <strong>partialmethod</strong>, <strong>singledispatch</strong>这三个函数</p>
+              <h2 id="参考链接">
+                <a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2>
               <blockquote class="pullquote">
                 <ul>
                   <li><a href="https://docs.python.org/2.7/library/functools.html" target="_blank" rel="external">py2.7 functools — Higher-order functions and operations on callable objects</a></li>
@@ -360,8 +360,8 @@
                 </ul>
               </blockquote>
             </div>
-            <script type="text/javascript" src="/js/share.js?v=0.0.0" async></script><a data-url="http://linw1995.com/2017/03/29/Python-functools/" data-id="cj4cg4rdy000ckoitqwnfev0w" class="article-share-link">Share</a>
-            <div class="tags"><a href="/tags/Python/">Python</a><a href="/tags/Functional-Programming/">Functional Programming</a></div>
+            <script type="text/javascript" src="/js/share.js?v=0.0.0" async></script><a data-url="http://linw1995.com/2017/03/29/Python-functools/" data-id="cj4o6mvke000awsituwd5q1s1" class="article-share-link">Share</a>
+            <div class="tags"><a href="/tags/Python/">Python</a><a href="/tags/FP/">FP</a></div>
             <div class="post-nav"><a href="/2017/03/30/Python-collections/" class="pre">Python collections</a><a href="/2017/03/25/编码问题-Python/" class="next">编码问题 ~ Python</a></div>
             <div id="disqus_thread">
               <div class="btn_click_load"><button class="disqus_click_btn">阅读评论 「请确保 disqus.com 可以正常加载」</button></div>

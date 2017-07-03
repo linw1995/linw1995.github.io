@@ -93,7 +93,7 @@ div {
 }
 
 #header .site-name #logo {
-  font: bold 38px/1.12 "Times New Roman", Georgia, Times, sans-serif;
+  font: bold 38px/1.12 "思源宋体 CN", "PingFangSC", "Times New Roman", Georgia, Times, sans-serif;
   color: #555;
 }
 
@@ -236,7 +236,7 @@ div {
   margin: 0;
   color: #555;
   text-align: left;
-  font: bold 25px/1.1 "ff-tisa-web-pro", Cambria, "Times New Roman", Georgia, Times, sans-serif;
+  font: bold 25px/1.1 "思源宋体 CN", "PingFangSC", "ff-tisa-web-pro", Cambria, "Times New Roman", Georgia, Times, sans-serif;
 }
 
 .post .post-title a {
@@ -1246,7 +1246,7 @@ figure.highlight .code,
 
 figure.highlight .code pre,
 .codeblock .code pre {
-  max-width: 700px;
+  max-width: 910px;
   overflow-x: auto;
   overflow-y: hidden;
 }

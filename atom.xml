@@ -134,7 +134,7 @@
     <link href="http://linw1995.com/2017/06/06/Use-go-to-manipulate-gif/"/>
     <id>http://linw1995.com/2017/06/06/Use-go-to-manipulate-gif/</id>
     <published>2017-06-06T05:33:08.000Z</published>
-    <updated>2017-06-06T05:38:31.718Z</updated>
+    <updated>2017-07-05T14:59:59.703Z</updated>
     
     <content type="html"><![CDATA[<h2 id="简单介绍下image-gif包">
   <a href="#简单介绍下image-gif包" class="headerlink" title="简单介绍下image/gif包"></a>简单介绍下image/gif包</h2>
@@ -201,7 +201,7 @@
     </tr>
   </table>
 </figure>
-<blockquote> <a href="https://gist.github.com/linw1995/820b05ac3fbab34937635d30a61740fb#file-gif2png-go" target="_blank" rel="external">img2gif.go | Gist</a> </blockquote>
+<blockquote> <a href="https://gist.github.com/linw1995/820b05ac3fbab34937635d30a61740fb#file-gif2png-go" target="_blank" rel="external">gif2png.go | Gist</a> </blockquote>
 <h2 id="代码解析">
   <a href="#代码解析" class="headerlink" title="代码解析"></a>代码解析</h2>
 <ul>

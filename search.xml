@@ -1942,7 +1942,7 @@ myprojec/
       <td>UserString</td>
       <td style="text-align:center"><span style="color:green">✔</span></td>
       <td style="text-align:center"><span style="color:green">✔</span></td>
-      <td>给开发这构造字符串子类时继承的</td>
+      <td>给开发者构造字符串子类时继承的</td>
     </tr>
   </tbody>
 </table>
@@ -3037,40 +3037,40 @@ myprojec/
     <entry>
       <title><![CDATA[Python On Visual Studio Code With Anaconda]]></title>
       <url>/2017/03/19/Python-On-Visual-Studio-Code-With-Anaconda/</url>
-      <content type="html"><![CDATA[<p>Python是一门入门容易，且入门后又可以做很多interesting things的语言。<br>想简单的写一些代码，又不想费力去安装体积庞大的IDE，也不想使用Python自带的IDLE。<br>这时候你就需要Python On Visual Studio Code With Anaconda。<br>
+      <content type="html"><![CDATA[<p>Python是一门入门容易，且入门后又可以做很多interesting things的语言。<br>想简单的写一些代码，又不想费力去安装体积庞大的IDE，也不想使用Python自带的IDLE。<br>这时候你就需要接下来要介绍的工具咯。<br>
   <a id="more"></a>
 </p>
-<h1 id="工具介绍">
-  <a href="#工具介绍" class="headerlink" title="工具介绍"></a>工具介绍</h1>
-<h2 id="Visual-Studio-Code-–-Code-editing-Redefined">
-  <a href="#Visual-Studio-Code-–-Code-editing-Redefined" class="headerlink" title="Visual Studio Code – Code editing. Redefined."></a>Visual Studio Code – Code editing. Redefined.</h2><img src="/2017/03/19/Python-On-Visual-Studio-Code-With-Anaconda/2016-10-14_061710.470637_Visual_Studio_Code_0.10.1_icon.png" alt="VSCode-Logo" title="VSCode-Logo"> <a href="https://code.visualstudio.com/Download" title="Download Visual Studio Code" target="_blank" rel="external">VS Code Download link</a>
+<h2 id="工具介绍">
+  <a href="#工具介绍" class="headerlink" title="工具介绍"></a>工具介绍</h2>
+<h3 id="Visual-Studio-Code">
+  <a href="#Visual-Studio-Code" class="headerlink" title="Visual Studio Code"></a>Visual Studio Code</h3><img src="/2017/03/19/Python-On-Visual-Studio-Code-With-Anaconda/2016-10-14_061710.470637_Visual_Studio_Code_0.10.1_icon.png" alt="VSCode-Logo" title="VSCode-Logo"> <a href="https://code.visualstudio.com/Download" title="Download Visual Studio Code" target="_blank" rel="external">VS Code Download link</a>
 <blockquote>
   <p>在2015 Build大会上宣布微软将开发 Visual Studio Code。<br>2015年4月29日，第一个预览版本发布。<br>2015年11月18日，Code团队将其在GitHub上面开源，并采用MIT许可证，同时宣布将支持扩展功能。<br>2016年4月14日，Visual Studio Code发布正式版，版本号1.0.0。<br>Visual Studio Code支持多种编程语言。与其他编辑器不同的是，Code的许多功能并不在菜单中显示，而是通过“命令面板”来调用。用户可以在命令面板中搜索和输入命令，从而实现指定功能，例如安装插件、设置属性等。<br>Code具备了现代文本编辑器所具有的功能，例如更改字符编码、更换换行符等。</p>
   <footer><strong>wikipedia</strong><cite><a href="https://zh.wikipedia.org/wiki/Visual_Studio_Code" target="_blank" rel="external">Visual Studio Code</a></cite></footer>
 </blockquote>
-<h2 id="Anaconda-–-Leading-Open-Data-Science-Platform-Powered-by-Python">
-  <a href="#Anaconda-–-Leading-Open-Data-Science-Platform-Powered-by-Python" class="headerlink" title="Anaconda – Leading Open Data Science Platform Powered by Python"></a>Anaconda – Leading Open Data Science Platform Powered by Python</h2><img src="/2017/03/19/Python-On-Visual-Studio-Code-With-Anaconda/AnacondaLogo.png" alt="Anaconda-Logo" title="Anaconda-Logo">
+<h3 id="Anaconda-–-Leading-Open-Data-Science-Platform-Powered-by-Python">
+  <a href="#Anaconda-–-Leading-Open-Data-Science-Platform-Powered-by-Python" class="headerlink" title="Anaconda – Leading Open Data Science Platform Powered by Python"></a>Anaconda – Leading Open Data Science Platform Powered by Python</h3><img src="/2017/03/19/Python-On-Visual-Studio-Code-With-Anaconda/AnacondaLogo.png" alt="Anaconda-Logo" title="Anaconda-Logo">
 <blockquote>
   <p>Where packages, notebooks, and environments are shared.<br>Powerful collaboration and package management for open source and private projects.<br>Public projects and notebooks are always free.</p>
   <footer><strong>Anaconda</strong><cite><a href="https://www.continuum.io/anaconda-overview" target="_blank" rel="external">overview</a></cite></footer>
 </blockquote>
 <p>对我们来说，Anaconda方便了我们对Python packages和Python environment的管理。<br>以及超方便的Jupyter Notebooks等工具，以后会一一介绍。</p> <a href="https://www.continuum.io/downloads" title="Anaconda Download link" target="_blank" rel="external">Anaconda Download link</a>
-<h2 id="安装">
-  <a href="#安装" class="headerlink" title="安装"></a>安装</h2>
+<h3 id="安装">
+  <a href="#安装" class="headerlink" title="安装"></a>安装</h3>
 <p>两个软件的安装教程到处都是，这里就略过了。</p>
-<h1 id="配置">
-  <a href="#配置" class="headerlink" title="配置"></a>配置</h1>
-<h2 id="创建一个新的conda环境">
-  <a href="#创建一个新的conda环境" class="headerlink" title="创建一个新的conda环境"></a>创建一个新的conda环境</h2>
+<h2 id="配置">
+  <a href="#配置" class="headerlink" title="配置"></a>配置</h2>
+<h3 id="创建一个新的conda环境">
+  <a href="#创建一个新的conda环境" class="headerlink" title="创建一个新的conda环境"></a>创建一个新的conda环境</h3>
 <p>Python拥有众多的模块可供使用，但我们在某些情况下需要同个模块但不同版本，甚至不同的Python版本。<br>这就需要我们对这些不同的Python环境进行管理。<br>庆幸的是Anaconda提供了一个优良的环境管理功能。</p>
-<h3 id="创建新环境">
-  <a href="#创建新环境" class="headerlink" title="创建新环境"></a>创建新环境</h3>
+<h4 id="创建新环境">
+  <a href="#创建新环境" class="headerlink" title="创建新环境"></a>创建新环境</h4>
 <p>Python3.5: <code>conda create --name py35 python=3.5</code><br>Python2.7: <code>conda create --name py27 python=2.7</code></p>
-<h3 id="激活环境">
-  <a href="#激活环境" class="headerlink" title="激活环境"></a>激活环境</h3>
+<h4 id="激活环境">
+  <a href="#激活环境" class="headerlink" title="激活环境"></a>激活环境</h4>
 <p>Linux, OS X: <code>source activate py27</code><br>Windows: <code>activate py27</code></p>
-<h2 id="VS-Code-基本配置">
-  <a href="#VS-Code-基本配置" class="headerlink" title="VS Code 基本配置"></a>VS Code 基本配置</h2>
+<h3 id="VS-Code-基本配置">
+  <a href="#VS-Code-基本配置" class="headerlink" title="VS Code 基本配置"></a>VS Code 基本配置</h3>
 <p>打开一个文件夹，按住<code>ctrl</code>+<code>shift</code>+<code>I</code>,打开扩展管理面板<br>在上方搜索框输入<code>python</code>, 安装python扩展</p>
 <ul>
   <li><a href="https://marketplace.visualstudio.com/items?itemName=donjayamanne.python" target="_blank" rel="external">python</a></li>
@@ -3093,8 +3093,8 @@ myprojec/
 <blockquote>
   <p>更多关于VSCode的设置请打开 菜单&gt;文件&gt;首选项&gt;设置<br>关于PythonVSCode的具体设置请看扩展介绍页的发布内容</p>
 </blockquote>
-<h1 id="Flask-小程序">
-  <a href="#Flask-小程序" class="headerlink" title="Flask 小程序"></a>Flask 小程序</h1>
+<h2 id="Flask-小程序">
+  <a href="#Flask-小程序" class="headerlink" title="Flask 小程序"></a>Flask 小程序</h2>
 <p>写一段flask小程序来展示下，VSCode搭配Python，这套“瑞士军刀”的强大之处</p>
 <figure class="highlight python">
   <table>
@@ -3121,8 +3121,9 @@ myprojec/
     </tr>
   </table>
 </figure>
-<h2 id="Task">
-  <a href="#Task" class="headerlink" title="Task"></a>Task</h2>
+<p>之后按住<code>alt</code>+<code>shift</code>+<code>f</code>进行代码格式化</p>
+<h3 id="Task">
+  <a href="#Task" class="headerlink" title="Task"></a>Task</h3>
 <p>现在开始运行写好的代码，可为了避免每次运行都要重新输入命令，我们要配置task<br>按住<code>ctrl</code>+<code>shift</code>+<code>b</code>, 选择配置任务程序<br>选择其它，弹出<code>tasks.json</code>文件，像这样编辑它</p>
 <figure class="highlight json">
   <table>
@@ -3151,8 +3152,8 @@ myprojec/
 </figure>
 <p>按住<code>ctrl</code>+<code>shift</code>+<code>p</code>输入reload重载整个编辑器后就可以，继续刚才的操作<br><img src="/2017/03/19/Python-On-Visual-Studio-Code-With-Anaconda/traceback.png" alt="traceback" title="traceback"></p>
 <p>是不是十分方便呢</p>
-<h2 id="Debug-launcher">
-  <a href="#Debug-launcher" class="headerlink" title="Debug launcher"></a>Debug launcher</h2>
+<h3 id="Debug-launcher">
+  <a href="#Debug-launcher" class="headerlink" title="Debug launcher"></a>Debug launcher</h3>
 <p>Task功能很方便，但是并不能满足debug的需求<br>所以接下来要这样配置</p>
 <p>进入调试面板，打开<code>launch.json</code>文件<br><img src="/2017/03/19/Python-On-Visual-Studio-Code-With-Anaconda/debug.png" alt="debug" title="debug"></p>
 <figure class="highlight json">

@@ -341,7 +341,6 @@ div {
   display: inline-block;
   margin: 0 5px;
   padding: 0 5px;
-  background: #f7f8f8;
 }
 
 .post .post-content p a {
@@ -393,7 +392,6 @@ div {
   display: inline-block;
   margin: 0 5px;
   padding: 0px 5px;
-  background: #f7f8f8;
 }
 
 .post .post-content ul a,
@@ -1169,7 +1167,6 @@ screen and (min-width: 48em) {
 
 figure.highlight,
 .codeblock {
-  background: #f7f8f8;
   margin: 10px 0;
   line-height: 1.1em;
   color: #333;
@@ -1228,7 +1225,6 @@ figure.highlight figcaption a,
 
 figure.highlight .gutter,
 .codeblock .gutter {
-  background: #f7f8f8;
   border-right: 1px solid #e6e6e6;
   padding: 0.3em 15px;
 }

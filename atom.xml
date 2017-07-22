@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://linw1995.com/"/>
-  <updated>2017-07-17T13:36:16.634Z</updated>
+  <updated>2017-07-22T08:16:45.126Z</updated>
   <id>http://linw1995.com/</id>
   
   <author>
@@ -16,11 +16,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>深入了解Python并发</title>
-    <link href="http://linw1995.com/2017/07/16/%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3Python%E5%B9%B6%E5%8F%91/"/>
-    <id>http://linw1995.com/2017/07/16/深入了解Python并发/</id>
+    <title>深入理解Python并发</title>
+    <link href="http://linw1995.com/2017/07/16/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Python%E5%B9%B6%E5%8F%91/"/>
+    <id>http://linw1995.com/2017/07/16/深入理解Python并发/</id>
     <published>2017-07-16T13:28:07.000Z</published>
-    <updated>2017-07-17T13:36:16.634Z</updated>
+    <updated>2017-07-22T08:16:45.126Z</updated>
     
     <content type="html"><![CDATA[<h2 id="前言">
   <a href="#前言" class="headerlink" title="前言"></a>前言</h2>
@@ -75,7 +75,7 @@
         <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre>
       </td>
       <td class="code">
-        <pre><div class="line"><span class="comment"># -*- coding: utf-8 -*-</span></div><div class="line"><span class="comment"># perf.py</span></div><div class="line"><span class="keyword">import</span> socket</div><div class="line"><span class="keyword">import</span> time</div><div class="line"><span class="keyword">from</span> threading <span class="keyword">import</span> Thread</div><div class="line"></div><div class="line">sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)</div><div class="line">sock.connect((<span class="string">'localhost'</span>, <span class="number">25000</span>))</div><div class="line"></div><div class="line">counter = <span class="number">0</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">monitor</span><span class="params">()</span>:</span></div><div class="line">    <span class="keyword">global</span> counter</div><div class="line">    <span class="keyword">while</span> <span class="keyword">True</span>:</div><div class="line">        time.sleep(<span class="number">1</span>)</div><div class="line">        print(counter, <span class="string">'reqs/sec'</span>)</div><div class="line">        counter = <span class="number">0</span></div><div class="line"></div><div class="line"></div><div class="line">Thread(target=monitor).start()</div><div class="line"></div><div class="line"><span class="keyword">while</span> <span class="keyword">True</span>:</div><div class="line">    sock.send(<span class="string">b'1'</span>)</div><div class="line">    resp = sock.recv(<span class="number">100</span>)</div><div class="line">    counter += <span class="number">1</span></div></pre>
+        <pre><div class="line"><span class="comment"># -*- coding: utf-8 -*-</span></div><div class="line"><span class="comment"># perf.py</span></div><div class="line"><span class="keyword">import</span> socket</div><div class="line"><span class="keyword">import</span> time</div><div class="line"><span class="keyword">from</span> threading <span class="keyword">import</span> Thread</div><div class="line"></div><div class="line">sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)</div><div class="line">sock.connect((<span class="string">'localhost'</span>, <span class="number">25000</span>))</div><div class="line"></div><div class="line">counter = <span class="number">0</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">monitor</span><span class="params">()</span>:</span></div><div class="line">    <span class="keyword">global</span> counter</div><div class="line">    <span class="keyword">while</span> <span class="keyword">True</span>:</div><div class="line">        time.sleep(<span class="number">1</span>)</div><div class="line">        print(counter, <span class="string">'reqs/sec'</span>)</div><div class="line">        counter = <span class="number">0</span></div><div class="line"></div><div class="line"></div><div class="line">Thread(target=monitor, daemon=<span class="keyword">True</span>).start()</div><div class="line"></div><div class="line"><span class="keyword">while</span> <span class="keyword">True</span>:</div><div class="line">    sock.send(<span class="string">b'1'</span>)</div><div class="line">    resp = sock.recv(<span class="number">100</span>)</div><div class="line">    counter += <span class="number">1</span></div></pre>
       </td>
     </tr>
   </table>
@@ -148,7 +148,7 @@
     </tr>
   </table>
   </figure>
-  <p>因为future对象不是文件描述符，无法用 <code>select</code> 来查看任务是否完成。但有更好的方法，future对象支持添加callback函数。用socketpair配合add_done_callback函数来解决这个问题。接下来有个小问题， <code>yield</code> 在代码中很突兀，有什么办法把它包装起来？！？</p>
+  <p>因为future对象不是文件描述符，无法用 <code>select</code> 来查看任务是否完成。但有更好的方法，future对象支持添加callback函数。用 <code>socket.socketpair</code> 配合 <code>future.add_done_callback</code> 函数来解决这个问题。接下来有个小问题， <code>yield</code> 在代码中很突兀，有什么办法把它包装起来？！？</p>
   <figure class="highlight python">
     <table>
       <tr>
@@ -161,7 +161,23 @@
       </tr>
     </table>
   </figure>
-  <p> <code>yield from</code> 是用来代理子生成器的，一种简单方式来控制子生成器的行为。在Python3.5之后，这种写法就可以用更简单的 <code>async/await</code> 来代替。</p>
+  <p><code>yield from</code> 是用来代理子生成器的，一种简单方式来控制子生成器的行为。在Python3.5之后，这种写法就可以用更简单的 <code>async/await</code> 来代替。</p>
+  <h2 id="async-await">
+    <a href="#async-await" class="headerlink" title="async/await"></a>async/await</h2>
+  <p>看了这个视频后，就看了pycon上关于Asynchronous的视频。研究了一下3.5后的协程语法，把代码修改成以下的样子。</p>
+  <figure class="highlight python">
+    <table>
+      <tr>
+        <td class="gutter">
+          <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div></pre>
+        </td>
+        <td class="code">
+          <pre><div class="line"><span class="comment"># -*- coding: utf-8 -*-</span></div><div class="line"><span class="comment"># server.py</span></div><div class="line"><span class="keyword">import</span> asyncio</div><div class="line"><span class="keyword">import</span> logging</div><div class="line"><span class="keyword">import</span> sys</div><div class="line"><span class="keyword">from</span> concurrent.futures <span class="keyword">import</span> ProcessPoolExecutor <span class="keyword">as</span> Executor</div><div class="line"></div><div class="line">logger = logging.getLogger(<span class="string">'SERVER'</span>)</div><div class="line">logging.basicConfig(stream=sys.stdout, level=logging.INFO)</div><div class="line">executor = Executor(<span class="number">4</span>)</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">fib</span><span class="params">(n: int)</span> -&gt; int:</span></div><div class="line">    <span class="keyword">if</span> n &lt;= <span class="number">2</span>:</div><div class="line">        <span class="keyword">return</span> <span class="number">1</span></div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        <span class="keyword">return</span> fib(n - <span class="number">1</span>) + fib(n - <span class="number">2</span>)</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">handler</span><span class="params">(reader: asyncio.StreamReader, writer: asyncio.StreamWriter)</span>:</span></div><div class="line">    addr = writer.get_extra_info(<span class="string">'peername'</span>)</div><div class="line">    logger.info(<span class="string">'Connection&lt;%s:%d&gt; Created'</span>, *addr)</div><div class="line">    loop = asyncio.get_event_loop()</div><div class="line">    <span class="keyword">while</span> <span class="keyword">True</span>:</div><div class="line">        req = <span class="keyword">await</span> reader.readline()</div><div class="line">        <span class="keyword">if</span> <span class="keyword">not</span> req.strip():</div><div class="line">            <span class="keyword">break</span></div><div class="line">        logger.debug(<span class="string">'Connection&lt;%s:%d&gt; Recv %r'</span>, *addr, req)</div><div class="line">        <span class="keyword">try</span>:</div><div class="line">            n = int(req)</div><div class="line">            future = loop.run_in_executor(executor, fib, n)</div><div class="line">            result = <span class="keyword">await</span> asyncio.gather(future, return_exceptions=<span class="keyword">True</span>)</div><div class="line">            <span class="keyword">if</span> isinstance(result, Exception):</div><div class="line">                <span class="keyword">break</span></div><div class="line">            resp = str(result[<span class="number">0</span>]).encode(<span class="string">'ascii'</span>) + <span class="string">b'\n'</span></div><div class="line">            logger.debug(<span class="string">'Connection&lt;%s:%d&gt; Send %r'</span>, *addr, resp)</div><div class="line">            writer.write(resp)</div><div class="line">            <span class="keyword">await</span> writer.drain()</div><div class="line">        <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</div><div class="line">            writer.write(<span class="string">b'[Error]\n'</span>)</div><div class="line">            <span class="keyword">await</span> writer.drain()</div><div class="line">            logger.exception(e)</div><div class="line">            <span class="keyword">continue</span></div><div class="line">    writer.close()</div><div class="line">    logger.info(<span class="string">'Connection&lt;%s:%d&gt; Done'</span>, *addr)</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">Server</span><span class="params">(host: str, port: int)</span>:</span></div><div class="line">    loop = asyncio.get_event_loop()</div><div class="line">    coro = asyncio.start_server(handler, host, port, loop=loop)</div><div class="line">    server = loop.run_until_complete(coro)</div><div class="line"></div><div class="line">    print(<span class="string">'Serving on http://%s:%d'</span> % (host, port))</div><div class="line">    <span class="keyword">try</span>:</div><div class="line">        loop.run_forever()</div><div class="line">    <span class="keyword">finally</span>:</div><div class="line">        executor.shutdown()</div><div class="line">        server.close()</div><div class="line">        <span class="keyword">try</span>:</div><div class="line">            loop.run_until_complete(server.wait_closed())</div><div class="line">        <span class="keyword">finally</span>:</div><div class="line">            <span class="keyword">pass</span></div><div class="line">        loop.close()</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></div><div class="line">    Server(<span class="string">'localhost'</span>, <span class="number">12345</span>)</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div><div class="line">    main()</div></pre>
+        </td>
+      </tr>
+    </table>
+  </figure>
+  <p>是不是看起简洁了许多？刚学体会也不是很深，不是很了解。但觉得代码可读性变好了。</p>
   <h2 id="参考链接">
     <a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2>
   <ul>
@@ -175,12 +191,13 @@
     <a href="#扩展阅读" class="headerlink" title="扩展阅读"></a>扩展阅读</h2>
   <ul>
     <li>
-      <p>Pycon Montreal, David’s talk所出现的所有代码</p>
-      <p> <a href="https://github.com/codeAshu/concurrency" target="_blank" rel="external">codeAshu/concurrency | GitHub</a></p>
+      <p>Pycon Montreal, David&#39;s talk所出现的所有代码<br> <a href="https://github.com/codeAshu/concurrency" target="_blank" rel="external">codeAshu/concurrency | GitHub</a></p>
     </li>
     <li>
-      <p>协程语法async与await</p>
-      <p> <a href="https://www.python.org/dev/peps/pep-0492/" target="_blank" rel="external">PEP 492 — Coroutines with async and await syntax</a></p>
+      <p>协程语法async与await<br> <a href="https://www.python.org/dev/peps/pep-0492/" target="_blank" rel="external">PEP 492 — Coroutines with async and await syntax</a></p>
+    </li>
+    <li>
+      <p>Python异步入门指南<br> <a href="https://youtu.be/iG6fr81xHKA" target="_blank" rel="external">Miguel Grinberg Asynchronous Python for the Complete Beginner PyCon 2017</a></p>
     </li>
   </ul>]]></content>
     
@@ -973,9 +990,9 @@
       <category term="Algorithms" scheme="http://linw1995.com/categories/Algorithms/"/>
     
     
-      <category term="Python" scheme="http://linw1995.com/tags/Python/"/>
-    
       <category term="Data Structrue" scheme="http://linw1995.com/tags/Data-Structrue/"/>
+    
+      <category term="Python" scheme="http://linw1995.com/tags/Python/"/>
     
   </entry>
   

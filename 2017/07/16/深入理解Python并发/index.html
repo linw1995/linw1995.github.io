@@ -66,9 +66,11 @@
   深入了解</span></a></li>
                   <li class="toc-item toc-level-2"><a class="toc-link" href="#async-await"><span class="toc-number">4.</span> <span class="toc-text">
     async/await</span></a></li>
-                  <li class="toc-item toc-level-2"><a class="toc-link" href="#参考链接"><span class="toc-number">5.</span> <span class="toc-text">
+                  <li class="toc-item toc-level-2"><a class="toc-link" href="#小结"><span class="toc-number">5.</span> <span class="toc-text">
+    小结</span></a></li>
+                  <li class="toc-item toc-level-2"><a class="toc-link" href="#参考链接"><span class="toc-number">6.</span> <span class="toc-text">
     参考链接</span></a></li>
-                  <li class="toc-item toc-level-2"><a class="toc-link" href="#扩展阅读"><span class="toc-number">6.</span> <span class="toc-text">
+                  <li class="toc-item toc-level-2"><a class="toc-link" href="#扩展阅读"><span class="toc-number">7.</span> <span class="toc-text">
     扩展阅读</span></a></li>
                 </ol>
               </div>
@@ -208,6 +210,42 @@
                 </table>
               </figure>
               <p>是不是看起简洁了许多？刚学体会也不是很深，不是很了解。但觉得代码可读性变好了。</p>
+              <h2 id="小结">
+                <a href="#小结" class="headerlink" title="小结"></a>小结</h2>
+              <table>
+                <thead>
+                  <tr>
+                    <th>CPU密集型任务</th>
+                    <th>IO密集型任务</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code>multiprocessing</code></td>
+                    <td><code>threading</code></td>
+                  </tr>
+                  <tr>
+                    <td><code>concurrent.futures.ProcessPoolExecutor</code></td>
+                    <td><code>concurrent.futures.ThreadPoolExecutor</code></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td><code>async / await</code></td>
+                  </tr>
+                </tbody>
+              </table>
+              <p>以上关于<strong>Fibonacci</strong>的例子是为了更好地理解并发，不是一个很好的算法。</p>
+              <figure class="highlight python">
+                <table>
+                  <tr>
+                    <td class="gutter">
+                      <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre> </td>
+                    <td class="code">
+                      <pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">fib</span><span class="params">(n)</span>:</span></div><div class="line">    a , b = <span class="number">1</span>, <span class="number">1</span></div><div class="line">    <span class="keyword">for</span> _ <span class="keyword">in</span> range(n):</div><div class="line">        a, b = b, a + b</div><div class="line">    <span class="keyword">return</span> a</div></pre> </td>
+                  </tr>
+                </table>
+              </figure>
+              <p>使用以上版本大大加快了<code>fib</code>的计算速度，就没必要用多进程了。<br>其实在多线程中最好不要开多进程，因为可能会出现死锁，导致程序出现不可预知的错误。因此，必须慎重对待多进程和多线程混搭使用。</p>
               <h2 id="参考链接">
                 <a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2>
               <ul>
@@ -227,11 +265,12 @@
                   <p>协程语法async与await<br> <a href="https://www.python.org/dev/peps/pep-0492/" target="_blank" rel="external">PEP 492 — Coroutines with async and await syntax</a></p>
                 </li>
                 <li>
-                  <p>Python异步入门指南<br> <a href="https://youtu.be/iG6fr81xHKA" target="_blank" rel="external">Miguel Grinberg Asynchronous Python for the Complete Beginner PyCon 2017</a></p>
+                  <p>Python异步入门指南<br> <a href="https://www.youtube.com/watch?v=Bv25Dwe84g0" target="_blank" rel="external">Thinking about Concurrency, Raymond Hettinger, Python core developer | PyCon Russia 2016</a><br> <a href="https://youtu.be/iG6fr81xHKA"
+                      target="_blank" rel="external">Miguel Grinberg Asynchronous Python for the Complete Beginner PyCon 2017</a></p>
                 </li>
               </ul>
             </div>
-            <script type="text/javascript" src="/js/share.js?v=0.0.0" async></script><a data-url="http://linw1995.com/2017/07/16/深入理解Python并发/" data-id="cj5e0fn4p001a08itj6vi5euo" class="article-share-link">Share</a>
+            <script type="text/javascript" src="/js/share.js?v=0.0.0" async></script><a data-url="http://linw1995.com/2017/07/16/深入理解Python并发/" data-id="cj5fmeilg001upwitagtwbywi" class="article-share-link">Share</a>
             <div class="tags"><a href="/tags/Python/">Python</a><a href="/tags/并发/">并发</a></div>
             <div class="post-nav"><a href="/2017/06/25/用golang给图片打水印/" class="next">用golang给图片打水印</a></div>
             <div id="disqus_thread">

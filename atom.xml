@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://linw1995.com/"/>
-  <updated>2017-07-22T08:16:45.126Z</updated>
+  <updated>2017-07-22T18:14:31.921Z</updated>
   <id>http://linw1995.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://linw1995.com/2017/07/16/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Python%E5%B9%B6%E5%8F%91/"/>
     <id>http://linw1995.com/2017/07/16/深入理解Python并发/</id>
     <published>2017-07-16T13:28:07.000Z</published>
-    <updated>2017-07-22T08:16:45.126Z</updated>
+    <updated>2017-07-22T18:14:31.921Z</updated>
     
     <content type="html"><![CDATA[<h2 id="前言">
   <a href="#前言" class="headerlink" title="前言"></a>前言</h2>
@@ -178,6 +178,44 @@
     </table>
   </figure>
   <p>是不是看起简洁了许多？刚学体会也不是很深，不是很了解。但觉得代码可读性变好了。</p>
+  <h2 id="小结">
+    <a href="#小结" class="headerlink" title="小结"></a>小结</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>CPU密集型任务</th>
+        <th>IO密集型任务</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>multiprocessing</code></td>
+        <td><code>threading</code></td>
+      </tr>
+      <tr>
+        <td><code>concurrent.futures.ProcessPoolExecutor</code></td>
+        <td><code>concurrent.futures.ThreadPoolExecutor</code></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><code>async / await</code></td>
+      </tr>
+    </tbody>
+  </table>
+  <p>以上关于<strong>Fibonacci</strong>的例子是为了更好地理解并发，不是一个很好的算法。</p>
+  <figure class="highlight python">
+    <table>
+      <tr>
+        <td class="gutter">
+          <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre>
+        </td>
+        <td class="code">
+          <pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">fib</span><span class="params">(n)</span>:</span></div><div class="line">    a , b = <span class="number">1</span>, <span class="number">1</span></div><div class="line">    <span class="keyword">for</span> _ <span class="keyword">in</span> range(n):</div><div class="line">        a, b = b, a + b</div><div class="line">    <span class="keyword">return</span> a</div></pre>
+        </td>
+      </tr>
+    </table>
+  </figure>
+  <p>使用以上版本大大加快了<code>fib</code>的计算速度，就没必要用多进程了。<br>其实在多线程中最好不要开多进程，因为可能会出现死锁，导致程序出现不可预知的错误。因此，必须慎重对待多进程和多线程混搭使用。</p>
   <h2 id="参考链接">
     <a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2>
   <ul>
@@ -197,7 +235,7 @@
       <p>协程语法async与await<br> <a href="https://www.python.org/dev/peps/pep-0492/" target="_blank" rel="external">PEP 492 — Coroutines with async and await syntax</a></p>
     </li>
     <li>
-      <p>Python异步入门指南<br> <a href="https://youtu.be/iG6fr81xHKA" target="_blank" rel="external">Miguel Grinberg Asynchronous Python for the Complete Beginner PyCon 2017</a></p>
+      <p>Python异步入门指南<br> <a href="https://www.youtube.com/watch?v=Bv25Dwe84g0" target="_blank" rel="external">Thinking about Concurrency, Raymond Hettinger, Python core developer | PyCon Russia 2016</a><br> <a href="https://youtu.be/iG6fr81xHKA" target="_blank" rel="external">Miguel Grinberg Asynchronous Python for the Complete Beginner PyCon 2017</a></p>
     </li>
   </ul>]]></content>
     
@@ -990,9 +1028,9 @@
       <category term="Algorithms" scheme="http://linw1995.com/categories/Algorithms/"/>
     
     
-      <category term="Data Structrue" scheme="http://linw1995.com/tags/Data-Structrue/"/>
-    
       <category term="Python" scheme="http://linw1995.com/tags/Python/"/>
+    
+      <category term="Data Structrue" scheme="http://linw1995.com/tags/Data-Structrue/"/>
     
   </entry>
   

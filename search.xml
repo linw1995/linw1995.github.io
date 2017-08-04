@@ -1412,25 +1412,43 @@ myprojec/
     <entry>
       <title><![CDATA[折腾VSCode记 一 · Python Traceback Jumper]]></title>
       <url>/2017/04/09/%E6%8A%98%E8%85%BEVSCode%E8%AE%B0-%E4%B8%80-%C2%B7-Python-Traceback-Jumper/</url>
-      <content type="html"><![CDATA[<p>因为<strong>Pycharm</strong>到期了，就开始折腾<strong>VSCode</strong>。<br>使用中，写一些<strong>Python</strong>代码时，觉得缺少一个功能 <strong>Traceback点击跳转</strong>。<br>所以就花了一整天翻看<strong>VSCode</strong>官方文档，写了个插件<br><img src="/2017/04/09/折腾VSCode记-一-·-Python-Traceback-Jumper/python%20traceback%20jumper%20logo.svg" alt="python traceback jumper logo.svg" title=""><strong>python traceback jumper</strong></p>
+      <content type="html"><![CDATA[<p>因为<strong>Pycharm</strong>到期了，就开始折腾<strong>VSCode</strong>。<br>使用中，写一些<strong>Python</strong>代码时，觉得缺少一个功能 <strong>Traceback点击跳转</strong>。<br>所以就花了一整天翻看<strong>VSCode</strong>官方文档，写了个插件<br><img src="/2017/04/09/折腾VSCode记-一-·-Python-Traceback-Jumper/icon.png" alt="python traceback jumper" title="python traceback jumper"></p>
 <a id="more"></a>
 <p>从三月18号发布，截止到今天四月9号，下载量已经<strong>1K</strong>了。<br>写之前也没想很多，觉得不需要写很多代码，也不知道要用<strong>TypeScript</strong>写，也不会 = =。<br>翻了一遍官方文档，看了下<strong>VSCode</strong>部分源码，相关的<strong>Github issue</strong>，凭着一腔热血给做出来了。<br>代码也就50多行 果然:），利用了<strong>Regex正则表达式</strong>和<strong>VSCode</strong>提供的Api，就实现了这个功能。</p>
-<h1 id="项目传送门">
-  <a href="#项目传送门" class="headerlink" title="项目传送门"></a>项目传送门</h1>
+<h2 id="更新-2017年8月4日">
+  <a href="#更新-2017年8月4日" class="headerlink" title="更新 2017年8月4日"></a>更新 2017年8月4日</h2>
+<p>这个插件从那天写完后就基本没改过了（〃｀ 3′〃），因为这个插件真是太简单了。过了这么久VSCode经过了几次更新，不知道哪一次，本插件就彻底废了┭┮﹏┭┮<br>不过VSCode相对于以前更好用了，哈哈。重看了下官方文档，发现之前的task中的problemMatcher更新了，能用来代替本插件( •̀ ω •́ )✧</p>
+<h3 id="配置">
+  <a href="#配置" class="headerlink" title="配置"></a>配置</h3>
+<p><a href="https://gist.github.com/linw1995/225a8d0e1cd32a51e44b2aab3af3f1dc" target="_blank" rel="external">Gist | VSCode Task.json for Python Traceback.</a></p>
+<figure class="highlight json">
+  <table>
+    <tr>
+      <td class="gutter">
+        <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre>
+      </td>
+      <td class="code">
+        <pre><div class="line">&#123;</div><div class="line">    <span class="attr">"version"</span>: <span class="string">"2.0.0"</span>,</div><div class="line">    <span class="attr">"tasks"</span>: [&#123;</div><div class="line">        <span class="attr">"taskName"</span>: <span class="string">"Run Python"</span>,</div><div class="line">        <span class="attr">"group"</span>: &#123;</div><div class="line">            <span class="attr">"kind"</span>: <span class="string">"build"</span>,</div><div class="line">            <span class="attr">"isDefault"</span>: <span class="literal">true</span></div><div class="line">        &#125;,</div><div class="line">        <span class="attr">"command"</span>: <span class="string">"$&#123;config:python.pythonPath&#125;"</span>,</div><div class="line">        <span class="attr">"type"</span>: <span class="string">"shell"</span>,</div><div class="line">        <span class="attr">"args"</span>: [</div><div class="line">            <span class="string">"$&#123;file&#125;"</span></div><div class="line">        ],</div><div class="line">        <span class="attr">"presentation"</span>: &#123;</div><div class="line">            <span class="attr">"reveal"</span>: <span class="string">"always"</span>,</div><div class="line">            <span class="attr">"panel"</span>: <span class="string">"new"</span></div><div class="line">        &#125;,</div><div class="line">        <span class="attr">"problemMatcher"</span>: &#123;</div><div class="line">            <span class="attr">"fileLocation"</span>: <span class="string">"absolute"</span>,</div><div class="line">            <span class="attr">"pattern"</span>: [&#123;</div><div class="line">                <span class="attr">"regexp"</span>: <span class="string">"^\\s+File \"(.*?)\", line ([0-9]+)[,]?.+?$"</span>,</div><div class="line">                <span class="attr">"line"</span>: <span class="number">2</span>,</div><div class="line">                <span class="attr">"file"</span>: <span class="number">1</span>,</div><div class="line">                <span class="attr">"message"</span>: <span class="number">0</span></div><div class="line">            &#125;, &#123;</div><div class="line">                <span class="attr">"regexp"</span>: <span class="string">"^\\s+(.+?)$"</span>,</div><div class="line">                <span class="attr">"code"</span>: <span class="number">1</span></div><div class="line">            &#125;]</div><div class="line">        &#125;</div><div class="line">    &#125;]</div><div class="line">&#125;</div></pre>
+      </td>
+    </tr>
+  </table>
+</figure>
+<h2 id="项目传送门">
+  <a href="#项目传送门" class="headerlink" title="项目传送门"></a>项目传送门</h2>
 <ul>
   <li><a href="https://marketplace.visualstudio.com/items?itemName=linw1995.python-traceback-jumper" target="_blank" rel="external">VSCode marketplace - python traceback jumper</a></li>
   <li><a href="https://github.com/linw1995/python-traceback-jumper" target="_blank" rel="external">Github - python-traceback-jumper</a> </li>
 </ul>
-<h1 id="如何使用">
-  <a href="#如何使用" class="headerlink" title="如何使用"></a>如何使用</h1>
+<h2 id="如何使用">
+  <a href="#如何使用" class="headerlink" title="如何使用"></a>如何使用</h2>
 <p>首先要安装</p>
-<h2 id="安装">
-  <a href="#安装" class="headerlink" title="安装"></a>安装</h2>
+<h3 id="安装">
+  <a href="#安装" class="headerlink" title="安装"></a>安装</h3>
 <p>在<strong>VSCode</strong>中按下<code>Ctrl</code> + <code>P</code> 输入</p>
 <pre><code>ext install python-traceback-jumper
 </code></pre>
-<h2 id="配置">
-  <a href="#配置" class="headerlink" title="配置"></a>配置</h2>
+<h3 id="配置-1">
+  <a href="#配置-1" class="headerlink" title="配置"></a>配置</h3>
 <p>在工作区下的<code>setting.json</code>中添加</p>
 <pre><code>&quot;python.tracebackJumper.enable&quot;: true
 </code></pre>
@@ -1439,16 +1457,16 @@ myprojec/
   <table>
     <tr>
       <td class="gutter">
-        <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre>
+        <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre>
       </td>
       <td class="code">
-        <pre><div class="line">&#123;</div><div class="line">    <span class="attr">"command"</span>: <span class="string">"$&#123;config.python.pythonPath&#125;"</span>,</div><div class="line">    <span class="attr">"isShellCommand"</span>: <span class="literal">true</span>,</div><div class="line">    <span class="attr">"args"</span>: [<span class="string">"$&#123;file&#125;"</span>],</div><div class="line">    <span class="attr">"showOutput"</span>: <span class="string">"always"</span> // 一定要showOutput</div><div class="line">&#125;</div></pre>
+        <pre><div class="line">&#123;</div><div class="line">    <span class="attr">"version"</span>: <span class="string">"1.0.0"</span>,</div><div class="line">    <span class="attr">"command"</span>: <span class="string">"$&#123;config.python.pythonPath&#125;"</span>,</div><div class="line">    <span class="attr">"isShellCommand"</span>: <span class="literal">true</span>,</div><div class="line">    <span class="attr">"args"</span>: [<span class="string">"$&#123;file&#125;"</span>],</div><div class="line">    <span class="attr">"showOutput"</span>: <span class="string">"always"</span> // 一定要showOutput</div><div class="line">&#125;</div></pre>
       </td>
     </tr>
   </table>
 </figure>
-<h1 id="吐槽">
-  <a href="#吐槽" class="headerlink" title="吐槽"></a>吐槽</h1>
+<h2 id="吐槽">
+  <a href="#吐槽" class="headerlink" title="吐槽"></a>吐槽</h2>
 <p>其实在<strong>terminal</strong>中会通过<strong>Regex</strong>来提供跳转链接，不过这是<strong>VSCode</strong>内建的。。。:)<br>为啥不连<strong>Output</strong>输出栏也搞了，还有<strong>DEBUG</strong>输出栏。</p>]]></content>
       
         <categories>
@@ -2954,9 +2972,9 @@ myprojec/
             
             <tag> Python </tag>
             
-            <tag> VSCode </tag>
-            
             <tag> Test </tag>
+            
+            <tag> VSCode </tag>
             
         </tags>
         

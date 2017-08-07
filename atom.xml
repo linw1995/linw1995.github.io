@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://linw1995.com/"/>
-  <updated>2017-07-22T18:14:31.921Z</updated>
+  <updated>2017-08-07T15:54:18.975Z</updated>
   <id>http://linw1995.com/</id>
   
   <author>
@@ -14,6 +14,169 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Windows上程序员神器——Cmder</title>
+    <link href="http://linw1995.com/2017/08/07/Windows%E4%B8%8A%E7%A8%8B%E5%BA%8F%E5%91%98%E7%A5%9E%E5%99%A8%E2%80%94%E2%80%94Cmder/"/>
+    <id>http://linw1995.com/2017/08/07/Windows上程序员神器——Cmder/</id>
+    <published>2017-08-07T15:43:12.000Z</published>
+    <updated>2017-08-07T15:54:18.975Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="前言">
+  <a href="#前言" class="headerlink" title="前言"></a>前言</h2>
+<p>在Windows系统上做开发，总是对其Terminal不满意。无论是CMD还是PowerShell，真是太丑了。<br>现在安利大家一款神器，除了外观好看以外，功能也是强劲的狠。</p>
+<h2 id="特点">
+  <a href="#特点" class="headerlink" title="特点"></a>特点</h2>
+<ul>
+  <li>便携，解压即可用</li>
+  <li>自带git、ls、curl等命令</li>
+  <li>可设置命令别名</li>
+  <li>丰富的颜色主题（Solarized、Twilight、Ubuntu、xterm、Monokai，甚至接受自定）、可定制字体</li>
+  <li>支持tab分页、同屏多端口（支持水平分割、垂直分割）</li>
+  <li>支持自定terminal，无论是CMD、PowerShell、bash都可以，还可以注入环境变量</li>
+</ul>
+<h2 id="示例图">
+  <a href="#示例图" class="headerlink" title="示例图"></a>示例图</h2><img src="/2017/08/07/Windows上程序员神器——Cmder/cmder-use-01.gif" alt="commad use" title="commad use"> <img src="/2017/08/07/Windows上程序员神器——Cmder/cmder-use-02.gif" alt="theme" title="theme">
+<h2 id="安装">
+  <a href="#安装" class="headerlink" title="安装"></a>安装</h2>
+<ul>
+  <li>
+    <p>下载链接：<a href="http://cmder.net/" target="_blank" rel="external">Cmder.net</a><br> 分别有mini（6MB）和full（84MD）版本，都是portable的，解压即可使用。<br> 占用空间又小，所以直接放在u盘、云盘（像Onedrive、iCloud）里也行，达到多台设备同步设置的效果（我是把设置导出到gist上，更改就手动更新）。</p>
+  </li>
+  <li>
+    <p>解压，双击Cmder.exe运行。</p>
+  </li>
+</ul>
+<h2 id="配置">
+  <a href="#配置" class="headerlink" title="配置"></a>配置</h2>
+<h3 id="外观设置">
+  <a href="#外观设置" class="headerlink" title="外观设置"></a>外观设置</h3>
+<ul>
+  <li>
+    <p><strong>Font</strong><br>右键Tab栏空白处，弹出菜单选择<strong>Settings</strong>，映入眼帘的就是字体设置了。<br>建议使用字体<a href="http://input.fontbureau.com/" target="_blank" rel="external">Input Mono</a>、<a href="http://www.levien.com/type/myfonts/inconsolata.htmlf" target="_blank" rel="external">Inconsolata</a>、Consolas、Courier New。<br>还可以加上中文字体，<strong>“Main font”</strong>设置下方的<strong>“Alternative font”</strong>添加CJK字体，在设置<strong>“Unicode ranges”</strong>成CJK的就好了。</p>
+  </li>
+  <li>
+    <p><strong>Color Schemes</strong><br>同样是在Settings框中，左侧树形菜单中选择<strong>Features</strong>-&gt;<strong>Colors</strong>，就能来到Scheme设置界面。Cmder自带的Scheme很丰富，也可以通过自定Scheme，应用网络上简洁好看的风格。<br><a href="https://github.com/joonro/ConEmu-Color-Themes" target="_blank" rel="external">Github | joonro/ConEmu-Color-Themes</a>提供了当前流行的Scheme安装方式。</p>
+  </li>
+  <li>
+    <p><strong>Quake Style</strong><br>开启后，Cmder就变成了下拉式。按住<code>ctrl + &#96;</code>Cmder就从屏幕上方弹出，焦点转移就收回（可修改成再次按住<code>ctrl + &#96;</code>收回）。开启Quake Style之后极客感很强 !( •̀ ω •́ )!</p>
+  </li>
+</ul>
+<h3 id="终端设置">
+  <a href="#终端设置" class="headerlink" title="终端设置"></a>终端设置</h3>
+<ul>
+  <li>
+    <p><strong>Default Terminal</strong><br>在<strong>Startup</strong>置项框里就可以更改默认终端，选择Special named task，在下拉菜单中选择适合自己的终端。<br>什么？！找不到自己满意的，还以在<strong>Startup</strong>-&gt;<strong>Tasks</strong>中添加新的终端，及初始化脚本（用来执行一些命令，设置环境变量、命令别名、ssh等）。还可以为这些终端添加快捷键HotKey，方便快速打开。<br><strong>Startup</strong>-&gt;<strong>Environment</strong>，能在这里为所有Tasks作初始化设置。</p>
+  </li>
+  <li>
+    <p><strong>Split window</strong></p> <img src="/2017/08/07/Windows上程序员神器——Cmder/ConEmu-Maximus5.png" alt="ConEmu" title="ConEmu">
+    <ul>
+      <li>按住<code>ctrl + shift + e</code>水平分屏</li>
+      <li>按住<code>ctrl + shift + o</code>垂直分屏 （可以在热键设置中更改）</li>
+      <li>点击<strong>Tab bar</strong>上的<code>[+]</code>，选择<strong>“New Console Dialog”</strong>，里有<strong>“New console split”</strong>选项，即可分屏出不同类型的Terminal了。</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Integration</strong><br>在<strong>Integration</strong>中即可添加右键菜单项，推荐用<strong>“ConEmu Here”</strong>。按住<strong>“Register”</strong>即可添加，但以后卸载Cmder之前一定要记得<strong>“Unregister”</strong>一下。</p>
+  </li>
+  <li>
+    <p><strong>HotKey</strong><br>在<strong>Keys &amp; Macro</strong>中即可，修改添加各种热键。在子设置项中，还可以更改复制方式。Cmder默认设置是左键划取文本后，就自动复制了，十分方便。</p>
+  </li>
+</ul>
+<h3 id="VSCode集成终端">
+  <a href="#VSCode集成终端" class="headerlink" title="VSCode集成终端"></a>VSCode集成终端</h3>
+<p>什么Cmder还可以当作VSCode的集成终端！？！？不过有个小bug，已经有人提了issue咯，等bug解决我再向大家安利吧。</p>
+<h2 id="Q-amp-A">
+  <a href="#Q-amp-A" class="headerlink" title="Q&amp;A"></a>Q&amp;A</h2>
+<ul>
+  <li>
+    <p>哪里可以看到详细的使用文档？<br>右键<strong>Tab bar</strong>-&gt;<strong>Help</strong>-&gt;<strong>About/Help</strong>就可以看到咯。</p>
+  </li>
+  <li>
+    <p>命令别名不起作用怎么办？<br>打开Windows里的Terminal，无论是CMD还是PowerShell都行。在其设置中勾选”使用旧版控制台”即可。<br>相关issue：<a href="https://github.com/cmderdev/cmder/issues/1257#issuecomment-285341670" target="_blank" rel="external">Aliases not working at all</a></p>
+  </li>
+  <li>
+    <p>ls命令不支持中文<br>在设置界面<strong>Startup</strong>-&gt;<strong>Environment</strong>中的文本框下加入<code>set LANG=zh_CN.UTF-8</code>即可。<br>顺便把代码页切成utf-8的吧，会省心很多跟你讲。输入<code>chcp 65001</code>。</p>
+  </li>
+  <li>
+    <p>想放弃Windows自带的Terminal怎么办？因为真是丑的受不了……<br>在设置界面<strong>Integration</strong>-&gt;<strong>Default term</strong>中有”Force ConEmu as default terminal for console applications”的选项。勾选之前别忘了看向上方的警告信息。</p>
+  </li>
+</ul>
+<h2 id="未提及的">
+  <a href="#未提及的" class="headerlink" title="未提及的"></a>未提及的</h2>
+<ul>
+  <li>
+    <p><a href="http://joonro.github.io/blog/posts/powershell-customizations.html" target="_blank" rel="external">My PowerShell Customizations | Joon Ro</a></p>
+  </li>
+  <li>
+    <p><a href="https://chocolatey.org/" target="_blank" rel="external">The package manager for Windows, Chocolatey - Software Management Automation</a></p>
+  </li>
+</ul>
+<h2 id="附录-·-Color-Schemes">
+  <a href="#附录-·-Color-Schemes" class="headerlink" title="附录 · Color Schemes"></a>附录 · Color Schemes</h2>
+<blockquote>
+  <p>Color Scheme名称带尖括号的是Cmder自带的<br>其余来自<a href="https://github.com/joonro/ConEmu-Color-Themes" target="_blank" rel="external">Github | joonro/ConEmu-Color-Themes</a></p>
+</blockquote>
+<p>
+  <link rel="stylesheet" href="/css/post/Windows上程序员神器——Cmder.css">
+</p>
+<div class="lightbox-gallery">
+  <div><img src="/2017/08/07/Windows上程序员神器——Cmder/theme 0.png"></div>
+  <div><img src="/2017/08/07/Windows上程序员神器——Cmder/theme 1.png"></div>
+  <div><img src="/2017/08/07/Windows上程序员神器——Cmder/theme 2.png"></div>
+  <div><img src="/2017/08/07/Windows上程序员神器——Cmder/theme 3.png"></div>
+  <div><img src="/2017/08/07/Windows上程序员神器——Cmder/theme 4.png"></div>
+  <div><img src="/2017/08/07/Windows上程序员神器——Cmder/theme 5.png"></div>
+  <div><img src="/2017/08/07/Windows上程序员神器——Cmder/theme 6.png"></div>
+  <div><img src="/2017/08/07/Windows上程序员神器——Cmder/theme 7.png"></div>
+  <div><img src="/2017/08/07/Windows上程序员神器——Cmder/theme 8.png"></div>
+  <div><img src="/2017/08/07/Windows上程序员神器——Cmder/theme 9.png"></div>
+  <div><img src="/2017/08/07/Windows上程序员神器——Cmder/theme 10.png"></div>
+  <div><img src="/2017/08/07/Windows上程序员神器——Cmder/theme 11.png"></div>
+  <div><img src="/2017/08/07/Windows上程序员神器——Cmder/theme 12.png"></div>
+  <div><img src="/2017/08/07/Windows上程序员神器——Cmder/theme 13.png"></div>
+  <div><img src="/2017/08/07/Windows上程序员神器——Cmder/theme 14.png"></div>
+  <div><img src="/2017/08/07/Windows上程序员神器——Cmder/theme 15.png"></div>
+  <div><img src="/2017/08/07/Windows上程序员神器——Cmder/theme 16.png"></div>
+  <div><img src="/2017/08/07/Windows上程序员神器——Cmder/theme 17.png"></div>
+  <div><img src="/2017/08/07/Windows上程序员神器——Cmder/theme 18.png"></div>
+  <div><img src="/2017/08/07/Windows上程序员神器——Cmder/theme 19.png"></div>
+  <div><img src="/2017/08/07/Windows上程序员神器——Cmder/theme 20.png"></div>
+  <div><img src="/2017/08/07/Windows上程序员神器——Cmder/theme 21.png"></div>
+  <div><img src="/2017/08/07/Windows上程序员神器——Cmder/theme 22.png"></div>
+  <div><img src="/2017/08/07/Windows上程序员神器——Cmder/theme 23.png"></div>
+  <div><img src="/2017/08/07/Windows上程序员神器——Cmder/theme 24.png"></div>
+  <div><img src="/2017/08/07/Windows上程序员神器——Cmder/theme 25.png"></div>
+  <div><img src="/2017/08/07/Windows上程序员神器——Cmder/theme 26.png"></div>
+  <div><img src="/2017/08/07/Windows上程序员神器——Cmder/theme 27.png"></div>
+  <div><img src="/2017/08/07/Windows上程序员神器——Cmder/theme 28.png"></div>
+  <div><img src="/2017/08/07/Windows上程序员神器——Cmder/theme 29.png"></div>
+  <div><img src="/2017/08/07/Windows上程序员神器——Cmder/theme 30.png"></div>
+  <div><img src="/2017/08/07/Windows上程序员神器——Cmder/theme 31.png"></div>
+  <div><img src="/2017/08/07/Windows上程序员神器——Cmder/theme 32.png"></div>
+  <div><img src="/2017/08/07/Windows上程序员神器——Cmder/theme 33.png"></div>
+  <div><img src="/2017/08/07/Windows上程序员神器——Cmder/theme 34.png"></div>
+  <div><img src="/2017/08/07/Windows上程序员神器——Cmder/theme 35.png"></div>
+  <div><img src="/2017/08/07/Windows上程序员神器——Cmder/theme 36.png"></div>
+  <div><img src="/2017/08/07/Windows上程序员神器——Cmder/theme 37.png"></div>
+  <div><img src="/2017/08/07/Windows上程序员神器——Cmder/theme 38.png"></div>
+  <div><img src="/2017/08/07/Windows上程序员神器——Cmder/theme 39.png"></div>
+  <div><img src="/2017/08/07/Windows上程序员神器——Cmder/theme 40.png"></div>
+  <div><img src="/2017/08/07/Windows上程序员神器——Cmder/theme 41.png"></div>
+</div>]]></content>
+    
+    <summary type="html">
+    
+      在Windows系统上做开发，总是对其Terminal不满意。无论是CMD还是PowerShell，真是太丑了。现在安利大家一款神器，除了外观好看以外，功能也是强劲的狠。&lt;img src=&quot;/2017/08/07/Windows上程序员神器——Cmder/cmder.jpg&quot; alt=&quot;Cmder&quot; title=&quot;Cmder&quot;&gt;
+    
+    </summary>
+    
+      <category term="Others" scheme="http://linw1995.com/categories/Others/"/>
+    
+    
+      <category term="tools" scheme="http://linw1995.com/tags/tools/"/>
+    
+  </entry>
   
   <entry>
     <title>深入理解Python并发</title>
@@ -1028,9 +1191,9 @@
       <category term="Algorithms" scheme="http://linw1995.com/categories/Algorithms/"/>
     
     
-      <category term="Python" scheme="http://linw1995.com/tags/Python/"/>
-    
       <category term="Data Structrue" scheme="http://linw1995.com/tags/Data-Structrue/"/>
+    
+      <category term="Python" scheme="http://linw1995.com/tags/Python/"/>
     
   </entry>
   
@@ -2590,171 +2753,6 @@ myprojec/
       <category term="Python" scheme="http://linw1995.com/tags/Python/"/>
     
       <category term="FP" scheme="http://linw1995.com/tags/FP/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>编码问题 ~ Python</title>
-    <link href="http://linw1995.com/2017/03/25/%E7%BC%96%E7%A0%81%E9%97%AE%E9%A2%98-Python/"/>
-    <id>http://linw1995.com/2017/03/25/编码问题-Python/</id>
-    <published>2017-03-25T12:33:12.000Z</published>
-    <updated>2017-05-24T10:42:41.781Z</updated>
-    
-    <content type="html"><![CDATA[<p>用Python处理中文时候经常出现乱码，或者代码经常因为编码的问题而出现各种错误，<br>比如说从网路上爬取数据，文本文件处理等等</p>
-<a id="more"></a>
-<h1 id="py2-to-py3">
-  <a href="#py2-to-py3" class="headerlink" title="py2 to py3"></a>py2 to py3</h1>
-<h2 id="Python2">
-  <a href="#Python2" class="headerlink" title="Python2"></a><strong>Python2</strong></h2>
-<ul>
-  <li>str</li>
-  <li>unicode</li>
-</ul>
-<p>在<strong>cmd</strong>中使用<strong>Python2.7 Interpreter</strong>，输入以下代码</p>
-<figure class="highlight python">
-  <table>
-    <tr>
-      <td class="gutter">
-        <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre>
-      </td>
-      <td class="code">
-        <pre><div class="line">my_unicode = <span class="string">u"Python之禅"</span></div><div class="line">my_unicode</div><div class="line"><span class="comment"># u'Python\u4e4b\u7985'</span></div><div class="line">len(my_unicode)</div><div class="line"><span class="comment"># 8</span></div><div class="line">my_str = <span class="string">"Python之禅"</span></div><div class="line">my_str</div><div class="line"><span class="comment"># 'Python\xd6\xae\xec\xf8'</span></div><div class="line">len(my_str)</div><div class="line"><span class="comment"># 10</span></div><div class="line">my_unicode.encode(<span class="string">"GBK"</span>) == my_str</div><div class="line"><span class="comment"># True</span></div></pre>
-      </td>
-    </tr>
-  </table>
-</figure>
-<p><strong>cmd</strong>的默认编码是<strong>GBK</strong>, 所以str的编码就是<strong>GBK</strong></p>
-<p>可以用<code>sys.getdefaultencoding()</code>得知,<br>代码文件中str的编码默认是<strong>ASCII</strong>,<br>若要改变只需要在代码文件头加上一行<code># -*- coding: utf-8 -*-</code>,<br>且用相应的编码保存文件<br>这样编码就改变成<strong>UTF8</strong></p>
-<blockquote> <a href="https://www.python.org/dev/peps/pep-0263/" target="_blank" rel="external">PEP 263 -- Defining Python Source Code Encodings</a> </blockquote>
-<figure class="highlight python">
-  <table>
-    <tr>
-      <td class="gutter">
-        <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre>
-      </td>
-      <td class="code">
-        <pre><div class="line"><span class="comment"># -*- coding: utf-8 -*-</span></div><div class="line">u = <span class="string">u"Python之禅"</span></div><div class="line">s = <span class="string">"Python之禅"</span></div><div class="line"></div><div class="line"><span class="keyword">assert</span> s.decode(<span class="string">"utf-8"</span>) == u</div><div class="line"><span class="keyword">assert</span> s == u.encode(<span class="string">"utf-8"</span>)</div><div class="line"><span class="keyword">assert</span> s != u.encode(<span class="string">"gbk"</span>)</div></pre>
-      </td>
-    </tr>
-  </table>
-</figure>
-<blockquote>
-  <p>如同<a href="http://farmdev.com/talks/unicode/" target="_blank" rel="external">Unicode In Python, Completely Demystified</a>建议的，记住三个原则：</p>
-  <ul>
-    <li>Decode early</li>
-    <li>Unicode everywhere</li>
-    <li>Encode late</li>
-  </ul>
-  <p>就是输入时一定要<strong>decode</strong>成<strong>unicode</strong>，<br>输出就<strong>encode</strong>成所需要的编码</p>
-</blockquote>
-<h2 id="Python3">
-  <a href="#Python3" class="headerlink" title="Python3"></a><strong>Python3</strong></h2>
-<ul>
-  <li>str (unicode)</li>
-  <li>bytes (py2’s str)</li>
-</ul>
-<p>就完全反过来了</p>
-<p>在<strong>cmd</strong>中使用<strong>Python3.6 Interpreter</strong>，输入以下代码</p>
-<figure class="highlight python">
-  <table>
-    <tr>
-      <td class="gutter">
-        <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre>
-      </td>
-      <td class="code">
-        <pre><div class="line">u = <span class="string">"Python之禅"</span></div><div class="line">u</div><div class="line"><span class="comment"># 'Python之禅'</span></div><div class="line">len(u)</div><div class="line"><span class="comment"># 8</span></div><div class="line">gbk = u.encode(<span class="string">"GBK"</span>)</div><div class="line">gbk</div><div class="line"><span class="comment"># b'Python\xd6\xae\xec\xf8'</span></div><div class="line">len(gbk)</div><div class="line"><span class="comment"># 10</span></div></pre>
-      </td>
-    </tr>
-  </table>
-</figure>
-<p>用<code>sys.getdefaultencoding()</code>得知，<br>默认编码为<strong>utf-8</strong>，所以就没必要在文件头加上<code># -*- coding: utf-8 -*-</code>，<br>若是要用到其他编码保存文件，那就有必要</p>
-<h1 id="爬虫巨坑">
-  <a href="#爬虫巨坑" class="headerlink" title="爬虫巨坑"></a>爬虫<strong>巨坑</strong></h1>
-<p>以前在写爬虫时，总是会出现乱码的现象<br>这是因为从网页得到的字符串格式是<strong>encode</strong>后的带编码的文本</p>
-<p>若得到的是<strong>UTF8</strong>编码<br>你在<strong>cmd</strong>里用<strong>Python3</strong>的<strong>print</strong>函数就有可能得到一个<strong>UnicodeDecodeError</strong></p>
-<figure class="highlight python">
-  <table>
-    <tr>
-      <td class="gutter">
-        <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre>
-      </td>
-      <td class="code">
-        <pre><div class="line"><span class="comment"># python3.6</span></div><div class="line"><span class="keyword">import</span> requests</div><div class="line">resp = requests.get(<span class="string">"https://www.baidu.com"</span>)</div><div class="line">content = resp.content <span class="comment"># 未decode的bytes</span></div><div class="line">content[<span class="number">0</span>:<span class="number">10</span>]</div><div class="line"><span class="comment"># b'&lt;!DOCTYPE'</span></div><div class="line">text = resp.text <span class="comment"># decode后的unicode即str</span></div><div class="line">text[<span class="number">0</span>:<span class="number">10</span>]</div><div class="line"><span class="comment"># '&lt;!DOCTYPE'</span></div></pre>
-      </td>
-    </tr>
-  </table>
-</figure>
-<figure class="highlight python">
-  <table>
-    <tr>
-      <td class="gutter">
-        <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre>
-      </td>
-      <td class="code">
-        <pre><div class="line"><span class="comment"># python2.7</span></div><div class="line"><span class="keyword">import</span> requests</div><div class="line">resp = requests.get(<span class="string">"https://www.baidu.com"</span>)</div><div class="line">content = resp.content <span class="comment"># 未decode的str</span></div><div class="line">content[<span class="number">0</span>:<span class="number">10</span>]</div><div class="line"><span class="comment"># '&lt;!DOCTYPE'</span></div><div class="line">text = resp.text <span class="comment"># decode后的unicode</span></div><div class="line">text[<span class="number">0</span>:<span class="number">10</span>]</div><div class="line"><span class="comment"># u'&lt;!DOCTYPE'</span></div></pre>
-      </td>
-    </tr>
-  </table>
-</figure>
-<p>一般网页文本的编码都在<strong>headers</strong>中<strong>charset</strong>字段，或者<strong>html</strong>中<strong>head</strong>里含有<strong>charset</strong>的<strong>meta</strong>标签来获得</p>
-<p>若是实在不知道文本的编码，可以用<strong>chardet</strong>这个库来判断字符串的编码</p>
-<figure class="highlight python">
-  <table>
-    <tr>
-      <td class="gutter">
-        <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre>
-      </td>
-      <td class="code">
-        <pre><div class="line"><span class="comment"># Python2.7</span></div><div class="line">type(s)</div><div class="line"><span class="comment"># &lt;type 'str'&gt;</span></div><div class="line">chardet.detect(s)</div><div class="line"><span class="comment"># &#123;'confidence': 0.5081280157397734, 'encoding': 'windows-1255'&#125;</span></div></pre>
-      </td>
-    </tr>
-  </table>
-</figure>
-<figure class="highlight python">
-  <table>
-    <tr>
-      <td class="gutter">
-        <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre>
-      </td>
-      <td class="code">
-        <pre><div class="line"><span class="comment"># Python3.6</span></div><div class="line">type(s)</div><div class="line"><span class="comment"># &lt;class 'bytes'&gt;</span></div><div class="line">chardet.detect(s)</div><div class="line"><span class="comment"># &#123;'encoding': 'utf-8', 'confidence': 0.99&#125;</span></div></pre>
-      </td>
-    </tr>
-  </table>
-</figure>
-<h1 id="文本文件处理">
-  <a href="#文本文件处理" class="headerlink" title="文本文件处理"></a>文本文件处理</h1>
-<p>除了爬虫会遇到这类问题，文本文件读取也会经常遇到<strong>UnicodeDecodeError</strong></p>
-<p><strong>Python3</strong>中的<strong>open</strong>函数中有<strong>encoding</strong>这个参数，默认是<strong>None</strong>，其实就是按照<strong>utf-8</strong>编码来<strong>decode</strong>获取<strong>unicode str</strong><br>若使用了错误了<strong>encoding</strong>参数，就有可能会抛出<strong>UnicodeDecodeError</strong>错误</p>
-<p>这样可以使用<strong>mode=’rb’</strong>参数，就可以读入<strong>bytes</strong>,用<strong>chardet.detect</strong>函数来获得编码，再用<strong>decode</strong>函数来得到<strong>unicode</strong>,即<strong>str</strong></p>
-<h1 id="其它要注意的地方">
-  <a href="#其它要注意的地方" class="headerlink" title="其它要注意的地方"></a>其它要注意的地方</h1>
-<ul>
-  <li><strong>Unicode</strong>是一种字符集，<strong>utf-8</strong>、<strong>utf-16</strong>和<strong>utf-32</strong>是其实现</li>
-  <li><strong>Python3</strong>中的<strong>str</strong>没有<strong>decode</strong>函数， that make sence</li>
-  <li><strong>Python2</strong>中的<strong>unicode</strong>有<strong>decode</strong>函数 …</li>
-  <li><strong>sys.stdin</strong>和<strong>sys.stdout</strong>是带有编码的</li>
-</ul>
-<h1 id="参考链接">
-  <a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h1>
-<blockquote class="pullquote">
-  <ul>
-    <li><a href="https://www.python.org/dev/peps/pep-0263/" target="_blank" rel="external">PEP 263 – Defining Python Source Code Encodings</a></li>
-    <li><a href="http://farmdev.com/talks/unicode/" target="_blank" rel="external">Unicode In Python, Completely Demystified</a></li>
-    <li><a href="https://nedbatchelder.com/text/unipain.html" target="_blank" rel="external">Pragmatic Unicode|Ned Batchelder</a></li>
-  </ul>
-</blockquote>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;用Python处理中文时候经常出现乱码，或者代码经常因为编码的问题而出现各种错误，&lt;br&gt;比如说从网路上爬取数据，文本文件处理等等&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Python" scheme="http://linw1995.com/categories/Python/"/>
-    
-    
-      <category term="Python" scheme="http://linw1995.com/tags/Python/"/>
     
   </entry>
   

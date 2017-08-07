@@ -3,6 +3,167 @@
   
     
     <entry>
+      <title><![CDATA[Windows上程序员神器——Cmder]]></title>
+      <url>/2017/08/07/Windows%E4%B8%8A%E7%A8%8B%E5%BA%8F%E5%91%98%E7%A5%9E%E5%99%A8%E2%80%94%E2%80%94Cmder/</url>
+      <content type="html"><![CDATA[<h2 id="前言">
+  <a href="#前言" class="headerlink" title="前言"></a>前言</h2>
+<p>在Windows系统上做开发，总是对其Terminal不满意。无论是CMD还是PowerShell，真是太丑了。<br>现在安利大家一款神器，除了外观好看以外，功能也是强劲的狠。</p>
+<h2 id="特点">
+  <a href="#特点" class="headerlink" title="特点"></a>特点</h2>
+<ul>
+  <li>便携，解压即可用</li>
+  <li>自带git、ls、curl等命令</li>
+  <li>可设置命令别名</li>
+  <li>丰富的颜色主题（Solarized、Twilight、Ubuntu、xterm、Monokai，甚至接受自定）、可定制字体</li>
+  <li>支持tab分页、同屏多端口（支持水平分割、垂直分割）</li>
+  <li>支持自定terminal，无论是CMD、PowerShell、bash都可以，还可以注入环境变量</li>
+</ul>
+<h2 id="示例图">
+  <a href="#示例图" class="headerlink" title="示例图"></a>示例图</h2><img src="/2017/08/07/Windows上程序员神器——Cmder/cmder-use-01.gif" alt="commad use" title="commad use"> <img src="/2017/08/07/Windows上程序员神器——Cmder/cmder-use-02.gif" alt="theme" title="theme">
+<h2 id="安装">
+  <a href="#安装" class="headerlink" title="安装"></a>安装</h2>
+<ul>
+  <li>
+    <p>下载链接：<a href="http://cmder.net/" target="_blank" rel="external">Cmder.net</a><br> 分别有mini（6MB）和full（84MD）版本，都是portable的，解压即可使用。<br> 占用空间又小，所以直接放在u盘、云盘（像Onedrive、iCloud）里也行，达到多台设备同步设置的效果（我是把设置导出到gist上，更改就手动更新）。</p>
+  </li>
+  <li>
+    <p>解压，双击Cmder.exe运行。</p>
+  </li>
+</ul>
+<h2 id="配置">
+  <a href="#配置" class="headerlink" title="配置"></a>配置</h2>
+<h3 id="外观设置">
+  <a href="#外观设置" class="headerlink" title="外观设置"></a>外观设置</h3>
+<ul>
+  <li>
+    <p><strong>Font</strong><br>右键Tab栏空白处，弹出菜单选择<strong>Settings</strong>，映入眼帘的就是字体设置了。<br>建议使用字体<a href="http://input.fontbureau.com/" target="_blank" rel="external">Input Mono</a>、<a href="http://www.levien.com/type/myfonts/inconsolata.htmlf" target="_blank" rel="external">Inconsolata</a>、Consolas、Courier New。<br>还可以加上中文字体，<strong>“Main font”</strong>设置下方的<strong>“Alternative font”</strong>添加CJK字体，在设置<strong>“Unicode ranges”</strong>成CJK的就好了。</p>
+  </li>
+  <li>
+    <p><strong>Color Schemes</strong><br>同样是在Settings框中，左侧树形菜单中选择<strong>Features</strong>-&gt;<strong>Colors</strong>，就能来到Scheme设置界面。Cmder自带的Scheme很丰富，也可以通过自定Scheme，应用网络上简洁好看的风格。<br><a href="https://github.com/joonro/ConEmu-Color-Themes" target="_blank" rel="external">Github | joonro/ConEmu-Color-Themes</a>提供了当前流行的Scheme安装方式。</p>
+  </li>
+  <li>
+    <p><strong>Quake Style</strong><br>开启后，Cmder就变成了下拉式。按住<code>ctrl + &#96;</code>Cmder就从屏幕上方弹出，焦点转移就收回（可修改成再次按住<code>ctrl + &#96;</code>收回）。开启Quake Style之后极客感很强 !( •̀ ω •́ )!</p>
+  </li>
+</ul>
+<h3 id="终端设置">
+  <a href="#终端设置" class="headerlink" title="终端设置"></a>终端设置</h3>
+<ul>
+  <li>
+    <p><strong>Default Terminal</strong><br>在<strong>Startup</strong>置项框里就可以更改默认终端，选择Special named task，在下拉菜单中选择适合自己的终端。<br>什么？！找不到自己满意的，还以在<strong>Startup</strong>-&gt;<strong>Tasks</strong>中添加新的终端，及初始化脚本（用来执行一些命令，设置环境变量、命令别名、ssh等）。还可以为这些终端添加快捷键HotKey，方便快速打开。<br><strong>Startup</strong>-&gt;<strong>Environment</strong>，能在这里为所有Tasks作初始化设置。</p>
+  </li>
+  <li>
+    <p><strong>Split window</strong></p> <img src="/2017/08/07/Windows上程序员神器——Cmder/ConEmu-Maximus5.png" alt="ConEmu" title="ConEmu">
+    <ul>
+      <li>按住<code>ctrl + shift + e</code>水平分屏</li>
+      <li>按住<code>ctrl + shift + o</code>垂直分屏 （可以在热键设置中更改）</li>
+      <li>点击<strong>Tab bar</strong>上的<code>[+]</code>，选择<strong>“New Console Dialog”</strong>，里有<strong>“New console split”</strong>选项，即可分屏出不同类型的Terminal了。</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Integration</strong><br>在<strong>Integration</strong>中即可添加右键菜单项，推荐用<strong>“ConEmu Here”</strong>。按住<strong>“Register”</strong>即可添加，但以后卸载Cmder之前一定要记得<strong>“Unregister”</strong>一下。</p>
+  </li>
+  <li>
+    <p><strong>HotKey</strong><br>在<strong>Keys &amp; Macro</strong>中即可，修改添加各种热键。在子设置项中，还可以更改复制方式。Cmder默认设置是左键划取文本后，就自动复制了，十分方便。</p>
+  </li>
+</ul>
+<h3 id="VSCode集成终端">
+  <a href="#VSCode集成终端" class="headerlink" title="VSCode集成终端"></a>VSCode集成终端</h3>
+<p>什么Cmder还可以当作VSCode的集成终端！？！？不过有个小bug，已经有人提了issue咯，等bug解决我再向大家安利吧。</p>
+<h2 id="Q-amp-A">
+  <a href="#Q-amp-A" class="headerlink" title="Q&amp;A"></a>Q&amp;A</h2>
+<ul>
+  <li>
+    <p>哪里可以看到详细的使用文档？<br>右键<strong>Tab bar</strong>-&gt;<strong>Help</strong>-&gt;<strong>About/Help</strong>就可以看到咯。</p>
+  </li>
+  <li>
+    <p>命令别名不起作用怎么办？<br>打开Windows里的Terminal，无论是CMD还是PowerShell都行。在其设置中勾选”使用旧版控制台”即可。<br>相关issue：<a href="https://github.com/cmderdev/cmder/issues/1257#issuecomment-285341670" target="_blank" rel="external">Aliases not working at all</a></p>
+  </li>
+  <li>
+    <p>ls命令不支持中文<br>在设置界面<strong>Startup</strong>-&gt;<strong>Environment</strong>中的文本框下加入<code>set LANG=zh_CN.UTF-8</code>即可。<br>顺便把代码页切成utf-8的吧，会省心很多跟你讲。输入<code>chcp 65001</code>。</p>
+  </li>
+  <li>
+    <p>想放弃Windows自带的Terminal怎么办？因为真是丑的受不了……<br>在设置界面<strong>Integration</strong>-&gt;<strong>Default term</strong>中有”Force ConEmu as default terminal for console applications”的选项。勾选之前别忘了看向上方的警告信息。</p>
+  </li>
+</ul>
+<h2 id="未提及的">
+  <a href="#未提及的" class="headerlink" title="未提及的"></a>未提及的</h2>
+<ul>
+  <li>
+    <p><a href="http://joonro.github.io/blog/posts/powershell-customizations.html" target="_blank" rel="external">My PowerShell Customizations | Joon Ro</a></p>
+  </li>
+  <li>
+    <p><a href="https://chocolatey.org/" target="_blank" rel="external">The package manager for Windows, Chocolatey - Software Management Automation</a></p>
+  </li>
+</ul>
+<h2 id="附录-·-Color-Schemes">
+  <a href="#附录-·-Color-Schemes" class="headerlink" title="附录 · Color Schemes"></a>附录 · Color Schemes</h2>
+<blockquote>
+  <p>Color Scheme名称带尖括号的是Cmder自带的<br>其余来自<a href="https://github.com/joonro/ConEmu-Color-Themes" target="_blank" rel="external">Github | joonro/ConEmu-Color-Themes</a></p>
+</blockquote>
+<p>
+  <link rel="stylesheet" href="/css/post/Windows上程序员神器——Cmder.css">
+</p>
+<div class="lightbox-gallery">
+  <div><img src="/2017/08/07/Windows上程序员神器——Cmder/theme 0.png"></div>
+  <div><img src="/2017/08/07/Windows上程序员神器——Cmder/theme 1.png"></div>
+  <div><img src="/2017/08/07/Windows上程序员神器——Cmder/theme 2.png"></div>
+  <div><img src="/2017/08/07/Windows上程序员神器——Cmder/theme 3.png"></div>
+  <div><img src="/2017/08/07/Windows上程序员神器——Cmder/theme 4.png"></div>
+  <div><img src="/2017/08/07/Windows上程序员神器——Cmder/theme 5.png"></div>
+  <div><img src="/2017/08/07/Windows上程序员神器——Cmder/theme 6.png"></div>
+  <div><img src="/2017/08/07/Windows上程序员神器——Cmder/theme 7.png"></div>
+  <div><img src="/2017/08/07/Windows上程序员神器——Cmder/theme 8.png"></div>
+  <div><img src="/2017/08/07/Windows上程序员神器——Cmder/theme 9.png"></div>
+  <div><img src="/2017/08/07/Windows上程序员神器——Cmder/theme 10.png"></div>
+  <div><img src="/2017/08/07/Windows上程序员神器——Cmder/theme 11.png"></div>
+  <div><img src="/2017/08/07/Windows上程序员神器——Cmder/theme 12.png"></div>
+  <div><img src="/2017/08/07/Windows上程序员神器——Cmder/theme 13.png"></div>
+  <div><img src="/2017/08/07/Windows上程序员神器——Cmder/theme 14.png"></div>
+  <div><img src="/2017/08/07/Windows上程序员神器——Cmder/theme 15.png"></div>
+  <div><img src="/2017/08/07/Windows上程序员神器——Cmder/theme 16.png"></div>
+  <div><img src="/2017/08/07/Windows上程序员神器——Cmder/theme 17.png"></div>
+  <div><img src="/2017/08/07/Windows上程序员神器——Cmder/theme 18.png"></div>
+  <div><img src="/2017/08/07/Windows上程序员神器——Cmder/theme 19.png"></div>
+  <div><img src="/2017/08/07/Windows上程序员神器——Cmder/theme 20.png"></div>
+  <div><img src="/2017/08/07/Windows上程序员神器——Cmder/theme 21.png"></div>
+  <div><img src="/2017/08/07/Windows上程序员神器——Cmder/theme 22.png"></div>
+  <div><img src="/2017/08/07/Windows上程序员神器——Cmder/theme 23.png"></div>
+  <div><img src="/2017/08/07/Windows上程序员神器——Cmder/theme 24.png"></div>
+  <div><img src="/2017/08/07/Windows上程序员神器——Cmder/theme 25.png"></div>
+  <div><img src="/2017/08/07/Windows上程序员神器——Cmder/theme 26.png"></div>
+  <div><img src="/2017/08/07/Windows上程序员神器——Cmder/theme 27.png"></div>
+  <div><img src="/2017/08/07/Windows上程序员神器——Cmder/theme 28.png"></div>
+  <div><img src="/2017/08/07/Windows上程序员神器——Cmder/theme 29.png"></div>
+  <div><img src="/2017/08/07/Windows上程序员神器——Cmder/theme 30.png"></div>
+  <div><img src="/2017/08/07/Windows上程序员神器——Cmder/theme 31.png"></div>
+  <div><img src="/2017/08/07/Windows上程序员神器——Cmder/theme 32.png"></div>
+  <div><img src="/2017/08/07/Windows上程序员神器——Cmder/theme 33.png"></div>
+  <div><img src="/2017/08/07/Windows上程序员神器——Cmder/theme 34.png"></div>
+  <div><img src="/2017/08/07/Windows上程序员神器——Cmder/theme 35.png"></div>
+  <div><img src="/2017/08/07/Windows上程序员神器——Cmder/theme 36.png"></div>
+  <div><img src="/2017/08/07/Windows上程序员神器——Cmder/theme 37.png"></div>
+  <div><img src="/2017/08/07/Windows上程序员神器——Cmder/theme 38.png"></div>
+  <div><img src="/2017/08/07/Windows上程序员神器——Cmder/theme 39.png"></div>
+  <div><img src="/2017/08/07/Windows上程序员神器——Cmder/theme 40.png"></div>
+  <div><img src="/2017/08/07/Windows上程序员神器——Cmder/theme 41.png"></div>
+</div>]]></content>
+      
+        <categories>
+            
+            <category> Others </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> tools </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[深入理解Python并发]]></title>
       <url>/2017/07/16/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Python%E5%B9%B6%E5%8F%91/</url>
       <content type="html"><![CDATA[<h2 id="前言">
@@ -997,9 +1158,9 @@
         
         <tags>
             
-            <tag> Python </tag>
-            
             <tag> Data Structrue </tag>
+            
+            <tag> Python </tag>
             
         </tags>
         

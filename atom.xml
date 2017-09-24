@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://linw1995.com/"/>
-  <updated>2017-08-07T15:54:18.975Z</updated>
+  <updated>2017-09-24T14:24:38.290Z</updated>
   <id>http://linw1995.com/</id>
   
   <author>
@@ -16,11 +16,323 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>自己来写压缩算法——哈夫曼算法</title>
+    <link href="http://linw1995.com/2017/09/24/%E8%87%AA%E5%B7%B1%E6%9D%A5%E5%86%99%E5%8E%8B%E7%BC%A9%E7%AE%97%E6%B3%95%E2%80%94%E2%80%94%E5%93%88%E5%A4%AB%E6%9B%BC%E7%AE%97%E6%B3%95/"/>
+    <id>http://linw1995.com/2017/09/24/自己来写压缩算法——哈夫曼算法/</id>
+    <published>2017-09-24T14:24:08.000Z</published>
+    <updated>2017-09-24T14:24:38.290Z</updated>
+    
+    <content type="html"><![CDATA[<p>一般文件的编码都是等长的，一些常用字符的编码与很少用到的等长，可若是编码是变长的呢？无疑可以使整个文件大小减小。为了解码时不遇到任何歧义的问题，则<strong>每个有效字符所代表的变长编码不能是其它字符的前缀</strong>，这种编码也叫做<strong>前缀编码</strong>。而如何做到这一点呢，接下的内容会尽可能地讲明白。</p>
+<h2 id="哈夫曼算法">
+  <a href="#哈夫曼算法" class="headerlink" title="哈夫曼算法"></a>哈夫曼算法</h2>
+<p>若是把等长的编码(一字节)用平衡二叉树来表示，字符共有256个，那么树的深度就有 $\log_{2}{256}=8$ 。</p>
+<p>如果变作变长编码，那么所有有儿子（child）的节点（node）都不能用来表示，唯有子叶（leaf，没有儿子的节点）才可以用来表示。这是因为<strong>每个有效字符所代表的变长编码不能是其它字符的前缀</strong>。而且树结构也不可能是平衡二叉树了，树的深度肯定会大于8。</p>
+<p>例如，有一份<a href="/2017/09/24/自己来写压缩算法——哈夫曼算法/MIT.txt" title="MIT-LICENCE">MIT-LICENCE</a>文件，其中空格<code>&#39;</code>&nbsp;<code>&#39;</code>有163个，而字母<code>&#39;</code>v<code>&#39;</code>却只有一个。那么让<code>&#39;</code>&nbsp;<code>&#39;</code>表示为<code>110</code>,<code>&#39;</code>v<code>&#39;</code>表示为<code>0111011101</code>，那么得省$(8
+  - 3) \times 163 - (8 - 10) \times 1 = 817$个bit。可见变长编码确确实实能起到压缩的作用。</p>
+<h3 id="哈夫曼树">
+  <a href="#哈夫曼树" class="headerlink" title="哈夫曼树"></a>哈夫曼树</h3>
+<p><strong>哈夫曼树Huffman Tree</strong>，也叫做<strong>最优二叉树</strong>，是一种带权路径长度最短的二叉树。所谓树的带权路径长度，就是树中所有的叶结点的权值乘上其到根结点的路径长度（若根结点为$0$层，叶结点到根结点的路径长度为叶结点的层数）。树的路径长度是从树根到每一结点的路径长度之和，记为$\operatorname{WPL}=(W_1 \times L_<br>1+W_2 \times L_2+W_3 \times L_3+…+W_n \times
+  L_n)$，$N$个权值$W_i(i=1,2,…n)$构成一棵有$N$个叶结点的二叉树，相应的叶结点的路径长度为$L_i(i=1,2,…n)$。可以证明霍夫曼树的$\operatorname{WPL}$是最小的。</p>
+<figure class="highlight plain">
+  <table>
+    <tr>
+      <td class="gutter">
+        <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre>
+      </td>
+      <td class="code">
+        <pre><div class="line">      /-40                /-40                /-40</div><div class="line">   /-|                 /-|                 /-|</div><div class="line">  |   \-48            |   \-48            |  |   /-48</div><div class="line">--|                   |                   |   \-|</div><div class="line">  |   /-60          --|      /-60       --|      \-18</div><div class="line">   \-|                |   /-|             |</div><div class="line">     |   /-30         |  |   \-20         |      /-60</div><div class="line">      \-|              \-|                |   /-|</div><div class="line">        |   /-18         |   /-30          \-|   \-20</div><div class="line">         \-|              \-|                |</div><div class="line">            \-20             \-18             \-30</div><div class="line"></div><div class="line">      (0)                (1)                  (2)</div></pre>
+      </td>
+    </tr>
+  </table>
+</figure>
+<p>计算上面三颗树的$\operatorname{WPL}$：<br>(0): $ 18 \times 3 + 20 \times 3 + 30 \times 2 + 60 \times 1 + 48 \times 1 + 40 \times 1 = 286$<br>(1): $ 18 \times 2 + 30 \times 2 + 20 \times 2 + 60 \times 2 + 48 \times 1 + 40 \times 1 = 344$<br>(2): $ 20 \times 2 +
+  60 \times 2 + 18 \times 2 + 48 \times 2 + 30 \times 1 + 40 \times 1 = 362$</p>
+<p>可以看出同样的子叶，构造出来的树(0)的$\operatorname{WPL}$最小。<br>其实它就是哈夫曼树，可以验证同样的子叶,构造出来树的$\operatorname{WPL}$没有比这更小的了(可以同$\operatorname{WPL}$不同构)。</p>
+<p><strong>结论</strong>: 权值越大的子叶离根节点越近，即路径长度越短；反之，权值越小的子叶离根节点越远，即路径长度越长。</p>
+<p>构造哈夫曼树的算法步骤下：</p>
+<ol>
+  <li>将所有的要添加到哈夫曼树的子叶按从小达到排列</li>
+  <li>找出两个权值最小的节点，拼接成一树结构，父节点的权值为二者之和</li>
+  <li>父节点为新的节点，加入排列中，重复步骤2</li>
+</ol>
+<figure class="highlight plain">
+  <table>
+    <tr>
+      <td class="gutter">
+        <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre>
+      </td>
+      <td class="code">
+        <pre><div class="line">1          /-1                                             /-3</div><div class="line">        3 |                                             /-|</div><div class="line">2          \-2          /-3             /-3            |  |   /-1</div><div class="line">                     6 |   /-1       6 |   /-1         |   \-|</div><div class="line">3       3               \-|             \-|          --|      \-2</div><div class="line">                           \-2             \-2         |</div><div class="line">4       4            4                  /-4            |   /-4</div><div class="line">                                     9 |                \-|</div><div class="line">5       5            5                  \-5                \-5</div><div class="line"></div><div class="line">(0)      (1)           (2)             (3)               (4)</div></pre>
+      </td>
+    </tr>
+  </table>
+</figure>
+<h3 id="哈夫曼编码">
+  <a href="#哈夫曼编码" class="headerlink" title="哈夫曼编码"></a>哈夫曼编码</h3>
+<p>从根结点开始，左子树为<code>&#39;0&#39;</code>,右子树为<code>&#39;1&#39;</code>，累积到子叶得到的编码就是哈夫曼编码。</p>
+<figure class="highlight plain">
+  <table>
+    <tr>
+      <td class="gutter">
+        <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre>
+      </td>
+      <td class="code">
+        <pre><div class="line">| leaf | code |</div><div class="line">|------|------|</div><div class="line">| 1    | 010  |</div><div class="line">| 2    | 011  |</div><div class="line">| 3    | 00   |</div><div class="line">| 4    | 10   |</div><div class="line">| 5    | 11   |</div></pre>
+      </td>
+    </tr>
+  </table>
+</figure>
+<h3 id="哈夫曼编码MIT-LICENCE文件结果">
+  <a href="#哈夫曼编码MIT-LICENCE文件结果" class="headerlink" title="哈夫曼编码MIT-LICENCE文件结果"></a>哈夫曼编码MIT-LICENCE文件结果</h3>
+<figure class="highlight plain">
+  <table>
+    <tr>
+      <td class="gutter">
+        <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre>
+      </td>
+      <td class="code">
+        <pre><div class="line">| byte | count | code       |     | byte | count | code       |     | byte | count | code       |</div><div class="line">|------|-------|------------|     |------|-------|------------|     |------|-------|------------|</div><div class="line">| &apos;/&apos;  | 1     | 0111011010 |     | &apos;j&apos;  | 1     | 0111011011 |     | &apos;:&apos;  | 1     | 0111011100 |</div><div class="line">| &apos;v&apos;  | 1     | 0111011101 |     | &apos;K&apos;  | 1     | 0111011110 |     | &apos;X&apos;  | 1     | 0111011111 |</div><div class="line">| &apos;(&apos;  | 2     | 011101000  |     | &apos;)&apos;  | 2     | 011101001  |     | &apos;&lt;&apos;  | 2     | 011101010  |</div><div class="line">| &apos;&gt;&apos;  | 2     | 011101011  |     | &apos;V&apos;  | 2     | 011101100  |     | &apos;.&apos;  | 3     | 01101100   |</div><div class="line">| &apos;&quot;&apos;  | 4     | 01101101   |     | &apos;B&apos;  | 5     | 11110100   |     | &apos;Y&apos;  | 6     | 11110101   |</div><div class="line">| &apos;G&apos;  | 6     | 0011110    |     | &apos;\r&apos; | 7     | 0011111    |     | &apos;\n&apos; | 7     | 0100110    |</div><div class="line">| &apos;M&apos;  | 7     | 0100111    |     | &apos;P&apos;  | 8     | 0110111    |     | &apos;m&apos;  | 8     | 0111000    |</div><div class="line">| &apos;U&apos;  | 8     | 0111001    |     | &apos;y&apos;  | 9     | 1011000    |     | &apos;b&apos;  | 9     | 1011001    |</div><div class="line">| &apos;W&apos;  | 9     | 1011010    |     | &apos;g&apos;  | 10    | 1011011    |     | &apos;w&apos;  | 10    | 1110000    |</div><div class="line">| &apos;D&apos;  | 10    | 1110001    |     | &apos;C&apos;  | 12    | 1111011    |     | &apos;u&apos;  | 12    | 000100     |</div><div class="line">| &apos;F&apos;  | 12    | 000101     |     | &apos;p&apos;  | 13    | 001110     |     | &apos;L&apos;  | 14    | 010010     |</div><div class="line">| &apos;f&apos;  | 15    | 011010     |     | &apos;c&apos;  | 17    | 100010     |     | &apos;l&apos;  | 17    | 100011     |</div><div class="line">| &apos;d&apos;  | 17    | 101000     |     | &apos;H&apos;  | 18    | 101001     |     | &apos;,&apos;  | 22    | 111001     |</div><div class="line">| &apos;h&apos;  | 23    | 111100     |     | &apos;S&apos;  | 25    | 00011      |     | &apos;a&apos;  | 26    | 00110      |</div><div class="line">| &apos;A&apos;  | 28    | 01000      |     | &apos;r&apos;  | 29    | 01010      |     | &apos;n&apos;  | 30    | 01011      |</div><div class="line">| &apos;N&apos;  | 30    | 01100      |     | &apos;s&apos;  | 34    | 01111      |     | &apos;R&apos;  | 34    | 10000      |</div><div class="line">| &apos;E&apos;  | 35    | 10010      |     | &apos;I&apos;  | 35    | 10011      |     | &apos;O&apos;  | 36    | 10101      |</div><div class="line">| &apos;T&apos;  | 39    | 10111      |     | &apos;i&apos;  | 45    | 11101      |     | &apos;e&apos;  | 48    | 11111      |</div><div class="line">| &apos;t&apos;  | 49    | 0000       |     | &apos;o&apos;  | 52    | 0010       |     | &apos; &apos;  | 163   | 110        |</div></pre>
+      </td>
+    </tr>
+  </table>
+</figure>
+<figure class="highlight plain">
+  <table>
+    <tr>
+      <td class="gutter">
+        <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div></pre>
+      </td>
+      <td class="code">
+        <pre><div class="line">                     /----&apos;t&apos; 49 0000</div><div class="line">                    |</div><div class="line">               /----0            /----&apos;u&apos; 12 000100</div><div class="line">              |     |      /----0</div><div class="line">              |      \----1      \----&apos;F&apos; 12 000101</div><div class="line">         /----0           |</div><div class="line">        |     |            \----&apos;S&apos; 25 00011</div><div class="line">        |     |</div><div class="line">        |     |      /----&apos;o&apos; 52 0010</div><div class="line">        |      \----1</div><div class="line">        |           |      /----&apos;a&apos; 26 00110</div><div class="line">        |            \----1</div><div class="line">        |                 |      /----&apos;p&apos; 13 001110</div><div class="line">        |                  \----1</div><div class="line">        |                       |      /----&apos;G&apos; 6 0011110</div><div class="line">        |                        \----1</div><div class="line">        |                              \----&apos;\r&apos; 7 0011111</div><div class="line">        |</div><div class="line">        |                  /----&apos;A&apos; 28 01000</div><div class="line">   /----0            /----0</div><div class="line">  |     |           |     |      /----&apos;L&apos; 14 010010</div><div class="line">  |     |           |      \----1</div><div class="line">  |     |           |           |      /----&apos;\n&apos; 7 0100110</div><div class="line">  |     |      /----0            \----1</div><div class="line">  |     |     |     |                  \----&apos;M&apos; 7 0100111</div><div class="line">  |     |     |     |</div><div class="line">  |     |     |     |      /----&apos;r&apos; 29 01010</div><div class="line">  |     |     |      \----1</div><div class="line">  |     |     |            \----&apos;n&apos; 30 01011</div><div class="line">  |     |     |</div><div class="line">  |     |     |            /----&apos;N&apos; 30 01100</div><div class="line">  |     |     |           |</div><div class="line">  |     |     |      /----0      /----&apos;f&apos; 15 011010</div><div class="line">  |      \----1     |     |     |</div><div class="line">  |           |     |      \----1            /----&apos;.&apos; 3 01101100</div><div class="line">  |           |     |           |      /----0</div><div class="line">  |           |     |            \----1      \----&apos;&quot;&apos; 4 01101101</div><div class="line">  |           |     |                 |</div><div class="line">  |           |     |                  \----&apos;P&apos; 8 0110111</div><div class="line">  |           |     |</div><div class="line">  |           |     |                  /----&apos;m&apos; 8 0111000</div><div class="line">  |           |     |            /----0</div><div class="line">  |           |     |           |      \----&apos;U&apos; 8 0111001</div><div class="line">  |           |     |           |</div><div class="line">  |            \----1           |                  /----&apos;(&apos; 2 011101000</div><div class="line">  |                 |           |            /----0</div><div class="line">  |                 |      /----0           |      \----&apos;)&apos; 2 011101001</div><div class="line">  |                 |     |     |      /----0</div><div class="line">  |                 |     |     |     |     |      /----&apos;&lt;&apos; 2 011101010</div><div class="line">  |                 |     |     |     |      \----1</div><div class="line">  |                 |     |     |     |            \----&apos;&gt;&apos; 2 011101011</div><div class="line">  |                 |     |     |     |</div><div class="line">  |                 |     |      \----1            /----&apos;V&apos; 2 011101100</div><div class="line">--|                 |     |           |      /----0</div><div class="line">  |                 |     |           |     |     |      /----&apos;/&apos; 1 0111011010</div><div class="line">  |                 |     |           |     |      \----1</div><div class="line">  |                  \----1           |     |            \----&apos;j&apos; 1 0111011011</div><div class="line">  |                       |            \----1</div><div class="line">  |                       |                 |            /----&apos;:&apos; 1 0111011100</div><div class="line">  |                       |                 |      /----0</div><div class="line">  |                       |                 |     |      \----&apos;v&apos; 1 0111011101</div><div class="line">  |                       |                  \----1</div><div class="line">  |                       |                       |      /----&apos;K&apos; 1 0111011110</div><div class="line">  |                       |                        \----1</div><div class="line">  |                       |                              \----&apos;X&apos; 1 0111011111</div><div class="line">  |                       |</div><div class="line">  |                        \----&apos;s&apos; 34 01111</div><div class="line">  |</div><div class="line">  |                        /----&apos;R&apos; 34 10000</div><div class="line">  |                  /----0</div><div class="line">  |                 |     |      /----&apos;c&apos; 17 100010</div><div class="line">  |                 |      \----1</div><div class="line">  |            /----0            \----&apos;l&apos; 17 100011</div><div class="line">  |           |     |</div><div class="line">  |           |     |      /----&apos;E&apos; 35 10010</div><div class="line">  |           |      \----1</div><div class="line">  |           |            \----&apos;I&apos; 35 10011</div><div class="line">  |           |</div><div class="line">  |      /----0                  /----&apos;d&apos; 17 101000</div><div class="line">  |     |     |            /----0</div><div class="line">  |     |     |      /----0      \----&apos;H&apos; 18 101001</div><div class="line">  |     |     |     |     |</div><div class="line">  |     |     |     |      \----&apos;O&apos; 36 10101</div><div class="line">  |     |     |     |</div><div class="line">  |     |      \----1                  /----&apos;y&apos; 9 1011000</div><div class="line">  |     |           |            /----0</div><div class="line">  |     |           |           |      \----&apos;b&apos; 9 1011001</div><div class="line">  |     |           |      /----0</div><div class="line">   \----1           |     |     |      /----&apos;W&apos; 9 1011010</div><div class="line">        |            \----1      \----1</div><div class="line">        |                 |            \----&apos;g&apos; 10 1011011</div><div class="line">        |                 |</div><div class="line">        |                  \----&apos;T&apos; 39 10111</div><div class="line">        |</div><div class="line">        |      /----&apos; &apos; 163 110</div><div class="line">        |     |</div><div class="line">        |     |                        /----&apos;w&apos; 10 1110000</div><div class="line">        |     |                  /----0</div><div class="line">        |     |            /----0      \----&apos;D&apos; 10 1110001</div><div class="line">         \----1           |     |</div><div class="line">              |      /----0      \----&apos;,&apos; 22 111001</div><div class="line">              |     |     |</div><div class="line">              |     |      \----&apos;i&apos; 45 11101</div><div class="line">              |     |</div><div class="line">               \----1            /----&apos;h&apos; 23 111100</div><div class="line">                    |           |</div><div class="line">                    |      /----0            /----&apos;B&apos; 5 11110100</div><div class="line">                    |     |     |      /----0</div><div class="line">                    |     |      \----1      \----&apos;Y&apos; 6 11110101</div><div class="line">                     \----1           |</div><div class="line">                          |            \----&apos;C&apos; 12 1111011</div><div class="line">                          |</div><div class="line">                           \----&apos;e&apos; 48 11111</div></pre>
+      </td>
+    </tr>
+  </table>
+</figure>
+<h2 id="压缩实现">
+  <a href="#压缩实现" class="headerlink" title="压缩实现"></a>压缩实现</h2>
+<p>知道了如何编码，那怎么应用到压缩上去呢？</p>
+<h3 id="压缩">
+  <a href="#压缩" class="headerlink" title="压缩"></a>压缩</h3>
+<ol>
+  <li>把文件分割成一个个字节，统计各个字节（总共256个）的数量</li>
+  <li>根据统计出来的权重，来构造哈夫曼树，得出哈夫曼编码</li>
+  <li>一字节一字节的转换为哈夫曼编码，再保存到新的文件（压缩文件）里</li>
+  <li>再把统计的结果，也存储到文件里，用来解压缩</li>
+</ol>
+<p><strong>注意</strong>：转换后数据不一定能被8整除，那么保存的结尾就要稍作处理</p>
+<p>原文：</p>
+<figure class="highlight plain">
+  <table>
+    <tr>
+      <td class="gutter">
+        <pre><div class="line">1</div></pre>
+      </td>
+      <td class="code">
+        <pre><div class="line">b&apos;Copyr……</div></pre>
+      </td>
+    </tr>
+  </table>
+</figure>
+<p>转换：</p>
+<figure class="highlight plain">
+  <table>
+    <tr>
+      <td class="gutter">
+        <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre>
+      </td>
+      <td class="code">
+        <pre><div class="line">| b&apos;C&apos;    | b&apos;o&apos; | b&apos;p&apos;   | b&apos;y&apos;    | b&apos;r&apos;  | ... |</div><div class="line">|---------|------|--------|---------|-------|-----|</div><div class="line">| 1111011 | 0010 | 001110 | 1011000 | 01010 | ... |</div><div class="line"></div><div class="line">11110110010001110101100001010……</div></pre>
+      </td>
+    </tr>
+  </table>
+</figure>
+<p>分割成字节：</p>
+<figure class="highlight plain">
+  <table>
+    <tr>
+      <td class="gutter">
+        <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre>
+      </td>
+      <td class="code">
+        <pre><div class="line">| 1111 0110 | 0100 0111 | 0101 1000 | 0101 0…… |</div><div class="line">|-----------|-----------|-----------|----------|</div><div class="line">| 246       | 71        | 88        | ……       |</div><div class="line">| b&apos;\xf6&apos;   | b&apos;G&apos;      | b&apos;X&apos;      | ……       |</div></pre>
+      </td>
+    </tr>
+  </table>
+</figure>
+<p>压缩结果：</p>
+<figure class="highlight plain">
+  <table>
+    <tr>
+      <td class="gutter">
+        <pre><div class="line">1</div></pre>
+      </td>
+      <td class="code">
+        <pre><div class="line">b&apos;\xf6GX……</div></pre>
+      </td>
+    </tr>
+  </table>
+</figure>
+<p>这么短短的一段，从5字节压缩成3.6+字节大小</p>
+<h3 id="解压">
+  <a href="#解压" class="headerlink" title="解压"></a>解压</h3>
+<ol>
+  <li>读取压缩文件中的统计结果，构造哈夫曼树</li>
+  <li>一比特一比特的用哈夫曼树索引，得到原本的字节，再保存到新文件中</li>
+</ol>
+<p>压缩文件字节流：</p>
+<figure class="highlight plain">
+  <table>
+    <tr>
+      <td class="gutter">
+        <pre><div class="line">1</div></pre>
+      </td>
+      <td class="code">
+        <pre><div class="line">b&apos;\xf6GX……</div></pre>
+      </td>
+    </tr>
+  </table>
+</figure>
+<p>得到比特流：</p>
+<figure class="highlight plain">
+  <table>
+    <tr>
+      <td class="gutter">
+        <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre>
+      </td>
+      <td class="code">
+        <pre><div class="line">| b&apos;\xf6&apos;   | b&apos;G&apos;      | b&apos;X&apos;      | ……       |</div><div class="line">|-----------|-----------|-----------|----------|</div><div class="line">| 246       | 71        | 88        | ……       |</div><div class="line">| 1111 0110 | 0100 0111 | 0101 1000 | 0101 0…… |</div></pre>
+      </td>
+    </tr>
+  </table>
+</figure>
+<p>根据哈夫曼树，索引出对应的值，<code>&#39;0&#39;</code>进入左子树，<code>&#39;1&#39;</code>进入右子树，直到子叶……</p>
+<figure class="highlight plain">
+  <table>
+    <tr>
+      <td class="gutter">
+        <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre>
+      </td>
+      <td class="code">
+        <pre><div class="line">11110110010001110101100001010……</div><div class="line"></div><div class="line">| 1111011 | 0010 | 001110 | 1011000 | 01010 | ... |</div><div class="line">|---------|------|--------|---------|-------|-----|</div><div class="line">| b&apos;C&apos;    | b&apos;o&apos; | b&apos;p&apos;   | b&apos;y&apos;    | b&apos;r&apos;  | ... |</div></pre>
+      </td>
+    </tr>
+  </table>
+</figure>
+<p>原文：</p>
+<figure class="highlight plain">
+  <table>
+    <tr>
+      <td class="gutter">
+        <pre><div class="line">1</div></pre>
+      </td>
+      <td class="code">
+        <pre><div class="line">b&apos;Copyr……</div></pre>
+      </td>
+    </tr>
+  </table>
+</figure>
+<h3 id="尾部处理">
+  <a href="#尾部处理" class="headerlink" title="尾部处理"></a>尾部处理</h3>
+<p>若结尾出现以下情况</p>
+<ol>
+  <li>
+    <p>结尾长度小于一字节</p>
+    <figure class="highlight plain">
+      <table>
+        <tr>
+          <td class="gutter">
+            <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre>
+          </td>
+          <td class="code">
+            <pre><div class="line">    压缩           解压</div><div class="line"></div><div class="line">| 0010    |   | b&apos;\x02&apos;  |</div><div class="line">|---------|   |----------|</div><div class="line">| 2       |   | 2        |</div><div class="line">| b&apos;\x02&apos; |   | 00000010 |</div></pre>
+          </td>
+        </tr>
+      </table>
+    </figure>
+  </li>
+  <li>
+    <p>结尾长度等于一字节</p>
+    <figure class="highlight plain">
+      <table>
+        <tr>
+          <td class="gutter">
+            <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre>
+          </td>
+          <td class="code">
+            <pre><div class="line">    压缩           解压</div><div class="line"></div><div class="line">| 00000010 |  | b&apos;\x02&apos;  |</div><div class="line">|----------|  |----------|</div><div class="line">| 2        |  | 2        |</div><div class="line">| b&apos;\x02&apos;  |  | 00000010 |</div></pre>
+          </td>
+        </tr>
+      </table>
+    </figure>
+  </li>
+</ol>
+<p>为了避免尾部可能出现的错误，所以将对尾部进行处理：<strong>在尾部写入之前，写入尾部的长度数据</strong></p>
+<figure class="highlight plain">
+  <table>
+    <tr>
+      <td class="gutter">
+        <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre>
+      </td>
+      <td class="code">
+        <pre><div class="line">      压缩               解压</div><div class="line"></div><div class="line">| 0010        |   | b&apos;\x04\x02&apos;  |</div><div class="line">|-------------|   |--------------|</div><div class="line">| 2           |   | 2            |</div><div class="line">| b&apos;\x04\x02&apos; |   | 0010         |</div><div class="line"></div><div class="line">      压缩               解压</div><div class="line"></div><div class="line">| 00000010    |   | b&apos;\x08\x02&apos;  |</div><div class="line">|-------------|   |--------------|</div><div class="line">| 2           |   | 2            |</div><div class="line">| b&apos;\x08\x02&apos; |   | 00000010     |</div></pre>
+      </td>
+    </tr>
+  </table>
+</figure>
+<h3 id="存储字节统计结果">
+  <a href="#存储字节统计结果" class="headerlink" title="存储字节统计结果"></a>存储字节统计结果</h3>
+<p>字符（一字节）字节，字符以一字节来存，最多有256个字符。<br>还要存储出现次数的字节长度，用来读取。</p>
+<figure class="highlight plain">
+  <table>
+    <tr>
+      <td class="gutter">
+        <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre>
+      </td>
+      <td class="code">
+        <pre><div class="line">| for                  | value         | bytes               |</div><div class="line">|----------------------|---------------|---------------------|</div><div class="line">| charNum              | 256 - 1 (max) | b&apos;\xff&apos;             |</div><div class="line">| Count&apos;s bytes length | 4             | b&apos;\x04              |</div><div class="line">| char                 | 0             | b&apos;\x00&apos;             |</div><div class="line">| char Count           | 255           | b&apos;\x00\x00\x00\xff&apos; |</div><div class="line">| char                 | 1             | b&apos;\x01&apos;             |</div><div class="line">| ...                  | ...           | ...                 |</div><div class="line"></div><div class="line">b&apos;\xff\x04\x00\x00\x00\x00\xff\x01...</div></pre>
+      </td>
+    </tr>
+  </table>
+</figure>
+<h3 id="测试">
+  <a href="#测试" class="headerlink" title="测试"></a>测试</h3>
+<p>拿<a href="/2017/09/24/自己来写压缩算法——哈夫曼算法/MIT.txt" title="MIT-LICENCE">MIT-LICENCE</a>文件来测试：</p>
+<figure class="highlight plain">
+  <table>
+    <tr>
+      <td class="gutter">
+        <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre>
+      </td>
+      <td class="code">
+        <pre><div class="line">| before      | after     |</div><div class="line">|-------------|-----------|</div><div class="line">| 1,072 bytes | 859 bytes |</div></pre>
+      </td>
+    </tr>
+  </table>
+</figure>
+<h3 id="代码">
+  <a href="#代码" class="headerlink" title="代码"></a>代码</h3>
+<script src="https://gist.github.com/linw1995/7e49f6d05276538d8675874c585ece5d.js"></script>
+<p>GIST: <a href="https://gist.github.com/linw1995/7e49f6d05276538d8675874c585ece5d" target="_blank" rel="external">Huffman Encoding and Data Compression | linw1995</a></p>]]></content>
+    
+    <summary type="html">
+    
+      压缩算法究竟是怎么做到压缩的？本文就介绍一种简单的压缩算法，哈夫曼算法
+    
+    </summary>
+    
+      <category term="Algorithms" scheme="http://linw1995.com/categories/Algorithms/"/>
+    
+    
+      <category term="Python" scheme="http://linw1995.com/tags/Python/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Windows上程序员神器——Cmder</title>
     <link href="http://linw1995.com/2017/08/07/Windows%E4%B8%8A%E7%A8%8B%E5%BA%8F%E5%91%98%E7%A5%9E%E5%99%A8%E2%80%94%E2%80%94Cmder/"/>
     <id>http://linw1995.com/2017/08/07/Windows上程序员神器——Cmder/</id>
     <published>2017-08-07T15:43:12.000Z</published>
-    <updated>2017-08-07T15:54:18.975Z</updated>
+    <updated>2017-08-08T15:24:37.797Z</updated>
     
     <content type="html"><![CDATA[<h2 id="前言">
   <a href="#前言" class="headerlink" title="前言"></a>前言</h2>
@@ -53,7 +365,7 @@
   <a href="#外观设置" class="headerlink" title="外观设置"></a>外观设置</h3>
 <ul>
   <li>
-    <p><strong>Font</strong><br>右键Tab栏空白处，弹出菜单选择<strong>Settings</strong>，映入眼帘的就是字体设置了。<br>建议使用字体<a href="http://input.fontbureau.com/" target="_blank" rel="external">Input Mono</a>、<a href="http://www.levien.com/type/myfonts/inconsolata.htmlf" target="_blank" rel="external">Inconsolata</a>、Consolas、Courier New。<br>还可以加上中文字体，<strong>“Main font”</strong>设置下方的<strong>“Alternative font”</strong>添加CJK字体，在设置<strong>“Unicode ranges”</strong>成CJK的就好了。</p>
+    <p><strong>Font</strong><br>右键Tab栏空白处，弹出菜单选择<strong>Settings</strong>，映入眼帘的就是字体设置了。<br>建议使用字体<a href="http://input.fontbureau.com/" target="_blank" rel="external">Input Mono</a>、<a href="http://www.levien.com/type/myfonts/inconsolata.html" target="_blank" rel="external">Inconsolata</a>、Consolas、Courier New。<br>还可以加上中文字体，<strong>“Main font”</strong>设置下方的<strong>“Alternative font”</strong>添加CJK字体，在设置<strong>“Unicode ranges”</strong>成CJK的就好了。</p>
   </li>
   <li>
     <p><strong>Color Schemes</strong><br>同样是在Settings框中，左侧树形菜单中选择<strong>Features</strong>-&gt;<strong>Colors</strong>，就能来到Scheme设置界面。Cmder自带的Scheme很丰富，也可以通过自定Scheme，应用网络上简洁好看的风格。<br><a href="https://github.com/joonro/ConEmu-Color-Themes" target="_blank" rel="external">Github | joonro/ConEmu-Color-Themes</a>提供了当前流行的Scheme安装方式。</p>
@@ -2439,320 +2751,6 @@ myprojec/
     
     
       <category term="Python" scheme="http://linw1995.com/tags/Python/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Python functools</title>
-    <link href="http://linw1995.com/2017/03/29/Python-functools/"/>
-    <id>http://linw1995.com/2017/03/29/Python-functools/</id>
-    <published>2017-03-29T08:30:08.000Z</published>
-    <updated>2017-07-03T15:01:23.926Z</updated>
-    
-    <content type="html"><![CDATA[<p><strong>Python</strong>也是支持<strong>函数式编程FP</strong>，<br>支持函数当参数，当返回变量，拥有<strong>闭包Closure</strong>这一特性，<br>而<strong>functools</strong>这个库是用来更好地构造<strong>高阶函数higher-order function</strong><br>
-  <a id="more"></a>
-</p>
-<h2 id="同">
-  <a href="#同" class="headerlink" title="同"></a>同</h2>
-<h3 id="cmp-to-key">
-  <a href="#cmp-to-key" class="headerlink" title="cmp_to_key"></a>cmp_to_key</h3>
-<p>这个函数是用来，搭配像<code>sorted</code>, <code>min</code>, <code>max</code>等，可接受key参数的函数。<br>在很久很久以前在需要为列表排序的时候，总要提供一个<strong>cmp</strong>函数，<br>直到如今，<strong>Python</strong>排序算法都调用其<strong>rich comparison ordering methods</strong>来进行比较，<br>例如<code>__lt__</code>,
-  <code>__gt__</code>等等， 所以需要把<strong>cmp</strong>转换成这些方法。</p>
-<p><strong>cmp_to_key</strong>的实现就像这样子：</p>
-<figure class="highlight python">
-  <table>
-    <tr>
-      <td class="gutter">
-        <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre>
-      </td>
-      <td class="code">
-        <pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">cmp_to_key</span><span class="params">(cmp)</span>:</span></div><div class="line">    <span class="class"><span class="keyword">class</span> <span class="title">K</span>:</span></div><div class="line">        <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, obj, *args)</span>:</span></div><div class="line">            self.obj = obj</div><div class="line">        <span class="function"><span class="keyword">def</span> <span class="title">__lt__</span><span class="params">(self, other)</span>:</span></div><div class="line">            <span class="keyword">return</span> cmp(self.obj, other.obj) &lt; <span class="number">0</span></div><div class="line">        <span class="function"><span class="keyword">def</span> <span class="title">__gt__</span><span class="params">(self, other)</span>:</span></div><div class="line">            <span class="keyword">return</span> cmp(self.obj, other.obj) &gt; <span class="number">0</span></div><div class="line">        <span class="function"><span class="keyword">def</span> <span class="title">__eq__</span><span class="params">(self, other)</span>:</span></div><div class="line">            <span class="keyword">return</span> cmp(self.obj, other.obj) == <span class="number">0</span></div><div class="line">        <span class="function"><span class="keyword">def</span> <span class="title">__le__</span><span class="params">(self, other)</span>:</span></div><div class="line">            <span class="keyword">return</span> cmp(self.obj, other.obj) &lt;= <span class="number">0</span></div><div class="line">        <span class="function"><span class="keyword">def</span> <span class="title">__ge__</span><span class="params">(self, other)</span>:</span></div><div class="line">            <span class="keyword">return</span> cmp(self.obj, other.obj) &gt;= <span class="number">0</span></div><div class="line">        <span class="function"><span class="keyword">def</span> <span class="title">__ne__</span><span class="params">(self, other)</span>:</span></div><div class="line">            <span class="keyword">return</span> cmp(self.obj, other.obj) != <span class="number">0</span></div><div class="line">    <span class="keyword">return</span> K</div></pre>
-      </td>
-    </tr>
-  </table>
-</figure>
-<p>示例：</p>
-<figure class="highlight python">
-  <table>
-    <tr>
-      <td class="gutter">
-        <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre>
-      </td>
-      <td class="code">
-        <pre><div class="line">l = <span class="string">"It just a Test for cmp to key"</span>.split()</div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">cmp</span><span class="params">(a, b)</span>:</span></div><div class="line">    a = a.lower()</div><div class="line">    b = b.lower()</div><div class="line">    <span class="keyword">if</span> a == b:</div><div class="line">        <span class="keyword">return</span> <span class="number">0</span></div><div class="line">    <span class="keyword">elif</span> a &gt; b:</div><div class="line">        <span class="keyword">return</span> <span class="number">1</span></div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        <span class="keyword">return</span> <span class="number">-1</span></div><div class="line"></div><div class="line">sorted(l, key=cmp_to_key(cmp))</div><div class="line"><span class="comment"># ['a', 'cmp', 'for', 'It', 'just', 'key', 'Test', 'to']</span></div></pre>
-      </td>
-    </tr>
-  </table>
-</figure>
-<h3 id="total-ordering">
-  <a href="#total-ordering" class="headerlink" title="total_ordering"></a>total_ordering</h3>
-<p><strong>class</strong>装饰器，用来补全<strong>rich comparison ordering methods</strong>，<br>但至少要提供<code>__eq__</code>，和<code>__lt__</code>，<code>__gt__</code>，<code>__le__</code>，<code>__ge__</code>中的一种。</p>
-<p>示例：</p>
-<figure class="highlight python">
-  <table>
-    <tr>
-      <td class="gutter">
-        <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre>
-      </td>
-      <td class="code">
-        <pre><div class="line"><span class="meta">@total_ordering</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Count</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, num)</span>:</span></div><div class="line">        self.num = num</div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__eq__</span><span class="params">(self, other)</span>:</span></div><div class="line">        <span class="keyword">return</span> self.num == other.num</div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__lt__</span><span class="params">(self, other)</span>:</span></div><div class="line">        <span class="keyword">return</span> self.num &lt; other.num</div><div class="line"></div><div class="line">a = Count(<span class="number">1</span>)</div><div class="line">b = Count(<span class="number">2</span>)</div><div class="line"><span class="keyword">assert</span> (b &gt; a) == <span class="keyword">False</span> <span class="comment"># False</span></div><div class="line"><span class="keyword">assert</span> hasattr(a, <span class="string">"__gt__"</span>) <span class="comment"># Ture</span></div></pre>
-      </td>
-    </tr>
-  </table>
-</figure>
-<h3 id="reduce">
-  <a href="#reduce" class="headerlink" title="reduce"></a>reduce</h3>
-<p>与<strong>py2</strong>内建函数<strong>reduce</strong>一致，而<strong>reduce</strong>在<strong>py3</strong>已不是内建函数</p>
-<p>其实现大概就是这样子的：</p>
-<figure class="highlight python">
-  <table>
-    <tr>
-      <td class="gutter">
-        <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre>
-      </td>
-      <td class="code">
-        <pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">reduce</span><span class="params">(function, iterable, initializer=None)</span>:</span></div><div class="line">    it = iter(iterable)</div><div class="line">    <span class="keyword">if</span> initializer <span class="keyword">is</span> <span class="keyword">None</span>:</div><div class="line">        value = next(it)</div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        value = initializer</div><div class="line">    <span class="keyword">for</span> element <span class="keyword">in</span> it:</div><div class="line">        value = function(value, element)</div><div class="line">    <span class="keyword">return</span> value</div></pre>
-      </td>
-    </tr>
-  </table>
-</figure>
-<h3 id="partial">
-  <a href="#partial" class="headerlink" title="partial"></a>partial</h3>
-<p>这就是用来实现<strong>偏函数Partial function</strong>的</p>
-<p>例如：</p>
-<figure class="highlight python">
-  <table>
-    <tr>
-      <td class="gutter">
-        <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre>
-      </td>
-      <td class="code">
-        <pre><div class="line">int2 = partial(int, base=<span class="number">2</span>)</div><div class="line"><span class="string">'''</span></div><div class="line">def int2(x):</div><div class="line">    return int(x, base=2)</div><div class="line">'''</div><div class="line"></div><div class="line"><span class="keyword">assert</span> int2(<span class="string">"1000000"</span>) == <span class="number">64</span></div></pre>
-      </td>
-    </tr>
-  </table>
-</figure>
-<h3 id="update-wrapper">
-  <a href="#update-wrapper" class="headerlink" title="update_wrapper"></a>update_wrapper</h3>
-<p>我们在用新函数包装旧函数时，就失去了原函数的信息，这对调试时非常不友好</p>
-<figure class="highlight python">
-  <table>
-    <tr>
-      <td class="gutter">
-        <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre>
-      </td>
-      <td class="code">
-        <pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">int2</span><span class="params">(x)</span>:</span></div><div class="line">    <span class="keyword">return</span> int(x, base=<span class="number">2</span>)</div><div class="line"><span class="keyword">assert</span> int2.__name__ == <span class="string">'int2'</span></div></pre>
-      </td>
-    </tr>
-  </table>
-</figure>
-<p><strong>update_wrapper</strong>就是用来把被封装函数即旧函数的信息复制到新函数里,<br>其实现像这样：</p>
-<figure class="highlight python">
-  <table>
-    <tr>
-      <td class="gutter">
-        <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre>
-      </td>
-      <td class="code">
-        <pre><div class="line">WRAPPER_ASSIGNMENTS = (<span class="string">'__module__'</span>, <span class="string">'__name__'</span>, <span class="string">'__doc__'</span>)</div><div class="line">WRAPPER_UPDATES = (<span class="string">'__dict__'</span>,)</div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">update_wrapper</span><span class="params">(wrapper,</span></span></div><div class="line">                   wrapped,</div><div class="line">                   assigned = WRAPPER_ASSIGNMENTS,</div><div class="line">                   updated = WRAPPER_UPDATES):</div><div class="line">    <span class="keyword">for</span> attr <span class="keyword">in</span> assigned:</div><div class="line">        setattr(wrapper, attr, getattr(wrapped, attr))</div><div class="line">    <span class="keyword">for</span> attr <span class="keyword">in</span> updated:</div><div class="line">        getattr(wrapper, attr).update(getattr(wrapped, attr, &#123;&#125;))</div><div class="line">    <span class="keyword">return</span> wrapper</div></pre>
-      </td>
-    </tr>
-  </table>
-</figure>
-<p>使用：</p>
-<figure class="highlight python">
-  <table>
-    <tr>
-      <td class="gutter">
-        <pre><div class="line">1</div><div class="line">2</div></pre>
-      </td>
-      <td class="code">
-        <pre><div class="line">update_wrapper(int2, int)</div><div class="line"><span class="keyword">assert</span> int2.__name__ == <span class="string">'int'</span></div></pre>
-      </td>
-    </tr>
-  </table>
-</figure>
-<h3 id="wraps">
-  <a href="#wraps" class="headerlink" title="wraps"></a>wraps</h3>
-<p>这个就是<strong>update_wrapper</strong>的<strong>partial</strong>版本</p>
-<figure class="highlight python">
-  <table>
-    <tr>
-      <td class="gutter">
-        <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre>
-      </td>
-      <td class="code">
-        <pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">wraps</span><span class="params">(wrapped,</span></span></div><div class="line">          assigned = WRAPPER_ASSIGNMENTS,</div><div class="line">          updated = WRAPPER_UPDATES):</div><div class="line"></div><div class="line">    <span class="keyword">return</span> partial(update_wrapper, wrapped=wrapped,</div><div class="line">                   assigned=assigned, updated=updated)</div></pre>
-      </td>
-    </tr>
-  </table>
-</figure>
-<p>使用：</p>
-<figure class="highlight python">
-  <table>
-    <tr>
-      <td class="gutter">
-        <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre>
-      </td>
-      <td class="code">
-        <pre><div class="line"><span class="keyword">from</span> functools <span class="keyword">import</span> wraps</div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">my_decorator</span><span class="params">(f)</span>:</span></div><div class="line"><span class="meta">    @wraps(f)</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">wrapper</span><span class="params">(*args, **kwds)</span>:</span></div><div class="line">        <span class="keyword">print</span> <span class="string">'Calling decorated function'</span></div><div class="line">        <span class="keyword">return</span> f(*args, **kwds)</div><div class="line">    <span class="keyword">return</span> wrapper</div><div class="line"></div><div class="line"><span class="meta">@my_decorator</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">example</span><span class="params">()</span>:</span></div><div class="line">    <span class="string">"""Docstring"""</span></div><div class="line">    <span class="keyword">print</span> <span class="string">'Called example function'</span></div><div class="line"></div><div class="line"><span class="comment"># console</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>example()</div><div class="line">Calling decorated function</div><div class="line">Called example function</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>example.__name__</div><div class="line"><span class="string">'example'</span></div></pre>
-      </td>
-    </tr>
-  </table>
-</figure>
-<h2 id="异">
-  <a href="#异" class="headerlink" title="异"></a>异</h2>
-<p><strong>partialmethod</strong>，<strong>lru_cache</strong>，<strong>singledispatch</strong>是<strong>py3</strong>中新增的函数</p>
-<h3 id="partialmethod">
-  <a href="#partialmethod" class="headerlink" title="partialmethod"></a>partialmethod</h3>
-<p>用来生成<strong>类方法</strong>的<strong>Partial function</strong></p>
-<figure class="highlight python">
-  <table>
-    <tr>
-      <td class="gutter">
-        <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre>
-      </td>
-      <td class="code">
-        <pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Cell</span><span class="params">(object)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></div><div class="line">        self._alive = <span class="keyword">False</span></div><div class="line"><span class="meta">    @property</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">alive</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="keyword">return</span> self._alive</div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">set_state</span><span class="params">(self, state)</span>:</span></div><div class="line">        self._alive = bool(state)</div><div class="line">    set_alive = partialmethod(set_state, <span class="keyword">True</span>)</div><div class="line">    set_dead = partialmethod(set_state, <span class="keyword">False</span>)</div><div class="line"></div><div class="line">c = Cell()</div><div class="line"><span class="keyword">assert</span> c.alive == <span class="keyword">False</span></div><div class="line">c.set_alive()</div><div class="line"><span class="keyword">assert</span> c.alive == <span class="keyword">True</span></div></pre>
-      </td>
-    </tr>
-  </table>
-</figure>
-<h3 id="lru-cache">
-  <a href="#lru-cache" class="headerlink" title="lru_cache"></a>lru_cache</h3>
-<blockquote> <a href="https://en.wikipedia.org/wiki/Cache_replacement_policies#Least_Recently_Used_.28LRU.29" target="_blank" rel="external">Least Recently Used(LRU)</a> </blockquote>
-<p>装饰器，用来缓存函数对应不同参数的返回结果。</p>
-<p>可以提供<code>maxsize=None</code>与<code>typed=False</code>这两个参数，<br>参数<strong>maxsize</strong>为最多缓存的次数，如果为<strong>None</strong>，则无限制，设置为<strong>2n</strong>时，性能最佳，特别适合于耗时的函数。<br><strong>typed=True</strong>，则不同参数类型的调用将分别缓存，例如 f(3) 和 f(3.0)。</p>
-<p>被装饰的函数会有<code>cache_clear</code>和<code>cache_info</code>这两个方法，分别用于清除缓存和查看缓存信息</p>
-<p>演示：</p>
-<figure class="highlight python">
-  <table>
-    <tr>
-      <td class="gutter">
-        <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre>
-      </td>
-      <td class="code">
-        <pre><div class="line"><span class="keyword">from</span> functools <span class="keyword">import</span> lru_cache</div><div class="line"><span class="meta">@lru_cache(None)</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">add</span><span class="params">(x, y)</span>:</span></div><div class="line">    print(<span class="string">"calculating: %s + %s"</span> % (x, y))</div><div class="line">    <span class="keyword">return</span> x + y</div><div class="line"></div><div class="line"><span class="comment"># console</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>print(add(<span class="number">1</span>, <span class="number">2</span>))</div><div class="line">calculating: <span class="number">1</span> + <span class="number">2</span></div><div class="line"><span class="number">3</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>print(add(<span class="number">1</span>, <span class="number">2</span>))</div><div class="line"><span class="number">3</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>print(add(<span class="number">2</span>, <span class="number">3</span>))</div><div class="line">calculating: <span class="number">2</span> + <span class="number">3</span></div><div class="line"><span class="number">5</span></div></pre>
-      </td>
-    </tr>
-  </table>
-</figure>
-<p>从结果可以看出，当第二次调用 add(1, 2) 时，并没有真正执行函数体，而是直接返回缓存的结果。</p>
-<p>有一个用 C 实现的，更快的，同时兼容 Python2 和 Python3 的第三方模块<a href="https://github.com/pbrady/fastcache" target="_blank" rel="external">fastcache</a>能够实现同样的功能。</p>
-<h3 id="singledispatch">
-  <a href="#singledispatch" class="headerlink" title="singledispatch"></a>singledispatch</h3>
-<blockquote> <a href="https://www.python.org/dev/peps/pep-0443/" target="_blank" rel="external">PEP 443 -- Single-dispatch generic functions</a> </blockquote>
-<p>用来定义函数重载，根据第一个参数类型来使用对应的函数</p>
-<p>使用：</p>
-<figure class="highlight python">
-  <table>
-    <tr>
-      <td class="gutter">
-        <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre>
-      </td>
-      <td class="code">
-        <pre><div class="line"><span class="keyword">import</span> html</div><div class="line"><span class="keyword">from</span> functools <span class="keyword">import</span> singledispatch</div><div class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> abc</div><div class="line"><span class="keyword">from</span> numbers <span class="keyword">import</span> Integral</div><div class="line"></div><div class="line"><span class="meta">@singledispatch</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">htmlize</span><span class="params">(obj)</span>:</span></div><div class="line">    <span class="keyword">return</span> <span class="string">'&lt;pre&gt;&#123;0&#125;&lt;/pre&gt;'</span>.format(html.escape(repr(obj)))</div><div class="line"></div><div class="line"><span class="meta">@htmlize.register(str)</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">_</span><span class="params">(text)</span>:</span></div><div class="line">    content = html.escape(text).replace(<span class="string">'\n'</span>, <span class="string">'&lt;br&gt;\n'</span>)</div><div class="line">    <span class="keyword">return</span> <span class="string">'&lt;p&gt;&#123;0&#125;&lt;/p&gt;'</span>.format(content)</div><div class="line"></div><div class="line"><span class="meta">@htmlize.register(Integral)</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">_</span><span class="params">(num)</span>:</span></div><div class="line">    <span class="keyword">return</span> <span class="string">'&lt;pre&gt;&#123;0&#125; (0x&#123;0:x&#125;)&lt;/pre&gt;'</span>.format(num)</div><div class="line"></div><div class="line"><span class="meta">@htmlize.register(tuple)</span></div><div class="line"><span class="meta">@htmlize.register(abc.MutableSequence)</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">_</span><span class="params">(seq)</span>:</span></div><div class="line">    inner = <span class="string">'&lt;/li&gt;\n&lt;li&gt;'</span>.join(htmlize(item) <span class="keyword">for</span> item <span class="keyword">in</span> seq)</div><div class="line">    <span class="keyword">return</span> <span class="string">'&lt;ul&gt;\n&lt;li&gt;&#123;0&#125;&lt;/li&gt;\n&lt;/ul&gt;'</span>.format(inner)</div><div class="line"></div><div class="line"><span class="comment"># console</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>htmlize(&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;)</div><div class="line"><span class="string">'&lt;pre&gt;&#123;1, 2, 3&#125;&lt;/pre&gt;'</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>htmlize(abs)</div><div class="line"><span class="string">'&lt;pre&gt;&amp;lt;built-in function abs&amp;gt;&lt;/pre&gt;'</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>htmlize(<span class="string">'Heimlich &amp; Co.\n- a game'</span>)</div><div class="line"><span class="string">'&lt;p&gt;Heimlich &amp;amp; Co.&lt;br&gt;\n- a game&lt;/p&gt;'</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>htmlize(<span class="number">42</span>)</div><div class="line"><span class="string">'&lt;pre&gt;42 (0x2a)&lt;/pre&gt;'</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>htmlize([<span class="string">'alpha'</span>, <span class="number">66</span>, &#123;<span class="number">3</span>, <span class="number">2</span>, <span class="number">1</span>&#125;])</div><div class="line"><span class="string">'&lt;ul&gt;\n&lt;li&gt;&lt;p&gt;alpha&lt;/p&gt;&lt;/li&gt;\n&lt;li&gt;&lt;pre&gt;66 (0x42)&lt;/pre&gt;&lt;/li&gt;\n&lt;li&gt;&lt;pre&gt;&#123;1, 2, 3&#125;&lt;/pre&gt;&lt;/li&gt;\n&lt;/ul&gt;'</span></div></pre>
-      </td>
-    </tr>
-  </table>
-</figure>
-<h2 id="py2与py3的区别">
-  <a href="#py2与py3的区别" class="headerlink" title="py2与py3的区别"></a>py2与py3的区别</h2>
-<p>首先先看下<strong>functools</strong>在<strong>py2</strong>与<strong>py3</strong>间的区别：</p>
-<table>
-  <thead>
-    <tr>
-      <th>函数</th>
-      <th style="text-align:center">py2</th>
-      <th style="text-align:center">py3</th>
-      <th>描述</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>cmp_to_key</td>
-      <td style="text-align:center"><span style="color:green">✔</span></td>
-      <td style="text-align:center"><span style="color:green">✔</span></td>
-      <td>把老式比较函数转换为新式比较方式（包装 -&gt; 比较 -&gt; 解包）</td>
-    </tr>
-    <tr>
-      <td>total_ordering</td>
-      <td style="text-align:center"><span style="color:green">✔</span></td>
-      <td style="text-align:center"><span style="color:green">✔</span></td>
-      <td>利用类定义中仅有的一或多个比较函数，来补全剩余的比较函数</td>
-    </tr>
-    <tr>
-      <td>reduce</td>
-      <td style="text-align:center"><span style="color:green">✔</span></td>
-      <td style="text-align:center"><span style="color:green">✔</span></td>
-      <td>与reduce函数一致</td>
-    </tr>
-    <tr>
-      <td>partial</td>
-      <td style="text-align:center"><span style="color:green">✔</span></td>
-      <td style="text-align:center"><span style="color:green">✔</span></td>
-      <td>用预先准备的参数包装该函数，以后每次调用只需要补充剩余的参数即可</td>
-    </tr>
-    <tr>
-      <td>partialmethod</td>
-      <td style="text-align:center"><span style="color:red">✘</span></td>
-      <td style="text-align:center"><span style="color:green">✔</span></td>
-      <td>同上，但只适用于类方法</td>
-    </tr>
-    <tr>
-      <td>update_wrapper</td>
-      <td style="text-align:center"><span style="color:green">✔</span></td>
-      <td style="text-align:center"><span style="color:green">✔</span></td>
-      <td>更新包装后的函数，即函数名、文档、等等，有利于调试</td>
-    </tr>
-    <tr>
-      <td>wraps</td>
-      <td style="text-align:center"><span style="color:green">✔</span></td>
-      <td style="text-align:center"><span style="color:green">✔</span></td>
-      <td>以上函数的装饰器版本，更方便使用</td>
-    </tr>
-    <tr>
-      <td>lru_cache</td>
-      <td style="text-align:center"><span style="color:red">✘</span></td>
-      <td style="text-align:center"><span style="color:green">✔</span></td>
-      <td>装饰器，缓存函数的调用结果，有限地（可无限）保存最近的调用结果</td>
-    </tr>
-    <tr>
-      <td>singledispatch</td>
-      <td style="text-align:center"><span style="color:red">✘</span></td>
-      <td style="text-align:center"><span style="color:green">✔</span></td>
-      <td>把函数转换成<strong>单分派泛函数</strong></td>
-    </tr>
-  </tbody>
-</table>
-<p><strong>py3</strong>多了<strong>lru_cache</strong>, <strong>partialmethod</strong>, <strong>singledispatch</strong>这三个函数</p>
-<h2 id="参考链接">
-  <a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2>
-<blockquote class="pullquote">
-  <ul>
-    <li><a href="https://docs.python.org/2.7/library/functools.html" target="_blank" rel="external">py2.7 functools — Higher-order functions and operations on callable objects</a></li>
-    <li><a href="https://docs.python.org/3/library/functools.html" target="_blank" rel="external">py3.6 functools — Higher-order functions and operations on callable objects</a></li>
-    <li><a href="https://en.wikipedia.org/wiki/Cache_replacement_policies#Least_Recently_Used_.28LRU.29" target="_blank" rel="external">Least Recently Used(LRU)</a></li>
-    <li><a href="http://kuanghy.github.io/2016/04/20/python-cache" target="_blank" rel="external">Python 缓存机制与 functools.lru_cache</a></li>
-    <li><a href="https://github.com/pbrady/fastcache" target="_blank" rel="external">fastcache github</a></li>
-    <li><a href="https://www.python.org/dev/peps/pep-0443/" target="_blank" rel="external">PEP 443 – Single-dispatch generic functions</a></li>
-    <li><a href="https://husless.github.io/2015/09/08/generic-functions-with-single-dispatch/" target="_blank" rel="external">Generic Functions with Single Dispatch</a></li>
-  </ul>
-</blockquote>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;strong&gt;Python&lt;/strong&gt;也是支持&lt;strong&gt;函数式编程FP&lt;/strong&gt;，&lt;br&gt;支持函数当参数，当返回变量，拥有&lt;strong&gt;闭包Closure&lt;/strong&gt;这一特性，&lt;br&gt;而&lt;strong&gt;functools&lt;/strong&gt;这个库是用来更好地构造&lt;strong&gt;高阶函数higher-order function&lt;/strong&gt;&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Python" scheme="http://linw1995.com/categories/Python/"/>
-    
-    
-      <category term="Python" scheme="http://linw1995.com/tags/Python/"/>
-    
-      <category term="FP" scheme="http://linw1995.com/tags/FP/"/>
     
   </entry>
   

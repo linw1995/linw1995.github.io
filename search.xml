@@ -295,7 +295,15 @@
 <h3 id="代码">
   <a href="#代码" class="headerlink" title="代码"></a>代码</h3>
 <script src="https://gist.github.com/linw1995/7e49f6d05276538d8675874c585ece5d.js"></script>
-<p>GIST: <a href="https://gist.github.com/linw1995/7e49f6d05276538d8675874c585ece5d" target="_blank" rel="external">Huffman Encoding and Data Compression | linw1995</a></p>]]></content>
+<p>GIST: <a href="https://gist.github.com/linw1995/7e49f6d05276538d8675874c585ece5d" target="_blank" rel="external">Huffman Encoding and Data Compression | linw1995</a></p>
+<h2 id="参考">
+  <a href="#参考" class="headerlink" title="参考"></a>参考</h2>
+<blockquote class="pullquote">
+  <ul>
+    <li><a href="https://zh.wikipedia.org/wiki/%E9%9C%8D%E5%A4%AB%E6%9B%BC%E7%BC%96%E7%A0%81" target="_blank" rel="external">霍夫曼编码 | Wikipedia</a></li>
+    <li>Magnus Lie Hetland.(2015).哈夫曼算法.In <em>Python算法教程</em>,pages 159-164.</li>
+  </ul>
+</blockquote>]]></content>
       
         <categories>
             

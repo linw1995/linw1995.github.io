@@ -52,44 +52,32 @@
             <h1 class="post-title">Python Unittest</h1>
             <div class="post-meta">Mar 22, 2017<span> | </span><span class="category"><a href="/categories/Python/">Python</a></span>
               <script src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js" async></script><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"></span><span> Hits</span></span>
-            </div>
-            <a data-disqus-identifier="2017/03/22/Python-Unittest/" href="/2017/03/22/Python-Unittest/#disqus_thread" class="disqus-comment-count"></a>
+            </div><a data-disqus-identifier="2017/03/22/Python-Unittest/" href="/2017/03/22/Python-Unittest/#disqus_thread" class="disqus-comment-count"></a>
             <div class="clear">
               <div id="toc" class="toc-article">
                 <div class="toc-title">Contents</div>
                 <ol class="toc">
-                  <li class="toc-item toc-level-1"><a class="toc-link" href="#Unittest"><span class="toc-number">1.</span> <span class="toc-text">
-  Unittest</span></a>
+                  <li class="toc-item toc-level-1"><a class="toc-link" href="#Unittest"><span class="toc-number">1.</span> <span class="toc-text">Unittest</span></a>
                     <ol class="toc-child">
-                      <li class="toc-item toc-level-2"><a class="toc-link" href="#简单的例子"><span class="toc-number">1.1.</span> <span class="toc-text">
-  简单的例子</span></a></li>
-                      <li class="toc-item toc-level-2"><a class="toc-link" href="#CLI-命令接口"><span class="toc-number">1.2.</span> <span class="toc-text">
-  CLI 命令接口</span></a></li>
-                      <li class="toc-item toc-level-2"><a class="toc-link" href="#初始化和清理测试环境"><span class="toc-number">1.3.</span> <span class="toc-text">
-  初始化和清理测试环境</span></a></li>
-                      <li class="toc-item toc-level-2"><a class="toc-link" href="#测试跳过"><span class="toc-number">1.4.</span> <span class="toc-text">
-  测试跳过</span></a></li>
-                      <li class="toc-item toc-level-2"><a class="toc-link" href="#常用的Assert方法"><span class="toc-number">1.5.</span> <span class="toc-text">
-  常用的Assert方法</span></a></li>
-                      <li class="toc-item toc-level-2"><a class="toc-link" href="#VSCode的测试配置"><span class="toc-number">1.6.</span> <span class="toc-text">
-  VSCode的测试配置</span></a></li>
+                      <li class="toc-item toc-level-2"><a class="toc-link" href="#简单的例子"><span class="toc-number">1.1.</span> <span class="toc-text">简单的例子</span></a></li>
+                      <li class="toc-item toc-level-2"><a class="toc-link" href="#CLI-命令接口"><span class="toc-number">1.2.</span> <span class="toc-text">CLI 命令接口</span></a></li>
+                      <li class="toc-item toc-level-2"><a class="toc-link" href="#初始化和清理测试环境"><span class="toc-number">1.3.</span> <span class="toc-text">初始化和清理测试环境</span></a></li>
+                      <li class="toc-item toc-level-2"><a class="toc-link" href="#测试跳过"><span class="toc-number">1.4.</span> <span class="toc-text">测试跳过</span></a></li>
+                      <li class="toc-item toc-level-2"><a class="toc-link" href="#常用的Assert方法"><span class="toc-number">1.5.</span> <span class="toc-text">常用的Assert方法</span></a></li>
+                      <li class="toc-item toc-level-2"><a class="toc-link" href="#VSCode的测试配置"><span class="toc-number">1.6.</span> <span class="toc-text">VSCode的测试配置</span></a></li>
                     </ol>
                   </li>
-                  <li class="toc-item toc-level-1"><a class="toc-link" href="#参考链接"><span class="toc-number">2.</span> <span class="toc-text">
-  参考链接</span></a>
+                  <li class="toc-item toc-level-1"><a class="toc-link" href="#参考链接"><span class="toc-number">2.</span> <span class="toc-text">参考链接</span></a>
                     <ol class="toc-child">
-                      <li class="toc-item toc-level-2"><a class="toc-link" href="#pythonVSCode配置详情"><span class="toc-number">2.1.</span> <span class="toc-text">
-  pythonVSCode配置详情</span></a></li>
+                      <li class="toc-item toc-level-2"><a class="toc-link" href="#pythonVSCode配置详情"><span class="toc-number">2.1.</span> <span class="toc-text">pythonVSCode配置详情</span></a></li>
                     </ol>
                   </li>
                 </ol>
               </div>
             </div>
             <div class="post-content">
-              <p>测试在持续集成开发中非常重要，写单元测试有助于定位bug，方便在未来重构代码。<br>本文简单介绍了下<strong>Python标准库</strong>中的<strong>Unittest</strong></p>
-              <a id="more"></a>
-              <h1 id="Unittest">
-                <a href="#Unittest" class="headerlink" title="Unittest"></a>Unittest</h1>
+              <p>测试在持续集成开发中非常重要，写单元测试有助于定位bug，方便在未来重构代码。<br>本文简单介绍了下<strong>Python标准库</strong>中的<strong>Unittest</strong></p> <a id="more"></a>
+              <h1 id="Unittest"><a href="#Unittest" class="headerlink" title="Unittest"></a>Unittest</h1>
               <p>该测试框架特性有</p>
               <ul>
                 <li>
@@ -105,8 +93,7 @@
                   <p><strong>runner</strong> 决定了测试的运行方式，顺序及输出</p>
                 </li>
               </ul>
-              <h2 id="简单的例子">
-                <a href="#简单的例子" class="headerlink" title="简单的例子"></a>简单的例子</h2>
+              <h2 id="简单的例子"><a href="#简单的例子" class="headerlink" title="简单的例子"></a>简单的例子</h2>
               <figure class="highlight python">
                 <table>
                   <tr>
@@ -117,8 +104,7 @@
                   </tr>
                 </table>
               </figure>
-              <h2 id="CLI-命令接口">
-                <a href="#CLI-命令接口" class="headerlink" title="CLI 命令接口"></a>CLI 命令接口</h2>
+              <h2 id="CLI-命令接口"><a href="#CLI-命令接口" class="headerlink" title="CLI 命令接口"></a>CLI 命令接口</h2>
               <p>Unittest允许执行某个Case下的某一个测试<br>只需要在命令行中输入</p>
               <figure class="highlight bash">
                 <table>
@@ -168,8 +154,7 @@
                   </tr>
                 </tbody>
               </table>
-              <h2 id="初始化和清理测试环境">
-                <a href="#初始化和清理测试环境" class="headerlink" title="初始化和清理测试环境"></a>初始化和清理测试环境</h2>
+              <h2 id="初始化和清理测试环境"><a href="#初始化和清理测试环境" class="headerlink" title="初始化和清理测试环境"></a>初始化和清理测试环境</h2>
               <p>简单的给<strong>TestCase</strong>加上<strong>setUp</strong>、<strong>tearDown</strong>方法</p>
               <figure class="highlight python">
                 <table>
@@ -192,8 +177,7 @@
                   </tr>
                 </table>
               </figure>
-              <h2 id="测试跳过">
-                <a href="#测试跳过" class="headerlink" title="测试跳过"></a>测试跳过</h2>
+              <h2 id="测试跳过"><a href="#测试跳过" class="headerlink" title="测试跳过"></a>测试跳过</h2>
               <p>直接给测试方法加上<code>@unittest.skip(reason)</code>装饰器<br>可是如果在某种情况下才需要跳过呢？</p>
               <table>
                 <thead>
@@ -217,8 +201,7 @@
                   </tr>
                 </tbody>
               </table>
-              <h2 id="常用的Assert方法">
-                <a href="#常用的Assert方法" class="headerlink" title="常用的Assert方法"></a>常用的Assert方法</h2>
+              <h2 id="常用的Assert方法"><a href="#常用的Assert方法" class="headerlink" title="常用的Assert方法"></a>常用的Assert方法</h2>
               <table>
                 <thead>
                   <tr>
@@ -282,8 +265,7 @@
                 </tbody>
               </table>
               <p>以上Assert方法都有可选的msg参数</p>
-              <h2 id="VSCode的测试配置">
-                <a href="#VSCode的测试配置" class="headerlink" title="VSCode的测试配置"></a>VSCode的测试配置</h2>
+              <h2 id="VSCode的测试配置"><a href="#VSCode的测试配置" class="headerlink" title="VSCode的测试配置"></a>VSCode的测试配置</h2>
               <p>首先要安装这个插件<a href="https://github.com/DonJayamanne/pythonVSCode" target="_blank" rel="external">pythonVSCode</a><br>按<code>ctrl</code>+<code>shift</code>+<code>p</code>输入<code>ext install python</code></p>
               <p>在<code>setting.json</code>中加入</p>
               <figure class="highlight json">
@@ -298,15 +280,13 @@
               </figure>
               <p>这样就会在工作路径中寻找测试<br>若VSCode左下方出现Run Tests，即测试导入完毕<br><img src="/2017/03/22/Python-Unittest/01.png" alt="Status" title="Status"><br>点击Run Tests，可选择进行所有测试，也可以进行某个测试方法<br>也可以进行上一次失败的测试<br><img src="/2017/03/22/Python-Unittest/02.png" alt="Contrl"
                   title="Contrl"><br>也可以到测试文件中，在<strong>TestMethod</strong>或<strong>TestCase</strong>运行测试</p>
-              <h1 id="参考链接">
-                <a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h1>
+              <h1 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h1>
               <blockquote class="pullquote">
                 <ul>
                   <li><a href="https://docs.python.org/3.6/library/unittest.html" target="_blank" rel="external">unittest — Unit testing framework</a></li>
                 </ul>
               </blockquote>
-              <h2 id="pythonVSCode配置详情">
-                <a href="#pythonVSCode配置详情" class="headerlink" title="pythonVSCode配置详情"></a>pythonVSCode配置详情</h2>
+              <h2 id="pythonVSCode配置详情"><a href="#pythonVSCode配置详情" class="headerlink" title="pythonVSCode配置详情"></a>pythonVSCode配置详情</h2>
               <blockquote class="pullquote">
                 <ul>
                   <li><a href="https://github.com/DonJayamanne/pythonVSCode/wiki/Unitest:-More-Options" target="_blank" rel="external">unittest: More Options</a></li>
@@ -314,8 +294,8 @@
                 </ul>
               </blockquote>
             </div>
-            <script type="text/javascript" src="/js/share.js?v=0.0.0" async></script><a data-url="http://linw1995.com/2017/03/22/Python-Unittest/" data-id="cj7yunahw0006pcitaobnkn4y" class="article-share-link">Share</a>
-            <div class="tags"><a href="/tags/Python/">Python</a><a href="/tags/Test/">Test</a><a href="/tags/VSCode/">VSCode</a></div>
+            <script type="text/javascript" src="/js/share.js?v=0.0.0" async></script><a data-url="http://linw1995.com/2017/03/22/Python-Unittest/" data-id="cj94wk93j0008e085vbv6lcvs" class="article-share-link">Share</a>
+            <div class="tags"><a href="/tags/Python/">Python</a><a href="/tags/VSCode/">VSCode</a><a href="/tags/Test/">Test</a></div>
             <div class="post-nav"><a href="/2017/03/24/我的CV/" class="pre">我的CV</a><a href="/2017/03/20/用python来handle复杂的时间/" class="next">用python来handle复杂的时间</a></div>
             <div id="disqus_thread">
               <div class="btn_click_load"><button class="disqus_click_btn">阅读评论 「请确保 disqus.com 可以正常加载」</button></div>
@@ -360,8 +340,7 @@
         <div id="footer">Copyright © 2017 <a href="/." rel="nofollow">linw1995.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow"
             target="_blank" href="https://github.com/pagecho"> Cho.</a></div>
       </div>
-    </div>
-    <a id="rocket" href="#top" class="show"></a>
+    </div><a id="rocket" href="#top" class="show"></a>
     <script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script>
     <script type="text/javascript" src="//cdn.bootcss.com/fancybox/3.0.47/jquery.fancybox.min.js" async></script>
     <script type="text/javascript" src="/js/fancybox.js?v=0.0.0" async></script>

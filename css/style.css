@@ -1,5 +1,4 @@
 @charset "UTF-8";
-
 /**
  *
  * @package Maupassant
@@ -7,7 +6,6 @@
  * @version 2.0
  * @link http://chopstack.com
  */
-
 
 /*
 pure css setting
@@ -217,7 +215,6 @@ div {
   -moz-box-shadow: none;
   box-shadow: none;
 }
-
 
 /* title for search result or tagged posts*/
 
@@ -496,7 +493,6 @@ div {
   font-size: .9em;
 }
 
-
 /* for archive page starts*/
 
 .post-archive {
@@ -514,9 +510,7 @@ div {
   padding-right: .7em;
 }
 
-
 /* for archive page ends*/
-
 
 /* middle*/
 
@@ -549,7 +543,6 @@ screen and (max-width: 48em) {
     font-size: 13px;
   }
 }
-
 
 /* small*/
 
@@ -600,7 +593,6 @@ pre {
 .hidden1 {
   display: none;
 }
-
 
 /* back-to-top rocket*/
 
@@ -662,7 +654,6 @@ screen and (min-width: 48em) {
     transform: scale(1.4, 3.2);
   }
 }
-
 
 /* *******************************************************
 * Process timelime, (homepage)
@@ -981,7 +972,6 @@ screen and (min-width: 48em) {
   }
 }
 
-
 /* read more*/
 
 .readmore a {
@@ -1004,7 +994,6 @@ screen and (min-width: 48em) {
   background: #F8F8F8;
   border-bottom-color: #D26911;
 }
-
 
 /* duoshuo style*/
 
@@ -1161,7 +1150,6 @@ screen and (min-width: 48em) {
 #ds-thread #ds-reset .ds-service-list .ds-more-services:hover {
   background: none;
 }
-
 
 /* syntax highlight*/
 
@@ -1798,7 +1786,6 @@ figure.highlight .line,
   color: #0086b3;
 }
 
-
 /* post navigator*/
 
 .post-nav {
@@ -1844,7 +1831,6 @@ figure.highlight .line,
   color: #222;
 }
 
-
 /* toc*/
 
 .toc-article {
@@ -1879,7 +1865,6 @@ figure.highlight .line,
   padding-left: 0;
 }
 
-
 /* table*/
 
 table {
@@ -1904,7 +1889,6 @@ table td {
 table tr:nth-child(2n) {
   background: #f7f8f8;
 }
-
 
 /* article-share*/
 
@@ -2034,7 +2018,6 @@ table tr:nth-child(2n) {
   display: none;
 }
 
-
 /* search result*/
 
 ul.search-result-list {
@@ -2057,7 +2040,6 @@ em.search-keyword {
   font-style: normal;
   color: #01579f;
 }
-
 
 /* Disqus Button */
 

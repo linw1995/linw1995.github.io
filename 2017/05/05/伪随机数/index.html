@@ -52,75 +52,54 @@
             <h1 class="post-title">伪随机数</h1>
             <div class="post-meta">May 5, 2017<span> | </span><span class="category"><a href="/categories/Algorithms/">Algorithms</a></span>
               <script src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js" async></script><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"></span><span> Hits</span></span>
-            </div>
-            <a data-disqus-identifier="2017/05/05/伪随机数/" href="/2017/05/05/伪随机数/#disqus_thread" class="disqus-comment-count"></a>
+            </div><a data-disqus-identifier="2017/05/05/伪随机数/" href="/2017/05/05/伪随机数/#disqus_thread" class="disqus-comment-count"></a>
             <div class="clear">
               <div id="toc" class="toc-article">
                 <div class="toc-title">Contents</div>
                 <ol class="toc">
-                  <li class="toc-item toc-level-2"><a class="toc-link" href="#序"><span class="toc-number">1.</span> <span class="toc-text">
-  序</span></a></li>
-                  <li class="toc-item toc-level-2"><a class="toc-link" href="#产生随机数的方法"><span class="toc-number">2.</span> <span class="toc-text">
-  产生随机数的方法</span></a></li>
-                  <li class="toc-item toc-level-2"><a class="toc-link" href="#线性同余法（LCG-linear-congruential-generator）"><span class="toc-number">3.</span> <span class="toc-text">
-  线性同余法（LCG linear congruential generator）</span></a>
+                  <li class="toc-item toc-level-2"><a class="toc-link" href="#序"><span class="toc-number">1.</span> <span class="toc-text">序</span></a></li>
+                  <li class="toc-item toc-level-2"><a class="toc-link" href="#产生随机数的方法"><span class="toc-number">2.</span> <span class="toc-text">产生随机数的方法</span></a></li>
+                  <li class="toc-item toc-level-2"><a class="toc-link" href="#线性同余法（LCG-linear-congruential-generator）"><span class="toc-number">3.</span> <span class="toc-text">线性同余法（LCG linear congruential generator）</span></a>
                     <ol class="toc-child">
-                      <li class="toc-item toc-level-3"><a class="toc-link" href="#Python-implementation"><span class="toc-number">3.1.</span> <span class="toc-text">
-  Python implementation</span></a></li>
-                      <li class="toc-item toc-level-3"><a class="toc-link" href="#随机数序列周期长度"><span class="toc-number">3.2.</span> <span class="toc-text">
-  随机数序列周期长度</span></a></li>
-                      <li class="toc-item toc-level-3"><a class="toc-link" href="#优点与缺点"><span class="toc-number">3.3.</span> <span class="toc-text">
-  优点与缺点</span></a></li>
+                      <li class="toc-item toc-level-3"><a class="toc-link" href="#Python-implementation"><span class="toc-number">3.1.</span> <span class="toc-text">Python implementation</span></a></li>
+                      <li class="toc-item toc-level-3"><a class="toc-link" href="#随机数序列周期长度"><span class="toc-number">3.2.</span> <span class="toc-text">随机数序列周期长度</span></a></li>
+                      <li class="toc-item toc-level-3"><a class="toc-link" href="#优点与缺点"><span class="toc-number">3.3.</span> <span class="toc-text">优点与缺点</span></a></li>
                     </ol>
                   </li>
-                  <li class="toc-item toc-level-2"><a class="toc-link" href="#非均匀分布随机数的生成"><span class="toc-number">4.</span> <span class="toc-text">
-  非均匀分布随机数的生成</span></a>
+                  <li class="toc-item toc-level-2"><a class="toc-link" href="#非均匀分布随机数的生成"><span class="toc-number">4.</span> <span class="toc-text">非均匀分布随机数的生成</span></a>
                     <ol class="toc-child">
-                      <li class="toc-item toc-level-3"><a class="toc-link" href="#均匀分布"><span class="toc-number">4.1.</span> <span class="toc-text">
-  均匀分布</span></a>
+                      <li class="toc-item toc-level-3"><a class="toc-link" href="#均匀分布"><span class="toc-number">4.1.</span> <span class="toc-text">均匀分布</span></a>
                         <ol class="toc-child">
-                          <li class="toc-item toc-level-4"><a class="toc-link" href="#Python-implementation-1"><span class="toc-number">4.1.1.</span> <span class="toc-text">
-  Python implementation</span></a></li>
-                          <li class="toc-item toc-level-4"><a class="toc-link" href="#概率密度图像"><span class="toc-number">4.1.2.</span> <span class="toc-text">
-  概率密度图像</span></a></li>
+                          <li class="toc-item toc-level-4"><a class="toc-link" href="#Python-implementation-1"><span class="toc-number">4.1.1.</span> <span class="toc-text">Python implementation</span></a></li>
+                          <li class="toc-item toc-level-4"><a class="toc-link" href="#概率密度图像"><span class="toc-number">4.1.2.</span> <span class="toc-text">概率密度图像</span></a></li>
                         </ol>
                       </li>
-                      <li class="toc-item toc-level-3"><a class="toc-link" href="#指数分布"><span class="toc-number">4.2.</span> <span class="toc-text">
-  指数分布</span></a>
+                      <li class="toc-item toc-level-3"><a class="toc-link" href="#指数分布"><span class="toc-number">4.2.</span> <span class="toc-text">指数分布</span></a>
                         <ol class="toc-child">
-                          <li class="toc-item toc-level-4"><a class="toc-link" href="#Python-implementation-2"><span class="toc-number">4.2.1.</span> <span class="toc-text">
-  Python implementation</span></a></li>
-                          <li class="toc-item toc-level-4"><a class="toc-link" href="#概率密度图像-1"><span class="toc-number">4.2.2.</span> <span class="toc-text">
-  概率密度图像</span></a></li>
+                          <li class="toc-item toc-level-4"><a class="toc-link" href="#Python-implementation-2"><span class="toc-number">4.2.1.</span> <span class="toc-text">Python implementation</span></a></li>
+                          <li class="toc-item toc-level-4"><a class="toc-link" href="#概率密度图像-1"><span class="toc-number">4.2.2.</span> <span class="toc-text">概率密度图像</span></a></li>
                         </ol>
                       </li>
-                      <li class="toc-item toc-level-3"><a class="toc-link" href="#正态分布"><span class="toc-number">4.3.</span> <span class="toc-text">
-  正态分布</span></a>
+                      <li class="toc-item toc-level-3"><a class="toc-link" href="#正态分布"><span class="toc-number">4.3.</span> <span class="toc-text">正态分布</span></a>
                         <ol class="toc-child">
-                          <li class="toc-item toc-level-4"><a class="toc-link" href="#Python-implementation-3"><span class="toc-number">4.3.1.</span> <span class="toc-text">
-  Python implementation</span></a></li>
-                          <li class="toc-item toc-level-4"><a class="toc-link" href="#概率密度图像-2"><span class="toc-number">4.3.2.</span> <span class="toc-text">
-  概率密度图像</span></a></li>
+                          <li class="toc-item toc-level-4"><a class="toc-link" href="#Python-implementation-3"><span class="toc-number">4.3.1.</span> <span class="toc-text">Python implementation</span></a></li>
+                          <li class="toc-item toc-level-4"><a class="toc-link" href="#概率密度图像-2"><span class="toc-number">4.3.2.</span> <span class="toc-text">概率密度图像</span></a></li>
                         </ol>
                       </li>
                     </ol>
                   </li>
-                  <li class="toc-item toc-level-2"><a class="toc-link" href="#结论"><span class="toc-number">5.</span> <span class="toc-text">
-  结论</span></a></li>
-                  <li class="toc-item toc-level-2"><a class="toc-link" href="#参考"><span class="toc-number">6.</span> <span class="toc-text">
-  参考</span></a></li>
+                  <li class="toc-item toc-level-2"><a class="toc-link" href="#结论"><span class="toc-number">5.</span> <span class="toc-text">结论</span></a></li>
+                  <li class="toc-item toc-level-2"><a class="toc-link" href="#参考"><span class="toc-number">6.</span> <span class="toc-text">参考</span></a></li>
                 </ol>
               </div>
             </div>
             <div class="post-content">
-              <h2 id="序">
-                <a href="#序" class="headerlink" title="序"></a>序</h2>
+              <h2 id="序"><a href="#序" class="headerlink" title="序"></a>序</h2>
               <blockquote>
                 <p><strong>伪随机性</strong>（英语：Pseudorandomness）是指一个过程似乎是随机的，但实际上并不是。例如<strong>伪随机数</strong>（或称<strong>伪乱数</strong>），是使用一个确定性的算法计算出来的似乎是随机的数序，因此伪随机数实际上并不随机。在计算伪随机数时假如使用的开始值不变的话，那么伪随机数的数序也不变。伪随机数的随机性可以用它的统计特性来衡量，其主要特征是每个数出现的可能性和它出现时与数序中其它数的关系。伪随机数的优点是它的计算比较简单，而且只使用少数数值很难推算出计算它的算法。一般人们使用一个假的随机数，比如电脑上的时间作为计算伪随机数的开始值。</p>
                 <footer><strong>伪随机数</strong><cite><a href="https://zh.wikipedia.org/wiki/%E4%BC%AA%E9%9A%8F%E6%9C%BA%E6%80%A7#firstHeading" target="_blank" rel="external">Wikipedia</a></cite></footer>
               </blockquote>
-              <h2 id="产生随机数的方法">
-                <a href="#产生随机数的方法" class="headerlink" title="产生随机数的方法"></a>产生随机数的方法</h2>
+              <h2 id="产生随机数的方法"><a href="#产生随机数的方法" class="headerlink" title="产生随机数的方法"></a>产生随机数的方法</h2>
               <ul>
                 <li>线性同余法</li>
                 <li>平方取中法</li>
@@ -129,14 +108,12 @@
                 <li>伪随机数二进制数列</li>
               </ul>
               <p>其中使用最多的是<strong>线性同余法</strong>和<strong>梅森旋转算法</strong>，下面主要介绍一下<strong>线性同余法</strong></p>
-              <h2 id="线性同余法（LCG-linear-congruential-generator）">
-                <a href="#线性同余法（LCG-linear-congruential-generator）" class="headerlink" title="线性同余法（LCG linear congruential generator）"></a>线性同余法（LCG linear congruential generator）</h2>
+              <h2 id="线性同余法（LCG-linear-congruential-generator）"><a href="#线性同余法（LCG-linear-congruential-generator）" class="headerlink" title="线性同余法（LCG linear congruential generator）"></a>线性同余法（LCG linear congruential generator）</h2>
               <blockquote>
                 <p><strong>线性同余方法（LCG）</strong>是个产生伪随机数的方法。<br>它是根据递归公式：<br>$$N_{j+1}\equiv (A\times N_{j}+C){\pmod {M}}$$<br>其中$A,C,M$是产生器设定的常数。</p>
                 <footer><strong>线性同余法</strong><cite><a href="https://zh.wikipedia.org/wiki/%E7%B7%9A%E6%80%A7%E5%90%8C%E9%A4%98%E6%96%B9%E6%B3%95#firstHeading" target="_blank" rel="external">Wikipedia</a></cite></footer>
               </blockquote>
-              <h3 id="Python-implementation">
-                <a href="#Python-implementation" class="headerlink" title="Python implementation"></a>Python implementation</h3>
+              <h3 id="Python-implementation"><a href="#Python-implementation" class="headerlink" title="Python implementation"></a>Python implementation</h3>
               <figure class="highlight python">
                 <table>
                   <tr>
@@ -147,8 +124,7 @@
                   </tr>
                 </table>
               </figure>
-              <h3 id="随机数序列周期长度">
-                <a href="#随机数序列周期长度" class="headerlink" title="随机数序列周期长度"></a>随机数序列周期长度</h3>
+              <h3 id="随机数序列周期长度"><a href="#随机数序列周期长度" class="headerlink" title="随机数序列周期长度"></a>随机数序列周期长度</h3>
               <blockquote>
                 <p><img src="/2017/05/05/伪随机数/Linear_congruential_generator_visualisation.svg" alt="LCG-Visualisation" title="LCG-Visualisation"></p>
                 <footer><strong>Linear congruential generator</strong><cite><a href="https://en.wikipedia.org/wiki/Linear_congruential_generator#firstHeading" target="_blank" rel="external">Wikipedia</a></cite></footer>
@@ -161,8 +137,7 @@
                 <li>$A,C,N_{0}$都比 $M$小；</li>
                 <li>$A,C$是正整数。</li>
               </ol>
-              <h3 id="优点与缺点">
-                <a href="#优点与缺点" class="headerlink" title="优点与缺点"></a>优点与缺点</h3>
+              <h3 id="优点与缺点"><a href="#优点与缺点" class="headerlink" title="优点与缺点"></a>优点与缺点</h3>
               <ul>
                 <li><strong>LCG</strong>速度非常快，需要的内存少；</li>
                 <li><strong>LCG</strong>不适用于需要高质量的随机数的应用，例如<strong>蒙特卡罗模拟Monte Carlo simulation</strong>；</li>
@@ -173,16 +148,13 @@
                   </blockquote>
                 </li>
               </ul>
-              <h2 id="非均匀分布随机数的生成">
-                <a href="#非均匀分布随机数的生成" class="headerlink" title="非均匀分布随机数的生成"></a>非均匀分布随机数的生成</h2>
+              <h2 id="非均匀分布随机数的生成"><a href="#非均匀分布随机数的生成" class="headerlink" title="非均匀分布随机数的生成"></a>非均匀分布随机数的生成</h2>
               <p>用线性同余法可产生在$[0,1)$间均匀分布的随机数，利用<strong>反变换法Inverse transform sampling</strong>来产生非均匀分布的随机数。</p>
-              <h3 id="均匀分布">
-                <a href="#均匀分布" class="headerlink" title="均匀分布"></a>均匀分布</h3>
+              <h3 id="均匀分布"><a href="#均匀分布" class="headerlink" title="均匀分布"></a>均匀分布</h3>
               <p>产生一个在$a\le x\le b$随机分布的随机数序列，期望的概率密度是：<br>$$<br>p(x)=<br>\begin{cases}<br>1/(b-a) &amp;,a\le x\le b \\<br>0 &amp;,otherwise<br>\end{cases}<br>$$<br>计算累积分布函数<br>$$<br>F(x)=<br>\begin{cases}<br>0 \qquad &amp;,x\lt a \\<br>\frac{x-a}{b-a} &amp;,a\le
                 x\lt b \\<br>1 &amp;,x\ge b<br>\end{cases}<br>$$<br>计算逆累积分布函数：<br>$$<br>F^{-1}(p)=a+(b-a)p \qquad ,p \in [0, 1]<br>$$</p>
               <p>利用上面的公式我们就可以产生符合均匀分布的随机数。这个过程就叫做<strong>反变换法</strong>。</p>
-              <h4 id="Python-implementation-1">
-                <a href="#Python-implementation-1" class="headerlink" title="Python implementation"></a>Python implementation</h4>
+              <h4 id="Python-implementation-1"><a href="#Python-implementation-1" class="headerlink" title="Python implementation"></a>Python implementation</h4>
               <figure class="highlight python">
                 <table>
                   <tr>
@@ -193,13 +165,10 @@
                   </tr>
                 </table>
               </figure>
-              <h4 id="概率密度图像">
-                <a href="#概率密度图像" class="headerlink" title="概率密度图像"></a>概率密度图像</h4><img src="/2017/05/05/伪随机数/t01.png" alt="Probability density" title="Probability density">
-              <h3 id="指数分布">
-                <a href="#指数分布" class="headerlink" title="指数分布"></a>指数分布</h3>
+              <h4 id="概率密度图像"><a href="#概率密度图像" class="headerlink" title="概率密度图像"></a>概率密度图像</h4><img src="/2017/05/05/伪随机数/t01.png" alt="Probability density" title="Probability density">
+              <h3 id="指数分布"><a href="#指数分布" class="headerlink" title="指数分布"></a>指数分布</h3>
               <p>指数分布的概率密度函数为：<br>$$<br>p(x)=\lambda e^{-\lambda x} ,x\gt 0 \qquad (\lambda \gt 0)<br>$$<br>计算累积分布函数：<br>$$<br>F(x)=1-e^{-\lambda x}<br>$$<br>计算逆累积分布函数：<br>$$<br>F^{-1}(p)=\frac{-ln(1-p)}{\lambda}<br>$$<br>利用上面的公式我们就可以产生符合指数分布的随机数。不过,因为$p$是均匀分布的，则$1-p$也是均匀分布的，所以上式可以简化成下式<br>$$<br>F^{-1}(p)=\frac{-ln(p)}{\lambda}<br>$$</p>
-              <h4 id="Python-implementation-2">
-                <a href="#Python-implementation-2" class="headerlink" title="Python implementation"></a>Python implementation</h4>
+              <h4 id="Python-implementation-2"><a href="#Python-implementation-2" class="headerlink" title="Python implementation"></a>Python implementation</h4>
               <figure class="highlight python">
                 <table>
                   <tr>
@@ -210,10 +179,8 @@
                   </tr>
                 </table>
               </figure>
-              <h4 id="概率密度图像-1">
-                <a href="#概率密度图像-1" class="headerlink" title="概率密度图像"></a>概率密度图像</h4><img src="/2017/05/05/伪随机数/t02.png" alt="Probability density" title="Probability density">
-              <h3 id="正态分布">
-                <a href="#正态分布" class="headerlink" title="正态分布"></a>正态分布</h3>
+              <h4 id="概率密度图像-1"><a href="#概率密度图像-1" class="headerlink" title="概率密度图像"></a>概率密度图像</h4><img src="/2017/05/05/伪随机数/t02.png" alt="Probability density" title="Probability density">
+              <h3 id="正态分布"><a href="#正态分布" class="headerlink" title="正态分布"></a>正态分布</h3>
               <p>正态分布的概率密度函数为<br>$$<br>p(x)=\frac{1}{\sqrt{2\pi\sigma^2}}e^{-\frac{(x-\mu)^2}{2\sigma^2}}<br>$$<br>计算累积分布函数：</p>
               <ul>
                 <li>
@@ -227,8 +194,7 @@
               </ul>
               <p>计算逆累积分布函数：<br>$$<br>F^{-1}(p)=\sqrt{-2\ln(1-p)}<br>$$</p>
               <p>根据<strong>反变换法</strong>，我们可以根据上式得出符合$p(R)$的分布，而如果$p$是均匀分布的，则$u_1=1-p$也是均匀分布的，则：<br>$$<br>X = R\cdot\cos\theta=\sqrt{-2\ln u_1}\cdot\cos (2\pi u_2) \\<br>Y = R\cdot\sin\theta=\sqrt{-2\ln u_1}\cdot\sin (2\pi u_2)<br>$$<br>利用以上任意一式即可生成符合正态分布的随机数，这个过程称作<strong>Box-Muller变换</strong>。</p>
-              <h4 id="Python-implementation-3">
-                <a href="#Python-implementation-3" class="headerlink" title="Python implementation"></a>Python implementation</h4>
+              <h4 id="Python-implementation-3"><a href="#Python-implementation-3" class="headerlink" title="Python implementation"></a>Python implementation</h4>
               <figure class="highlight python">
                 <table>
                   <tr>
@@ -239,13 +205,10 @@
                   </tr>
                 </table>
               </figure>
-              <h4 id="概率密度图像-2">
-                <a href="#概率密度图像-2" class="headerlink" title="概率密度图像"></a>概率密度图像</h4><img src="/2017/05/05/伪随机数/t03.png" alt="Probability density" title="Probability density">
-              <h2 id="结论">
-                <a href="#结论" class="headerlink" title="结论"></a>结论</h2>
+              <h4 id="概率密度图像-2"><a href="#概率密度图像-2" class="headerlink" title="概率密度图像"></a>概率密度图像</h4><img src="/2017/05/05/伪随机数/t03.png" alt="Probability density" title="Probability density">
+              <h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2>
               <p>以上简单的讲了如何用<strong>线性同余法</strong>来生成均匀分布在$[0, 1)$间的随机数，再利用<strong>反变换法</strong>生成非均匀分布的伪随机数，例如<strong>指数分布</strong>,<strong>正态分布</strong>。</p>
-              <h2 id="参考">
-                <a href="#参考" class="headerlink" title="参考"></a>参考</h2>
+              <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2>
               <blockquote class="pullquote">
                 <ul>
                   <li><a href="https://zh.wikipedia.org/wiki/%E4%BC%AA%E9%9A%8F%E6%9C%BA%E6%80%A7" target="_blank" rel="external">伪随机数</a></li>
@@ -256,7 +219,7 @@
                 </ul>
               </blockquote>
             </div>
-            <script type="text/javascript" src="/js/share.js?v=0.0.0" async></script><a data-url="http://linw1995.com/2017/05/05/伪随机数/" data-id="cj7yunaj3000xpcitt98bk322" class="article-share-link">Share</a>
+            <script type="text/javascript" src="/js/share.js?v=0.0.0" async></script><a data-url="http://linw1995.com/2017/05/05/伪随机数/" data-id="cj94wk94z000ue085cmwhcut8" class="article-share-link">Share</a>
             <div class="tags"><a href="/tags/Python/">Python</a></div>
             <div class="post-nav"><a href="/2017/05/11/分享-No-One-But-You-Doug-Paisley/" class="pre">分享 No One But You - Doug Paisley</a><a href="/2017/04/27/AA树的平衡与再平衡/" class="next">AA树的平衡与再平衡</a></div>
             <div id="disqus_thread">
@@ -302,8 +265,7 @@
         <div id="footer">Copyright © 2017 <a href="/." rel="nofollow">linw1995.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow"
             target="_blank" href="https://github.com/pagecho"> Cho.</a></div>
       </div>
-    </div>
-    <a id="rocket" href="#top" class="show"></a>
+    </div><a id="rocket" href="#top" class="show"></a>
     <script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script>
     <script type="text/javascript" src="//cdn.bootcss.com/fancybox/3.0.47/jquery.fancybox.min.js" async></script>
     <script type="text/javascript" src="/js/fancybox.js?v=0.0.0" async></script>

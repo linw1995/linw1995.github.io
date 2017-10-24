@@ -52,56 +52,39 @@
             <h1 class="post-title">蒙特卡洛方法及应用</h1>
             <div class="post-meta">May 21, 2017<span> | </span><span class="category"><a href="/categories/Algorithms/">Algorithms</a></span>
               <script src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js" async></script><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"></span><span> Hits</span></span>
-            </div>
-            <a data-disqus-identifier="2017/05/21/蒙特卡洛方法及应用/" href="/2017/05/21/蒙特卡洛方法及应用/#disqus_thread" class="disqus-comment-count"></a>
+            </div><a data-disqus-identifier="2017/05/21/蒙特卡洛方法及应用/" href="/2017/05/21/蒙特卡洛方法及应用/#disqus_thread" class="disqus-comment-count"></a>
             <div class="clear">
               <div id="toc" class="toc-article">
                 <div class="toc-title">Contents</div>
                 <ol class="toc">
-                  <li class="toc-item toc-level-2"><a class="toc-link" href="#基本思想"><span class="toc-number">1.</span> <span class="toc-text">
-  基本思想</span></a></li>
-                  <li class="toc-item toc-level-2"><a class="toc-link" href="#应用"><span class="toc-number">2.</span> <span class="toc-text">
-  应用</span></a>
+                  <li class="toc-item toc-level-2"><a class="toc-link" href="#基本思想"><span class="toc-number">1.</span> <span class="toc-text">基本思想</span></a></li>
+                  <li class="toc-item toc-level-2"><a class="toc-link" href="#应用"><span class="toc-number">2.</span> <span class="toc-text">应用</span></a>
                     <ol class="toc-child">
-                      <li class="toc-item toc-level-3"><a class="toc-link" href="#求解圆周率"><span class="toc-number">2.1.</span> <span class="toc-text">
-  求解圆周率</span></a></li>
-                      <li class="toc-item toc-level-3"><a class="toc-link" href="#计算定积分"><span class="toc-number">2.2.</span> <span class="toc-text">
-  计算定积分</span></a>
+                      <li class="toc-item toc-level-3"><a class="toc-link" href="#求解圆周率"><span class="toc-number">2.1.</span> <span class="toc-text">求解圆周率</span></a></li>
+                      <li class="toc-item toc-level-3"><a class="toc-link" href="#计算定积分"><span class="toc-number">2.2.</span> <span class="toc-text">计算定积分</span></a>
                         <ol class="toc-child">
-                          <li class="toc-item toc-level-4"><a class="toc-link" href="#偶然命中法"><span class="toc-number">2.2.1.</span> <span class="toc-text">
-  偶然命中法</span></a></li>
-                          <li class="toc-item toc-level-4"><a class="toc-link" href="#抽样平均法"><span class="toc-number">2.2.2.</span> <span class="toc-text">
-  抽样平均法</span></a></li>
-                          <li class="toc-item toc-level-4"><a class="toc-link" href="#计算高维定积分"><span class="toc-number">2.2.3.</span> <span class="toc-text">
-  计算高维定积分</span></a></li>
+                          <li class="toc-item toc-level-4"><a class="toc-link" href="#偶然命中法"><span class="toc-number">2.2.1.</span> <span class="toc-text">偶然命中法</span></a></li>
+                          <li class="toc-item toc-level-4"><a class="toc-link" href="#抽样平均法"><span class="toc-number">2.2.2.</span> <span class="toc-text">抽样平均法</span></a></li>
+                          <li class="toc-item toc-level-4"><a class="toc-link" href="#计算高维定积分"><span class="toc-number">2.2.3.</span> <span class="toc-text">计算高维定积分</span></a></li>
                         </ol>
                       </li>
-                      <li class="toc-item toc-level-3"><a class="toc-link" href="#调制随机数-Metropolis–Hastings算法"><span class="toc-number">2.3.</span> <span class="toc-text">
-  调制随机数(Metropolis–Hastings算法)</span></a>
+                      <li class="toc-item toc-level-3"><a class="toc-link" href="#调制随机数-Metropolis–Hastings算法"><span class="toc-number">2.3.</span> <span class="toc-text">调制随机数(Metropolis–Hastings算法)</span></a>
                         <ol class="toc-child">
-                          <li class="toc-item toc-level-4"><a class="toc-link" href="#马尔可夫链（Markov-Chain）"><span class="toc-number">2.3.1.</span> <span class="toc-text">
-  马尔可夫链（Markov Chain）</span></a></li>
-                          <li class="toc-item toc-level-4"><a class="toc-link" href="#马尔可夫收敛定理（Markov-Convergence-Theore）"><span class="toc-number">2.3.2.</span> <span class="toc-text">
-  马尔可夫收敛定理（Markov Convergence Theore）</span></a></li>
-                          <li class="toc-item toc-level-4"><a class="toc-link" href="#Metropolis-Hastings采样算法"><span class="toc-number">2.3.3.</span> <span class="toc-text">
-  Metropolis-Hastings采样算法</span></a></li>
+                          <li class="toc-item toc-level-4"><a class="toc-link" href="#马尔可夫链（Markov-Chain）"><span class="toc-number">2.3.1.</span> <span class="toc-text">马尔可夫链（Markov Chain）</span></a></li>
+                          <li class="toc-item toc-level-4"><a class="toc-link" href="#马尔可夫收敛定理（Markov-Convergence-Theore）"><span class="toc-number">2.3.2.</span> <span class="toc-text">马尔可夫收敛定理（Markov Convergence Theore）</span></a></li>
+                          <li class="toc-item toc-level-4"><a class="toc-link" href="#Metropolis-Hastings采样算法"><span class="toc-number">2.3.3.</span> <span class="toc-text">Metropolis-Hastings采样算法</span></a></li>
                         </ol>
                       </li>
                     </ol>
                   </li>
-                  <li class="toc-item toc-level-2"><a class="toc-link" href="#误差分析"><span class="toc-number">3.</span> <span class="toc-text">
-  误差分析</span></a>
+                  <li class="toc-item toc-level-2"><a class="toc-link" href="#误差分析"><span class="toc-number">3.</span> <span class="toc-text">误差分析</span></a>
                     <ol class="toc-child">
-                      <li class="toc-item toc-level-3"><a class="toc-link" href="#递归分层抽样（Recursive-stratified-sampling）"><span class="toc-number">3.1.</span> <span class="toc-text">
-  递归分层抽样（Recursive stratified sampling）</span></a></li>
-                      <li class="toc-item toc-level-3"><a class="toc-link" href="#重要抽样法（Importance-sampling）"><span class="toc-number">3.2.</span> <span class="toc-text">
-  重要抽样法（Importance sampling）</span></a></li>
+                      <li class="toc-item toc-level-3"><a class="toc-link" href="#递归分层抽样（Recursive-stratified-sampling）"><span class="toc-number">3.1.</span> <span class="toc-text">递归分层抽样（Recursive stratified sampling）</span></a></li>
+                      <li class="toc-item toc-level-3"><a class="toc-link" href="#重要抽样法（Importance-sampling）"><span class="toc-number">3.2.</span> <span class="toc-text">重要抽样法（Importance sampling）</span></a></li>
                     </ol>
                   </li>
-                  <li class="toc-item toc-level-2"><a class="toc-link" href="#蒙特卡洛方法的其它应用"><span class="toc-number">4.</span> <span class="toc-text">
-  蒙特卡洛方法的其它应用</span></a></li>
-                  <li class="toc-item toc-level-2"><a class="toc-link" href="#参考"><span class="toc-number">5.</span> <span class="toc-text">
-  参考</span></a></li>
+                  <li class="toc-item toc-level-2"><a class="toc-link" href="#蒙特卡洛方法的其它应用"><span class="toc-number">4.</span> <span class="toc-text">蒙特卡洛方法的其它应用</span></a></li>
+                  <li class="toc-item toc-level-2"><a class="toc-link" href="#参考"><span class="toc-number">5.</span> <span class="toc-text">参考</span></a></li>
                 </ol>
               </div>
             </div>
@@ -110,31 +93,24 @@
                 <p>蒙特卡洛方法（英语：Monte Carlo method），也称统计模拟方法，是1940年代中期由于科学技术的发展和电子计算机的发明，而提出的一种以概率统计理论为指导的数值计算方法。是指使用随机数（或更常见的伪随机数）来解决很多计算问题的方法。<br>20世纪40年代，在冯·诺伊曼，斯塔尼斯拉夫·乌拉姆和尼古拉斯·梅特罗波利斯在洛斯阿拉莫斯国家实验室为核武器计划工作时，发明了蒙特卡洛方法。因为乌拉姆的叔叔经常在摩纳哥的蒙特卡洛赌场输钱得名，而蒙特卡罗方法正是以概率为基础的方法。<br>与它对应的是确定性算法。<br>蒙特卡洛方法在金融工程学，宏观经济学，生物医学，计算物理学（如粒子输运计算、量子热力学计算、空气动力学计算）等领域应用广泛。</p>
                 <footer><strong>蒙特卡罗方法</strong><cite><a href="https://zh.wikipedia.org/wiki/%E8%92%99%E5%9C%B0%E5%8D%A1%E7%BE%85%E6%96%B9%E6%B3%95#firstHeading" target="_blank" rel="external">Wikipedia</a></cite></footer>
               </blockquote>
-              <h2 id="基本思想">
-                <a href="#基本思想" class="headerlink" title="基本思想"></a>基本思想</h2>
+              <h2 id="基本思想"><a href="#基本思想" class="headerlink" title="基本思想"></a>基本思想</h2>
               <p>把所求解的问题转换为某种随机分布的特征数，例如随机事件出现的概率，或者随机变量的期望值。通过随机抽样的方法，以随机事件出现的频率估计其概率，或者一抽样的数字特征估算随机变量的数学特征，并将其作为问题的解。</p>
-              <h2 id="应用">
-                <a href="#应用" class="headerlink" title="应用"></a>应用</h2>
-              <h3 id="求解圆周率">
-                <a href="#求解圆周率" class="headerlink" title="求解圆周率"></a>求解圆周率</h3><img src="/2017/05/21/蒙特卡洛方法及应用/pi.gif" alt="圆周率求解" title="圆周率求解">
+              <h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2>
+              <h3 id="求解圆周率"><a href="#求解圆周率" class="headerlink" title="求解圆周率"></a>求解圆周率</h3><img src="/2017/05/21/蒙特卡洛方法及应用/pi.gif" alt="圆周率求解" title="圆周率求解">
               <p>圆形的面积为$A_s=\pi r^2$，正方形的面积为$A_q=(2r)^2$, 则产生一对随机数$(x_i, y_i)$落在圆内的概率为：<br>$$<br>p=\frac{A_s}{A_q}=\frac{\pi r^2}{(2r)^2}=\frac{\pi}{4}<br>$$<br>只要不断产生一对对随机数$(x_i, y_i)$，由于<strong>大数法则（Law of large numbers）</strong>，能以随机事件（落在圆内）出现的频率估计其概率，再求解$\pi$。</p>
               <img src="/2017/05/21/蒙特卡洛方法及应用/pi.png" alt="误差与随机抽样次数的关系" title="误差与随机抽样次数的关系">
               <blockquote>
                 <p>代码<br><a href="https://gist.github.com/linw1995/28d70604f8d430177fd0496ae15eb763" target="_blank" rel="external">Gist | Monte Carlo method applied to approximating the value of π.</a></p>
               </blockquote>
-              <h3 id="计算定积分">
-                <a href="#计算定积分" class="headerlink" title="计算定积分"></a>计算定积分</h3>
+              <h3 id="计算定积分"><a href="#计算定积分" class="headerlink" title="计算定积分"></a>计算定积分</h3>
               <p>假设我们要求解$f(x)=x^2$在$[0, 2]$间的积分，即下图函数曲线与$x$轴围成的面积</p> <img src="/2017/05/21/蒙特卡洛方法及应用/x2.png" alt="$f(x)=x^2$在$[0, 2]$间的积分" title="$f(x)=x^2$在$[0, 2]$间的积分">
               <p>其实，求解圆周率其实是在求函数$f(x)=\sqrt{1 - x^2}$在区间$[0, 1]$上的积分。</p>
-              <h4 id="偶然命中法">
-                <a href="#偶然命中法" class="headerlink" title="偶然命中法"></a>偶然命中法</h4>
+              <h4 id="偶然命中法"><a href="#偶然命中法" class="headerlink" title="偶然命中法"></a>偶然命中法</h4>
               <p>像求解圆周率那样，只要求解出一对随机数$(x_i,y_i),x_i\in[0,2],y_i\in[0,4]$落在曲线下方的概率，即可求出$f(x)=x^2$在$[0, 2]$间的积分结果。<br>$$H(x, y)=\begin{cases}<br>1\qquad&amp;if\quad y \le f(x) \\<br>0 &amp;else<br>\end{cases}\\<br>F_n=A \frac{1}{n} \sum^{n}_{i=1} H(x_i,y_i)
                 = h(b-a) \frac{1}{n}\sum^{n}_{i=1} H(x_i,y_i)<br>$$</p>
-              <h4 id="抽样平均法">
-                <a href="#抽样平均法" class="headerlink" title="抽样平均法"></a>抽样平均法</h4>
+              <h4 id="抽样平均法"><a href="#抽样平均法" class="headerlink" title="抽样平均法"></a>抽样平均法</h4>
               <p>还有另外一种蒙特卡罗积分方法是基于计算的平均值理论，即函数的积分结果取决被积函数$f(x)$在$a\le x\le b$的平均值。为了确定这个平均值，用随机的$x_i$来取代规律的$x_i$，抽样平均值方法的积分估计值$F_n$为：<br>$$<br>F_n=(b-a)\left\lt f\right\gt=\frac{b-a}{n}\sum^n_{i=1}f(x_i)<br>$$</p>
-              <h4 id="计算高维定积分">
-                <a href="#计算高维定积分" class="headerlink" title="计算高维定积分"></a>计算高维定积分</h4>
+              <h4 id="计算高维定积分"><a href="#计算高维定积分" class="headerlink" title="计算高维定积分"></a>计算高维定积分</h4>
               <p>高维定积分的解析解<br>$\displaystyle \quad<br>I = \int_{ \Omega } f(\overline{x}) d\overline{x}<br>$<br>其中$\Omega$，是$\mathbb{ R }^m$的子集，拥有体积<br>$\displaystyle \quad<br>V = \int_{ \Omega } d\overline{x}<br>$<br>一般的MC方式是从$\Omega$的均匀分布中获取长度为$N$的随机数序列<br>$\displaystyle
                 \quad<br>\overline{x_1},\overline{x_2},\cdots,\overline{x_N} \in \Omega<br>$<br>$N$越大，$I$的值就能被越精确地估计出来<br>$\displaystyle \quad<br>I \approx Q_N \equiv V\left\lt f \right\gt = V \frac{1}{N} \sum^N_{i=1} f(\overline{x_i})<br>$<br>由于<strong>大数法则（Law of large numbers）</strong>，则<br>$\displaystyle
                 \quad<br>\lim_{N \to \infty} Q_N = I<br>$</p>
@@ -142,13 +118,11 @@
                 <p>高维定积分可参考<a href="#误差分析">误差分析</a></p>
               </blockquote>
               <p>所以用蒙特卡罗方法计算高维定积分是可行</p>
-              <h3 id="调制随机数-Metropolis–Hastings算法">
-                <a href="#调制随机数-Metropolis–Hastings算法" class="headerlink" title="调制随机数(Metropolis–Hastings算法)"></a>调制随机数(Metropolis–Hastings算法)</h3>
+              <h3 id="调制随机数-Metropolis–Hastings算法"><a href="#调制随机数-Metropolis–Hastings算法" class="headerlink" title="调制随机数(Metropolis–Hastings算法)"></a>调制随机数(Metropolis–Hastings算法)</h3>
               <p>在1953年Nicholas Metropolis, Arianna W. Rosenbluth, Marshall N. Rosenbluth, Augusta H. Teller, 和 Edward Teller提出了产生任意的非均匀分布的另外一个方法。在1970年被 W. K. Hastings 扩展到更普遍的情况，所以该算法被称作<strong>Metropolis–Hastings采样算法</strong>。该算法整个过程形成一个马尔科夫链(MCMC)。</p>
               <p>我们常见的概率分布，无论是连续还是离散的分布，都可以基于均匀分布的样本来生成。无论是正态分布、指数分布等等，都可以用数学变换来得到。可当$p(x)$的形式很复杂，或者$p(x)$是一个高维的分布的时候，就很难生成符合该分布的样本了。<strong>而Metropolis-Hastings采样算法解决了这个问题，给定一个概率分布函数，即可生成符合这一概率分布的样本。</strong></p>
               <p>要想明白<strong>Metropolis–Hastings采样算法</strong>，就想要明白<strong>马尔可夫链（Markov Chain）</strong>及<strong>马尔可夫收敛定理（Markov Convergence Theore）</strong>。</p>
-              <h4 id="马尔可夫链（Markov-Chain）">
-                <a href="#马尔可夫链（Markov-Chain）" class="headerlink" title="马尔可夫链（Markov Chain）"></a>马尔可夫链（Markov Chain）</h4>
+              <h4 id="马尔可夫链（Markov-Chain）"><a href="#马尔可夫链（Markov-Chain）" class="headerlink" title="马尔可夫链（Markov Chain）"></a>马尔可夫链（Markov Chain）</h4>
               <p>先举个简单的例子，马拉松比赛跑者众多，几万人跑步。假设一万个人一起出发，分为三个梯队，第一梯队1k个人，第二2k个人，第三7k个人。<br>这三个梯队间的转移概率如下<br>$$<br>\begin{array}{c|ccc}<br>状态 &amp; 第一梯队 &amp; 第二梯队 &amp; 第三梯队 \\<br>\hline<br>第一梯队 &amp; 0.65 &amp; 0.30 &amp; 0.05 \\<br>第二梯队 &amp; 0.15 &amp; 0.60
                 &amp; 0.25 \\<br>第三梯队 &amp; 0.20 &amp; 0.10 &amp; 0.70<br>\end{array}<br>$$<br>使用矩阵来表示，概率转移矩阵如下：<br>$$<br>P = \begin{bmatrix}<br>0.65 &amp; 0.30 &amp; 0.05 \\<br>0.15 &amp; 0.60 &amp; 0.25 \\<br>0.30 &amp; 0.40 &amp; 0.30 \\<br>\end{bmatrix}<br>$$<br>假如这一刻的梯队分布为$\pi_0=\begin{bmatrix}\pi_0(0)&amp;\pi_0(1)&amp;\pi_0(2)\end{bmatrix}$，那么下一刻的分布矩阵将是$\pi_1=\pi_0P$，下下一刻的分布矩阵将是$\pi_2=\pi_1P=\pi_0P^2$，…，第$n$刻的分布矩阵将是$\pi_n=\pi_0P^n$。</p>
               <p>初始分布矩阵为$\pi_0=\begin{bmatrix}1.00k&amp;2.00k&amp;7.00k\end{bmatrix}$，则可以计算前n刻的分布情况<br>$$<br>\begin{array}{c|ccc}<br>第n刻 &amp; 第一梯队 &amp; 第二梯队 &amp; 第三梯队 \\<br>\hline<br>0 &amp; 1.00k &amp; 2.00k &amp; 7.00k \\<br>1 &amp; 3.05k &amp; 4.30k
@@ -158,8 +132,7 @@
                 &amp; 4.56k &amp; 1.88k \\<br>5 &amp; 3.56k &amp; 4.56k &amp; 1.88k \\<br>6 &amp; 3.56k &amp; 4.55k &amp; 1.88k \\<br>\dots &amp; \dots &amp; \dots &amp; \dots<br>\end{array}<br>$$<br>这次在第6刻就开始稳定不变了，而且两次给定不同的初始分布矩阵，最终都收敛到概率分布$\pi \times
                 10k=\begin{bmatrix}0.356&amp;0.455&amp;0.188\end{bmatrix} \times 10k$, 而且第二次收敛的速度更快，这是为什么呢？这说明收敛的行为和初始分布$\pi_0$无关，而与概率转移矩阵$P$决定的。第二次收敛更快是因为初始分布比第一次更接近收敛后的分布矩阵。<br>$$<br>P^5 = P^6 = \cdots = P^n= \begin{bmatrix}<br>0.356 &amp; 0.455 &amp;
                 0.188 \\<br>0.356 &amp; 0.455 &amp; 0.188 \\<br>0.356 &amp; 0.455 &amp; 0.188 \\<br>\end{bmatrix}<br>$$<br>显而易见，当$n$足够大时，转移矩阵的每一行都会收敛到$\pi=\begin{bmatrix}0.356 &amp; 0.455 &amp; 0.188\end{bmatrix}$。</p>
-              <h4 id="马尔可夫收敛定理（Markov-Convergence-Theore）">
-                <a href="#马尔可夫收敛定理（Markov-Convergence-Theore）" class="headerlink" title="马尔可夫收敛定理（Markov Convergence Theore）"></a>马尔可夫收敛定理（Markov Convergence Theore）</h4>
+              <h4 id="马尔可夫收敛定理（Markov-Convergence-Theore）"><a href="#马尔可夫收敛定理（Markov-Convergence-Theore）" class="headerlink" title="马尔可夫收敛定理（Markov Convergence Theore）"></a>马尔可夫收敛定理（Markov Convergence Theore）</h4>
               <p>如果一个非周期马氏链具有转移概率矩阵$P$，且它的任何两个状态是联通的，那么$\displaystyle \lim_{n\to\infty}P^n_{ij}$存在且与$i$无关，即$\displaystyle \lim_{n\to\infty}P^n_{ij}=\pi(j)$</p>
               <ol>
                 <li>$\displaystyle<br> \lim_{n \rightarrow \infty} P^n =\begin{bmatrix}<br> \pi(0) &amp; \pi(1) &amp; \cdots &amp; \pi(j) &amp; \cdots \\<br> \pi(0) &amp; \pi(1) &amp; \cdots &amp; \pi(j) &amp; \cdots \\<br> \cdots &amp; \cdots &amp; \cdots
@@ -177,8 +150,7 @@
               <p><strong>可以利用MC的平稳分布，来生成符合某些难以生成的概率分布的随机数。</strong>从初始概率分布$\pi_0$出发，每一次在马氏链上做状态转移时，记$X_i$的概率分布为$\pi_i$，则有：<br>$$<br>\begin{align}<br>&amp;X_0\sim\pi_0(x) \\<br>&amp;X_i\sim\pi_i(x), \quad \pi_i(x)=\pi_{i-1}(x)P=\pi_0(x)P^n<br>\end{align}<br>$$<br>由于<strong>马尔可夫收敛定理（Markov Convergence Theore）</strong>，概率分布$\pi_i(x)$将收敛到平稳分布$\pi(x)$。假设到第$n$的时候马氏链收敛，则有：<br>$$<br>\begin{align}<br>X_0
                 &amp; \sim \pi_0(x) \\<br>X_1 &amp; \sim \pi_1(x) \\<br>&amp; \cdots \\<br>X_n &amp; \sim \pi_n(x)=\pi(x) \\<br>X_{n+1} &amp; \sim \pi(x) \\<br>X_{n+2}&amp; \sim \pi(x) \\<br>&amp; \cdots<br>\end{align}<br>$$<br>所以$X_n,X_{n+1},X_{n+2},\cdots
                 \sim \pi(x)$都是同分布的随机变量, 当然他们并不独立。如果我们从一个具体的初始状态$x_0$开始,沿着马氏链按照概率转移矩阵做跳转，那么我们得到一个转移序列$x_0, x_1, x_2, \cdots x_n, x_{n+1}\cdots$，由于马氏链的收敛行为，$x_n, x_{n+1},\cdots$都将是平稳分布$\pi(x)$的样本。</p>
-              <h4 id="Metropolis-Hastings采样算法">
-                <a href="#Metropolis-Hastings采样算法" class="headerlink" title="Metropolis-Hastings采样算法"></a>Metropolis-Hastings采样算法</h4>
+              <h4 id="Metropolis-Hastings采样算法"><a href="#Metropolis-Hastings采样算法" class="headerlink" title="Metropolis-Hastings采样算法"></a>Metropolis-Hastings采样算法</h4>
               <p>结合蒙特卡罗方法，构造概率转移矩阵，使得马尔可夫链的平稳分布恰好符合我们想要的分布$P(x)$。这个方式被称作<strong>马尔科夫蒙特卡洛（MCMC|Markov Chain Monte Carlo）方法</strong>，而<strong>Metropolis-Hastings采样算法</strong>为其中的一种常用的改进算法。</p>
               <p>如果非周期马氏链的转移矩阵$P$和分布$\pi(x)$满足<br>$$<br>\pi(i)P_{ij}=\pi(j)P_{ji},\quad \forall i,\forall j \tag{一}\label{0}<br>$$<br>则$\pi(x)$是马氏链的平稳分布，上式被称为<strong>细致平稳条件(detailed balance condition)</strong>。</p>
               <p>其实这个定理是显而易见的，因为<strong>细致平稳条件</strong>$\eqref{0}$的物理含义就是，对于任何两个状态$i,j$，从$i$转移出去到$j$而丢失的的概率质量，恰好会被从$j$转移回$i$的概率质量补充回来，所以状态$i$上的概率质量$\pi(i)$是稳定的，即$\pi(x)$是马氏链的平稳分布。</p>
@@ -198,8 +170,7 @@
               <blockquote>
                 <p>代码<br><a href="https://gist.github.com/linw1995/b078c9cebd7f01aa7bfb46de8c6a8a04" target="_blank" rel="external">Gist | Metropolis-Hasting Algorithm</a></p>
               </blockquote> <img src="/2017/05/21/蒙特卡洛方法及应用/normal-distribution.png" alt="正态分布" title="正态分布"> <img src="/2017/05/21/蒙特卡洛方法及应用/two-dimemsion-somekind-distribution.png" alt="某种二维分布" title="某种二维分布">
-              <h2 id="误差分析">
-                <a href="#误差分析" class="headerlink" title="误差分析"></a>误差分析</h2>
+              <h2 id="误差分析"><a href="#误差分析" class="headerlink" title="误差分析"></a>误差分析</h2>
               <p>蒙特卡罗方法，只是用随机数来解决很多问题的方法统称。无法提出一个对所有蒙特卡罗方法进行误差分析的方法，只能具体问题具体分析。</p>
               <p>比如用MC方法求解$\pi$的数值，用计算定积分的方式计算，也就是计算函数$f(x)=\sqrt{1 - x^2}$在区间$[0, 1]$上的积分。对于一次实验产生的$10^4$随机数的序列，用抽样平均法$\displaystyle F_N=V \frac{1}{N} \sum ^N _{i=1} f(x_i)=V\left\lt f \right\gt$可得$F_N=3.1489$。与准确结果比较，可以发现，这次试验结果误差大约是$0.0073$。</p>
               <p>当然这只是一次实验的误差，没有什么说服力，若是计算随机数序列整体结果的方差<br>$$<br>\operatorname{Var}(f)=\sigma_N^2 = \left\lt f^2 \right\gt - \left\lt f \right\gt^2 \\<br>其中，\left\lt f \right\gt = \frac{1}{N}\sum^N_{i=1}f(x_i)，\left\lt f^2 \right\gt = \frac{1}{N}\sum^N_{i=1}f^2(x_i)$$<br>那么积分结果的方差为:<br>$$\operatorname{Var}(F)=\sigma^2=
@@ -209,8 +180,7 @@
                 3.4241 \times 10^{-6} &amp; 8.5602 \times 10^{-4} &amp; 3.142984 &amp; 0.001391 \\<br>10^7 &amp; 4.9500 \times 10^{-7} &amp; 3.9133 \times 10^{-4} &amp; 3.141403 &amp; 0.000189 \\<br>10^8 &amp; 5.0821 \times 10^{-8} &amp; 1.2705 \times
                 10^{-4} &amp; 3.141461 &amp; 0.000132 \\<br>10^9 &amp; 5.0482 \times 10^{-9} &amp; 3.9909 \times 10^{-5} &amp; 3.141595 &amp; 0.000002 \\<br>\cdots &amp; \cdots &amp; \cdots &amp; \cdots &amp; \cdots<br>\end{array}<br>$$</p>
               <p>可以很明显地看出，$\sigma$随着$N$的增大而减少。除了一味的增加$N$来降低误差，还有别的什么方法吗？接下来讲的两种方法从一定程度上降低了误差。</p>
-              <h3 id="递归分层抽样（Recursive-stratified-sampling）">
-                <a href="#递归分层抽样（Recursive-stratified-sampling）" class="headerlink" title="递归分层抽样（Recursive stratified sampling）"></a>递归分层抽样（Recursive stratified sampling）</h3>
+              <h3 id="递归分层抽样（Recursive-stratified-sampling）"><a href="#递归分层抽样（Recursive-stratified-sampling）" class="headerlink" title="递归分层抽样（Recursive stratified sampling）"></a>递归分层抽样（Recursive stratified sampling）</h3>
               <p>递归分层抽样过程的是：在每个递归步骤中，使用普通蒙特卡罗算法估计积分和误差。当如果误差估计大于所需精度，则其积分区域被分割为子集，并且把算法重新应用于子集中。<br>分层采样算法将采样点集中在函数方差最大的区域，从而减小大差异，使抽样更有效。该思路最热门的实现是<strong>MISER算法</strong>。</p> <img src="/2017/05/21/蒙特卡洛方法及应用/miser.png" alt="$利用MISER\ Monte\ Carlo求解\pi$"
                 title="$利用MISER\ Monte\ Carlo求解\pi$">
               <p>上图是用<strong>MISER算法</strong>求解$\pi$的采样点分布图。可以看出采样点形成了弧状轮廓。<br>$$<br>H(x, y)=\begin{cases}1, \quad &amp;if\ x^2+y^2 \le 1 \\0, &amp;else \end{cases}\quad x,y\in [0,1) \\<br>F_n=A \frac{1}{n} \sum^{n}_{i=1} H(x_i,y_i) = \frac{1}{n}\sum^{n}_{i=1}
@@ -223,8 +193,7 @@
               <blockquote>
                 <p>代码<br><a href="https://gist.github.com/linw1995/28d70604f8d430177fd0496ae15eb763" target="_blank" rel="external">Gist | Monte Carlo method applied to approximating the value of π.</a></p>
               </blockquote>
-              <h3 id="重要抽样法（Importance-sampling）">
-                <a href="#重要抽样法（Importance-sampling）" class="headerlink" title="重要抽样法（Importance sampling）"></a>重要抽样法（Importance sampling）</h3>
+              <h3 id="重要抽样法（Importance-sampling）"><a href="#重要抽样法（Importance-sampling）" class="headerlink" title="重要抽样法（Importance sampling）"></a>重要抽样法（Importance sampling）</h3>
               <p>重要抽样法是一个能很好地提高蒙特卡罗积分算法精度的方法，即减少方差$\sigma^2$值。<br>做法是，在积分函数中引入一个整函数$p(x)$，则其应满足<br>$$<br>\int^b_{b} p(x)dx = 1<br>$$<br>那么积分函数转变成<br>$$<br>I = \int^a_{b}\left[\frac{f(x)}{p(x)}\right]p(x)dx<br>$$<br>那么积分的估计值$F_n$为<br>$$<br>F_n=\frac{1}{n}\sum^n_{i=1}\frac{f(x_i)}{p(x_i)}<br>$$<br>对于均匀分布的情况$p(x)=\frac{1}{b-a}$<br>$$<br>F_n=\frac{b-a}{n}\sum^n_{i=1}f(x_i)<br>$$<br>这就是一般的蒙特卡罗积分方式，而我们的目的是选择一个$p(x)$使得被积分函数$\frac{f(x)}{p(x)}$的方差最小。<br>比如，我们要求$\displaystyle
                 \int^1_0 e^{-x^2} dx$，比较合理的选择是$p(x)=Ae^{-x}$，其中$A$为归一化常数。</p>
               <p>$$<br>\begin{array}{ccc}<br>p(x)=\frac{1}{b-a}=1 &amp; \quad &amp; p(x)=Ae^{-x}<br>\\<br>\begin{array}{c|cc}<br>n &amp; \sigma &amp; \sigma_N \\<br>\hline<br>10^{1} &amp; 3.6575 \times 10^{-2} &amp; 1.1566 \times 10^{-1} \\<br>10^{2} &amp;
@@ -234,14 +203,12 @@
                 10^{-3} &amp; 2.3577 \times 10^{-2} \\<br>10^{2} &amp; 1.0579 \times 10^{-3} &amp; 1.0579 \times 10^{-2} \\<br>10^{3} &amp; 1.1004 \times 10^{-4} &amp; 3.4796 \times 10^{-3} \\<br>10^{4} &amp; 1.1655 \times 10^{-5} &amp; 1.1655 \times
                 10^{-3} \\<br>10^{5} &amp; 1.4812 \times 10^{-6} &amp; 4.6840 \times 10^{-4} \\<br>10^{6} &amp; 1.6222 \times 10^{-7} &amp; 1.6222 \times 10^{-4} \\<br>10^{7} &amp; 1.7185 \times 10^{-8} &amp; 5.4343 \times 10^{-5} \\<br>10^{8} &amp; 1.9564
                 \times 10^{-9} &amp; 1.9564 \times 10^{-5} \\<br>10^{9} &amp; 9.7523 \times 10^{-10} &amp; 3.0840 \times 10^{-5} \\<br>\cdots &amp; \cdots &amp; \cdots<br>\end{array}<br>\end{array}<br>$$<br>虽然使用非均匀分布$p(x)$加大计算消耗，但提高了精度。在实际使用中要权衡二者，再考虑是否使用。</p>
-              <h2 id="蒙特卡洛方法的其它应用">
-                <a href="#蒙特卡洛方法的其它应用" class="headerlink" title="蒙特卡洛方法的其它应用"></a>蒙特卡洛方法的其它应用</h2>
+              <h2 id="蒙特卡洛方法的其它应用"><a href="#蒙特卡洛方法的其它应用" class="headerlink" title="蒙特卡洛方法的其它应用"></a>蒙特卡洛方法的其它应用</h2>
               <p>最近<strong>柯洁</strong>对战<strong>AlphaGo</strong>输了，人类在围棋上终究输给了机器。有点小难过，可能我是人类吧 :)<br><strong>AlphaGo</strong>的背后就是使用了<strong>蒙特卡洛树搜索（英语：Monte Carlo tree search；简称：MCTS）</strong>和深度学习。蒙特卡洛树搜索也被用于其他棋盘游戏程序，如六贯棋、三宝棋、亚马逊棋和印度斗兽棋；即时电子游戏，如《吃豆小姐》、《神鬼寓言:传奇》、《罗马II：全面战争》；不确定性游戏，如斯卡特、扑克、万智牌、卡坦岛。</p>
               <blockquote>
                 <p>最后用<strong>miser</strong>画了个蝙蝠镖的图，哈哈真好看<br><img src="/2017/05/21/蒙特卡洛方法及应用/batman.png" alt="蝙蝠镖" title="蝙蝠镖"></p>
               </blockquote>
-              <h2 id="参考">
-                <a href="#参考" class="headerlink" title="参考"></a>参考</h2>
+              <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2>
               <blockquote class="pullquote">
                 <ul>
                   <li><a href="https://youtu.be/AyBNnkYrSWY" target="_blank" rel="external">What is Monte Carlo? | YouTube</a></li>
@@ -256,7 +223,7 @@
                 </ul>
               </blockquote>
             </div>
-            <script type="text/javascript" src="/js/share.js?v=0.0.0" async></script><a data-url="http://linw1995.com/2017/05/21/蒙特卡洛方法及应用/" data-id="cj7yunbby003qpcitv028yeg0" class="article-share-link">Share</a>
+            <script type="text/javascript" src="/js/share.js?v=0.0.0" async></script><a data-url="http://linw1995.com/2017/05/21/蒙特卡洛方法及应用/" data-id="cj94wk975002ke08578uv0l82" class="article-share-link">Share</a>
             <div class="tags"><a href="/tags/Python/">Python</a><a href="/tags/Go/">Go</a></div>
             <div class="post-nav"><a href="/2017/06/06/Use-go-to-manipulate-gif/" class="pre">Use go to manipulate gif</a><a href="/2017/05/11/分享-No-One-But-You-Doug-Paisley/" class="next">分享 No One But You - Doug Paisley</a></div>
             <div id="disqus_thread">
@@ -302,8 +269,7 @@
         <div id="footer">Copyright © 2017 <a href="/." rel="nofollow">linw1995.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow"
             target="_blank" href="https://github.com/pagecho"> Cho.</a></div>
       </div>
-    </div>
-    <a id="rocket" href="#top" class="show"></a>
+    </div><a id="rocket" href="#top" class="show"></a>
     <script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script>
     <script type="text/javascript" src="//cdn.bootcss.com/fancybox/3.0.47/jquery.fancybox.min.js" async></script>
     <script type="text/javascript" src="/js/fancybox.js?v=0.0.0" async></script>

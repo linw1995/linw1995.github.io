@@ -52,55 +52,40 @@
             <h1 class="post-title">自己来写压缩算法——哈夫曼算法</h1>
             <div class="post-meta">Sep 24, 2017<span> | </span><span class="category"><a href="/categories/Algorithms/">Algorithms</a></span>
               <script src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js" async></script><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"></span><span> Hits</span></span>
-            </div>
-            <a data-disqus-identifier="2017/09/24/自己来写压缩算法——哈夫曼算法/" href="/2017/09/24/自己来写压缩算法——哈夫曼算法/#disqus_thread" class="disqus-comment-count"></a>
+            </div><a data-disqus-identifier="2017/09/24/自己来写压缩算法——哈夫曼算法/" href="/2017/09/24/自己来写压缩算法——哈夫曼算法/#disqus_thread" class="disqus-comment-count"></a>
             <div class="clear">
               <div id="toc" class="toc-article">
                 <div class="toc-title">Contents</div>
                 <ol class="toc">
-                  <li class="toc-item toc-level-2"><a class="toc-link" href="#哈夫曼算法"><span class="toc-number">1.</span> <span class="toc-text">
-  哈夫曼算法</span></a>
+                  <li class="toc-item toc-level-2"><a class="toc-link" href="#哈夫曼算法"><span class="toc-number">1.</span> <span class="toc-text">哈夫曼算法</span></a>
                     <ol class="toc-child">
-                      <li class="toc-item toc-level-3"><a class="toc-link" href="#哈夫曼树"><span class="toc-number">1.1.</span> <span class="toc-text">
-  哈夫曼树</span></a></li>
-                      <li class="toc-item toc-level-3"><a class="toc-link" href="#哈夫曼编码"><span class="toc-number">1.2.</span> <span class="toc-text">
-  哈夫曼编码</span></a></li>
-                      <li class="toc-item toc-level-3"><a class="toc-link" href="#哈夫曼编码MIT-LICENCE文件结果"><span class="toc-number">1.3.</span> <span class="toc-text">
-  哈夫曼编码MIT-LICENCE文件结果</span></a></li>
+                      <li class="toc-item toc-level-3"><a class="toc-link" href="#哈夫曼树"><span class="toc-number">1.1.</span> <span class="toc-text">哈夫曼树</span></a></li>
+                      <li class="toc-item toc-level-3"><a class="toc-link" href="#哈夫曼编码"><span class="toc-number">1.2.</span> <span class="toc-text">哈夫曼编码</span></a></li>
+                      <li class="toc-item toc-level-3"><a class="toc-link" href="#哈夫曼编码MIT-LICENCE文件结果"><span class="toc-number">1.3.</span> <span class="toc-text">哈夫曼编码MIT-LICENCE文件结果</span></a></li>
                     </ol>
                   </li>
-                  <li class="toc-item toc-level-2"><a class="toc-link" href="#压缩实现"><span class="toc-number">2.</span> <span class="toc-text">
-  压缩实现</span></a>
+                  <li class="toc-item toc-level-2"><a class="toc-link" href="#压缩实现"><span class="toc-number">2.</span> <span class="toc-text">压缩实现</span></a>
                     <ol class="toc-child">
-                      <li class="toc-item toc-level-3"><a class="toc-link" href="#压缩"><span class="toc-number">2.1.</span> <span class="toc-text">
-  压缩</span></a></li>
-                      <li class="toc-item toc-level-3"><a class="toc-link" href="#解压"><span class="toc-number">2.2.</span> <span class="toc-text">
-  解压</span></a></li>
-                      <li class="toc-item toc-level-3"><a class="toc-link" href="#尾部处理"><span class="toc-number">2.3.</span> <span class="toc-text">
-  尾部处理</span></a></li>
-                      <li class="toc-item toc-level-3"><a class="toc-link" href="#存储字节统计结果"><span class="toc-number">2.4.</span> <span class="toc-text">
-  存储字节统计结果</span></a></li>
-                      <li class="toc-item toc-level-3"><a class="toc-link" href="#测试"><span class="toc-number">2.5.</span> <span class="toc-text">
-  测试</span></a></li>
-                      <li class="toc-item toc-level-3"><a class="toc-link" href="#代码"><span class="toc-number">2.6.</span> <span class="toc-text">
-  代码</span></a></li>
+                      <li class="toc-item toc-level-3"><a class="toc-link" href="#压缩"><span class="toc-number">2.1.</span> <span class="toc-text">压缩</span></a></li>
+                      <li class="toc-item toc-level-3"><a class="toc-link" href="#解压"><span class="toc-number">2.2.</span> <span class="toc-text">解压</span></a></li>
+                      <li class="toc-item toc-level-3"><a class="toc-link" href="#尾部处理"><span class="toc-number">2.3.</span> <span class="toc-text">尾部处理</span></a></li>
+                      <li class="toc-item toc-level-3"><a class="toc-link" href="#存储字节统计结果"><span class="toc-number">2.4.</span> <span class="toc-text">存储字节统计结果</span></a></li>
+                      <li class="toc-item toc-level-3"><a class="toc-link" href="#测试"><span class="toc-number">2.5.</span> <span class="toc-text">测试</span></a></li>
+                      <li class="toc-item toc-level-3"><a class="toc-link" href="#代码"><span class="toc-number">2.6.</span> <span class="toc-text">代码</span></a></li>
                     </ol>
                   </li>
-                  <li class="toc-item toc-level-2"><a class="toc-link" href="#参考"><span class="toc-number">3.</span> <span class="toc-text">
-  参考</span></a></li>
+                  <li class="toc-item toc-level-2"><a class="toc-link" href="#参考"><span class="toc-number">3.</span> <span class="toc-text">参考</span></a></li>
                 </ol>
               </div>
             </div>
             <div class="post-content">
               <p>一般文件的编码都是等长的，一些常用字符的编码与很少用到的等长，可若是编码是变长的呢？无疑可以使整个文件大小减小。为了解码时不遇到任何歧义的问题，则<strong>每个有效字符所代表的变长编码不能是其它字符的前缀</strong>，这种编码也叫做<strong>前缀编码</strong>。而如何做到这一点呢，接下的内容会尽可能地讲明白。</p>
-              <h2 id="哈夫曼算法">
-                <a href="#哈夫曼算法" class="headerlink" title="哈夫曼算法"></a>哈夫曼算法</h2>
+              <h2 id="哈夫曼算法"><a href="#哈夫曼算法" class="headerlink" title="哈夫曼算法"></a>哈夫曼算法</h2>
               <p>若是把等长的编码(一字节)用平衡二叉树来表示，字符共有256个，那么树的深度就有 $\log_{2}{256}=8$ 。</p>
               <p>如果变作变长编码，那么所有有儿子（child）的节点（node）都不能用来表示，唯有子叶（leaf，没有儿子的节点）才可以用来表示。这是因为<strong>每个有效字符所代表的变长编码不能是其它字符的前缀</strong>。而且树结构也不可能是平衡二叉树了，树的深度肯定会大于8。</p>
               <p>例如，有一份<a href="/2017/09/24/自己来写压缩算法——哈夫曼算法/MIT.txt" title="MIT-LICENCE">MIT-LICENCE</a>文件，其中空格<code>&#39;</code>&nbsp;<code>&#39;</code>有163个，而字母<code>&#39;</code>v<code>&#39;</code>却只有一个。那么让<code>&#39;</code>&nbsp;<code>&#39;</code>表示为<code>110</code>,<code>&#39;</code>v<code>&#39;</code>表示为<code>0111011101</code>，那么得省$(8
                 - 3) \times 163 - (8 - 10) \times 1 = 817$个bit。可见变长编码确确实实能起到压缩的作用。</p>
-              <h3 id="哈夫曼树">
-                <a href="#哈夫曼树" class="headerlink" title="哈夫曼树"></a>哈夫曼树</h3>
+              <h3 id="哈夫曼树"><a href="#哈夫曼树" class="headerlink" title="哈夫曼树"></a>哈夫曼树</h3>
               <p><strong>哈夫曼树Huffman Tree</strong>，也叫做<strong>最优二叉树</strong>，是一种带权路径长度最短的二叉树。所谓树的带权路径长度，就是树中所有的叶结点的权值乘上其到根结点的路径长度（若根结点为$0$层，叶结点到根结点的路径长度为叶结点的层数）。树的路径长度是从树根到每一结点的路径长度之和，记为$\operatorname{WPL}=(W_1 \times L_<br>1+W_2 \times L_2+W_3 \times L_3+…+W_n
                 \times L_n)$，$N$个权值$W_i(i=1,2,…n)$构成一棵有$N$个叶结点的二叉树，相应的叶结点的路径长度为$L_i(i=1,2,…n)$。可以证明霍夫曼树的$\operatorname{WPL}$是最小的。</p>
               <figure class="highlight plain">
@@ -133,8 +118,7 @@
                   </tr>
                 </table>
               </figure>
-              <h3 id="哈夫曼编码">
-                <a href="#哈夫曼编码" class="headerlink" title="哈夫曼编码"></a>哈夫曼编码</h3>
+              <h3 id="哈夫曼编码"><a href="#哈夫曼编码" class="headerlink" title="哈夫曼编码"></a>哈夫曼编码</h3>
               <p>从根结点开始，左子树为<code>&#39;0&#39;</code>,右子树为<code>&#39;1&#39;</code>，累积到子叶得到的编码就是哈夫曼编码。</p>
               <figure class="highlight plain">
                 <table>
@@ -146,8 +130,7 @@
                   </tr>
                 </table>
               </figure>
-              <h3 id="哈夫曼编码MIT-LICENCE文件结果">
-                <a href="#哈夫曼编码MIT-LICENCE文件结果" class="headerlink" title="哈夫曼编码MIT-LICENCE文件结果"></a>哈夫曼编码MIT-LICENCE文件结果</h3>
+              <h3 id="哈夫曼编码MIT-LICENCE文件结果"><a href="#哈夫曼编码MIT-LICENCE文件结果" class="headerlink" title="哈夫曼编码MIT-LICENCE文件结果"></a>哈夫曼编码MIT-LICENCE文件结果</h3>
               <figure class="highlight plain">
                 <table>
                   <tr>
@@ -168,11 +151,9 @@
                   </tr>
                 </table>
               </figure>
-              <h2 id="压缩实现">
-                <a href="#压缩实现" class="headerlink" title="压缩实现"></a>压缩实现</h2>
+              <h2 id="压缩实现"><a href="#压缩实现" class="headerlink" title="压缩实现"></a>压缩实现</h2>
               <p>知道了如何编码，那怎么应用到压缩上去呢？</p>
-              <h3 id="压缩">
-                <a href="#压缩" class="headerlink" title="压缩"></a>压缩</h3>
+              <h3 id="压缩"><a href="#压缩" class="headerlink" title="压缩"></a>压缩</h3>
               <ol>
                 <li>把文件分割成一个个字节，统计各个字节（总共256个）的数量</li>
                 <li>根据统计出来的权重，来构造哈夫曼树，得出哈夫曼编码</li>
@@ -225,8 +206,7 @@
                 </table>
               </figure>
               <p>这么短短的一段，从5字节压缩成3.6+字节大小</p>
-              <h3 id="解压">
-                <a href="#解压" class="headerlink" title="解压"></a>解压</h3>
+              <h3 id="解压"><a href="#解压" class="headerlink" title="解压"></a>解压</h3>
               <ol>
                 <li>读取压缩文件中的统计结果，构造哈夫曼树</li>
                 <li>一比特一比特的用哈夫曼树索引，得到原本的字节，再保存到新文件中</li>
@@ -275,8 +255,7 @@
                   </tr>
                 </table>
               </figure>
-              <h3 id="尾部处理">
-                <a href="#尾部处理" class="headerlink" title="尾部处理"></a>尾部处理</h3>
+              <h3 id="尾部处理"><a href="#尾部处理" class="headerlink" title="尾部处理"></a>尾部处理</h3>
               <p>若结尾出现以下情况</p>
               <ol>
                 <li>
@@ -317,8 +296,7 @@
                   </tr>
                 </table>
               </figure>
-              <h3 id="存储字节统计结果">
-                <a href="#存储字节统计结果" class="headerlink" title="存储字节统计结果"></a>存储字节统计结果</h3>
+              <h3 id="存储字节统计结果"><a href="#存储字节统计结果" class="headerlink" title="存储字节统计结果"></a>存储字节统计结果</h3>
               <p>字符（一字节）字节，字符以一字节来存，最多有256个字符。<br>还要存储出现次数的字节长度，用来读取。</p>
               <figure class="highlight plain">
                 <table>
@@ -330,8 +308,7 @@
                   </tr>
                 </table>
               </figure>
-              <h3 id="测试">
-                <a href="#测试" class="headerlink" title="测试"></a>测试</h3>
+              <h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3>
               <p>拿<a href="/2017/09/24/自己来写压缩算法——哈夫曼算法/MIT.txt" title="MIT-LICENCE">MIT-LICENCE</a>文件来测试：</p>
               <figure class="highlight plain">
                 <table>
@@ -343,12 +320,10 @@
                   </tr>
                 </table>
               </figure>
-              <h3 id="代码">
-                <a href="#代码" class="headerlink" title="代码"></a>代码</h3>
+              <h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3>
               <script src="https://gist.github.com/linw1995/7e49f6d05276538d8675874c585ece5d.js"></script>
               <p>GIST: <a href="https://gist.github.com/linw1995/7e49f6d05276538d8675874c585ece5d" target="_blank" rel="external">Huffman Encoding and Data Compression | linw1995</a></p>
-              <h2 id="参考">
-                <a href="#参考" class="headerlink" title="参考"></a>参考</h2>
+              <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2>
               <blockquote class="pullquote">
                 <ul>
                   <li><a href="https://zh.wikipedia.org/wiki/%E9%9C%8D%E5%A4%AB%E6%9B%BC%E7%BC%96%E7%A0%81" target="_blank" rel="external">霍夫曼编码 | Wikipedia</a></li>
@@ -356,9 +331,9 @@
                 </ul>
               </blockquote>
             </div>
-            <script type="text/javascript" src="/js/share.js?v=0.0.0" async></script><a data-url="http://linw1995.com/2017/09/24/自己来写压缩算法——哈夫曼算法/" data-id="cj7yunakf0020pcitroxz4smr" class="article-share-link">Share</a>
+            <script type="text/javascript" src="/js/share.js?v=0.0.0" async></script><a data-url="http://linw1995.com/2017/09/24/自己来写压缩算法——哈夫曼算法/" data-id="cj94wk971002ge085hj0ssdxp" class="article-share-link">Share</a>
             <div class="tags"><a href="/tags/Python/">Python</a></div>
-            <div class="post-nav"><a href="/2017/08/07/Windows上程序员神器——Cmder/" class="next">Windows上程序员神器——Cmder</a></div>
+            <div class="post-nav"><a href="/2017/10/24/自己来写压缩算法——LZW/" class="pre">自己来写压缩算法——LZW</a><a href="/2017/08/07/Windows上程序员神器——Cmder/" class="next">Windows上程序员神器——Cmder</a></div>
             <div id="disqus_thread">
               <div class="btn_click_load"><button class="disqus_click_btn">阅读评论 「请确保 disqus.com 可以正常加载」</button></div>
               <script>
@@ -402,8 +377,7 @@
         <div id="footer">Copyright © 2017 <a href="/." rel="nofollow">linw1995.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow"
             target="_blank" href="https://github.com/pagecho"> Cho.</a></div>
       </div>
-    </div>
-    <a id="rocket" href="#top" class="show"></a>
+    </div><a id="rocket" href="#top" class="show"></a>
     <script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script>
     <script type="text/javascript" src="//cdn.bootcss.com/fancybox/3.0.47/jquery.fancybox.min.js" async></script>
     <script type="text/javascript" src="/js/fancybox.js?v=0.0.0" async></script>

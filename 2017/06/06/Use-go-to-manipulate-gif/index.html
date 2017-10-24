@@ -52,32 +52,23 @@
             <h1 class="post-title">Use go to manipulate gif</h1>
             <div class="post-meta">Jun 6, 2017<span> | </span><span class="category"><a href="/categories/Go/">Go</a></span>
               <script src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js" async></script><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"></span><span> Hits</span></span>
-            </div>
-            <a data-disqus-identifier="2017/06/06/Use-go-to-manipulate-gif/" href="/2017/06/06/Use-go-to-manipulate-gif/#disqus_thread" class="disqus-comment-count"></a>
+            </div><a data-disqus-identifier="2017/06/06/Use-go-to-manipulate-gif/" href="/2017/06/06/Use-go-to-manipulate-gif/#disqus_thread" class="disqus-comment-count"></a>
             <div class="clear">
               <div id="toc" class="toc-article">
                 <div class="toc-title">Contents</div>
                 <ol class="toc">
-                  <li class="toc-item toc-level-2"><a class="toc-link" href="#简单介绍下image-gif包"><span class="toc-number">1.</span> <span class="toc-text">
-  简单介绍下image/gif包</span></a></li>
-                  <li class="toc-item toc-level-2"><a class="toc-link" href="#实例"><span class="toc-number">2.</span> <span class="toc-text">
-  实例</span></a></li>
-                  <li class="toc-item toc-level-2"><a class="toc-link" href="#多张图片合成GIF"><span class="toc-number">3.</span> <span class="toc-text">
-  多张图片合成GIF</span></a></li>
-                  <li class="toc-item toc-level-2"><a class="toc-link" href="#GIF拆分成一张张图片"><span class="toc-number">4.</span> <span class="toc-text">
-  GIF拆分成一张张图片</span></a></li>
-                  <li class="toc-item toc-level-2"><a class="toc-link" href="#代码解析"><span class="toc-number">5.</span> <span class="toc-text">
-  代码解析</span></a></li>
-                  <li class="toc-item toc-level-2"><a class="toc-link" href="#Gallery"><span class="toc-number">6.</span> <span class="toc-text">
-  Gallery</span></a></li>
-                  <li class="toc-item toc-level-2"><a class="toc-link" href="#参考"><span class="toc-number">7.</span> <span class="toc-text">
-  参考</span></a></li>
+                  <li class="toc-item toc-level-2"><a class="toc-link" href="#简单介绍下image-gif包"><span class="toc-number">1.</span> <span class="toc-text">简单介绍下image/gif包</span></a></li>
+                  <li class="toc-item toc-level-2"><a class="toc-link" href="#实例"><span class="toc-number">2.</span> <span class="toc-text">实例</span></a></li>
+                  <li class="toc-item toc-level-2"><a class="toc-link" href="#多张图片合成GIF"><span class="toc-number">3.</span> <span class="toc-text">多张图片合成GIF</span></a></li>
+                  <li class="toc-item toc-level-2"><a class="toc-link" href="#GIF拆分成一张张图片"><span class="toc-number">4.</span> <span class="toc-text">GIF拆分成一张张图片</span></a></li>
+                  <li class="toc-item toc-level-2"><a class="toc-link" href="#代码解析"><span class="toc-number">5.</span> <span class="toc-text">代码解析</span></a></li>
+                  <li class="toc-item toc-level-2"><a class="toc-link" href="#Gallery"><span class="toc-number">6.</span> <span class="toc-text">Gallery</span></a></li>
+                  <li class="toc-item toc-level-2"><a class="toc-link" href="#参考"><span class="toc-number">7.</span> <span class="toc-text">参考</span></a></li>
                 </ol>
               </div>
             </div>
             <div class="post-content">
-              <h2 id="简单介绍下image-gif包">
-                <a href="#简单介绍下image-gif包" class="headerlink" title="简单介绍下image/gif包"></a>简单介绍下image/gif包</h2>
+              <h2 id="简单介绍下image-gif包"><a href="#简单介绍下image-gif包" class="headerlink" title="简单介绍下image/gif包"></a>简单介绍下image/gif包</h2>
               <figure class="highlight go">
                 <table>
                   <tr>
@@ -93,8 +84,7 @@
                 <li><code>func DecodeConfig(r io.Reader) (image.Config, error)</code> DecodeConfig从r中读取出GIF图像的全局颜色模型和尺寸，无需解码整个图像</li>
                 <li><code>func EncodeAll(w io.Writer, g *GIF) error</code> EncodeAll把GIF图像写入w中</li>
               </ul>
-              <h2 id="实例">
-                <a href="#实例" class="headerlink" title="实例"></a>实例</h2><img src="/2017/06/06/Use-go-to-manipulate-gif/rgb.gif" alt="rgb" title="rgb">
+              <h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><img src="/2017/06/06/Use-go-to-manipulate-gif/rgb.gif" alt="rgb" title="rgb">
               <figure class="highlight go">
                 <table>
                   <tr>
@@ -106,8 +96,7 @@
                 </table>
               </figure>
               <blockquote> <a href="https://gist.github.com/linw1995/820b05ac3fbab34937635d30a61740fb#file-rgb-go" target="_blank" rel="external">rgb.go | Gist</a> </blockquote>
-              <h2 id="多张图片合成GIF">
-                <a href="#多张图片合成GIF" class="headerlink" title="多张图片合成GIF"></a>多张图片合成GIF</h2>
+              <h2 id="多张图片合成GIF"><a href="#多张图片合成GIF" class="headerlink" title="多张图片合成GIF"></a>多张图片合成GIF</h2>
               <p>若是我们要把多张图片(png, jpeg)转变成<strong>GIF</strong>, 该怎么做呢</p> <img src="/2017/06/06/Use-go-to-manipulate-gif/inputs.png" alt="Inputs" title="Inputs">
               <p>比如把以上图片做成动图</p> <img src="/2017/06/06/Use-go-to-manipulate-gif/scriptK.gif" alt="Output" title="Output">
               <figure class="highlight go">
@@ -121,8 +110,7 @@
                 </table>
               </figure>
               <blockquote> <a href="https://gist.github.com/linw1995/820b05ac3fbab34937635d30a61740fb#file-img2gif-go" target="_blank" rel="external">img2gif.go | Gist</a> </blockquote>
-              <h2 id="GIF拆分成一张张图片">
-                <a href="#GIF拆分成一张张图片" class="headerlink" title="GIF拆分成一张张图片"></a>GIF拆分成一张张图片</h2>
+              <h2 id="GIF拆分成一张张图片"><a href="#GIF拆分成一张张图片" class="headerlink" title="GIF拆分成一张张图片"></a>GIF拆分成一张张图片</h2>
               <figure class="highlight go">
                 <table>
                   <tr>
@@ -134,25 +122,22 @@
                 </table>
               </figure>
               <blockquote> <a href="https://gist.github.com/linw1995/820b05ac3fbab34937635d30a61740fb#file-gif2png-go" target="_blank" rel="external">gif2png.go | Gist</a> </blockquote>
-              <h2 id="代码解析">
-                <a href="#代码解析" class="headerlink" title="代码解析"></a>代码解析</h2>
+              <h2 id="代码解析"><a href="#代码解析" class="headerlink" title="代码解析"></a>代码解析</h2>
               <ul>
                 <li><code>func Draw(dst Image, r image.Rectangle, src image.Image, sp image.Point, op Op)</code><br>是<code>&quot;image/draw&quot;</code>包中的一个函数，作用是把scr图以sp点起点开始的区域，根据op修改后，覆盖到dst图的r区域上。<br>在以上的代码中作用是图像格式转换，GIF拆分子图。</li>
                 <li><code>draw.Src</code> 是<code>&quot;image/draw&quot;</code>包中的一个常量，代表操作：源图像透过遮罩后，替换掉目标图像。<br><code>draw.Over</code> 代表操作：源图像透过遮罩后，覆盖在目标图像上（类似图层）。</li>
                 <li><code>image.ZP</code> 为<code>&quot;image&quot;</code>包中的一个常量，代表图片原点位置</li>
               </ul>
-              <h2 id="Gallery">
-                <a href="#Gallery" class="headerlink" title="Gallery"></a>Gallery</h2>
+              <h2 id="Gallery"><a href="#Gallery" class="headerlink" title="Gallery"></a>Gallery</h2>
               <p>无聊时随便搞得几个动图</p> <img src="/2017/06/06/Use-go-to-manipulate-gif/AnimationExample01.gif" alt="&nbsp;" title="&nbsp;"> <img src="/2017/06/06/Use-go-to-manipulate-gif/AnimationExample02.gif" alt="&nbsp;" title="&nbsp;">
-              <h2 id="参考">
-                <a href="#参考" class="headerlink" title="参考"></a>参考</h2>
+              <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2>
               <blockquote class="pullquote">
                 <ul>
                   <li><a href="https://blog.golang.org/go-imagedraw-package" target="_blank" rel="external">The Go image/draw package | The Go Blog</a></li>
                 </ul>
               </blockquote>
             </div>
-            <script type="text/javascript" src="/js/share.js?v=0.0.0" async></script><a data-url="http://linw1995.com/2017/06/06/Use-go-to-manipulate-gif/" data-id="cj7yunaij000epcit0zq987rj" class="article-share-link">Share</a>
+            <script type="text/javascript" src="/js/share.js?v=0.0.0" async></script><a data-url="http://linw1995.com/2017/06/06/Use-go-to-manipulate-gif/" data-id="cj94wk94m000je085narvkdc1" class="article-share-link">Share</a>
             <div class="tags"><a href="/tags/Go/">Go</a></div>
             <div class="post-nav"><a href="/2017/06/16/iOS字体安装和使用/" class="pre">iOS字体安装和使用</a><a href="/2017/05/21/蒙特卡洛方法及应用/" class="next">蒙特卡洛方法及应用</a></div>
             <div id="disqus_thread">
@@ -198,8 +183,7 @@
         <div id="footer">Copyright © 2017 <a href="/." rel="nofollow">linw1995.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow"
             target="_blank" href="https://github.com/pagecho"> Cho.</a></div>
       </div>
-    </div>
-    <a id="rocket" href="#top" class="show"></a>
+    </div><a id="rocket" href="#top" class="show"></a>
     <script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script>
     <script type="text/javascript" src="//cdn.bootcss.com/fancybox/3.0.47/jquery.fancybox.min.js" async></script>
     <script type="text/javascript" src="/js/fancybox.js?v=0.0.0" async></script>

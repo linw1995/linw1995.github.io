@@ -52,45 +52,34 @@
             <h1 class="post-title">折腾VSCode记 一 · Python Traceback Jumper</h1>
             <div class="post-meta">Apr 9, 2017<span> | </span><span class="category"><a href="/categories/Others/">Others</a></span>
               <script src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js" async></script><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"></span><span> Hits</span></span>
-            </div>
-            <a data-disqus-identifier="2017/04/09/折腾VSCode记-一-·-Python-Traceback-Jumper/" href="/2017/04/09/折腾VSCode记-一-·-Python-Traceback-Jumper/#disqus_thread" class="disqus-comment-count"></a>
+            </div><a data-disqus-identifier="2017/04/09/折腾VSCode记-一-·-Python-Traceback-Jumper/" href="/2017/04/09/折腾VSCode记-一-·-Python-Traceback-Jumper/#disqus_thread" class="disqus-comment-count"></a>
             <div class="clear">
               <div id="toc" class="toc-article">
                 <div class="toc-title">Contents</div>
                 <ol class="toc">
-                  <li class="toc-item toc-level-2"><a class="toc-link" href="#更新-2017年8月4日"><span class="toc-number">1.</span> <span class="toc-text">
-  更新 2017年8月4日</span></a>
+                  <li class="toc-item toc-level-2"><a class="toc-link" href="#更新-2017年8月4日"><span class="toc-number">1.</span> <span class="toc-text">更新 2017年8月4日</span></a>
                     <ol class="toc-child">
-                      <li class="toc-item toc-level-3"><a class="toc-link" href="#配置"><span class="toc-number">1.1.</span> <span class="toc-text">
-  配置</span></a></li>
+                      <li class="toc-item toc-level-3"><a class="toc-link" href="#配置"><span class="toc-number">1.1.</span> <span class="toc-text">配置</span></a></li>
                     </ol>
                   </li>
-                  <li class="toc-item toc-level-2"><a class="toc-link" href="#项目传送门"><span class="toc-number">2.</span> <span class="toc-text">
-  项目传送门</span></a></li>
-                  <li class="toc-item toc-level-2"><a class="toc-link" href="#如何使用"><span class="toc-number">3.</span> <span class="toc-text">
-  如何使用</span></a>
+                  <li class="toc-item toc-level-2"><a class="toc-link" href="#项目传送门"><span class="toc-number">2.</span> <span class="toc-text">项目传送门</span></a></li>
+                  <li class="toc-item toc-level-2"><a class="toc-link" href="#如何使用"><span class="toc-number">3.</span> <span class="toc-text">如何使用</span></a>
                     <ol class="toc-child">
-                      <li class="toc-item toc-level-3"><a class="toc-link" href="#安装"><span class="toc-number">3.1.</span> <span class="toc-text">
-  安装</span></a></li>
-                      <li class="toc-item toc-level-3"><a class="toc-link" href="#配置-1"><span class="toc-number">3.2.</span> <span class="toc-text">
-  配置</span></a></li>
+                      <li class="toc-item toc-level-3"><a class="toc-link" href="#安装"><span class="toc-number">3.1.</span> <span class="toc-text">安装</span></a></li>
+                      <li class="toc-item toc-level-3"><a class="toc-link" href="#配置-1"><span class="toc-number">3.2.</span> <span class="toc-text">配置</span></a></li>
                     </ol>
                   </li>
-                  <li class="toc-item toc-level-2"><a class="toc-link" href="#吐槽"><span class="toc-number">4.</span> <span class="toc-text">
-  吐槽</span></a></li>
+                  <li class="toc-item toc-level-2"><a class="toc-link" href="#吐槽"><span class="toc-number">4.</span> <span class="toc-text">吐槽</span></a></li>
                 </ol>
               </div>
             </div>
             <div class="post-content">
               <p>因为<strong>Pycharm</strong>到期了，就开始折腾<strong>VSCode</strong>。<br>使用中，写一些<strong>Python</strong>代码时，觉得缺少一个功能 <strong>Traceback点击跳转</strong>。<br>所以就花了一整天翻看<strong>VSCode</strong>官方文档，写了个插件<br><img src="/2017/04/09/折腾VSCode记-一-·-Python-Traceback-Jumper/icon.png"
-                  alt="python traceback jumper" title="python traceback jumper"></p>
-              <a id="more"></a>
+                  alt="python traceback jumper" title="python traceback jumper"></p> <a id="more"></a>
               <p>从三月18号发布，截止到今天四月9号，下载量已经<strong>1K</strong>了。<br>写之前也没想很多，觉得不需要写很多代码，也不知道要用<strong>TypeScript</strong>写，也不会 = =。<br>翻了一遍官方文档，看了下<strong>VSCode</strong>部分源码，相关的<strong>Github issue</strong>，凭着一腔热血给做出来了。<br>代码也就50多行 果然:），利用了<strong>Regex正则表达式</strong>和<strong>VSCode</strong>提供的Api，就实现了这个功能。</p>
-              <h2 id="更新-2017年8月4日">
-                <a href="#更新-2017年8月4日" class="headerlink" title="更新 2017年8月4日"></a>更新 2017年8月4日</h2>
+              <h2 id="更新-2017年8月4日"><a href="#更新-2017年8月4日" class="headerlink" title="更新 2017年8月4日"></a>更新 2017年8月4日</h2>
               <p>这个插件从那天写完后就基本没改过了（〃｀ 3′〃），因为这个插件真是太简单了。过了这么久VSCode经过了几次更新，不知道哪一次，本插件就彻底废了┭┮﹏┭┮<br>不过VSCode相对于以前更好用了，哈哈。重看了下官方文档，发现之前的task中的problemMatcher更新了，能用来代替本插件( •̀ ω •́ )✧</p>
-              <h3 id="配置">
-                <a href="#配置" class="headerlink" title="配置"></a>配置</h3>
+              <h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3>
               <p><a href="https://gist.github.com/linw1995/225a8d0e1cd32a51e44b2aab3af3f1dc" target="_blank" rel="external">Gist | VSCode Task.json for Python Traceback.</a></p>
               <figure class="highlight json">
                 <table>
@@ -102,22 +91,18 @@
                   </tr>
                 </table>
               </figure>
-              <h2 id="项目传送门">
-                <a href="#项目传送门" class="headerlink" title="项目传送门"></a>项目传送门</h2>
+              <h2 id="项目传送门"><a href="#项目传送门" class="headerlink" title="项目传送门"></a>项目传送门</h2>
               <ul>
                 <li><a href="https://marketplace.visualstudio.com/items?itemName=linw1995.python-traceback-jumper" target="_blank" rel="external">VSCode marketplace - python traceback jumper</a></li>
                 <li><a href="https://github.com/linw1995/python-traceback-jumper" target="_blank" rel="external">Github - python-traceback-jumper</a> </li>
               </ul>
-              <h2 id="如何使用">
-                <a href="#如何使用" class="headerlink" title="如何使用"></a>如何使用</h2>
+              <h2 id="如何使用"><a href="#如何使用" class="headerlink" title="如何使用"></a>如何使用</h2>
               <p>首先要安装</p>
-              <h3 id="安装">
-                <a href="#安装" class="headerlink" title="安装"></a>安装</h3>
+              <h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3>
               <p>在<strong>VSCode</strong>中按下<code>Ctrl</code> + <code>P</code> 输入</p>
               <pre><code>ext install python-traceback-jumper
 </code></pre>
-              <h3 id="配置-1">
-                <a href="#配置-1" class="headerlink" title="配置"></a>配置</h3>
+              <h3 id="配置-1"><a href="#配置-1" class="headerlink" title="配置"></a>配置</h3>
               <p>在工作区下的<code>setting.json</code>中添加</p>
               <pre><code>&quot;python.tracebackJumper.enable&quot;: true
 </code></pre>
@@ -132,11 +117,10 @@
                   </tr>
                 </table>
               </figure>
-              <h2 id="吐槽">
-                <a href="#吐槽" class="headerlink" title="吐槽"></a>吐槽</h2>
+              <h2 id="吐槽"><a href="#吐槽" class="headerlink" title="吐槽"></a>吐槽</h2>
               <p>其实在<strong>terminal</strong>中会通过<strong>Regex</strong>来提供跳转链接，不过这是<strong>VSCode</strong>内建的。。。:)<br>为啥不连<strong>Output</strong>输出栏也搞了，还有<strong>DEBUG</strong>输出栏。</p>
             </div>
-            <script type="text/javascript" src="/js/share.js?v=0.0.0" async></script><a data-url="http://linw1995.com/2017/04/09/折腾VSCode记-一-·-Python-Traceback-Jumper/" data-id="cj7yunak3001spcitzxv2e3cf" class="article-share-link">Share</a>
+            <script type="text/javascript" src="/js/share.js?v=0.0.0" async></script><a data-url="http://linw1995.com/2017/04/09/折腾VSCode记-一-·-Python-Traceback-Jumper/" data-id="cj94wk968001qe085l2wc8pdv" class="article-share-link">Share</a>
             <div class="tags"><a href="/tags/Python/">Python</a><a href="/tags/VSCode/">VSCode</a><a href="/tags/TypeScript/">TypeScript</a></div>
             <div class="post-nav"><a href="/2017/04/10/分享-你就不要想起我-Cover-张杰/" class="pre">分享 你就不要想起我(Cover 张杰)-唯默</a><a href="/2017/04/08/成为一个DictionaryKey的条件/" class="next">成为一个DictionaryKey的条件</a></div>
             <div id="disqus_thread">
@@ -182,8 +166,7 @@
         <div id="footer">Copyright © 2017 <a href="/." rel="nofollow">linw1995.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow"
             target="_blank" href="https://github.com/pagecho"> Cho.</a></div>
       </div>
-    </div>
-    <a id="rocket" href="#top" class="show"></a>
+    </div><a id="rocket" href="#top" class="show"></a>
     <script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script>
     <script type="text/javascript" src="//cdn.bootcss.com/fancybox/3.0.47/jquery.fancybox.min.js" async></script>
     <script type="text/javascript" src="/js/fancybox.js?v=0.0.0" async></script>

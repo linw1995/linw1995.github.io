@@ -168,7 +168,6 @@
   overflow: visible !important;
 }
 
-
 /* Overlay helper */
 
 .fancybox-lock {
@@ -204,7 +203,6 @@
   overflow: auto;
   overflow-y: scroll;
 }
-
 
 /* Title helper */
 
@@ -266,7 +264,6 @@
   background: #000;
   background: rgba(0, 0, 0, .8);
 }
-
 
 /*Retina graphics!*/
 

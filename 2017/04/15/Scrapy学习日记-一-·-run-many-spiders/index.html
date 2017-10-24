@@ -52,31 +52,22 @@
             <h1 class="post-title">Scrapy学习日记 一 · run many spiders</h1>
             <div class="post-meta">Apr 15, 2017<span> | </span><span class="category"><a href="/categories/Python/">Python</a></span>
               <script src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js" async></script><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"></span><span> Hits</span></span>
-            </div>
-            <a data-disqus-identifier="2017/04/15/Scrapy学习日记-一-·-run-many-spiders/" href="/2017/04/15/Scrapy学习日记-一-·-run-many-spiders/#disqus_thread" class="disqus-comment-count"></a>
+            </div><a data-disqus-identifier="2017/04/15/Scrapy学习日记-一-·-run-many-spiders/" href="/2017/04/15/Scrapy学习日记-一-·-run-many-spiders/#disqus_thread" class="disqus-comment-count"></a>
             <div class="clear">
               <div id="toc" class="toc-article">
                 <div class="toc-title">Contents</div>
                 <ol class="toc">
-                  <li class="toc-item toc-level-1"><a class="toc-link" href="#template-自定模板"><span class="toc-number">1.</span> <span class="toc-text">
-  template 自定模板</span></a></li>
-                  <li class="toc-item toc-level-1"><a class="toc-link" href="#command-自定命令"><span class="toc-number">2.</span> <span class="toc-text">
-  command 自定命令</span></a></li>
-                  <li class="toc-item toc-level-1"><a class="toc-link" href="#job-Spider的暂停-恢复"><span class="toc-number">3.</span> <span class="toc-text">
-  job Spider的暂停\恢复</span></a></li>
-                  <li class="toc-item toc-level-1"><a class="toc-link" href="#结论"><span class="toc-number">4.</span> <span class="toc-text">
-  结论</span></a></li>
-                  <li class="toc-item toc-level-1"><a class="toc-link" href="#Scrapy学习日记"><span class="toc-number">5.</span> <span class="toc-text">
-  Scrapy学习日记</span></a></li>
+                  <li class="toc-item toc-level-1"><a class="toc-link" href="#template-自定模板"><span class="toc-number">1.</span> <span class="toc-text">template 自定模板</span></a></li>
+                  <li class="toc-item toc-level-1"><a class="toc-link" href="#command-自定命令"><span class="toc-number">2.</span> <span class="toc-text">command 自定命令</span></a></li>
+                  <li class="toc-item toc-level-1"><a class="toc-link" href="#job-Spider的暂停-恢复"><span class="toc-number">3.</span> <span class="toc-text">job Spider的暂停\恢复</span></a></li>
+                  <li class="toc-item toc-level-1"><a class="toc-link" href="#结论"><span class="toc-number">4.</span> <span class="toc-text">结论</span></a></li>
+                  <li class="toc-item toc-level-1"><a class="toc-link" href="#Scrapy学习日记"><span class="toc-number">5.</span> <span class="toc-text">Scrapy学习日记</span></a></li>
                 </ol>
               </div>
             </div>
             <div class="post-content">
-              <p>这两周都在学习使用这个爬虫框架，略有收获。<br>把一些小技巧分享给大家。<br>
-                <a id="more"></a>
-              </p>
-              <h1 id="template-自定模板">
-                <a href="#template-自定模板" class="headerlink" title="template 自定模板"></a>template 自定模板</h1>
+              <p>这两周都在学习使用这个爬虫框架，略有收获。<br>把一些小技巧分享给大家。<br> <a id="more"></a> </p>
+              <h1 id="template-自定模板"><a href="#template-自定模板" class="headerlink" title="template 自定模板"></a>template 自定模板</h1>
               <p>用过<strong>Scrapy</strong>的人都知道，有生成<strong>Spider</strong>的命令</p>
               <pre><code>scrapy genspider mydomain mydomain.com
 </code></pre>
@@ -126,8 +117,7 @@ myprojec/
               <p>然后即可使用该命令生成<strong>Spider</strong>了</p>
               <pre><code>scrapy genspider -t common mydomain mydomain.com
 </code></pre>
-              <h1 id="command-自定命令">
-                <a href="#command-自定命令" class="headerlink" title="command 自定命令"></a>command 自定命令</h1>
+              <h1 id="command-自定命令"><a href="#command-自定命令" class="headerlink" title="command 自定命令"></a>command 自定命令</h1>
               <p>用<strong>template</strong>模板生成了大量的<strong>Spider</strong>,想要用一个命令让他们一起运行怎么办。<br>通过自定<strong>command</strong>,满足你的</p>
               <!-- markdownlint-disable MD022 MD026 MD012 -->
               <figure class="highlight python">
@@ -158,8 +148,7 @@ myprojec/
               <p>然后即可使用该命令同时运行所有<strong>Spider</strong>了</p>
               <pre><code>scrapy runallspider
 </code></pre>
-              <h1 id="job-Spider的暂停-恢复">
-                <a href="#job-Spider的暂停-恢复" class="headerlink" title="job Spider的暂停\恢复"></a>job Spider的暂停\恢复</h1>
+              <h1 id="job-Spider的暂停-恢复"><a href="#job-Spider的暂停-恢复" class="headerlink" title="job Spider的暂停\恢复"></a>job Spider的暂停\恢复</h1>
               <p>和<strong>Linux</strong>系统下的<strong>job</strong>命令类似，用来保存<strong>Spider</strong>状态，以下次启动<strong>Spider</strong>来恢复之前的保存的爬取状态</p>
               <p>首先要修改设置，添加JOBDIR<br>
                 <!-- markdownlint-disable MD022 MD026 -->
@@ -207,16 +196,14 @@ myprojec/
               </figure>
               <!-- markdownlint-enable MD022 MD026 -->
               <p>现在运行<code>scrapy runallspider</code>就没问题了，暂停，等下次重新启动也就能恢复到原来的爬虫状态。</p>
-              <h1 id="结论">
-                <a href="#结论" class="headerlink" title="结论"></a>结论</h1>
+              <h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1>
               <p><strong>Scrapy</strong>是一个十分强大且支持扩展的爬虫框架</p>
               <ol>
                 <li><strong>template</strong>模板,让我们少写了许多代码;</li>
                 <li><strong>command</strong>自定命令,让我们可以偷懒 :) ；</li>
                 <li><strong>job</strong> <strong>Spider</strong>的暂停\恢复,这个功能太强大了。<br> 不仅只是保存<strong>Spider</strong>这几类状态，比如说通过重载<strong>pipeline</strong>中的<br><code>open_spider(spider)</code>和<code>closed_spider(spider)</code>方法,来保存<strong>pipeline</strong>的状态，以供下次恢复</li>
               </ol>
-              <h1 id="Scrapy学习日记">
-                <a href="#Scrapy学习日记" class="headerlink" title="Scrapy学习日记"></a>Scrapy学习日记</h1>
+              <h1 id="Scrapy学习日记"><a href="#Scrapy学习日记" class="headerlink" title="Scrapy学习日记"></a>Scrapy学习日记</h1>
               <blockquote class="pullquote">
                 <ol>
                   <li><a href="/2017/04/15/Scrapy学习日记-一-·-run-many-spiders/" title="Scrapy学习日记 一 · run many spiders">Scrapy学习日记 一 · run many spiders</a></li>
@@ -224,7 +211,7 @@ myprojec/
                 </ol>
               </blockquote>
             </div>
-            <script type="text/javascript" src="/js/share.js?v=0.0.0" async></script><a data-url="http://linw1995.com/2017/04/15/Scrapy学习日记-一-·-run-many-spiders/" data-id="cj7yunaih000cpcitjuc7b9gq" class="article-share-link">Share</a>
+            <script type="text/javascript" src="/js/share.js?v=0.0.0" async></script><a data-url="http://linw1995.com/2017/04/15/Scrapy学习日记-一-·-run-many-spiders/" data-id="cj94wk93u000de085twsxkf2g" class="article-share-link">Share</a>
             <div class="tags"><a href="/tags/Python/">Python</a><a href="/tags/Scrapy/">Scrapy</a></div>
             <div class="post-nav"><a href="/2017/04/17/分享-Way-Back-Into-Love-Haley-Bennett-Hugh-Grant/" class="pre">分享 Way Back Into Love - Haley Bennett/Hugh Grant</a><a href="/2017/04/12/折腾VSCode记-二-·-Settings-Sync/" class="next">折腾VSCode记 二 · Settings Sync</a></div>
             <div
@@ -271,8 +258,7 @@ myprojec/
       <div id="footer">Copyright © 2017 <a href="/." rel="nofollow">linw1995.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow"
           target="_blank" href="https://github.com/pagecho"> Cho.</a></div>
     </div>
-  </div>
-  <a id="rocket" href="#top" class="show"></a>
+  </div><a id="rocket" href="#top" class="show"></a>
   <script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script>
   <script type="text/javascript" src="//cdn.bootcss.com/fancybox/3.0.47/jquery.fancybox.min.js" async></script>
   <script type="text/javascript" src="/js/fancybox.js?v=0.0.0" async></script>

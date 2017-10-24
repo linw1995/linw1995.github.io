@@ -52,37 +52,28 @@
             <h1 class="post-title">Python object的可变与不可变</h1>
             <div class="post-meta">Mar 31, 2017<span> | </span><span class="category"><a href="/categories/Python/">Python</a></span>
               <script src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js" async></script><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"></span><span> Hits</span></span>
-            </div>
-            <a data-disqus-identifier="2017/03/31/可变与不可变/" href="/2017/03/31/可变与不可变/#disqus_thread" class="disqus-comment-count"></a>
+            </div><a data-disqus-identifier="2017/03/31/可变与不可变/" href="/2017/03/31/可变与不可变/#disqus_thread" class="disqus-comment-count"></a>
             <div class="clear">
               <div id="toc" class="toc-article">
                 <div class="toc-title">Contents</div>
                 <ol class="toc">
-                  <li class="toc-item toc-level-1"><a class="toc-link" href="#常见的mutable和immutable对象"><span class="toc-number">1.</span> <span class="toc-text">
-  常见的mutable和immutable对象</span></a></li>
-                  <li class="toc-item toc-level-1"><a class="toc-link" href="#用id函数来判断对象是可变还是不可变"><span class="toc-number">2.</span> <span class="toc-text">
-  用id函数来判断对象是可变还是不可变</span></a></li>
-                  <li class="toc-item toc-level-1"><a class="toc-link" href="#Tuple之谜"><span class="toc-number">3.</span> <span class="toc-text">
-  Tuple之谜</span></a></li>
-                  <li class="toc-item toc-level-1"><a class="toc-link" href="#hashable可散列"><span class="toc-number">4.</span> <span class="toc-text">
-  hashable可散列</span></a></li>
-                  <li class="toc-item toc-level-1"><a class="toc-link" href="#参考链接"><span class="toc-number">5.</span> <span class="toc-text">
-  参考链接</span></a></li>
+                  <li class="toc-item toc-level-1"><a class="toc-link" href="#常见的mutable和immutable对象"><span class="toc-number">1.</span> <span class="toc-text">常见的mutable和immutable对象</span></a></li>
+                  <li class="toc-item toc-level-1"><a class="toc-link" href="#用id函数来判断对象是可变还是不可变"><span class="toc-number">2.</span> <span class="toc-text">用id函数来判断对象是可变还是不可变</span></a></li>
+                  <li class="toc-item toc-level-1"><a class="toc-link" href="#Tuple之谜"><span class="toc-number">3.</span> <span class="toc-text">Tuple之谜</span></a></li>
+                  <li class="toc-item toc-level-1"><a class="toc-link" href="#hashable可散列"><span class="toc-number">4.</span> <span class="toc-text">hashable可散列</span></a></li>
+                  <li class="toc-item toc-level-1"><a class="toc-link" href="#参考链接"><span class="toc-number">5.</span> <span class="toc-text">参考链接</span></a></li>
                 </ol>
               </div>
             </div>
             <div class="post-content">
-              <p><strong>Python object</strong>可以分为两大类型，<strong>可变mutable</strong>与<strong>不可变immutable</strong>。<br>可变与不可变究竟意味着什么？<br>
-                <a id="more"></a>
-              </p>
+              <p><strong>Python object</strong>可以分为两大类型，<strong>可变mutable</strong>与<strong>不可变immutable</strong>。<br>可变与不可变究竟意味着什么？<br> <a id="more"></a> </p>
               <p>对象是<strong>Python</strong>对数据的抽象化，在<strong>Python</strong>中，数据被表现成对象或者对象间的关系。<br>在<strong>Python</strong>中一切皆为对象，每个对象各含有<strong>identity</strong>、<strong>type</strong>和<strong>value</strong></p>
               <ul>
                 <li><strong>identity</strong> 在对象创建之后就不会改变，可想作是对象在内存中的地址。<br> 使用<strong>id(obj)</strong>可以得到一个对象的<strong>identity</strong>。</li>
                 <li><strong>type</strong> 可想而知，类型在创建后也不会被改变。</li>
                 <li><strong>value</strong> 保存了对象的值。<br> 对于有的对象这个值在创建对象之后还是可变的，那么称这种对象为<strong>可变对象mutable object</strong>；<br>而有的反之，自创建对象之后不可变，那么称这种对象为<strong>不可变对象immutable object</strong>。</li>
               </ul>
-              <h1 id="常见的mutable和immutable对象">
-                <a href="#常见的mutable和immutable对象" class="headerlink" title="常见的mutable和immutable对象"></a>常见的mutable和immutable对象</h1>
+              <h1 id="常见的mutable和immutable对象"><a href="#常见的mutable和immutable对象" class="headerlink" title="常见的mutable和immutable对象"></a>常见的mutable和immutable对象</h1>
               <p><strong>Python</strong>的主要类型有：</p>
               <ul>
                 <li>
@@ -102,8 +93,7 @@
                   <p>以上类型的对象都是可变的</p>
                 </li>
               </ul>
-              <h1 id="用id函数来判断对象是可变还是不可变">
-                <a href="#用id函数来判断对象是可变还是不可变" class="headerlink" title="用id函数来判断对象是可变还是不可变"></a>用id函数来判断对象是可变还是不可变</h1>
+              <h1 id="用id函数来判断对象是可变还是不可变"><a href="#用id函数来判断对象是可变还是不可变" class="headerlink" title="用id函数来判断对象是可变还是不可变"></a>用id函数来判断对象是可变还是不可变</h1>
               <figure class="highlight python">
                 <table>
                   <tr>
@@ -137,8 +127,7 @@
                 </table>
               </figure>
               <blockquote> <a href="http://stackoverflow.com/questions/15171695/whats-with-the-integer-cache-inside-python" target="_blank" rel="external">What's with the Integer Cache inside Python? [stackoverflow]</a> </blockquote>
-              <h1 id="Tuple之谜">
-                <a href="#Tuple之谜" class="headerlink" title="Tuple之谜"></a>Tuple之谜</h1>
+              <h1 id="Tuple之谜"><a href="#Tuple之谜" class="headerlink" title="Tuple之谜"></a>Tuple之谜</h1>
               <figure class="highlight python">
                 <table>
                   <tr>
@@ -151,8 +140,7 @@
               </figure>
               <p>当要改变<strong>tuple</strong>中的值时，抛出<strong>TypeError</strong>错误，因为<strong>tuple</strong>是不可变的对象<br>可接下来<code>t[3].append(&quot;some&quot;)</code>，却成功的改变了<strong>tuple</strong>的内容。<br>其实保存在<strong>tuple</strong>中的只是<strong>list</strong>的<strong>identity</strong>,
                 <strong>list</strong>是可变的，但其<strong>identity</strong>是不变的。</p>
-              <h1 id="hashable可散列">
-                <a href="#hashable可散列" class="headerlink" title="hashable可散列"></a>hashable可散列</h1>
+              <h1 id="hashable可散列"><a href="#hashable可散列" class="headerlink" title="hashable可散列"></a>hashable可散列</h1>
               <figure class="highlight python">
                 <table>
                   <tr>
@@ -164,8 +152,7 @@
                 </table>
               </figure>
               <p>结论：<strong>mutable object</strong>都是<strong>unhashable</strong>的，纯<strong>immutable object</strong>都是<strong>hashable</strong>。</p>
-              <h1 id="参考链接">
-                <a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h1>
+              <h1 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h1>
               <blockquote class="pullquote">
                 <ul>
                   <li><a href="https://docs.python.org/3.6/reference/datamodel.html#objects-values-and-types" target="_blank" rel="external">Objects, values and types - Data model [python doc]</a></li>
@@ -173,7 +160,7 @@
                 </ul>
               </blockquote>
             </div>
-            <script type="text/javascript" src="/js/share.js?v=0.0.0" async></script><a data-url="http://linw1995.com/2017/03/31/可变与不可变/" data-id="cj7yunajp001hpcitywiaypcu" class="article-share-link">Share</a>
+            <script type="text/javascript" src="/js/share.js?v=0.0.0" async></script><a data-url="http://linw1995.com/2017/03/31/可变与不可变/" data-id="cj94wk95o001ce085mttrthe3" class="article-share-link">Share</a>
             <div class="tags"><a href="/tags/Python/">Python</a></div>
             <div class="post-nav"><a href="/2017/04/08/成为一个DictionaryKey的条件/" class="pre">成为一个DictionaryKey的条件</a><a href="/2017/03/30/Python-collections/" class="next">Python collections</a></div>
             <div id="disqus_thread">
@@ -219,8 +206,7 @@
         <div id="footer">Copyright © 2017 <a href="/." rel="nofollow">linw1995.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow"
             target="_blank" href="https://github.com/pagecho"> Cho.</a></div>
       </div>
-    </div>
-    <a id="rocket" href="#top" class="show"></a>
+    </div><a id="rocket" href="#top" class="show"></a>
     <script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script>
     <script type="text/javascript" src="//cdn.bootcss.com/fancybox/3.0.47/jquery.fancybox.min.js" async></script>
     <script type="text/javascript" src="/js/fancybox.js?v=0.0.0" async></script>

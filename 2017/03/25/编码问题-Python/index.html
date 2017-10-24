@@ -52,39 +52,28 @@
             <h1 class="post-title">编码问题 ~ Python</h1>
             <div class="post-meta">Mar 25, 2017<span> | </span><span class="category"><a href="/categories/Python/">Python</a></span>
               <script src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js" async></script><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"></span><span> Hits</span></span>
-            </div>
-            <a data-disqus-identifier="2017/03/25/编码问题-Python/" href="/2017/03/25/编码问题-Python/#disqus_thread" class="disqus-comment-count"></a>
+            </div><a data-disqus-identifier="2017/03/25/编码问题-Python/" href="/2017/03/25/编码问题-Python/#disqus_thread" class="disqus-comment-count"></a>
             <div class="clear">
               <div id="toc" class="toc-article">
                 <div class="toc-title">Contents</div>
                 <ol class="toc">
-                  <li class="toc-item toc-level-1"><a class="toc-link" href="#py2-to-py3"><span class="toc-number">1.</span> <span class="toc-text">
-  py2 to py3</span></a>
+                  <li class="toc-item toc-level-1"><a class="toc-link" href="#py2-to-py3"><span class="toc-number">1.</span> <span class="toc-text">py2 to py3</span></a>
                     <ol class="toc-child">
-                      <li class="toc-item toc-level-2"><a class="toc-link" href="#Python2"><span class="toc-number">1.1.</span> <span class="toc-text">
-  Python2</span></a></li>
-                      <li class="toc-item toc-level-2"><a class="toc-link" href="#Python3"><span class="toc-number">1.2.</span> <span class="toc-text">
-  Python3</span></a></li>
+                      <li class="toc-item toc-level-2"><a class="toc-link" href="#Python2"><span class="toc-number">1.1.</span> <span class="toc-text">Python2</span></a></li>
+                      <li class="toc-item toc-level-2"><a class="toc-link" href="#Python3"><span class="toc-number">1.2.</span> <span class="toc-text">Python3</span></a></li>
                     </ol>
                   </li>
-                  <li class="toc-item toc-level-1"><a class="toc-link" href="#爬虫巨坑"><span class="toc-number">2.</span> <span class="toc-text">
-  爬虫巨坑</span></a></li>
-                  <li class="toc-item toc-level-1"><a class="toc-link" href="#文本文件处理"><span class="toc-number">3.</span> <span class="toc-text">
-  文本文件处理</span></a></li>
-                  <li class="toc-item toc-level-1"><a class="toc-link" href="#其它要注意的地方"><span class="toc-number">4.</span> <span class="toc-text">
-  其它要注意的地方</span></a></li>
-                  <li class="toc-item toc-level-1"><a class="toc-link" href="#参考链接"><span class="toc-number">5.</span> <span class="toc-text">
-  参考链接</span></a></li>
+                  <li class="toc-item toc-level-1"><a class="toc-link" href="#爬虫巨坑"><span class="toc-number">2.</span> <span class="toc-text">爬虫巨坑</span></a></li>
+                  <li class="toc-item toc-level-1"><a class="toc-link" href="#文本文件处理"><span class="toc-number">3.</span> <span class="toc-text">文本文件处理</span></a></li>
+                  <li class="toc-item toc-level-1"><a class="toc-link" href="#其它要注意的地方"><span class="toc-number">4.</span> <span class="toc-text">其它要注意的地方</span></a></li>
+                  <li class="toc-item toc-level-1"><a class="toc-link" href="#参考链接"><span class="toc-number">5.</span> <span class="toc-text">参考链接</span></a></li>
                 </ol>
               </div>
             </div>
             <div class="post-content">
-              <p>用Python处理中文时候经常出现乱码，或者代码经常因为编码的问题而出现各种错误，<br>比如说从网路上爬取数据，文本文件处理等等</p>
-              <a id="more"></a>
-              <h1 id="py2-to-py3">
-                <a href="#py2-to-py3" class="headerlink" title="py2 to py3"></a>py2 to py3</h1>
-              <h2 id="Python2">
-                <a href="#Python2" class="headerlink" title="Python2"></a><strong>Python2</strong></h2>
+              <p>用Python处理中文时候经常出现乱码，或者代码经常因为编码的问题而出现各种错误，<br>比如说从网路上爬取数据，文本文件处理等等</p> <a id="more"></a>
+              <h1 id="py2-to-py3"><a href="#py2-to-py3" class="headerlink" title="py2 to py3"></a>py2 to py3</h1>
+              <h2 id="Python2"><a href="#Python2" class="headerlink" title="Python2"></a><strong>Python2</strong></h2>
               <ul>
                 <li>str</li>
                 <li>unicode</li>
@@ -122,8 +111,7 @@
                 </ul>
                 <p>就是输入时一定要<strong>decode</strong>成<strong>unicode</strong>，<br>输出就<strong>encode</strong>成所需要的编码</p>
               </blockquote>
-              <h2 id="Python3">
-                <a href="#Python3" class="headerlink" title="Python3"></a><strong>Python3</strong></h2>
+              <h2 id="Python3"><a href="#Python3" class="headerlink" title="Python3"></a><strong>Python3</strong></h2>
               <ul>
                 <li>str (unicode)</li>
                 <li>bytes (py2’s str)</li>
@@ -141,8 +129,7 @@
                 </table>
               </figure>
               <p>用<code>sys.getdefaultencoding()</code>得知，<br>默认编码为<strong>utf-8</strong>，所以就没必要在文件头加上<code># -*- coding: utf-8 -*-</code>，<br>若是要用到其他编码保存文件，那就有必要</p>
-              <h1 id="爬虫巨坑">
-                <a href="#爬虫巨坑" class="headerlink" title="爬虫巨坑"></a>爬虫<strong>巨坑</strong></h1>
+              <h1 id="爬虫巨坑"><a href="#爬虫巨坑" class="headerlink" title="爬虫巨坑"></a>爬虫<strong>巨坑</strong></h1>
               <p>以前在写爬虫时，总是会出现乱码的现象<br>这是因为从网页得到的字符串格式是<strong>encode</strong>后的带编码的文本</p>
               <p>若得到的是<strong>UTF8</strong>编码<br>你在<strong>cmd</strong>里用<strong>Python3</strong>的<strong>print</strong>函数就有可能得到一个<strong>UnicodeDecodeError</strong></p>
               <figure class="highlight python">
@@ -187,21 +174,18 @@
                   </tr>
                 </table>
               </figure>
-              <h1 id="文本文件处理">
-                <a href="#文本文件处理" class="headerlink" title="文本文件处理"></a>文本文件处理</h1>
+              <h1 id="文本文件处理"><a href="#文本文件处理" class="headerlink" title="文本文件处理"></a>文本文件处理</h1>
               <p>除了爬虫会遇到这类问题，文本文件读取也会经常遇到<strong>UnicodeDecodeError</strong></p>
               <p><strong>Python3</strong>中的<strong>open</strong>函数中有<strong>encoding</strong>这个参数，默认是<strong>None</strong>，其实就是按照<strong>utf-8</strong>编码来<strong>decode</strong>获取<strong>unicode str</strong><br>若使用了错误了<strong>encoding</strong>参数，就有可能会抛出<strong>UnicodeDecodeError</strong>错误</p>
               <p>这样可以使用<strong>mode=’rb’</strong>参数，就可以读入<strong>bytes</strong>,用<strong>chardet.detect</strong>函数来获得编码，再用<strong>decode</strong>函数来得到<strong>unicode</strong>,即<strong>str</strong></p>
-              <h1 id="其它要注意的地方">
-                <a href="#其它要注意的地方" class="headerlink" title="其它要注意的地方"></a>其它要注意的地方</h1>
+              <h1 id="其它要注意的地方"><a href="#其它要注意的地方" class="headerlink" title="其它要注意的地方"></a>其它要注意的地方</h1>
               <ul>
                 <li><strong>Unicode</strong>是一种字符集，<strong>utf-8</strong>、<strong>utf-16</strong>和<strong>utf-32</strong>是其实现</li>
                 <li><strong>Python3</strong>中的<strong>str</strong>没有<strong>decode</strong>函数， that make sence</li>
                 <li><strong>Python2</strong>中的<strong>unicode</strong>有<strong>decode</strong>函数 …</li>
                 <li><strong>sys.stdin</strong>和<strong>sys.stdout</strong>是带有编码的</li>
               </ul>
-              <h1 id="参考链接">
-                <a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h1>
+              <h1 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h1>
               <blockquote class="pullquote">
                 <ul>
                   <li><a href="https://www.python.org/dev/peps/pep-0263/" target="_blank" rel="external">PEP 263 – Defining Python Source Code Encodings</a></li>
@@ -210,7 +194,7 @@
                 </ul>
               </blockquote>
             </div>
-            <script type="text/javascript" src="/js/share.js?v=0.0.0" async></script><a data-url="http://linw1995.com/2017/03/25/编码问题-Python/" data-id="cj7yunak7001xpcita4he8gju" class="article-share-link">Share</a>
+            <script type="text/javascript" src="/js/share.js?v=0.0.0" async></script><a data-url="http://linw1995.com/2017/03/25/编码问题-Python/" data-id="cj94wk96t0028e0856hjavy06" class="article-share-link">Share</a>
             <div class="tags"><a href="/tags/Python/">Python</a></div>
             <div class="post-nav"><a href="/2017/03/29/Python-functools/" class="pre">Python functools</a><a href="/2017/03/24/我的CV/" class="next">我的CV</a></div>
             <div id="disqus_thread">
@@ -256,8 +240,7 @@
         <div id="footer">Copyright © 2017 <a href="/." rel="nofollow">linw1995.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow"
             target="_blank" href="https://github.com/pagecho"> Cho.</a></div>
       </div>
-    </div>
-    <a id="rocket" href="#top" class="show"></a>
+    </div><a id="rocket" href="#top" class="show"></a>
     <script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script>
     <script type="text/javascript" src="//cdn.bootcss.com/fancybox/3.0.47/jquery.fancybox.min.js" async></script>
     <script type="text/javascript" src="/js/fancybox.js?v=0.0.0" async></script>

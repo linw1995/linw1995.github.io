@@ -15,24 +15,24 @@
 <meta property="og:site_name" content="linw1995" />
 <meta property="og:locale" content="nn_NO" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://linw1995.com/tags/%E5%B9%B6%E5%8F%91/" />
-<meta property="og:title" content="并发" />
-<meta property="twitter:title" content="并发">
+<meta property="og:url" content="http://linw1995.com/blog/%E8%87%AA%E5%B7%B1%E6%9D%A5%E5%86%99%E5%8E%8B%E7%BC%A9%E7%AE%97%E6%B3%95%E5%93%88%E5%A4%AB%E6%9B%BC%E7%AE%97%E6%B3%95/" />
+<meta property="og:title" content="自己来写压缩算法——哈夫曼算法" />
+<meta property="twitter:title" content="自己来写压缩算法——哈夫曼算法">
 
     <meta property="og:image" content="http://linw1995.com//img/banner.png">
     <meta property="twitter:card" content="summary">
     <meta property="twitter:image" content="http://linw1995.com//img/banner.png">
 
-<meta property="og:description" content="">
-<meta property="twitter:description" content="">
+<meta property="og:description" content="压缩算法究竟是怎么做到压缩的？本文就介绍一种简单的压缩算法，哈夫曼算法">
+<meta property="twitter:description" content="压缩算法究竟是怎么做到压缩的？本文就介绍一种简单的压缩算法，哈夫曼算法">
 
 <title>
 
 
-     linw1995 - 并发 
+     linw1995 - 自己来写压缩算法——哈夫曼算法 
 
 </title>
-<link rel="canonical" href="http://linw1995.com/tags/%E5%B9%B6%E5%8F%91/">
+<link rel="canonical" href="http://linw1995.com/blog/%E8%87%AA%E5%B7%B1%E6%9D%A5%E5%86%99%E5%8E%8B%E7%BC%A9%E7%AE%97%E6%B3%95%E5%93%88%E5%A4%AB%E6%9B%BC%E7%AE%97%E6%B3%95/">
 
 
 <style media="screen">
@@ -1052,8 +1052,6 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
 
 
 
-  <link href="http://linw1995.com/tags/%E5%B9%B6%E5%8F%91/index.xml" rel="alternate" type="application/rss+xml" title="linw1995" />
-
 
 </head>
 
@@ -1061,7 +1059,7 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
 <body>
 
 
-<div class="header header-home column">
+<div class="header column">
 
     <div class="container">
         <a href="http://linw1995.com/"><img class="logo" src="http://linw1995.com/img/logo.svg" alt="logo" /></a>
@@ -1090,24 +1088,483 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
     </div>
 </div>
 
-<div class="main column">
+
+<div class="main post non-narrow zero-top-spacing column">
     <div class="container">
         <div class="content">
-            <div class="posts">
-                <div class="page-heading">Posts about 并发</div>
-                <ul>
-                    
-                        <li class="post-item">
-    <span class="meta">Jul 16, 2017</span>
-    <a href="http://linw1995.com/blog/%E5%88%9D%E8%A7%A3python%E5%B9%B6%E5%8F%91/"><span>初解Python并发</span></a>
-</li>
+            <div class="front-matter">
+                <div class="title-container">
+                    <div class="page-heading">
 
+    自己来写压缩算法——哈夫曼算法
+
+</div>
+
+                </div>
+                <div class="meta">
+                    <div class="date" title="Sun Sep 24 2017 22:24:08 UTC">Sep 24, 2017</div>
                     
-                </ul>
+                        
+                    
+                    <div class="reading-time middot">8 minute read</div>
+                    <div class="tags">
+                        <ul>
+                          
+                            <li class="middot"><a href="http://linw1995.com/tags/python">Python</a> </li>
+                          
+                            <li class="middot"><a href="http://linw1995.com/tags/algorithm">Algorithm</a> </li>
+                          
+                        </ul>
+                    </div>
+                    <div class="tags">
+                        <ul>
+                          
+                          
+                        </ul>
+                    </div>
+                </div>
             </div>
+            <div class="markdown">
+                
+    
+
+<p>一般文件的编码都是等长的，一些常用字符的编码与很少用到的等长，可若是编码是变长的呢？无疑可以使整个文件大小减小。为了解码时不遇到任何歧义的问题，则<strong>每个有效字符所代表的变长编码不能是其它字符的前缀</strong>，这种编码也叫做<strong>前缀编码</strong>。而如何做到这一点呢，接下的内容会尽可能地讲明白。</p>
+
+<h2 id="哈夫曼算法">哈夫曼算法</h2>
+
+<p>若是把等长的编码(一字节)用平衡二叉树来表示，字符共有256个，那么树的深度就有 $\log_{2}{256}=8$ 。</p>
+
+<p>如果变作变长编码，那么所有有儿子（child）的节点（node）都不能用来表示，唯有子叶（leaf，没有儿子的节点）才可以用来表示。这是因为<strong>每个有效字符所代表的变长编码不能是其它字符的前缀</strong>。而且树结构也不可能是平衡二叉树了，树的深度肯定会大于8。</p>
+
+<p>例如，有一份<a href="http://linw1995.com/blog/MIT.txt">MIT-LICENCE.txt</a>文件，其中空格<code>'</code>&nbsp;<code>'</code>有163个，而字母<code>'</code>v<code>'</code>却只有一个。那么让<code>'</code>&nbsp;<code>'</code>表示为<code>110</code>,<code>'</code>v<code>'</code>表示为<code>0111011101</code>，那么得省$(8 - 3) \times 163 - (8 - 10) \times 1 = 817$个bit。可见变长编码确确实实能起到压缩的作用。</p>
+
+<h3 id="哈夫曼树">哈夫曼树</h3>
+
+<p><strong>哈夫曼树Huffman Tree</strong>，也叫做<strong>最优二叉树</strong>，是一种带权路径长度最短的二叉树。所谓树的带权路径长度，就是树中所有的叶结点的权值乘上其到根结点的路径长度（若根结点为$0$层，叶结点到根结点的路径长度为叶结点的层数）。树的路径长度是从树根到每一结点的路径长度之和，记为$\operatorname{WPL}=(W_1 \times L_
+1+W_2 \times L_2+W_3 \times L_3+&hellip;+W_n \times L_n)$，$N$个权值$W_i(i=1,2,&hellip;n)$构成一棵有$N$个叶结点的二叉树，相应的叶结点的路径长度为$L_i(i=1,2,&hellip;n)$。可以证明霍夫曼树的$\operatorname{WPL}$是最小的。</p>
+
+<pre><code class="language-plain">      /-40                /-40                /-40
+   /-|                 /-|                 /-|
+  |   \-48            |   \-48            |  |   /-48
+--|                   |                   |   \-|
+  |   /-60          --|      /-60       --|      \-18
+   \-|                |   /-|             |
+     |   /-30         |  |   \-20         |      /-60
+      \-|              \-|                |   /-|
+        |   /-18         |   /-30          \-|   \-20
+         \-|              \-|                |
+            \-20             \-18             \-30
+
+      (0)                (1)                  (2)
+</code></pre>
+
+<p>计算上面三颗树的$\operatorname{WPL}$：</p>
+
+<p>(0) $ 18 \times 3 + 20 \times 3 + 30 \times 2 + 60 \times 1 + 48 \times 1 + 40 \times 1 = 286$</p>
+
+<p>(1) $ 18 \times 2 + 30 \times 2 + 20 \times 2 + 60 \times 2 + 48 \times 1 + 40 \times 1 = 344$</p>
+
+<p>(2) $ 20 \times 2 + 60 \times 2 + 18 \times 2 + 48 \times 2 + 30 \times 1 + 40 \times 1 = 362$</p>
+
+<p>可以看出同样的子叶，构造出来的树(0)的$\operatorname{WPL}$最小。
+其实它就是哈夫曼树，可以验证同样的子叶,构造出来树的$\operatorname{WPL}$没有比这更小的了(可以同$\operatorname{WPL}$不同构)。</p>
+
+<p><strong>结论</strong>: 权值越大的子叶离根节点越近，即路径长度越短；反之，权值越小的子叶离根节点越远，即路径长度越长。</p>
+
+<p>构造哈夫曼树的算法步骤下：</p>
+
+<ol>
+<li>将所有的要添加到哈夫曼树的子叶按从小达到排列</li>
+<li>找出两个权值最小的节点，拼接成一树结构，父节点的权值为二者之和</li>
+<li>父节点为新的节点，加入排列中，重复步骤2</li>
+</ol>
+
+<pre><code class="language-plain">1          /-1                                             /-3
+        3 |                                             /-|
+2          \-2          /-3             /-3            |  |   /-1
+                     6 |   /-1       6 |   /-1         |   \-|
+3       3               \-|             \-|          --|      \-2
+                           \-2             \-2         |
+4       4            4                  /-4            |   /-4
+                                     9 |                \-|
+5       5            5                  \-5                \-5
+
+(0)      (1)           (2)             (3)               (4)
+</code></pre>
+
+<h3 id="哈夫曼编码">哈夫曼编码</h3>
+
+<p>从根结点开始，左子树为<code>'0'</code>,右子树为<code>'1'</code>，累积到子叶得到的编码就是哈夫曼编码。</p>
+
+<pre><code class="language-plain">| leaf | code |
+|------|------|
+| 1    | 010  |
+| 2    | 011  |
+| 3    | 00   |
+| 4    | 10   |
+| 5    | 11   |
+</code></pre>
+
+<h3 id="哈夫曼编码mit-licence文件结果">哈夫曼编码MIT-LICENCE文件结果</h3>
+
+<pre><code class="language-plain">| byte | count | code       |     | byte | count | code       |     | byte | count | code       |
+|------|-------|------------|     |------|-------|------------|     |------|-------|------------|
+| '/'  | 1     | 0111011010 |     | 'j'  | 1     | 0111011011 |     | ':'  | 1     | 0111011100 |
+| 'v'  | 1     | 0111011101 |     | 'K'  | 1     | 0111011110 |     | 'X'  | 1     | 0111011111 |
+| '('  | 2     | 011101000  |     | ')'  | 2     | 011101001  |     | '&lt;'  | 2     | 011101010  |
+| '&gt;'  | 2     | 011101011  |     | 'V'  | 2     | 011101100  |     | '.'  | 3     | 01101100   |
+| '&quot;'  | 4     | 01101101   |     | 'B'  | 5     | 11110100   |     | 'Y'  | 6     | 11110101   |
+| 'G'  | 6     | 0011110    |     | '\r' | 7     | 0011111    |     | '\n' | 7     | 0100110    |
+| 'M'  | 7     | 0100111    |     | 'P'  | 8     | 0110111    |     | 'm'  | 8     | 0111000    |
+| 'U'  | 8     | 0111001    |     | 'y'  | 9     | 1011000    |     | 'b'  | 9     | 1011001    |
+| 'W'  | 9     | 1011010    |     | 'g'  | 10    | 1011011    |     | 'w'  | 10    | 1110000    |
+| 'D'  | 10    | 1110001    |     | 'C'  | 12    | 1111011    |     | 'u'  | 12    | 000100     |
+| 'F'  | 12    | 000101     |     | 'p'  | 13    | 001110     |     | 'L'  | 14    | 010010     |
+| 'f'  | 15    | 011010     |     | 'c'  | 17    | 100010     |     | 'l'  | 17    | 100011     |
+| 'd'  | 17    | 101000     |     | 'H'  | 18    | 101001     |     | ','  | 22    | 111001     |
+| 'h'  | 23    | 111100     |     | 'S'  | 25    | 00011      |     | 'a'  | 26    | 00110      |
+| 'A'  | 28    | 01000      |     | 'r'  | 29    | 01010      |     | 'n'  | 30    | 01011      |
+| 'N'  | 30    | 01100      |     | 's'  | 34    | 01111      |     | 'R'  | 34    | 10000      |
+| 'E'  | 35    | 10010      |     | 'I'  | 35    | 10011      |     | 'O'  | 36    | 10101      |
+| 'T'  | 39    | 10111      |     | 'i'  | 45    | 11101      |     | 'e'  | 48    | 11111      |
+| 't'  | 49    | 0000       |     | 'o'  | 52    | 0010       |     | ' '  | 163   | 110        |
+</code></pre>
+
+<pre><code class="language-plain">                     /----'t' 49 0000
+                    |
+               /----0            /----'u' 12 000100
+              |     |      /----0
+              |      \----1      \----'F' 12 000101
+         /----0           |
+        |     |            \----'S' 25 00011
+        |     |
+        |     |      /----'o' 52 0010
+        |      \----1
+        |           |      /----'a' 26 00110
+        |            \----1
+        |                 |      /----'p' 13 001110
+        |                  \----1
+        |                       |      /----'G' 6 0011110
+        |                        \----1
+        |                              \----'\r' 7 0011111
+        |
+        |                  /----'A' 28 01000
+   /----0            /----0
+  |     |           |     |      /----'L' 14 010010
+  |     |           |      \----1
+  |     |           |           |      /----'\n' 7 0100110
+  |     |      /----0            \----1
+  |     |     |     |                  \----'M' 7 0100111
+  |     |     |     |
+  |     |     |     |      /----'r' 29 01010
+  |     |     |      \----1
+  |     |     |            \----'n' 30 01011
+  |     |     |
+  |     |     |            /----'N' 30 01100
+  |     |     |           |
+  |     |     |      /----0      /----'f' 15 011010
+  |      \----1     |     |     |
+  |           |     |      \----1            /----'.' 3 01101100
+  |           |     |           |      /----0
+  |           |     |            \----1      \----'&quot;' 4 01101101
+  |           |     |                 |
+  |           |     |                  \----'P' 8 0110111
+  |           |     |
+  |           |     |                  /----'m' 8 0111000
+  |           |     |            /----0
+  |           |     |           |      \----'U' 8 0111001
+  |           |     |           |
+  |            \----1           |                  /----'(' 2 011101000
+  |                 |           |            /----0
+  |                 |      /----0           |      \----')' 2 011101001
+  |                 |     |     |      /----0
+  |                 |     |     |     |     |      /----'&lt;' 2 011101010
+  |                 |     |     |     |      \----1
+  |                 |     |     |     |            \----'&gt;' 2 011101011
+  |                 |     |     |     |
+  |                 |     |      \----1            /----'V' 2 011101100
+--|                 |     |           |      /----0
+  |                 |     |           |     |     |      /----'/' 1 0111011010
+  |                 |     |           |     |      \----1
+  |                  \----1           |     |            \----'j' 1 0111011011
+  |                       |            \----1
+  |                       |                 |            /----':' 1 0111011100
+  |                       |                 |      /----0
+  |                       |                 |     |      \----'v' 1 0111011101
+  |                       |                  \----1
+  |                       |                       |      /----'K' 1 0111011110
+  |                       |                        \----1
+  |                       |                              \----'X' 1 0111011111
+  |                       |
+  |                        \----'s' 34 01111
+  |
+  |                        /----'R' 34 10000
+  |                  /----0
+  |                 |     |      /----'c' 17 100010
+  |                 |      \----1
+  |            /----0            \----'l' 17 100011
+  |           |     |
+  |           |     |      /----'E' 35 10010
+  |           |      \----1
+  |           |            \----'I' 35 10011
+  |           |
+  |      /----0                  /----'d' 17 101000
+  |     |     |            /----0
+  |     |     |      /----0      \----'H' 18 101001
+  |     |     |     |     |
+  |     |     |     |      \----'O' 36 10101
+  |     |     |     |
+  |     |      \----1                  /----'y' 9 1011000
+  |     |           |            /----0
+  |     |           |           |      \----'b' 9 1011001
+  |     |           |      /----0
+   \----1           |     |     |      /----'W' 9 1011010
+        |            \----1      \----1
+        |                 |            \----'g' 10 1011011
+        |                 |
+        |                  \----'T' 39 10111
+        |
+        |      /----' ' 163 110
+        |     |
+        |     |                        /----'w' 10 1110000
+        |     |                  /----0
+        |     |            /----0      \----'D' 10 1110001
+         \----1           |     |
+              |      /----0      \----',' 22 111001
+              |     |     |
+              |     |      \----'i' 45 11101
+              |     |
+               \----1            /----'h' 23 111100
+                    |           |
+                    |      /----0            /----'B' 5 11110100
+                    |     |     |      /----0
+                    |     |      \----1      \----'Y' 6 11110101
+                     \----1           |
+                          |            \----'C' 12 1111011
+                          |
+                           \----'e' 48 11111
+</code></pre>
+
+<h2 id="压缩实现">压缩实现</h2>
+
+<p>知道了如何编码，那怎么应用到压缩上去呢？</p>
+
+<h3 id="压缩">压缩</h3>
+
+<ol>
+<li>把文件分割成一个个字节，统计各个字节（总共256个）的数量</li>
+<li>根据统计出来的权重，来构造哈夫曼树，得出哈夫曼编码</li>
+<li>一字节一字节的转换为哈夫曼编码，再保存到新的文件（压缩文件）里</li>
+<li>再把统计的结果，也存储到文件里，用来解压缩</li>
+</ol>
+
+<p><strong>注意</strong>：转换后数据不一定能被8整除，那么保存的结尾就要稍作处理</p>
+
+<p>原文：</p>
+
+<pre><code class="language-plain">b'Copyr……
+</code></pre>
+
+<p>转换：</p>
+
+<pre><code class="language-plain">| b'C'    | b'o' | b'p'   | b'y'    | b'r'  | ... |
+|---------|------|--------|---------|-------|-----|
+| 1111011 | 0010 | 001110 | 1011000 | 01010 | ... |
+
+11110110010001110101100001010……
+</code></pre>
+
+<p>分割成字节：</p>
+
+<pre><code class="language-plain">| 1111 0110 | 0100 0111 | 0101 1000 | 0101 0…… |
+|-----------|-----------|-----------|----------|
+| 246       | 71        | 88        | ……       |
+| b'\xf6'   | b'G'      | b'X'      | ……       |
+</code></pre>
+
+<p>压缩结果：</p>
+
+<pre><code class="language-plain">b'\xf6GX……
+</code></pre>
+
+<p>这么短短的一段，从5字节压缩成3.6+字节大小</p>
+
+<h3 id="解压">解压</h3>
+
+<ol>
+<li>读取压缩文件中的统计结果，构造哈夫曼树</li>
+<li>一比特一比特的用哈夫曼树索引，得到原本的字节，再保存到新文件中</li>
+</ol>
+
+<p>压缩文件字节流：</p>
+
+<pre><code class="language-plain">b'\xf6GX……
+</code></pre>
+
+<p>得到比特流：</p>
+
+<pre><code class="language-plain">| b'\xf6'   | b'G'      | b'X'      | ……       |
+|-----------|-----------|-----------|----------|
+| 246       | 71        | 88        | ……       |
+| 1111 0110 | 0100 0111 | 0101 1000 | 0101 0…… |
+</code></pre>
+
+<p>根据哈夫曼树，索引出对应的值，<code>'0'</code>进入左子树，<code>'1'</code>进入右子树，直到子叶……</p>
+
+<pre><code class="language-plain">11110110010001110101100001010……
+
+| 1111011 | 0010 | 001110 | 1011000 | 01010 | ... |
+|---------|------|--------|---------|-------|-----|
+| b'C'    | b'o' | b'p'   | b'y'    | b'r'  | ... |
+</code></pre>
+
+<p>原文：</p>
+
+<pre><code class="language-plain">b'Copyr……
+</code></pre>
+
+<h3 id="尾部处理">尾部处理</h3>
+
+<p>若结尾出现以下情况</p>
+
+<ol>
+<li><p>结尾长度小于一字节</p>
+
+<pre><code>```plain
+    压缩           解压
+
+| 0010    |   | b'\x02'  |
+|---------|   |----------|
+| 2       |   | 2        |
+| b'\x02' |   | 00000010 |
+```
+</code></pre></li>
+
+<li><p>结尾长度等于一字节</p>
+
+<pre><code class="language-plain">    压缩           解压
+
+| 00000010 |  | b'\x02'  |
+|----------|  |----------|
+| 2        |  | 2        |
+| b'\x02'  |  | 00000010 |
+</code></pre></li>
+</ol>
+
+<p>为了避免尾部可能出现的错误，所以将对尾部进行处理：<strong>在尾部写入之前，写入尾部的长度数据</strong></p>
+
+<pre><code class="language-plain">      压缩               解压
+
+| 0010        |   | b'\x04\x02'  |
+|-------------|   |--------------|
+| 2           |   | 2            |
+| b'\x04\x02' |   | 0010         |
+
+      压缩               解压
+
+| 00000010    |   | b'\x08\x02'  |
+|-------------|   |--------------|
+| 2           |   | 2            |
+| b'\x08\x02' |   | 00000010     |
+</code></pre>
+
+<h3 id="存储字节统计结果">存储字节统计结果</h3>
+
+<p>字符（一字节）字节，字符以一字节来存，最多有256个字符。
+还要存储出现次数的字节长度，用来读取。</p>
+
+<pre><code class="language-plain">| for                  | value         | bytes               |
+|----------------------|---------------|---------------------|
+| charNum              | 256 - 1 (max) | b'\xff'             |
+| Count's bytes length | 4             | b'\x04              |
+| char                 | 0             | b'\x00'             |
+| char Count           | 255           | b'\x00\x00\x00\xff' |
+| char                 | 1             | b'\x01'             |
+| ...                  | ...           | ...                 |
+
+b'\xff\x04\x00\x00\x00\x00\xff\x01...
+</code></pre>
+
+<h3 id="测试">测试</h3>
+
+<p>拿<a href="http://linw1995.com/blog/MIT.txt">MIT-LICENCE.txt</a>文件来测试：</p>
+
+<pre><code class="language-plain">| before      | after     |
+|-------------|-----------|
+| 1,072 bytes | 859 bytes |
+</code></pre>
+
+<h3 id="代码">代码</h3>
+
+<script src="//gist.github.com/linw1995/7e49f6d05276538d8675874c585ece5d.js"></script>
+
+<p>GIST: <a href="https://gist.github.com/linw1995/7e49f6d05276538d8675874c585ece5d">Huffman Encoding and Data Compression | linw1995</a></p>
+
+<h2 id="参考">参考</h2>
+
+<blockquote>
+<ul>
+<li><a href="https://zh.wikipedia.org/wiki/%E9%9C%8D%E5%A4%AB%E6%9B%BC%E7%BC%96%E7%A0%81">霍夫曼编码 | Wikipedia</a></li>
+<li>Magnus Lie Hetland.(2015).哈夫曼算法.In <em>Python算法教程</em>,pages 159-164.</li>
+</ul>
+</blockquote>
+
+
+                <br>
+            </div>
+            
+            <div class="share">
+                <a href="" class="ssk ssk-facebook"></a>
+                <a href="" class="ssk ssk-twitter"></a>
+                <a href="" class="ssk ssk-google-plus"></a>
+                <a href="" class="ssk ssk-linkedin"></a>
+            </div>
+            
+            
+                <div class="navigation">
+                    
+                    <div>
+                        <img class="icon" src="http://linw1995.com/img/back.svg" alt="back" />
+                        <a href="http://linw1995.com/blog/%E5%88%9D%E8%A7%A3python%E5%B9%B6%E5%8F%91/">初解Python并发</a>
+                    </div>
+                    
+                    <div style="width: 100%;"></div>
+                    
+                    <div>
+                        <a href="http://linw1995.com/blog/%E8%87%AA%E5%B7%B1%E6%9D%A5%E5%86%99%E5%8E%8B%E7%BC%A9%E7%AE%97%E6%B3%95lzw/">自己来写压缩算法——LZW</a>
+                        <img class="icon" src="http://linw1995.com/img/next.svg" alt="next" />
+                    </div>
+                    
+                </div>
+            
+            <br>
+            <div class="disqus">
+                <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "linw1995" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+            </div>
+            
         </div>
     </div>
 </div>
+
 <div class="footer column">
     <div class="container">
 

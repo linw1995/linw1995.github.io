@@ -31,10 +31,10 @@
     
     <item>
       <title>自己来写压缩算法——LZW</title>
-      <link>http://linw1995.com/blog/%E8%87%AA%E5%B7%B1%E6%9D%A5%E5%86%99%E5%8E%8B%E7%BC%A9%E7%AE%97%E6%B3%95lzw/</link>
+      <link>http://linw1995.com/blog/%E8%87%AA%E5%B7%B1%E6%9D%A5%E5%86%99%E5%8E%8B%E7%BC%A9%E7%AE%97%E6%B3%95LZW/</link>
       <pubDate>Tue, 24 Oct 2017 08:52:58 +0000</pubDate>
       
-      <guid>http://linw1995.com/blog/%E8%87%AA%E5%B7%B1%E6%9D%A5%E5%86%99%E5%8E%8B%E7%BC%A9%E7%AE%97%E6%B3%95lzw/</guid>
+      <guid>http://linw1995.com/blog/%E8%87%AA%E5%B7%B1%E6%9D%A5%E5%86%99%E5%8E%8B%E7%BC%A9%E7%AE%97%E6%B3%95LZW/</guid>
       <description>之前用哈夫曼算法，把固定长的字符编码根据其出现次数，编码为不固定长的编码。而这次介绍的算法恰恰相反，该算法是把不等长的字符串，编码为固定长的编码。
 LZW 蓝博-立夫-卫曲编码法（Lempel-Ziv-Welch，缩写LZW），是亚伯拉罕·蓝波、杰可布·立夫与泰瑞·卫曲共同提出的一种无损数据压缩演算法。与霍夫曼编码相比，LZW把不同长度的字符串转换为固定长的编码。该方法不需要事先对数据做任何分析，所以可以流式地对文件进行处理。
 原理 编码 首先先将单字符建立成一个字符串编码表，分别给予编号。
@@ -58,10 +58,10 @@ LZW 蓝博-立夫-卫曲编码法（Lempel-Ziv-Welch，缩写LZW），是亚伯�
     
     <item>
       <title>初解Python并发</title>
-      <link>http://linw1995.com/blog/%E5%88%9D%E8%A7%A3python%E5%B9%B6%E5%8F%91/</link>
+      <link>http://linw1995.com/blog/%E5%88%9D%E8%A7%A3Python%E5%B9%B6%E5%8F%91/</link>
       <pubDate>Sun, 16 Jul 2017 21:28:07 +0000</pubDate>
       
-      <guid>http://linw1995.com/blog/%E5%88%9D%E8%A7%A3python%E5%B9%B6%E5%8F%91/</guid>
+      <guid>http://linw1995.com/blog/%E5%88%9D%E8%A7%A3Python%E5%B9%B6%E5%8F%91/</guid>
       <description>前言 昨天（2017年7月15日）偶然看到这个视频，看完之后豁然开朗，忍不住要分享给大家。   并发Demo 视频中举了个例子，用socket写了个迷你服务，只有一个作用，计算Fibonacci……
 # -*- coding: utf-8 -*- # server.py import socket def fib(n): if n &amp;lt;= 2: return 1 else: return fib(n - 1) + fib(n - 2) def server(addr, port): sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM) sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1) sock.bind((addr, port)) sock.listen(5) while True: client, addr = sock.accept() print(&#39;Connection&#39;, addr) handler(client) def handler(client): while True: req = client.recv(100) if not req: break n = int(req) result = fib(n) resp = str(result).</description>
     </item>
@@ -98,10 +98,10 @@ Python implementation class Random: def __init__(self, A, C, M, seed=0): self._A
     
     <item>
       <title>AA树的平衡与再平衡</title>
-      <link>http://linw1995.com/blog/aa%E6%A0%91%E7%9A%84%E5%B9%B3%E8%A1%A1%E4%B8%8E%E5%86%8D%E5%B9%B3%E8%A1%A1/</link>
+      <link>http://linw1995.com/blog/AA%E6%A0%91%E7%9A%84%E5%B9%B3%E8%A1%A1%E4%B8%8E%E5%86%8D%E5%B9%B3%E8%A1%A1/</link>
       <pubDate>Thu, 27 Apr 2017 12:38:13 +0000</pubDate>
       
-      <guid>http://linw1995.com/blog/aa%E6%A0%91%E7%9A%84%E5%B9%B3%E8%A1%A1%E4%B8%8E%E5%86%8D%E5%B9%B3%E8%A1%A1/</guid>
+      <guid>http://linw1995.com/blog/AA%E6%A0%91%E7%9A%84%E5%B9%B3%E8%A1%A1%E4%B8%8E%E5%86%8D%E5%B9%B3%E8%A1%A1/</guid>
       <description>介绍  AA树在计算机科学一种形式的自平衡二叉查找树用于高效存储和检索序数据。AA树的名称是由它的发明者*Arne Andersson*而来。 AA树是红黑树的一种变种，是*Arne Andersson教授在1993年年在他的论文&amp;ldquo;Balanced search trees made simple&amp;rdquo;*中介绍，设计的目的是减少红黑树考虑的不同情况，区别于红黑树的是，AA树的红节点只能作为右叶子。换句话说，没有红节点可以是一个左子儿。这导致代替2-3-4树，从而大大简化了维护2-3树的模拟。维护红黑树的平衡需要考虑7种不同的情况:
   因为AA树有严格的条件(红节点只能为右节点)，故只需考虑2种情形:
  AA树是2-3树的模拟，2-3树和AA树是等距同构的。其节点类型如下

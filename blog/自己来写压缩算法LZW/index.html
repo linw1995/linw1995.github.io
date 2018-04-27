@@ -2,7 +2,6 @@
 <html lang="en-US">
 
 <head>
-	<meta name="generator" content="Hugo 0.40.1" />
 <meta charset="utf-8">
 <meta name="HandheldFriendly" content="True">
 <meta name="MobileOptimized" content="320">
@@ -16,24 +15,24 @@
 <meta property="og:site_name" content="linw1995" />
 <meta property="og:locale" content="nn_NO" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://linw1995.com/" />
-<meta property="og:title" content="linw1995" />
-<meta property="twitter:title" content="linw1995">
+<meta property="og:url" content="http://linw1995.com/blog/%E8%87%AA%E5%B7%B1%E6%9D%A5%E5%86%99%E5%8E%8B%E7%BC%A9%E7%AE%97%E6%B3%95LZW/" />
+<meta property="og:title" content="自己来写压缩算法——LZW" />
+<meta property="twitter:title" content="自己来写压缩算法——LZW">
 
     <meta property="og:image" content="http://linw1995.com//img/banner.png">
     <meta property="twitter:card" content="summary">
     <meta property="twitter:image" content="http://linw1995.com//img/banner.png">
 
-<meta property="og:description" content="Example blog">
-<meta property="twitter:description" content="Example blog">
+<meta property="og:description" content="压缩算法究竟是怎么做到压缩的？本文就介绍一种简单的压缩算法，LZW算法">
+<meta property="twitter:description" content="压缩算法究竟是怎么做到压缩的？本文就介绍一种简单的压缩算法，LZW算法">
 
 <title>
 
 
-    linw1995
+     linw1995 - 自己来写压缩算法——LZW 
 
 </title>
-<link rel="canonical" href="http://linw1995.com/">
+<link rel="canonical" href="http://linw1995.com/blog/%E8%87%AA%E5%B7%B1%E6%9D%A5%E5%86%99%E5%8E%8B%E7%BC%A9%E7%AE%97%E6%B3%95LZW/">
 
 
 <style media="screen">
@@ -1053,8 +1052,6 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
 
 
 
-  <link href="http://linw1995.com/index.xml" rel="alternate" type="application/rss+xml" title="linw1995" />
-
 
 </head>
 
@@ -1062,7 +1059,7 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
 <body>
 
 
-<div class="header header-home column">
+<div class="header column">
 
     <div class="container">
         
@@ -1093,76 +1090,307 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
     </div>
 </div>
 
-<div class="main column">
+
+
+
+<div class="main post non-narrow zero-top-spacing column">
     <div class="container">
         <div class="content">
+            <div class="front-matter">
+                <div class="title-container">
+                    <div class="page-heading">
+
+    自己来写压缩算法——LZW
+
+</div>
+
+                </div>
+                <div class="meta">
+                    <div class="date" title="Tue Oct 24 2017 08:52:58 UTC">Oct 24, 2017</div>
+                    
+                        
+                    
+                    <div class="reading-time middot">3 minute read</div>
+                    <div class="tags">
+                        <ul>
+                          
+                            <li class="middot"><a href="http://linw1995.com/tags/Python">Python</a> </li>
+                          
+                            <li class="middot"><a href="http://linw1995.com/tags/Algorithm">Algorithm</a> </li>
+                          
+                        </ul>
+                    </div>
+                    <div class="tags">
+                        <ul>
+                          
+                          
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="markdown">
+                
+    
+
+<p>之前用<a href="http://linw1995.com/blog/%E8%87%AA%E5%B7%B1%E6%9D%A5%E5%86%99%E5%8E%8B%E7%BC%A9%E7%AE%97%E6%B3%95%E5%93%88%E5%A4%AB%E6%9B%BC%E7%AE%97%E6%B3%95/">哈夫曼算法</a>，把<strong>固定长</strong>的字符编码根据其出现次数，编码为<strong>不固定长</strong>的编码。而这次介绍的算法恰恰相反，该算法是把<strong>不等长</strong>的字符串，编码为<strong>固定长</strong>的编码。</p>
+
+<h2 id="lzw">LZW</h2>
+
+<p>蓝博-立夫-卫曲编码法（Lempel-Ziv-Welch，缩写LZW），是亚伯拉罕·蓝波、杰可布·立夫与泰瑞·卫曲共同提出的一种无损数据压缩演算法。与<a href="https://zh.wikipedia.org/wiki/%E9%9C%8D%E5%A4%AB%E6%9B%BC%E7%BC%96%E7%A0%81">霍夫曼编码</a>相比，LZW把不同长度的字符串转换为固定长的编码。该方法不需要事先对数据做任何分析，所以可以流式地对文件进行处理。</p>
+
+<h2 id="原理">原理</h2>
+
+<h3 id="编码">编码</h3>
+
+<p>首先先将单字符建立成一个字符串编码表，分别给予编号。</p>
+
+<pre><code class="language-plain">| string | code |
+|--------|------|
+| a      | 1    |
+| b      | 2    |
+| c      | 3    |
+</code></pre>
+
+<p>若数据为<code>aabcaac</code>，进过LZW编码后结果为<code>112343</code>，过程如下</p>
+
+<pre><code class="language-plain">| No. | cur | prefix | prefix in str-&gt;code | code | str-&gt;code |
+|-----|-----|--------|---------------------|------|-----------|
+| 1   | a   |        |                     |      |           |
+| 2   | a   | a      | 1                   |      |           |
+| 3   | b   | aa     | 0                   | 1    | aa -&gt; 4   |
+| 4   | c   | ab     | 0                   | 1    | ab -&gt; 5   |
+| 5   | a   | bc     | 0                   | 2    | bc -&gt; 6   |
+| 6   | a   | ca     | 0                   | 3    | ca -&gt; 7   |
+| 7   | c   | aa     | 1                   |      |           |
+| 8   |     | aac    | 0                   | 4    | aac -&gt; 8  |
+| 9   |     | c      | 1                   | 3    |           |
+</code></pre>
+
+<p>整个算法过程如下：</p>
+
+<ol>
+<li>取一个字符c</li>
+<li>若字符串p + 字符c <strong>在</strong> 字符串编码表中，字符串p += 字符c</li>
+<li>若字符串p + 字符c <strong>不在</strong> 字符串编码表中：
+
+<ol>
+<li>获取 字符串p 的编码</li>
+<li>将 字符串p + 字符c 存入字符串编码表</li>
+<li>字符串p = 字符c</li>
+</ol></li>
+<li>重复以上步骤</li>
+<li>最后 获取 字符串p 的编码</li>
+</ol>
+
+<h3 id="解码">解码</h3>
+
+<p>一开始的字符串编码都是同一个，那么如何把<code>112343</code>解码为<code>aabcaac</code>？</p>
+
+<pre><code class="language-plain">| string | code |
+|--------|------|
+| a      | 1    |
+| b      | 2    |
+| c      | 3    |
+</code></pre>
+
+<p>解码过程如下：</p>
+
+<pre><code class="language-plain">| No. | cur | str | prefix | prefix in str-&gt;code | str-&gt;code |
+|-----|-----|-----|--------|---------------------|-----------|
+| 1   | 1   | a   |        |                     |           |
+| 2   | 1   | a   | a      | 1                   |           |
+| 3   | 2   | b   | aa     | 0                   | aa -&gt; 4   |
+| 4   | 3   | c   | ab     | 0                   | ab -&gt; 5   |
+| 5   | 4   | aa  | bc     | 0                   | bc -&gt; 6   |
+| 6   |     | a   | ca     | 0                   | ca -&gt; 7   |
+| 7   | 3   | c   | aa     | 1                   |           |
+| 8   |     |     | aac    | 0                   | aac -&gt; 8  |
+</code></pre>
+
+<p>整个算法过程如下：</p>
+
+<ol>
+<li>取一个编码k</li>
+<li>对照 字符串编码表 取得字符串cs
+
+<ol>
+<li>从字符串cs中取得字符c</li>
+<li>若字符串p + 字符c <strong>在</strong> 字符串编码表中，字符串p += 字符c</li>
+<li>若字符串p + 字符c <strong>不在</strong> 字符串编码表中：
+
+<ol>
+<li>将 字符串p + 字符c 存入字符串编码表</li>
+<li>字符串p = 字符c</li>
+</ol></li>
+<li>重复以上步骤</li>
+</ol></li>
+<li>重复以上步骤</li>
+</ol>
+
+<h2 id="实现">实现</h2>
+
+<h3 id="核心代码">核心代码</h3>
+
+<p>照着算法步骤，我们很容易地写出以下的代码：</p>
+
+<pre><code class="language-python">from six import int2byte
+
+
+# 初始字符串编码表
+# str  -&gt; code
+original_cdict = {b'a': 0, b'b': 1, b'c': 2}
+# code -&gt; str
+original_kdict = [b'a', b'b', b'c']
+
+
+def encode(data):
+    '''
+    &gt;&gt;&gt; encode(b'aabcaac')
+    [0, 0, 1, 2, 3, 2]
+    '''
+    cdict = original_cdict.copy()
+    rv = []
+    prefix = b''
+    for c in data:
+        if prefix + int2byte(c) in cdict:
+            prefix += int2byte(c)
+        else:
+            rv.append(cdict[prefix])
+            cdict[prefix + int2byte(c)] = len(cdict)
+            prefix = int2byte(c)
+    rv.append(cdict[prefix])
+    return rv
+
+
+def decode(data):
+    '''
+    &gt;&gt;&gt; decode([0, 0, 1, 2, 3, 2])
+    b'aabcaac'
+    '''
+    cdict = original_cdict.copy()
+    kdict = original_kdict.copy()
+    prefix = b''
+    rv = b''
+    for key in data:
+        cs = kdict[key]
+        for c in cs:
+            if prefix + int2byte(c) in cdict:
+                prefix += int2byte(c)
+            else:
+                cdict[prefix + int2byte(c)] = len(cdict)
+                kdict.append(prefix + int2byte(c))
+                prefix = int2byte(c)
+        rv += cs
+    return rv
+</code></pre>
+
+<p>以上就是LZW压缩算法的核心代码。若是要应用到文件上，还是有挺多步要走的。</p>
+
+<h3 id="读写文件">读写文件</h3>
+
+<blockquote>
+<p>如何写一个真正实用的压缩程序</p>
+</blockquote>
+
+<p>要做到压缩、解压缩，如何保存其压缩结果是一个躲避不了的问题。有了之前处理{% post_link 自己来写压缩算法——哈夫曼算法 哈夫曼算法 %}的经验，我们知道要把压缩后的编码列表写入文件过程。先是将其变换成比特流，然后再把比特流写入到文件里。那么一个编码以多少长度写入文件里呢？
+如果要压缩一个文件，初始字符串编码表长度就是256($2^8$)个。为了使<strong>LZW算法</strong>起到应有的作用，一个编码的长度应该大于8。长度为9,就能保存$2^9 = 512$个编码；长度为10,就能保存$2^{10} = 1024$个编码；长度为16,就能保存$2^{16} = 65536$个编码。若是选择长度短的，那么怎么压缩大文件呢；若是选择长度长的，那么目标文件更大呢；总不能选个超级长的长度，最后是能压缩大多数文件了，可哪能叫压缩吗（压缩结果大小反而大过源文件）。</p>
+
+<p>面对这种情况，要增加一个<strong>“哨兵”</strong>。我们以长度16来保存编码，当字符串编码表长度快超过能保存的界限时，重置字符串编码表，从这个位置重新开始算法过程。哈，这个<strong>“哨兵”</strong>值肯定就是$2^{16} - 1 = 65535$。</p>
+
+<p>新增的压缩处理过程：</p>
+
+<ol>
+<li>编码结果转换为比特流，再写入文件（如何写入文件）</li>
+<li>设置字符串编码表重置<strong>“哨兵”</strong>值（如何解决字符串编码表无节制增长）</li>
+</ol>
+
+<p>核心代码加上以上的处理过程，就能写出一个真正实用的压缩程序了！</p>
+
+<h3 id="动态编码长度">动态编码长度</h3>
+
+<blockquote>
+<p>让压缩结果大小再小点</p>
+</blockquote>
+
+<p>当字符串编码表的长度为1024($2^{10}$)时,在此之前出现的所有编码都小于1024($2^{10}$)，若用长度16来保存编码未免也太浪费空间了。
+只有动态地改变保存长度，才能更加有效地利用存储空间，使压缩效果更好。
+那如何做到这一点呢？还是利用用<strong>“哨兵”</strong>就能做到。</p>
+
+<p>比如字符串编码表长度为512($2^9$)时,设立一个<strong>“变长哨兵值”</strong>为$2^{10} - 1 = 1023$，当字符串编码长度达到这个<strong>“变长哨兵值”</strong>之前，以长度10来保存,达到之后以长度11来保存，且生成新的<strong>“变长哨兵值”</strong>，如此重复，最后达到<strong>“重置哨兵值”</strong>。</p>
+
+<h2 id="完整代码">完整代码</h2>
+
+<script src="//gist.github.com/linw1995/38b805e35d667d45e51612c11c71a70b.js"></script>
+
+<p>GIST: <a href="https://gist.github.com/linw1995/38b805e35d667d45e51612c11c71a70b">LZW Encoding and Data Compression. | linw1995</a></p>
+
+<h2 id="参考">参考</h2>
+
+<blockquote>
+<ul>
+<li><a href="https://zh.wikipedia.org/zh-hans/LZW">LZW | Wikipedia</a></li>
+</ul>
+</blockquote>
+
+
+                <br>
+            </div>
             
-
+            <div class="share">
+                  
+                  <a href="" class="ssk ssk-facebook"></a>
+                  
+                  
+                  <a href="" class="ssk ssk-twitter"></a>
+                  
+                  
+                  <a href="" class="ssk ssk-google-plus"></a>
+                  
+                  
+                  <a href="" class="ssk ssk-linkedin"></a>
+                  
+            </div>
             
-                <div class="posts">
-                
-                
-                    <div class="page-heading">Latest posts</div>
-                    <ul>
+            
+                <div class="navigation">
                     
-                        <li class="groupby">Oct, 2017</li>
-                        
-                            <li class="post-item">
-    <span class="meta">Oct 24, 2017</span>
-    <a href="http://linw1995.com/blog/%E8%87%AA%E5%B7%B1%E6%9D%A5%E5%86%99%E5%8E%8B%E7%BC%A9%E7%AE%97%E6%B3%95LZW/"><span>自己来写压缩算法——LZW</span></a>
-</li>
-
-                        
+                    <div>
+                        <img class="icon" src="http://linw1995.com/img/back.svg" alt="back" />
+                        <a href="http://linw1995.com/blog/%E8%87%AA%E5%B7%B1%E6%9D%A5%E5%86%99%E5%8E%8B%E7%BC%A9%E7%AE%97%E6%B3%95%E5%93%88%E5%A4%AB%E6%9B%BC%E7%AE%97%E6%B3%95/">自己来写压缩算法——哈夫曼算法</a>
+                    </div>
                     
-                        <li class="groupby">Sep, 2017</li>
-                        
-                            <li class="post-item">
-    <span class="meta">Sep 24, 2017</span>
-    <a href="http://linw1995.com/blog/%E8%87%AA%E5%B7%B1%E6%9D%A5%E5%86%99%E5%8E%8B%E7%BC%A9%E7%AE%97%E6%B3%95%E5%93%88%E5%A4%AB%E6%9B%BC%E7%AE%97%E6%B3%95/"><span>自己来写压缩算法——哈夫曼算法</span></a>
-</li>
-
-                        
+                    <div style="width: 100%;"></div>
                     
-                        <li class="groupby">Jul, 2017</li>
-                        
-                            <li class="post-item">
-    <span class="meta">Jul 16, 2017</span>
-    <a href="http://linw1995.com/blog/%E5%88%9D%E8%A7%A3Python%E5%B9%B6%E5%8F%91/"><span>初解Python并发</span></a>
-</li>
-
-                        
-                    
-                        <li class="groupby">May, 2017</li>
-                        
-                            <li class="post-item">
-    <span class="meta">May 21, 2017</span>
-    <a href="http://linw1995.com/blog/%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%96%B9%E6%B3%95%E5%8F%8A%E5%BA%94%E7%94%A8/"><span>蒙特卡洛方法及应用</span></a>
-</li>
-
-                        
-                            <li class="post-item">
-    <span class="meta">May 5, 2017</span>
-    <a href="http://linw1995.com/blog/%E4%BC%AA%E9%9A%8F%E6%9C%BA%E6%95%B0/"><span>伪随机数</span></a>
-</li>
-
-                        
-                    
-                    </ul>
-
-                    
-                        <a href="./blog/" class="see-more">See more ...</a>
-                    
-                
                 </div>
             
-
-            <div class="best-posts">
-            
-            
+            <br>
+            <div class="disqus">
+                <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "linw1995" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
             </div>
+            
         </div>
     </div>
 </div>
+
 <div class="footer column">
     <div class="container">
 

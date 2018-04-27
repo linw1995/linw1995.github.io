@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ulysses on linw1995</title>
+    <link>http://linw1995.com/tags/ulysses/</link>
+    <description>Recent content in Ulysses on linw1995</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <lastBuildDate>Fri, 27 Apr 2018 01:02:13 +0000</lastBuildDate>
+    
+	<atom:link href="http://linw1995.com/tags/ulysses/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>How to use markdown codeblock with highlighting in Ulysses.</title>
+      <link>http://linw1995.com/blog/How-to-use-markdown-codeblock-with-highlighting-in-Ulysses./</link>
+      <pubDate>Fri, 27 Apr 2018 01:02:13 +0000</pubDate>
+      
+      <guid>http://linw1995.com/blog/How-to-use-markdown-codeblock-with-highlighting-in-Ulysses./</guid>
+      <description>Ulysses is the best writing tool on the mac, but is useless to the programmer. Because it is suck when using codeblock. Without language highlighting, reading code is a difficult thing.
+using makedown-it.js and highlight.js to render codeblock add ~~ as prefix into every line of codeblock
+~~ ```json ~~ { &amp;quot;where&amp;quot;: &amp;quot;xiamen&amp;quot;, &amp;quot;date&amp;quot;: &amp;quot;18-04-28&amp;quot; } ~~ ```  then insert this three lines into &amp;lt;div class=&amp;quot;md_codeblock&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;
+~~ &amp;lt;div class=&amp;quot;md_codeblock&amp;quot;&amp;gt; ~~ ```json ~~ { &amp;quot;where&amp;quot;: &amp;quot;xiamen&amp;quot;, &amp;quot;date&amp;quot;: &amp;quot;18-04-28&amp;quot; } ~~ ``` ~~ &amp;lt;/div&amp;gt;  last step!</description>
+    </item>
+    
+  </channel>
+</rss>

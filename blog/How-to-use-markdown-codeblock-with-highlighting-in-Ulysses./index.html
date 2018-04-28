@@ -1132,7 +1132,7 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
                 
     
 
-<p><strong>Ulysses</strong> is the best writing tool on the mac, but is useless to the programmer. Because it is suck when using codeblock. Without language highlighting, reading code is a difficult thing.</p>
+<p><strong>Ulysses</strong> is the best writing tool on the mac but is unusable to the programmer. Because it sucks when using code block. Without language highlighting, reading code is a difficult thing.</p>
 
 <h2 id="using-makedown-it-js-and-highlight-js-to-render-codeblock">using makedown-it.js and highlight.js to render codeblock</h2>
 
@@ -1141,6 +1141,13 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
 <pre><code class="language-plain">~~ ```json
 ~~ { &quot;where&quot;: &quot;xiamen&quot;, &quot;date&quot;: &quot;18-04-28&quot; }
 ~~ ```
+~~
+~~ ```python
+~~ def hello_world():
+~~    print('hello world')
+~~
+~~ hello_world()
+~~ ```
 </code></pre>
 
 <p>then insert this three lines into <code>&lt;div class=&quot;md_codeblock&quot;&gt;&lt;/div&gt;</code></p>
@@ -1148,6 +1155,13 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
 <pre><code class="language-plain">~~ &lt;div class=&quot;md_codeblock&quot;&gt;
 ~~ ```json
 ~~ { &quot;where&quot;: &quot;xiamen&quot;, &quot;date&quot;: &quot;18-04-28&quot; }
+~~ ```
+~~
+~~ ```python
+~~ def hello_world():
+~~    print('hello world')
+~~
+~~ hello_world()
 ~~ ```
 ~~ &lt;/div&gt;
 </code></pre>
@@ -1158,10 +1172,19 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
 ~~ ```json
 ~~ { &quot;where&quot;: &quot;xiamen&quot;, &quot;date&quot;: &quot;18-04-28&quot; }
 ~~ ```
+~~
+~~ ```python
+~~ def hello_world():
+~~    print('hello world')
+~~
+~~ hello_world()
+~~ ```
 ~~ &lt;/div&gt;
+~~
 ~~ &lt;script type=&quot;text/javascript&quot; src=&quot;https://cdnjs.cloudflare.com/ajax/libs/markdown-it/8.4.1/markdown-it.min.js&quot;&gt;&lt;/script&gt;
 ~~ &lt;script type=&quot;text/javascript&quot; src=&quot;https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js&quot;&gt;&lt;/script&gt;
 ~~ &lt;script type=&quot;text/javascript&quot; src=&quot;https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/json.min.js&quot;&gt;&lt;/script&gt;
+~~ &lt;script type=&quot;text/javascript&quot; src=&quot;https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js&quot;&gt;&lt;/script&gt;
 ~~ &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/gruvbox-dark.min.css&quot;&gt;&lt;/link&gt;
 ~~ &lt;script&gt;
 ~~     var md = new markdownit({
@@ -1189,6 +1212,12 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
 <p>Press <kbd>&#8984;</kbd> + <kbd>SHIFT</kbd> + <kbd>p</kbd> then Bang!!!</p>
 
 <pre><code class="language-json">{ &quot;where&quot;: &quot;xiamen&quot;, &quot;date&quot;: &quot;18-04-28&quot; }
+</code></pre>
+
+<pre><code class="language-python">def hello_world():
+    print('hello world')
+
+hello_world()
 </code></pre>
 
 

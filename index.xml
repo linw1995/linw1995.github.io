@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>linw1995</title>
-    <link>http://linw1995.com/</link>
+    <link>https://linw1995.com/</link>
     <description>Recent content on linw1995</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <lastBuildDate>Fri, 27 Apr 2018 01:02:13 +0000</lastBuildDate>
     
-	<atom:link href="http://linw1995.com/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://linw1995.com/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>How to use markdown codeblock with highlighting in Ulysses.</title>
-      <link>http://linw1995.com/blog/How-to-use-markdown-codeblock-with-highlighting-in-Ulysses./</link>
+      <link>https://linw1995.com/blog/How-to-use-markdown-codeblock-with-highlighting-in-Ulysses./</link>
       <pubDate>Fri, 27 Apr 2018 01:02:13 +0000</pubDate>
       
-      <guid>http://linw1995.com/blog/How-to-use-markdown-codeblock-with-highlighting-in-Ulysses./</guid>
+      <guid>https://linw1995.com/blog/How-to-use-markdown-codeblock-with-highlighting-in-Ulysses./</guid>
       <description>Ulysses is the best writing tool on the mac but is unusable to the programmer. Because it sucks when using code block. Without language highlighting, reading code is a difficult thing.
 using makedown-it.js and highlight.js to render codeblock add ~~ as prefix into every line of codeblock
 ~~ ```json ~~ { &amp;quot;where&amp;quot;: &amp;quot;xiamen&amp;quot;, &amp;quot;date&amp;quot;: &amp;quot;18-04-28&amp;quot; } ~~ ``` ~~ ~~ ```python ~~ def hello_world(): ~~ print(&#39;hello world&#39;) ~~ ~~ hello_world() ~~ ```  then insert this three lines into &amp;lt;div class=&amp;quot;md_codeblock&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;</description>
@@ -24,28 +24,28 @@ using makedown-it.js and highlight.js to render codeblock add ~~ as prefix into 
     
     <item>
       <title>License</title>
-      <link>http://linw1995.com/license/</link>
+      <link>https://linw1995.com/license/</link>
       <pubDate>Thu, 15 Feb 2018 00:56:01 +0800</pubDate>
       
-      <guid>http://linw1995.com/license/</guid>
+      <guid>https://linw1995.com/license/</guid>
       <description>本作品采用知识共享署名-非商业性使用-禁止演绎 3.0 未本地化版本许可协议进行许可。</description>
     </item>
     
     <item>
       <title>About</title>
-      <link>http://linw1995.com/about/</link>
+      <link>https://linw1995.com/about/</link>
       <pubDate>Wed, 14 Feb 2018 21:59:59 +0800</pubDate>
       
-      <guid>http://linw1995.com/about/</guid>
+      <guid>https://linw1995.com/about/</guid>
       <description>  现在是一名大四学生，就读于集美大学 就职于美图，数据研发工程师  Links  Codewars CodePen  </description>
     </item>
     
     <item>
       <title>自己来写压缩算法——LZW</title>
-      <link>http://linw1995.com/blog/%E8%87%AA%E5%B7%B1%E6%9D%A5%E5%86%99%E5%8E%8B%E7%BC%A9%E7%AE%97%E6%B3%95LZW/</link>
+      <link>https://linw1995.com/blog/%E8%87%AA%E5%B7%B1%E6%9D%A5%E5%86%99%E5%8E%8B%E7%BC%A9%E7%AE%97%E6%B3%95LZW/</link>
       <pubDate>Tue, 24 Oct 2017 08:52:58 +0000</pubDate>
       
-      <guid>http://linw1995.com/blog/%E8%87%AA%E5%B7%B1%E6%9D%A5%E5%86%99%E5%8E%8B%E7%BC%A9%E7%AE%97%E6%B3%95LZW/</guid>
+      <guid>https://linw1995.com/blog/%E8%87%AA%E5%B7%B1%E6%9D%A5%E5%86%99%E5%8E%8B%E7%BC%A9%E7%AE%97%E6%B3%95LZW/</guid>
       <description>之前用哈夫曼算法，把固定长的字符编码根据其出现次数，编码为不固定长的编码。而这次介绍的算法恰恰相反，该算法是把不等长的字符串，编码为固定长的编码。
 LZW 蓝博-立夫-卫曲编码法（Lempel-Ziv-Welch，缩写LZW），是亚伯拉罕·蓝波、杰可布·立夫与泰瑞·卫曲共同提出的一种无损数据压缩演算法。与霍夫曼编码相比，LZW把不同长度的字符串转换为固定长的编码。该方法不需要事先对数据做任何分析，所以可以流式地对文件进行处理。
 原理 编码 首先先将单字符建立成一个字符串编码表，分别给予编号。
@@ -55,10 +55,10 @@ LZW 蓝博-立夫-卫曲编码法（Lempel-Ziv-Welch，缩写LZW），是亚伯�
     
     <item>
       <title>自己来写压缩算法——哈夫曼算法</title>
-      <link>http://linw1995.com/blog/%E8%87%AA%E5%B7%B1%E6%9D%A5%E5%86%99%E5%8E%8B%E7%BC%A9%E7%AE%97%E6%B3%95%E5%93%88%E5%A4%AB%E6%9B%BC%E7%AE%97%E6%B3%95/</link>
+      <link>https://linw1995.com/blog/%E8%87%AA%E5%B7%B1%E6%9D%A5%E5%86%99%E5%8E%8B%E7%BC%A9%E7%AE%97%E6%B3%95%E5%93%88%E5%A4%AB%E6%9B%BC%E7%AE%97%E6%B3%95/</link>
       <pubDate>Sun, 24 Sep 2017 22:24:08 +0000</pubDate>
       
-      <guid>http://linw1995.com/blog/%E8%87%AA%E5%B7%B1%E6%9D%A5%E5%86%99%E5%8E%8B%E7%BC%A9%E7%AE%97%E6%B3%95%E5%93%88%E5%A4%AB%E6%9B%BC%E7%AE%97%E6%B3%95/</guid>
+      <guid>https://linw1995.com/blog/%E8%87%AA%E5%B7%B1%E6%9D%A5%E5%86%99%E5%8E%8B%E7%BC%A9%E7%AE%97%E6%B3%95%E5%93%88%E5%A4%AB%E6%9B%BC%E7%AE%97%E6%B3%95/</guid>
       <description>一般文件的编码都是等长的，一些常用字符的编码与很少用到的等长，可若是编码是变长的呢？无疑可以使整个文件大小减小。为了解码时不遇到任何歧义的问题，则每个有效字符所代表的变长编码不能是其它字符的前缀，这种编码也叫做前缀编码。而如何做到这一点呢，接下的内容会尽可能地讲明白。
 哈夫曼算法 若是把等长的编码(一字节)用平衡二叉树来表示，字符共有256个，那么树的深度就有 $\log_{2}{256}=8$ 。
 如果变作变长编码，那么所有有儿子（child）的节点（node）都不能用来表示，唯有子叶（leaf，没有儿子的节点）才可以用来表示。这是因为每个有效字符所代表的变长编码不能是其它字符的前缀。而且树结构也不可能是平衡二叉树了，树的深度肯定会大于8。
@@ -69,20 +69,20 @@ LZW 蓝博-立夫-卫曲编码法（Lempel-Ziv-Welch，缩写LZW），是亚伯�
     
     <item>
       <title>初解Python并发</title>
-      <link>http://linw1995.com/blog/%E5%88%9D%E8%A7%A3Python%E5%B9%B6%E5%8F%91/</link>
+      <link>https://linw1995.com/blog/%E5%88%9D%E8%A7%A3Python%E5%B9%B6%E5%8F%91/</link>
       <pubDate>Sun, 16 Jul 2017 21:28:07 +0000</pubDate>
       
-      <guid>http://linw1995.com/blog/%E5%88%9D%E8%A7%A3Python%E5%B9%B6%E5%8F%91/</guid>
+      <guid>https://linw1995.com/blog/%E5%88%9D%E8%A7%A3Python%E5%B9%B6%E5%8F%91/</guid>
       <description>前言 昨天（2017年7月15日）偶然看到这个视频，看完之后豁然开朗，忍不住要分享给大家。   并发Demo 视频中举了个例子，用socket写了个迷你服务，只有一个作用，计算Fibonacci……
 # -*- coding: utf-8 -*- # server.py import socket def fib(n): if n &amp;lt;= 2: return 1 else: return fib(n - 1) + fib(n - 2) def server(addr, port): sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM) sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1) sock.bind((addr, port)) sock.listen(5) while True: client, addr = sock.accept() print(&#39;Connection&#39;, addr) handler(client) def handler(client): while True: req = client.recv(100) if not req: break n = int(req) result = fib(n) resp = str(result).</description>
     </item>
     
     <item>
       <title>蒙特卡洛方法及应用</title>
-      <link>http://linw1995.com/blog/%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%96%B9%E6%B3%95%E5%8F%8A%E5%BA%94%E7%94%A8/</link>
+      <link>https://linw1995.com/blog/%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%96%B9%E6%B3%95%E5%8F%8A%E5%BA%94%E7%94%A8/</link>
       <pubDate>Sun, 21 May 2017 03:03:20 +0000</pubDate>
       
-      <guid>http://linw1995.com/blog/%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%96%B9%E6%B3%95%E5%8F%8A%E5%BA%94%E7%94%A8/</guid>
+      <guid>https://linw1995.com/blog/%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%96%B9%E6%B3%95%E5%8F%8A%E5%BA%94%E7%94%A8/</guid>
       <description>蒙特卡洛方法（英语：Monte Carlo method），也称统计模拟方法，是1940年代中期由于科学技术的发展和电子计算机的发明，而提出的一种以概率统计理论为指导的数值计算方法。是指使用随机数（或更常见的伪随机数）来解决很多计算问题的方法。
 20世纪40年代，在冯·诺伊曼，斯塔尼斯拉夫·乌拉姆和尼古拉斯·梅特罗波利斯在洛斯阿拉莫斯国家实验室为核武器计划工作时，发明了蒙特卡洛方法。因为乌拉姆的叔叔经常在摩纳哥的蒙特卡洛赌场输钱得名，而蒙特卡罗方法正是以概率为基础的方法。
 与它对应的是确定性算法。
@@ -97,10 +97,10 @@ LZW 蓝博-立夫-卫曲编码法（Lempel-Ziv-Welch，缩写LZW），是亚伯�
     
     <item>
       <title>伪随机数</title>
-      <link>http://linw1995.com/blog/%E4%BC%AA%E9%9A%8F%E6%9C%BA%E6%95%B0/</link>
+      <link>https://linw1995.com/blog/%E4%BC%AA%E9%9A%8F%E6%9C%BA%E6%95%B0/</link>
       <pubDate>Fri, 05 May 2017 22:42:12 +0000</pubDate>
       
-      <guid>http://linw1995.com/blog/%E4%BC%AA%E9%9A%8F%E6%9C%BA%E6%95%B0/</guid>
+      <guid>https://linw1995.com/blog/%E4%BC%AA%E9%9A%8F%E6%9C%BA%E6%95%B0/</guid>
       <description>序  伪随机性（英语：Pseudorandomness）是指一个过程似乎是随机的，但实际上并不是。例如伪随机数（或称伪乱数），是使用一个确定性的算法计算出来的似乎是随机的数序，因此伪随机数实际上并不随机。在计算伪随机数时假如使用的开始值不变的话，那么伪随机数的数序也不变。伪随机数的随机性可以用它的统计特性来衡量，其主要特征是每个数出现的可能性和它出现时与数序中其它数的关系。伪随机数的优点是它的计算比较简单，而且只使用少数数值很难推算出计算它的算法。一般人们使用一个假的随机数，比如电脑上的时间作为计算伪随机数的开始值。
  产生随机数的方法  线性同余法 平方取中法 M-Sequence 梅森旋转算法 伪随机数二进制数列  其中使用最多的是线性同余法和梅森旋转算法，下面主要介绍一下线性同余法
 线性同余法（LCG linear congruential generator） 线性同余方法（LCG）是个产生伪随机数的方法。 它是根据递归公式： $$N_{j+1}\equiv (A\times N_{j}+C){\pmod {M}}$$ 其中$A,C,M$是产生器设定的常数。
@@ -109,10 +109,10 @@ Python implementation class Random: def __init__(self, A, C, M, seed=0): self._A
     
     <item>
       <title>AA树的平衡与再平衡</title>
-      <link>http://linw1995.com/blog/AA%E6%A0%91%E7%9A%84%E5%B9%B3%E8%A1%A1%E4%B8%8E%E5%86%8D%E5%B9%B3%E8%A1%A1/</link>
+      <link>https://linw1995.com/blog/AA%E6%A0%91%E7%9A%84%E5%B9%B3%E8%A1%A1%E4%B8%8E%E5%86%8D%E5%B9%B3%E8%A1%A1/</link>
       <pubDate>Thu, 27 Apr 2017 12:38:13 +0000</pubDate>
       
-      <guid>http://linw1995.com/blog/AA%E6%A0%91%E7%9A%84%E5%B9%B3%E8%A1%A1%E4%B8%8E%E5%86%8D%E5%B9%B3%E8%A1%A1/</guid>
+      <guid>https://linw1995.com/blog/AA%E6%A0%91%E7%9A%84%E5%B9%B3%E8%A1%A1%E4%B8%8E%E5%86%8D%E5%B9%B3%E8%A1%A1/</guid>
       <description>介绍  AA树在计算机科学一种形式的自平衡二叉查找树用于高效存储和检索序数据。AA树的名称是由它的发明者*Arne Andersson*而来。 AA树是红黑树的一种变种，是*Arne Andersson教授在1993年年在他的论文&amp;ldquo;Balanced search trees made simple&amp;rdquo;*中介绍，设计的目的是减少红黑树考虑的不同情况，区别于红黑树的是，AA树的红节点只能作为右叶子。换句话说，没有红节点可以是一个左子儿。这导致代替2-3-4树，从而大大简化了维护2-3树的模拟。维护红黑树的平衡需要考虑7种不同的情况:
   因为AA树有严格的条件(红节点只能为右节点)，故只需考虑2种情形:
  AA树是2-3树的模拟，2-3树和AA树是等距同构的。其节点类型如下

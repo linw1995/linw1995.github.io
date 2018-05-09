@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Markdown on linw1995</title>
-    <link>http://linw1995.com/tags/markdown/</link>
+    <link>https://linw1995.com/tags/markdown/</link>
     <description>Recent content in Markdown on linw1995</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <lastBuildDate>Fri, 27 Apr 2018 01:02:13 +0000</lastBuildDate>
     
-	<atom:link href="http://linw1995.com/tags/markdown/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://linw1995.com/tags/markdown/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>How to use markdown codeblock with highlighting in Ulysses.</title>
-      <link>http://linw1995.com/blog/How-to-use-markdown-codeblock-with-highlighting-in-Ulysses./</link>
+      <link>https://linw1995.com/blog/How-to-use-markdown-codeblock-with-highlighting-in-Ulysses./</link>
       <pubDate>Fri, 27 Apr 2018 01:02:13 +0000</pubDate>
       
-      <guid>http://linw1995.com/blog/How-to-use-markdown-codeblock-with-highlighting-in-Ulysses./</guid>
+      <guid>https://linw1995.com/blog/How-to-use-markdown-codeblock-with-highlighting-in-Ulysses./</guid>
       <description>Ulysses is the best writing tool on the mac but is unusable to the programmer. Because it sucks when using code block. Without language highlighting, reading code is a difficult thing.
 using makedown-it.js and highlight.js to render codeblock add ~~ as prefix into every line of codeblock
 ~~ ```json ~~ { &amp;quot;where&amp;quot;: &amp;quot;xiamen&amp;quot;, &amp;quot;date&amp;quot;: &amp;quot;18-04-28&amp;quot; } ~~ ``` ~~ ~~ ```python ~~ def hello_world(): ~~ print(&#39;hello world&#39;) ~~ ~~ hello_world() ~~ ```  then insert this three lines into &amp;lt;div class=&amp;quot;md_codeblock&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;</description>

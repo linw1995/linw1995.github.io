@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Go on linw1995</title>
-    <link>http://linw1995.com/tags/go/</link>
+    <link>https://linw1995.com/tags/go/</link>
     <description>Recent content in Go on linw1995</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <lastBuildDate>Sun, 21 May 2017 03:03:20 +0000</lastBuildDate>
     
-	<atom:link href="http://linw1995.com/tags/go/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://linw1995.com/tags/go/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>蒙特卡洛方法及应用</title>
-      <link>http://linw1995.com/blog/%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%96%B9%E6%B3%95%E5%8F%8A%E5%BA%94%E7%94%A8/</link>
+      <link>https://linw1995.com/blog/%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%96%B9%E6%B3%95%E5%8F%8A%E5%BA%94%E7%94%A8/</link>
       <pubDate>Sun, 21 May 2017 03:03:20 +0000</pubDate>
       
-      <guid>http://linw1995.com/blog/%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%96%B9%E6%B3%95%E5%8F%8A%E5%BA%94%E7%94%A8/</guid>
+      <guid>https://linw1995.com/blog/%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%96%B9%E6%B3%95%E5%8F%8A%E5%BA%94%E7%94%A8/</guid>
       <description>蒙特卡洛方法（英语：Monte Carlo method），也称统计模拟方法，是1940年代中期由于科学技术的发展和电子计算机的发明，而提出的一种以概率统计理论为指导的数值计算方法。是指使用随机数（或更常见的伪随机数）来解决很多计算问题的方法。
 20世纪40年代，在冯·诺伊曼，斯塔尼斯拉夫·乌拉姆和尼古拉斯·梅特罗波利斯在洛斯阿拉莫斯国家实验室为核武器计划工作时，发明了蒙特卡洛方法。因为乌拉姆的叔叔经常在摩纳哥的蒙特卡洛赌场输钱得名，而蒙特卡罗方法正是以概率为基础的方法。
 与它对应的是确定性算法。

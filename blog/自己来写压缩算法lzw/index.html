@@ -6,14 +6,13 @@
 <meta name="HandheldFriendly" content="True">
 <meta name="MobileOptimized" content="320">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="referrer" content="no-referrer">
 <meta name="description" content="Example blog">
 
 
     <meta property="twitter:site" content="@linw1995">
 
 <meta property="og:site_name" content="linw1995" />
-<meta property="og:locale" content="nn_NO" />
+<meta property="og:locale" content="en-US" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://linw1995.com/blog/%E8%87%AA%E5%B7%B1%E6%9D%A5%E5%86%99%E5%8E%8B%E7%BC%A9%E7%AE%97%E6%B3%95LZW/" />
 <meta property="og:title" content="自己来写压缩算法——LZW" />
@@ -195,7 +194,9 @@ div.header .content {
   align-items: center;
 }
 div.header .container .logo {
+  
   max-width: 100px;
+  
   margin-left: -2em;
 }
 div.header .name {
@@ -317,7 +318,8 @@ div.main .content .title-container {
   justify-content: space-between;
 }
 div.main .content .posts {
-  margin-bottom: 4em;
+  
+  
 }
 div.main .content .page-heading {
   font-size: 20px;
@@ -789,11 +791,15 @@ section {
 padding: 0 16px;
 margin-left: 100px;
 margin-right: 100px;
+
 max-width: 750px;
+
 }
 div.column {
 padding: 0 16px;
+
 max-width: 750px;
+
 }
 div.header {
 background-color: transparent;
@@ -808,8 +814,8 @@ div.header .container .logo {
 margin: 0;
 }
 div.header-home .container .logo {
-max-width: 180px;
-margin-left: 20px;
+max-width: 216px;
+margin-left: 24px;
 }
 div.header-home .name-home {
 padding-top: 30px;
@@ -894,11 +900,16 @@ padding-top: 60px;
 padding-bottom: 60px;
 }
 div.footer {
-padding-top: 30px;
+padding-top: 60px;
 padding-bottom: 60px;
 }
 div.main {
 padding-top: 0;
+}
+div.main .content {
+  
+  font-size: 16px;
+  
 }
 div.main .container .content .post-item {
 display: flex;
@@ -907,10 +918,6 @@ padding-left: 1.5em;
 }
 div.main .container .content .post-item .meta {
 display: block;
-}
-div.main.post {
-padding-top: 60px;
-padding-bottom: 60px;
 }
 div.main .content .markdown blockquote {
 padding-right: 5rem;
@@ -1070,7 +1077,7 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
             <nav>
                 <ul>
                     
-                        <li><a href="https://linw1995.com/blog/">Blog</a></li>
+                            <li><a href="https://linw1995.com/blog/">Blog</a></li>
                     
                     
                         
@@ -1093,6 +1100,7 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
 
 
 
+
 <div class="main post non-narrow zero-top-spacing column">
     <div class="container">
         <div class="content">
@@ -1100,7 +1108,9 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
                 <div class="title-container">
                     <div class="page-heading">
 
+    
     自己来写压缩算法——LZW
+    
 
 </div>
 
@@ -1110,7 +1120,9 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
                     
                         
                     
+                    
                     <div class="reading-time middot">3 minute read</div>
+                    
                     <div class="tags">
                         <ul>
                           
@@ -1333,9 +1345,9 @@ def decode(data):
 </blockquote>
 
 
-                <br>
             </div>
             
+            <br>
             <div class="share">
                   
                   <a href="" class="ssk ssk-facebook"></a>
@@ -1352,16 +1364,23 @@ def decode(data):
             </div>
             
             
-                <div class="navigation">
-                    
-                    <div>
-                        <img class="icon" src="https://linw1995.com/img/back.svg" alt="back" />
-                        <a href="https://linw1995.com/blog/%E8%87%AA%E5%B7%B1%E6%9D%A5%E5%86%99%E5%8E%8B%E7%BC%A9%E7%AE%97%E6%B3%95%E5%93%88%E5%A4%AB%E6%9B%BC%E7%AE%97%E6%B3%95/">自己来写压缩算法——哈夫曼算法</a>
-                    </div>
-                    
-                    <div style="width: 100%;"></div>
-                    
+            <br>
+            <div class="navigation">
+                
+                <div>
+                    <img class="icon" src="https://linw1995.com/img/back.svg" alt="back" />
+                    <a href="https://linw1995.com/blog/%E8%87%AA%E5%B7%B1%E6%9D%A5%E5%86%99%E5%8E%8B%E7%BC%A9%E7%AE%97%E6%B3%95%E5%93%88%E5%A4%AB%E6%9B%BC%E7%AE%97%E6%B3%95/">自己来写压缩算法——哈夫曼算法</a>
                 </div>
+                
+                <div style="width: 100%;"></div>
+                
+                <div>
+                    <a href="https://linw1995.com/blog/Python-%E7%89%88%E6%9C%AC%E5%8F%8A%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86%E7%9A%84%E6%9C%80%E7%BB%88%E6%96%B9%E6%A1%88-pyenv-Pipenv/">Python 版本及依赖管理的最终方案 pyenv &#43; Pipenv</a>
+                    <img class="icon" src="https://linw1995.com/img/next.svg" alt="next" />
+                </div>
+                
+            </div>
+            
             
             <br>
             <div class="disqus">
@@ -1387,9 +1406,15 @@ def decode(data):
 <a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
             </div>
             
+
+            
+
+            
         </div>
     </div>
 </div>
+
+
 
 <div class="footer column">
     <div class="container">
@@ -1414,21 +1439,27 @@ def decode(data):
         
 
         
-            <a href="https://github.com/linw1995" target="_blank">
+
+        
+
+        
+            <a href="https://github.com/linw1995" rel=me target="_blank">
                 <img class="icon" src="https://linw1995.com/img/github.svg" alt="github" />
             </a>
         
 
         
-            <a href="https://twitter.com/linw1995" target="_blank">
+            <a href="https://twitter.com/linw1995" rel=me target="_blank">
                 <img class="icon" src="https://linw1995.com/img/twitter.svg" alt="twitter" />
             </a>
         
 
         
-            <a href="https://www.linkedin.com/in/%e7%8e%ae-%e6%9e%97-061655126" target="_blank">
+            <a href="https://www.linkedin.com/in/%e7%8e%ae-%e6%9e%97-061655126" rel=me target="_blank">
                 <img class="icon" src="https://linw1995.com/img/linkedin.svg" alt="linkedin" />
             </a>
+        
+
         
 
         
@@ -1467,6 +1498,8 @@ def decode(data):
 
 
   <script src="https://linw1995.com/js/social-share-kit.min.js" defer></script>
+
+
 
 
 

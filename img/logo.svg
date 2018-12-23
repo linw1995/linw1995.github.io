@@ -5,8 +5,8 @@
       ]]>
   </style>
   <!-- fix safari mix-blend-mode screen need dark background.-->
-  <circle class="c1 bg" r="51.2" fill="black">   </circle>
-  <circle class="c2 bg" r="51.2" fill="black"> </circle>
+  <circle class="c1 bg" r="51.2" fill="black"></circle>
+  <circle class="c2 bg" r="51.2" fill="black"></circle>
   <circle class="c3 bg" r="51.2" fill="black"></circle>
   <!-- fix end-->
   <circle class="c1" r="51.2" fill="rgba(255, 0, 0, 255)"></circle>

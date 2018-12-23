@@ -14,24 +14,24 @@
 <meta property="og:site_name" content="linw1995" />
 <meta property="og:locale" content="en-US" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://linw1995.com/tags/go/" />
-<meta property="og:title" content="Go" />
-<meta property="twitter:title" content="Go">
+<meta property="og:url" content="https://linw1995.com/blog/Python-%E7%89%88%E6%9C%AC%E5%8F%8A%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86%E7%9A%84%E6%9C%80%E7%BB%88%E6%96%B9%E6%A1%88-pyenv-Pipenv/" />
+<meta property="og:title" content="Python 版本及依赖管理的最终方案 pyenv &#43; Pipenv" />
+<meta property="twitter:title" content="Python 版本及依赖管理的最终方案 pyenv &#43; Pipenv">
 
     <meta property="og:image" content="https://linw1995.com//img/banner.png">
     <meta property="twitter:card" content="summary">
     <meta property="twitter:image" content="https://linw1995.com//img/banner.png">
 
-<meta property="og:description" content="">
-<meta property="twitter:description" content="">
+<meta property="og:description" content="pyenv - python多版本管理；Pipenv - 项目依赖管理">
+<meta property="twitter:description" content="pyenv - python多版本管理；Pipenv - 项目依赖管理">
 
 <title>
 
 
-     linw1995 - Go 
+     linw1995 - Python 版本及依赖管理的最终方案 pyenv &#43; Pipenv 
 
 </title>
-<link rel="canonical" href="https://linw1995.com/tags/go/">
+<link rel="canonical" href="https://linw1995.com/blog/Python-%E7%89%88%E6%9C%AC%E5%8F%8A%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86%E7%9A%84%E6%9C%80%E7%BB%88%E6%96%B9%E6%A1%88-pyenv-Pipenv/">
 
 
 <style media="screen">
@@ -1059,8 +1059,6 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
 
 
 
-  <link href="https://linw1995.com/tags/go/index.xml" rel="alternate" type="application/rss+xml" title="linw1995" />
-
 
 </head>
 
@@ -1099,26 +1097,189 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
     </div>
 </div>
 
-<div class="main column">
+
+
+
+
+<div class="main post non-narrow zero-top-spacing column">
     <div class="container">
         <div class="content">
-            <div class="posts">
-                <div class="page-heading">Posts about Go</div>
-                <ul>
-                    
-                        <li class="post-item">
-    <span class="meta">May 21, 2017</span>
-    
-    <a href="https://linw1995.com/blog/%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%96%B9%E6%B3%95%E5%8F%8A%E5%BA%94%E7%94%A8/"><span>蒙特卡洛方法及应用</span></a>
-    
-</li>
+            <div class="front-matter">
+                <div class="title-container">
+                    <div class="page-heading">
 
+    
+    Python 版本及依赖管理的最终方案 pyenv &#43; Pipenv
+    
+
+</div>
+
+                </div>
+                <div class="meta">
+                    <div class="date" title="Sat Dec 22 2018 22:45:00 UTC">Dec 22, 2018</div>
                     
-                </ul>
+                        
+                    
+                    
+                    <div class="reading-time middot">1 minute read</div>
+                    
+                    <div class="tags">
+                        <ul>
+                          
+                            <li class="middot"><a href="https://linw1995.com/tags/Python">Python</a> </li>
+                          
+                            <li class="middot"><a href="https://linw1995.com/tags/Dev">Dev</a> </li>
+                          
+                        </ul>
+                    </div>
+                    <div class="tags">
+                        <ul>
+                          
+                          
+                        </ul>
+                    </div>
+                </div>
             </div>
+            <div class="markdown">
+                
+    
+
+<h2 id="前言">前言</h2>
+
+<p>作为个程序员，总会遇到这些问题：如何升级系统的 Python 版本；如何安装多个 Python 版本；如何隔离项目的依赖；在开发机上好好的，为什么线上、CI 就运行失败了呢</p>
+
+<ol>
+<li>通过下载 Python 源码编译安装（最好不要覆盖掉系统原有的 Python，可安装在自己的 home 目录或者其他路径下）</li>
+<li>通过 Virtualenv 来隔离项目 Python 环境</li>
+<li>通过 <code>pip freeze &gt; requirements.txt</code> 和 <code>pip install -r requirements.txt</code>来固定依赖的版本，来确保重新安装后的 Python 环境是一致</li>
+</ol>
+
+<p>随着开发项目的增多，mac 上的 Python 环境越来越复杂，就像下面这张图一样。面对这样的复杂的环境，管理起来太折磨人了，且会因冗余而浪费硬盘空间。</p>
+
+<p><a href="https://xkcd.com/1987/"><img src="https://linw1995.com/blog/Python 版本及依赖管理的最终方案 pyenv + Pipenv/01.png" alt="版本及依赖管理指北" /></a></p>
+
+<p>那么我们如何来管理越来越复杂的 Python 环境？解决该问题的最终方案是：使用 <a href="https://github.com/pyenv/pyenv"><strong>pyenv</strong></a> 管理多个 python 版本；使用 <a href="https://github.com/pypa/pipenv"><strong>Pipenv</strong></a> 管理项目所需要的依赖。</p>
+
+<h2 id="pyenv">pyenv</h2>
+
+<p>Github Repo: <a href="https://github.com/pyenv/pyenv">pyenv/pyenv</a></p>
+
+<p>参照此教程安装 pyenv</p>
+
+<blockquote>
+<p><a href="https://github.com/pyenv/pyenv#installation">installation | pyenv</a></p>
+</blockquote>
+
+<p>使用</p>
+
+<pre><code class="language-shell">pyenv install --list  # 列出所有可安装的版本
+pyenv install 3.7.1  # 安装指定版本
+pyenv shell 3.7.1  # 激活该版本环境
+pyenv global 3.7.1  # 设置全局为该版本
+pyenv local 3.7.1  # 设置进入当前目录后，Python 环境自动切换为该版本
+</code></pre>
+
+<blockquote>
+<p>安装失败可能是因为编译 Python 所需要的依赖没有安装。
+<a href="https://github.com/pyenv/pyenv/wiki#troubleshooting--faq">troubleshooting/FAQ | pyenv/wiki</a>
+如果想在安装的时候，把 Python 编译为共享库 ，请看 FAQ 的最后两节</p>
+</blockquote>
+
+<h2 id="pipenv">pipenv</h2>
+
+<p>Github Repo: <a href="https://github.com/pypa/pipenv">pypa/pipenv</a></p>
+
+<p>使用其管理各项目的依赖</p>
+
+<pre><code class="language-shell">pipenv --python 3.7  # 创建 Python 3.7 的虚拟环境
+pipenv install requests  # 安装依赖
+pipenv install black rope isort flake8 --dev  # 安装开发依赖
+pipenv shell  # 激活该虚拟环境
+pipenv run pip install requests  # 在该虚拟环境下执行命令
+# ...
+</code></pre>
+
+<p>具体怎么使用就看看其 <a href="https://github.com/pypa/pipenv/blob/master/README.md">README.md</a> 吧</p>
+
+<p>也可以看作者的 PyCon 分享 <a href="https://www.youtube.com/watch?v=GBQAKldqgZs">Kenneth Reitz - Pipenv: The Future of Python Dependency Management - PyCon 2018 | Youtube</a></p>
+
+<h2 id="参考链接">参考链接</h2>
+
+<ul>
+<li><a href="https://xkcd.com/1987/">Python Environment | XKCD </a></li>
+<li><a href="https://github.com/pyenv/pyenv">pyenv/pyenv</a></li>
+<li><a href="https://github.com/pypa/pipenv">pypa/pipenv</a></li>
+<li><a href="https://www.youtube.com/watch?v=GBQAKldqgZs">Kenneth Reitz - Pipenv: The Future of Python Dependency Management - PyCon 2018 | Youtube</a></li>
+<li><a href="https://pythonguidecn.readthedocs.io/zh/latest/dev/virtualenvs.html">Pipenv &amp; 虚拟环境 | Python最佳实践指南</a></li>
+</ul>
+
+
+            </div>
+            
+            <br>
+            <div class="share">
+                  
+                  <a href="" class="ssk ssk-facebook"></a>
+                  
+                  
+                  <a href="" class="ssk ssk-twitter"></a>
+                  
+                  
+                  <a href="" class="ssk ssk-google-plus"></a>
+                  
+                  
+                  <a href="" class="ssk ssk-linkedin"></a>
+                  
+            </div>
+            
+            
+            <br>
+            <div class="navigation">
+                
+                <div>
+                    <img class="icon" src="https://linw1995.com/img/back.svg" alt="back" />
+                    <a href="https://linw1995.com/blog/%E8%87%AA%E5%B7%B1%E6%9D%A5%E5%86%99%E5%8E%8B%E7%BC%A9%E7%AE%97%E6%B3%95LZW/">自己来写压缩算法——LZW</a>
+                </div>
+                
+                <div style="width: 100%;"></div>
+                
+            </div>
+            
+            
+            <br>
+            <div class="disqus">
+                <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "linw1995" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+            </div>
+            
+
+            
+
+            
         </div>
     </div>
 </div>
+
+
+
 <div class="footer column">
     <div class="container">
 

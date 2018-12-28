@@ -6,10 +6,20 @@
     <description>Recent content on linw1995</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Sat, 22 Dec 2018 22:45:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 27 Dec 2018 23:59:59 +0000</lastBuildDate>
     
 	<atom:link href="https://linw1995.com/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Run Twisted in another thread</title>
+      <link>https://linw1995.com/blog/Run-Twisted-in-another-thread/</link>
+      <pubDate>Thu, 27 Dec 2018 23:59:59 +0000</pubDate>
+      
+      <guid>https://linw1995.com/blog/Run-Twisted-in-another-thread/</guid>
+      <description>Develop a project related to a service project base on Twisted, and consider how to test it. This is a solution. Run Twisted&amp;rsquo;s reactor in another thread and delegating the Twisted functions calling into it.
+import pytest from twisted.internet import reactor as twisted_reactor @pytest.fixture(scope=&amp;quot;session&amp;quot;, autouse=True) def reactor(): t = threading.Thread( target=twisted_reactor.run, kwargs={&amp;quot;installSignalHandlers&amp;quot;: False}, daemon=True, ) t.start() yield twisted_reactor twisted_reactor.callFromThread(twisted_reactor.stop) t.join()  Use this fixture run a reactor in another thread.</description>
+    </item>
     
     <item>
       <title>Python 版本及依赖管理的最终方案 pyenv &#43; Pipenv</title>

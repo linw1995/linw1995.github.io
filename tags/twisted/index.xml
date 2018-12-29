@@ -18,7 +18,8 @@
       
       <guid>https://linw1995.com/blog/Run-Twisted-in-another-thread/</guid>
       <description>Develop a project related to a service project base on Twisted, and consider how to test it. This is a solution. Run Twisted&amp;rsquo;s reactor in another thread and delegating the Twisted functions calling into it.
-import pytest from twisted.internet import reactor as twisted_reactor @pytest.fixture(scope=&amp;quot;session&amp;quot;, autouse=True) def reactor(): t = threading.Thread( target=twisted_reactor.run, kwargs={&amp;quot;installSignalHandlers&amp;quot;: False}, daemon=True, ) t.start() yield twisted_reactor twisted_reactor.callFromThread(twisted_reactor.stop) t.join()  Use this fixture run a reactor in another thread.</description>
+Use this fixture run a reactor in another thread. Due to the reactor is not restartable, so the fixture&amp;rsquo;s scope is &amp;ldquo;session&amp;rdquo;.
+import pytest from twisted.internet import reactor as twisted_reactor @pytest.fixture(scope=&amp;quot;session&amp;quot;, autouse=True) def reactor(): t = threading.</description>
     </item>
     
   </channel>

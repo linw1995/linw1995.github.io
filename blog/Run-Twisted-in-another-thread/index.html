@@ -1147,6 +1147,8 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
 <p>Develop a project related to a service project base on Twisted, and consider how to test it.
 This is a solution. Run Twisted&rsquo;s reactor in another thread and delegating the Twisted functions calling into it.</p>
 
+<p>Use this fixture run a reactor in another thread. Due to the reactor is not restartable, so the fixture&rsquo;s scope is &ldquo;session&rdquo;.</p>
+
 <pre><code class="language-python">import pytest
 
 from twisted.internet import reactor as twisted_reactor
@@ -1168,15 +1170,9 @@ def reactor():
 
 </code></pre>
 
-<p>Use this fixture run a reactor in another thread. Due to the reactor is not restartable, so the fixture&rsquo;s scope is &ldquo;session&rdquo;.</p>
+<p>Write a simple Echo Protocol for example.</p>
 
-<pre><code class="language-python">import socket
-import threading
-
-import pytest
-
-from twisted.application import internet
-from twisted.internet.protocol import Protocol, Factory
+<pre><code class="language-python">from twisted.internet.protocol import Protocol, Factory
 
 class Echo(Protocol):
     def dataReceived(self, data):
@@ -1186,6 +1182,17 @@ class Echo(Protocol):
 class EchoFactory(Factory):
     def buildProtocol(self, addr):
         return Echo()
+
+</code></pre>
+
+<p>Use Pytest fixture to run an echo service.</p>
+
+<pre><code class="language-python">import socket
+import threading
+
+import pytest
+
+from twisted.application import internet
 
 
 @pytest.fixture
@@ -1244,7 +1251,7 @@ def echo_service(reactor, port):
 
 </code></pre>
 
-<p><strong>Write base RPC methods unit test. Then using stubs to do the high-level encapsulation unit test.</strong></p>
+<p><strong>Tip</strong>:Write base RPC methods unit test. Then using stubs to do the high-level encapsulation unit test.</p>
 
 <h2 id="complete-code">Complete Code</h2>
 

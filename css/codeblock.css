@@ -1,0 +1,4 @@
+div.main .content .markdown pre {
+    word-wrap: normal;
+    overflow-x: auto;
+}

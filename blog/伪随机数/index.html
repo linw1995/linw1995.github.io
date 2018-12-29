@@ -964,6 +964,10 @@ margin-left: -4%;
 
 
 
+  <style type="text/css" media="screen">
+    .progressive{overflow:hidden;position:relative;background:#efefef}.progressive__img{width:100%;height:100%;position:absolute;-webkit-transform:translateZ(0);transform:translateZ(0)}.progressive--not-loaded{filter:blur(30px);-webkit-filter:blur(30px)}.progressive--is-loaded{filter:blur(20px);-webkit-filter:blur(20px);-webkit-animation:sharpen .5s both;animation:sharpen .5s both}@-webkit-keyframes sharpen{from{filter:blur(20px);-webkit-filter:blur(20px)}to{filter:blur(0);-webkit-filter:blur(0)}}@keyframes sharpen{from{filter:blur(20px);-webkit-filter:blur(20px)}to{filter:blur(0);-webkit-filter:blur(0)}}
+  </style>
+
 
 
   <style type="text/css" media="screen">
@@ -1048,6 +1052,10 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
   </style>
 
 
+
+  <link rel="stylesheet" href="https://linw1995.com/css/main.css">
+
+  <link rel="stylesheet" href="https://linw1995.com/css/codeblock.css">
 
 
 
@@ -1143,6 +1151,7 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
             <div class="markdown">
                 
     
+    
 
 <h2 id="序">序</h2>
 
@@ -1193,7 +1202,7 @@ $$N_{j+1}\equiv (A\times N_{j}+C){\pmod {M}}$$
 
 <h3 id="随机数序列周期长度">随机数序列周期长度</h3>
 
-<p><img src="https://linw1995.com/blog/伪随机数/Linear_congruential_generator_visualisation.svg" alt="Linear_congruential_generator_visualisation.svg" />
+<p><figure class="progressive"><img class="progressive__img progressive--not-loaded" data-progressive="https://linw1995.com/blog/伪随机数/Linear_congruential_generator_visualisation.svg" src="https://linw1995.com/blog/伪随机数/low/Linear_congruential_generator_visualisation.svg" alt="Linear_congruential_generator_visualisation.svg" /></figure>
 <a href="https://en.wikipedia.org/wiki/Linear_congruential_generator#firstHeading"><strong>LCG</strong></a>产生的随机数序列周期最大为$M$，但大部分情况都会少于$M$。要使随机数序列达到最大周期，应符合以下条件：</p>
 
 <ol>
@@ -1212,7 +1221,7 @@ $$N_{j+1}\equiv (A\times N_{j}+C){\pmod {M}}$$
 
 <li><p>当使用<strong>LCG</strong>生成n维空间中的点，则这些点将位于$(n!m)^{1/n}$超平面（hyperplanes）；（Marsaglia&apos;s Theorem）</p>
 
-<p><img src="https://linw1995.com/blog/伪随机数/spectral-test.png" alt="Random(A=65539, C=0, M=2**31, seed=1)" /></p>
+<p><figure class="progressive"><img class="progressive__img progressive--not-loaded" data-progressive="https://linw1995.com/blog/伪随机数/spectral-test.png" src="https://linw1995.com/blog/伪随机数/low/spectral-test.png" alt="Random(A=65539, C=0, M=2**31, seed=1)" /></p></figure>
 
 <blockquote>
 <p><a href="https://en.wikipedia.org/wiki/Spectral_test#firstHeading">Spectral test</a>是一种伪随机数生成器（PRNG），线性同余生成器（LCG）的生成的随机数质量的统计检验方法。
@@ -1276,7 +1285,7 @@ def uniformDistributionFactory(a, b):
 
 <h4 id="概率密度图像">概率密度图像</h4>
 
-<p><img src="https://linw1995.com/blog/伪随机数/t01.png" alt="Probability density" /></p>
+<p><figure class="progressive"><img class="progressive__img progressive--not-loaded" data-progressive="https://linw1995.com/blog/伪随机数/t01.png" src="https://linw1995.com/blog/伪随机数/low/t01.png" alt="Probability density" /></p></figure>
 
 <h3 id="指数分布">指数分布</h3>
 
@@ -1328,7 +1337,7 @@ def exponentialDistributionFactory(lam):
 
 <h4 id="概率密度图像-1">概率密度图像</h4>
 
-<p><img src="https://linw1995.com/blog/伪随机数/t02.png" alt="Probability density" /></p>
+<p><figure class="progressive"><img class="progressive__img progressive--not-loaded" data-progressive="https://linw1995.com/blog/伪随机数/t02.png" src="https://linw1995.com/blog/伪随机数/low/t02.png" alt="Probability density" /></p></figure>
 
 <h3 id="正态分布">正态分布</h3>
 
@@ -1414,7 +1423,7 @@ def NormalDistributionFactory(mu, sigma):
 
 <h4 id="概率密度图像-2">概率密度图像</h4>
 
-<p><img src="https://linw1995.com/blog/伪随机数/t03.png" alt="Probability density" /></p>
+<p><figure class="progressive"><img class="progressive__img progressive--not-loaded" data-progressive="https://linw1995.com/blog/伪随机数/t03.png" src="https://linw1995.com/blog/伪随机数/low/t03.png" alt="Probability density" /></p></figure>
 
 <h2 id="结论">结论</h2>
 
@@ -1585,6 +1594,8 @@ def NormalDistributionFactory(mu, sigma):
 
 
 
+  <script src="https://linw1995.com/js/progressively.min.js" defer></script>
+
 
 
   <script src="https://linw1995.com/js/social-share-kit.min.js" defer></script>
@@ -1599,6 +1610,8 @@ def NormalDistributionFactory(mu, sigma):
     
       hljs.initHighlighting();
     
+    
+      progressively.init({delay: 30, throttle: 50});
     
     
       SocialShareKit.init({

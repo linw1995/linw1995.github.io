@@ -964,6 +964,10 @@ margin-left: -4%;
 
 
 
+  <style type="text/css" media="screen">
+    .progressive{overflow:hidden;position:relative;background:#efefef}.progressive__img{width:100%;height:100%;position:absolute;-webkit-transform:translateZ(0);transform:translateZ(0)}.progressive--not-loaded{filter:blur(30px);-webkit-filter:blur(30px)}.progressive--is-loaded{filter:blur(20px);-webkit-filter:blur(20px);-webkit-animation:sharpen .5s both;animation:sharpen .5s both}@-webkit-keyframes sharpen{from{filter:blur(20px);-webkit-filter:blur(20px)}to{filter:blur(0);-webkit-filter:blur(0)}}@keyframes sharpen{from{filter:blur(20px);-webkit-filter:blur(20px)}to{filter:blur(0);-webkit-filter:blur(0)}}
+  </style>
+
 
 
   <style type="text/css" media="screen">
@@ -1048,6 +1052,10 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
   </style>
 
 
+
+  <link rel="stylesheet" href="https://linw1995.com/css/main.css">
+
+  <link rel="stylesheet" href="https://linw1995.com/css/codeblock.css">
 
 
 
@@ -1142,6 +1150,7 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
             </div>
             <div class="markdown">
                 
+    
     
 
 <p>一般文件的编码都是等长的，一些常用字符的编码与很少用到的等长，可若是编码是变长的呢？无疑可以使整个文件大小减小。为了解码时不遇到任何歧义的问题，则<strong>每个有效字符所代表的变长编码不能是其它字符的前缀</strong>，这种编码也叫做<strong>前缀编码</strong>。而如何做到这一点呢，接下的内容会尽可能地讲明白。</p>
@@ -1680,6 +1689,8 @@ b'\xff\x04\x00\x00\x00\x00\xff\x01...
 
 
 
+  <script src="https://linw1995.com/js/progressively.min.js" defer></script>
+
 
 
   <script src="https://linw1995.com/js/social-share-kit.min.js" defer></script>
@@ -1694,6 +1705,8 @@ b'\xff\x04\x00\x00\x00\x00\xff\x01...
     
       hljs.initHighlighting();
     
+    
+      progressively.init({delay: 30, throttle: 50});
     
     
       SocialShareKit.init({

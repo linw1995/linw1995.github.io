@@ -964,6 +964,10 @@ margin-left: -4%;
 
 
 
+  <style type="text/css" media="screen">
+    .progressive{overflow:hidden;position:relative;background:#efefef}.progressive__img{width:100%;height:100%;position:absolute;-webkit-transform:translateZ(0);transform:translateZ(0)}.progressive--not-loaded{filter:blur(30px);-webkit-filter:blur(30px)}.progressive--is-loaded{filter:blur(20px);-webkit-filter:blur(20px);-webkit-animation:sharpen .5s both;animation:sharpen .5s both}@-webkit-keyframes sharpen{from{filter:blur(20px);-webkit-filter:blur(20px)}to{filter:blur(0);-webkit-filter:blur(0)}}@keyframes sharpen{from{filter:blur(20px);-webkit-filter:blur(20px)}to{filter:blur(0);-webkit-filter:blur(0)}}
+  </style>
+
 
 
   <style type="text/css" media="screen">
@@ -1048,6 +1052,10 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
   </style>
 
 
+
+  <link rel="stylesheet" href="https://linw1995.com/css/main.css">
+
+  <link rel="stylesheet" href="https://linw1995.com/css/codeblock.css">
 
 
 
@@ -1143,6 +1151,7 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
             <div class="markdown">
                 
     
+    
 
 <blockquote>
 <p>蒙特卡洛方法（英语：Monte Carlo method），也称统计模拟方法，是1940年代中期由于科学技术的发展和电子计算机的发明，而提出的一种以概率统计理论为指导的数值计算方法。是指使用随机数（或更常见的伪随机数）来解决很多计算问题的方法。</p>
@@ -1162,7 +1171,7 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
 
 <h3 id="求解圆周率">求解圆周率</h3>
 
-<p><img src="https://linw1995.com/blog/蒙特卡洛方法及应用/pi.gif" alt="圆周率求解" /></p>
+<p><figure class="progressive"><img class="progressive__img progressive--not-loaded" data-progressive="https://linw1995.com/blog/蒙特卡洛方法及应用/pi.gif" src="https://linw1995.com/blog/蒙特卡洛方法及应用/low/pi.gif" alt="圆周率求解" /></p></figure>
 
 <p>圆形的面积为$A_s=\pi r^2$，正方形的面积为$A_q=(2r)^2$, 则产生一对随机数$(x_i, y_i)$落在圆内的概率为：
 $$
@@ -1170,7 +1179,7 @@ p=\frac{A_s}{A_q}=\frac{\pi r^2}{(2r)^2}=\frac{\pi}{4}
 $$
 只要不断产生一对对随机数$(x_i, y_i)$，由于<strong>大数法则（Law of large numbers）</strong>，能以随机事件（落在圆内）出现的频率估计其概率，再求解$\pi$。</p>
 
-<p><img src="https://linw1995.com/blog/蒙特卡洛方法及应用/pi.png" alt="误差与随机抽样次数的关系" /></p>
+<p><figure class="progressive"><img class="progressive__img progressive--not-loaded" data-progressive="https://linw1995.com/blog/蒙特卡洛方法及应用/pi.png" src="https://linw1995.com/blog/蒙特卡洛方法及应用/low/pi.png" alt="误差与随机抽样次数的关系" /></p></figure>
 
 <blockquote>
 <p>代码
@@ -1181,7 +1190,7 @@ $$
 
 <p>假设我们要求解$f(x)=x^2$在$[0, 2]$间的积分，即下图函数曲线与$x$轴围成的面积</p>
 
-<p><img src="https://linw1995.com/blog/蒙特卡洛方法及应用/x2.png" alt="$f(x)=x^2$在$[0, 2]$间的积分" /></p>
+<p><figure class="progressive"><img class="progressive__img progressive--not-loaded" data-progressive="https://linw1995.com/blog/蒙特卡洛方法及应用/x2.png" src="https://linw1995.com/blog/蒙特卡洛方法及应用/low/x2.png" alt="$f(x)=x^2$在$[0, 2]$间的积分" /></p></figure>
 
 <p>其实，求解圆周率其实是在求函数$f(x)=\sqrt{1 - x^2}$在区间$[0, 1]$上的积分。</p>
 
@@ -1532,9 +1541,9 @@ $$
 <a href="https://gist.github.com/linw1995/b078c9cebd7f01aa7bfb46de8c6a8a04">Gist | Metropolis-Hasting Algorithm</a></p>
 </blockquote>
 
-<p><img src="https://linw1995.com/blog/蒙特卡洛方法及应用/normal-distribution.png" alt="正态分布" /></p>
+<p><figure class="progressive"><img class="progressive__img progressive--not-loaded" data-progressive="https://linw1995.com/blog/蒙特卡洛方法及应用/normal-distribution.png" src="https://linw1995.com/blog/蒙特卡洛方法及应用/low/normal-distribution.png" alt="正态分布" /></p></figure>
 
-<p><img src="https://linw1995.com/blog/蒙特卡洛方法及应用/two-dimemsion-somekind-distribution.png" alt="某种二维分布" /></p>
+<p><figure class="progressive"><img class="progressive__img progressive--not-loaded" data-progressive="https://linw1995.com/blog/蒙特卡洛方法及应用/two-dimemsion-somekind-distribution.png" src="https://linw1995.com/blog/蒙特卡洛方法及应用/low/two-dimemsion-somekind-distribution.png" alt="某种二维分布" /></p></figure>
 
 <h2 id="误差分析">误差分析</h2>
 
@@ -1585,7 +1594,7 @@ $$
 <p>递归分层抽样过程的是：在每个递归步骤中，使用普通蒙特卡罗算法估计积分和误差。当如果误差估计大于所需精度，则其积分区域被分割为子集，并且把算法重新应用于子集中。
 分层采样算法将采样点集中在函数方差最大的区域，从而减小大差异，使抽样更有效。该思路最热门的实现是<strong>MISER算法</strong>。</p>
 
-<p><img src="https://linw1995.com/blog/蒙特卡洛方法及应用/miser.png" alt="$利用MISER\ Monte\ Carlo求解\pi$" /></p>
+<p><figure class="progressive"><img class="progressive__img progressive--not-loaded" data-progressive="https://linw1995.com/blog/蒙特卡洛方法及应用/miser.png" src="https://linw1995.com/blog/蒙特卡洛方法及应用/low/miser.png" alt="$利用MISER\ Monte\ Carlo求解\pi$" /></p></figure>
 
 <p>上图是用<strong>MISER算法</strong>求解$\pi$的采样点分布图。可以看出采样点形成了弧状轮廓。
 
@@ -1708,7 +1717,7 @@ $$
 <p>最后用<strong>miser</strong>画了个蝙蝠镖的图，哈哈真好看</p>
 </blockquote>
 
-<p><img src="https://linw1995.com/blog/蒙特卡洛方法及应用/batman.png" alt="蝙蝠镖" /></p>
+<p><figure class="progressive"><img class="progressive__img progressive--not-loaded" data-progressive="https://linw1995.com/blog/蒙特卡洛方法及应用/batman.png" src="https://linw1995.com/blog/蒙特卡洛方法及应用/low/batman.png" alt="蝙蝠镖" /></p></figure>
 
 <h2 id="参考">参考</h2>
 
@@ -1880,6 +1889,8 @@ $$
 
 
 
+  <script src="https://linw1995.com/js/progressively.min.js" defer></script>
+
 
 
   <script src="https://linw1995.com/js/social-share-kit.min.js" defer></script>
@@ -1894,6 +1905,8 @@ $$
     
       hljs.initHighlighting();
     
+    
+      progressively.init({delay: 30, throttle: 50});
     
     
       SocialShareKit.init({

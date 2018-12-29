@@ -964,6 +964,10 @@ margin-left: -4%;
 
 
 
+  <style type="text/css" media="screen">
+    .progressive{overflow:hidden;position:relative;background:#efefef}.progressive__img{width:100%;height:100%;position:absolute;-webkit-transform:translateZ(0);transform:translateZ(0)}.progressive--not-loaded{filter:blur(30px);-webkit-filter:blur(30px)}.progressive--is-loaded{filter:blur(20px);-webkit-filter:blur(20px);-webkit-animation:sharpen .5s both;animation:sharpen .5s both}@-webkit-keyframes sharpen{from{filter:blur(20px);-webkit-filter:blur(20px)}to{filter:blur(0);-webkit-filter:blur(0)}}@keyframes sharpen{from{filter:blur(20px);-webkit-filter:blur(20px)}to{filter:blur(0);-webkit-filter:blur(0)}}
+  </style>
+
 
 
   <style type="text/css" media="screen">
@@ -1048,6 +1052,10 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
   </style>
 
 
+
+  <link rel="stylesheet" href="https://linw1995.com/css/main.css">
+
+  <link rel="stylesheet" href="https://linw1995.com/css/codeblock.css">
 
 
 
@@ -1143,6 +1151,7 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
             <div class="markdown">
                 
     
+    
 
 <h2 id="介绍">介绍</h2>
 
@@ -1151,17 +1160,17 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
 <strong>AA树</strong>是<strong>红黑树</strong>的一种变种，是*Arne Andersson<em>教授在1993年年在他的论文</em>&ldquo;Balanced search trees made simple&rdquo;*中介绍，设计的目的是减少<strong>红黑树</strong>考虑的不同情况，区别于<strong>红黑树</strong>的是，<strong>AA树</strong>的红节点只能作为右叶子。换句话说，没有红节点可以是一个左子儿。这导致代替<strong>2-3-4树</strong>，从而大大简化了维护<strong>2-3树</strong>的模拟。维护<strong>红黑树</strong>的平衡需要考虑7种不同的情况:</p>
 </blockquote>
 
-<p><img src="https://linw1995.com/blog/AA树的平衡与再平衡/Red_Black_Shape_Cases.svg" alt="Red-Black-Shape-Cases" /></p>
+<p><figure class="progressive"><img class="progressive__img progressive--not-loaded" data-progressive="https://linw1995.com/blog/AA树的平衡与再平衡/Red_Black_Shape_Cases.svg" src="https://linw1995.com/blog/AA树的平衡与再平衡/low/Red_Black_Shape_Cases.svg" alt="Red-Black-Shape-Cases" /></p></figure>
 
 <blockquote>
 <p>因为<strong>AA树</strong>有严格的条件(红节点只能为右节点)，故只需考虑2种情形:</p>
 </blockquote>
 
-<p><img src="https://linw1995.com/blog/AA树的平衡与再平衡/AA_Tree_Shape_Cases.svg" alt="AA-Tree-Shape-Cases" /></p>
+<p><figure class="progressive"><img class="progressive__img progressive--not-loaded" data-progressive="https://linw1995.com/blog/AA树的平衡与再平衡/AA_Tree_Shape_Cases.svg" src="https://linw1995.com/blog/AA树的平衡与再平衡/low/AA_Tree_Shape_Cases.svg" alt="AA-Tree-Shape-Cases" /></p></figure>
 
 <p><strong>AA树</strong>是<strong>2-3树</strong>的模拟，<strong>2-3树</strong>和<strong>AA树</strong>是<strong>等距同构</strong>的。其节点类型如下</p>
 
-<p><img src="https://linw1995.com/blog/AA树的平衡与再平衡/IMG_01.JPG" alt="2-3tree&amp;1-2tree" /></p>
+<p><figure class="progressive"><img class="progressive__img progressive--not-loaded" data-progressive="https://linw1995.com/blog/AA树的平衡与再平衡/IMG_01.JPG" src="https://linw1995.com/blog/AA树的平衡与再平衡/low/IMG_01.JPG" alt="2-3tree&amp;1-2tree" /></p></figure>
 
 <h2 id="平衡条件">平衡条件</h2>
 
@@ -1183,7 +1192,7 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
 <ol>
 <li><p><strong>偏斜Skew</strong>：使得子树中向左的水平边变成向右的。</p>
 
-<p><img src="https://linw1995.com/blog/AA树的平衡与再平衡/IMG_02.JPG" alt="Skew" /></p>
+<p><figure class="progressive"><img class="progressive__img progressive--not-loaded" data-progressive="https://linw1995.com/blog/AA树的平衡与再平衡/IMG_02.JPG" src="https://linw1995.com/blog/AA树的平衡与再平衡/low/IMG_02.JPG" alt="Skew" /></p></figure>
 
 <p>不满足平衡条件：2</p>
 
@@ -1209,7 +1218,7 @@ iii. 是否不满足平衡条件 2，满足则不执行</li>
 
 <li><p><strong>分割Split</strong>：对溢出子节点进行分割，将三个值中的中间值向上移到父节点，如果让父节点溢出了，就继续分割下去。</p>
 
-<p><img src="https://linw1995.com/blog/AA树的平衡与再平衡/IMG_03.JPG" alt="Split" /></p>
+<p><figure class="progressive"><img class="progressive__img progressive--not-loaded" data-progressive="https://linw1995.com/blog/AA树的平衡与再平衡/IMG_03.JPG" src="https://linw1995.com/blog/AA树的平衡与再平衡/low/IMG_03.JPG" alt="Split" /></p></figure>
 
 <p>不满足平衡条件：4</p>
 
@@ -1681,6 +1690,8 @@ current tree:
 
 
 
+  <script src="https://linw1995.com/js/progressively.min.js" defer></script>
+
 
 
   <script src="https://linw1995.com/js/social-share-kit.min.js" defer></script>
@@ -1695,6 +1706,8 @@ current tree:
     
       hljs.initHighlighting();
     
+    
+      progressively.init({delay: 30, throttle: 50});
     
     
       SocialShareKit.init({

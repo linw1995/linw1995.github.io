@@ -964,6 +964,10 @@ margin-left: -4%;
 
 
 
+  <style type="text/css" media="screen">
+    .progressive{overflow:hidden;position:relative;background:#efefef}.progressive__img{width:100%;height:100%;position:absolute;-webkit-transform:translateZ(0);transform:translateZ(0)}.progressive--not-loaded{filter:blur(30px);-webkit-filter:blur(30px)}.progressive--is-loaded{filter:blur(20px);-webkit-filter:blur(20px);-webkit-animation:sharpen .5s both;animation:sharpen .5s both}@-webkit-keyframes sharpen{from{filter:blur(20px);-webkit-filter:blur(20px)}to{filter:blur(0);-webkit-filter:blur(0)}}@keyframes sharpen{from{filter:blur(20px);-webkit-filter:blur(20px)}to{filter:blur(0);-webkit-filter:blur(0)}}
+  </style>
+
 
 
   <style type="text/css" media="screen">
@@ -1048,6 +1052,10 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
   </style>
 
 
+
+  <link rel="stylesheet" href="https://linw1995.com/css/main.css">
+
+  <link rel="stylesheet" href="https://linw1995.com/css/codeblock.css">
 
 
 
@@ -1143,6 +1151,7 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
             <div class="markdown">
                 
     
+    
 
 <h2 id="前言">前言</h2>
 
@@ -1156,7 +1165,7 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
 
 <p>随着开发项目的增多，mac 上的 Python 环境越来越复杂，就像下面这张图一样。面对这样的复杂的环境，管理起来太折磨人了，且会因冗余而浪费硬盘空间。</p>
 
-<p><a href="https://xkcd.com/1987/"><img src="https://linw1995.com/blog/Python 版本及依赖管理的最终方案 pyenv + Pipenv/01.png" alt="版本及依赖管理指北" /></a></p>
+<p><a href="https://xkcd.com/1987/"><figure class="progressive"><img class="progressive__img progressive--not-loaded" data-progressive="https://linw1995.com/blog/Python 版本及依赖管理的最终方案 pyenv + Pipenv/01.png" src="https://linw1995.com/blog/Python 版本及依赖管理的最终方案 pyenv + Pipenv/low/01.png" alt="版本及依赖管理指北" /></a></p></figure>
 
 <p>那么我们如何来管理越来越复杂的 Python 环境？解决该问题的最终方案是：使用 <a href="https://github.com/pyenv/pyenv"><strong>pyenv</strong></a> 管理多个 python 版本；使用 <a href="https://github.com/pypa/pipenv"><strong>Pipenv</strong></a> 管理项目所需要的依赖。</p>
 
@@ -1368,6 +1377,8 @@ pipenv run pip install requests  # 在该虚拟环境下执行命令
 
 
 
+  <script src="https://linw1995.com/js/progressively.min.js" defer></script>
+
 
 
   <script src="https://linw1995.com/js/social-share-kit.min.js" defer></script>
@@ -1382,6 +1393,8 @@ pipenv run pip install requests  # 在该虚拟环境下执行命令
     
       hljs.initHighlighting();
     
+    
+      progressively.init({delay: 30, throttle: 50});
     
     
       SocialShareKit.init({

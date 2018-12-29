@@ -964,6 +964,10 @@ margin-left: -4%;
 
 
 
+  <style type="text/css" media="screen">
+    .progressive{overflow:hidden;position:relative;background:#efefef}.progressive__img{width:100%;height:100%;position:absolute;-webkit-transform:translateZ(0);transform:translateZ(0)}.progressive--not-loaded{filter:blur(30px);-webkit-filter:blur(30px)}.progressive--is-loaded{filter:blur(20px);-webkit-filter:blur(20px);-webkit-animation:sharpen .5s both;animation:sharpen .5s both}@-webkit-keyframes sharpen{from{filter:blur(20px);-webkit-filter:blur(20px)}to{filter:blur(0);-webkit-filter:blur(0)}}@keyframes sharpen{from{filter:blur(20px);-webkit-filter:blur(20px)}to{filter:blur(0);-webkit-filter:blur(0)}}
+  </style>
+
 
 
   <style type="text/css" media="screen">
@@ -1048,6 +1052,10 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
   </style>
 
 
+
+  <link rel="stylesheet" href="https://linw1995.com/css/main.css">
+
+  <link rel="stylesheet" href="https://linw1995.com/css/codeblock.css">
 
 
 
@@ -1142,6 +1150,7 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
             </div>
             <div class="markdown">
                 
+    
     
 
 <p>之前用<a href="https://linw1995.com/blog/%E8%87%AA%E5%B7%B1%E6%9D%A5%E5%86%99%E5%8E%8B%E7%BC%A9%E7%AE%97%E6%B3%95%E5%93%88%E5%A4%AB%E6%9B%BC%E7%AE%97%E6%B3%95/">哈夫曼算法</a>，把<strong>固定长</strong>的字符编码根据其出现次数，编码为<strong>不固定长</strong>的编码。而这次介绍的算法恰恰相反，该算法是把<strong>不等长</strong>的字符串，编码为<strong>固定长</strong>的编码。</p>
@@ -1499,6 +1508,8 @@ def decode(data):
 
 
 
+  <script src="https://linw1995.com/js/progressively.min.js" defer></script>
+
 
 
   <script src="https://linw1995.com/js/social-share-kit.min.js" defer></script>
@@ -1513,6 +1524,8 @@ def decode(data):
     
       hljs.initHighlighting();
     
+    
+      progressively.init({delay: 30, throttle: 50});
     
     
       SocialShareKit.init({

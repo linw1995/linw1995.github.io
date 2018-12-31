@@ -1136,6 +1136,10 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
                           
                             <li class="middot"><a href="https://linw1995.com/tags/python">Python</a> </li>
                           
+                            <li class="middot"><a href="https://linw1995.com/tags/multi-threading">multi-threading</a> </li>
+                          
+                            <li class="middot"><a href="https://linw1995.com/tags/multi-processing">multi-processing</a> </li>
+                          
                             <li class="middot"><a href="https://linw1995.com/tags/%e5%b9%b6%e5%8f%91">并发</a> </li>
                           
                         </ul>
@@ -1155,12 +1159,13 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
 
 <h2 id="前言">前言</h2>
 
-<p>昨天（2017年7月15日）偶然看到这个视频，看完之后豁然开朗，忍不住要分享给大家。
+<p>昨天（2017年7月15日）偶然看到这个视频，看完之后豁然开朗，忍不住要分享给大家。</p>
+
 
 <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
   <iframe src="//www.youtube.com/embed/MCs5OvhV9S4" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
 </div>
-</p>
+
 
 <h2 id="并发demo">并发Demo</h2>
 
@@ -1341,51 +1346,11 @@ if __name__ == '__main__':
     server(&quot;&quot;, 25000)
 </code></pre>
 
-<p>当然，我们要使用 <strong>ProcessPoolExecutor</strong> 来执行 <strong>CPU密集型任务</strong> ；用 <strong>ThreadPoolExecutor</strong> 更适合 <strong>I/O密集型任务</strong> 。这样突然来了一个需要 <code>fib(40)</code> 的请求，也不会造成很大的影响。不过各个测试端的每秒请求数量，会比之前降了一个数量级，这是因为解释器与子进程沟通的消耗导致的。</p>
+<p>当然，我们要使用 <strong>ProcessPoolExecutor</strong> 来执行 <strong>CPU密集型任务</strong> ；用 <strong>ThreadPoolExecutor</strong> 更适合 <strong>I/O密集型任务</strong> 。这样突然来了一个需要 <code>fib(40)</code> 的请求，也不会造成很大的影响。不过各个测试端的每秒请求数量，会比之前降了一个数量级。</p>
 
 <h2 id="深入了解">深入了解</h2>
 
-<p>视频来到高潮部分，David Beazley讲Python圈子里有个特别火的观点，就是用 <code>threading</code> 非常糟糕，不要用！所以他把代码恢复到原来的版本。</p>
-
-<pre><code class="language-python"># -*- coding: utf-8 -*-
-# server.py
-import socket
-
-
-def fib(n):
-    if n &lt;= 2:
-        return 1
-    else:
-        return fib(n - 1) + fib(n - 2)
-
-
-def server(addr, port):
-    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-    sock.bind((addr, port))
-    sock.listen(5)
-    while True:
-        client, addr = sock.accept()
-        print('Connection', addr)
-        handler(client)
-
-
-def handler(client):
-    while True:
-        req = client.recv(100)
-        if not req:
-        break
-        n = int(req)
-        result = fib(n)
-        resp = str(result).encode('ascii') + b'\n'
-        client.send(resp)
-    print(&quot;Connection Closed&quot;)
-
-if __name__ == '__main__':
-    server(&quot;&quot;, 25000)
-</code></pre>
-
-<p>如果不用 <code>threading</code> 模块，如何做到并发呢？用Python中的生成器特性，使用yield关键字。</p>
+<p>David Beazley 讲 Python 圈子里有个特别火的观点，就是因为 GIL (Global Interpreter Lock)的存在，导致用 <code>threading</code> 实际表现起来十分糟糕，所以不要用！所以他把代码恢复到原来的版本。如果不用 <code>threading</code> 模块，如何做到并发呢？用Python中的生成器特性，使用yield关键字。</p>
 
 <pre><code class="language-python">&gt;&gt;&gt; def countdown(n):
 ...     while n &gt; 0:
@@ -1405,7 +1370,7 @@ Traceback (most recent call last):
 StopIteration
 </code></pre>
 
-<p>当解释器运行到yield会返回结果，并挂起该函数，等待下次激活。利用这个特性，稍微修改一下代码</p>
+<p>当解释器运行到 yield 会返回结果，并挂起该函数，等待下次激活。利用这个特性，稍微修改一下代码</p>
 
 <pre><code class="language-python"># -*- coding: utf-8 -*-
 # server.py
@@ -1480,7 +1445,7 @@ if __name__ == '__main__':
     run()
 </code></pre>
 
-<p>在需要进行I/O操作的地方使用 <code>yield</code> ，挂起该函数，用 <code>select</code> 查看socket的I/O操作是否准备好。准备好就唤醒该函数，执行I/O操作。使用perf.py或者nc.py测试一下，发现我们成功地实现了并发，没用借助 <code>threading</code> 模块。但我们遇到CPU密集型任务，该代码的表现就乏善可陈。我们尝试用 <code>ProcessPoolExecutor</code> 来解决这个问题</p>
+<p>在需要进行I/O操作的地方使用 <code>yield</code> ，挂起该函数，用 <code>select</code> 查看socket的I/O操作是否准备好。准备好就唤醒该函数，执行 I/O 操作。使用perf.py或者nc.py测试一下，发现我们成功地实现了并发，没用借助 <code>threading</code> 模块。但我们遇到CPU密集型任务，该代码的表现就乏善可陈。我们尝试用 <code>ProcessPoolExecutor</code> 来解决这个问题</p>
 
 <pre><code class="language-python"># -*- coding: utf-8 -*-
 # server.py
@@ -1577,7 +1542,7 @@ if __name__ == '__main__':
     run()
 </code></pre>
 
-<p>因为future对象不是文件描述符，无法用 <code>select</code> 来查看任务是否完成。但有更好的方法，future对象支持添加callback函数。用 <code>socket.socketpair</code> 配合 <code>future.add_done_callback</code> 函数来解决这个问题。接下来有个小问题， <code>yield</code> 在代码中很突兀，有什么办法把它包装起来？！？</p>
+<p>因为 <code>future</code> 对象不是文件描述符，无法用 <code>select</code> 来查看任务是否完成。但有更好的方法，<code>future</code> 对象支持添加 <code>callback</code> 函数。用 <code>socket.socketpair</code> 配合 <code>future.add_done_callback</code> 函数来解决这个问题。接下来有个小问题， <code>yield</code> 在代码中很突兀，有什么办法把它包装起来？！？</p>
 
 <pre><code class="language-python"># -*- co```ding: utf-8 -*-
 # server.py
@@ -1696,7 +1661,7 @@ if __name__ == '__main__':
 
 <h2 id="async-await">async/await</h2>
 
-<p>看了这个视频后，就看了pycon上关于Asynchronous的视频。研究了一下3.5后的协程语法，把代码修改成以下的样子。</p>
+<p>看了这个视频后，就看了 pycon 上关于 Asynchronous 的视频。研究了一下 3.5 后的协程语法，把代码修改成以下的样子。</p>
 
 <pre><code class="language-python"># -*- coding: utf-8 -*-
 # server.py
@@ -1811,8 +1776,7 @@ if __name__ == '__main__':
     return a
 </code></pre>
 
-<p>使用以上版本大大加快了<code>fib</code>的计算速度，就没必要用多进程了。
-其实在多线程中最好不要开多进程，因为可能会出现死锁，导致程序出现不可预知的错误。因此，必须慎重对待多进程和多线程混搭使用。</p>
+<p>使用以上版本大大加快了<code>fib</code>的计算速度，就没必要用多进程了。而且多进程与多线程不要混搭使用，因为可能会出现死锁，导致程序出现不可预知的错误。必须慎重对待多进程和多线程混搭使用。</p>
 
 <h2 id="参考链接">参考链接</h2>
 

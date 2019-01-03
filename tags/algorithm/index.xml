@@ -21,7 +21,7 @@
 LZW 蓝博-立夫-卫曲编码法（Lempel-Ziv-Welch，缩写LZW），是亚伯拉罕·蓝波、杰可布·立夫与泰瑞·卫曲共同提出的一种无损数据压缩演算法。与霍夫曼编码相比，LZW把不同长度的字符串转换为固定长的编码。该方法不需要事先对数据做任何分析，所以可以流式地对文件进行处理。
 原理 编码 首先先将单字符建立成一个字符串编码表，分别给予编号。
 | string | code | |--------|------| | a | 1 | | b | 2 | | c | 3 |  若数据为aabcaac，进过LZW编码后结果为112343，过程如下
-| No. | cur | prefix | prefix in str-&amp;gt;code | code | str-&amp;gt;code | |-----|-----|--------|---------------------|------|-----------| | 1 | a | | | | | | 2 | a | a | 1 | | | | 3 | b | aa | 0 | 1 | aa -&amp;gt; 4 | | 4 | c | ab | 0 | 1 | ab -&amp;gt; 5 | | 5 | a | bc | 0 | 2 | bc -&amp;gt; 6 | | 6 | a | ca | 0 | 3 | ca -&amp;gt; 7 | | 7 | c | aa | 1 | | | | 8 | | aac | 0 | 4 | aac -&amp;gt; 8 | | 9 | | c | 1 | 3 | |  整个算法过程如下：</description>
+| No. | cur | prefix | prefix in str-&amp;gt;code | code | add into str-&amp;gt;code | | --- | --- | ------ | ------------------- | ---- | ------------------ | | 1 | a | | | | | | 2 | a | a | true | | | | 3 | b | aa | false | 1 | aa -&amp;gt; 4 | | 4 | c | ab | false | 1 | ab -&amp;gt; 5 | | 5 | a | bc | false | 2 | bc -&amp;gt; 6 | | 6 | a | ca | false | 3 | ca -&amp;gt; 7 | | 7 | c | aa | true | | | | 8 | | aac | false | 4 | aac -&amp;gt; 8 | | 9 | | c | true | 3 | |  整个算法过程如下：</description>
     </item>
     
     <item>

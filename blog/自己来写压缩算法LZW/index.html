@@ -1129,7 +1129,7 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
                         
                     
                     
-                    <div class="reading-time middot">3 minute read</div>
+                    <div class="reading-time middot">4 minute read</div>
                     
                     <div class="tags">
                         <ul>
@@ -1163,85 +1163,89 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
 
 <h3 id="编码">编码</h3>
 
+<p>举个简单的例子，如果有一份数据，内容中的字符只有&rsquo;abc&rsquo;三种。那么如何对它进行编码呢？</p>
+
 <p>首先先将单字符建立成一个字符串编码表，分别给予编号。</p>
 
 <pre><code class="language-plain">| string | code |
 |--------|------|
-| a      | 1    |
-| b      | 2    |
-| c      | 3    |
+| a      | 0    |
+| b      | 1    |
+| c      | 2    |
 </code></pre>
 
-<p>若数据为<code>aabcaac</code>，进过LZW编码后结果为<code>112343</code>，过程如下</p>
+<p>若数据为<code>aabcaac</code>，进过LZW编码后结果为 <code>[0,0,1,2,3,2,]</code>，过程如下</p>
 
-<pre><code class="language-plain">| No. | cur | prefix | prefix in str-&gt;code | code | add into str-&gt;code |
-| --- | --- | ------ | ------------------- | ---- | ------------------ |
-| 1   | a   |        |                     |      |                    |
-| 2   | a   | a      | true                |      |                    |
-| 3   | b   | aa     | false               | 1    | aa -&gt; 4            |
-| 4   | c   | ab     | false               | 1    | ab -&gt; 5            |
-| 5   | a   | bc     | false               | 2    | bc -&gt; 6            |
-| 6   | a   | ca     | false               | 3    | ca -&gt; 7            |
-| 7   | c   | aa     | true                |      |                    |
-| 8   |     | aac    | false               | 4    | aac -&gt; 8           |
-| 9   |     | c      | true                | 3    |                    |
+<pre><code class="language-plain">| No. | cur | prefix | prefix + cur | in str-&gt;code | code | add into str-&gt;code |
+| --- | --- | ------ | ------------ | ------------ | ---- | ------------------ |
+| 1   | a   |        | a            | true         |      |                    |
+| 2   | a   | a      | aa           | false        | 0    | aa -&gt; 3            |
+| 3   | b   | a      | ab           | false        | 0    | ab -&gt; 4            |
+| 4   | c   | b      | bc           | false        | 1    | bc -&gt; 5            |
+| 5   | a   | c      | ca           | false        | 2    | ca -&gt; 6            |
+| 6   | a   | a      | aa           | true         |      |                    |
+| 7   | c   | aa     | aac          | false        | 3    | aac -&gt; 7           |
+| 8   |     | c      |              |              | 2    |                    |
 </code></pre>
 
 <p>整个算法过程如下：</p>
 
 <ol>
-<li>取一个字符c</li>
-<li>若字符串p + 字符c <strong>在</strong> 字符串编码表中，字符串p += 字符c</li>
-<li>若字符串p + 字符c <strong>不在</strong> 字符串编码表中：
+<li>从输入流读取一个字符 char</li>
+<li>若字符串 prefix + 字符 char <strong>在</strong> 字符串编码表中，字符串 prefix += 字符 char</li>
+<li>若字符串 prefix + 字符 char <strong>不在</strong> 字符串编码表中：
 
 <ol>
-<li>获取 字符串p 的编码</li>
-<li>将 字符串p + 字符c 存入字符串编码表</li>
-<li>字符串p = 字符c</li>
+<li>获取 字符串 prefix 的编码 k，写入输出流</li>
+<li>将 字符串 prefix + 字符 char 以编码 k + 1 存入字符串编码表</li>
+<li>字符串 prefix = 字符 char</li>
 </ol></li>
-<li>重复以上步骤</li>
-<li>最后 获取 字符串p 的编码</li>
+<li>重复以上步骤，直到输入流无新数据</li>
+<li>最后获取 字符串 prefix 的编码 k，写入输出流</li>
 </ol>
 
 <h3 id="解码">解码</h3>
 
-<p>一开始的字符串编码都是同一个，那么如何把<code>112343</code>解码为<code>aabcaac</code>？</p>
-
 <pre><code class="language-plain">| string | code |
 |--------|------|
-| a      | 1    |
-| b      | 2    |
-| c      | 3    |
+| a      | 0    |
+| b      | 1    |
+| c      | 2    |
 </code></pre>
+
+<p>一开始的字符串编码都是同一个，那么如何把 <code>[0,0,1,2,3,2,]</code> 解码为 <code>aabcaac</code> ？</p>
 
 <p>解码过程如下：</p>
 
-<pre><code class="language-plain">| No. | cur | str | prefix | prefix in str-&gt;code | add into str-&gt;code |
-| --- | --- | --- | ------ | ------------------- | ------------------ |
-| 1   | 1   | a   |        |                     |                    |
-| 2   | 1   | a   | a      | true                |                    |
-| 3   | 2   | b   | aa     | false               | aa -&gt; 4            |
-| 4   | 3   | c   | ab     | false               | ab -&gt; 5            |
-| 5   | 4   | aa  | bc     | false               | bc -&gt; 6            |
-| 6   |     | a   | ca     | false               | ca -&gt; 7            |
-| 7   | 3   | c   | aa     | true                |                    |
-| 8   |     |     | aac    | false               | aac -&gt; 8           |
+<pre><code class="language-plain">| No. | code | str | char | prefix | prefix + char | in str-&gt;code | add into str-&gt;code | result  |
+| --- | ---- | --- | ---- | ------ | ------------- | ------------ | ------------------ | ------- |
+| 1   | 0    | a   | a    |        | a             | true         |                    | a       |
+| 2   | 0    | a   | a    | a      | aa            | false        | aa -&gt; 3            | aa      |
+| 3   | 1    | b   | b    | a      | ab            | false        | ab -&gt; 4            | aab     |
+| 4   | 2    | c   | c    | b      | bc            | false        | bc -&gt; 5            | aabc    |
+| 5-1 | 3    | aa  | a    | c      | ca            | false        | ca -&gt; 6            | aabcaa  |
+| 5-2 |      | aa  | a    | a      | aa            | true         |                    |         |
+| 7   | 2    | c   | c    | aa     | aac           | false        | aac -&gt; 7           | aabcaac |
 </code></pre>
 
 <p>整个算法过程如下：</p>
 
 <ol>
-<li>取一个编码k</li>
-<li>对照 字符串编码表 取得字符串cs
+<li>从输入流中获取一个编码 k</li>
+<li>对照 字符串编码表 取得字符串 str
 
 <ol>
-<li>从字符串cs中取得字符c</li>
-<li>若字符串p + 字符c <strong>在</strong> 字符串编码表中，字符串p += 字符c</li>
-<li>若字符串p + 字符c <strong>不在</strong> 字符串编码表中：
+<li>从字符串 str 中取得字符 char
 
 <ol>
-<li>将 字符串p + 字符c 存入字符串编码表</li>
-<li>字符串p = 字符c</li>
+<li>若字符串 prefix + 字符 char <strong>在</strong> 字符串编码表中，字符串 prefix += 字符 char</li>
+<li>若字符串 prefix + 字符 char <strong>不在</strong> 字符串编码表中：
+
+<ol>
+<li>将字符串 prefix + 字符 char 存入字符串编码表</li>
+<li>字符串 prefix = 字符 char</li>
+</ol></li>
+<li>重复以上步骤</li>
 </ol></li>
 <li>重复以上步骤</li>
 </ol></li>
@@ -1279,6 +1283,7 @@ def encode(data):
             rv.append(cdict[prefix])
             cdict[prefix + int2byte(c)] = len(cdict)
             prefix = int2byte(c)
+
     rv.append(cdict[prefix])
     return rv
 
@@ -1301,7 +1306,9 @@ def decode(data):
                 cdict[prefix + int2byte(c)] = len(cdict)
                 kdict.append(prefix + int2byte(c))
                 prefix = int2byte(c)
+
         rv += cs
+
     return rv
 </code></pre>
 
@@ -1322,7 +1329,7 @@ def decode(data):
 
 <p>但不能让字符串编码表无限增大下去，所以得设置个<strong>哨兵值</strong>来重置字符串编码表。</p>
 
-<p>处理过程：</p>
+<p>处理过程</p>
 
 <ol>
 <li>设置重置字符串编码表的<strong>哨兵值</strong>（解决字符串编码表无节制增长）</li>
@@ -1333,9 +1340,12 @@ def decode(data):
 
 <p>核心代码加上以上的处理过程，就能写出一个真正实用的压缩程序了！</p>
 
-<blockquote>
-<p>实际上 LZW 支持流式处理数据，读写和处理可以同时进行。</p>
-</blockquote>
+<h2 id="扩展">扩展</h2>
+
+<ol>
+<li>LZW 支持流式处理数据，读写和处理可以同时进行</li>
+<li>如果不以一字节一字节地读取或写入，以其他大小读取会有什么影响？</li>
+</ol>
 
 <h2 id="完整代码">完整代码</h2>
 

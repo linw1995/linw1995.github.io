@@ -1455,12 +1455,12 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
 <ol>
 <li><p>结尾长度小于一字节</p>
 
-<pre><code class="language-plain">      压缩           解压
+<pre><code class="language-plain">    压缩           解压
 
-  | 0010    |   | b'\x02'  |
-  |---------|   |----------|
-  | 2       |   | 2        |
-  | b'\x02' |   | 00000010 |
+| 0010    |   | b'\x02'  |
+|---------|   |----------|
+| 2       |   | 2        |
+| b'\x02' |   | 00000010 |
 </code></pre></li>
 
 <li><p>结尾长度等于一字节</p>

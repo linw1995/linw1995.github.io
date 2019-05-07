@@ -6,10 +6,20 @@
     <description>Recent content on linw1995</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Tue, 29 Jan 2019 23:59:59 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 07 May 2019 00:00:00 +0800</lastBuildDate>
     
 	<atom:link href="https://linw1995.com/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Projects</title>
+      <link>https://linw1995.com/projects/</link>
+      <pubDate>Tue, 07 May 2019 00:00:00 +0800</pubDate>
+      
+      <guid>https://linw1995.com/projects/</guid>
+      <description> Data-Extractor Combine XPath, CSS Selector and JSONPath for Web data extracting.
+ Repo Docs  </description>
+    </item>
     
     <item>
       <title>两种方式来用 Python logging 记录额外的值</title>

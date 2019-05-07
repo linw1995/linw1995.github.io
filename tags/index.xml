@@ -6,49 +6,58 @@
     <description>Recent content in Tags on linw1995</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Tue, 24 Oct 2017 08:52:58 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 29 Jan 2019 23:59:59 +0000</lastBuildDate>
     
 	<atom:link href="https://linw1995.com/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Algorithm</title>
-      <link>https://linw1995.com/tags/algorithm/</link>
-      <pubDate>Tue, 24 Oct 2017 08:52:58 +0000</pubDate>
+      <title>Logging</title>
+      <link>https://linw1995.com/tags/Logging/</link>
+      <pubDate>Tue, 29 Jan 2019 23:59:59 +0000</pubDate>
       
-      <guid>https://linw1995.com/tags/algorithm/</guid>
+      <guid>https://linw1995.com/tags/Logging/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Python</title>
+      <link>https://linw1995.com/tags/Python/</link>
+      <pubDate>Tue, 29 Jan 2019 23:59:59 +0000</pubDate>
+      
+      <guid>https://linw1995.com/tags/Python/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Twisted</title>
+      <link>https://linw1995.com/tags/Twisted/</link>
+      <pubDate>Thu, 27 Dec 2018 23:59:59 +0000</pubDate>
+      
+      <guid>https://linw1995.com/tags/Twisted/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Dev</title>
-      <link>https://linw1995.com/tags/dev/</link>
+      <link>https://linw1995.com/tags/Dev/</link>
       <pubDate>Sat, 22 Dec 2018 22:45:00 +0000</pubDate>
       
-      <guid>https://linw1995.com/tags/dev/</guid>
+      <guid>https://linw1995.com/tags/Dev/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Go</title>
-      <link>https://linw1995.com/tags/go/</link>
-      <pubDate>Sun, 21 May 2017 03:03:20 +0000</pubDate>
+      <title>Algorithm</title>
+      <link>https://linw1995.com/tags/Algorithm/</link>
+      <pubDate>Tue, 24 Oct 2017 08:52:58 +0000</pubDate>
       
-      <guid>https://linw1995.com/tags/go/</guid>
+      <guid>https://linw1995.com/tags/Algorithm/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Logging</title>
-      <link>https://linw1995.com/tags/logging/</link>
-      <pubDate>Tue, 29 Jan 2019 23:59:59 +0000</pubDate>
-      
-      <guid>https://linw1995.com/tags/logging/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Multi Processing</title>
+      <title>multi-processing</title>
       <link>https://linw1995.com/tags/multi-processing/</link>
       <pubDate>Sun, 16 Jul 2017 21:28:07 +0000</pubDate>
       
@@ -57,29 +66,11 @@
     </item>
     
     <item>
-      <title>Multi Threading</title>
+      <title>multi-threading</title>
       <link>https://linw1995.com/tags/multi-threading/</link>
       <pubDate>Sun, 16 Jul 2017 21:28:07 +0000</pubDate>
       
       <guid>https://linw1995.com/tags/multi-threading/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Python</title>
-      <link>https://linw1995.com/tags/python/</link>
-      <pubDate>Tue, 29 Jan 2019 23:59:59 +0000</pubDate>
-      
-      <guid>https://linw1995.com/tags/python/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Twisted</title>
-      <link>https://linw1995.com/tags/twisted/</link>
-      <pubDate>Thu, 27 Dec 2018 23:59:59 +0000</pubDate>
-      
-      <guid>https://linw1995.com/tags/twisted/</guid>
       <description></description>
     </item>
     
@@ -89,6 +80,15 @@
       <pubDate>Sun, 16 Jul 2017 21:28:07 +0000</pubDate>
       
       <guid>https://linw1995.com/tags/%E5%B9%B6%E5%8F%91/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Go</title>
+      <link>https://linw1995.com/tags/Go/</link>
+      <pubDate>Sun, 21 May 2017 03:03:20 +0000</pubDate>
+      
+      <guid>https://linw1995.com/tags/Go/</guid>
       <description></description>
     </item>
     

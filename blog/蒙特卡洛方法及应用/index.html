@@ -386,6 +386,7 @@ div.main .content .front-matter .tags ul li:hover {
 div.main .content .front-matter .tags ul li a {
   color: #666666;
 }
+
 div.main .container.f04 {
   -webkit-justify-content: center;
   -moz-justify-content: center;
@@ -965,7 +966,8 @@ margin-left: -4%;
 
 
   <style type="text/css" media="screen">
-    .progressive{overflow:hidden;position:relative;background:#efefef}.progressive__img{width:100%;height:100%;position:absolute;-webkit-transform:translateZ(0);transform:translateZ(0)}.progressive--not-loaded{filter:blur(30px);-webkit-filter:blur(30px)}.progressive--is-loaded{filter:blur(20px);-webkit-filter:blur(20px);-webkit-animation:sharpen .5s both;animation:sharpen .5s both}@-webkit-keyframes sharpen{from{filter:blur(20px);-webkit-filter:blur(20px)}to{filter:blur(0);-webkit-filter:blur(0)}}@keyframes sharpen{from{filter:blur(20px);-webkit-filter:blur(20px)}to{filter:blur(0);-webkit-filter:blur(0)}}
+    .progressive{overflow:hidden;position:relative;background:#efefef}.progressive__img{width:100%;height:100%;transform:translateZ(0)}.progressive--not-loaded{filter:blur(30px)}.progressive--is-loaded{filter:blur(20px);animation:a .5s both}@keyframes a{0%{filter:blur(20px)}to{filter:blur(0)}}
+
   </style>
 
 
@@ -1135,12 +1137,14 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
                     
                     <div class="reading-time middot">8 minute read</div>
                     
-                    <div class="tags">
+                    
+                      <div class="tags">
+                    
                         <ul>
                           
-                            <li class="middot"><a href="https://linw1995.com/tags/python">Python</a> </li>
+                            <li class="middot"><a href="https://linw1995.com/tags/Python">Python</a> </li>
                           
-                            <li class="middot"><a href="https://linw1995.com/tags/go">Go</a> </li>
+                            <li class="middot"><a href="https://linw1995.com/tags/Go">Go</a> </li>
                           
                         </ul>
                     </div>
@@ -1802,6 +1806,9 @@ $$
             
 
             
+            
+
+            
 
             
         </div>
@@ -1819,7 +1826,7 @@ $$
 
         
             
-                <a href="https://linw1995.com/license">Copyright © 2015 linw1995</a>
+                <a href="https://linw1995.com/license">Copyright © 2019 linw1995</a>
             
         
 

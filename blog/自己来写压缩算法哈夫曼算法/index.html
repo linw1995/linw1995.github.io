@@ -6,6 +6,7 @@
 <meta name="HandheldFriendly" content="True">
 <meta name="MobileOptimized" content="320">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <meta name="description" content="Example blog">
 
 
@@ -1209,21 +1210,22 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
 <ol>
 <li>将所有的要添加到哈夫曼树的子叶按从小达到排列</li>
 <li>找出两个权值最小的节点，拼接成一树结构，父节点的权值为二者之和</li>
-<li>父节点为新的节点，加入排列中，重复步骤2</li>
-</ol>
+
+<li><p>父节点为新的节点，加入排列中，重复步骤2</p>
 
 <pre><code class="language-plain">1          /-1                                             /-3
-        3 |                                             /-|
+    3 |                                             /-|
 2          \-2          /-3             /-3            |  |   /-1
-                     6 |   /-1       6 |   /-1         |   \-|
+                 6 |   /-1       6 |   /-1         |   \-|
 3       3               \-|             \-|          --|      \-2
-                           \-2             \-2         |
+                       \-2             \-2         |
 4       4            4                  /-4            |   /-4
-                                     9 |                \-|
+                                 9 |                \-|
 5       5            5                  \-5                \-5
 
 (0)      (1)           (2)             (3)               (4)
-</code></pre>
+</code></pre></li>
+</ol>
 
 <h3 id="哈夫曼编码">哈夫曼编码</h3>
 
@@ -1469,11 +1471,9 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
 |---------|   |----------|
 | 2       |   | 2        |
 | b'\x02' |   | 00000010 |
-</code></pre>
+</code></pre></li>
 
-<ol>
-<li>结尾长度等于一字节</li>
-</ol>
+<li><p>结尾长度等于一字节</p>
 
 <pre><code class="language-plain">    压缩           解压
 
@@ -1663,6 +1663,8 @@ b'\xff\x04\x00\x00\x00\x00\xff\x01...
             <a href="https://www.linkedin.com/in/%e7%8e%ae-%e6%9e%97-061655126" rel=me target="_blank">
                 <img class="icon" src="https://linw1995.com/img/linkedin.svg" alt="linkedin" />
             </a>
+        
+
         
 
         

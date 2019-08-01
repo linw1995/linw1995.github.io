@@ -1172,13 +1172,13 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
 
 <h2 id="问题-scrapy-的并发处理">问题: Scrapy 的并发处理</h2>
 
-<p>在 Scrapy 的文档中提到可以通过配置 <code>DOWNLOAD_DELAY</code> 来控制请求间的时间间隔，配置 <code>CONCURRENT_REQUESTS</code> 来限制请求的并发数（粒度可基于域名，或者 IP 地址）。甚至可以通过使用 Auto-Throttling 自动节流插件，来自动地且动态的调整这些配置项。</p>
+<p>在 Scrapy 的文档中提到可以通过配置 <code>DOWNLOAD_DELAY</code> 来控制请求（request）间的时间间隔，配置 <code>CONCURRENT_REQUESTS</code> 来限制请求（request）的并发数（粒度可基于域名，或者 IP 地址）。甚至可以通过使用 Auto-Throttling 自动节流插件，来自动地且动态的调整这些配置项。</p>
 
 <p>这样我们就有了以下这两个问题</p>
 
 <ol>
 <li>如何并发地处理请求</li>
-<li>如何动态地配置请求的并发数</li>
+<li>如何动态地改变配置项</li>
 </ol>
 
 <p>以下的源码分析基于版本号为 <code>1.7.2</code> 的 <a href="https://github.com/scrapy/scrapy/tree/1.7.2">scrapy</a> 项目</p>
@@ -1236,9 +1236,9 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
 
 <p>关于 <code>slot</code> 的类定义在 <a href="https://github.com/scrapy/scrapy/blob/1a289c15f8deb416efdb5f72742ec5416d751d98/scrapy/core/downloader/__init__.py#L19-L58"><code>scrapy/core/downloader/__init__.py#L19-L58</code></a></p>
 
-<h3 id="auto-throttling-extension">Auto-Throttling Extension</h3>
+<h3 id="如何动态地改变配置项">如何动态地改变配置项</h3>
 
-<p>明白了如何并发地处理 request，我们来看看 Auto-Throttling 插件是怎么工作的。</p>
+<p>明白了如何并发地处理 request，可如何动态地改变配置项？我们来看看 Auto-Throttling 插件是怎么工作的，就能明白了。</p>
 
 <p>通过绑定 <code>signals.response_downloaded</code> 信号，当 request 的网络处理完成时就会调用绑定的函数。<a href="https://github.com/scrapy/scrapy/blob/1a289c15f8deb416efdb5f72742ec5416d751d98/scrapy/extensions/throttle.py#L19"><code>scrapy/extensions/throttle.py#L19</code></a></p>
 

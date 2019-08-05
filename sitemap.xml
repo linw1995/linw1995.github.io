@@ -4,14 +4,49 @@
   
   <url>
     <loc>https://linw1995.com/blog/</loc>
-    <lastmod>2019-07-29T23:59:59+00:00</lastmod>
+    <lastmod>2019-08-04T23:59:59+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://linw1995.com/tags/Docker/</loc>
+    <lastmod>2019-08-04T23:59:59+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://linw1995.com/tags/Mock/</loc>
+    <lastmod>2019-08-04T23:59:59+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://linw1995.com/tags/Mongo/</loc>
+    <lastmod>2019-08-04T23:59:59+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://linw1995.com/tags/Python/</loc>
-    <lastmod>2019-07-29T23:59:59+00:00</lastmod>
+    <lastmod>2019-08-04T23:59:59+00:00</lastmod>
     <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://linw1995.com/tags/</loc>
+    <lastmod>2019-08-04T23:59:59+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://linw1995.com/</loc>
+    <lastmod>2019-08-04T23:59:59+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://linw1995.com/blog/%E7%94%A8-docker-compose-%E9%83%A8%E7%BD%B2-mongo-replica-set-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/</loc>
+    <lastmod>2019-08-04T23:59:59+00:00</lastmod>
   </url>
   
   <url>
@@ -23,18 +58,6 @@
   <url>
     <loc>https://linw1995.com/blog/Scrapy-%E7%9A%84%E5%B9%B6%E5%8F%91%E5%A4%84%E7%90%86/</loc>
     <lastmod>2019-07-29T23:59:59+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://linw1995.com/tags/</loc>
-    <lastmod>2019-07-29T23:59:59+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://linw1995.com/</loc>
-    <lastmod>2019-07-29T23:59:59+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>

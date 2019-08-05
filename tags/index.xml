@@ -6,15 +6,42 @@
     <description>Recent content in Tags on linw1995</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Mon, 29 Jul 2019 23:59:59 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 04 Aug 2019 23:59:59 +0000</lastBuildDate>
     
 	<atom:link href="https://linw1995.com/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>Docker</title>
+      <link>https://linw1995.com/tags/Docker/</link>
+      <pubDate>Sun, 04 Aug 2019 23:59:59 +0000</pubDate>
+      
+      <guid>https://linw1995.com/tags/Docker/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Mock</title>
+      <link>https://linw1995.com/tags/Mock/</link>
+      <pubDate>Sun, 04 Aug 2019 23:59:59 +0000</pubDate>
+      
+      <guid>https://linw1995.com/tags/Mock/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Mongo</title>
+      <link>https://linw1995.com/tags/Mongo/</link>
+      <pubDate>Sun, 04 Aug 2019 23:59:59 +0000</pubDate>
+      
+      <guid>https://linw1995.com/tags/Mongo/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Python</title>
       <link>https://linw1995.com/tags/Python/</link>
-      <pubDate>Mon, 29 Jul 2019 23:59:59 +0000</pubDate>
+      <pubDate>Sun, 04 Aug 2019 23:59:59 +0000</pubDate>
       
       <guid>https://linw1995.com/tags/Python/</guid>
       <description></description>

@@ -15,24 +15,24 @@
 <meta property="og:site_name" content="linw1995" />
 <meta property="og:locale" content="en-US" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://linw1995.com/tags/Python/" />
-<meta property="og:title" content="Python" />
-<meta property="twitter:title" content="Python">
+<meta property="og:url" content="https://linw1995.com/blog/%E7%94%A8-docker-compose-%E9%83%A8%E7%BD%B2-mongo-replica-set-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" />
+<meta property="og:title" content="用 docker-compose 部署 mongo replica set 开发环境" />
+<meta property="twitter:title" content="用 docker-compose 部署 mongo replica set 开发环境">
 
     <meta property="og:image" content="https://linw1995.com//img/banner.png">
     <meta property="twitter:card" content="summary">
     <meta property="twitter:image" content="https://linw1995.com//img/banner.png">
 
-<meta property="og:description" content="">
-<meta property="twitter:description" content="">
+<meta property="og:description" content="用 docker-compose 搭建一组 Mongo Replica set 来支持 Mongo ChangeStream 的开发环境，在通过 motor 或者 pymongo 去使用，以便开发测试">
+<meta property="twitter:description" content="用 docker-compose 搭建一组 Mongo Replica set 来支持 Mongo ChangeStream 的开发环境，在通过 motor 或者 pymongo 去使用，以便开发测试">
 
 <title>
 
 
-     linw1995 - Python 
+     linw1995 - 用 docker-compose 部署 mongo replica set 开发环境 
 
 </title>
-<link rel="canonical" href="https://linw1995.com/tags/Python/">
+<link rel="canonical" href="https://linw1995.com/blog/%E7%94%A8-docker-compose-%E9%83%A8%E7%BD%B2-mongo-replica-set-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/">
 
 
 <style media="screen">
@@ -1070,8 +1070,6 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
 
 
 
-  <link href="https://linw1995.com/tags/Python/index.xml" rel="alternate" type="application/rss+xml" title="linw1995" />
-
 
 </head>
 
@@ -1114,114 +1112,454 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
     </div>
 </div>
 
-<div class="main column">
+
+
+
+
+<div class="main post non-narrow zero-top-spacing column">
     <div class="container">
         <div class="content">
-            <div class="posts">
-                <div class="page-heading">Posts about Python</div>
-                <ul>
-                    
-                        <li class="post-item">
-    <span class="meta">Apr 27, 2017</span>
-    
-    <a href="https://linw1995.com/blog/AA%E6%A0%91%E7%9A%84%E5%B9%B3%E8%A1%A1%E4%B8%8E%E5%86%8D%E5%B9%B3%E8%A1%A1/"><span>AA树的平衡与再平衡</span></a>
-    
-</li>
+            <div class="front-matter">
+                <div class="title-container">
+                    <div class="page-heading">
 
-                    
-                        <li class="post-item">
-    <span class="meta">May 5, 2017</span>
     
-    <a href="https://linw1995.com/blog/%E4%BC%AA%E9%9A%8F%E6%9C%BA%E6%95%B0/"><span>伪随机数</span></a>
+    用 docker-compose 部署 mongo replica set 开发环境
     
-</li>
 
-                    
-                        <li class="post-item">
-    <span class="meta">May 21, 2017</span>
-    
-    <a href="https://linw1995.com/blog/%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%96%B9%E6%B3%95%E5%8F%8A%E5%BA%94%E7%94%A8/"><span>蒙特卡洛方法及应用</span></a>
-    
-</li>
+</div>
 
+                </div>
+                <div class="meta">
+                    <div class="date" title="Sun Aug 4 2019 23:59:59 UTC">Aug 4, 2019</div>
                     
-                        <li class="post-item">
-    <span class="meta">Jul 16, 2017</span>
-    
-    <a href="https://linw1995.com/blog/%E5%88%9D%E8%A7%A3Python%E5%B9%B6%E5%8F%91/"><span>初解Python并发</span></a>
-    
-</li>
-
+                        
                     
-                        <li class="post-item">
-    <span class="meta">Sep 24, 2017</span>
-    
-    <a href="https://linw1995.com/blog/%E8%87%AA%E5%B7%B1%E6%9D%A5%E5%86%99%E5%8E%8B%E7%BC%A9%E7%AE%97%E6%B3%95%E5%93%88%E5%A4%AB%E6%9B%BC%E7%AE%97%E6%B3%95/"><span>自己来写压缩算法——哈夫曼算法</span></a>
-    
-</li>
-
                     
-                        <li class="post-item">
-    <span class="meta">Oct 24, 2017</span>
-    
-    <a href="https://linw1995.com/blog/%E8%87%AA%E5%B7%B1%E6%9D%A5%E5%86%99%E5%8E%8B%E7%BC%A9%E7%AE%97%E6%B3%95LZW/"><span>自己来写压缩算法——LZW</span></a>
-    
-</li>
-
+                    <div class="reading-time middot">4 minute read</div>
                     
-                        <li class="post-item">
-    <span class="meta">Dec 22, 2018</span>
-    
-    <a href="https://linw1995.com/blog/Python-%E7%89%88%E6%9C%AC%E5%8F%8A%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86%E7%9A%84%E6%9C%80%E7%BB%88%E6%96%B9%E6%A1%88-pyenv-Pipenv/"><span>Python 版本及依赖管理的最终方案 pyenv &#43; Pipenv</span></a>
-    
-</li>
-
                     
-                        <li class="post-item">
-    <span class="meta">Dec 27, 2018</span>
-    
-    <a href="https://linw1995.com/blog/Run-Twisted-in-another-thread/"><span>Run Twisted in another thread</span></a>
-    
-</li>
-
+                      <div class="tags">
                     
-                        <li class="post-item">
-    <span class="meta">Jan 29, 2019</span>
-    
-    <a href="https://linw1995.com/blog/%E4%B8%A4%E7%A7%8D%E6%96%B9%E5%BC%8F%E6%9D%A5%E7%94%A8-Python-logging-%E8%AE%B0%E5%BD%95%E9%A2%9D%E5%A4%96%E7%9A%84%E5%80%BC/"><span>两种方式来用 Python logging 记录额外的值</span></a>
-    
-</li>
-
-                    
-                        <li class="post-item">
-    <span class="meta">Jul 17, 2019</span>
-    
-    <a href="https://linw1995.com/blog/%E7%94%A8%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%8A%A0%E9%80%9F%E7%88%AC%E8%99%AB%E5%81%9A-lxml-%E8%A7%A3%E6%9E%90/"><span>用多线程加速爬虫做 lxml 解析</span></a>
-    
-</li>
-
-                    
-                        <li class="post-item">
-    <span class="meta">Jul 29, 2019</span>
-    
-    <a href="https://linw1995.com/blog/Scrapy-%E7%9A%84%E5%B9%B6%E5%8F%91%E5%A4%84%E7%90%86/"><span>Scrapy 的并发处理</span></a>
-    
-</li>
-
-                    
-                        <li class="post-item">
-    <span class="meta">Aug 4, 2019</span>
-    
-    <a href="https://linw1995.com/blog/%E7%94%A8-docker-compose-%E9%83%A8%E7%BD%B2-mongo-replica-set-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/"><span>用 docker-compose 部署 mongo replica set 开发环境</span></a>
-    
-</li>
-
-                    
-                </ul>
+                        <ul>
+                          
+                            <li class="middot"><a href="https://linw1995.com/tags/Mongo">Mongo</a> </li>
+                          
+                            <li class="middot"><a href="https://linw1995.com/tags/Docker">Docker</a> </li>
+                          
+                            <li class="middot"><a href="https://linw1995.com/tags/Python">Python</a> </li>
+                          
+                            <li class="middot"><a href="https://linw1995.com/tags/Mock">Mock</a> </li>
+                          
+                        </ul>
+                    </div>
+                    <div class="tags">
+                        <ul>
+                          
+                          
+                        </ul>
+                    </div>
+                </div>
             </div>
+            <div class="markdown">
+                
+    
+    
+
+<h2 id="前言">前言</h2>
+
+<p>话不多说，直接进正题</p>
+
+<h2 id="如何搭建和配置">如何搭建和配置</h2>
+
+<p>把以下内容写入 <code>docker-compose.yml</code> 文件中。然后运行 <code>docker-compose up -d --scale mongo=3</code>，就可以启动三个 mongo 服务。接下来我们要把这三个 mongo 节点配置成一组 replica set</p>
+
+<pre><code class="language-yaml">version: '3.5'
+services:
+  mongo:
+    image: mongo
+    ports:
+      - &quot;27017-27118:27017&quot;
+    command: mongod --replSet main
+</code></pre>
+
+<p>把以下内容写入 <code>utils.py</code> 文件中</p>
+
+<pre><code class="language-python">import subprocess as sp
+
+
+def get_node_ports():
+    ports = []
+    idx = 1
+    while True:
+        try:
+            output = sp.check_output(
+                f&quot;docker-compose port --index {idx} mongo 27017&quot;,
+                shell=True,
+                encoding=&quot;utf-8&quot;,
+                stderr=sp.DEVNULL,
+            )
+        except sp.CalledProcessError:
+            break
+
+        port = output.split(&quot;:&quot;)[1]
+        ports.append(int(port))
+        idx += 1
+
+    if not ports:
+        raise RuntimeError(&quot;no node is running.&quot;)
+
+    return ports
+</code></pre>
+
+<p>把以下内容写入 <code>init.py</code> 文件中，再执行 <code>python init.py</code> 命令配置这组 replica set</p>
+
+<pre><code class="language-python">import json
+import subprocess as sp
+import tempfile
+
+from utils import get_node_ports
+
+
+def generate_init_js(node_ports):
+    members = [
+        {&quot;_id&quot;: idx, &quot;host&quot;: f&quot;host.docker.internal:{port}&quot;}
+        for idx, port in enumerate(node_ports)
+    ]
+    initiate_parameters = {&quot;_id&quot;: &quot;main&quot;, &quot;members&quot;: members}
+
+    init_js = f&quot;rs.initiate({json.dumps(initiate_parameters, indent=2)})&quot;
+    return init_js
+
+
+def main():
+    ports = get_node_ports()
+    init_js = generate_init_js(ports)
+    print(&quot;\x1b[32m$\x1b[0m cat init.js&quot;)
+    print(init_js)
+
+    container_name = sp.check_output(
+        &quot;docker-compose ps | grep mongo_1 | awk '{ print $1 }'&quot;,
+        shell=True,
+        encoding=&quot;utf-8&quot;,
+    ).strip()
+    with tempfile.NamedTemporaryFile(mode=&quot;w&quot;, encoding=&quot;utf-8&quot;) as f:
+        f.write(init_js)
+        f.flush()
+
+        path = f.name
+        sp.check_output(f&quot;docker cp {path} {container_name}:/init.js&quot;, shell=True)
+        print(&quot;\x1b[32m$\x1b[0m copy init.js&quot;)
+
+    output = sp.check_output(
+        f'docker exec {container_name} sh -c &quot;mongo --port 27017 &lt; /init.js&quot;',
+        shell=True,
+        encoding=&quot;utf-8&quot;,
+    )
+    print(&quot;\x1b[32m$\x1b[0m initiate&quot;)
+    print(output)
+
+
+if __name__ == &quot;__main__&quot;:
+    main()
+
+</code></pre>
+
+<p>执行的结果如下</p>
+
+<pre><div class="ansi_up">
+[32m$[0m cat init.js
+rs.initiate({
+  "_id": "main",
+  "members": [
+    {
+      "_id": 0,
+      "host": "host.docker.internal:27025"
+    },
+    {
+      "_id": 1,
+      "host": "host.docker.internal:27023"
+    },
+    {
+      "_id": 2,
+      "host": "host.docker.internal:27024"
+    }
+  ]
+})
+[32m$[0m copy init.js
+[32m$[0m initiate
+MongoDB shell version v4.0.11
+connecting to: mongodb://127.0.0.1:27017/?gssapiServiceName=mongodb
+Implicit session: session { "id" : UUID("af1e1d7a-69aa-406d-abb3-73b422f3f093") }
+MongoDB server version: 4.0.11
+{
+        "ok" : 1,
+        "operationTime" : Timestamp(1565015581, 1),
+        "$clusterTime" : {
+                "clusterTime" : Timestamp(1565015581, 1),
+                "signature" : {
+                        "hash" : BinData(0,"AAAAAAAAAAAAAAAAAAAAAAAAAAA="),
+                        "keyId" : NumberLong(0)
+                }
+        }
+}
+bye
+</div></pre>
+<script src="https://linw1995.com/js/ansi_up.js" type="text/javascript"></script>
+<script type="text/javascript">
+    var ansi_up = new AnsiUp;
+
+    var elements = document.getElementsByClassName("ansi_up");
+    for (var idx = 0; idx < elements.length; idx++) {
+        var element = elements[idx];
+        var txt = element.innerHTML;
+        var html = ansi_up.ansi_to_html(txt);
+        element.innerHTML = html;
+        element.className = "ansi_up_done";
+    }
+</script>
+
+
+<h2 id="测试">测试</h2>
+
+<p>搭建完成了，接下来用以下代码测试一下</p>
+
+<pre><code class="language-python">import asyncio
+import logging
+import socket
+
+from unittest import mock
+
+import pytest
+
+from motor.motor_asyncio import AsyncIOMotorClient
+
+from utils import get_node_ports
+
+
+@pytest.fixture(scope=&quot;session&quot;)
+def node_addresses():
+    node_ports = get_node_ports()
+    return [(&quot;localhost&quot;, port) for port in node_ports]
+
+
+@pytest.fixture(autouse=True)
+def hook_getaddrinfo():
+    original_getaddrinfo = socket.getaddrinfo
+
+    def container_2_host_address(host, port, family=0, type=0, proto=0, flags=0):
+        &quot;&quot;&quot;
+        由于 mongo 会下发 replica 在容器中的地址，
+        必须替换成在主机上的正确地址
+        &quot;&quot;&quot;
+        if host == &quot;host.docker.internal&quot;:
+            logging.debug(&quot;container 2 host&quot;)
+            host = &quot;localhost&quot;
+        else:
+            logging.debug(&quot;no change %r&quot;, (host, port))
+
+        return original_getaddrinfo(host, port, family, type, proto, flags)
+
+    with mock.patch(&quot;socket.getaddrinfo&quot;, new=container_2_host_address):
+        yield
+
+
+@pytest.fixture
+def uri(node_addresses):
+    nodes = &quot;,&quot;.join(f&quot;{host}:{port}&quot; for host, port in node_addresses)
+    return f&quot;mongodb://{nodes}/?replicaSet=main&quot;
+
+
+@pytest.fixture
+async def create_db(uri):
+    async def creator():
+        client = AsyncIOMotorClient(uri)
+        db = client[&quot;default&quot;]
+        return db
+
+    db = await creator()
+
+    # 删除掉所有 collections
+    col_names = await db.list_collection_names()
+    for col_name in col_names:
+        await db.drop_collection(col_name)
+
+    return creator
+
+
+async def get_latest_oplog_timestamp(client):
+    &quot;&quot;&quot;
+    获取最新的 oplog 时间戳
+    &quot;&quot;&quot;
+    cursor = client.local.oplog.rs.find().sort(&quot;$natural&quot;, -1).limit(-1)
+    await cursor.fetch_next
+    return cursor.next_object()[&quot;ts&quot;]
+
+
+@pytest.mark.asyncio
+async def test_change_stream(create_db):
+    db = await create_db()
+    col_name = &quot;boo&quot;
+    await db.create_collection(col_name)
+    logging.debug(&quot;create collection&quot;)
+
+    current_timestamp = await get_latest_oplog_timestamp(db.client)
+    logging.debug(&quot;latest oplog timestamp %r&quot;, current_timestamp)
+
+    async def wait_for_change():
+        async with db[col_name].watch(
+            pipeline=[{&quot;$match&quot;: {&quot;operationType&quot;: &quot;insert&quot;}}],
+            start_at_operation_time=current_timestamp,
+        ) as change_stream:
+            # 使用 startAtOperationTime 参数，避免漏掉插入事件
+            # https://docs.mongodb.com/manual/changeStreams/#start-time
+            # 可要创建一个 bson.Timestamp 对象
+            logging.debug(&quot;wait for change&quot;)
+            async for change in change_stream:
+                return change
+
+    fut = asyncio.ensure_future(wait_for_change())
+
+    data = {&quot;username&quot;: &quot;black&quot;}
+    await db[col_name].insert_one(data)
+    logging.debug(&quot;insert new document %r&quot;, data)
+
+    change = await fut
+    logging.debug(&quot;received change %r&quot;, change)
+
+    assert data == change[&quot;fullDocument&quot;]
+</code></pre>
+
+<p>从以上的代码，你可能会发现代码利用 <code>unittest.mock.patch</code> 修改了 <code>socket.getaddrinfo</code> 函数的执行，目的是为了替换 mongo replica set 下发的节点地址。这个地址为容器内的主机地址 <code>host.docker.internal</code>，需要替换成本地主机地址 <code>localhost</code>，以避免无法解析导致测试代码运行失败。如果把程序打包成 docker 镜像，在 docker 容器中开发测试的话，就去掉这一部分的代码了</p>
+
+<pre><code class="language-sh">pytest test.py --log-cli-level debug
+</code></pre>
+
+<p>把代码写入 <code>test.py</code>，再执行以上命令</p>
+
+<pre><div class="ansi_up">
+[1m============================= test session starts ==============================[0m
+platform darwin -- Python 3.7.4, pytest-5.0.1, py-1.8.0, pluggy-0.12.0
+rootdir: /Users/linw1995/Documents/me/tmp
+plugins: asyncio-0.10.0
+collected 1 item
+
+test.py::test_change_stream
+[1m-------------------------------- live log setup --------------------------------[0m
+[35mDEBUG   [0m asyncio:selector_events.py:53 Using selector: KqueueSelector
+[35mDEBUG   [0m asyncio:selector_events.py:53 Using selector: KqueueSelector
+[35mDEBUG   [0m root:test.py:33 no change ('localhost', 27025)
+[35mDEBUG   [0m root:test.py:33 no change ('localhost', 27024)
+[35mDEBUG   [0m root:test.py:33 no change ('localhost', 27023)
+[35mDEBUG   [0m root:test.py:30 container 2 host
+[35mDEBUG   [0m root:test.py:30 container 2 host
+[35mDEBUG   [0m root:test.py:30 container 2 host
+[35mDEBUG   [0m root:test.py:30 container 2 host
+[1m-------------------------------- live log call ---------------------------------[0m
+[35mDEBUG   [0m root:test.py:33 no change ('localhost', 27025)
+[35mDEBUG   [0m root:test.py:33 no change ('localhost', 27024)
+[35mDEBUG   [0m root:test.py:33 no change ('localhost', 27023)
+[35mDEBUG   [0m root:test.py:30 container 2 host
+[35mDEBUG   [0m root:test.py:30 container 2 host
+[35mDEBUG   [0m root:test.py:30 container 2 host
+[35mDEBUG   [0m root:test.py:30 container 2 host
+[35mDEBUG   [0m root:test.py:78 create collection
+[35mDEBUG   [0m root:test.py:81 latest oplog timestamp Timestamp(1565015602, 1)
+[35mDEBUG   [0m root:test.py:91 wait for change
+[35mDEBUG   [0m root:test.py:30 container 2 host
+[35mDEBUG   [0m root:test.py:99 insert new document {'username': 'black', '_id': ObjectId('5d483e325c87feb3e9b4bf9d')}
+[35mDEBUG   [0m root:test.py:102 received change {'_id': {'_data': '825D483E32000000022B022C0100296E5A10044B41D3216978416C8D3372D0F6FCEA4046645F696400645D483E325C87FEB3E9B4BF9D0004'}, 'operationType': 'insert', 'clusterTime': Timestamp(1565015602, 2), 'fullDocument': {'_id': ObjectId('5d483e325c87feb3e9b4bf9d'), 'username': 'black'}, 'ns': {'db': 'default', 'coll': 'boo'}, 'documentKey': {'_id': ObjectId('5d483e325c87feb3e9b4bf9d')}}
+[32mPASSED[0m[36m                                                                   [100%][0m
+
+[32m[1m=========================== 1 passed in 2.64 seconds ===========================[0m
+</div></pre>
+<script src="https://linw1995.com/js/ansi_up.js" type="text/javascript"></script>
+<script type="text/javascript">
+    var ansi_up = new AnsiUp;
+
+    var elements = document.getElementsByClassName("ansi_up");
+    for (var idx = 0; idx < elements.length; idx++) {
+        var element = elements[idx];
+        var txt = element.innerHTML;
+        var html = ansi_up.ansi_to_html(txt);
+        element.innerHTML = html;
+        element.className = "ansi_up_done";
+    }
+</script>
+
+
+<p>成功了～这样用来做开发测试真是十分的方便呢</p>
+
+
+            </div>
+            
+            <br>
+            <div class="share">
+                  
+                  <a href="" class="ssk ssk-facebook"></a>
+                  
+                  
+                  <a href="" class="ssk ssk-twitter"></a>
+                  
+                  
+                  <a href="" class="ssk ssk-google-plus"></a>
+                  
+                  
+                  <a href="" class="ssk ssk-linkedin"></a>
+                  
+            </div>
+            
+            
+            <br>
+            <div class="navigation">
+                
+                <div>
+                    <img class="icon" src="https://linw1995.com/img/back.svg" alt="back" />
+                    <a href="https://linw1995.com/blog/Scrapy-%E7%9A%84%E5%B9%B6%E5%8F%91%E5%A4%84%E7%90%86/">Scrapy 的并发处理</a>
+                </div>
+                
+                <div style="width: 100%;"></div>
+                
+            </div>
+            
+            
+            <br>
+            <div class="disqus">
+                <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "linw1995" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+            </div>
+            
+
+            
+            
+
+            
+
+            
         </div>
     </div>
 </div>
+
+
+
 <div class="footer column">
     <div class="container">
 
@@ -1280,10 +1618,6 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
             </a>
         
 
-        
-            <a href="https://linw1995.com/tags/Python/index.xml">
-                <img class="icon" src="https://linw1995.com/img/rss.svg" alt="rss" />
-            </a>
         
 
         </div>

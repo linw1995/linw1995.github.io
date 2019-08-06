@@ -12,13 +12,13 @@
     
     
     <item>
-      <title>用 docker-compose 部署 mongo replica set 开发环境</title>
-      <link>https://linw1995.com/blog/%E7%94%A8-docker-compose-%E9%83%A8%E7%BD%B2-mongo-replica-set-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/</link>
+      <title>用 docker-compose 部署 MongoDB Replica Set 开发环境</title>
+      <link>https://linw1995.com/blog/%E7%94%A8-docker-compose-%E9%83%A8%E7%BD%B2-MongoDB-Replica-Set-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/</link>
       <pubDate>Sun, 04 Aug 2019 23:59:59 +0000</pubDate>
       
-      <guid>https://linw1995.com/blog/%E7%94%A8-docker-compose-%E9%83%A8%E7%BD%B2-mongo-replica-set-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/</guid>
+      <guid>https://linw1995.com/blog/%E7%94%A8-docker-compose-%E9%83%A8%E7%BD%B2-MongoDB-Replica-Set-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/</guid>
       <description>前言 话不多说，直接进正题
-如何搭建和配置 把以下内容写入 docker-compose.yml 文件中。然后运行 docker-compose up -d --scale mongo=3，就可以启动三个 mongo 服务。接下来我们要把这三个 mongo 节点配置成一组 replica set
+如何搭建和配置 把以下内容写入 docker-compose.yml 文件中。然后运行 docker-compose up -d --scale mongo=3，就可以启动三个 MongoDB 服务。接下来我们要把这三个 MongoDB 节点配置成一组 Replica Set
 version: &#39;3.5&#39; services: mongo: image: mongo ports: - &amp;quot;27017-27118:27017&amp;quot; command: mongod --replSet main  把以下内容写入 utils.py 文件中
 import subprocess as sp def get_node_ports(): ports = [] idx = 1 while True: try: output = sp.check_output( f&amp;quot;docker-compose port --index {idx} mongo 27017&amp;quot;, shell=True, encoding=&amp;quot;utf-8&amp;quot;, stderr=sp.DEVNULL, ) except sp.CalledProcessError: break port = output.split(&amp;quot;:&amp;quot;)[1] ports.append(int(port)) idx += 1 if not ports: raise RuntimeError(&amp;quot;no node is running.</description>
     </item>

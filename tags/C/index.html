@@ -15,24 +15,24 @@
 <meta property="og:site_name" content="linw1995" />
 <meta property="og:locale" content="en-US" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://linw1995.com/blog/Run-Twisted-in-another-thread/" />
-<meta property="og:title" content="Run Twisted in another thread" />
-<meta property="twitter:title" content="Run Twisted in another thread">
+<meta property="og:url" content="https://linw1995.com/tags/C/" />
+<meta property="og:title" content="C" />
+<meta property="twitter:title" content="C">
 
     <meta property="og:image" content="https://linw1995.com//img/banner.png">
     <meta property="twitter:card" content="summary">
     <meta property="twitter:image" content="https://linw1995.com//img/banner.png">
 
-<meta property="og:description" content="Develop a project related to a service project base on Twisted, and consider how to test it.">
-<meta property="twitter:description" content="Develop a project related to a service project base on Twisted, and consider how to test it.">
+<meta property="og:description" content="">
+<meta property="twitter:description" content="">
 
 <title>
 
 
-     linw1995 - Run Twisted in another thread 
+     linw1995 - C 
 
 </title>
-<link rel="canonical" href="https://linw1995.com/blog/Run-Twisted-in-another-thread/">
+<link rel="canonical" href="https://linw1995.com/tags/C/">
 
 
 <style media="screen">
@@ -1070,6 +1070,8 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
 
 
 
+  <link href="https://linw1995.com/tags/C/index.xml" rel="alternate" type="application/rss+xml" title="linw1995" />
+
 
 </head>
 
@@ -1112,254 +1114,26 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
     </div>
 </div>
 
-
-
-
-
-<div class="main post non-narrow zero-top-spacing column">
+<div class="main column">
     <div class="container">
         <div class="content">
-            <div class="front-matter">
-                <div class="title-container">
-                    <div class="page-heading">
-
+            <div class="posts">
+                <div class="page-heading">Posts about C</div>
+                <ul>
+                    
+                        <li class="post-item">
+    <span class="meta">Aug 18, 2019</span>
     
-    Run Twisted in another thread
+    <a href="https://linw1995.com/blog/%E6%84%89%E5%BF%AB%E5%9C%B0%E7%94%A8-C-%E5%9C%A8-LeetCode-%E4%B8%8A%E5%88%B7%E9%A2%98/"><span>愉快地用 C 在 LeetCode 上刷题</span></a>
     
+</li>
 
-</div>
-
-                </div>
-                <div class="meta">
-                    <div class="date" title="Thu Dec 27 2018 23:59:59 UTC">Dec 27, 2018</div>
                     
-                        
-                    
-                    
-                    <div class="reading-time middot">2 minute read</div>
-                    
-                    
-                      <div class="tags">
-                    
-                        <ul>
-                          
-                            <li class="middot"><a href="https://linw1995.com/tags/Python">Python</a> </li>
-                          
-                            <li class="middot"><a href="https://linw1995.com/tags/Twisted">Twisted</a> </li>
-                          
-                        </ul>
-                    </div>
-                    <div class="tags">
-                        <ul>
-                          
-                          
-                        </ul>
-                    </div>
-                </div>
+                </ul>
             </div>
-            <div class="markdown">
-                
-    
-    
-
-<p>Develop a project related to a service project base on Twisted, and consider how to test it.
-This is a solution. Run Twisted&rsquo;s reactor in another thread and delegating the Twisted functions calling into it.</p>
-
-<p>Use this fixture run a reactor in another thread. Due to the reactor is not restartable, so the fixture&rsquo;s scope is &ldquo;session&rdquo;.</p>
-
-<pre><code class="language-python">import pytest
-
-from twisted.internet import reactor as twisted_reactor
-
-
-@pytest.fixture(scope=&quot;session&quot;, autouse=True)
-def reactor():
-    t = threading.Thread(
-        target=twisted_reactor.run,
-        kwargs={&quot;installSignalHandlers&quot;: False},
-        daemon=True,
-    )
-    t.start()
-
-    yield twisted_reactor
-
-    twisted_reactor.callFromThread(twisted_reactor.stop)
-    t.join()
-
-</code></pre>
-
-<p>Write a simple Echo Protocol for example.</p>
-
-<pre><code class="language-python">from twisted.internet.protocol import Protocol, Factory
-
-class Echo(Protocol):
-    def dataReceived(self, data):
-        self.transport.write(data)
-
-
-class EchoFactory(Factory):
-    def buildProtocol(self, addr):
-        return Echo()
-
-</code></pre>
-
-<p>Use Pytest fixture to run an echo service.</p>
-
-<pre><code class="language-python">import socket
-import threading
-
-import pytest
-
-from twisted.application import internet
-
-
-@pytest.fixture
-def get_unused_port():
-    def unused_port_getter():
-        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        s.bind((&quot;&quot;, 0))
-        addr = s.getsockname()
-        s.close()
-        return addr[1]
-
-    return unused_port_getter
-
-
-@pytest.fixture
-def port(get_unused_port):
-    return get_unused_port()
-
-
-@pytest.fixture
-def echo_service(reactor, port):
-    echo_service = internet.TCPServer(port, EchoFactory())
-
-    reactor.callFromThread(echo_service.startService)
-
-    started = threading.Event()
-
-    def wait_started():
-        if echo_service.running:
-            started.set()
-        else:
-            reactor.callLater(0.1, wait_started)
-
-    reactor.callFromThread(wait_started)
-    started.wait()
-
-    yield echo_service
-
-    stoped = threading.Event()
-
-    def wait_stoped():
-        echo_service.stopService().addBoth(lambda _: stoped.set())
-
-    reactor.callFromThread(wait_stoped)
-    stoped.wait()
-
-</code></pre>
-
-<p>Now, write and run a simple test.</p>
-
-<pre><code class="language-python">def test_echo_service(echo_service, port):
-    conn = socket.create_connection((&quot;&quot;, port))
-    msg = b&quot;abcdefg&quot;
-    conn.send(msg)
-    assert msg == conn.recv(len(msg))
-
-</code></pre>
-
-<p><strong>Tip</strong>:Write base RPC methods unit test. Then using stubs to do the high-level encapsulation unit test.</p>
-
-<h2 id="complete-code">Complete Code</h2>
-
-<script type="application/javascript" src="https://gist.github.com/linw1995/81abfda02b369493c5fee3f4ff1610c7.js"></script>
-
-
-<p>GIST: <a href="https://gist.github.com/linw1995/81abfda02b369493c5fee3f4ff1610c7">Run Twisted in another thread | linw1995 </a></p>
-
-<h2 id="references">References</h2>
-
-<ul>
-<li><a href="https://twistedmatrix.com/documents/current/core/howto/servers.html">Writing Servers | Twisted Docs</a></li>
-<li><a href="https://docs.pytest.org/en/latest/fixture.html#scope-sharing-a-fixture-instance-across-tests-in-a-class-module-or-session">Scope: sharing a fixture instance across tests in a class, module or session | Pytest Docs</a></li>
-</ul>
-
-
-            </div>
-            
-            <br>
-            <div class="share">
-                  
-                  <a href="" class="ssk ssk-facebook"></a>
-                  
-                  
-                  <a href="" class="ssk ssk-twitter"></a>
-                  
-                  
-                  <a href="" class="ssk ssk-google-plus"></a>
-                  
-                  
-                  <a href="" class="ssk ssk-linkedin"></a>
-                  
-            </div>
-            
-            
-            <br>
-            <div class="navigation">
-                
-                <div>
-                    <img class="icon" src="https://linw1995.com/img/back.svg" alt="back" />
-                    <a href="https://linw1995.com/blog/Python-%E7%89%88%E6%9C%AC%E5%8F%8A%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86%E7%9A%84%E6%9C%80%E7%BB%88%E6%96%B9%E6%A1%88-pyenv-Pipenv/">Python 版本及依赖管理的最终方案 pyenv &#43; Pipenv</a>
-                </div>
-                
-                <div style="width: 100%;"></div>
-                
-                <div>
-                    <a href="https://linw1995.com/blog/%E4%B8%A4%E7%A7%8D%E6%96%B9%E5%BC%8F%E6%9D%A5%E7%94%A8-Python-logging-%E8%AE%B0%E5%BD%95%E9%A2%9D%E5%A4%96%E7%9A%84%E5%80%BC/">两种方式来用 Python logging 记录额外的值</a>
-                    <img class="icon" src="https://linw1995.com/img/next.svg" alt="next" />
-                </div>
-                
-            </div>
-            
-            
-            <br>
-            <div class="disqus">
-                <div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
-    
-    
-    
-    };
-    (function() {
-        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
-            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
-            return;
-        }
-        var d = document, s = d.createElement('script'); s.async = true;
-        s.src = '//' + "linw1995" + '.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-            </div>
-            
-
-            
-            
-
-            
-
-            
         </div>
     </div>
 </div>
-
-
-
 <div class="footer column">
     <div class="container">
 
@@ -1418,6 +1192,10 @@ def echo_service(reactor, port):
             </a>
         
 
+        
+            <a href="https://linw1995.com/tags/C/index.xml">
+                <img class="icon" src="https://linw1995.com/img/rss.svg" alt="rss" />
+            </a>
         
 
         </div>

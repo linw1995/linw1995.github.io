@@ -6,10 +6,28 @@
     <description>Recent content in Tags on linw1995</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Sun, 04 Aug 2019 23:59:59 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 18 Aug 2019 23:59:59 +0000</lastBuildDate>
     
 	<atom:link href="https://linw1995.com/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>C</title>
+      <link>https://linw1995.com/tags/C/</link>
+      <pubDate>Sun, 18 Aug 2019 23:59:59 +0000</pubDate>
+      
+      <guid>https://linw1995.com/tags/C/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>LeetCode</title>
+      <link>https://linw1995.com/tags/LeetCode/</link>
+      <pubDate>Sun, 18 Aug 2019 23:59:59 +0000</pubDate>
+      
+      <guid>https://linw1995.com/tags/LeetCode/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Docker</title>

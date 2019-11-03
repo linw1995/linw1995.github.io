@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>爬虫 on linw1995</title>
@@ -28,11 +28,11 @@ def _process_queue(self, spider, slot): if slot.latercall and slot.latercall.act
     </item>
     
     <item>
-      <title>用多线程加速爬虫做 lxml 解析</title>
-      <link>https://linw1995.com/blog/%E7%94%A8%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%8A%A0%E9%80%9F%E7%88%AC%E8%99%AB%E5%81%9A-lxml-%E8%A7%A3%E6%9E%90/</link>
+      <title>用多线程加速爬虫的 lxml 解析</title>
+      <link>https://linw1995.com/blog/%E7%94%A8%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%8A%A0%E9%80%9F%E7%88%AC%E8%99%AB%E7%9A%84-lxml-%E8%A7%A3%E6%9E%90/</link>
       <pubDate>Wed, 17 Jul 2019 23:59:59 +0000</pubDate>
       
-      <guid>https://linw1995.com/blog/%E7%94%A8%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%8A%A0%E9%80%9F%E7%88%AC%E8%99%AB%E5%81%9A-lxml-%E8%A7%A3%E6%9E%90/</guid>
+      <guid>https://linw1995.com/blog/%E7%94%A8%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%8A%A0%E9%80%9F%E7%88%AC%E8%99%AB%E7%9A%84-lxml-%E8%A7%A3%E6%9E%90/</guid>
       <description>当编写一个爬虫时，会使用 lxml 库来解析 HTML 文件。当爬取到了一个超大且复杂的 HTML 文件，解析起来十分耗费时间，进而影响了爬虫的正常运行
 为了不影响爬虫的正常运行，尝试把解析任务交给线程池来处理
 模拟爬虫 先随便准备一个 html 文件，就直接从 lxml 的文档上下载一个

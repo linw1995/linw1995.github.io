@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
@@ -88,13 +88,18 @@
   </url>
   
   <url>
-    <loc>https://linw1995.com/blog/%E7%94%A8%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%8A%A0%E9%80%9F%E7%88%AC%E8%99%AB%E5%81%9A-lxml-%E8%A7%A3%E6%9E%90/</loc>
+    <loc>https://linw1995.com/blog/%E7%94%A8%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%8A%A0%E9%80%9F%E7%88%AC%E8%99%AB%E7%9A%84-lxml-%E8%A7%A3%E6%9E%90/</loc>
     <lastmod>2019-07-17T23:59:59+00:00</lastmod>
   </url>
   
   <url>
+    <loc>https://linw1995.com/projects/data_extractor/</loc>
+    <lastmod>2019-04-18T00:29:50+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://linw1995.com/projects/</loc>
-    <lastmod>2019-05-07T00:00:00+08:00</lastmod>
+    <lastmod>2019-04-18T00:29:50+00:00</lastmod>
   </url>
   
   <url>

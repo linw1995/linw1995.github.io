@@ -19,7 +19,7 @@
       <guid>https://linw1995.com/blog/Python-%E7%89%88%E6%9C%AC%E5%8F%8A%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86%E7%9A%84%E6%9C%80%E7%BB%88%E6%96%B9%E6%A1%88-pyenv-Pipenv/</guid>
       <description>前言 作为个程序员，总会遇到这些问题：如何升级系统的 Python 版本；如何安装多个 Python 版本；如何隔离项目的依赖；在开发机上好好的，为什么线上、CI 就运行失败了呢
  通过下载 Python 源码编译安装（最好不要覆盖掉系统原有的 Python，可安装在自己的 home 目录或者其他路径下） 通过 Virtualenv 来隔离项目 Python 环境 通过 pip freeze &amp;gt; requirements.txt 和 pip install -r requirements.txt来固定依赖的版本，来确保重新安装后的 Python 环境是一致  随着开发项目的增多，mac 上的 Python 环境越来越复杂，就像下面这张图一样。面对这样的复杂的环境，管理起来太折磨人了，且会因冗余而浪费硬盘空间。
-
+![版本及依赖管理指北](/blog/Python 版本及依赖管理的最终方案 pyenv + Pipenv/01.png)
 那么我们如何来管理越来越复杂的 Python 环境？解决该问题的最终方案是：使用 pyenv 管理多个 python 版本；使用 Pipenv 管理项目所需要的依赖。
 pyenv Github Repo: pyenv/pyenv
 参照此教程安装 pyenv

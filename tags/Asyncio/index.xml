@@ -20,8 +20,8 @@
       <description>当编写一个爬虫时，会使用 lxml 库来解析 HTML 文件。当爬取到了一个超大且复杂的 HTML 文件，解析起来十分耗费时间，进而影响了爬虫的正常运行
 为了不影响爬虫的正常运行，尝试把解析任务交给线程池来处理
 模拟爬虫 先随便准备一个 html 文件，就直接从 lxml 的文档上下载一个
-wget https://lxml.de/tutorial.html -O example.html  举一个重解析的模拟爬虫例子，每次请求的 io 时间假定为 0.01s ，请求并发数无上限，总量为 2000 个。
-import asyncio import time from pathlib import Path from lxml import html _html_text = None _latest_fetched = 0 async def fetch_text(): # 模拟爬取 await asyncio.sleep(0.01) # 记录最后的一个请求的结束时间 global _latest_fetched _latest_fetched = time.perf_counter() return _html_text def get_title(text): doc = html.fromstring(text) return doc.xpath(&amp;quot;//title/text()&amp;quot;)[0] async def create_task(): text = await fetch_text() title = get_title(text) return title async def main(): futs = [] for _ in range(2000): fut = asyncio.</description>
+wget https://lxml.de/tutorial.html -O example.html 举一个重解析的模拟爬虫例子，每次请求的 io 时间假定为 0.01s ，请求并发数无上限，总量为 2000 个。
+import asyncio import time from pathlib import Path from lxml import html _html_text = None _latest_fetched = 0 async def fetch_text(): # 模拟爬取 await asyncio.sleep(0.01) # 记录最后的一个请求的结束时间 global _latest_fetched _latest_fetched = time.perf_counter() return _html_text def get_title(text): doc = html.fromstring(text) return doc.xpath(&amp;#34;//title/text()&amp;#34;)[0] async def create_task(): text = await fetch_text() title = get_title(text) return title async def main(): futs = [] for _ in range(2000): fut = asyncio.</description>
     </item>
     
   </channel>

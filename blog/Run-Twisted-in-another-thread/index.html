@@ -1162,126 +1162,106 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
             <div class="markdown">
                 
     
-    
+    <p>Develop a project related to a service project base on Twisted, and consider how to test it.
+This is a solution. Run Twisted's reactor in another thread and delegating the Twisted functions calling into it.</p>
+<p>Use this fixture run a reactor in another thread. Due to the reactor is not restartable, so the fixture's scope is &ldquo;session&rdquo;.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> pytest
 
-<p>Develop a project related to a service project base on Twisted, and consider how to test it.
-This is a solution. Run Twisted&rsquo;s reactor in another thread and delegating the Twisted functions calling into it.</p>
-
-<p>Use this fixture run a reactor in another thread. Due to the reactor is not restartable, so the fixture&rsquo;s scope is &ldquo;session&rdquo;.</p>
-
-<pre><code class="language-python">import pytest
-
-from twisted.internet import reactor as twisted_reactor
+<span style="color:#f92672">from</span> twisted.internet <span style="color:#f92672">import</span> reactor <span style="color:#66d9ef">as</span> twisted_reactor
 
 
-@pytest.fixture(scope=&quot;session&quot;, autouse=True)
-def reactor():
-    t = threading.Thread(
-        target=twisted_reactor.run,
-        kwargs={&quot;installSignalHandlers&quot;: False},
-        daemon=True,
+<span style="color:#a6e22e">@pytest.fixture</span>(scope<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">session</span><span style="color:#e6db74">&#34;</span>, autouse<span style="color:#f92672">=</span>True)
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">reactor</span>():
+    t <span style="color:#f92672">=</span> threading<span style="color:#f92672">.</span>Thread(
+        target<span style="color:#f92672">=</span>twisted_reactor<span style="color:#f92672">.</span>run,
+        kwargs<span style="color:#f92672">=</span>{<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">installSignalHandlers</span><span style="color:#e6db74">&#34;</span>: False},
+        daemon<span style="color:#f92672">=</span>True,
     )
-    t.start()
+    t<span style="color:#f92672">.</span>start()
 
-    yield twisted_reactor
+    <span style="color:#66d9ef">yield</span> twisted_reactor
 
-    twisted_reactor.callFromThread(twisted_reactor.stop)
-    t.join()
+    twisted_reactor<span style="color:#f92672">.</span>callFromThread(twisted_reactor<span style="color:#f92672">.</span>stop)
+    t<span style="color:#f92672">.</span>join()
 
-</code></pre>
+</code></pre></div><p>Write a simple Echo Protocol for example.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> twisted.internet.protocol <span style="color:#f92672">import</span> Protocol, Factory
 
-<p>Write a simple Echo Protocol for example.</p>
-
-<pre><code class="language-python">from twisted.internet.protocol import Protocol, Factory
-
-class Echo(Protocol):
-    def dataReceived(self, data):
-        self.transport.write(data)
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Echo</span>(Protocol):
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">dataReceived</span>(self, data):
+        self<span style="color:#f92672">.</span>transport<span style="color:#f92672">.</span>write(data)
 
 
-class EchoFactory(Factory):
-    def buildProtocol(self, addr):
-        return Echo()
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">EchoFactory</span>(Factory):
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">buildProtocol</span>(self, addr):
+        <span style="color:#66d9ef">return</span> Echo()
 
-</code></pre>
+</code></pre></div><p>Use Pytest fixture to run an echo service.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> socket
+<span style="color:#f92672">import</span> threading
 
-<p>Use Pytest fixture to run an echo service.</p>
+<span style="color:#f92672">import</span> pytest
 
-<pre><code class="language-python">import socket
-import threading
-
-import pytest
-
-from twisted.application import internet
+<span style="color:#f92672">from</span> twisted.application <span style="color:#f92672">import</span> internet
 
 
-@pytest.fixture
-def get_unused_port():
-    def unused_port_getter():
-        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        s.bind((&quot;&quot;, 0))
-        addr = s.getsockname()
-        s.close()
-        return addr[1]
+<span style="color:#a6e22e">@pytest.fixture</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_unused_port</span>():
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">unused_port_getter</span>():
+        s <span style="color:#f92672">=</span> socket<span style="color:#f92672">.</span>socket(socket<span style="color:#f92672">.</span>AF_INET, socket<span style="color:#f92672">.</span>SOCK_STREAM)
+        s<span style="color:#f92672">.</span>bind((<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">&#34;</span>, <span style="color:#ae81ff">0</span>))
+        addr <span style="color:#f92672">=</span> s<span style="color:#f92672">.</span>getsockname()
+        s<span style="color:#f92672">.</span>close()
+        <span style="color:#66d9ef">return</span> addr[<span style="color:#ae81ff">1</span>]
 
-    return unused_port_getter
-
-
-@pytest.fixture
-def port(get_unused_port):
-    return get_unused_port()
+    <span style="color:#66d9ef">return</span> unused_port_getter
 
 
-@pytest.fixture
-def echo_service(reactor, port):
-    echo_service = internet.TCPServer(port, EchoFactory())
+<span style="color:#a6e22e">@pytest.fixture</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">port</span>(get_unused_port):
+    <span style="color:#66d9ef">return</span> get_unused_port()
 
-    reactor.callFromThread(echo_service.startService)
 
-    started = threading.Event()
+<span style="color:#a6e22e">@pytest.fixture</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">echo_service</span>(reactor, port):
+    echo_service <span style="color:#f92672">=</span> internet<span style="color:#f92672">.</span>TCPServer(port, EchoFactory())
 
-    def wait_started():
-        if echo_service.running:
-            started.set()
-        else:
-            reactor.callLater(0.1, wait_started)
+    reactor<span style="color:#f92672">.</span>callFromThread(echo_service<span style="color:#f92672">.</span>startService)
 
-    reactor.callFromThread(wait_started)
-    started.wait()
+    started <span style="color:#f92672">=</span> threading<span style="color:#f92672">.</span>Event()
 
-    yield echo_service
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">wait_started</span>():
+        <span style="color:#66d9ef">if</span> echo_service<span style="color:#f92672">.</span>running:
+            started<span style="color:#f92672">.</span>set()
+        <span style="color:#66d9ef">else</span>:
+            reactor<span style="color:#f92672">.</span>callLater(<span style="color:#ae81ff">0.1</span>, wait_started)
 
-    stoped = threading.Event()
+    reactor<span style="color:#f92672">.</span>callFromThread(wait_started)
+    started<span style="color:#f92672">.</span>wait()
 
-    def wait_stoped():
-        echo_service.stopService().addBoth(lambda _: stoped.set())
+    <span style="color:#66d9ef">yield</span> echo_service
 
-    reactor.callFromThread(wait_stoped)
-    stoped.wait()
+    stoped <span style="color:#f92672">=</span> threading<span style="color:#f92672">.</span>Event()
 
-</code></pre>
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">wait_stoped</span>():
+        echo_service<span style="color:#f92672">.</span>stopService()<span style="color:#f92672">.</span>addBoth(<span style="color:#66d9ef">lambda</span> _: stoped<span style="color:#f92672">.</span>set())
 
-<p>Now, write and run a simple test.</p>
+    reactor<span style="color:#f92672">.</span>callFromThread(wait_stoped)
+    stoped<span style="color:#f92672">.</span>wait()
 
-<pre><code class="language-python">def test_echo_service(echo_service, port):
-    conn = socket.create_connection((&quot;&quot;, port))
-    msg = b&quot;abcdefg&quot;
-    conn.send(msg)
-    assert msg == conn.recv(len(msg))
+</code></pre></div><p>Now, write and run a simple test.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_echo_service</span>(echo_service, port):
+    conn <span style="color:#f92672">=</span> socket<span style="color:#f92672">.</span>create_connection((<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">&#34;</span>, port))
+    msg <span style="color:#f92672">=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">abcdefg</span><span style="color:#e6db74">&#34;</span>
+    conn<span style="color:#f92672">.</span>send(msg)
+    <span style="color:#66d9ef">assert</span> msg <span style="color:#f92672">==</span> conn<span style="color:#f92672">.</span>recv(len(msg))
 
-</code></pre>
-
-<p><strong>Tip</strong>:Write base RPC methods unit test. Then using stubs to do the high-level encapsulation unit test.</p>
-
+</code></pre></div><p><strong>Tip</strong>:Write base RPC methods unit test. Then using stubs to do the high-level encapsulation unit test.</p>
 <h2 id="complete-code">Complete Code</h2>
-
 <script type="application/javascript" src="https://gist.github.com/linw1995/81abfda02b369493c5fee3f4ff1610c7.js"></script>
 
-
 <p>GIST: <a href="https://gist.github.com/linw1995/81abfda02b369493c5fee3f4ff1610c7">Run Twisted in another thread | linw1995 </a></p>
-
 <h2 id="references">References</h2>
-
 <ul>
 <li><a href="https://twistedmatrix.com/documents/current/core/howto/servers.html">Writing Servers | Twisted Docs</a></li>
 <li><a href="https://docs.pytest.org/en/latest/fixture.html#scope-sharing-a-fixture-instance-across-tests-in-a-class-module-or-session">Scope: sharing a fixture instance across tests in a class, module or session | Pytest Docs</a></li>
@@ -1373,7 +1353,7 @@ def echo_service(reactor, port):
 
         
             
-                <a href="https://linw1995.com/license">Copyright © 2019 linw1995</a>
+                <a href="https://linw1995.com/license">Copyright © 2020 linw1995</a>
             
         
 

@@ -1166,592 +1166,550 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
             <div class="markdown">
                 
     
-    
-
-<h2 id="前言">前言</h2>
-
+    <h2 id="前言">前言</h2>
 <p>昨天（2017年7月15日）偶然看到这个视频，看完之后豁然开朗，忍不住要分享给大家。</p>
-
 
 <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
   <iframe src="https://www.youtube.com/embed/MCs5OvhV9S4" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
 </div>
 
-
 <h2 id="并发demo">并发Demo</h2>
-
 <p>视频中举了个例子，用socket写了个迷你服务，只有一个作用，计算Fibonacci……</p>
-
-<pre><code class="language-python"># -*- coding: utf-8 -*-
-# server.py
-import socket
-
-
-def fib(n):
-    if n &lt;= 2:
-        return 1
-    else:
-        return fib(n - 1) + fib(n - 2)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># -*- coding: utf-8 -*-</span>
+<span style="color:#75715e"># server.py</span>
+<span style="color:#f92672">import</span> socket
 
 
-def server(addr, port):
-    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-    sock.bind((addr, port))
-    sock.listen(5)
-    while True:
-        client, addr = sock.accept()
-        print('Connection', addr)
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">fib</span>(n):
+    <span style="color:#66d9ef">if</span> n <span style="color:#f92672">&lt;</span><span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>:
+        <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>
+    <span style="color:#66d9ef">else</span>:
+        <span style="color:#66d9ef">return</span> fib(n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">+</span> fib(n <span style="color:#f92672">-</span> <span style="color:#ae81ff">2</span>)
+
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">server</span>(addr, port):
+    sock <span style="color:#f92672">=</span> socket<span style="color:#f92672">.</span>socket(socket<span style="color:#f92672">.</span>AF_INET, socket<span style="color:#f92672">.</span>SOCK_STREAM)
+    sock<span style="color:#f92672">.</span>setsockopt(socket<span style="color:#f92672">.</span>SOL_SOCKET, socket<span style="color:#f92672">.</span>SO_REUSEADDR, <span style="color:#ae81ff">1</span>)
+    sock<span style="color:#f92672">.</span>bind((addr, port))
+    sock<span style="color:#f92672">.</span>listen(<span style="color:#ae81ff">5</span>)
+    <span style="color:#66d9ef">while</span> True:
+        client, addr <span style="color:#f92672">=</span> sock<span style="color:#f92672">.</span>accept()
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Connection</span><span style="color:#e6db74">&#39;</span>, addr)
         handler(client)
 
 
-def handler(client):
-    while True:
-        req = client.recv(100)
-        if not req:
-            break
-        n = int(req)
-        result = fib(n)
-        resp = str(result).encode('ascii') + b'\n'
-        client.send(resp)
-    print(&quot;Connection Closed&quot;)
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">handler</span>(client):
+    <span style="color:#66d9ef">while</span> True:
+        req <span style="color:#f92672">=</span> client<span style="color:#f92672">.</span>recv(<span style="color:#ae81ff">100</span>)
+        <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> req:
+            <span style="color:#66d9ef">break</span>
+        n <span style="color:#f92672">=</span> int(req)
+        result <span style="color:#f92672">=</span> fib(n)
+        resp <span style="color:#f92672">=</span> str(result)<span style="color:#f92672">.</span>encode(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">ascii</span><span style="color:#e6db74">&#39;</span>) <span style="color:#f92672">+</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>
+        client<span style="color:#f92672">.</span>send(resp)
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Connection Closed</span><span style="color:#e6db74">&#34;</span>)
 
 
-server(&quot;&quot;, 25000)
-</code></pre>
+server(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">&#34;</span>, <span style="color:#ae81ff">25000</span>)
+</code></pre></div><p>当然目前这个只是一个堵塞版本，可以用以下代码测试一下</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># -*- coding: utf-8 -*-</span>
+<span style="color:#75715e"># nc.py</span>
+<span style="color:#f92672">import</span> socket
 
-<p>当然目前这个只是一个堵塞版本，可以用以下代码测试一下</p>
+sock <span style="color:#f92672">=</span> socket<span style="color:#f92672">.</span>socket(socket<span style="color:#f92672">.</span>AF_INET, socket<span style="color:#f92672">.</span>SOCK_STREAM)
+sock<span style="color:#f92672">.</span>connect((<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">localhost</span><span style="color:#e6db74">&#39;</span>, <span style="color:#ae81ff">25000</span>))
 
-<pre><code class="language-python"># -*- coding: utf-8 -*-
-# nc.py
-import socket
-
-sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-sock.connect(('localhost', 25000))
-
-while True:
-    n = input()
-    sock.send(n.encode('ascii'))
-    resp = sock.recv(100)
-    print(resp.decode('ascii'), end='')
-</code></pre>
-
-<p>该迷你服务一次只能处理一个请求，我们只需要稍微修改一下代码即可以改变现状</p>
-
-<pre><code class="language-python"># -*- coding: utf-8 -*-
-# server.py
-import socket
-from threading import Thread
+<span style="color:#66d9ef">while</span> True:
+    n <span style="color:#f92672">=</span> input()
+    sock<span style="color:#f92672">.</span>send(n<span style="color:#f92672">.</span>encode(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">ascii</span><span style="color:#e6db74">&#39;</span>))
+    resp <span style="color:#f92672">=</span> sock<span style="color:#f92672">.</span>recv(<span style="color:#ae81ff">100</span>)
+    <span style="color:#66d9ef">print</span>(resp<span style="color:#f92672">.</span>decode(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">ascii</span><span style="color:#e6db74">&#39;</span>), end<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">&#39;</span>)
+</code></pre></div><p>该迷你服务一次只能处理一个请求，我们只需要稍微修改一下代码即可以改变现状</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># -*- coding: utf-8 -*-</span>
+<span style="color:#75715e"># server.py</span>
+<span style="color:#f92672">import</span> socket
+<span style="color:#f92672">from</span> threading <span style="color:#f92672">import</span> Thread
 
 
-def fib(n):
-    if n &lt;= 2:
-        return 1
-    else:
-        return fib(n - 1) + fib(n - 2)
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">fib</span>(n):
+    <span style="color:#66d9ef">if</span> n <span style="color:#f92672">&lt;</span><span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>:
+        <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>
+    <span style="color:#66d9ef">else</span>:
+        <span style="color:#66d9ef">return</span> fib(n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">+</span> fib(n <span style="color:#f92672">-</span> <span style="color:#ae81ff">2</span>)
 
 
-def server(addr, port):
-    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-    sock.bind((addr, port))
-    sock.listen(5)
-    while True:
-        client, addr = sock.accept()
-        print('Connection', addr)
-        Thread(target=handler, args=(client,), daemon=True).start()
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">server</span>(addr, port):
+    sock <span style="color:#f92672">=</span> socket<span style="color:#f92672">.</span>socket(socket<span style="color:#f92672">.</span>AF_INET, socket<span style="color:#f92672">.</span>SOCK_STREAM)
+    sock<span style="color:#f92672">.</span>setsockopt(socket<span style="color:#f92672">.</span>SOL_SOCKET, socket<span style="color:#f92672">.</span>SO_REUSEADDR, <span style="color:#ae81ff">1</span>)
+    sock<span style="color:#f92672">.</span>bind((addr, port))
+    sock<span style="color:#f92672">.</span>listen(<span style="color:#ae81ff">5</span>)
+    <span style="color:#66d9ef">while</span> True:
+        client, addr <span style="color:#f92672">=</span> sock<span style="color:#f92672">.</span>accept()
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Connection</span><span style="color:#e6db74">&#39;</span>, addr)
+        Thread(target<span style="color:#f92672">=</span>handler, args<span style="color:#f92672">=</span>(client,), daemon<span style="color:#f92672">=</span>True)<span style="color:#f92672">.</span>start()
 
 
-def handler(client):
-    while True:
-        req = client.recv(100)
-        if not req:
-            break
-        n = int(req)
-        result = fib(n)
-        resp = str(result).encode('ascii') + b'\n'
-        client.send(resp)
-    print(&quot;Connection Closed&quot;)
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">handler</span>(client):
+    <span style="color:#66d9ef">while</span> True:
+        req <span style="color:#f92672">=</span> client<span style="color:#f92672">.</span>recv(<span style="color:#ae81ff">100</span>)
+        <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> req:
+            <span style="color:#66d9ef">break</span>
+        n <span style="color:#f92672">=</span> int(req)
+        result <span style="color:#f92672">=</span> fib(n)
+        resp <span style="color:#f92672">=</span> str(result)<span style="color:#f92672">.</span>encode(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">ascii</span><span style="color:#e6db74">&#39;</span>) <span style="color:#f92672">+</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>
+        client<span style="color:#f92672">.</span>send(resp)
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Connection Closed</span><span style="color:#e6db74">&#34;</span>)
 
 
-server(&quot;&quot;, 25000)
-</code></pre>
+server(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">&#34;</span>, <span style="color:#ae81ff">25000</span>)
+</code></pre></div><p>每次收到请求，就会开启一个新的线程来处理。用以下代码来测试其性能。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># -*- coding: utf-8 -*-</span>
+<span style="color:#75715e"># perf.py</span>
+<span style="color:#f92672">import</span> socket
+<span style="color:#f92672">import</span> time
+<span style="color:#f92672">from</span> threading <span style="color:#f92672">import</span> Thread
 
-<p>每次收到请求，就会开启一个新的线程来处理。用以下代码来测试其性能。</p>
+sock <span style="color:#f92672">=</span> socket<span style="color:#f92672">.</span>socket(socket<span style="color:#f92672">.</span>AF_INET, socket<span style="color:#f92672">.</span>SOCK_STREAM)
+sock<span style="color:#f92672">.</span>connect((<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">localhost</span><span style="color:#e6db74">&#39;</span>, <span style="color:#ae81ff">25000</span>))
 
-<pre><code class="language-python"># -*- coding: utf-8 -*-
-# perf.py
-import socket
-import time
-from threading import Thread
-
-sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-sock.connect(('localhost', 25000))
-
-counter = 0
+counter <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
 
 
-def monitor():
-    global counter
-    while True:
-        time.sleep(1)
-        print(counter, 'reqs/sec')
-        counter = 0
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">monitor</span>():
+    <span style="color:#66d9ef">global</span> counter
+    <span style="color:#66d9ef">while</span> True:
+        time<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">1</span>)
+        <span style="color:#66d9ef">print</span>(counter, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">reqs/sec</span><span style="color:#e6db74">&#39;</span>)
+        counter <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
 
 
-Thread(target=monitor, daemon=True).start()
+Thread(target<span style="color:#f92672">=</span>monitor, daemon<span style="color:#f92672">=</span>True)<span style="color:#f92672">.</span>start()
 
-while True:
-    sock.send(b'1')
-    resp = sock.recv(100)
-    counter += 1
-</code></pre>
+<span style="color:#66d9ef">while</span> True:
+    sock<span style="color:#f92672">.</span>send(<span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">1</span><span style="color:#e6db74">&#39;</span>)
+    resp <span style="color:#f92672">=</span> sock<span style="color:#f92672">.</span>recv(<span style="color:#ae81ff">100</span>)
+    counter <span style="color:#f92672">+</span><span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
+</code></pre></div><p>每当多开启一个测试端，各个测试端每秒请求数量或多或少都会受到影响。而且当我们用nc.py作一个需要大量计算资源请求，比如 <code>fib(40)</code> ,结果更是惨不忍睹。若是我们把线程换成进程。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># -*- coding: utf-8 -*-</span>
+<span style="color:#75715e"># server.py</span>
+<span style="color:#f92672">import</span> socket
+<span style="color:#f92672">from</span> threading <span style="color:#f92672">import</span> Thread
+<span style="color:#f92672">from</span> concurrent.futures <span style="color:#f92672">import</span> ProcessPoolExecutor <span style="color:#66d9ef">as</span> Pool
 
-<p>每当多开启一个测试端，各个测试端每秒请求数量或多或少都会受到影响。而且当我们用nc.py作一个需要大量计算资源请求，比如 <code>fib(40)</code> ,结果更是惨不忍睹。若是我们把线程换成进程。</p>
-
-<pre><code class="language-python"># -*- coding: utf-8 -*-
-# server.py
-import socket
-from threading import Thread
-from concurrent.futures import ProcessPoolExecutor as Pool
-
-pool = Pool(10)
+pool <span style="color:#f92672">=</span> Pool(<span style="color:#ae81ff">10</span>)
 
 
-def fib(n):
-    if n &lt;= 2:
-        return 1
-    else:
-        return fib(n - 1) + fib(n - 2)
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">fib</span>(n):
+    <span style="color:#66d9ef">if</span> n <span style="color:#f92672">&lt;</span><span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>:
+        <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>
+    <span style="color:#66d9ef">else</span>:
+        <span style="color:#66d9ef">return</span> fib(n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">+</span> fib(n <span style="color:#f92672">-</span> <span style="color:#ae81ff">2</span>)
 
 
-def server(addr, port):
-    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-    sock.bind((addr, port))
-    sock.listen(5)
-    while True:
-        client, addr = sock.accept()
-        print('Connection', addr)
-        Thread(target=handler, args=(client, ), daemon=True).start()
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">server</span>(addr, port):
+    sock <span style="color:#f92672">=</span> socket<span style="color:#f92672">.</span>socket(socket<span style="color:#f92672">.</span>AF_INET, socket<span style="color:#f92672">.</span>SOCK_STREAM)
+    sock<span style="color:#f92672">.</span>setsockopt(socket<span style="color:#f92672">.</span>SOL_SOCKET, socket<span style="color:#f92672">.</span>SO_REUSEADDR, <span style="color:#ae81ff">1</span>)
+    sock<span style="color:#f92672">.</span>bind((addr, port))
+    sock<span style="color:#f92672">.</span>listen(<span style="color:#ae81ff">5</span>)
+    <span style="color:#66d9ef">while</span> True:
+        client, addr <span style="color:#f92672">=</span> sock<span style="color:#f92672">.</span>accept()
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Connection</span><span style="color:#e6db74">&#39;</span>, addr)
+        Thread(target<span style="color:#f92672">=</span>handler, args<span style="color:#f92672">=</span>(client, ), daemon<span style="color:#f92672">=</span>True)<span style="color:#f92672">.</span>start()
 
 
-def handler(client):
-    while True:
-        req = client.recv(100)
-        if not req:
-            break
-        n = int(req)
-        future = pool.submit(fib, n)
-        result = future.result()
-        resp = str(result).encode('ascii') + b'\n'
-        client.send(resp)
-    print(&quot;Connection Closed&quot;)
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">handler</span>(client):
+    <span style="color:#66d9ef">while</span> True:
+        req <span style="color:#f92672">=</span> client<span style="color:#f92672">.</span>recv(<span style="color:#ae81ff">100</span>)
+        <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> req:
+            <span style="color:#66d9ef">break</span>
+        n <span style="color:#f92672">=</span> int(req)
+        future <span style="color:#f92672">=</span> pool<span style="color:#f92672">.</span>submit(fib, n)
+        result <span style="color:#f92672">=</span> future<span style="color:#f92672">.</span>result()
+        resp <span style="color:#f92672">=</span> str(result)<span style="color:#f92672">.</span>encode(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">ascii</span><span style="color:#e6db74">&#39;</span>) <span style="color:#f92672">+</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>
+        client<span style="color:#f92672">.</span>send(resp)
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Connection Closed</span><span style="color:#e6db74">&#34;</span>)
 
-# 使用ProcessPoolExecutor必须用
-# if __name__ == '__main__':
-#     main()
-# 因为子进程会导入__main__模块，若不用此方法避免子进程重复执行主进程的代码，
-# 可能会导致一些奇怪的结果
-if __name__ == '__main__':
-    server(&quot;&quot;, 25000)
-</code></pre>
-
-<p>当然，我们要使用 <strong>ProcessPoolExecutor</strong> 来执行 <strong>CPU密集型任务</strong> ；用 <strong>ThreadPoolExecutor</strong> 更适合 <strong>I/O密集型任务</strong> 。这样突然来了一个需要 <code>fib(40)</code> 的请求，也不会造成很大的影响。不过各个测试端的每秒请求数量，会比之前降了一个数量级。</p>
-
+<span style="color:#75715e"># 使用ProcessPoolExecutor必须用</span>
+<span style="color:#75715e"># if __name__ == &#39;__main__&#39;:</span>
+<span style="color:#75715e">#     main()</span>
+<span style="color:#75715e"># 因为子进程会导入__main__模块，若不用此方法避免子进程重复执行主进程的代码，</span>
+<span style="color:#75715e"># 可能会导致一些奇怪的结果</span>
+<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">__main__</span><span style="color:#e6db74">&#39;</span>:
+    server(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">&#34;</span>, <span style="color:#ae81ff">25000</span>)
+</code></pre></div><p>当然，我们要使用 <strong>ProcessPoolExecutor</strong> 来执行 <strong>CPU密集型任务</strong> ；用 <strong>ThreadPoolExecutor</strong> 更适合 <strong>I/O密集型任务</strong> 。这样突然来了一个需要 <code>fib(40)</code> 的请求，也不会造成很大的影响。不过各个测试端的每秒请求数量，会比之前降了一个数量级。</p>
 <h2 id="深入了解">深入了解</h2>
-
 <p>David Beazley 讲 Python 圈子里有个特别火的观点，就是因为 GIL (Global Interpreter Lock)的存在，导致用 <code>threading</code> 实际表现起来十分糟糕，所以不要用！所以他把代码恢复到原来的版本。如果不用 <code>threading</code> 模块，如何做到并发呢？用Python中的生成器特性，使用yield关键字。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">countdown</span>(n):
+<span style="color:#f92672">.</span><span style="color:#f92672">.</span><span style="color:#f92672">.</span>     <span style="color:#66d9ef">while</span> n <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>:
+<span style="color:#f92672">.</span><span style="color:#f92672">.</span><span style="color:#f92672">.</span>         <span style="color:#66d9ef">yield</span> n
+<span style="color:#f92672">.</span><span style="color:#f92672">.</span><span style="color:#f92672">.</span> n <span style="color:#f92672">-</span><span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
+<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> cd <span style="color:#f92672">=</span> countdown(<span style="color:#ae81ff">3</span>)
+<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> next(cd)
+<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">3</span>
+<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> cd:
+<span style="color:#f92672">.</span><span style="color:#f92672">.</span><span style="color:#f92672">.</span>     <span style="color:#66d9ef">print</span>(i)
+<span style="color:#ae81ff">2</span>
+<span style="color:#ae81ff">1</span>
 
-<pre><code class="language-python">&gt;&gt;&gt; def countdown(n):
-...     while n &gt; 0:
-...         yield n
-... n -= 1
-&gt;&gt;&gt; cd = countdown(3)
-&gt;&gt;&gt; next(cd)
-&gt;&gt;&gt; 3
-&gt;&gt;&gt; for i in cd:
-...     print(i)
-2
-1
-
-&gt;&gt;&gt; next(cd)
+<span style="color:#f92672">&gt;&gt;</span><span style="color:#f92672">&gt;</span> next(cd)
 Traceback (most recent call last):
-    File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;
-StopIteration
-</code></pre>
+    File <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">&lt;stdin&gt;</span><span style="color:#e6db74">&#34;</span>, line <span style="color:#ae81ff">1</span>, <span style="color:#f92672">in</span> <span style="color:#f92672">&lt;</span>module<span style="color:#f92672">&gt;</span>
+<span style="color:#a6e22e">StopIteration</span>
+</code></pre></div><p>当解释器运行到 yield 会返回结果，并挂起该函数，等待下次激活。利用这个特性，稍微修改一下代码</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># -*- coding: utf-8 -*-</span>
+<span style="color:#75715e"># server.py</span>
+<span style="color:#f92672">import</span> socket
+<span style="color:#f92672">import</span> select
+<span style="color:#f92672">from</span> collections <span style="color:#f92672">import</span> deque
 
-<p>当解释器运行到 yield 会返回结果，并挂起该函数，等待下次激活。利用这个特性，稍微修改一下代码</p>
-
-<pre><code class="language-python"># -*- coding: utf-8 -*-
-# server.py
-import socket
-import select
-from collections import deque
-
-tasks = deque()
-recv_wait = dict() # Mapping sockets -&gt; tasks (generators)
-send_wait = dict()
+tasks <span style="color:#f92672">=</span> deque()
+recv_wait <span style="color:#f92672">=</span> dict() <span style="color:#75715e"># Mapping sockets -&gt; tasks (generators)</span>
+send_wait <span style="color:#f92672">=</span> dict()
 
 
-def run():
-    while any([tasks, recv_wait, send_wait]):
-        while not tasks:
-            # 没有正在运行的task
-            # 等待I/O操作
-            can_recv, can_send, _ = select.select(recv_wait, send_wait, [])
-            for sock in can_recv:
-                tasks.append(recv_wait.pop(sock))
-            for sock in can_send:
-                tasks.append(send_wait.pop(sock))
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">run</span>():
+    <span style="color:#66d9ef">while</span> any([tasks, recv_wait, send_wait]):
+        <span style="color:#66d9ef">while</span> <span style="color:#f92672">not</span> tasks:
+            <span style="color:#75715e"># 没有正在运行的task</span>
+            <span style="color:#75715e"># 等待I/O操作</span>
+            can_recv, can_send, _ <span style="color:#f92672">=</span> select<span style="color:#f92672">.</span>select(recv_wait, send_wait, [])
+            <span style="color:#66d9ef">for</span> sock <span style="color:#f92672">in</span> can_recv:
+                tasks<span style="color:#f92672">.</span>append(recv_wait<span style="color:#f92672">.</span>pop(sock))
+            <span style="color:#66d9ef">for</span> sock <span style="color:#f92672">in</span> can_send:
+                tasks<span style="color:#f92672">.</span>append(send_wait<span style="color:#f92672">.</span>pop(sock))
 
-        task = tasks.popleft()
-        try:
-            why, what = next(task)
-            if why == 'recv':
-                recv_wait[what] = task
-            elif why == 'send':
-                send_wait[what] = task
-            else:
-                raise RuntimeError('需要参数!')
-        except StopIteration:
-            print('Task Done!')
-
-
-def fib(n):
-    if n &lt;= 2:
-        return 1
-    else:
-        return fib(n - 1) + fib(n - 2)
+        task <span style="color:#f92672">=</span> tasks<span style="color:#f92672">.</span>popleft()
+        <span style="color:#66d9ef">try</span>:
+            why, what <span style="color:#f92672">=</span> next(task)
+            <span style="color:#66d9ef">if</span> why <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">recv</span><span style="color:#e6db74">&#39;</span>:
+                recv_wait[what] <span style="color:#f92672">=</span> task
+            <span style="color:#66d9ef">elif</span> why <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">send</span><span style="color:#e6db74">&#39;</span>:
+                send_wait[what] <span style="color:#f92672">=</span> task
+            <span style="color:#66d9ef">else</span>:
+                <span style="color:#66d9ef">raise</span> <span style="color:#a6e22e">RuntimeError</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">需要参数!</span><span style="color:#e6db74">&#39;</span>)
+        <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">StopIteration</span>:
+            <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Task Done!</span><span style="color:#e6db74">&#39;</span>)
 
 
-def server(addr, port):
-    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-    sock.bind((addr, port))
-    sock.listen(5)
-    while True:
-        yield 'recv', sock
-        client, addr = sock.accept()
-        print('Connection', addr)
-        tasks.append(handler(client)) # 添加新任务
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">fib</span>(n):
+    <span style="color:#66d9ef">if</span> n <span style="color:#f92672">&lt;</span><span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>:
+        <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>
+    <span style="color:#66d9ef">else</span>:
+        <span style="color:#66d9ef">return</span> fib(n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">+</span> fib(n <span style="color:#f92672">-</span> <span style="color:#ae81ff">2</span>)
 
 
-def handler(client):
-    while True:
-        yield 'recv', client
-        req = client.recv(100)
-        if not req:
-            break
-        n = int(req)
-        result = fib(n)
-        resp = str(result).encode('ascii') + b'\n'
-        yield 'send', client
-        client.send(resp)
-    print(&quot;Connection Closed&quot;)
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">server</span>(addr, port):
+    sock <span style="color:#f92672">=</span> socket<span style="color:#f92672">.</span>socket(socket<span style="color:#f92672">.</span>AF_INET, socket<span style="color:#f92672">.</span>SOCK_STREAM)
+    sock<span style="color:#f92672">.</span>setsockopt(socket<span style="color:#f92672">.</span>SOL_SOCKET, socket<span style="color:#f92672">.</span>SO_REUSEADDR, <span style="color:#ae81ff">1</span>)
+    sock<span style="color:#f92672">.</span>bind((addr, port))
+    sock<span style="color:#f92672">.</span>listen(<span style="color:#ae81ff">5</span>)
+    <span style="color:#66d9ef">while</span> True:
+        <span style="color:#66d9ef">yield</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">recv</span><span style="color:#e6db74">&#39;</span>, sock
+        client, addr <span style="color:#f92672">=</span> sock<span style="color:#f92672">.</span>accept()
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Connection</span><span style="color:#e6db74">&#39;</span>, addr)
+        tasks<span style="color:#f92672">.</span>append(handler(client)) <span style="color:#75715e"># 添加新任务</span>
 
 
-if __name__ == '__main__':
-    tasks.append(server(&quot;&quot;, 25000)) # 添加初始任务
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">handler</span>(client):
+    <span style="color:#66d9ef">while</span> True:
+        <span style="color:#66d9ef">yield</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">recv</span><span style="color:#e6db74">&#39;</span>, client
+        req <span style="color:#f92672">=</span> client<span style="color:#f92672">.</span>recv(<span style="color:#ae81ff">100</span>)
+        <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> req:
+            <span style="color:#66d9ef">break</span>
+        n <span style="color:#f92672">=</span> int(req)
+        result <span style="color:#f92672">=</span> fib(n)
+        resp <span style="color:#f92672">=</span> str(result)<span style="color:#f92672">.</span>encode(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">ascii</span><span style="color:#e6db74">&#39;</span>) <span style="color:#f92672">+</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>
+        <span style="color:#66d9ef">yield</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">send</span><span style="color:#e6db74">&#39;</span>, client
+        client<span style="color:#f92672">.</span>send(resp)
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Connection Closed</span><span style="color:#e6db74">&#34;</span>)
+
+
+<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">__main__</span><span style="color:#e6db74">&#39;</span>:
+    tasks<span style="color:#f92672">.</span>append(server(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">&#34;</span>, <span style="color:#ae81ff">25000</span>)) <span style="color:#75715e"># 添加初始任务</span>
     run()
-</code></pre>
+</code></pre></div><p>在需要进行I/O操作的地方使用 <code>yield</code> ，挂起该函数，用 <code>select</code> 查看socket的I/O操作是否准备好。准备好就唤醒该函数，执行 I/O 操作。使用perf.py或者nc.py测试一下，发现我们成功地实现了并发，没用借助 <code>threading</code> 模块。但我们遇到CPU密集型任务，该代码的表现就乏善可陈。我们尝试用 <code>ProcessPoolExecutor</code> 来解决这个问题</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># -*- coding: utf-8 -*-</span>
+<span style="color:#75715e"># server.py</span>
+<span style="color:#f92672">import</span> socket
+<span style="color:#f92672">import</span> select
+<span style="color:#f92672">from</span> collections <span style="color:#f92672">import</span> deque
+<span style="color:#f92672">from</span> concurrent.futures <span style="color:#f92672">import</span> ProcessPoolExecutor <span style="color:#66d9ef">as</span> Pool
 
-<p>在需要进行I/O操作的地方使用 <code>yield</code> ，挂起该函数，用 <code>select</code> 查看socket的I/O操作是否准备好。准备好就唤醒该函数，执行 I/O 操作。使用perf.py或者nc.py测试一下，发现我们成功地实现了并发，没用借助 <code>threading</code> 模块。但我们遇到CPU密集型任务，该代码的表现就乏善可陈。我们尝试用 <code>ProcessPoolExecutor</code> 来解决这个问题</p>
+pool <span style="color:#f92672">=</span> Pool(<span style="color:#ae81ff">10</span>)
+tasks <span style="color:#f92672">=</span> deque()
+recv_wait <span style="color:#f92672">=</span> dict() <span style="color:#75715e"># Mapping sockets -&gt; tasks (generators)</span>
+send_wait <span style="color:#f92672">=</span> dict()
+future_wait <span style="color:#f92672">=</span> dict()
 
-<pre><code class="language-python"># -*- coding: utf-8 -*-
-# server.py
-import socket
-import select
-from collections import deque
-from concurrent.futures import ProcessPoolExecutor as Pool
-
-pool = Pool(10)
-tasks = deque()
-recv_wait = dict() # Mapping sockets -&gt; tasks (generators)
-send_wait = dict()
-future_wait = dict()
-
-future_notify, future_event = socket.socketpair()
+future_notify, future_event <span style="color:#f92672">=</span> socket<span style="color:#f92672">.</span>socketpair()
 
 
-def future_done(future):
-    tasks.append(future_wait.pop(future))
-    future_notify.send(b'x')
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">future_done</span>(future):
+    tasks<span style="color:#f92672">.</span>append(future_wait<span style="color:#f92672">.</span>pop(future))
+    future_notify<span style="color:#f92672">.</span>send(<span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">x</span><span style="color:#e6db74">&#39;</span>)
 
 
-def future_monitor():
-    while True:
-        yield 'recv', future_event
-        future_event.recv(100)
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">future_monitor</span>():
+    <span style="color:#66d9ef">while</span> True:
+        <span style="color:#66d9ef">yield</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">recv</span><span style="color:#e6db74">&#39;</span>, future_event
+        future_event<span style="color:#f92672">.</span>recv(<span style="color:#ae81ff">100</span>)
 
 
-def run():
-    while any([tasks, recv_wait, send_wait]):
-        while not tasks:
-            # 没有正在运行的task
-            # 等待I/O操作
-            can_recv, can_send, _ = select.select(recv_wait, send_wait, [])
-            for sock in can_recv:
-                tasks.append(recv_wait.pop(sock))
-            for sock in can_send:
-                tasks.append(send_wait.pop(sock))
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">run</span>():
+    <span style="color:#66d9ef">while</span> any([tasks, recv_wait, send_wait]):
+        <span style="color:#66d9ef">while</span> <span style="color:#f92672">not</span> tasks:
+            <span style="color:#75715e"># 没有正在运行的task</span>
+            <span style="color:#75715e"># 等待I/O操作</span>
+            can_recv, can_send, _ <span style="color:#f92672">=</span> select<span style="color:#f92672">.</span>select(recv_wait, send_wait, [])
+            <span style="color:#66d9ef">for</span> sock <span style="color:#f92672">in</span> can_recv:
+                tasks<span style="color:#f92672">.</span>append(recv_wait<span style="color:#f92672">.</span>pop(sock))
+            <span style="color:#66d9ef">for</span> sock <span style="color:#f92672">in</span> can_send:
+                tasks<span style="color:#f92672">.</span>append(send_wait<span style="color:#f92672">.</span>pop(sock))
 
-        task = tasks.popleft()
-        try:
-            why, what = next(task)
-            if why == 'recv':
-                recv_wait[what] = task
-            elif why == 'send':
-                send_wait[what] = task
-            elif why == 'future':
-                future_wait[what] = task
-                what.add_done_callback(future_done)
-            else:
-                raise RuntimeError('需要参数!')
-        except (StopIteration, ConnectionResetError):
-            print('Task Done!')
-
-
-def fib(n):
-    if n &lt;= 2:
-        return 1
-    else:
-        return fib(n - 1) + fib(n - 2)
+        task <span style="color:#f92672">=</span> tasks<span style="color:#f92672">.</span>popleft()
+        <span style="color:#66d9ef">try</span>:
+            why, what <span style="color:#f92672">=</span> next(task)
+            <span style="color:#66d9ef">if</span> why <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">recv</span><span style="color:#e6db74">&#39;</span>:
+                recv_wait[what] <span style="color:#f92672">=</span> task
+            <span style="color:#66d9ef">elif</span> why <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">send</span><span style="color:#e6db74">&#39;</span>:
+                send_wait[what] <span style="color:#f92672">=</span> task
+            <span style="color:#66d9ef">elif</span> why <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">future</span><span style="color:#e6db74">&#39;</span>:
+                future_wait[what] <span style="color:#f92672">=</span> task
+                what<span style="color:#f92672">.</span>add_done_callback(future_done)
+            <span style="color:#66d9ef">else</span>:
+                <span style="color:#66d9ef">raise</span> <span style="color:#a6e22e">RuntimeError</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">需要参数!</span><span style="color:#e6db74">&#39;</span>)
+        <span style="color:#66d9ef">except</span> (<span style="color:#a6e22e">StopIteration</span>, ConnectionResetError):
+            <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Task Done!</span><span style="color:#e6db74">&#39;</span>)
 
 
-def server(addr, port):
-    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-    sock.bind((addr, port))
-    sock.listen(5)
-    while True:
-        yield 'recv', sock
-        client, addr = sock.accept()
-        print('Connection', addr)
-        tasks.append(handler(client))
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">fib</span>(n):
+    <span style="color:#66d9ef">if</span> n <span style="color:#f92672">&lt;</span><span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>:
+        <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>
+    <span style="color:#66d9ef">else</span>:
+        <span style="color:#66d9ef">return</span> fib(n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">+</span> fib(n <span style="color:#f92672">-</span> <span style="color:#ae81ff">2</span>)
 
 
-def handler(client):
-    while True:
-        yield 'recv', client
-        req = client.recv(100)
-        if not req:
-            break
-        n = int(req)
-        future = pool.submit(fib, n)
-        yield 'future', future
-        result = future.result()
-        resp = str(result).encode('ascii') + b'\n'
-        yield 'send', client
-        client.send(resp)
-        print(&quot;Closed&quot;)
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">server</span>(addr, port):
+    sock <span style="color:#f92672">=</span> socket<span style="color:#f92672">.</span>socket(socket<span style="color:#f92672">.</span>AF_INET, socket<span style="color:#f92672">.</span>SOCK_STREAM)
+    sock<span style="color:#f92672">.</span>setsockopt(socket<span style="color:#f92672">.</span>SOL_SOCKET, socket<span style="color:#f92672">.</span>SO_REUSEADDR, <span style="color:#ae81ff">1</span>)
+    sock<span style="color:#f92672">.</span>bind((addr, port))
+    sock<span style="color:#f92672">.</span>listen(<span style="color:#ae81ff">5</span>)
+    <span style="color:#66d9ef">while</span> True:
+        <span style="color:#66d9ef">yield</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">recv</span><span style="color:#e6db74">&#39;</span>, sock
+        client, addr <span style="color:#f92672">=</span> sock<span style="color:#f92672">.</span>accept()
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Connection</span><span style="color:#e6db74">&#39;</span>, addr)
+        tasks<span style="color:#f92672">.</span>append(handler(client))
 
 
-if __name__ == '__main__':
-    tasks.append(server(&quot;&quot;, 25000))
-    tasks.append(future_monitor())
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">handler</span>(client):
+    <span style="color:#66d9ef">while</span> True:
+        <span style="color:#66d9ef">yield</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">recv</span><span style="color:#e6db74">&#39;</span>, client
+        req <span style="color:#f92672">=</span> client<span style="color:#f92672">.</span>recv(<span style="color:#ae81ff">100</span>)
+        <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> req:
+            <span style="color:#66d9ef">break</span>
+        n <span style="color:#f92672">=</span> int(req)
+        future <span style="color:#f92672">=</span> pool<span style="color:#f92672">.</span>submit(fib, n)
+        <span style="color:#66d9ef">yield</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">future</span><span style="color:#e6db74">&#39;</span>, future
+        result <span style="color:#f92672">=</span> future<span style="color:#f92672">.</span>result()
+        resp <span style="color:#f92672">=</span> str(result)<span style="color:#f92672">.</span>encode(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">ascii</span><span style="color:#e6db74">&#39;</span>) <span style="color:#f92672">+</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>
+        <span style="color:#66d9ef">yield</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">send</span><span style="color:#e6db74">&#39;</span>, client
+        client<span style="color:#f92672">.</span>send(resp)
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Closed</span><span style="color:#e6db74">&#34;</span>)
+
+
+<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">__main__</span><span style="color:#e6db74">&#39;</span>:
+    tasks<span style="color:#f92672">.</span>append(server(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">&#34;</span>, <span style="color:#ae81ff">25000</span>))
+    tasks<span style="color:#f92672">.</span>append(future_monitor())
     run()
-</code></pre>
+</code></pre></div><p>因为 <code>future</code> 对象不是文件描述符，无法用 <code>select</code> 来查看任务是否完成。但有更好的方法，<code>future</code> 对象支持添加 <code>callback</code> 函数。用 <code>socket.socketpair</code> 配合 <code>future.add_done_callback</code> 函数来解决这个问题。接下来有个小问题， <code>yield</code> 在代码中很突兀，有什么办法把它包装起来？！？</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># -*- co```ding: utf-8 -*-</span>
+<span style="color:#75715e"># server.py</span>
+<span style="color:#f92672">import</span> socket
+<span style="color:#f92672">import</span> select
+<span style="color:#f92672">from</span> collections <span style="color:#f92672">import</span> deque
+<span style="color:#f92672">from</span> concurrent.futures <span style="color:#f92672">import</span> ProcessPoolExecutor <span style="color:#66d9ef">as</span> Pool
 
-<p>因为 <code>future</code> 对象不是文件描述符，无法用 <code>select</code> 来查看任务是否完成。但有更好的方法，<code>future</code> 对象支持添加 <code>callback</code> 函数。用 <code>socket.socketpair</code> 配合 <code>future.add_done_callback</code> 函数来解决这个问题。接下来有个小问题， <code>yield</code> 在代码中很突兀，有什么办法把它包装起来？！？</p>
+pool <span style="color:#f92672">=</span> Pool(<span style="color:#ae81ff">10</span>)
+tasks <span style="color:#f92672">=</span> deque()
+recv_wait <span style="color:#f92672">=</span> dict() <span style="color:#75715e"># Mapping sockets -&gt; tasks (generators)</span>
+send_wait <span style="color:#f92672">=</span> dict()
+future_wait <span style="color:#f92672">=</span> dict()
 
-<pre><code class="language-python"># -*- co```ding: utf-8 -*-
-# server.py
-import socket
-import select
-from collections import deque
-from concurrent.futures import ProcessPoolExecutor as Pool
-
-pool = Pool(10)
-tasks = deque()
-recv_wait = dict() # Mapping sockets -&gt; tasks (generators)
-send_wait = dict()
-future_wait = dict()
-
-future_notify, future_event = socket.socketpair()
+future_notify, future_event <span style="color:#f92672">=</span> socket<span style="color:#f92672">.</span>socketpair()
 
 
-def future_done(future):
-    tasks.append(future_wait.pop(future))
-    future_notify.send(b'x')
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">future_done</span>(future):
+    tasks<span style="color:#f92672">.</span>append(future_wait<span style="color:#f92672">.</span>pop(future))
+    future_notify<span style="color:#f92672">.</span>send(<span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">x</span><span style="color:#e6db74">&#39;</span>)
 
 
-def future_monitor():
-    while True:
-        yield 'recv', future_event
-        future_event.recv(100)
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">future_monitor</span>():
+    <span style="color:#66d9ef">while</span> True:
+        <span style="color:#66d9ef">yield</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">recv</span><span style="color:#e6db74">&#39;</span>, future_event
+        future_event<span style="color:#f92672">.</span>recv(<span style="color:#ae81ff">100</span>)
 
 
-def run():
-    while any([tasks, recv_wait, send_wait]):
-        while not tasks:
-            # 没有正在运行的task
-            # 等待I/O操作
-            can_recv, can_send, _ = select.select(recv_wait, send_wait, [])
-            for sock in can_recv:
-                tasks.append(recv_wait.pop(sock))
-            for sock in can_send:
-                tasks.append(send_wait.pop(sock))
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">run</span>():
+    <span style="color:#66d9ef">while</span> any([tasks, recv_wait, send_wait]):
+        <span style="color:#66d9ef">while</span> <span style="color:#f92672">not</span> tasks:
+            <span style="color:#75715e"># 没有正在运行的task</span>
+            <span style="color:#75715e"># 等待I/O操作</span>
+            can_recv, can_send, _ <span style="color:#f92672">=</span> select<span style="color:#f92672">.</span>select(recv_wait, send_wait, [])
+            <span style="color:#66d9ef">for</span> sock <span style="color:#f92672">in</span> can_recv:
+                tasks<span style="color:#f92672">.</span>append(recv_wait<span style="color:#f92672">.</span>pop(sock))
+            <span style="color:#66d9ef">for</span> sock <span style="color:#f92672">in</span> can_send:
+                tasks<span style="color:#f92672">.</span>append(send_wait<span style="color:#f92672">.</span>pop(sock))
 
-        task = tasks.popleft()
-        try:
-            why, what = next(task)
-            if why == 'recv':
-                recv_wait[what] = task
-            elif why == 'send':
-                send_wait[what] = task
-            elif why == 'future':
-                future_wait[what] = task
-                what.add_done_callback(future_done)
-            else:
-                raise RuntimeError('需要参数!')
-        except (StopIteration, ConnectionResetError):
-            print('Task Done!')
-
-
-def fib(n):
-    if n &lt;= 2:
-        return 1
-    else:
-        return fib(n - 1) + fib(n - 2)
+        task <span style="color:#f92672">=</span> tasks<span style="color:#f92672">.</span>popleft()
+        <span style="color:#66d9ef">try</span>:
+            why, what <span style="color:#f92672">=</span> next(task)
+            <span style="color:#66d9ef">if</span> why <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">recv</span><span style="color:#e6db74">&#39;</span>:
+                recv_wait[what] <span style="color:#f92672">=</span> task
+            <span style="color:#66d9ef">elif</span> why <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">send</span><span style="color:#e6db74">&#39;</span>:
+                send_wait[what] <span style="color:#f92672">=</span> task
+            <span style="color:#66d9ef">elif</span> why <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">future</span><span style="color:#e6db74">&#39;</span>:
+                future_wait[what] <span style="color:#f92672">=</span> task
+                what<span style="color:#f92672">.</span>add_done_callback(future_done)
+            <span style="color:#66d9ef">else</span>:
+                <span style="color:#66d9ef">raise</span> <span style="color:#a6e22e">RuntimeError</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">需要参数!</span><span style="color:#e6db74">&#39;</span>)
+        <span style="color:#66d9ef">except</span> (<span style="color:#a6e22e">StopIteration</span>, ConnectionResetError):
+            <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Task Done!</span><span style="color:#e6db74">&#39;</span>)
 
 
-class AsyncSocket(object):
-    def __init__(self, sock):
-        self.sock = sock
-
-    def recv(self, maxsize):
-        yield 'recv', self.sock
-        return self.sock.recv(maxsize)
-
-    def send(self, data):
-        yield 'send', self.sock
-        return self.sock.send(data)
-
-    def accept(self):
-        yield 'recv', self.sock
-        client, addr = self.sock.accept()
-        return AsyncSocket(client), addr
-
-    def __getattr__(self, name):
-        return getattr(self.sock, name)
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">fib</span>(n):
+    <span style="color:#66d9ef">if</span> n <span style="color:#f92672">&lt;</span><span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>:
+        <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>
+    <span style="color:#66d9ef">else</span>:
+        <span style="color:#66d9ef">return</span> fib(n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">+</span> fib(n <span style="color:#f92672">-</span> <span style="color:#ae81ff">2</span>)
 
 
-def server(addr, port):
-    sock = AsyncSocket(socket.socket(socket.AF_INET, socket.SOCK_STREAM))
-    sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-    sock.bind((addr, port))
-    sock.listen(5)
-    while True:
-        client, addr = yield from sock.accept()
-        print('Connection', addr)
-        tasks.append(handler(client))
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">AsyncSocket</span>(object):
+    <span style="color:#66d9ef">def</span> __init__(self, sock):
+        self<span style="color:#f92672">.</span>sock <span style="color:#f92672">=</span> sock
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">recv</span>(self, maxsize):
+        <span style="color:#66d9ef">yield</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">recv</span><span style="color:#e6db74">&#39;</span>, self<span style="color:#f92672">.</span>sock
+        <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>sock<span style="color:#f92672">.</span>recv(maxsize)
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">send</span>(self, data):
+        <span style="color:#66d9ef">yield</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">send</span><span style="color:#e6db74">&#39;</span>, self<span style="color:#f92672">.</span>sock
+        <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>sock<span style="color:#f92672">.</span>send(data)
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">accept</span>(self):
+        <span style="color:#66d9ef">yield</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">recv</span><span style="color:#e6db74">&#39;</span>, self<span style="color:#f92672">.</span>sock
+        client, addr <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>sock<span style="color:#f92672">.</span>accept()
+        <span style="color:#66d9ef">return</span> AsyncSocket(client), addr
+
+    <span style="color:#66d9ef">def</span> __getattr__(self, name):
+        <span style="color:#66d9ef">return</span> getattr(self<span style="color:#f92672">.</span>sock, name)
 
 
-def handler(client):
-    while True:
-        req = yield from client.recv(100)
-        if not req:
-            break
-        n = int(req)
-        future = pool.submit(fib, n)
-        yield 'future', future
-        result = future.result()
-        resp = str(result).encode('ascii') + b'\n'
-        yield from client.send(resp)
-    print(&quot;Connection Closed&quot;)
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">server</span>(addr, port):
+    sock <span style="color:#f92672">=</span> AsyncSocket(socket<span style="color:#f92672">.</span>socket(socket<span style="color:#f92672">.</span>AF_INET, socket<span style="color:#f92672">.</span>SOCK_STREAM))
+    sock<span style="color:#f92672">.</span>setsockopt(socket<span style="color:#f92672">.</span>SOL_SOCKET, socket<span style="color:#f92672">.</span>SO_REUSEADDR, <span style="color:#ae81ff">1</span>)
+    sock<span style="color:#f92672">.</span>bind((addr, port))
+    sock<span style="color:#f92672">.</span>listen(<span style="color:#ae81ff">5</span>)
+    <span style="color:#66d9ef">while</span> True:
+        client, addr <span style="color:#f92672">=</span> <span style="color:#66d9ef">yield</span> <span style="color:#f92672">from</span> sock.accept()
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Connection</span><span style="color:#e6db74">&#39;</span>, addr)
+        tasks<span style="color:#f92672">.</span>append(handler(client))
 
 
-if __name__ == '__main__':
-    tasks.append(server(&quot;&quot;, 25000))
-    tasks.append(future_monitor())
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">handler</span>(client):
+    <span style="color:#66d9ef">while</span> True:
+        req <span style="color:#f92672">=</span> <span style="color:#66d9ef">yield</span> <span style="color:#f92672">from</span> client.recv(<span style="color:#ae81ff">100</span>)
+        <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> req:
+            <span style="color:#66d9ef">break</span>
+        n <span style="color:#f92672">=</span> int(req)
+        future <span style="color:#f92672">=</span> pool<span style="color:#f92672">.</span>submit(fib, n)
+        <span style="color:#66d9ef">yield</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">future</span><span style="color:#e6db74">&#39;</span>, future
+        result <span style="color:#f92672">=</span> future<span style="color:#f92672">.</span>result()
+        resp <span style="color:#f92672">=</span> str(result)<span style="color:#f92672">.</span>encode(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">ascii</span><span style="color:#e6db74">&#39;</span>) <span style="color:#f92672">+</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>
+        <span style="color:#66d9ef">yield</span> <span style="color:#f92672">from</span> client.send(resp)
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Connection Closed</span><span style="color:#e6db74">&#34;</span>)
+
+
+<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">__main__</span><span style="color:#e6db74">&#39;</span>:
+    tasks<span style="color:#f92672">.</span>append(server(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">&#34;</span>, <span style="color:#ae81ff">25000</span>))
+    tasks<span style="color:#f92672">.</span>append(future_monitor())
     run()
-</code></pre>
-
-<p><code>yield from</code> 是用来代理子生成器的，一种简单方式来控制子生成器的行为。在Python3.5之后，这种写法就可以用更简单的 <code>async/await</code> 来代替。</p>
-
-<h2 id="async-await">async/await</h2>
-
+</code></pre></div><p><code>yield from</code> 是用来代理子生成器的，一种简单方式来控制子生成器的行为。在Python3.5之后，这种写法就可以用更简单的 <code>async/await</code> 来代替。</p>
+<h2 id="asyncawait">async/await</h2>
 <p>看了这个视频后，就看了 pycon 上关于 Asynchronous 的视频。研究了一下 3.5 后的协程语法，把代码修改成以下的样子。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># -*- coding: utf-8 -*-</span>
+<span style="color:#75715e"># server.py</span>
+<span style="color:#f92672">import</span> asyncio
+<span style="color:#f92672">import</span> logging
+<span style="color:#f92672">import</span> sys
+<span style="color:#f92672">from</span> concurrent.futures <span style="color:#f92672">import</span> ProcessPoolExecutor <span style="color:#66d9ef">as</span> Executor
 
-<pre><code class="language-python"># -*- coding: utf-8 -*-
-# server.py
-import asyncio
-import logging
-import sys
-from concurrent.futures import ProcessPoolExecutor as Executor
-
-logger = logging.getLogger('SERVER')
-logging.basicConfig(stream=sys.stdout, level=logging.INFO)
-executor = Executor(4)
-
-
-def fib(n: int) -&gt; int:
-    if n &lt;= 2:
-        return 1
-    else:
-        return fib(n - 1) + fib(n - 2)
+logger <span style="color:#f92672">=</span> logging<span style="color:#f92672">.</span>getLogger(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">SERVER</span><span style="color:#e6db74">&#39;</span>)
+logging<span style="color:#f92672">.</span>basicConfig(stream<span style="color:#f92672">=</span>sys<span style="color:#f92672">.</span>stdout, level<span style="color:#f92672">=</span>logging<span style="color:#f92672">.</span>INFO)
+executor <span style="color:#f92672">=</span> Executor(<span style="color:#ae81ff">4</span>)
 
 
-async def handler(reader: asyncio.StreamReader, writer: asyncio.StreamWriter):
-    addr = writer.get_extra_info('peername')
-    logger.info('Connection&lt;%s:%d&gt; Created', *addr)
-    loop = asyncio.get_event_loop()
-    while True:
-        req = await reader.readline()
-        if not req.strip():
-            break
-        logger.debug('Connection&lt;%s:%d&gt; Recv %r', *addr, req)
-        try:
-            n = int(req)
-            future = loop.run_in_executor(executor, fib, n)
-            result = await asyncio.gather(future, return_exceptions=True)
-            if isinstance(result, Exception):
-                break
-            resp = str(result[0]).encode('ascii') + b'\n'
-            logger.debug('Connection&lt;%s:%d&gt; Send %r', *addr, resp)
-            writer.write(resp)
-            await writer.drain()
-        except Exception as e:
-            writer.write(b'[Error]\n')
-            await writer.drain()
-            logger.exception(e)
-            continue
-    writer.close()
-    logger.info('Connection&lt;%s:%d&gt; Done', *addr)
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">fib</span>(n: int) <span style="color:#f92672">-</span><span style="color:#f92672">&gt;</span> int:
+    <span style="color:#66d9ef">if</span> n <span style="color:#f92672">&lt;</span><span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>:
+        <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>
+    <span style="color:#66d9ef">else</span>:
+        <span style="color:#66d9ef">return</span> fib(n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">+</span> fib(n <span style="color:#f92672">-</span> <span style="color:#ae81ff">2</span>)
 
 
-def Server(host: str, port: int):
-    loop = asyncio.get_event_loop()
-    coro = asyncio.start_server(handler, host, port, loop=loop)
-    server = loop.run_until_complete(coro)
+async <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">handler</span>(reader: asyncio<span style="color:#f92672">.</span>StreamReader, writer: asyncio<span style="color:#f92672">.</span>StreamWriter):
+    addr <span style="color:#f92672">=</span> writer<span style="color:#f92672">.</span>get_extra_info(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">peername</span><span style="color:#e6db74">&#39;</span>)
+    logger<span style="color:#f92672">.</span>info(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Connection&lt;</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">:</span><span style="color:#e6db74">%d</span><span style="color:#e6db74">&gt; Created</span><span style="color:#e6db74">&#39;</span>, <span style="color:#f92672">*</span>addr)
+    loop <span style="color:#f92672">=</span> asyncio<span style="color:#f92672">.</span>get_event_loop()
+    <span style="color:#66d9ef">while</span> True:
+        req <span style="color:#f92672">=</span> await reader<span style="color:#f92672">.</span>readline()
+        <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> req<span style="color:#f92672">.</span>strip():
+            <span style="color:#66d9ef">break</span>
+        logger<span style="color:#f92672">.</span>debug(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Connection&lt;</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">:</span><span style="color:#e6db74">%d</span><span style="color:#e6db74">&gt; Recv </span><span style="color:#e6db74">%r</span><span style="color:#e6db74">&#39;</span>, <span style="color:#f92672">*</span>addr, req)
+        <span style="color:#66d9ef">try</span>:
+            n <span style="color:#f92672">=</span> int(req)
+            future <span style="color:#f92672">=</span> loop<span style="color:#f92672">.</span>run_in_executor(executor, fib, n)
+            result <span style="color:#f92672">=</span> await asyncio<span style="color:#f92672">.</span>gather(future, return_exceptions<span style="color:#f92672">=</span>True)
+            <span style="color:#66d9ef">if</span> isinstance(result, <span style="color:#a6e22e">Exception</span>):
+                <span style="color:#66d9ef">break</span>
+            resp <span style="color:#f92672">=</span> str(result[<span style="color:#ae81ff">0</span>])<span style="color:#f92672">.</span>encode(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">ascii</span><span style="color:#e6db74">&#39;</span>) <span style="color:#f92672">+</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>
+            logger<span style="color:#f92672">.</span>debug(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Connection&lt;</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">:</span><span style="color:#e6db74">%d</span><span style="color:#e6db74">&gt; Send </span><span style="color:#e6db74">%r</span><span style="color:#e6db74">&#39;</span>, <span style="color:#f92672">*</span>addr, resp)
+            writer<span style="color:#f92672">.</span>write(resp)
+            await writer<span style="color:#f92672">.</span>drain()
+        <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">Exception</span> <span style="color:#66d9ef">as</span> e:
+            writer<span style="color:#f92672">.</span>write(<span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">[Error]</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>)
+            await writer<span style="color:#f92672">.</span>drain()
+            logger<span style="color:#f92672">.</span>exception(e)
+            <span style="color:#66d9ef">continue</span>
+    writer<span style="color:#f92672">.</span>close()
+    logger<span style="color:#f92672">.</span>info(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Connection&lt;</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">:</span><span style="color:#e6db74">%d</span><span style="color:#e6db74">&gt; Done</span><span style="color:#e6db74">&#39;</span>, <span style="color:#f92672">*</span>addr)
 
-    print('Serving on http://%s:%d' % (host, port))
-    try:
-        loop.run_forever()
-    finally:
-        executor.shutdown()
-        server.close()
-        try:
-            loop.run_until_complete(server.wait_closed())
-        finally:
-            pass
-        loop.close()
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">Server</span>(host: str, port: int):
+    loop <span style="color:#f92672">=</span> asyncio<span style="color:#f92672">.</span>get_event_loop()
+    coro <span style="color:#f92672">=</span> asyncio<span style="color:#f92672">.</span>start_server(handler, host, port, loop<span style="color:#f92672">=</span>loop)
+    server <span style="color:#f92672">=</span> loop<span style="color:#f92672">.</span>run_until_complete(coro)
+
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Serving on http://</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">:</span><span style="color:#e6db74">%d</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">%</span> (host, port))
+    <span style="color:#66d9ef">try</span>:
+        loop<span style="color:#f92672">.</span>run_forever()
+    <span style="color:#66d9ef">finally</span>:
+        executor<span style="color:#f92672">.</span>shutdown()
+        server<span style="color:#f92672">.</span>close()
+        <span style="color:#66d9ef">try</span>:
+            loop<span style="color:#f92672">.</span>run_until_complete(server<span style="color:#f92672">.</span>wait_closed())
+        <span style="color:#66d9ef">finally</span>:
+            <span style="color:#66d9ef">pass</span>
+        loop<span style="color:#f92672">.</span>close()
 
 
-def main():
-    Server('localhost', 12345)
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">main</span>():
+    Server(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">localhost</span><span style="color:#e6db74">&#39;</span>, <span style="color:#ae81ff">12345</span>)
 
 
-if __name__ == '__main__':
+<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">__main__</span><span style="color:#e6db74">&#39;</span>:
     main()
 
-</code></pre>
-
-<p>是不是看起简洁了许多？刚学体会也不是很深，不是很了解。但觉得代码可读性变好了。</p>
-
+</code></pre></div><p>是不是看起简洁了许多？刚学体会也不是很深，不是很了解。但觉得代码可读性变好了。</p>
 <h2 id="小结">小结</h2>
-
 <table>
 <thead>
 <tr>
@@ -1759,38 +1717,29 @@ if __name__ == '__main__':
 <th>IO密集型任务</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td><code>multiprocessing</code></td>
 <td><code>threading</code></td>
 </tr>
-
 <tr>
 <td><code>concurrent.futures.ProcessPoolExecutor</code></td>
 <td><code>concurrent.futures.ThreadPoolExecutor</code></td>
 </tr>
-
 <tr>
 <td></td>
 <td><code>async / await</code></td>
 </tr>
 </tbody>
 </table>
-
 <p>以上关于<strong>Fibonacci</strong>的例子是为了更好地理解并发，不是一个很好的算法。</p>
-
-<pre><code class="language-python">def fib(n):
-    a , b = 1, 1
-    for _ in range(n):
-        a, b = b, a + b
-    return a
-</code></pre>
-
-<p>使用以上版本大大加快了<code>fib</code>的计算速度，就没必要用多进程了。而且多进程与多线程不要混搭使用，因为可能会出现死锁，导致程序出现不可预知的错误。必须慎重对待多进程和多线程混搭使用。</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">fib</span>(n):
+    a , b <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>
+    <span style="color:#66d9ef">for</span> _ <span style="color:#f92672">in</span> range(n):
+        a, b <span style="color:#f92672">=</span> b, a <span style="color:#f92672">+</span> b
+    <span style="color:#66d9ef">return</span> a
+</code></pre></div><p>使用以上版本大大加快了<code>fib</code>的计算速度，就没必要用多进程了。而且多进程与多线程不要混搭使用，因为可能会出现死锁，导致程序出现不可预知的错误。必须慎重对待多进程和多线程混搭使用。</p>
 <h2 id="参考链接">参考链接</h2>
-
 <ul>
 <li><a href="https://docs.python.org/dev/library/concurrent.futures.html#processpoolexecutor-example">17.4.3. ProcessPoolExecutor | Python Docs</a></li>
 <li><a href="http://masnun.com/2016/03/29/python-a-quick-introduction-to-the-concurrent-futures-module.html">PYTHON: A QUICK INTRODUCTION TO THE CONCURRENT.FUTURES MODULE</a></li>
@@ -1798,19 +1747,21 @@ if __name__ == '__main__':
 <li><a href="http://blog.theerrorlog.com/yield-from-in-python-3.html">Python3中的yield from语法</a></li>
 <li><a href="https://www.python.org/dev/peps/pep-0380/">PEP 380 — Syntax for Delegating to a Subgenerator</a></li>
 </ul>
-
 <h2 id="扩展阅读">扩展阅读</h2>
-
 <ul>
-<li><p>Pycon Montreal, David&#39;s talk所出现的所有代码
-<a href="https://github.com/codeAshu/concurrency">codeAshu/concurrency | GitHub</a></p></li>
-
-<li><p>协程语法async与await
-<a href="https://www.python.org/dev/peps/pep-0492/">PEP 492 — Coroutines with async and await syntax</a></p></li>
-
-<li><p>Python异步入门指南
+<li>
+<p>Pycon Montreal, David's talk所出现的所有代码
+<a href="https://github.com/codeAshu/concurrency">codeAshu/concurrency | GitHub</a></p>
+</li>
+<li>
+<p>协程语法async与await
+<a href="https://www.python.org/dev/peps/pep-0492/">PEP 492 — Coroutines with async and await syntax</a></p>
+</li>
+<li>
+<p>Python异步入门指南
 <a href="https://www.youtube.com/watch?v=Bv25Dwe84g0">Thinking about Concurrency, Raymond Hettinger, Python core developer | PyCon Russia 2016</a>
-<a href="https://youtu.be/iG6fr81xHKA">Miguel Grinberg Asynchronous Python for the Complete Beginner PyCon 2017</a></p></li>
+<a href="https://youtu.be/iG6fr81xHKA">Miguel Grinberg Asynchronous Python for the Complete Beginner PyCon 2017</a></p>
+</li>
 </ul>
 
 
@@ -1899,7 +1850,7 @@ if __name__ == '__main__':
 
         
             
-                <a href="https://linw1995.com/license">Copyright © 2019 linw1995</a>
+                <a href="https://linw1995.com/license">Copyright © 2020 linw1995</a>
             
         
 

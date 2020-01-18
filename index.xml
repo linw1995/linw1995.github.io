@@ -6,10 +6,23 @@
     <description>Recent content on linw1995</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Sun, 18 Aug 2019 23:59:59 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 17 Jan 2020 23:59:59 +0000</lastBuildDate>
     
 	<atom:link href="https://linw1995.com/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>树莓派系统烧录及 SSH 远程连接</title>
+      <link>https://linw1995.com/blog/%E6%A0%91%E8%8E%93%E6%B4%BE%E7%B3%BB%E7%BB%9F%E7%83%A7%E5%BD%95%E5%8F%8A-SSH-%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5/</link>
+      <pubDate>Fri, 17 Jan 2020 23:59:59 +0000</pubDate>
+      
+      <guid>https://linw1995.com/blog/%E6%A0%91%E8%8E%93%E6%B4%BE%E7%B3%BB%E7%BB%9F%E7%83%A7%E5%BD%95%E5%8F%8A-SSH-%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5/</guid>
+      <description>很久之前入了个树莓派 3B+，本来打算来搭个 nas 的。但后来买了群晖ds218+，树莓派就置灰了许久。最近入了个 Nintendo Switch，打算折腾一下用来和基友们联机，就翻出置灰许久的树莓派。本文就来记录一下是怎么折腾这台树莓派。
+系统烧录 使用到的硬件  树莓派本体（三代 B+ 型） 电源 5V2.5A（Micro USB接口） SD 卡 （32 GB） SD 卡 USB 读卡器  新到的机子没有安装系统，甚至没有存储媒介。没有的话，需要购买一个大小合适的 SD 卡。 到官网下载合适的系统镜像，本文下载的是最简的镜像 Raspbian Buster Lite，内核版本为 4.19。下载完成后解压，得到 *.img 镜像文件，再用 balenaEtcher 软件来烧录到 SD 卡中。
+ Installing operating system images
+ 无界面链接 Wi-Fi（用网线的可跳过） 无界面怎么配置 Wi-Fi 链接呢？通过在烧录好的 SD 卡的 boot 分区，写入一个配置文件 wpa_supplicant.conf。其内容如下，替换尖括号的内容即可。刚烧录好的读卡器要重新拔插一次。
+ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev update_config=1 country=&amp;lt;Insert country code here&amp;gt; network={ ssid=&amp;#34;&amp;lt;Name of your WiFi&amp;gt;&amp;#34; psk=&amp;#34;&amp;lt;Password for your WiFi&amp;gt;&amp;#34; } 国家代码请看 ISO3166 | Wikipedia，中国的就是 CN</description>
+    </item>
     
     <item>
       <title>愉快地用 C 在 LeetCode 上刷题</title>
@@ -19,7 +32,7 @@
       <guid>https://linw1995.com/blog/%E6%84%89%E5%BF%AB%E5%9C%B0%E7%94%A8-C-%E5%9C%A8-LeetCode-%E4%B8%8A%E5%88%B7%E9%A2%98/</guid>
       <description>当在用 C 在 LeetCode 上刷题，难免无法一次 AC。而在 LeetCode 上又无法调试，只能用 printf 大法，输出一些简单的日志，比如代码运行时的变量值等。当代码 AC 后，为了降低代码运行的时间消耗，则需要把 printf 的代码删除或者注释掉。这就有点麻烦了，因为使用 printf 的代码越多，需要删除或注释掉的地方就越多。
 通过使用C的预处理指令 #define, #ifdef, #else, #endif 这几个简单的指令，再加上函数式的宏（Function-like Macros），就可以只注释一行代码，即可把日志输出去掉。听起来是不是很方便呢？接下来就用 LeetCode 的第 2 题，两数相加，来据一个简单的例子。
-#define __WITH_LOG__ #ifdef __WITH_LOG__ #include &amp;lt;stdio.h&amp;gt; #define LOG(message, args...) \ fprintf(stdout, &amp;quot;| %s:%d | &amp;quot; message &amp;quot;\n&amp;quot;, __FUNCTION__, __LINE__, ##args) #else #define LOG(message, args...) #endif struct ListNode *addTwoNumbers(struct ListNode *l1, struct ListNode *l2) { struct ListNode dummy; struct ListNode *last = &amp;amp;dummy; int inc = 0; while (inc || l1 || l2) { last-&amp;gt;next = malloc(sizeof(struct ListNode)); last = last-&amp;gt;next; last-&amp;gt;val = inc; LOG(&amp;quot;last-&amp;gt;val=inc; val=%d&amp;quot;, inc); if (l1) { last-&amp;gt;val += l1-&amp;gt;val; LOG(&amp;quot;last-&amp;gt;val+=l1-&amp;gt;val; l1-&amp;gt;val=%d, last-&amp;gt;val=%d&amp;quot;, l1-&amp;gt;val, last-&amp;gt;val); } if (l2) { last-&amp;gt;val += l2-&amp;gt;val; LOG(&amp;quot;last-&amp;gt;val+=l2-&amp;gt;val; l2-&amp;gt;val=%d, last-&amp;gt;val=%d&amp;quot;, l2-&amp;gt;val, last-&amp;gt;val); } if (last-&amp;gt;val &amp;gt; 9) { last-&amp;gt;val -= 10; inc = 1; } else { inc = 0; } if (l1) l1 = l1-&amp;gt;next; if (l2) l2 = l2-&amp;gt;next; } last-&amp;gt;next = 0; return dummy.</description>
+#define __WITH_LOG__ #ifdef __WITH_LOG__#include &amp;lt;stdio.h&amp;gt;#define LOG(message, args...) \fprintf(stdout, &amp;#34;| %s:%d | &amp;#34; message &amp;#34;\n&amp;#34;, __FUNCTION__, __LINE__, ##args)#else#define LOG(message, args...)#endif struct ListNode *addTwoNumbers(struct ListNode *l1, struct ListNode *l2) { struct ListNode dummy; struct ListNode *last = &amp;amp;dummy; int inc = 0; while (inc || l1 || l2) { last-&amp;gt;next = malloc(sizeof(struct ListNode)); last = last-&amp;gt;next; last-&amp;gt;val = inc; LOG(&amp;#34;last-&amp;gt;val=inc; val=%d&amp;#34;, inc); if (l1) { last-&amp;gt;val += l1-&amp;gt;val; LOG(&amp;#34;last-&amp;gt;val+=l1-&amp;gt;val; l1-&amp;gt;val=%d, last-&amp;gt;val=%d&amp;#34;, l1-&amp;gt;val, last-&amp;gt;val); } if (l2) { last-&amp;gt;val += l2-&amp;gt;val; LOG(&amp;#34;last-&amp;gt;val+=l2-&amp;gt;val; l2-&amp;gt;val=%d, last-&amp;gt;val=%d&amp;#34;, l2-&amp;gt;val, last-&amp;gt;val); } if (last-&amp;gt;val &amp;gt; 9) { last-&amp;gt;val -= 10; inc = 1; } else { inc = 0; } if (l1) l1 = l1-&amp;gt;next; if (l2) l2 = l2-&amp;gt;next; } last-&amp;gt;next = 0; return dummy.</description>
     </item>
     
     <item>
@@ -30,8 +43,8 @@
       <guid>https://linw1995.com/blog/%E7%94%A8-docker-compose-%E9%83%A8%E7%BD%B2-MongoDB-Replica-Set-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/</guid>
       <description>前言 话不多说，直接进正题
 如何搭建和配置 把以下内容写入 docker-compose.yml 文件中。然后运行 docker-compose up -d --scale mongo=3，就可以启动三个 MongoDB 服务。接下来我们要把这三个 MongoDB 节点配置成一组 Replica Set
-version: &#39;3.5&#39; services: mongo: image: mongo ports: - &amp;quot;27017-27118:27017&amp;quot; command: mongod --replSet main  把以下内容写入 utils.py 文件中
-import subprocess as sp def get_node_ports(): ports = [] idx = 1 while True: try: output = sp.check_output( f&amp;quot;docker-compose port --index {idx} mongo 27017&amp;quot;, shell=True, encoding=&amp;quot;utf-8&amp;quot;, stderr=sp.DEVNULL, ) except sp.CalledProcessError: break port = output.split(&amp;quot;:&amp;quot;)[1] ports.append(int(port)) idx += 1 if not ports: raise RuntimeError(&amp;quot;no node is running.</description>
+version: &amp;#39;3.5&amp;#39; services: mongo: image: mongo ports: - &amp;#34;27017-27118:27017&amp;#34; command: mongod --replSet main 把以下内容写入 utils.py 文件中
+import subprocess as sp def get_node_ports(): ports = [] idx = 1 while True: try: output = sp.check_output( f&amp;#34;docker-compose port --index {idx} mongo 27017&amp;#34;, shell=True, encoding=&amp;#34;utf-8&amp;#34;, stderr=sp.DEVNULL, ) except sp.CalledProcessError: break port = output.split(&amp;#34;:&amp;#34;)[1] ports.append(int(port)) idx += 1 if not ports: raise RuntimeError(&amp;#34;no node is running.</description>
     </item>
     
     <item>
@@ -59,8 +72,8 @@ def _process_queue(self, spider, slot): if slot.latercall and slot.latercall.act
       <description>当编写一个爬虫时，会使用 lxml 库来解析 HTML 文件。当爬取到了一个超大且复杂的 HTML 文件，解析起来十分耗费时间，进而影响了爬虫的正常运行
 为了不影响爬虫的正常运行，尝试把解析任务交给线程池来处理
 模拟爬虫 先随便准备一个 html 文件，就直接从 lxml 的文档上下载一个
-wget https://lxml.de/tutorial.html -O example.html  举一个重解析的模拟爬虫例子，每次请求的 io 时间假定为 0.01s ，请求并发数无上限，总量为 2000 个。
-import asyncio import time from pathlib import Path from lxml import html _html_text = None _latest_fetched = 0 async def fetch_text(): # 模拟爬取 await asyncio.sleep(0.01) # 记录最后的一个请求的结束时间 global _latest_fetched _latest_fetched = time.perf_counter() return _html_text def get_title(text): doc = html.fromstring(text) return doc.xpath(&amp;quot;//title/text()&amp;quot;)[0] async def create_task(): text = await fetch_text() title = get_title(text) return title async def main(): futs = [] for _ in range(2000): fut = asyncio.</description>
+wget https://lxml.de/tutorial.html -O example.html 举一个重解析的模拟爬虫例子，每次请求的 io 时间假定为 0.01s ，请求并发数无上限，总量为 2000 个。
+import asyncio import time from pathlib import Path from lxml import html _html_text = None _latest_fetched = 0 async def fetch_text(): # 模拟爬取 await asyncio.sleep(0.01) # 记录最后的一个请求的结束时间 global _latest_fetched _latest_fetched = time.perf_counter() return _html_text def get_title(text): doc = html.fromstring(text) return doc.xpath(&amp;#34;//title/text()&amp;#34;)[0] async def create_task(): text = await fetch_text() title = get_title(text) return title async def main(): futs = [] for _ in range(2000): fut = asyncio.</description>
     </item>
     
     <item>
@@ -81,10 +94,11 @@ import asyncio import time from pathlib import Path from lxml import html _html_
       <guid>https://linw1995.com/blog/%E4%B8%A4%E7%A7%8D%E6%96%B9%E5%BC%8F%E6%9D%A5%E7%94%A8-Python-logging-%E8%AE%B0%E5%BD%95%E9%A2%9D%E5%A4%96%E7%9A%84%E5%80%BC/</guid>
       <description>前言 有两种方式来用 Python logging 记录额外的值
  使用 extra 参数 向 args 传入字典结构的数据  使用 extra 参数 通过 log 方法的 extra 参数可以来记录而外的值。通过 LogRecord.extra 获取，配合 LogFilter 及 LoggerAdapter 使用。还可以通过配置 Formatter 打印出该值
-logging.basicConfig(format=&amp;quot;%(ip)s - %(message)s&amp;quot;) logging.info(&amp;quot;test message&amp;quot;, extra={&amp;quot;ip&amp;quot;: &amp;quot;127.0.0.1&amp;quot;})  其输出
-127.0.0.1 - test message  使用 Formatter 十分方便，但一旦没有通过 extra 传入对应的键值，则会导致日志写出异常
-logger = logging.getLogger() adapted_logger = logging.LoggerAdapter(logger, extra={&amp;quot;ip&amp;quot;: &amp;quot;127.0.0.1&amp;quot;}) adapted_logger.info(&amp;quot;test message&amp;quot;)  可通过 LoggerAdapter 来给所有 log 方法加上 extra 参数
-不过官方的实现很奇怪，直接覆盖掉了原本的 extra 参数。</description>
+logging.basicConfig(format=&amp;#34;%(ip)s- %(message)s&amp;#34;) logging.info(&amp;#34;test message&amp;#34;, extra={&amp;#34;ip&amp;#34;: &amp;#34;127.0.0.1&amp;#34;}) 其输出
+127.0.0.1 - test message 使用 Formatter 十分方便，但一旦没有通过 extra 传入对应的键值，则会导致日志写出异常
+logger = logging.getLogger() adapted_logger = logging.LoggerAdapter(logger, extra={&amp;#34;ip&amp;#34;: &amp;#34;127.0.0.1&amp;#34;}) adapted_logger.info(&amp;#34;test message&amp;#34;) 可通过 LoggerAdapter 来给所有 log 方法加上 extra 参数
+不过官方的实现很奇怪，直接覆盖掉了原本的 extra 参数。
+ LoggerAdapter.process LoggerAdapter.log  通过继承它，修改 process 方法即可</description>
     </item>
     
     <item>
@@ -93,9 +107,9 @@ logger = logging.getLogger() adapted_logger = logging.LoggerAdapter(logger, extr
       <pubDate>Thu, 27 Dec 2018 23:59:59 +0000</pubDate>
       
       <guid>https://linw1995.com/blog/Run-Twisted-in-another-thread/</guid>
-      <description>Develop a project related to a service project base on Twisted, and consider how to test it. This is a solution. Run Twisted&amp;rsquo;s reactor in another thread and delegating the Twisted functions calling into it.
-Use this fixture run a reactor in another thread. Due to the reactor is not restartable, so the fixture&amp;rsquo;s scope is &amp;ldquo;session&amp;rdquo;.
-import pytest from twisted.internet import reactor as twisted_reactor @pytest.fixture(scope=&amp;quot;session&amp;quot;, autouse=True) def reactor(): t = threading.</description>
+      <description>Develop a project related to a service project base on Twisted, and consider how to test it. This is a solution. Run Twisted&#39;s reactor in another thread and delegating the Twisted functions calling into it.
+Use this fixture run a reactor in another thread. Due to the reactor is not restartable, so the fixture&#39;s scope is &amp;ldquo;session&amp;rdquo;.
+import pytest from twisted.internet import reactor as twisted_reactor @pytest.fixture(scope=&amp;#34;session&amp;#34;, autouse=True) def reactor(): t = threading.</description>
     </item>
     
     <item>
@@ -106,7 +120,7 @@ import pytest from twisted.internet import reactor as twisted_reactor @pytest.fi
       <guid>https://linw1995.com/blog/Python-%E7%89%88%E6%9C%AC%E5%8F%8A%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86%E7%9A%84%E6%9C%80%E7%BB%88%E6%96%B9%E6%A1%88-pyenv-Pipenv/</guid>
       <description>前言 作为个程序员，总会遇到这些问题：如何升级系统的 Python 版本；如何安装多个 Python 版本；如何隔离项目的依赖；在开发机上好好的，为什么线上、CI 就运行失败了呢
  通过下载 Python 源码编译安装（最好不要覆盖掉系统原有的 Python，可安装在自己的 home 目录或者其他路径下） 通过 Virtualenv 来隔离项目 Python 环境 通过 pip freeze &amp;gt; requirements.txt 和 pip install -r requirements.txt来固定依赖的版本，来确保重新安装后的 Python 环境是一致  随着开发项目的增多，mac 上的 Python 环境越来越复杂，就像下面这张图一样。面对这样的复杂的环境，管理起来太折磨人了，且会因冗余而浪费硬盘空间。
-
+![版本及依赖管理指北](/blog/Python 版本及依赖管理的最终方案 pyenv + Pipenv/01.png)
 那么我们如何来管理越来越复杂的 Python 环境？解决该问题的最终方案是：使用 pyenv 管理多个 python 版本；使用 Pipenv 管理项目所需要的依赖。
 pyenv Github Repo: pyenv/pyenv
 参照此教程安装 pyenv
@@ -121,7 +135,7 @@ pyenv install --list # 列出所有可安装的版本 pyenv install 3.7.1 # 安�
       <pubDate>Thu, 15 Feb 2018 00:56:01 +0800</pubDate>
       
       <guid>https://linw1995.com/license/</guid>
-      <description>本作品采用知识共享署名-非商业性使用-禁止演绎 3.0 未本地化版本许可协议进行许可。</description>
+      <description></description>
     </item>
     
     <item>
@@ -130,7 +144,7 @@ pyenv install --list # 列出所有可安装的版本 pyenv install 3.7.1 # 安�
       <pubDate>Wed, 14 Feb 2018 21:59:59 +0800</pubDate>
       
       <guid>https://linw1995.com/about/</guid>
-      <description>  毕业于 集美大学 · 应用物理学 现就职于 美图 · 爬虫工程师  Links  CodePen Codewars Github PSN Steam Weibo  </description>
+      <description> 毕业于 集美大学 · 应用物理学 现就职于 美图 · 爬虫工程师  Links  CodePen Codewars Github PSN Steam Weibo  </description>
     </item>
     
     <item>
@@ -141,10 +155,10 @@ pyenv install --list # 列出所有可安装的版本 pyenv install 3.7.1 # 安�
       <guid>https://linw1995.com/blog/%E8%87%AA%E5%B7%B1%E6%9D%A5%E5%86%99%E5%8E%8B%E7%BC%A9%E7%AE%97%E6%B3%95LZW/</guid>
       <description>之前用哈夫曼算法，把固定长的字符编码根据其出现次数，编码为不固定长的编码。而这次介绍的算法恰恰相反，该算法是把不等长的字符串，编码为固定长的编码。
 LZW 蓝博-立夫-卫曲编码法（Lempel-Ziv-Welch，缩写LZW），是亚伯拉罕·蓝波、杰可布·立夫与泰瑞·卫曲共同提出的一种无损数据压缩演算法。与霍夫曼编码相比，LZW把不同长度的字符串转换为固定长的编码。该方法不需要事先对数据做任何分析，所以可以流式地对文件进行处理。
-原理 编码 举个简单的例子，如果有一份数据，内容中的字符只有&amp;rsquo;abc&amp;rsquo;三种。那么如何对它进行编码呢？
+原理 编码 举个简单的例子，如果有一份数据，内容中的字符只有&#39;abc&#39;三种。那么如何对它进行编码呢？
 首先先将单字符建立成一个字符串编码表，分别给予编号。
-| string | code | |--------|------| | a | 0 | | b | 1 | | c | 2 |  若数据为aabcaac，进过LZW编码后结果为 [0,0,1,2,3,2,]，过程如下
-| No. | cur | prefix | prefix + cur | in str-&amp;gt;code | code | add into str-&amp;gt;code | | --- | --- | ------ | ------------ | ------------ | ---- | ------------------ | | 1 | a | | a | true | | | | 2 | a | a | aa | false | 0 | aa -&amp;gt; 3 | | 3 | b | a | ab | false | 0 | ab -&amp;gt; 4 | | 4 | c | b | bc | false | 1 | bc -&amp;gt; 5 | | 5 | a | c | ca | false | 2 | ca -&amp;gt; 6 | | 6 | a | a | aa | true | | | | 7 | c | aa | aac | false | 3 | aac -&amp;gt; 7 | | 8 | | c | | | 2 | |  整个算法过程如下：</description>
+| string | code | |--------|------| | a | 0 | | b | 1 | | c | 2 | 若数据为aabcaac，进过LZW编码后结果为 [0,0,1,2,3,2,]，过程如下
+| No. | cur | prefix | prefix + cur | in str-&amp;gt;code | code | add into str-&amp;gt;code | | --- | --- | ------ | ------------ | ------------ | ---- | ------------------ | | 1 | a | | a | true | | | | 2 | a | a | aa | false | 0 | aa -&amp;gt; 3 | | 3 | b | a | ab | false | 0 | ab -&amp;gt; 4 | | 4 | c | b | bc | false | 1 | bc -&amp;gt; 5 | | 5 | a | c | ca | false | 2 | ca -&amp;gt; 6 | | 6 | a | a | aa | true | | | | 7 | c | aa | aac | false | 3 | aac -&amp;gt; 7 | | 8 | | c | | | 2 | | 整个算法过程如下：</description>
     </item>
     
     <item>
@@ -156,9 +170,9 @@ LZW 蓝博-立夫-卫曲编码法（Lempel-Ziv-Welch，缩写LZW），是亚伯�
       <description>一般文件的编码都是等长的，一些常用字符的编码与很少用到的等长，可若是编码是变长的呢？无疑可以使整个文件大小减小。为了解码时不遇到任何歧义的问题，则每个有效字符所代表的变长编码不能是其它字符的前缀，这种编码也叫做前缀编码。而如何做到这一点呢，接下的内容会尽可能地讲明白。
 哈夫曼算法 若是把等长的编码(一字节)用平衡二叉树来表示，字符共有256个，那么树的深度就有 $\log_{2}{256}=8$ 。
 如果变作变长编码，那么所有有儿子（child）的节点（node）都不能用来表示，唯有子叶（leaf，没有儿子的节点）才可以用来表示。这是因为每个有效字符所代表的变长编码不能是其它字符的前缀。而且树结构也不可能是平衡二叉树了，树的深度肯定会大于8。
-例如，有一份MIT-LICENCE.txt文件，其中空格&#39;&amp;nbsp;&#39;有163个，而字母&#39;v&#39;却只有一个。那么让&#39;&amp;nbsp;&#39;表示为110,&#39;v&#39;表示为0111011101，那么得省$(8 - 3) \times 163 - (8 - 10) \times 1 = 817$个bit。可见变长编码确确实实能起到压缩的作用。
+例如，有一份MIT-LICENCE.txt文件，其中空格&#39; &#39;有163个，而字母&#39;v&#39;却只有一个。那么让&#39; &#39;表示为110,&#39;v&#39;表示为0111011101，那么得省$(8 - 3) \times 163 - (8 - 10) \times 1 = 817$个bit。可见变长编码确确实实能起到压缩的作用。
 哈夫曼树 哈夫曼树Huffman Tree，也叫做最优二叉树，是一种带权路径长度最短的二叉树。所谓树的带权路径长度，就是树中所有的叶结点的权值乘上其到根结点的路径长度（若根结点为$0$层，叶结点到根结点的路径长度为叶结点的层数）。树的路径长度是从树根到每一结点的路径长度之和，记为$\operatorname{WPL}=(W_1 \times L_ 1+W_2 \times L_2+W_3 \times L_3+&amp;hellip;+W_n \times L_n)$，$N$个权值$W_i(i=1,2,&amp;hellip;n)$构成一棵有$N$个叶结点的二叉树，相应的叶结点的路径长度为$L_i(i=1,2,&amp;hellip;n)$。可以证明霍夫曼树的$\operatorname{WPL}$是最小的。
-/-40 /-40 /-40 /-| /-| /-| | \-48 | \-48 | | /-48 --| | | \-| | /-60 --| /-60 --| \-18 \-| | /-| | | /-30 | | \-20 | /-60 \-| \-| | /-| | /-18 | /-30 \-| \-20 \-| \-| | \-20 \-18 \-30 (0) (1) (2)  计算上面三颗树的$\operatorname{WPL}$：</description>
+/-40 /-40 /-40 /-| /-| /-| | \-48 | \-48 | | /-48 --| | | \-| | /-60 --| /-60 --| \-18 \-| | /-| | | /-30 | | \-20 | /-60 \-| \-| | /-| | /-18 | /-30 \-| \-20 \-| \-| | \-20 \-18 \-30 (0) (1) (2) 计算上面三颗树的$\operatorname{WPL}$：</description>
     </item>
     
     <item>
@@ -169,7 +183,7 @@ LZW 蓝博-立夫-卫曲编码法（Lempel-Ziv-Welch，缩写LZW），是亚伯�
       <guid>https://linw1995.com/blog/%E5%88%9D%E8%A7%A3Python%E5%B9%B6%E5%8F%91/</guid>
       <description>前言 昨天（2017年7月15日）偶然看到这个视频，看完之后豁然开朗，忍不住要分享给大家。
   并发Demo 视频中举了个例子，用socket写了个迷你服务，只有一个作用，计算Fibonacci……
-# -*- coding: utf-8 -*- # server.py import socket def fib(n): if n &amp;lt;= 2: return 1 else: return fib(n - 1) + fib(n - 2) def server(addr, port): sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM) sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1) sock.bind((addr, port)) sock.listen(5) while True: client, addr = sock.accept() print(&#39;Connection&#39;, addr) handler(client) def handler(client): while True: req = client.recv(100) if not req: break n = int(req) result = fib(n) resp = str(result).</description>
+# -*- coding: utf-8 -*- # server.py import socketdef fib(n):if n &amp;lt;= 2:return 1else:return fib(n - 1) + fib(n - 2)def server(addr, port):sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)sock.bind((addr, port))sock.listen(5)while True:client, addr = sock.accept()print(&amp;#39;Connection&amp;#39;, addr)handler(client)def handler(client):while True:req = client.recv(100)if not req:breakn = int(req)result = fib(n)resp = str(result).</description>
     </item>
     
     <item>
@@ -199,7 +213,7 @@ LZW 蓝博-立夫-卫曲编码法（Lempel-Ziv-Welch，缩写LZW），是亚伯�
       <description>序  伪随机性（英语：Pseudorandomness）是指一个过程似乎是随机的，但实际上并不是。例如伪随机数（或称伪乱数），是使用一个确定性的算法计算出来的似乎是随机的数序，因此伪随机数实际上并不随机。在计算伪随机数时假如使用的开始值不变的话，那么伪随机数的数序也不变。伪随机数的随机性可以用它的统计特性来衡量，其主要特征是每个数出现的可能性和它出现时与数序中其它数的关系。伪随机数的优点是它的计算比较简单，而且只使用少数数值很难推算出计算它的算法。一般人们使用一个假的随机数，比如电脑上的时间作为计算伪随机数的开始值。
  产生随机数的方法  线性同余法 平方取中法 M-Sequence 梅森旋转算法 伪随机数二进制数列  其中使用最多的是线性同余法和梅森旋转算法，下面主要介绍一下线性同余法
 线性同余法（LCG linear congruential generator） 线性同余方法（LCG）是个产生伪随机数的方法。 它是根据递归公式： $$N_{j+1}\equiv (A\times N_{j}+C){\pmod {M}}$$ 其中$A,C,M$是产生器设定的常数。
-Python implementation class Random: def __init__(self, A, C, M, seed=0): self._A = A self._C = C self._M = M self._prev = seed % M def __call__(self): A = self._A C = self._C M = self._M prev = self._prev cur = self._prev = (A * prev + C) % M return cur / M def __repr__(self): return &#39;Random(A={obj.</description>
+Python implementation class Random:def __init__(self, A, C, M, seed=0):self._A = Aself._C = Cself._M = Mself._prev = seed % Mdef __call__(self):A = self._AC = self._CM = self._Mprev = self._prevcur = self._prev = (A * prev + C) % Mreturn cur / Mdef __repr__(self):return &amp;#39;Random(A={obj.</description>
     </item>
     
     <item>
@@ -208,14 +222,14 @@ Python implementation class Random: def __init__(self, A, C, M, seed=0): self._A
       <pubDate>Thu, 27 Apr 2017 12:38:13 +0000</pubDate>
       
       <guid>https://linw1995.com/blog/AA%E6%A0%91%E7%9A%84%E5%B9%B3%E8%A1%A1%E4%B8%8E%E5%86%8D%E5%B9%B3%E8%A1%A1/</guid>
-      <description>介绍  AA树在计算机科学一种形式的自平衡二叉查找树用于高效存储和检索序数据。AA树的名称是由它的发明者*Arne Andersson*而来。 AA树是红黑树的一种变种，是*Arne Andersson教授在1993年年在他的论文&amp;ldquo;Balanced search trees made simple&amp;rdquo;*中介绍，设计的目的是减少红黑树考虑的不同情况，区别于红黑树的是，AA树的红节点只能作为右叶子。换句话说，没有红节点可以是一个左子儿。这导致代替2-3-4树，从而大大简化了维护2-3树的模拟。维护红黑树的平衡需要考虑7种不同的情况:
+      <description>介绍  AA树在计算机科学一种形式的自平衡二叉查找树用于高效存储和检索序数据。AA树的名称是由它的发明者Arne Andersson而来。 AA树是红黑树的一种变种，是Arne Andersson教授在1993年年在他的论文*&amp;ldquo;Balanced search trees made simple&amp;rdquo;*中介绍，设计的目的是减少**红黑树**考虑的不同情况，区别于**红黑树**的是，**AA树**的红节点只能作为右叶子。换句话说，没有红节点可以是一个左子儿。这导致代替**2-3-4树**，从而大大简化了维护**2-3树**的模拟。维护**红黑树**的平衡需要考虑7种不同的情况:
   因为AA树有严格的条件(红节点只能为右节点)，故只需考虑2种情形:
  AA树是2-3树的模拟，2-3树和AA树是等距同构的。其节点类型如下
 平衡条件 树是用与高效的存储和检索数据的，为了维持其效率，必须维持其平衡结构。 平衡一颗红黑树需记录其颜色，而AA树是在每个节点记录其level这相当于红黑树节点的黑高度
  所有叶节点的level都是1 每个左孩子的level恰好为其父亲的level减一 每个右孩子的level等于其父亲的level或为其父亲的level减一 每个右孙子的level严格小于其祖父节点的level 每一个level大于1的节点有两个子节点  Skew &amp;amp; Split 对于AA树，维持其平衡的基本操作如下：
- 偏斜Skew：使得子树中向左的水平边变成向右的。
+  偏斜Skew：使得子树中向左的水平边变成向右的。
 不满足平衡条件：2
-def skew(node): if node is None or node.left is None: return node if node.left.level != node.level: return node lft = node.left node.left = lft.right # B =&amp;gt; C change to D =&amp;gt; C lft.right = node # D =&amp;gt; B change to B =&amp;gt; D return lft # top =&amp;gt; D change to top =&amp;gt; B   判断是否是偏斜 i.</description>
+def skew(node):if node is None or node.left is None:return nodeif node.left.level != node.level:return nodelft = node.leftnode.left = lft.right # B =&amp;gt; C change to D =&amp;gt; C lft.right = node # D =&amp;gt; B change to B =&amp;gt; D return lft # top =&amp;gt; D change to top =&amp;gt; B  判断是否是偏斜 i.</description>
     </item>
     
   </channel>

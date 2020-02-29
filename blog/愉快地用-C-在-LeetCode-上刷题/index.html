@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-US">
+<html lang="zh-cn">
 
 <head>
 <meta charset="utf-8">
@@ -13,7 +13,7 @@
     <meta property="twitter:site" content="@linw1995">
 
 <meta property="og:site_name" content="linw1995" />
-<meta property="og:locale" content="en-US" />
+<meta property="og:locale" content="zh-cn" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://linw1995.com/blog/%E6%84%89%E5%BF%AB%E5%9C%B0%E7%94%A8-C-%E5%9C%A8-LeetCode-%E4%B8%8A%E5%88%B7%E9%A2%98/" />
 <meta property="og:title" content="愉快地用 C 在 LeetCode 上刷题" />
@@ -1008,7 +1008,7 @@ div.main .content .markdown code {
 }
 
 div.main .content .markdown pre, div.main .content .markdown pre code {
-    background-color: #282a36;
+    background-color: #272822;
     color: #87a5d2;
 }
 
@@ -1076,7 +1076,6 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
 
 <body>
 
-
 <div class="header column">
 
     <div class="container">
@@ -1088,27 +1087,19 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
             <nav>
                 <ul>
                     
-                            <li><a href="https://linw1995.com/blog/">Blog</a></li>
+                        <li><a href="https://linw1995.com/blog/">博客</a></li>
+                    
+                        <li><a href="https://linw1995.com/projects/">项目</a></li>
                     
                     
-                        
-                            
-                        
+                        <li><a href="https://linw1995.com/about/">关于</a></li>
                     
-                        
-                            
-                            <li><a href="https://linw1995.com/projects">projects</a></li>
-                            
-                        
-                    
-                    
-                        
-                    
-                        
-                            <li><a href="https://linw1995.com/about/">About</a></li>
-                        
+                        <li><a href="https://linw1995.com/license/">许可</a></li>
                     
                 </ul>
+
+                
+
             </nav>
         </div>
     </div>
@@ -1162,53 +1153,57 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
             <div class="markdown">
                 
     
-    <p>当在用 C 在 LeetCode 上刷题，难免无法一次 AC。而在 LeetCode 上又无法调试，只能用 printf 大法，输出一些简单的日志，比如代码运行时的变量值等。当代码 AC 后，为了降低代码运行的时间消耗，则需要把 printf 的代码删除或者注释掉。这就有点麻烦了，因为使用 printf 的代码越多，需要删除或注释掉的地方就越多。</p>
+    
+
+<p>当在用 C 在 LeetCode 上刷题，难免无法一次 AC。而在 LeetCode 上又无法调试，只能用 printf 大法，输出一些简单的日志，比如代码运行时的变量值等。当代码 AC 后，为了降低代码运行的时间消耗，则需要把 printf 的代码删除或者注释掉。这就有点麻烦了，因为使用 printf 的代码越多，需要删除或注释掉的地方就越多。</p>
+
 <p>通过使用C的预处理指令 <code>#define</code>, <code>#ifdef</code>, <code>#else</code>, <code>#endif</code> 这几个简单的指令，再加上函数式的宏（Function-like Macros），就可以只注释一行代码，即可把日志输出去掉。听起来是不是很方便呢？接下来就用 LeetCode 的第 2 题，两数相加，来据一个简单的例子。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#75715e">#</span><span style="color:#75715e">define __WITH_LOG__</span><span style="color:#75715e">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#75715e">#define __WITH_LOG__
 </span><span style="color:#75715e"></span>
-<span style="color:#75715e">#</span><span style="color:#75715e">ifdef __WITH_LOG__</span><span style="color:#75715e">
-</span><span style="color:#75715e"></span><span style="color:#75715e">#</span><span style="color:#75715e">include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
-</span><span style="color:#75715e"></span><span style="color:#75715e">#</span><span style="color:#75715e">define LOG(message, args...)                                                  \</span><span style="color:#75715e">
-</span><span style="color:#75715e"></span><span style="color:#75715e">  fprintf(stdout, &#34;| %s:%d | &#34; message &#34;\n&#34;, __FUNCTION__, __LINE__, ##args)</span><span style="color:#75715e">
-</span><span style="color:#75715e"></span><span style="color:#75715e">#</span><span style="color:#75715e">else</span><span style="color:#75715e">
-</span><span style="color:#75715e"></span><span style="color:#75715e">#</span><span style="color:#75715e">define LOG(message, args...)</span><span style="color:#75715e">
-</span><span style="color:#75715e"></span><span style="color:#75715e">#</span><span style="color:#75715e">endif</span><span style="color:#75715e">
+<span style="color:#75715e">#ifdef __WITH_LOG__
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#define LOG(message, args...)                                                  \
+</span><span style="color:#75715e">  fprintf(stdout, &#34;| %s:%d | &#34; message &#34;\n&#34;, __FUNCTION__, __LINE__, ##args)
+</span><span style="color:#75715e">#else
+</span><span style="color:#75715e">#define LOG(message, args...)
+</span><span style="color:#75715e">#endif
 </span><span style="color:#75715e"></span>
 <span style="color:#66d9ef">struct</span> ListNode <span style="color:#f92672">*</span><span style="color:#a6e22e">addTwoNumbers</span>(<span style="color:#66d9ef">struct</span> ListNode <span style="color:#f92672">*</span>l1, <span style="color:#66d9ef">struct</span> ListNode <span style="color:#f92672">*</span>l2) {
   <span style="color:#66d9ef">struct</span> ListNode dummy;
   <span style="color:#66d9ef">struct</span> ListNode <span style="color:#f92672">*</span>last <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span>dummy;
   <span style="color:#66d9ef">int</span> inc <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-  <span style="color:#66d9ef">while</span> (inc <span style="color:#f92672">|</span><span style="color:#f92672">|</span> l1 <span style="color:#f92672">|</span><span style="color:#f92672">|</span> l2) {
-    last<span style="color:#f92672">-</span><span style="color:#f92672">&gt;</span>next <span style="color:#f92672">=</span> malloc(<span style="color:#66d9ef">sizeof</span>(<span style="color:#66d9ef">struct</span> ListNode));
-    last <span style="color:#f92672">=</span> last<span style="color:#f92672">-</span><span style="color:#f92672">&gt;</span>next;
-    last<span style="color:#f92672">-</span><span style="color:#f92672">&gt;</span>val <span style="color:#f92672">=</span> inc;
-    LOG(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">last-&gt;val=inc; val=%d</span><span style="color:#e6db74">&#34;</span>, inc);
+  <span style="color:#66d9ef">while</span> (inc <span style="color:#f92672">||</span> l1 <span style="color:#f92672">||</span> l2) {
+    last<span style="color:#f92672">-&gt;</span>next <span style="color:#f92672">=</span> malloc(<span style="color:#66d9ef">sizeof</span>(<span style="color:#66d9ef">struct</span> ListNode));
+    last <span style="color:#f92672">=</span> last<span style="color:#f92672">-&gt;</span>next;
+    last<span style="color:#f92672">-&gt;</span>val <span style="color:#f92672">=</span> inc;
+    LOG(<span style="color:#e6db74">&#34;last-&gt;val=inc; val=%d&#34;</span>, inc);
     <span style="color:#66d9ef">if</span> (l1) {
-      last<span style="color:#f92672">-</span><span style="color:#f92672">&gt;</span>val <span style="color:#f92672">+</span><span style="color:#f92672">=</span> l1<span style="color:#f92672">-</span><span style="color:#f92672">&gt;</span>val;
-      LOG(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">last-&gt;val+=l1-&gt;val; l1-&gt;val=%d, last-&gt;val=%d</span><span style="color:#e6db74">&#34;</span>, l1<span style="color:#f92672">-</span><span style="color:#f92672">&gt;</span>val, last<span style="color:#f92672">-</span><span style="color:#f92672">&gt;</span>val);
+      last<span style="color:#f92672">-&gt;</span>val <span style="color:#f92672">+=</span> l1<span style="color:#f92672">-&gt;</span>val;
+      LOG(<span style="color:#e6db74">&#34;last-&gt;val+=l1-&gt;val; l1-&gt;val=%d, last-&gt;val=%d&#34;</span>, l1<span style="color:#f92672">-&gt;</span>val, last<span style="color:#f92672">-&gt;</span>val);
     }
     <span style="color:#66d9ef">if</span> (l2) {
-      last<span style="color:#f92672">-</span><span style="color:#f92672">&gt;</span>val <span style="color:#f92672">+</span><span style="color:#f92672">=</span> l2<span style="color:#f92672">-</span><span style="color:#f92672">&gt;</span>val;
-      LOG(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">last-&gt;val+=l2-&gt;val; l2-&gt;val=%d, last-&gt;val=%d</span><span style="color:#e6db74">&#34;</span>, l2<span style="color:#f92672">-</span><span style="color:#f92672">&gt;</span>val, last<span style="color:#f92672">-</span><span style="color:#f92672">&gt;</span>val);
+      last<span style="color:#f92672">-&gt;</span>val <span style="color:#f92672">+=</span> l2<span style="color:#f92672">-&gt;</span>val;
+      LOG(<span style="color:#e6db74">&#34;last-&gt;val+=l2-&gt;val; l2-&gt;val=%d, last-&gt;val=%d&#34;</span>, l2<span style="color:#f92672">-&gt;</span>val, last<span style="color:#f92672">-&gt;</span>val);
     }
 
-    <span style="color:#66d9ef">if</span> (last<span style="color:#f92672">-</span><span style="color:#f92672">&gt;</span>val <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">9</span>) {
-      last<span style="color:#f92672">-</span><span style="color:#f92672">&gt;</span>val <span style="color:#f92672">-</span><span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>;
+    <span style="color:#66d9ef">if</span> (last<span style="color:#f92672">-&gt;</span>val <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">9</span>) {
+      last<span style="color:#f92672">-&gt;</span>val <span style="color:#f92672">-=</span> <span style="color:#ae81ff">10</span>;
       inc <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
     } <span style="color:#66d9ef">else</span> {
       inc <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
     }
 
     <span style="color:#66d9ef">if</span> (l1)
-      l1 <span style="color:#f92672">=</span> l1<span style="color:#f92672">-</span><span style="color:#f92672">&gt;</span>next;
+      l1 <span style="color:#f92672">=</span> l1<span style="color:#f92672">-&gt;</span>next;
     <span style="color:#66d9ef">if</span> (l2)
-      l2 <span style="color:#f92672">=</span> l2<span style="color:#f92672">-</span><span style="color:#f92672">&gt;</span>next;
+      l2 <span style="color:#f92672">=</span> l2<span style="color:#f92672">-&gt;</span>next;
   }
 
-  last<span style="color:#f92672">-</span><span style="color:#f92672">&gt;</span>next <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+  last<span style="color:#f92672">-&gt;</span>next <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
   <span style="color:#66d9ef">return</span> dummy.next;
-}
-</code></pre></div><p>跑个测试用例看看效果</p>
+}</code></pre></div>
+<p>跑个测试用例看看效果</p>
+
 <blockquote>
 <p>以下是在 VSCode 使用 LeetCode 插件 <a href="https://github.com/jdneo/vscode-leetcode">jdneo/vscode-leetcode</a> 使用默认测试用例测试所输出的结果</p>
 </blockquote>
@@ -1232,10 +1227,13 @@ Actual
 Expected
   ✔ runtime: 24 ms
   ✔ answer: [7,0,8]
-  ✔ stdout: &#39;&#39;
-</code></pre></div><p>通过简单地注释掉 <code>#define __WITH_LOG__</code>，就可以让代码运行时不输出日志，也就少了 IO 写入的时间，降低了代码运行的耗时。真是超方便的呢～</p>
+  ✔ stdout: &#39;&#39;</code></pre></div>
+<p>通过简单地注释掉 <code>#define __WITH_LOG__</code>，就可以让代码运行时不输出日志，也就少了 IO 写入的时间，降低了代码运行的耗时。真是超方便的呢～</p>
+
 <p>希望大家能够用上这个小技巧，愉快地刷题～</p>
+
 <h2 id="参考">参考</h2>
+
 <ul>
 <li><a href="https://gcc.gnu.org/onlinedocs/cpp/Ifdef.html#Ifdef">Ifdef | The C Preprocessor</a></li>
 <li><a href="https://gcc.gnu.org/onlinedocs/cpp/Else.html#Else">Else | The C Preprocessor</a></li>

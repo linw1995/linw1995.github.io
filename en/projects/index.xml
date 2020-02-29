@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Projects on linw1995</title>
+    <link>https://linw1995.com/en/projects/</link>
+    <description>Recent content in Projects on linw1995</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sat, 09 Nov 2019 21:11:36 +0800</lastBuildDate>
+    
+	<atom:link href="https://linw1995.com/en/projects/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>JSONPath</title>
+      <link>https://linw1995.com/en/projects/jsonpath/</link>
+      <pubDate>Sat, 09 Nov 2019 21:11:36 +0800</pubDate>
+      
+      <guid>https://linw1995.com/en/projects/jsonpath/</guid>
+      <description>A selector expression for extracting data from JSON.
+ Repo  </description>
+    </item>
+    
+    <item>
+      <title>Data-Extractor</title>
+      <link>https://linw1995.com/en/projects/data_extractor/</link>
+      <pubDate>Thu, 18 Apr 2019 00:29:50 +0800</pubDate>
+      
+      <guid>https://linw1995.com/en/projects/data_extractor/</guid>
+      <description>Combine XPath, CSS Selectors and JSONPath for Web data extracting.
+ Repo Docs  </description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-US">
+<html lang="zh-cn">
 
 <head>
 <meta charset="utf-8">
@@ -13,7 +13,7 @@
     <meta property="twitter:site" content="@linw1995">
 
 <meta property="og:site_name" content="linw1995" />
-<meta property="og:locale" content="en-US" />
+<meta property="og:locale" content="zh-cn" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://linw1995.com/blog/Scrapy-%E7%9A%84%E5%B9%B6%E5%8F%91%E5%A4%84%E7%90%86/" />
 <meta property="og:title" content="Scrapy 的并发处理" />
@@ -1008,7 +1008,7 @@ div.main .content .markdown code {
 }
 
 div.main .content .markdown pre, div.main .content .markdown pre code {
-    background-color: #282a36;
+    background-color: #272822;
     color: #87a5d2;
 }
 
@@ -1076,7 +1076,6 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
 
 <body>
 
-
 <div class="header column">
 
     <div class="container">
@@ -1088,27 +1087,19 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
             <nav>
                 <ul>
                     
-                            <li><a href="https://linw1995.com/blog/">Blog</a></li>
+                        <li><a href="https://linw1995.com/blog/">博客</a></li>
+                    
+                        <li><a href="https://linw1995.com/projects/">项目</a></li>
                     
                     
-                        
-                            
-                        
+                        <li><a href="https://linw1995.com/about/">关于</a></li>
                     
-                        
-                            
-                            <li><a href="https://linw1995.com/projects">projects</a></li>
-                            
-                        
-                    
-                    
-                        
-                    
-                        
-                            <li><a href="https://linw1995.com/about/">About</a></li>
-                        
+                        <li><a href="https://linw1995.com/license/">许可</a></li>
                     
                 </ul>
+
+                
+
             </nav>
         </div>
     </div>
@@ -1166,24 +1157,37 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
             <div class="markdown">
                 
     
-    <h2 id="前言">前言</h2>
+    
+
+<h2 id="前言">前言</h2>
+
 <p>看大型项目的源码时，经常摸不着头脑，耗时但收益少，所以也就不容易坚持下去。但如果带着问题来看的话，屏蔽掉问题无关的代码，专注于相关的，看看能不能真正的从源码中学习到好东西</p>
+
 <h2 id="问题-scrapy-的并发处理">问题: Scrapy 的并发处理</h2>
+
 <p>在 Scrapy 的文档中提到可以通过配置 <code>DOWNLOAD_DELAY</code> 来控制请求（request）间的时间间隔，配置 <code>CONCURRENT_REQUESTS</code> 来限制请求（request）的并发数（粒度可基于域名，或者 IP 地址）。甚至可以通过使用 Auto-Throttling 自动节流插件，来自动地且动态的调整这些配置项。</p>
+
 <p>这样我们就有了以下这两个问题</p>
+
 <ol>
 <li>如何并发地处理请求</li>
 <li>如何动态地改变配置项</li>
 </ol>
+
 <p>以下的源码分析基于版本号为 <code>1.7.2</code> 的 <a href="https://github.com/scrapy/scrapy/tree/1.7.2">scrapy</a> 项目</p>
+
 <h3 id="如何并发地处理请求">如何并发地处理请求</h3>
+
 <p><a href="https://github.com/scrapy/scrapy/blob/1a289c15f8deb416efdb5f72742ec5416d751d98/scrapy/core/downloader/__init__.py#L138-L160"><code>scrapy/core/downloader/__init__.pyL138-L160</code></a> 里的 <code>Downloader</code> 类的类方法 <code>_process_queue</code> 就负责处理 scrapy 的并发请求</p>
+
 <p>为了更好的理解这函数的代码，首先要确定什么情况下 <code>_process_queue</code> 才会被调用</p>
+
 <ol>
 <li>当新的请求进入队列时 <a href="https://github.com/scrapy/scrapy/blob/1a289c15f8deb416efdb5f72742ec5416d751d98/scrapy/core/downloader/__init__.py#L135">L135</a></li>
 <li>当请求完成网络处理时 <a href="https://github.com/scrapy/scrapy/blob/1a289c15f8deb416efdb5f72742ec5416d751d98/scrapy/core/downloader/__init__.py#L186">L186</a></li>
 <li>当不满足 <code>DONWLOAD_DELAY</code> 时的延迟调用 <a href="https://github.com/scrapy/scrapy/blob/1a289c15f8deb416efdb5f72742ec5416d751d98/scrapy/core/downloader/__init__.py#L148">L148</a></li>
 </ol>
+
 <p>以下就是该函数的代码，加上了些注释方便大家理解</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">_process_queue</span>(self, spider, slot):
     <span style="color:#66d9ef">if</span> slot<span style="color:#f92672">.</span>latercall <span style="color:#f92672">and</span> slot<span style="color:#f92672">.</span>latercall<span style="color:#f92672">.</span>active():
@@ -1219,16 +1223,19 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
             <span style="color:#66d9ef">break</span>
 
         <span style="color:#75715e"># 当 DOWNLOAD_DELAY == 0 时</span>
-        <span style="color:#75715e"># 则一直进行 request 的网络处理，直到实际并发数达到限制，或者队列中没有新的 request</span>
-</code></pre></div><p>关于 <code>slot</code> 的类定义在 <a href="https://github.com/scrapy/scrapy/blob/1a289c15f8deb416efdb5f72742ec5416d751d98/scrapy/core/downloader/__init__.py#L19-L58"><code>scrapy/core/downloader/__init__.py#L19-L58</code></a></p>
+        <span style="color:#75715e"># 则一直进行 request 的网络处理，直到实际并发数达到限制，或者队列中没有新的 request</span></code></pre></div>
+<p>关于 <code>slot</code> 的类定义在 <a href="https://github.com/scrapy/scrapy/blob/1a289c15f8deb416efdb5f72742ec5416d751d98/scrapy/core/downloader/__init__.py#L19-L58"><code>scrapy/core/downloader/__init__.py#L19-L58</code></a></p>
+
 <h3 id="如何动态地改变配置项">如何动态地改变配置项</h3>
+
 <p>明白了如何并发地处理 request，可如何动态地改变配置项？我们来看看 Auto-Throttling 插件是怎么工作的，就能明白了。</p>
+
 <p>通过绑定 <code>signals.response_downloaded</code> 信号，当 request 的网络处理完成时就会调用绑定的函数。<a href="https://github.com/scrapy/scrapy/blob/1a289c15f8deb416efdb5f72742ec5416d751d98/scrapy/extensions/throttle.py#L19"><code>scrapy/extensions/throttle.py#L19</code></a></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">crawler<span style="color:#f92672">.</span>signals<span style="color:#f92672">.</span>connect(self<span style="color:#f92672">.</span>_response_downloaded, signal<span style="color:#f92672">=</span>signals<span style="color:#f92672">.</span>response_downloaded)
-</code></pre></div><p><code>_response_downloaded</code> 的定义如下 <a href="https://github.com/scrapy/scrapy/blob/1a289c15f8deb416efdb5f72742ec5416d751d98/scrapy/extensions/throttle.py#L40-L48"><code>scrapy/extensions/throttle.py#L40-L48</code></a> ，同样，加上了些注释方便大家理解</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">crawler<span style="color:#f92672">.</span>signals<span style="color:#f92672">.</span>connect(self<span style="color:#f92672">.</span>_response_downloaded, signal<span style="color:#f92672">=</span>signals<span style="color:#f92672">.</span>response_downloaded)</code></pre></div>
+<p><code>_response_downloaded</code> 的定义如下 <a href="https://github.com/scrapy/scrapy/blob/1a289c15f8deb416efdb5f72742ec5416d751d98/scrapy/extensions/throttle.py#L40-L48"><code>scrapy/extensions/throttle.py#L40-L48</code></a> ，同样，加上了些注释方便大家理解</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">_response_downloaded</span>(self, response, request, spider):
     key, slot <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>_get_slot(request, spider)
-    latency <span style="color:#f92672">=</span> request<span style="color:#f92672">.</span>meta<span style="color:#f92672">.</span>get(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">download_latency</span><span style="color:#e6db74">&#39;</span>)
+    latency <span style="color:#f92672">=</span> request<span style="color:#f92672">.</span>meta<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;download_latency&#39;</span>)
     <span style="color:#75715e"># 获取 request 网络处理的耗时</span>
     <span style="color:#66d9ef">if</span> latency <span style="color:#f92672">is</span> None <span style="color:#f92672">or</span> slot <span style="color:#f92672">is</span> None:
         <span style="color:#66d9ef">return</span>
@@ -1238,10 +1245,10 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
     self<span style="color:#f92672">.</span>_adjust_delay(slot, latency, response)
     <span style="color:#75715e"># 调整 request 间的时间间隔</span>
     <span style="color:#66d9ef">if</span> self<span style="color:#f92672">.</span>debug:
-        <span style="color:#f92672">.</span><span style="color:#f92672">.</span><span style="color:#f92672">.</span>
-</code></pre></div><p><code>_adjust_delay</code> 的定义如下 <a href="https://github.com/scrapy/scrapy/blob/1a289c15f8deb416efdb5f72742ec5416d751d98/scrapy/extensions/throttle.py#L68-L93"><code>scrapy/extensions/throttle.py#L68-L93</code></a></p>
+        <span style="color:#f92672">...</span></code></pre></div>
+<p><code>_adjust_delay</code> 的定义如下 <a href="https://github.com/scrapy/scrapy/blob/1a289c15f8deb416efdb5f72742ec5416d751d98/scrapy/extensions/throttle.py#L68-L93"><code>scrapy/extensions/throttle.py#L68-L93</code></a></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">_adjust_delay</span>(self, slot, latency, response):
-    <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;&#34;&#34;</span><span style="color:#e6db74">Define delay adjustment policy</span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+    <span style="color:#e6db74">&#34;&#34;&#34;Define delay adjustment policy&#34;&#34;&#34;</span>
 
 
     <span style="color:#75715e"># If a server needs `latency` seconds to respond then</span>
@@ -1277,29 +1284,32 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
     <span style="color:#75715e"># 当响应的状态不为 200，及新的延迟小于旧的时，则不调整延迟。</span>
     <span style="color:#75715e"># 这是因为错误页或者重定向的响应时间小，会趋向于降低延迟</span>
     <span style="color:#75715e"># 但应该做的是增加延迟（错误页响应有可能是因为高频率的请求导致的）</span>
-    <span style="color:#66d9ef">if</span> response<span style="color:#f92672">.</span>status <span style="color:#f92672">!=</span> <span style="color:#ae81ff">200</span> <span style="color:#f92672">and</span> new_delay <span style="color:#f92672">&lt;</span><span style="color:#f92672">=</span> slot<span style="color:#f92672">.</span>delay:
+    <span style="color:#66d9ef">if</span> response<span style="color:#f92672">.</span>status <span style="color:#f92672">!=</span> <span style="color:#ae81ff">200</span> <span style="color:#f92672">and</span> new_delay <span style="color:#f92672">&lt;=</span> slot<span style="color:#f92672">.</span>delay:
         <span style="color:#66d9ef">return</span>
 
 
-    slot<span style="color:#f92672">.</span>delay <span style="color:#f92672">=</span> new_delay
-</code></pre></div><p>现今有些网站不正确地使用 HTTP 状态码（HTTP Status Codes），一律响应 200。从这个插件的源码来看，对于这样的网站不能很好的处理</p>
-<h2 id="qa">Q&amp;A</h2>
+    slot<span style="color:#f92672">.</span>delay <span style="color:#f92672">=</span> new_delay</code></pre></div>
+<p>现今有些网站不正确地使用 HTTP 状态码（HTTP Status Codes），一律响应 200。从这个插件的源码来看，对于这样的网站不能很好的处理</p>
+
+<h2 id="q-a">Q&amp;A</h2>
+
 <ol>
-<li>
-<p>为什么配置的并发数很高，但爬虫的爬取速度却没有提高？</p>
-<p>发生这种情况一般是因为 request 网络处理的平均用时小于配置的 <code>DOWNLOAD_DELAY</code></p>
-</li>
-<li>
-<p>如何为不同的 request 配置不同的 <code>CONCURRENT_REQUESTS</code> 及 <code>DOWNLOAD_DELAY</code></p>
+<li><p>为什么配置的并发数很高，但爬虫的爬取速度却没有提高？</p>
+
+<p>发生这种情况一般是因为 request 网络处理的平均用时小于配置的 <code>DOWNLOAD_DELAY</code></p></li>
+
+<li><p>如何为不同的 request 配置不同的 <code>CONCURRENT_REQUESTS</code> 及 <code>DOWNLOAD_DELAY</code></p>
+
 <p>通过创建不同的 Slot 来配置，以 <code>start_requests</code> 中配置为例</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">start_requests</span>(self):
-    slot_key <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">custom_slot_key</span><span style="color:#e6db74">&#34;</span>
+    slot_key <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;custom_slot_key&#34;</span>
     slot <span style="color:#f92672">=</span> Slot(concurrency<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>, delay<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>, randomize_delay<span style="color:#f92672">=</span>True)
     self<span style="color:#f92672">.</span>crawler<span style="color:#f92672">.</span>engine<span style="color:#f92672">.</span>downloader<span style="color:#f92672">.</span>slots[slot_key] <span style="color:#f92672">=</span> slot
-    <span style="color:#66d9ef">yield</span> scrapy<span style="color:#f92672">.</span>Request(url<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">https://example.com</span><span style="color:#e6db74">&#34;</span>, meta<span style="color:#f92672">=</span>{<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">download_slot</span><span style="color:#e6db74">&#34;</span>:slot_key})
-</code></pre></div></li>
+    <span style="color:#66d9ef">yield</span> scrapy<span style="color:#f92672">.</span>Request(url<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;https://example.com&#34;</span>, meta<span style="color:#f92672">=</span>{<span style="color:#e6db74">&#34;download_slot&#34;</span>:slot_key})</code></pre></div></li>
 </ol>
+
 <h2 id="参考">参考</h2>
+
 <ol>
 <li><a href="https://docs.scrapy.org/en/latest/topics/settings.html?highlight=CONCURRENT_REQUESTS#concurrent-requests">关于 <code>CONCURRENT_REQUESTS</code> 配置的文档</a></li>
 <li><a href="https://docs.scrapy.org/en/latest/topics/request-response.html?highlight=download_latency#download-latency">关于 <code>download_latency</code> 的文档</a></li>

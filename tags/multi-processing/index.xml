@@ -5,7 +5,7 @@
     <link>https://linw1995.com/tags/multi-processing/</link>
     <description>Recent content in multi-processing on linw1995</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-US</language>
+    <language>zh-cn</language>
     <lastBuildDate>Sun, 16 Jul 2017 21:28:07 +0000</lastBuildDate>
     
 	<atom:link href="https://linw1995.com/tags/multi-processing/index.xml" rel="self" type="application/rss+xml" />
@@ -19,7 +19,7 @@
       <guid>https://linw1995.com/blog/%E5%88%9D%E8%A7%A3Python%E5%B9%B6%E5%8F%91/</guid>
       <description>前言 昨天（2017年7月15日）偶然看到这个视频，看完之后豁然开朗，忍不住要分享给大家。
   并发Demo 视频中举了个例子，用socket写了个迷你服务，只有一个作用，计算Fibonacci……
-# -*- coding: utf-8 -*- # server.py import socketdef fib(n):if n &amp;lt;= 2:return 1else:return fib(n - 1) + fib(n - 2)def server(addr, port):sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)sock.bind((addr, port))sock.listen(5)while True:client, addr = sock.accept()print(&amp;#39;Connection&amp;#39;, addr)handler(client)def handler(client):while True:req = client.recv(100)if not req:breakn = int(req)result = fib(n)resp = str(result).</description>
+# -*- coding: utf-8 -*- # server.py import socket def fib(n): if n &amp;lt;= 2: return 1 else: return fib(n - 1) + fib(n - 2) def server(addr, port): sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM) sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1) sock.bind((addr, port)) sock.listen(5) while True: client, addr = sock.accept() print(&amp;#39;Connection&amp;#39;, addr) handler(client) def handler(client): while True: req = client.recv(100) if not req: break n = int(req) result = fib(n) resp = str(result).</description>
     </item>
     
   </channel>

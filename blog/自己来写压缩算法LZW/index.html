@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-US">
+<html lang="zh-cn">
 
 <head>
 <meta charset="utf-8">
@@ -13,7 +13,7 @@
     <meta property="twitter:site" content="@linw1995">
 
 <meta property="og:site_name" content="linw1995" />
-<meta property="og:locale" content="en-US" />
+<meta property="og:locale" content="zh-cn" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://linw1995.com/blog/%E8%87%AA%E5%B7%B1%E6%9D%A5%E5%86%99%E5%8E%8B%E7%BC%A9%E7%AE%97%E6%B3%95LZW/" />
 <meta property="og:title" content="自己来写压缩算法——LZW" />
@@ -1008,7 +1008,7 @@ div.main .content .markdown code {
 }
 
 div.main .content .markdown pre, div.main .content .markdown pre code {
-    background-color: #282a36;
+    background-color: #272822;
     color: #87a5d2;
 }
 
@@ -1076,7 +1076,6 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
 
 <body>
 
-
 <div class="header column">
 
     <div class="container">
@@ -1088,27 +1087,19 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
             <nav>
                 <ul>
                     
-                            <li><a href="https://linw1995.com/blog/">Blog</a></li>
+                        <li><a href="https://linw1995.com/blog/">博客</a></li>
+                    
+                        <li><a href="https://linw1995.com/projects/">项目</a></li>
                     
                     
-                        
-                            
-                        
+                        <li><a href="https://linw1995.com/about/">关于</a></li>
                     
-                        
-                            
-                            <li><a href="https://linw1995.com/projects">projects</a></li>
-                            
-                        
-                    
-                    
-                        
-                    
-                        
-                            <li><a href="https://linw1995.com/about/">About</a></li>
-                        
+                        <li><a href="https://linw1995.com/license/">许可</a></li>
                     
                 </ul>
+
+                
+
             </nav>
         </div>
     </div>
@@ -1162,19 +1153,27 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
             <div class="markdown">
                 
     
-    <p>之前用<a href="https://linw1995.com/blog/%E8%87%AA%E5%B7%B1%E6%9D%A5%E5%86%99%E5%8E%8B%E7%BC%A9%E7%AE%97%E6%B3%95%E5%93%88%E5%A4%AB%E6%9B%BC%E7%AE%97%E6%B3%95/">哈夫曼算法</a>，把<strong>固定长</strong>的字符编码根据其出现次数，编码为<strong>不固定长</strong>的编码。而这次介绍的算法恰恰相反，该算法是把<strong>不等长</strong>的字符串，编码为<strong>固定长</strong>的编码。</p>
+    
+
+<p>之前用<a href="https://linw1995.com/blog/%E8%87%AA%E5%B7%B1%E6%9D%A5%E5%86%99%E5%8E%8B%E7%BC%A9%E7%AE%97%E6%B3%95%E5%93%88%E5%A4%AB%E6%9B%BC%E7%AE%97%E6%B3%95/">哈夫曼算法</a>，把<strong>固定长</strong>的字符编码根据其出现次数，编码为<strong>不固定长</strong>的编码。而这次介绍的算法恰恰相反，该算法是把<strong>不等长</strong>的字符串，编码为<strong>固定长</strong>的编码。</p>
+
 <h2 id="lzw">LZW</h2>
+
 <p>蓝博-立夫-卫曲编码法（Lempel-Ziv-Welch，缩写LZW），是亚伯拉罕·蓝波、杰可布·立夫与泰瑞·卫曲共同提出的一种无损数据压缩演算法。与<a href="https://zh.wikipedia.org/wiki/%E9%9C%8D%E5%A4%AB%E6%9B%BC%E7%BC%96%E7%A0%81">霍夫曼编码</a>相比，LZW把不同长度的字符串转换为固定长的编码。该方法不需要事先对数据做任何分析，所以可以流式地对文件进行处理。</p>
+
 <h2 id="原理">原理</h2>
+
 <h3 id="编码">编码</h3>
-<p>举个简单的例子，如果有一份数据，内容中的字符只有'abc'三种。那么如何对它进行编码呢？</p>
+
+<p>举个简单的例子，如果有一份数据，内容中的字符只有&rsquo;abc&rsquo;三种。那么如何对它进行编码呢？</p>
+
 <p>首先先将单字符建立成一个字符串编码表，分别给予编号。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plain" data-lang="plain">| string | code |
 |--------|------|
 | a      | 0    |
 | b      | 1    |
-| c      | 2    |
-</code></pre></div><p>若数据为<code>aabcaac</code>，进过LZW编码后结果为 <code>[0,0,1,2,3,2,]</code>，过程如下</p>
+| c      | 2    |</code></pre></div>
+<p>若数据为<code>aabcaac</code>，进过LZW编码后结果为 <code>[0,0,1,2,3,2,]</code>，过程如下</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plain" data-lang="plain">| No. | cur | prefix | prefix + cur | in str-&gt;code | code | add into str-&gt;code |
 | --- | --- | ------ | ------------ | ------------ | ---- | ------------------ |
 | 1   | a   |        | a            | true         |      |                    |
@@ -1184,28 +1183,31 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
 | 5   | a   | c      | ca           | false        | 2    | ca -&gt; 6            |
 | 6   | a   | a      | aa           | true         |      |                    |
 | 7   | c   | aa     | aac          | false        | 3    | aac -&gt; 7           |
-| 8   |     | c      |              |              | 2    |                    |
-</code></pre></div><p>整个算法过程如下：</p>
+| 8   |     | c      |              |              | 2    |                    |</code></pre></div>
+<p>整个算法过程如下：</p>
+
 <ol>
 <li>从输入流读取一个字符 char</li>
 <li>若字符串 prefix + 字符 char <strong>在</strong> 字符串编码表中，字符串 prefix += 字符 char</li>
 <li>若字符串 prefix + 字符 char <strong>不在</strong> 字符串编码表中：
+
 <ol>
 <li>获取 字符串 prefix 的编码 k，写入输出流</li>
 <li>将 字符串 prefix + 字符 char 以编码 k + 1 存入字符串编码表</li>
 <li>字符串 prefix = 字符 char</li>
-</ol>
-</li>
+</ol></li>
 <li>重复以上步骤，直到输入流无新数据</li>
 <li>最后获取 字符串 prefix 的编码 k，写入输出流</li>
 </ol>
+
 <h3 id="解码">解码</h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plain" data-lang="plain">| string | code |
 |--------|------|
 | a      | 0    |
 | b      | 1    |
-| c      | 2    |
-</code></pre></div><p>一开始的字符串编码都是同一个，那么如何把 <code>[0,0,1,2,3,2,]</code> 解码为 <code>aabcaac</code> ？</p>
+| c      | 2    |</code></pre></div>
+<p>一开始的字符串编码都是同一个，那么如何把 <code>[0,0,1,2,3,2,]</code> 解码为 <code>aabcaac</code> ？</p>
+
 <p>解码过程如下：</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plain" data-lang="plain">| No. | code | str | char | prefix | prefix + char | in str-&gt;code | add into str-&gt;code | result  |
 | --- | ---- | --- | ---- | ------ | ------------- | ------------ | ------------------ | ------- |
@@ -1215,53 +1217,57 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
 | 4   | 2    | c   | c    | b      | bc            | false        | bc -&gt; 5            | aabc    |
 | 5-1 | 3    | aa  | a    | c      | ca            | false        | ca -&gt; 6            | aabcaa  |
 | 5-2 |      | aa  | a    | a      | aa            | true         |                    |         |
-| 7   | 2    | c   | c    | aa     | aac           | false        | aac -&gt; 7           | aabcaac |
-</code></pre></div><p>整个算法过程如下：</p>
+| 7   | 2    | c   | c    | aa     | aac           | false        | aac -&gt; 7           | aabcaac |</code></pre></div>
+<p>整个算法过程如下：</p>
+
 <ol>
 <li>从输入流中获取一个编码 k</li>
 <li>对照 字符串编码表 取得字符串 str
+
 <ol>
 <li>从字符串 str 中取得字符 char
+
 <ol>
 <li>若字符串 prefix + 字符 char <strong>在</strong> 字符串编码表中，字符串 prefix += 字符 char</li>
 <li>若字符串 prefix + 字符 char <strong>不在</strong> 字符串编码表中：
+
 <ol>
 <li>将字符串 prefix + 字符 char 存入字符串编码表</li>
 <li>字符串 prefix = 字符 char</li>
-</ol>
-</li>
+</ol></li>
+<li>重复以上步骤</li>
+</ol></li>
+<li>重复以上步骤</li>
+</ol></li>
 <li>重复以上步骤</li>
 </ol>
-</li>
-<li>重复以上步骤</li>
-</ol>
-</li>
-<li>重复以上步骤</li>
-</ol>
+
 <h2 id="实现">实现</h2>
+
 <h3 id="核心代码">核心代码</h3>
+
 <p>照着算法步骤，我们很容易地写出以下的代码：</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> six <span style="color:#f92672">import</span> int2byte
 
 
 <span style="color:#75715e"># 初始字符串编码表</span>
 <span style="color:#75715e"># str  -&gt; code</span>
-original_cdict <span style="color:#f92672">=</span> {<span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">a</span><span style="color:#e6db74">&#39;</span>: <span style="color:#ae81ff">0</span>, <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;</span>: <span style="color:#ae81ff">1</span>, <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">c</span><span style="color:#e6db74">&#39;</span>: <span style="color:#ae81ff">2</span>}
+original_cdict <span style="color:#f92672">=</span> {<span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;a&#39;</span>: <span style="color:#ae81ff">0</span>, <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;b&#39;</span>: <span style="color:#ae81ff">1</span>, <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;c&#39;</span>: <span style="color:#ae81ff">2</span>}
 <span style="color:#75715e"># code -&gt; str</span>
-original_kdict <span style="color:#f92672">=</span> [<span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">a</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">c</span><span style="color:#e6db74">&#39;</span>]
+original_kdict <span style="color:#f92672">=</span> [<span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;a&#39;</span>, <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;b&#39;</span>, <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;c&#39;</span>]
 
 
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">encode</span>(data):
-    <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;&#39;&#39;</span><span style="color:#e6db74">
-</span><span style="color:#e6db74"></span><span style="color:#e6db74">    &gt;&gt;&gt; encode(b</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">aabcaac</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">)</span><span style="color:#e6db74">
-</span><span style="color:#e6db74"></span><span style="color:#e6db74">    [0, 0, 1, 2, 3, 2]</span><span style="color:#e6db74">
-</span><span style="color:#e6db74"></span><span style="color:#e6db74">    </span><span style="color:#e6db74">&#39;&#39;&#39;</span>
+    <span style="color:#e6db74">&#39;&#39;&#39;
+</span><span style="color:#e6db74">    &gt;&gt;&gt; encode(b&#39;aabcaac&#39;)
+</span><span style="color:#e6db74">    [0, 0, 1, 2, 3, 2]
+</span><span style="color:#e6db74">    &#39;&#39;&#39;</span>
     cdict <span style="color:#f92672">=</span> original_cdict<span style="color:#f92672">.</span>copy()
     rv <span style="color:#f92672">=</span> []
-    prefix <span style="color:#f92672">=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">&#39;</span>
+    prefix <span style="color:#f92672">=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;&#39;</span>
     <span style="color:#66d9ef">for</span> c <span style="color:#f92672">in</span> data:
         <span style="color:#66d9ef">if</span> prefix <span style="color:#f92672">+</span> int2byte(c) <span style="color:#f92672">in</span> cdict:
-            prefix <span style="color:#f92672">+</span><span style="color:#f92672">=</span> int2byte(c)
+            prefix <span style="color:#f92672">+=</span> int2byte(c)
         <span style="color:#66d9ef">else</span>:
             rv<span style="color:#f92672">.</span>append(cdict[prefix])
             cdict[prefix <span style="color:#f92672">+</span> int2byte(c)] <span style="color:#f92672">=</span> len(cdict)
@@ -1272,60 +1278,78 @@ original_kdict <span style="color:#f92672">=</span> [<span style="color:#e6db74"
 
 
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">decode</span>(data):
-    <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;&#39;&#39;</span><span style="color:#e6db74">
-</span><span style="color:#e6db74"></span><span style="color:#e6db74">    &gt;&gt;&gt; decode([0, 0, 1, 2, 3, 2])</span><span style="color:#e6db74">
-</span><span style="color:#e6db74"></span><span style="color:#e6db74">    b</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">aabcaac</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">
-</span><span style="color:#e6db74"></span><span style="color:#e6db74">    </span><span style="color:#e6db74">&#39;&#39;&#39;</span>
+    <span style="color:#e6db74">&#39;&#39;&#39;
+</span><span style="color:#e6db74">    &gt;&gt;&gt; decode([0, 0, 1, 2, 3, 2])
+</span><span style="color:#e6db74">    b&#39;aabcaac&#39;
+</span><span style="color:#e6db74">    &#39;&#39;&#39;</span>
     cdict <span style="color:#f92672">=</span> original_cdict<span style="color:#f92672">.</span>copy()
     kdict <span style="color:#f92672">=</span> original_kdict<span style="color:#f92672">.</span>copy()
-    prefix <span style="color:#f92672">=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">&#39;</span>
-    rv <span style="color:#f92672">=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">&#39;</span>
+    prefix <span style="color:#f92672">=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;&#39;</span>
+    rv <span style="color:#f92672">=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;&#39;</span>
     <span style="color:#66d9ef">for</span> key <span style="color:#f92672">in</span> data:
         cs <span style="color:#f92672">=</span> kdict[key]
         <span style="color:#66d9ef">for</span> c <span style="color:#f92672">in</span> cs:
             <span style="color:#66d9ef">if</span> prefix <span style="color:#f92672">+</span> int2byte(c) <span style="color:#f92672">in</span> cdict:
-                prefix <span style="color:#f92672">+</span><span style="color:#f92672">=</span> int2byte(c)
+                prefix <span style="color:#f92672">+=</span> int2byte(c)
             <span style="color:#66d9ef">else</span>:
                 cdict[prefix <span style="color:#f92672">+</span> int2byte(c)] <span style="color:#f92672">=</span> len(cdict)
                 kdict<span style="color:#f92672">.</span>append(prefix <span style="color:#f92672">+</span> int2byte(c))
                 prefix <span style="color:#f92672">=</span> int2byte(c)
 
-        rv <span style="color:#f92672">+</span><span style="color:#f92672">=</span> cs
+        rv <span style="color:#f92672">+=</span> cs
 
-    <span style="color:#66d9ef">return</span> rv
-</code></pre></div><p>以上就是LZW压缩算法的核心代码。若是要应用到文件上，还是有挺多步要走的。</p>
+    <span style="color:#66d9ef">return</span> rv</code></pre></div>
+<p>以上就是LZW压缩算法的核心代码。若是要应用到文件上，还是有挺多步要走的。</p>
+
 <h3 id="文件压缩">文件压缩</h3>
+
 <p>要做到压缩、解压缩，如何保存其压缩结果是一个躲避不了的问题。有了之前处理<a href="https://linw1995.com/blog/%E8%87%AA%E5%B7%B1%E6%9D%A5%E5%86%99%E5%8E%8B%E7%BC%A9%E7%AE%97%E6%B3%95%E5%93%88%E5%A4%AB%E6%9B%BC%E7%AE%97%E6%B3%95/">自己来写压缩算法——哈夫曼算法 哈夫曼算法</a>的经验，我们知道要把压缩后的编码列表写入文件过程。先是将其变换成比特流，然后再把比特流写入到文件里。那么一个编码以多少长度写入文件里呢？</p>
+
 <p>如果要压缩一个文件，如果是以<strong>一字节一字节</strong>地读取处理，那么初始字符串编码表长度至少哋256($2^8$)个，所以一个压缩后的编码的长度大于8比特。</p>
+
 <p>长度为9比特，就能保存$2^9 = 512$个编码；长度为10比特，就能保存$2^{10} = 1024$个编码；长度为16比特，就能保存$2^{16} = 65536$个编码。若是选择长度短的，那么怎么压缩大文件呢；若是选择长度长的，那么目标文件更大呢；总不能选个超级长的长度，最后是能压缩大多数文件了，可哪能叫压缩吗（压缩结果大小反而大过源文件）</p>
+
 <h4 id="动态编码长度">动态编码长度</h4>
+
 <p>当字符串编码表的长度为1024($2^{10}$)时，在此之前出现的所有编码都小于1024($2^{10}$)，若用长度16来保存编码未免也太浪费空间了。
 只有动态地改变保存长度，才能更加有效地利用存储空间，使压缩效果更好。</p>
+
 <p>比如字符串编码表超过为512($2^9$)时，就以长度10来保存；超过1024($2^10$)，就以长度11来保存；如此类推既可以。</p>
+
 <p>但不能让字符串编码表无限增大下去，所以得设置个<strong>哨兵值</strong>来重置字符串编码表。</p>
+
 <p>处理过程</p>
+
 <ol>
 <li>设置重置字符串编码表的<strong>哨兵值</strong>（解决字符串编码表无节制增长）</li>
 <li>读文件</li>
 <li>使用 LZW 算法压缩或者解压文件数据</li>
 <li>写文件</li>
 </ol>
+
 <p>核心代码加上以上的处理过程，就能写出一个真正实用的压缩程序了！</p>
+
 <blockquote>
 <p>LZW 支持流式处理数据，读写和处理可以同时进行</p>
 </blockquote>
+
 <h2 id="扩展">扩展</h2>
+
 <ol>
-<li>
-<p>初始的字符串编码表的大小可以不是256个吗？</p>
-<p>可以，每次处理的数据大小决定了初始编码表的大小。每 8bits 的处理，初始编码表的大小为256；每 10bits 的处理，初始编码表的大小为1024；每 11bits 的处理，初始编码表的大小为2048；</p>
-</li>
+<li><p>初始的字符串编码表的大小可以不是256个吗？</p>
+
+<p>可以，每次处理的数据大小决定了初始编码表的大小。每 8bits 的处理，初始编码表的大小为256；每 10bits 的处理，初始编码表的大小为1024；每 11bits 的处理，初始编码表的大小为2048；</p></li>
 </ol>
+
 <h2 id="完整代码">完整代码</h2>
+
 <script type="application/javascript" src="https://gist.github.com/linw1995/38b805e35d667d45e51612c11c71a70b.js"></script>
 
+
 <p>GIST: <a href="https://gist.github.com/linw1995/38b805e35d667d45e51612c11c71a70b">LZW Encoding and Data Compression. | linw1995</a></p>
+
 <h2 id="参考">参考</h2>
+
 <blockquote>
 <ul>
 <li><a href="https://zh.wikipedia.org/zh-hans/LZW">LZW | Wikipedia</a></li>

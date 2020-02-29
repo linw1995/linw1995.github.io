@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-US">
+<html lang="zh-cn">
 
 <head>
 <meta charset="utf-8">
@@ -13,7 +13,7 @@
     <meta property="twitter:site" content="@linw1995">
 
 <meta property="og:site_name" content="linw1995" />
-<meta property="og:locale" content="en-US" />
+<meta property="og:locale" content="zh-cn" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://linw1995.com/blog/Python-%E7%89%88%E6%9C%AC%E5%8F%8A%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86%E7%9A%84%E6%9C%80%E7%BB%88%E6%96%B9%E6%A1%88-pyenv-Pipenv/" />
 <meta property="og:title" content="Python 版本及依赖管理的最终方案 pyenv &#43; Pipenv" />
@@ -1008,7 +1008,7 @@ div.main .content .markdown code {
 }
 
 div.main .content .markdown pre, div.main .content .markdown pre code {
-    background-color: #282a36;
+    background-color: #272822;
     color: #87a5d2;
 }
 
@@ -1076,7 +1076,6 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
 
 <body>
 
-
 <div class="header column">
 
     <div class="container">
@@ -1088,27 +1087,19 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
             <nav>
                 <ul>
                     
-                            <li><a href="https://linw1995.com/blog/">Blog</a></li>
+                        <li><a href="https://linw1995.com/blog/">博客</a></li>
+                    
+                        <li><a href="https://linw1995.com/projects/">项目</a></li>
                     
                     
-                        
-                            
-                        
+                        <li><a href="https://linw1995.com/about/">关于</a></li>
                     
-                        
-                            
-                            <li><a href="https://linw1995.com/projects">projects</a></li>
-                            
-                        
-                    
-                    
-                        
-                    
-                        
-                            <li><a href="https://linw1995.com/about/">About</a></li>
-                        
+                        <li><a href="https://linw1995.com/license/">许可</a></li>
                     
                 </ul>
+
+                
+
             </nav>
         </div>
     </div>
@@ -1162,45 +1153,63 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
             <div class="markdown">
                 
     
-    <h2 id="前言">前言</h2>
+    
+
+<h2 id="前言">前言</h2>
+
 <p>作为个程序员，总会遇到这些问题：如何升级系统的 Python 版本；如何安装多个 Python 版本；如何隔离项目的依赖；在开发机上好好的，为什么线上、CI 就运行失败了呢</p>
+
 <ol>
 <li>通过下载 Python 源码编译安装（最好不要覆盖掉系统原有的 Python，可安装在自己的 home 目录或者其他路径下）</li>
 <li>通过 Virtualenv 来隔离项目 Python 环境</li>
 <li>通过 <code>pip freeze &gt; requirements.txt</code> 和 <code>pip install -r requirements.txt</code>来固定依赖的版本，来确保重新安装后的 Python 环境是一致</li>
 </ol>
+
 <p>随着开发项目的增多，mac 上的 Python 环境越来越复杂，就像下面这张图一样。面对这样的复杂的环境，管理起来太折磨人了，且会因冗余而浪费硬盘空间。</p>
-<p><a href="https://xkcd.com/1987/">![版本及依赖管理指北](/blog/Python 版本及依赖管理的最终方案 pyenv + Pipenv/01.png)</a></p>
+
+<p><a href="https://xkcd.com/1987/"><img src="./01.png" alt="版本及依赖管理指北" /></a></p>
+
 <p>那么我们如何来管理越来越复杂的 Python 环境？解决该问题的最终方案是：使用 <a href="https://github.com/pyenv/pyenv"><strong>pyenv</strong></a> 管理多个 python 版本；使用 <a href="https://github.com/pypa/pipenv"><strong>Pipenv</strong></a> 管理项目所需要的依赖。</p>
+
 <h2 id="pyenv">pyenv</h2>
+
 <p>Github Repo: <a href="https://github.com/pyenv/pyenv">pyenv/pyenv</a></p>
+
 <p>参照此教程安装 pyenv</p>
+
 <blockquote>
 <p><a href="https://github.com/pyenv/pyenv#installation">installation | pyenv</a></p>
 </blockquote>
+
 <p>使用</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">pyenv install --list  <span style="color:#75715e"># 列出所有可安装的版本</span>
 pyenv install 3.7.1  <span style="color:#75715e"># 安装指定版本</span>
 pyenv shell 3.7.1  <span style="color:#75715e"># 激活该版本环境</span>
 pyenv global 3.7.1  <span style="color:#75715e"># 设置全局为该版本</span>
-pyenv local 3.7.1  <span style="color:#75715e"># 设置进入当前目录后，Python 环境自动切换为该版本</span>
-</code></pre></div><blockquote>
+pyenv local 3.7.1  <span style="color:#75715e"># 设置进入当前目录后，Python 环境自动切换为该版本</span></code></pre></div>
+<blockquote>
 <p>安装失败可能是因为编译 Python 所需要的依赖没有安装。
 <a href="https://github.com/pyenv/pyenv/wiki#troubleshooting--faq">troubleshooting/FAQ | pyenv/wiki</a>
 如果想在安装的时候，把 Python 编译为共享库 ，请看 FAQ 的最后两节</p>
 </blockquote>
+
 <h2 id="pipenv">pipenv</h2>
+
 <p>Github Repo: <a href="https://github.com/pypa/pipenv">pypa/pipenv</a></p>
+
 <p>使用其管理各项目的依赖</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">pipenv --python 3.7  <span style="color:#75715e"># 创建 Python 3.7 的虚拟环境</span>
 pipenv install requests  <span style="color:#75715e"># 安装依赖</span>
 pipenv install black rope isort flake8 --dev  <span style="color:#75715e"># 安装开发依赖</span>
 pipenv shell  <span style="color:#75715e"># 激活该虚拟环境</span>
 pipenv run pip install requests  <span style="color:#75715e"># 在该虚拟环境下执行命令</span>
-<span style="color:#75715e"># ...</span>
-</code></pre></div><p>具体怎么使用就看看其 <a href="https://github.com/pypa/pipenv/blob/master/README.md">README.md</a> 吧</p>
+<span style="color:#75715e"># ...</span></code></pre></div>
+<p>具体怎么使用就看看其 <a href="https://github.com/pypa/pipenv/blob/master/README.md">README.md</a> 吧</p>
+
 <p>也可以看作者的 PyCon 分享 <a href="https://www.youtube.com/watch?v=GBQAKldqgZs">Kenneth Reitz - Pipenv: The Future of Python Dependency Management - PyCon 2018 | Youtube</a></p>
+
 <h2 id="参考链接">参考链接</h2>
+
 <ul>
 <li><a href="https://xkcd.com/1987/">Python Environment | XKCD </a></li>
 <li><a href="https://github.com/pyenv/pyenv">pyenv/pyenv</a></li>
@@ -1240,7 +1249,7 @@ pipenv run pip install requests  <span style="color:#75715e"># 在该虚拟环�
                 <div style="width: 100%;"></div>
                 
                 <div>
-                    <a href="https://linw1995.com/blog/Run-Twisted-in-another-thread/">Run Twisted in another thread</a>
+                    <a href="https://linw1995.com/blog/%E4%B8%A4%E7%A7%8D%E6%96%B9%E5%BC%8F%E6%9D%A5%E7%94%A8-Python-logging-%E8%AE%B0%E5%BD%95%E9%A2%9D%E5%A4%96%E7%9A%84%E5%80%BC/">两种方式来用 Python logging 记录额外的值</a>
                     <img class="icon" src="https://linw1995.com/img/next.svg" alt="next" />
                 </div>
                 

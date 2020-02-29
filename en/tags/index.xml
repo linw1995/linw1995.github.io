@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on linw1995</title>
+    <link>https://linw1995.com/en/tags/</link>
+    <description>Recent content in Tags on linw1995</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Fri, 28 Feb 2020 23:59:59 +0800</lastBuildDate>
+    
+	<atom:link href="https://linw1995.com/en/tags/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Automation</title>
+      <link>https://linw1995.com/en/tags/Automation/</link>
+      <pubDate>Fri, 28 Feb 2020 23:59:59 +0800</pubDate>
+      
+      <guid>https://linw1995.com/en/tags/Automation/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Crawler</title>
+      <link>https://linw1995.com/en/tags/Crawler/</link>
+      <pubDate>Fri, 28 Feb 2020 23:59:59 +0800</pubDate>
+      
+      <guid>https://linw1995.com/en/tags/Crawler/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Python</title>
+      <link>https://linw1995.com/en/tags/Python/</link>
+      <pubDate>Fri, 28 Feb 2020 23:59:59 +0800</pubDate>
+      
+      <guid>https://linw1995.com/en/tags/Python/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Twisted</title>
+      <link>https://linw1995.com/en/tags/Twisted/</link>
+      <pubDate>Thu, 27 Dec 2018 23:59:59 +0000</pubDate>
+      
+      <guid>https://linw1995.com/en/tags/Twisted/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

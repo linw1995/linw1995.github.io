@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-US">
+<html lang="zh-cn">
 
 <head>
 <meta charset="utf-8">
@@ -13,7 +13,7 @@
     <meta property="twitter:site" content="@linw1995">
 
 <meta property="og:site_name" content="linw1995" />
-<meta property="og:locale" content="en-US" />
+<meta property="og:locale" content="zh-cn" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://linw1995.com/blog/%E6%A0%91%E8%8E%93%E6%B4%BE%E7%B3%BB%E7%BB%9F%E7%83%A7%E5%BD%95%E5%8F%8A-SSH-%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5/" />
 <meta property="og:title" content="树莓派系统烧录及 SSH 远程连接" />
@@ -1008,7 +1008,7 @@ div.main .content .markdown code {
 }
 
 div.main .content .markdown pre, div.main .content .markdown pre code {
-    background-color: #282a36;
+    background-color: #272822;
     color: #87a5d2;
 }
 
@@ -1076,7 +1076,6 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
 
 <body>
 
-
 <div class="header column">
 
     <div class="container">
@@ -1088,27 +1087,19 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
             <nav>
                 <ul>
                     
-                            <li><a href="https://linw1995.com/blog/">Blog</a></li>
+                        <li><a href="https://linw1995.com/blog/">博客</a></li>
+                    
+                        <li><a href="https://linw1995.com/projects/">项目</a></li>
                     
                     
-                        
-                            
-                        
+                        <li><a href="https://linw1995.com/about/">关于</a></li>
                     
-                        
-                            
-                            <li><a href="https://linw1995.com/projects">projects</a></li>
-                            
-                        
-                    
-                    
-                        
-                    
-                        
-                            <li><a href="https://linw1995.com/about/">About</a></li>
-                        
+                        <li><a href="https://linw1995.com/license/">许可</a></li>
                     
                 </ul>
+
+                
+
             </nav>
         </div>
     </div>
@@ -1160,21 +1151,30 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
             <div class="markdown">
                 
     
-    <p>很久之前入了个树莓派 3B+，本来打算来搭个 nas 的。但后来买了群晖ds218+，树莓派就置灰了许久。最近入了个 Nintendo Switch，打算折腾一下用来和基友们联机，就翻出置灰许久的树莓派。本文就来记录一下是怎么折腾这台树莓派。</p>
+    
+
+<p>很久之前入了个树莓派 3B+，本来打算来搭个 nas 的。但后来买了群晖ds218+，树莓派就置灰了许久。最近入了个 Nintendo Switch，打算折腾一下用来和基友们联机，就翻出置灰许久的树莓派。本文就来记录一下是怎么折腾这台树莓派。</p>
+
 <h2 id="系统烧录">系统烧录</h2>
+
 <h3 id="使用到的硬件">使用到的硬件</h3>
+
 <ol>
 <li>树莓派本体（三代 B+ 型）</li>
 <li>电源 5V2.5A（Micro USB接口）</li>
 <li>SD 卡 （32 GB）</li>
 <li>SD 卡 USB 读卡器</li>
 </ol>
+
 <p>新到的机子没有安装系统，甚至没有存储媒介。没有的话，需要购买一个大小合适的 SD 卡。
 到<a href="https://www.raspberrypi.org/downloads/">官网下载</a>合适的系统镜像，本文下载的是最简的镜像 <a href="https://www.raspberrypi.org/downloads/raspbian/">Raspbian Buster Lite</a>，内核版本为 4.19。下载完成后解压，得到 *<strong>.img</strong> 镜像文件，再用 <a href="https://www.balena.io/etcher/">balenaEtcher</a> 软件来烧录到 SD 卡中。</p>
+
 <blockquote>
 <p><a href="https://www.raspberrypi.org/documentation/installation/installing-images/README.md">Installing operating system images</a></p>
 </blockquote>
-<h2 id="无界面链接-wi-fi用网线的可跳过">无界面链接 Wi-Fi（用网线的可跳过）</h2>
+
+<h2 id="无界面链接-wi-fi-用网线的可跳过">无界面链接 Wi-Fi（用网线的可跳过）</h2>
+
 <p>无界面怎么配置 Wi-Fi 链接呢？通过在烧录好的 SD 卡的 boot 分区，写入一个配置文件 <strong>wpa_supplicant.conf</strong>。其内容如下，替换尖括号的内容即可。刚烧录好的读卡器要重新拔插一次。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plain" data-lang="plain">ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
 update_config=1
@@ -1183,15 +1183,19 @@ country=&lt;Insert country code here&gt;
 network={
  ssid=&#34;&lt;Name of your WiFi&gt;&#34;
  psk=&#34;&lt;Password for your WiFi&gt;&#34;
-}
-</code></pre></div><p>国家代码请看 <a href="https://en.wikipedia.org/wiki/ISO_3166-1">ISO3166 | Wikipedia</a>，中国的就是 <strong>CN</strong></p>
+}</code></pre></div>
+<p>国家代码请看 <a href="https://en.wikipedia.org/wiki/ISO_3166-1">ISO3166 | Wikipedia</a>，中国的就是 <strong>CN</strong></p>
+
 <blockquote>
 <p><a href="https://www.raspberrypi.org/documentation/configuration/wireless/headless.md">Setting up wireless networking headless</a></p>
 </blockquote>
+
 <h2 id="无界面启用-ssh">无界面启用 ssh</h2>
+
 <p>也是在烧录好的 SD 卡重的 boot 分区，写入一个名为 <strong>ssh</strong> 文件（什么内容都行，甚至空的也行）。再把 SD 卡插入树莓派，启动电源。
 稍等片刻，即可通过 <code>ssh pi@raspberrypi.local</code> 链接。
 如果无法链接，可能是你的设备不支持 mDNS。可以从路由器查看树莓派的 ip 地址，再运行 <code>ssh pi@&lt;替换为树莓派的ip地址&gt;</code> 命令进行链接。密码默认为 <strong>raspberry</strong>。</p>
+
 <blockquote>
 <ul>
 <li><a href="https://www.raspberrypi.org/documentation/remote-access/ssh/README.md">Enable SSH on a headless Raspberry Pi</a></li>

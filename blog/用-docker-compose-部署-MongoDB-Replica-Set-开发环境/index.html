@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-US">
+<html lang="zh-cn">
 
 <head>
 <meta charset="utf-8">
@@ -13,7 +13,7 @@
     <meta property="twitter:site" content="@linw1995">
 
 <meta property="og:site_name" content="linw1995" />
-<meta property="og:locale" content="en-US" />
+<meta property="og:locale" content="zh-cn" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://linw1995.com/blog/%E7%94%A8-docker-compose-%E9%83%A8%E7%BD%B2-MongoDB-Replica-Set-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" />
 <meta property="og:title" content="用 docker-compose 部署 MongoDB Replica Set 开发环境" />
@@ -1008,7 +1008,7 @@ div.main .content .markdown code {
 }
 
 div.main .content .markdown pre, div.main .content .markdown pre code {
-    background-color: #282a36;
+    background-color: #272822;
     color: #87a5d2;
 }
 
@@ -1076,7 +1076,6 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
 
 <body>
 
-
 <div class="header column">
 
     <div class="container">
@@ -1088,27 +1087,19 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
             <nav>
                 <ul>
                     
-                            <li><a href="https://linw1995.com/blog/">Blog</a></li>
+                        <li><a href="https://linw1995.com/blog/">博客</a></li>
+                    
+                        <li><a href="https://linw1995.com/projects/">项目</a></li>
                     
                     
-                        
-                            
-                        
+                        <li><a href="https://linw1995.com/about/">关于</a></li>
                     
-                        
-                            
-                            <li><a href="https://linw1995.com/projects">projects</a></li>
-                            
-                        
-                    
-                    
-                        
-                    
-                        
-                            <li><a href="https://linw1995.com/about/">About</a></li>
-                        
+                        <li><a href="https://linw1995.com/license/">许可</a></li>
                     
                 </ul>
+
+                
+
             </nav>
         </div>
     </div>
@@ -1166,18 +1157,23 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
             <div class="markdown">
                 
     
-    <h2 id="前言">前言</h2>
+    
+
+<h2 id="前言">前言</h2>
+
 <p>话不多说，直接进正题</p>
+
 <h2 id="如何搭建和配置">如何搭建和配置</h2>
+
 <p>把以下内容写入 <code>docker-compose.yml</code> 文件中。然后运行 <code>docker-compose up -d --scale mongo=3</code>，就可以启动三个 MongoDB 服务。接下来我们要把这三个 MongoDB 节点配置成一组 Replica Set</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">version: <span style="color:#e6db74">&#39;3.5&#39;</span>
-services:
-  mongo:
-    image: mongo
-    ports:
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">version</span>: <span style="color:#e6db74">&#39;3.5&#39;</span>
+<span style="color:#66d9ef">services</span>:
+  <span style="color:#66d9ef">mongo</span>:
+    <span style="color:#66d9ef">image</span>: mongo
+    <span style="color:#66d9ef">ports</span>:
       - <span style="color:#e6db74">&#34;27017-27118:27017&#34;</span>
-    command: mongod --replSet main
-</code></pre></div><p>把以下内容写入 <code>utils.py</code> 文件中</p>
+    <span style="color:#66d9ef">command</span>: mongod --replSet main</code></pre></div>
+<p>把以下内容写入 <code>utils.py</code> 文件中</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> subprocess <span style="color:#f92672">as</span> sp
 
 
@@ -1187,23 +1183,23 @@ services:
     <span style="color:#66d9ef">while</span> True:
         <span style="color:#66d9ef">try</span>:
             output <span style="color:#f92672">=</span> sp<span style="color:#f92672">.</span>check_output(
-                f<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">docker-compose port --index {idx} mongo 27017</span><span style="color:#e6db74">&#34;</span>,
+                f<span style="color:#e6db74">&#34;docker-compose port --index {idx} mongo 27017&#34;</span>,
                 shell<span style="color:#f92672">=</span>True,
-                encoding<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">utf-8</span><span style="color:#e6db74">&#34;</span>,
+                encoding<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;utf-8&#34;</span>,
                 stderr<span style="color:#f92672">=</span>sp<span style="color:#f92672">.</span>DEVNULL,
             )
         <span style="color:#66d9ef">except</span> sp<span style="color:#f92672">.</span>CalledProcessError:
             <span style="color:#66d9ef">break</span>
 
-        port <span style="color:#f92672">=</span> output<span style="color:#f92672">.</span>split(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">:</span><span style="color:#e6db74">&#34;</span>)[<span style="color:#ae81ff">1</span>]
+        port <span style="color:#f92672">=</span> output<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#34;:&#34;</span>)[<span style="color:#ae81ff">1</span>]
         ports<span style="color:#f92672">.</span>append(int(port))
-        idx <span style="color:#f92672">+</span><span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
+        idx <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
 
     <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> ports:
-        <span style="color:#66d9ef">raise</span> <span style="color:#a6e22e">RuntimeError</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">no node is running.</span><span style="color:#e6db74">&#34;</span>)
+        <span style="color:#66d9ef">raise</span> <span style="color:#a6e22e">RuntimeError</span>(<span style="color:#e6db74">&#34;no node is running.&#34;</span>)
 
-    <span style="color:#66d9ef">return</span> ports
-</code></pre></div><p>把以下内容写入 <code>init.py</code> 文件中，再执行 <code>python init.py</code> 命令配置这组 Replica Set</p>
+    <span style="color:#66d9ef">return</span> ports</code></pre></div>
+<p>把以下内容写入 <code>init.py</code> 文件中，再执行 <code>python init.py</code> 命令配置这组 Replica Set</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> json
 <span style="color:#f92672">import</span> subprocess <span style="color:#f92672">as</span> sp
 <span style="color:#f92672">import</span> tempfile
@@ -1213,47 +1209,47 @@ services:
 
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">generate_init_js</span>(node_ports):
     members <span style="color:#f92672">=</span> [
-        {<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">_id</span><span style="color:#e6db74">&#34;</span>: idx, <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">host</span><span style="color:#e6db74">&#34;</span>: f<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">host.docker.internal:{port}</span><span style="color:#e6db74">&#34;</span>}
+        {<span style="color:#e6db74">&#34;_id&#34;</span>: idx, <span style="color:#e6db74">&#34;host&#34;</span>: f<span style="color:#e6db74">&#34;host.docker.internal:{port}&#34;</span>}
         <span style="color:#66d9ef">for</span> idx, port <span style="color:#f92672">in</span> enumerate(node_ports)
     ]
-    initiate_parameters <span style="color:#f92672">=</span> {<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">_id</span><span style="color:#e6db74">&#34;</span>: <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">main</span><span style="color:#e6db74">&#34;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">members</span><span style="color:#e6db74">&#34;</span>: members}
+    initiate_parameters <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#34;_id&#34;</span>: <span style="color:#e6db74">&#34;main&#34;</span>, <span style="color:#e6db74">&#34;members&#34;</span>: members}
 
-    init_js <span style="color:#f92672">=</span> f<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">rs.initiate({json.dumps(initiate_parameters, indent=2)})</span><span style="color:#e6db74">&#34;</span>
+    init_js <span style="color:#f92672">=</span> f<span style="color:#e6db74">&#34;rs.initiate({json.dumps(initiate_parameters, indent=2)})&#34;</span>
     <span style="color:#66d9ef">return</span> init_js
 
 
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">main</span>():
     ports <span style="color:#f92672">=</span> get_node_ports()
     init_js <span style="color:#f92672">=</span> generate_init_js(ports)
-    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\x1b</span><span style="color:#e6db74">[32m$</span><span style="color:#ae81ff">\x1b</span><span style="color:#e6db74">[0m cat init.js</span><span style="color:#e6db74">&#34;</span>)
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\x1b</span><span style="color:#e6db74">[32m$</span><span style="color:#ae81ff">\x1b</span><span style="color:#e6db74">[0m cat init.js&#34;</span>)
     <span style="color:#66d9ef">print</span>(init_js)
 
     container_name <span style="color:#f92672">=</span> sp<span style="color:#f92672">.</span>check_output(
-        <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">docker-compose ps | grep mongo_1 | awk </span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">{ print $1 }</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">&#34;</span>,
+        <span style="color:#e6db74">&#34;docker-compose ps | grep mongo_1 | awk &#39;{ print $1 }&#39;&#34;</span>,
         shell<span style="color:#f92672">=</span>True,
-        encoding<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">utf-8</span><span style="color:#e6db74">&#34;</span>,
+        encoding<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;utf-8&#34;</span>,
     )<span style="color:#f92672">.</span>strip()
-    <span style="color:#66d9ef">with</span> tempfile<span style="color:#f92672">.</span>NamedTemporaryFile(mode<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">w</span><span style="color:#e6db74">&#34;</span>, encoding<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">utf-8</span><span style="color:#e6db74">&#34;</span>) <span style="color:#66d9ef">as</span> f:
+    <span style="color:#66d9ef">with</span> tempfile<span style="color:#f92672">.</span>NamedTemporaryFile(mode<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;w&#34;</span>, encoding<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;utf-8&#34;</span>) <span style="color:#66d9ef">as</span> f:
         f<span style="color:#f92672">.</span>write(init_js)
         f<span style="color:#f92672">.</span>flush()
 
         path <span style="color:#f92672">=</span> f<span style="color:#f92672">.</span>name
-        sp<span style="color:#f92672">.</span>check_output(f<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">docker cp {path} {container_name}:/init.js</span><span style="color:#e6db74">&#34;</span>, shell<span style="color:#f92672">=</span>True)
-        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\x1b</span><span style="color:#e6db74">[32m$</span><span style="color:#ae81ff">\x1b</span><span style="color:#e6db74">[0m copy init.js</span><span style="color:#e6db74">&#34;</span>)
+        sp<span style="color:#f92672">.</span>check_output(f<span style="color:#e6db74">&#34;docker cp {path} {container_name}:/init.js&#34;</span>, shell<span style="color:#f92672">=</span>True)
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\x1b</span><span style="color:#e6db74">[32m$</span><span style="color:#ae81ff">\x1b</span><span style="color:#e6db74">[0m copy init.js&#34;</span>)
 
     output <span style="color:#f92672">=</span> sp<span style="color:#f92672">.</span>check_output(
-        f<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">docker exec {container_name} sh -c </span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">mongo --port 27017 &lt; /init.js</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">&#39;</span>,
+        f<span style="color:#e6db74">&#39;docker exec {container_name} sh -c &#34;mongo --port 27017 &lt; /init.js&#34;&#39;</span>,
         shell<span style="color:#f92672">=</span>True,
-        encoding<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">utf-8</span><span style="color:#e6db74">&#34;</span>,
+        encoding<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;utf-8&#34;</span>,
     )
-    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\x1b</span><span style="color:#e6db74">[32m$</span><span style="color:#ae81ff">\x1b</span><span style="color:#e6db74">[0m initiate</span><span style="color:#e6db74">&#34;</span>)
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\x1b</span><span style="color:#e6db74">[32m$</span><span style="color:#ae81ff">\x1b</span><span style="color:#e6db74">[0m initiate&#34;</span>)
     <span style="color:#66d9ef">print</span>(output)
 
 
-<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">__main__</span><span style="color:#e6db74">&#34;</span>:
-    main()
+<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;__main__&#34;</span>:
+    main()</code></pre></div>
+<p>执行的结果如下</p>
 
-</code></pre></div><p>执行的结果如下</p>
 <pre><div class="ansi_up">
 [32m$[0m cat init.js
 rs.initiate({
@@ -1306,7 +1302,9 @@ bye
     }
 </script>
 
+
 <h2 id="测试">测试</h2>
+
 <p>搭建完成了，接下来用以下代码测试一下</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> asyncio
 <span style="color:#f92672">import</span> logging
@@ -1321,10 +1319,10 @@ bye
 <span style="color:#f92672">from</span> utils <span style="color:#f92672">import</span> get_node_ports
 
 
-<span style="color:#a6e22e">@pytest.fixture</span>(scope<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">session</span><span style="color:#e6db74">&#34;</span>)
+<span style="color:#a6e22e">@pytest.fixture</span>(scope<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;session&#34;</span>)
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">node_addresses</span>():
     node_ports <span style="color:#f92672">=</span> get_node_ports()
-    <span style="color:#66d9ef">return</span> [(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">localhost</span><span style="color:#e6db74">&#34;</span>, port) <span style="color:#66d9ef">for</span> port <span style="color:#f92672">in</span> node_ports]
+    <span style="color:#66d9ef">return</span> [(<span style="color:#e6db74">&#34;localhost&#34;</span>, port) <span style="color:#66d9ef">for</span> port <span style="color:#f92672">in</span> node_ports]
 
 
 <span style="color:#a6e22e">@pytest.fixture</span>(autouse<span style="color:#f92672">=</span>True)
@@ -1332,33 +1330,33 @@ bye
     original_getaddrinfo <span style="color:#f92672">=</span> socket<span style="color:#f92672">.</span>getaddrinfo
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">container_2_host_address</span>(host, port, family<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>, type<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>, proto<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>, flags<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>):
-        <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;&#34;&#34;</span><span style="color:#e6db74">
-</span><span style="color:#e6db74"></span><span style="color:#e6db74">        由于 MongoDB 会下发 replica 在容器中的地址，</span><span style="color:#e6db74">
-</span><span style="color:#e6db74"></span><span style="color:#e6db74">        必须替换成在主机上的正确地址</span><span style="color:#e6db74">
-</span><span style="color:#e6db74"></span><span style="color:#e6db74">        </span><span style="color:#e6db74">&#34;&#34;&#34;</span>
-        <span style="color:#66d9ef">if</span> host <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">host.docker.internal</span><span style="color:#e6db74">&#34;</span>:
-            logging<span style="color:#f92672">.</span>debug(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">container 2 host</span><span style="color:#e6db74">&#34;</span>)
-            host <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">localhost</span><span style="color:#e6db74">&#34;</span>
+        <span style="color:#e6db74">&#34;&#34;&#34;
+</span><span style="color:#e6db74">        由于 MongoDB 会下发 replica 在容器中的地址，
+</span><span style="color:#e6db74">        必须替换成在主机上的正确地址
+</span><span style="color:#e6db74">        &#34;&#34;&#34;</span>
+        <span style="color:#66d9ef">if</span> host <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;host.docker.internal&#34;</span>:
+            logging<span style="color:#f92672">.</span>debug(<span style="color:#e6db74">&#34;container 2 host&#34;</span>)
+            host <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;localhost&#34;</span>
         <span style="color:#66d9ef">else</span>:
-            logging<span style="color:#f92672">.</span>debug(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">no change </span><span style="color:#e6db74">%r</span><span style="color:#e6db74">&#34;</span>, (host, port))
+            logging<span style="color:#f92672">.</span>debug(<span style="color:#e6db74">&#34;no change </span><span style="color:#e6db74">%r</span><span style="color:#e6db74">&#34;</span>, (host, port))
 
         <span style="color:#66d9ef">return</span> original_getaddrinfo(host, port, family, type, proto, flags)
 
-    <span style="color:#66d9ef">with</span> mock<span style="color:#f92672">.</span>patch(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">socket.getaddrinfo</span><span style="color:#e6db74">&#34;</span>, new<span style="color:#f92672">=</span>container_2_host_address):
+    <span style="color:#66d9ef">with</span> mock<span style="color:#f92672">.</span>patch(<span style="color:#e6db74">&#34;socket.getaddrinfo&#34;</span>, new<span style="color:#f92672">=</span>container_2_host_address):
         <span style="color:#66d9ef">yield</span>
 
 
 <span style="color:#a6e22e">@pytest.fixture</span>
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">uri</span>(node_addresses):
-    nodes <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">,</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">.</span>join(f<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">{host}:{port}</span><span style="color:#e6db74">&#34;</span> <span style="color:#66d9ef">for</span> host, port <span style="color:#f92672">in</span> node_addresses)
-    <span style="color:#66d9ef">return</span> f<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">mongodb://{nodes}/?replicaSet=main</span><span style="color:#e6db74">&#34;</span>
+    nodes <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;,&#34;</span><span style="color:#f92672">.</span>join(f<span style="color:#e6db74">&#34;{host}:{port}&#34;</span> <span style="color:#66d9ef">for</span> host, port <span style="color:#f92672">in</span> node_addresses)
+    <span style="color:#66d9ef">return</span> f<span style="color:#e6db74">&#34;mongodb://{nodes}/?replicaSet=main&#34;</span>
 
 
 <span style="color:#a6e22e">@pytest.fixture</span>
 async <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">create_db</span>(uri):
     async <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">creator</span>():
         client <span style="color:#f92672">=</span> AsyncIOMotorClient(uri)
-        db <span style="color:#f92672">=</span> client[<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">default</span><span style="color:#e6db74">&#34;</span>]
+        db <span style="color:#f92672">=</span> client[<span style="color:#e6db74">&#34;default&#34;</span>]
         <span style="color:#66d9ef">return</span> db
 
     db <span style="color:#f92672">=</span> await creator()
@@ -1372,49 +1370,50 @@ async <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">create_
 
 
 async <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_latest_oplog_timestamp</span>(client):
-    <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;&#34;&#34;</span><span style="color:#e6db74">
-</span><span style="color:#e6db74"></span><span style="color:#e6db74">    获取最新的 oplog 时间戳</span><span style="color:#e6db74">
-</span><span style="color:#e6db74"></span><span style="color:#e6db74">    </span><span style="color:#e6db74">&#34;&#34;&#34;</span>
-    cursor <span style="color:#f92672">=</span> client<span style="color:#f92672">.</span>local<span style="color:#f92672">.</span>oplog<span style="color:#f92672">.</span>rs<span style="color:#f92672">.</span>find()<span style="color:#f92672">.</span>sort(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">$natural</span><span style="color:#e6db74">&#34;</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)<span style="color:#f92672">.</span>limit(<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)
+    <span style="color:#e6db74">&#34;&#34;&#34;
+</span><span style="color:#e6db74">    获取最新的 oplog 时间戳
+</span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+    cursor <span style="color:#f92672">=</span> client<span style="color:#f92672">.</span>local<span style="color:#f92672">.</span>oplog<span style="color:#f92672">.</span>rs<span style="color:#f92672">.</span>find()<span style="color:#f92672">.</span>sort(<span style="color:#e6db74">&#34;$natural&#34;</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)<span style="color:#f92672">.</span>limit(<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)
     await cursor<span style="color:#f92672">.</span>fetch_next
-    <span style="color:#66d9ef">return</span> cursor<span style="color:#f92672">.</span>next_object()[<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">ts</span><span style="color:#e6db74">&#34;</span>]
+    <span style="color:#66d9ef">return</span> cursor<span style="color:#f92672">.</span>next_object()[<span style="color:#e6db74">&#34;ts&#34;</span>]
 
 
 <span style="color:#a6e22e">@pytest.mark.asyncio</span>
 async <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_change_stream</span>(create_db):
     db <span style="color:#f92672">=</span> await create_db()
-    col_name <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">boo</span><span style="color:#e6db74">&#34;</span>
+    col_name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;boo&#34;</span>
     await db<span style="color:#f92672">.</span>create_collection(col_name)
-    logging<span style="color:#f92672">.</span>debug(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">create collection</span><span style="color:#e6db74">&#34;</span>)
+    logging<span style="color:#f92672">.</span>debug(<span style="color:#e6db74">&#34;create collection&#34;</span>)
 
     current_timestamp <span style="color:#f92672">=</span> await get_latest_oplog_timestamp(db<span style="color:#f92672">.</span>client)
-    logging<span style="color:#f92672">.</span>debug(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">latest oplog timestamp </span><span style="color:#e6db74">%r</span><span style="color:#e6db74">&#34;</span>, current_timestamp)
+    logging<span style="color:#f92672">.</span>debug(<span style="color:#e6db74">&#34;latest oplog timestamp </span><span style="color:#e6db74">%r</span><span style="color:#e6db74">&#34;</span>, current_timestamp)
 
     async <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">wait_for_change</span>():
         async <span style="color:#66d9ef">with</span> db[col_name]<span style="color:#f92672">.</span>watch(
-            pipeline<span style="color:#f92672">=</span>[{<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">$match</span><span style="color:#e6db74">&#34;</span>: {<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">operationType</span><span style="color:#e6db74">&#34;</span>: <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">insert</span><span style="color:#e6db74">&#34;</span>}}],
+            pipeline<span style="color:#f92672">=</span>[{<span style="color:#e6db74">&#34;$match&#34;</span>: {<span style="color:#e6db74">&#34;operationType&#34;</span>: <span style="color:#e6db74">&#34;insert&#34;</span>}}],
             start_at_operation_time<span style="color:#f92672">=</span>current_timestamp,
         ) <span style="color:#66d9ef">as</span> change_stream:
             <span style="color:#75715e"># 使用 startAtOperationTime 参数，避免漏掉插入事件</span>
             <span style="color:#75715e"># https://docs.mongodb.com/manual/changeStreams/#start-time</span>
             <span style="color:#75715e"># 可要创建一个 bson.Timestamp 对象</span>
-            logging<span style="color:#f92672">.</span>debug(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">wait for change</span><span style="color:#e6db74">&#34;</span>)
+            logging<span style="color:#f92672">.</span>debug(<span style="color:#e6db74">&#34;wait for change&#34;</span>)
             async <span style="color:#66d9ef">for</span> change <span style="color:#f92672">in</span> change_stream:
                 <span style="color:#66d9ef">return</span> change
 
     fut <span style="color:#f92672">=</span> asyncio<span style="color:#f92672">.</span>ensure_future(wait_for_change())
 
-    data <span style="color:#f92672">=</span> {<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">username</span><span style="color:#e6db74">&#34;</span>: <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">black</span><span style="color:#e6db74">&#34;</span>}
+    data <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#34;username&#34;</span>: <span style="color:#e6db74">&#34;black&#34;</span>}
     await db[col_name]<span style="color:#f92672">.</span>insert_one(data)
-    logging<span style="color:#f92672">.</span>debug(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">insert new document </span><span style="color:#e6db74">%r</span><span style="color:#e6db74">&#34;</span>, data)
+    logging<span style="color:#f92672">.</span>debug(<span style="color:#e6db74">&#34;insert new document </span><span style="color:#e6db74">%r</span><span style="color:#e6db74">&#34;</span>, data)
 
     change <span style="color:#f92672">=</span> await fut
-    logging<span style="color:#f92672">.</span>debug(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">received change </span><span style="color:#e6db74">%r</span><span style="color:#e6db74">&#34;</span>, change)
+    logging<span style="color:#f92672">.</span>debug(<span style="color:#e6db74">&#34;received change </span><span style="color:#e6db74">%r</span><span style="color:#e6db74">&#34;</span>, change)
 
-    <span style="color:#66d9ef">assert</span> data <span style="color:#f92672">==</span> change[<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">fullDocument</span><span style="color:#e6db74">&#34;</span>]
-</code></pre></div><p>从以上的代码，你可能会发现代码利用 <code>unittest.mock.patch</code> 修改了 <code>socket.getaddrinfo</code> 函数的执行，目的是为了替换 MongoDB Replica Set 下发的节点地址。这个地址为容器内的主机地址 <code>host.docker.internal</code>，需要替换成本地主机地址 <code>localhost</code>，以避免无法解析导致测试代码运行失败。如果把程序打包成 docker 镜像，在 docker 容器中开发测试的话，就去掉这一部分的代码了</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">pytest test.py --log-cli-level debug
-</code></pre></div><p>把代码写入 <code>test.py</code>，再执行以上命令</p>
+    <span style="color:#66d9ef">assert</span> data <span style="color:#f92672">==</span> change[<span style="color:#e6db74">&#34;fullDocument&#34;</span>]</code></pre></div>
+<p>从以上的代码，你可能会发现代码利用 <code>unittest.mock.patch</code> 修改了 <code>socket.getaddrinfo</code> 函数的执行，目的是为了替换 MongoDB Replica Set 下发的节点地址。这个地址为容器内的主机地址 <code>host.docker.internal</code>，需要替换成本地主机地址 <code>localhost</code>，以避免无法解析导致测试代码运行失败。如果把程序打包成 docker 镜像，在 docker 容器中开发测试的话，就去掉这一部分的代码了</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">pytest test.py --log-cli-level debug</code></pre></div>
+<p>把代码写入 <code>test.py</code>，再执行以上命令</p>
+
 <pre><div class="ansi_up">
 [1m============================= test session starts ==============================[0m
 platform darwin -- Python 3.7.4, pytest-5.0.1, py-1.8.0, pluggy-0.12.0
@@ -1465,8 +1464,11 @@ test.py::test_change_stream
     }
 </script>
 
+
 <p>成功了～这样用来做开发测试真是十分的方便呢</p>
+
 <h2 id="参考">参考</h2>
+
 <ol>
 <li><a href="https://docs.mongodb.com/manual/replication/">Replication | MongoDB</a></li>
 <li><a href="https://docs.mongodb.com/manual/changeStreams/">Change Streams | MongoDB</a></li>

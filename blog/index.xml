@@ -6,10 +6,22 @@
     <description>Recent content in 博客 on linw1995</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Fri, 17 Jan 2020 23:59:59 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 28 Feb 2020 23:59:59 +0800</lastBuildDate>
     
 	<atom:link href="https://linw1995.com/blog/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>如何在无头模式下的谷歌浏览器设置地理位置</title>
+      <link>https://linw1995.com/blog/%E5%A6%82%E4%BD%95%E5%9C%A8%E6%97%A0%E5%A4%B4%E6%A8%A1%E5%BC%8F%E4%B8%8B%E7%9A%84%E8%B0%B7%E6%AD%8C%E6%B5%8F%E8%A7%88%E5%99%A8%E8%AE%BE%E7%BD%AE%E5%9C%B0%E7%90%86%E4%BD%8D%E7%BD%AE/</link>
+      <pubDate>Fri, 28 Feb 2020 23:59:59 +0800</pubDate>
+      
+      <guid>https://linw1995.com/blog/%E5%A6%82%E4%BD%95%E5%9C%A8%E6%97%A0%E5%A4%B4%E6%A8%A1%E5%BC%8F%E4%B8%8B%E7%9A%84%E8%B0%B7%E6%AD%8C%E6%B5%8F%E8%A7%88%E5%99%A8%E8%AE%BE%E7%BD%AE%E5%9C%B0%E7%90%86%E4%BD%8D%E7%BD%AE/</guid>
+      <description> 谷歌到很多方法。试了一个又一个，但大部分方法都过时了。所幸最后发现了个解决办法，就是用 Chrome Devtools Protocol。
+以下是一个简单的例子，用最常用的 selenium 来执行 Chrome Devtools Protocol 命令。
+import time from selenium.webdriver import Chrome, ChromeOptions options = ChromeOptions() options.add_argument(&amp;#34;--headless&amp;#34;) driver = Chrome(options=options) driver.execute_cdp_cmd( &amp;#34;Browser.grantPermissions&amp;#34;, { &amp;#34;origin&amp;#34;: &amp;#34;https://www.openstreetmap.org/&amp;#34;, &amp;#34;permissions&amp;#34;: [&amp;#34;geolocation&amp;#34;] }, ) driver.execute_cdp_cmd( &amp;#34;Emulation.setGeolocationOverride&amp;#34;, { &amp;#34;latitude&amp;#34;: 35.689487, &amp;#34;longitude&amp;#34;: 139.691706, &amp;#34;accuracy&amp;#34;: 100, }, ) driver.get(&amp;#34;https://www.openstreetmap.org/&amp;#34;) driver.find_element_by_xpath(&amp;#34;//span[@class=&amp;#39;icon geolocate&amp;#39;]&amp;#34;).click() time.sleep(3) # wait for the page full loaded driver.get_screenshot_as_file(&amp;#34;screenshot.png&amp;#34;) 
+Refecences  Browser.grantPermissions | Chrome Devtools Protocol Emulation.setGeolocationOverride | Chrome Devtools Protocol  </description>
+    </item>
     
     <item>
       <title>树莓派系统烧录及 SSH 远程连接</title>
@@ -162,7 +174,7 @@ LZW 蓝博-立夫-卫曲编码法（Lempel-Ziv-Welch，缩写LZW），是亚伯�
  代码 Gist | Monte Carlo method applied to approximating the value of π.
  计算定积分 假设我们要求解$f(x)=x^2$在$[0, 2]$间的积分，即下图函数曲线与$x$轴围成的面积
 其实，求解圆周率其实是在求函数$f(x)=\sqrt{1 - x^2}$在区间$[0, 1]$上的积分。
-偶然命中法 像求解圆周率那样，只要求解出一对随机数$(x_i,y_i),x_i\in[0,2],y_i\in[0,4]$落在曲线下方的概率，即可求出$f(x)=x^2$在$[0, 2]$间的积分结果。 $$H(x, y)=\begin{cases}1\qquad&amp;amp;if\quad y \le f(x) \\0 &amp;amp;else\end{cases}\\F_n=A \frac{1}{n} \sum^{n}_{i=1} H(x_i,y_i) = h(b-a) \frac{1}{n}\sum^{n}_{i=1} H(x_i,y_i)$$抽样平均法 还有另外一种蒙特卡罗积分方法是基于计算的平均值理论，即函数的积分结果取决被积函数$f(x)$在$a\le x\le b$的平均值。为了确定这个平均值，用随机的$x_i$来取代规律的$x_i$，抽样平均值方法的积分估计值$F_n$为： $$ F_n=(b-a)\left\lt f\right\gt=\frac{b-a}{n}\sum^n_{i=1}f(x_i) $$</description>
+偶然命中法 像求解圆周率那样，只要求解出一对随机数$(x_i,y_i),x_i\in[0,2],y_i\in[0,4]$落在曲线下方的概率，即可求出$f(x)=x^2$在$[0, 2]$间的积分结果。 $$ H(x, y)=\begin{cases} 1\qquad&amp;amp;if\quad y \le f(x) \\ 0 &amp;amp;else \end{cases}\\ F_n=A \frac{1}{n} \sum^{n}_{i=1} H(x_i,y_i) = h(b-a) \frac{1}{n}\sum^{n}_{i=1} H(x_i,y_i) $$ 抽样平均法 还有另外一种蒙特卡罗积分方法是基于计算的平均值理论，即函数的积分结果取决被积函数$f(x)$在$a\le x\le b$的平均值。为了确定这个平均值，用随机的$x_i$来取代规律的$x_i$，抽样平均值方法的积分估计值$F_n$为： $$ F_n=(b-a)\left\lt f\right\gt=\frac{b-a}{n}\sum^n_{i=1}f(x_i) $$</description>
     </item>
     
     <item>

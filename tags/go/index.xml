@@ -26,7 +26,7 @@
  代码 Gist | Monte Carlo method applied to approximating the value of π.
  计算定积分 假设我们要求解$f(x)=x^2$在$[0, 2]$间的积分，即下图函数曲线与$x$轴围成的面积
 其实，求解圆周率其实是在求函数$f(x)=\sqrt{1 - x^2}$在区间$[0, 1]$上的积分。
-偶然命中法 像求解圆周率那样，只要求解出一对随机数$(x_i,y_i),x_i\in[0,2],y_i\in[0,4]$落在曲线下方的概率，即可求出$f(x)=x^2$在$[0, 2]$间的积分结果。 $$H(x, y)=\begin{cases}1\qquad&amp;amp;if\quad y \le f(x) \\0 &amp;amp;else\end{cases}\\F_n=A \frac{1}{n} \sum^{n}_{i=1} H(x_i,y_i) = h(b-a) \frac{1}{n}\sum^{n}_{i=1} H(x_i,y_i)$$抽样平均法 还有另外一种蒙特卡罗积分方法是基于计算的平均值理论，即函数的积分结果取决被积函数$f(x)$在$a\le x\le b$的平均值。为了确定这个平均值，用随机的$x_i$来取代规律的$x_i$，抽样平均值方法的积分估计值$F_n$为： $$ F_n=(b-a)\left\lt f\right\gt=\frac{b-a}{n}\sum^n_{i=1}f(x_i) $$</description>
+偶然命中法 像求解圆周率那样，只要求解出一对随机数$(x_i,y_i),x_i\in[0,2],y_i\in[0,4]$落在曲线下方的概率，即可求出$f(x)=x^2$在$[0, 2]$间的积分结果。 $$ H(x, y)=\begin{cases} 1\qquad&amp;amp;if\quad y \le f(x) \\ 0 &amp;amp;else \end{cases}\\ F_n=A \frac{1}{n} \sum^{n}_{i=1} H(x_i,y_i) = h(b-a) \frac{1}{n}\sum^{n}_{i=1} H(x_i,y_i) $$ 抽样平均法 还有另外一种蒙特卡罗积分方法是基于计算的平均值理论，即函数的积分结果取决被积函数$f(x)$在$a\le x\le b$的平均值。为了确定这个平均值，用随机的$x_i$来取代规律的$x_i$，抽样平均值方法的积分估计值$F_n$为： $$ F_n=(b-a)\left\lt f\right\gt=\frac{b-a}{n}\sum^n_{i=1}f(x_i) $$</description>
     </item>
     
   </channel>

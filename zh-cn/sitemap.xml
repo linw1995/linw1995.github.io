@@ -3,13 +3,58 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://linw1995.com/tags/RaspberryPi/</loc>
-    <lastmod>2020-01-17T23:59:59+00:00</lastmod>
+    <loc>https://linw1995.com/tags/Automation/</loc>
+    <lastmod>2020-02-28T23:59:59+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://linw1995.com/en/tags/Automation/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://linw1995.com/tags/Automation/"
+                />
+  </url>
+  
+  <url>
+    <loc>https://linw1995.com/tags/C/</loc>
+    <lastmod>2020-02-28T23:59:59+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://linw1995.com/tags/Crawler/</loc>
+    <lastmod>2020-02-28T23:59:59+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://linw1995.com/en/tags/Crawler/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://linw1995.com/tags/Crawler/"
+                />
+  </url>
+  
+  <url>
+    <loc>https://linw1995.com/tags/Python/</loc>
+    <lastmod>2020-02-28T23:59:59+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://linw1995.com/en/tags/Python/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://linw1995.com/tags/Python/"
+                />
   </url>
   
   <url>
     <loc>https://linw1995.com/tags/</loc>
-    <lastmod>2020-01-17T23:59:59+00:00</lastmod>
+    <lastmod>2020-02-28T23:59:59+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -24,7 +69,7 @@
   
   <url>
     <loc>https://linw1995.com/blog/</loc>
-    <lastmod>2020-01-17T23:59:59+00:00</lastmod>
+    <lastmod>2020-02-28T23:59:59+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -35,6 +80,26 @@
                 hreflang="zh-cn"
                 href="https://linw1995.com/blog/"
                 />
+  </url>
+  
+  <url>
+    <loc>https://linw1995.com/blog/%E5%A6%82%E4%BD%95%E5%9C%A8%E6%97%A0%E5%A4%B4%E6%A8%A1%E5%BC%8F%E4%B8%8B%E7%9A%84%E8%B0%B7%E6%AD%8C%E6%B5%8F%E8%A7%88%E5%99%A8%E8%AE%BE%E7%BD%AE%E5%9C%B0%E7%90%86%E4%BD%8D%E7%BD%AE/</loc>
+    <lastmod>2020-02-28T23:59:59+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://linw1995.com/en/blog/How-To-Override-Geolocation-on-Headless-Chrome/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://linw1995.com/blog/%E5%A6%82%E4%BD%95%E5%9C%A8%E6%97%A0%E5%A4%B4%E6%A8%A1%E5%BC%8F%E4%B8%8B%E7%9A%84%E8%B0%B7%E6%AD%8C%E6%B5%8F%E8%A7%88%E5%99%A8%E8%AE%BE%E7%BD%AE%E5%9C%B0%E7%90%86%E4%BD%8D%E7%BD%AE/"
+                />
+  </url>
+  
+  <url>
+    <loc>https://linw1995.com/tags/RaspberryPi/</loc>
+    <lastmod>2020-01-17T23:59:59+00:00</lastmod>
   </url>
   
   <url>
@@ -73,11 +138,6 @@
   </url>
   
   <url>
-    <loc>https://linw1995.com/tags/C/</loc>
-    <lastmod>2019-08-18T23:59:59+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://linw1995.com/tags/LeetCode/</loc>
     <lastmod>2019-08-18T23:59:59+00:00</lastmod>
   </url>
@@ -103,23 +163,13 @@
   </url>
   
   <url>
-    <loc>https://linw1995.com/tags/Python/</loc>
+    <loc>https://linw1995.com/blog/%E7%94%A8-docker-compose-%E9%83%A8%E7%BD%B2-MongoDB-Replica-Set-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/</loc>
     <lastmod>2019-08-04T23:59:59+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://linw1995.com/en/tags/Python/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh-cn"
-                href="https://linw1995.com/tags/Python/"
-                />
   </url>
   
   <url>
-    <loc>https://linw1995.com/blog/%E7%94%A8-docker-compose-%E9%83%A8%E7%BD%B2-MongoDB-Replica-Set-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/</loc>
-    <lastmod>2019-08-04T23:59:59+00:00</lastmod>
+    <loc>https://linw1995.com/tags/Concurrent/</loc>
+    <lastmod>2019-07-29T23:59:59+00:00</lastmod>
   </url>
   
   <url>
@@ -133,22 +183,12 @@
   </url>
   
   <url>
-    <loc>https://linw1995.com/tags/%E5%B9%B6%E5%8F%91/</loc>
-    <lastmod>2019-07-29T23:59:59+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://linw1995.com/tags/%E7%88%AC%E8%99%AB/</loc>
-    <lastmod>2019-07-29T23:59:59+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://linw1995.com/tags/Asyncio/</loc>
     <lastmod>2019-07-17T23:59:59+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://linw1995.com/tags/multi-threading/</loc>
+    <loc>https://linw1995.com/tags/MultiThreading/</loc>
     <lastmod>2019-07-17T23:59:59+00:00</lastmod>
   </url>
   
@@ -183,7 +223,7 @@
   </url>
   
   <url>
-    <loc>https://linw1995.com/tags/Dev/</loc>
+    <loc>https://linw1995.com/tags/Develop/</loc>
     <lastmod>2018-12-22T22:45:00+00:00</lastmod>
   </url>
   
@@ -238,7 +278,7 @@
   </url>
   
   <url>
-    <loc>https://linw1995.com/tags/multi-processing/</loc>
+    <loc>https://linw1995.com/tags/MultiProcessing/</loc>
     <lastmod>2017-07-16T21:28:07+00:00</lastmod>
   </url>
   

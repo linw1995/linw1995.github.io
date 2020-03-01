@@ -6,10 +6,46 @@
     <description>Recent content in Tags on linw1995</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Fri, 17 Jan 2020 23:59:59 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 28 Feb 2020 23:59:59 +0800</lastBuildDate>
     
 	<atom:link href="https://linw1995.com/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Automation</title>
+      <link>https://linw1995.com/tags/Automation/</link>
+      <pubDate>Fri, 28 Feb 2020 23:59:59 +0800</pubDate>
+      
+      <guid>https://linw1995.com/tags/Automation/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>C</title>
+      <link>https://linw1995.com/tags/C/</link>
+      <pubDate>Fri, 28 Feb 2020 23:59:59 +0800</pubDate>
+      
+      <guid>https://linw1995.com/tags/C/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Crawler</title>
+      <link>https://linw1995.com/tags/Crawler/</link>
+      <pubDate>Fri, 28 Feb 2020 23:59:59 +0800</pubDate>
+      
+      <guid>https://linw1995.com/tags/Crawler/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Python</title>
+      <link>https://linw1995.com/tags/Python/</link>
+      <pubDate>Fri, 28 Feb 2020 23:59:59 +0800</pubDate>
+      
+      <guid>https://linw1995.com/tags/Python/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>RaspberryPi</title>
@@ -17,15 +53,6 @@
       <pubDate>Fri, 17 Jan 2020 23:59:59 +0000</pubDate>
       
       <guid>https://linw1995.com/tags/RaspberryPi/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>C</title>
-      <link>https://linw1995.com/tags/C/</link>
-      <pubDate>Sun, 18 Aug 2019 23:59:59 +0000</pubDate>
-      
-      <guid>https://linw1995.com/tags/C/</guid>
       <description></description>
     </item>
     
@@ -66,11 +93,11 @@
     </item>
     
     <item>
-      <title>Python</title>
-      <link>https://linw1995.com/tags/Python/</link>
-      <pubDate>Sun, 04 Aug 2019 23:59:59 +0000</pubDate>
+      <title>Concurrent</title>
+      <link>https://linw1995.com/tags/Concurrent/</link>
+      <pubDate>Mon, 29 Jul 2019 23:59:59 +0000</pubDate>
       
-      <guid>https://linw1995.com/tags/Python/</guid>
+      <guid>https://linw1995.com/tags/Concurrent/</guid>
       <description></description>
     </item>
     
@@ -84,24 +111,6 @@
     </item>
     
     <item>
-      <title>并发</title>
-      <link>https://linw1995.com/tags/%E5%B9%B6%E5%8F%91/</link>
-      <pubDate>Mon, 29 Jul 2019 23:59:59 +0000</pubDate>
-      
-      <guid>https://linw1995.com/tags/%E5%B9%B6%E5%8F%91/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>爬虫</title>
-      <link>https://linw1995.com/tags/%E7%88%AC%E8%99%AB/</link>
-      <pubDate>Mon, 29 Jul 2019 23:59:59 +0000</pubDate>
-      
-      <guid>https://linw1995.com/tags/%E7%88%AC%E8%99%AB/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Asyncio</title>
       <link>https://linw1995.com/tags/Asyncio/</link>
       <pubDate>Wed, 17 Jul 2019 23:59:59 +0000</pubDate>
@@ -111,11 +120,11 @@
     </item>
     
     <item>
-      <title>multi-threading</title>
-      <link>https://linw1995.com/tags/multi-threading/</link>
+      <title>MultiThreading</title>
+      <link>https://linw1995.com/tags/MultiThreading/</link>
       <pubDate>Wed, 17 Jul 2019 23:59:59 +0000</pubDate>
       
-      <guid>https://linw1995.com/tags/multi-threading/</guid>
+      <guid>https://linw1995.com/tags/MultiThreading/</guid>
       <description></description>
     </item>
     
@@ -129,11 +138,11 @@
     </item>
     
     <item>
-      <title>Dev</title>
-      <link>https://linw1995.com/tags/Dev/</link>
+      <title>Develop</title>
+      <link>https://linw1995.com/tags/Develop/</link>
       <pubDate>Sat, 22 Dec 2018 22:45:00 +0000</pubDate>
       
-      <guid>https://linw1995.com/tags/Dev/</guid>
+      <guid>https://linw1995.com/tags/Develop/</guid>
       <description></description>
     </item>
     
@@ -147,11 +156,11 @@
     </item>
     
     <item>
-      <title>multi-processing</title>
-      <link>https://linw1995.com/tags/multi-processing/</link>
+      <title>MultiProcessing</title>
+      <link>https://linw1995.com/tags/MultiProcessing/</link>
       <pubDate>Sun, 16 Jul 2017 21:28:07 +0000</pubDate>
       
-      <guid>https://linw1995.com/tags/multi-processing/</guid>
+      <guid>https://linw1995.com/tags/MultiProcessing/</guid>
       <description></description>
     </item>
     

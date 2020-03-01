@@ -5,6 +5,16 @@
   <url>
     <loc>https://linw1995.com/en/tags/Automation/</loc>
     <lastmod>2020-02-28T23:59:59+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://linw1995.com/tags/Automation/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://linw1995.com/en/tags/Automation/"
+                />
   </url>
   
   <url>
@@ -25,11 +35,31 @@
   <url>
     <loc>https://linw1995.com/en/tags/Crawler/</loc>
     <lastmod>2020-02-28T23:59:59+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://linw1995.com/tags/Crawler/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://linw1995.com/en/tags/Crawler/"
+                />
   </url>
   
   <url>
     <loc>https://linw1995.com/en/blog/How-To-Override-Geolocation-on-Headless-Chrome/</loc>
     <lastmod>2020-02-28T23:59:59+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://linw1995.com/blog/%E5%A6%82%E4%BD%95%E5%9C%A8%E6%97%A0%E5%A4%B4%E6%A8%A1%E5%BC%8F%E4%B8%8B%E7%9A%84%E8%B0%B7%E6%AD%8C%E6%B5%8F%E8%A7%88%E5%99%A8%E8%AE%BE%E7%BD%AE%E5%9C%B0%E7%90%86%E4%BD%8D%E7%BD%AE/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://linw1995.com/en/blog/How-To-Override-Geolocation-on-Headless-Chrome/"
+                />
   </url>
   
   <url>

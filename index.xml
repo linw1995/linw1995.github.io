@@ -6,7 +6,7 @@
     <description>Recent content on linw1995</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Wed, 14 Feb 2018 21:59:59 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 28 Feb 2020 23:59:59 +0800</lastBuildDate>
     
 	<atom:link href="https://linw1995.com/index.xml" rel="self" type="application/rss+xml" />
     
@@ -141,15 +141,6 @@ pyenv install --list # 列出所有可安装的版本 pyenv install 3.7.1 # 安�
     </item>
     
     <item>
-      <title>关于</title>
-      <link>https://linw1995.com/about/</link>
-      <pubDate>Wed, 14 Feb 2018 21:59:59 +0800</pubDate>
-      
-      <guid>https://linw1995.com/about/</guid>
-      <description>  毕业于 集美大学 · 应用物理学 现就职于 美图 · 爬虫工程师  社交链接  CodePen Codewars Github PSN Steam Weibo  </description>
-    </item>
-    
-    <item>
       <title>自己来写压缩算法——LZW</title>
       <link>https://linw1995.com/blog/%E8%87%AA%E5%B7%B1%E6%9D%A5%E5%86%99%E5%8E%8B%E7%BC%A9%E7%AE%97%E6%B3%95LZW/</link>
       <pubDate>Tue, 24 Oct 2017 08:52:58 +0000</pubDate>
@@ -230,6 +221,15 @@ Python implementation class Random: def __init__(self, A, C, M, seed=0): self._A
 平衡条件 树是用与高效的存储和检索数据的，为了维持其效率，必须维持其平衡结构。 平衡一颗红黑树需记录其颜色，而 AA 树是在每个节点记录其 level 这相当于红黑树节点的黑高度
  所有叶节点的 level 都是1 每个左孩子的 level 恰好为其父亲的 level 减一 每个右孩子的 level 等于其父亲的 level 或为其父亲的 level 减一 每个右孙子的 level 严格小于其祖父节点的 level 每一个 level 大于1的节点有两个子节点  Skew &amp;amp; Split 对于 AA 树，维持其平衡的基本操作如下：
  偏斜 Skew：使得子树中向左的水平边变成向右的。</description>
+    </item>
+    
+    <item>
+      <title>关于</title>
+      <link>https://linw1995.com/about/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://linw1995.com/about/</guid>
+      <description>  毕业于 集美大学 · 应用物理学 现就职于 美图 · 爬虫工程师  社交链接  CodePen Codewars Github PSN stack overflow Steam Weibo  </description>
     </item>
     
     <item>

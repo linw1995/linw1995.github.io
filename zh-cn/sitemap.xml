@@ -38,6 +38,21 @@
   </url>
   
   <url>
+    <loc>https://linw1995.com/</loc>
+    <lastmod>2020-02-28T23:59:59+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://linw1995.com/en/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://linw1995.com/"
+                />
+  </url>
+  
+  <url>
     <loc>https://linw1995.com/tags/Python/</loc>
     <lastmod>2020-02-28T23:59:59+08:00</lastmod>
     <xhtml:link
@@ -233,36 +248,6 @@
   </url>
   
   <url>
-    <loc>https://linw1995.com/</loc>
-    <lastmod>2018-02-14T21:59:59+08:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://linw1995.com/en/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh-cn"
-                href="https://linw1995.com/"
-                />
-  </url>
-  
-  <url>
-    <loc>https://linw1995.com/about/</loc>
-    <lastmod>2018-02-14T21:59:59+08:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://linw1995.com/en/about/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh-cn"
-                href="https://linw1995.com/about/"
-                />
-  </url>
-  
-  <url>
     <loc>https://linw1995.com/tags/Algorithm/</loc>
     <lastmod>2017-10-24T08:52:58+00:00</lastmod>
   </url>
@@ -318,6 +303,20 @@
                 rel="alternate"
                 hreflang="zh-cn"
                 href="https://linw1995.com/categories/"
+                />
+  </url>
+  
+  <url>
+    <loc>https://linw1995.com/about/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://linw1995.com/en/about/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://linw1995.com/about/"
                 />
   </url>
   

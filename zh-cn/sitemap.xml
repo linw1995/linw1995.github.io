@@ -4,7 +4,7 @@
   
   <url>
     <loc>https://linw1995.com/tags/Automation/</loc>
-    <lastmod>2020-02-28T23:59:59+08:00</lastmod>
+    <lastmod>2020-03-10T01:15:00+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -19,12 +19,27 @@
   
   <url>
     <loc>https://linw1995.com/tags/C/</loc>
-    <lastmod>2020-02-28T23:59:59+08:00</lastmod>
+    <lastmod>2020-03-10T01:15:00+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://linw1995.com/tags/Chrome/</loc>
+    <lastmod>2020-03-10T01:15:00+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://linw1995.com/en/tags/Chrome/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://linw1995.com/tags/Chrome/"
+                />
   </url>
   
   <url>
     <loc>https://linw1995.com/tags/Crawler/</loc>
-    <lastmod>2020-02-28T23:59:59+08:00</lastmod>
+    <lastmod>2020-03-10T01:15:00+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -39,7 +54,7 @@
   
   <url>
     <loc>https://linw1995.com/</loc>
-    <lastmod>2020-02-28T23:59:59+08:00</lastmod>
+    <lastmod>2020-03-10T01:15:00+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -54,7 +69,7 @@
   
   <url>
     <loc>https://linw1995.com/tags/Python/</loc>
-    <lastmod>2020-02-28T23:59:59+08:00</lastmod>
+    <lastmod>2020-03-10T01:15:00+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -69,7 +84,7 @@
   
   <url>
     <loc>https://linw1995.com/tags/</loc>
-    <lastmod>2020-02-28T23:59:59+08:00</lastmod>
+    <lastmod>2020-03-10T01:15:00+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -84,7 +99,7 @@
   
   <url>
     <loc>https://linw1995.com/blog/</loc>
-    <lastmod>2020-02-28T23:59:59+08:00</lastmod>
+    <lastmod>2020-03-10T01:15:00+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -95,6 +110,11 @@
                 hreflang="zh-cn"
                 href="https://linw1995.com/blog/"
                 />
+  </url>
+  
+  <url>
+    <loc>https://linw1995.com/blog/%E7%BD%91%E7%AB%99%E8%A7%82%E6%B5%8B%E5%B7%A5%E5%85%B7/</loc>
+    <lastmod>2020-03-10T01:15:00+08:00</lastmod>
   </url>
   
   <url>

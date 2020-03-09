@@ -6,7 +6,7 @@
     <description>Recent content in Tags on linw1995</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Fri, 28 Feb 2020 23:59:59 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 10 Mar 2020 01:15:00 +0800</lastBuildDate>
     
 	<atom:link href="https://linw1995.com/tags/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,7 +14,7 @@
     <item>
       <title>Automation</title>
       <link>https://linw1995.com/tags/Automation/</link>
-      <pubDate>Fri, 28 Feb 2020 23:59:59 +0800</pubDate>
+      <pubDate>Tue, 10 Mar 2020 01:15:00 +0800</pubDate>
       
       <guid>https://linw1995.com/tags/Automation/</guid>
       <description></description>
@@ -23,16 +23,25 @@
     <item>
       <title>C</title>
       <link>https://linw1995.com/tags/C/</link>
-      <pubDate>Fri, 28 Feb 2020 23:59:59 +0800</pubDate>
+      <pubDate>Tue, 10 Mar 2020 01:15:00 +0800</pubDate>
       
       <guid>https://linw1995.com/tags/C/</guid>
       <description></description>
     </item>
     
     <item>
+      <title>Chrome</title>
+      <link>https://linw1995.com/tags/Chrome/</link>
+      <pubDate>Tue, 10 Mar 2020 01:15:00 +0800</pubDate>
+      
+      <guid>https://linw1995.com/tags/Chrome/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Crawler</title>
       <link>https://linw1995.com/tags/Crawler/</link>
-      <pubDate>Fri, 28 Feb 2020 23:59:59 +0800</pubDate>
+      <pubDate>Tue, 10 Mar 2020 01:15:00 +0800</pubDate>
       
       <guid>https://linw1995.com/tags/Crawler/</guid>
       <description></description>
@@ -41,7 +50,7 @@
     <item>
       <title>Python</title>
       <link>https://linw1995.com/tags/Python/</link>
-      <pubDate>Fri, 28 Feb 2020 23:59:59 +0800</pubDate>
+      <pubDate>Tue, 10 Mar 2020 01:15:00 +0800</pubDate>
       
       <guid>https://linw1995.com/tags/Python/</guid>
       <description></description>

@@ -6,10 +6,29 @@
     <description>Recent content in Crawler on linw1995</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Fri, 28 Feb 2020 23:59:59 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 10 Mar 2020 01:15:00 +0800</lastBuildDate>
     
 	<atom:link href="https://linw1995.com/tags/Crawler/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>网站观测工具</title>
+      <link>https://linw1995.com/blog/%E7%BD%91%E7%AB%99%E8%A7%82%E6%B5%8B%E5%B7%A5%E5%85%B7/</link>
+      <pubDate>Tue, 10 Mar 2020 01:15:00 +0800</pubDate>
+      
+      <guid>https://linw1995.com/blog/%E7%BD%91%E7%AB%99%E8%A7%82%E6%B5%8B%E5%B7%A5%E5%85%B7/</guid>
+      <description>通过 Chrome 本身的支持及集成 mitmproxy 这一伟大的工具对一个网站观测（爬取分析），做到开箱即用，完全沙盒，全程中间人抓包。
+环境配置  安装 chrome
+这就不需要多说什么了吧。如果是 MacOS 安装的 Chrome，其 CLI 路径为 /Applications/Google Chrome.app/Contents/MacOS/Google Chrome
+ 安装 mitm_chrome
+CLI 工具，整合了 mitmproxy 与 Chrome 。能十分方便地快速启动，即开即用。
+可以通过 pip 安装
+pip install git+https://github.com/linw1995/mitm_chrome.git@master 证书安装
+参考 mitmproxy 的文档安装一下，About Certificates | mitmproxy
+  使用姿势 在 MacOS 上
+mitm_chrome --chrome-path=&amp;#39;/Applications/Google Chrome.app/Contents/MacOS/Google Chrome&amp;#39; mitmproxy 在有 chrome 命令情况下，无需指定 --chrome-path 参数
+mitm_chrome mitmproxy 后记 目前，我发现 Chrome 无法通过 CLI 去指定使用自定的证书，只能使用预先安装好的证书。应该有办法的，不然 seleniumwire 项目怎么做到抓包的，这个以后有时间再研究研究吧。</description>
+    </item>
     
     <item>
       <title>如何在无头模式下的谷歌浏览器设置地理位置</title>

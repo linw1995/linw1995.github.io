@@ -15,24 +15,24 @@
 <meta property="og:site_name" content="linw1995" />
 <meta property="og:locale" content="zh-cn" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://linw1995.com/blog/%E5%A6%82%E4%BD%95%E5%9C%A8%E6%97%A0%E5%A4%B4%E6%A8%A1%E5%BC%8F%E4%B8%8B%E7%9A%84%E8%B0%B7%E6%AD%8C%E6%B5%8F%E8%A7%88%E5%99%A8%E8%AE%BE%E7%BD%AE%E5%9C%B0%E7%90%86%E4%BD%8D%E7%BD%AE/" />
-<meta property="og:title" content="如何在无头模式下的谷歌浏览器设置地理位置" />
-<meta property="twitter:title" content="如何在无头模式下的谷歌浏览器设置地理位置">
+<meta property="og:url" content="https://linw1995.com/blog/%E7%BD%91%E7%AB%99%E8%A7%82%E6%B5%8B%E5%B7%A5%E5%85%B7/" />
+<meta property="og:title" content="网站观测工具" />
+<meta property="twitter:title" content="网站观测工具">
 
     <meta property="og:image" content="https://linw1995.com//img/banner.png">
     <meta property="twitter:card" content="summary">
     <meta property="twitter:image" content="https://linw1995.com//img/banner.png">
 
-<meta property="og:description" content="How to grant geolocation permission and override it on headless Chrome.">
-<meta property="twitter:description" content="How to grant geolocation permission and override it on headless Chrome.">
+<meta property="og:description" content="如何搭建一个即开即用的网站观测工具">
+<meta property="twitter:description" content="如何搭建一个即开即用的网站观测工具">
 
 <title>
 
 
-     linw1995 - 如何在无头模式下的谷歌浏览器设置地理位置 
+     linw1995 - 网站观测工具 
 
 </title>
-<link rel="canonical" href="https://linw1995.com/blog/%E5%A6%82%E4%BD%95%E5%9C%A8%E6%97%A0%E5%A4%B4%E6%A8%A1%E5%BC%8F%E4%B8%8B%E7%9A%84%E8%B0%B7%E6%AD%8C%E6%B5%8F%E8%A7%88%E5%99%A8%E8%AE%BE%E7%BD%AE%E5%9C%B0%E7%90%86%E4%BD%8D%E7%BD%AE/">
+<link rel="canonical" href="https://linw1995.com/blog/%E7%BD%91%E7%AB%99%E8%A7%82%E6%B5%8B%E5%B7%A5%E5%85%B7/">
 
 
 <style media="screen">
@@ -1098,15 +1098,6 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
                     
                 </ul>
                 
-<hr>
-<ul>
-    
-    <li>
-        <a href="https://linw1995.com/en/blog/How-To-Override-Geolocation-on-Headless-Chrome/">English  </a>
-    </li>
-    
-</ul>
-
 
             </nav>
         </div>
@@ -1125,14 +1116,14 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
                     <div class="page-heading">
 
     
-    如何在无头模式下的谷歌浏览器设置地理位置
+    网站观测工具
     
 
 </div>
 
                 </div>
                 <div class="meta">
-                    <div class="date" title="Fri Feb 28 2020 23:59:59 CST">Feb 28, 2020</div>
+                    <div class="date" title="Tue Mar 10 2020 01:15:00 CST">Mar 10, 2020</div>
                     
                         
                     
@@ -1167,43 +1158,36 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
     
     
 
-<p>谷歌到很多方法。试了一个又一个，但大部分方法都过时了。所幸最后发现了个解决办法，就是用 Chrome Devtools Protocol。</p>
+<p>通过 Chrome 本身的支持及集成 <a href="https://mitmproxy.org/">mitmproxy</a> 这一伟大的工具对一个网站观测（爬取分析），做到开箱即用，完全沙盒，全程中间人抓包。</p>
 
-<p>以下是一个简单的例子，用最常用的 selenium 来执行 Chrome Devtools Protocol 命令。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> time
+<h2 id="环境配置">环境配置</h2>
 
-<span style="color:#f92672">from</span> selenium.webdriver <span style="color:#f92672">import</span> Chrome, ChromeOptions
+<ol>
+<li><p>安装 chrome</p>
 
-options <span style="color:#f92672">=</span> ChromeOptions()
-options<span style="color:#f92672">.</span>add_argument(<span style="color:#e6db74">&#34;--headless&#34;</span>)
-driver <span style="color:#f92672">=</span> Chrome(options<span style="color:#f92672">=</span>options)
-driver<span style="color:#f92672">.</span>execute_cdp_cmd(
-    <span style="color:#e6db74">&#34;Browser.grantPermissions&#34;</span>,
-    {
-        <span style="color:#e6db74">&#34;origin&#34;</span>: <span style="color:#e6db74">&#34;https://www.openstreetmap.org/&#34;</span>,
-        <span style="color:#e6db74">&#34;permissions&#34;</span>: [<span style="color:#e6db74">&#34;geolocation&#34;</span>]
-    },
-)
-driver<span style="color:#f92672">.</span>execute_cdp_cmd(
-    <span style="color:#e6db74">&#34;Emulation.setGeolocationOverride&#34;</span>,
-    {
-        <span style="color:#e6db74">&#34;latitude&#34;</span>: <span style="color:#ae81ff">35.689487</span>,
-        <span style="color:#e6db74">&#34;longitude&#34;</span>: <span style="color:#ae81ff">139.691706</span>,
-        <span style="color:#e6db74">&#34;accuracy&#34;</span>: <span style="color:#ae81ff">100</span>,
-    },
-)
-driver<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;https://www.openstreetmap.org/&#34;</span>)
-driver<span style="color:#f92672">.</span>find_element_by_xpath(<span style="color:#e6db74">&#34;//span[@class=&#39;icon geolocate&#39;]&#34;</span>)<span style="color:#f92672">.</span>click()
-time<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">3</span>)  <span style="color:#75715e"># wait for the page full loaded</span>
-driver<span style="color:#f92672">.</span>get_screenshot_as_file(<span style="color:#e6db74">&#34;screenshot.png&#34;</span>)</code></pre></div>
-<p><a href="https://www.openstreetmap.org/#map=14/35.6895/139.6917"><img src="./screenshot.png" alt="Tokyo" /></a></p>
+<p>这就不需要多说什么了吧。如果是 MacOS 安装的 Chrome，其 CLI 路径为 <code>/Applications/Google Chrome.app/Contents/MacOS/Google Chrome</code></p></li>
 
-<h2 id="refecences">Refecences</h2>
+<li><p>安装 <a href="https://github.com/linw1995/mitm_chrome">mitm_chrome</a></p>
 
-<ul>
-<li><a href="https://chromedevtools.github.io/devtools-protocol/tot/Browser#method-grantPermissions">Browser.grantPermissions | Chrome Devtools Protocol</a></li>
-<li><a href="https://chromedevtools.github.io/devtools-protocol/tot/Emulation#method-setGeolocationOverride">Emulation.setGeolocationOverride | Chrome Devtools Protocol</a></li>
-</ul>
+<p>CLI 工具，整合了 mitmproxy 与 Chrome 。能十分方便地快速启动，即开即用。</p>
+
+<p>可以通过 pip 安装</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">pip install git+https://github.com/linw1995/mitm_chrome.git@master</code></pre></div></li>
+
+<li><p>证书安装</p>
+
+<p>参考 mitmproxy 的文档安装一下，<a href="https://docs.mitmproxy.org/stable/concepts-certificates/">About Certificates | mitmproxy</a></p></li>
+</ol>
+
+<h2 id="使用姿势">使用姿势</h2>
+
+<p>在 MacOS 上</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">mitm_chrome --chrome-path<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;/Applications/Google Chrome.app/Contents/MacOS/Google Chrome&#39;</span> mitmproxy</code></pre></div>
+<p>在有 <code>chrome</code> 命令情况下，无需指定 <code>--chrome-path</code> 参数</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">mitm_chrome mitmproxy</code></pre></div>
+<h2 id="后记">后记</h2>
+
+<p>目前，我发现 Chrome 无法通过 CLI 去指定使用自定的证书，只能使用预先安装好的证书。应该有办法的，不然 seleniumwire 项目怎么做到抓包的，这个以后有时间再研究研究吧。</p>
 
 
             </div>
@@ -1230,15 +1214,10 @@ driver<span style="color:#f92672">.</span>get_screenshot_as_file(<span style="co
                 
                 <div>
                     <img class="icon" src="https://linw1995.com/img/back.svg" alt="back" />
-                    <a href="https://linw1995.com/blog/%E6%A0%91%E8%8E%93%E6%B4%BE%E7%B3%BB%E7%BB%9F%E7%83%A7%E5%BD%95%E5%8F%8A-SSH-%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5/">树莓派系统烧录及 SSH 远程连接</a>
+                    <a href="https://linw1995.com/blog/%E5%A6%82%E4%BD%95%E5%9C%A8%E6%97%A0%E5%A4%B4%E6%A8%A1%E5%BC%8F%E4%B8%8B%E7%9A%84%E8%B0%B7%E6%AD%8C%E6%B5%8F%E8%A7%88%E5%99%A8%E8%AE%BE%E7%BD%AE%E5%9C%B0%E7%90%86%E4%BD%8D%E7%BD%AE/">如何在无头模式下的谷歌浏览器设置地理位置</a>
                 </div>
                 
                 <div style="width: 100%;"></div>
-                
-                <div>
-                    <a href="https://linw1995.com/blog/%E7%BD%91%E7%AB%99%E8%A7%82%E6%B5%8B%E5%B7%A5%E5%85%B7/">网站观测工具</a>
-                    <img class="icon" src="https://linw1995.com/img/next.svg" alt="next" />
-                </div>
                 
             </div>
             

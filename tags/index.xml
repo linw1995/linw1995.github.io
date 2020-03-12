@@ -6,10 +6,28 @@
     <description>Recent content in Tags on linw1995</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Tue, 10 Mar 2020 01:15:00 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 13 Mar 2020 00:02:00 +0800</lastBuildDate>
     
 	<atom:link href="https://linw1995.com/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Develop</title>
+      <link>https://linw1995.com/tags/Develop/</link>
+      <pubDate>Fri, 13 Mar 2020 00:02:00 +0800</pubDate>
+      
+      <guid>https://linw1995.com/tags/Develop/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>MacOS</title>
+      <link>https://linw1995.com/tags/MacOS/</link>
+      <pubDate>Fri, 13 Mar 2020 00:02:00 +0800</pubDate>
+      
+      <guid>https://linw1995.com/tags/MacOS/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Automation</title>
@@ -143,15 +161,6 @@
       <pubDate>Tue, 29 Jan 2019 23:59:59 +0000</pubDate>
       
       <guid>https://linw1995.com/tags/Logging/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Develop</title>
-      <link>https://linw1995.com/tags/Develop/</link>
-      <pubDate>Sat, 22 Dec 2018 22:45:00 +0000</pubDate>
-      
-      <guid>https://linw1995.com/tags/Develop/</guid>
       <description></description>
     </item>
     

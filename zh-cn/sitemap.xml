@@ -3,6 +3,66 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://linw1995.com/tags/Develop/</loc>
+    <lastmod>2020-03-13T00:02:00+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://linw1995.com/</loc>
+    <lastmod>2020-03-13T00:02:00+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://linw1995.com/en/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://linw1995.com/"
+                />
+  </url>
+  
+  <url>
+    <loc>https://linw1995.com/tags/MacOS/</loc>
+    <lastmod>2020-03-13T00:02:00+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://linw1995.com/tags/</loc>
+    <lastmod>2020-03-13T00:02:00+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://linw1995.com/en/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://linw1995.com/tags/"
+                />
+  </url>
+  
+  <url>
+    <loc>https://linw1995.com/blog/</loc>
+    <lastmod>2020-03-13T00:02:00+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://linw1995.com/en/blog/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://linw1995.com/blog/"
+                />
+  </url>
+  
+  <url>
+    <loc>https://linw1995.com/blog/%E6%88%91%E7%9A%84-Shell-%E9%85%8D%E7%BD%AE/</loc>
+    <lastmod>2020-03-13T00:02:00+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://linw1995.com/tags/Automation/</loc>
     <lastmod>2020-03-10T01:15:00+08:00</lastmod>
     <xhtml:link
@@ -53,21 +113,6 @@
   </url>
   
   <url>
-    <loc>https://linw1995.com/</loc>
-    <lastmod>2020-03-10T01:15:00+08:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://linw1995.com/en/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh-cn"
-                href="https://linw1995.com/"
-                />
-  </url>
-  
-  <url>
     <loc>https://linw1995.com/tags/Python/</loc>
     <lastmod>2020-03-10T01:15:00+08:00</lastmod>
     <xhtml:link
@@ -79,36 +124,6 @@
                 rel="alternate"
                 hreflang="zh-cn"
                 href="https://linw1995.com/tags/Python/"
-                />
-  </url>
-  
-  <url>
-    <loc>https://linw1995.com/tags/</loc>
-    <lastmod>2020-03-10T01:15:00+08:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://linw1995.com/en/tags/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh-cn"
-                href="https://linw1995.com/tags/"
-                />
-  </url>
-  
-  <url>
-    <loc>https://linw1995.com/blog/</loc>
-    <lastmod>2020-03-10T01:15:00+08:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://linw1995.com/en/blog/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh-cn"
-                href="https://linw1995.com/blog/"
                 />
   </url>
   
@@ -255,11 +270,6 @@
   <url>
     <loc>https://linw1995.com/blog/%E4%B8%A4%E7%A7%8D%E6%96%B9%E5%BC%8F%E6%9D%A5%E7%94%A8-Python-logging-%E8%AE%B0%E5%BD%95%E9%A2%9D%E5%A4%96%E7%9A%84%E5%80%BC/</loc>
     <lastmod>2019-01-29T23:59:59+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://linw1995.com/tags/Develop/</loc>
-    <lastmod>2018-12-22T22:45:00+00:00</lastmod>
   </url>
   
   <url>

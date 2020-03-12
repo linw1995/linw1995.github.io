@@ -15,24 +15,24 @@
 <meta property="og:site_name" content="linw1995" />
 <meta property="og:locale" content="zh-cn" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://linw1995.com/blog/%E7%BD%91%E7%AB%99%E8%A7%82%E6%B5%8B%E5%B7%A5%E5%85%B7/" />
-<meta property="og:title" content="网站观测工具" />
-<meta property="twitter:title" content="网站观测工具">
+<meta property="og:url" content="https://linw1995.com/blog/%E6%88%91%E7%9A%84-Shell-%E9%85%8D%E7%BD%AE/" />
+<meta property="og:title" content="我的 Shell 配置" />
+<meta property="twitter:title" content="我的 Shell 配置">
 
     <meta property="og:image" content="https://linw1995.com//img/banner.png">
     <meta property="twitter:card" content="summary">
     <meta property="twitter:image" content="https://linw1995.com//img/banner.png">
 
-<meta property="og:description" content="如何搭建一个即开即用的网站观测工具">
-<meta property="twitter:description" content="如何搭建一个即开即用的网站观测工具">
+<meta property="og:description" content="分享并记录一下我的 Shell 配置">
+<meta property="twitter:description" content="分享并记录一下我的 Shell 配置">
 
 <title>
 
 
-     linw1995 - 网站观测工具 
+     linw1995 - 我的 Shell 配置 
 
 </title>
-<link rel="canonical" href="https://linw1995.com/blog/%E7%BD%91%E7%AB%99%E8%A7%82%E6%B5%8B%E5%B7%A5%E5%85%B7/">
+<link rel="canonical" href="https://linw1995.com/blog/%E6%88%91%E7%9A%84-Shell-%E9%85%8D%E7%BD%AE/">
 
 
 <style media="screen">
@@ -1116,14 +1116,14 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
                     <div class="page-heading">
 
     
-    网站观测工具
+    我的 Shell 配置
     
 
 </div>
 
                 </div>
                 <div class="meta">
-                    <div class="date" title="Tue Mar 10 2020 01:15:00 CST">Mar 10, 2020</div>
+                    <div class="date" title="Fri Mar 13 2020 00:02:00 CST">Mar 13, 2020</div>
                     
                         
                     
@@ -1135,13 +1135,9 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
                     
                         <ul>
                           
-                            <li class="middot"><a href="https://linw1995.com/tags/Python">Python</a> </li>
+                            <li class="middot"><a href="https://linw1995.com/tags/Develop">Develop</a> </li>
                           
-                            <li class="middot"><a href="https://linw1995.com/tags/Automation">Automation</a> </li>
-                          
-                            <li class="middot"><a href="https://linw1995.com/tags/Crawler">Crawler</a> </li>
-                          
-                            <li class="middot"><a href="https://linw1995.com/tags/Chrome">Chrome</a> </li>
+                            <li class="middot"><a href="https://linw1995.com/tags/MacOS">MacOS</a> </li>
                           
                         </ul>
                     </div>
@@ -1156,38 +1152,66 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
             <div class="markdown">
                 
     
-    
+    <p>统一各个开发环境，有助于平滑地切换，避免每次切换导致的生疏感，降低码力。当然公司的环境就别瞎搞了。</p>
 
-<p>通过 Chrome 本身的支持及集成 <a href="https://mitmproxy.org/">mitmproxy</a> 这一伟大的工具对一个网站观测（爬取分析），做到开箱即用，完全沙盒，全程中间人抓包。</p>
+<p><a href="https://github.com/starship/starship"><img src="./demo.gif" alt="Demo from starship README.md" /></a></p>
 
-<h2 id="环境配置">环境配置</h2>
+<blockquote>
+<p>这个 GIF 示例来自 starship 的 README。
+其 Shell 为 <a href="http://fishshell.com/">fish Shell</a> ，所以自带了自动补全、历史命令展示和命令高亮等功能。
+fish 也是一个很好用的 Shell，感兴趣的可以自行体验一下。</p>
+</blockquote>
+
+<p>以下是需要安装的工具列表</p>
+
+<ul>
+<li><a href="https://www.zsh.org/">zsh</a></li>
+<li><a href="https://github.com/ohmyzsh/ohmyzsh">ohmyzsh</a></li>
+<li><a href="https://github.com/starship/starship">starship</a></li>
+<li><a href="https://github.com/getantibody/antibody">antibody</a></li>
+</ul>
+
+<p>本文只以 MacOS 为例，而其他 OS 的安装方式，请仔细阅读以上工具的文档。</p>
 
 <ol>
-<li><p>安装 chrome</p>
+<li><p>安装 zsh</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">brew install zsh
+chsh -s /bin/zsh</code></pre></div>
+<p>执行以上命令安装 zsh，再重启终端即可发现 Shell 变成了 zsh。</p></li>
 
-<p>这就不需要多说什么了吧。如果是 MacOS 安装的 Chrome，其 CLI 路径为 <code>/Applications/Google Chrome.app/Contents/MacOS/Google Chrome</code></p></li>
+<li><p>安装 ohmyzsh</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">sh -c <span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh<span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span></code></pre></div>
+<p>执行以上命令安装 ohmyzsh</p></li>
 
-<li><p>安装 <a href="https://github.com/linw1995/mitm_chrome">mitm_chrome</a></p>
+<li><p>安装 starship</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">brew install starship</code></pre></div>
+<p>执行以上命令安装 starship，然后把 <code>eval &quot;$(starship init zsh)&quot;</code> 写入到 <code>~/.zshrc</code> 文件末尾。
+再执行 <code>$SHELL</code> 就可以看到 Shell 变漂亮了～</p>
 
-<p>CLI 工具，整合了 mitmproxy 与 Chrome 。能十分方便地快速启动，即开即用。</p>
+<p>但没法像这个 demo 一样，因为有 <a href="http://fishshell.com/">fish Shell</a> 的加持，有将历史命令以阴影的方式展现展现出来，命令自动补全等功能。
+这就需要安装相应的插件，接下来需要安装的 antibody ，正是用来安装管理这些组件的。</p></li>
 
-<p>可以通过 pip 安装</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">pip install git+https://github.com/linw1995/mitm_chrome.git@master</code></pre></div></li>
-
-<li><p>证书安装</p>
-
-<p>参考 mitmproxy 的文档安装一下，<a href="https://docs.mitmproxy.org/stable/concepts-certificates/">About Certificates | mitmproxy</a></p></li>
+<li><p>安装 antibody</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">brew install getantibody/tap/antibody</code></pre></div>
+<p>执行以上命令安装 antibody，然后创建 <code>~/.zsh_plugins.txt</code>。
+它保存着需要安装的 zsh 插件，每行都是一个 Github Repos 名称。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plain" data-lang="plain">zsh-users/zsh-completions
+zsh-users/zsh-history-substring-search
+zsh-users/zsh-syntax-highlighting
+zsh-users/zsh-autosuggestions</code></pre></div>
+<p>再把以下内容写入到 <code>~/.zshrc</code> 文件末尾。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">source &lt;<span style="color:#f92672">(</span>antibody init<span style="color:#f92672">)</span>
+antibody bundle &lt; ~/.zsh_plugins.txt</code></pre></div>
+<p>执行 <code>$SHELL</code> 或者重新打开终端即可生效。
+更改 <code>~/.zsh_plugins.txt</code> 后，首次打开 Shell 会安装不存在的插件。稍微等待一下，即可享受这颜值与实力并存的生产力工具了。</p></li>
 </ol>
 
-<h2 id="使用姿势">使用姿势</h2>
+<blockquote>
+<p>关于具体怎么安装 zsh，ohmyzsh 的 Wiki 里解答的太好了。
+<a href="https://github.com/ohmyzsh/ohmyzsh/wiki/Installing-ZSH">Installing ZSH | ohmyzsh Wiki</a></p>
 
-<p>在 MacOS 上</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">mitm_chrome --chrome-path<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;/Applications/Google Chrome.app/Contents/MacOS/Google Chrome&#39;</span> mitmproxy</code></pre></div>
-<p>在有 <code>chrome</code> 命令情况下，无需指定 <code>--chrome-path</code> 参数</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">mitm_chrome mitmproxy</code></pre></div>
-<h2 id="后记">后记</h2>
-
-<p>目前，我发现 Chrome 无法通过 CLI 去指定使用自定的证书，只能使用预先安装好的证书。应该有办法的，不然 seleniumwire 项目怎么做到抓包的，这个以后有时间再研究研究吧。</p>
+<p>具体如何使用 antibody 直接看其文档 <a href="https://getantibody.github.io/">getantibody | Github.io</a></p>
+</blockquote>
 
 
             </div>
@@ -1214,15 +1238,10 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
                 
                 <div>
                     <img class="icon" src="https://linw1995.com/img/back.svg" alt="back" />
-                    <a href="https://linw1995.com/blog/%E5%A6%82%E4%BD%95%E5%9C%A8%E6%97%A0%E5%A4%B4%E6%A8%A1%E5%BC%8F%E4%B8%8B%E7%9A%84%E8%B0%B7%E6%AD%8C%E6%B5%8F%E8%A7%88%E5%99%A8%E8%AE%BE%E7%BD%AE%E5%9C%B0%E7%90%86%E4%BD%8D%E7%BD%AE/">如何在无头模式下的谷歌浏览器设置地理位置</a>
+                    <a href="https://linw1995.com/blog/%E7%BD%91%E7%AB%99%E8%A7%82%E6%B5%8B%E5%B7%A5%E5%85%B7/">网站观测工具</a>
                 </div>
                 
                 <div style="width: 100%;"></div>
-                
-                <div>
-                    <a href="https://linw1995.com/blog/%E6%88%91%E7%9A%84-Shell-%E9%85%8D%E7%BD%AE/">我的 Shell 配置</a>
-                    <img class="icon" src="https://linw1995.com/img/next.svg" alt="next" />
-                </div>
                 
             </div>
             

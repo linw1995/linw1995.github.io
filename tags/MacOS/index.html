@@ -15,24 +15,24 @@
 <meta property="og:site_name" content="linw1995" />
 <meta property="og:locale" content="zh-cn" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://linw1995.com/blog/%E7%BD%91%E7%AB%99%E8%A7%82%E6%B5%8B%E5%B7%A5%E5%85%B7/" />
-<meta property="og:title" content="网站观测工具" />
-<meta property="twitter:title" content="网站观测工具">
+<meta property="og:url" content="https://linw1995.com/tags/MacOS/" />
+<meta property="og:title" content="MacOS" />
+<meta property="twitter:title" content="MacOS">
 
     <meta property="og:image" content="https://linw1995.com//img/banner.png">
     <meta property="twitter:card" content="summary">
     <meta property="twitter:image" content="https://linw1995.com//img/banner.png">
 
-<meta property="og:description" content="如何搭建一个即开即用的网站观测工具">
-<meta property="twitter:description" content="如何搭建一个即开即用的网站观测工具">
+<meta property="og:description" content="">
+<meta property="twitter:description" content="">
 
 <title>
 
 
-     linw1995 - 网站观测工具 
+     linw1995 - MacOS 
 
 </title>
-<link rel="canonical" href="https://linw1995.com/blog/%E7%BD%91%E7%AB%99%E8%A7%82%E6%B5%8B%E5%B7%A5%E5%85%B7/">
+<link rel="canonical" href="https://linw1995.com/tags/MacOS/">
 
 
 <style media="screen">
@@ -1070,6 +1070,8 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
 
 
 
+  <link href="https://linw1995.com/tags/MacOS/index.xml" rel="alternate" type="application/rss+xml" title="linw1995" />
+
 
 </head>
 
@@ -1104,166 +1106,26 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
     </div>
 </div>
 
-
-
-
-
-<div class="main post non-narrow zero-top-spacing column">
+<div class="main column">
     <div class="container">
         <div class="content">
-            <div class="front-matter">
-                <div class="title-container">
-                    <div class="page-heading">
-
+            <div class="posts">
+                <div class="page-heading">Posts about MacOS</div>
+                <ul>
+                    
+                        <li class="post-item">
+    <span class="meta">Mar 13, 2020</span>
     
-    网站观测工具
+    <a href="https://linw1995.com/blog/%E6%88%91%E7%9A%84-Shell-%E9%85%8D%E7%BD%AE/"><span>我的 Shell 配置</span></a>
     
+</li>
 
-</div>
-
-                </div>
-                <div class="meta">
-                    <div class="date" title="Tue Mar 10 2020 01:15:00 CST">Mar 10, 2020</div>
                     
-                        
-                    
-                    
-                    <div class="reading-time middot">1 minute read</div>
-                    
-                    
-                      <div class="tags">
-                    
-                        <ul>
-                          
-                            <li class="middot"><a href="https://linw1995.com/tags/Python">Python</a> </li>
-                          
-                            <li class="middot"><a href="https://linw1995.com/tags/Automation">Automation</a> </li>
-                          
-                            <li class="middot"><a href="https://linw1995.com/tags/Crawler">Crawler</a> </li>
-                          
-                            <li class="middot"><a href="https://linw1995.com/tags/Chrome">Chrome</a> </li>
-                          
-                        </ul>
-                    </div>
-                    <div class="tags">
-                        <ul>
-                          
-                          
-                        </ul>
-                    </div>
-                </div>
+                </ul>
             </div>
-            <div class="markdown">
-                
-    
-    
-
-<p>通过 Chrome 本身的支持及集成 <a href="https://mitmproxy.org/">mitmproxy</a> 这一伟大的工具对一个网站观测（爬取分析），做到开箱即用，完全沙盒，全程中间人抓包。</p>
-
-<h2 id="环境配置">环境配置</h2>
-
-<ol>
-<li><p>安装 chrome</p>
-
-<p>这就不需要多说什么了吧。如果是 MacOS 安装的 Chrome，其 CLI 路径为 <code>/Applications/Google Chrome.app/Contents/MacOS/Google Chrome</code></p></li>
-
-<li><p>安装 <a href="https://github.com/linw1995/mitm_chrome">mitm_chrome</a></p>
-
-<p>CLI 工具，整合了 mitmproxy 与 Chrome 。能十分方便地快速启动，即开即用。</p>
-
-<p>可以通过 pip 安装</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">pip install git+https://github.com/linw1995/mitm_chrome.git@master</code></pre></div></li>
-
-<li><p>证书安装</p>
-
-<p>参考 mitmproxy 的文档安装一下，<a href="https://docs.mitmproxy.org/stable/concepts-certificates/">About Certificates | mitmproxy</a></p></li>
-</ol>
-
-<h2 id="使用姿势">使用姿势</h2>
-
-<p>在 MacOS 上</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">mitm_chrome --chrome-path<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;/Applications/Google Chrome.app/Contents/MacOS/Google Chrome&#39;</span> mitmproxy</code></pre></div>
-<p>在有 <code>chrome</code> 命令情况下，无需指定 <code>--chrome-path</code> 参数</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">mitm_chrome mitmproxy</code></pre></div>
-<h2 id="后记">后记</h2>
-
-<p>目前，我发现 Chrome 无法通过 CLI 去指定使用自定的证书，只能使用预先安装好的证书。应该有办法的，不然 seleniumwire 项目怎么做到抓包的，这个以后有时间再研究研究吧。</p>
-
-
-            </div>
-            
-            <br>
-            <div class="share">
-                  
-                  <a href="" class="ssk ssk-facebook"></a>
-                  
-                  
-                  <a href="" class="ssk ssk-twitter"></a>
-                  
-                  
-                  <a href="" class="ssk ssk-google-plus"></a>
-                  
-                  
-                  <a href="" class="ssk ssk-linkedin"></a>
-                  
-            </div>
-            
-            
-            <br>
-            <div class="navigation">
-                
-                <div>
-                    <img class="icon" src="https://linw1995.com/img/back.svg" alt="back" />
-                    <a href="https://linw1995.com/blog/%E5%A6%82%E4%BD%95%E5%9C%A8%E6%97%A0%E5%A4%B4%E6%A8%A1%E5%BC%8F%E4%B8%8B%E7%9A%84%E8%B0%B7%E6%AD%8C%E6%B5%8F%E8%A7%88%E5%99%A8%E8%AE%BE%E7%BD%AE%E5%9C%B0%E7%90%86%E4%BD%8D%E7%BD%AE/">如何在无头模式下的谷歌浏览器设置地理位置</a>
-                </div>
-                
-                <div style="width: 100%;"></div>
-                
-                <div>
-                    <a href="https://linw1995.com/blog/%E6%88%91%E7%9A%84-Shell-%E9%85%8D%E7%BD%AE/">我的 Shell 配置</a>
-                    <img class="icon" src="https://linw1995.com/img/next.svg" alt="next" />
-                </div>
-                
-            </div>
-            
-            
-            <br>
-            <div class="disqus">
-                <div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
-    
-    
-    
-    };
-    (function() {
-        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
-            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
-            return;
-        }
-        var d = document, s = d.createElement('script'); s.async = true;
-        s.src = '//' + "linw1995" + '.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-            </div>
-            
-
-            
-            
-
-            
-
-            
         </div>
     </div>
 </div>
-
-
-
 <div class="footer column">
     <div class="container">
 
@@ -1326,6 +1188,10 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
             </a>
         
 
+        
+            <a href="https://linw1995.com/tags/MacOS/index.xml">
+                <img class="icon" src="https://linw1995.com/img/rss.svg" alt="rss" />
+            </a>
         
 
         </div>

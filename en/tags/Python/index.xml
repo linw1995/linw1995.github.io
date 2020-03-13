@@ -6,10 +6,21 @@
     <description>Recent content in Python on linw1995</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Fri, 28 Feb 2020 23:59:59 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 14 Mar 2020 00:15:59 +0800</lastBuildDate>
     
 	<atom:link href="https://linw1995.com/en/tags/Python/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Run Asyncio Event Loop in another thread</title>
+      <link>https://linw1995.com/en/blog/Run-Asyncio-Event-Loop-in-another-thread/</link>
+      <pubDate>Sat, 14 Mar 2020 00:15:59 +0800</pubDate>
+      
+      <guid>https://linw1995.com/en/blog/Run-Asyncio-Event-Loop-in-another-thread/</guid>
+      <description>When using a web framework not supports to write concurrent code using the async/await syntax, want to use concurrent to speed the connection up with another service, like connecting Redis, making a lot of requests, etc. So it&amp;rsquo;s why we need to run the asyncio event loop in another thread.
+Create a thread that runs asyncio event loop forever Attention, This example is not fully tested.
+import asyncio import threading class AsyncioEventLoopThread(threading.</description>
+    </item>
     
     <item>
       <title>How To Override Geolocation on Headless Chrome</title>

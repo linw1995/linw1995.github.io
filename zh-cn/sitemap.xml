@@ -235,11 +235,31 @@
   <url>
     <loc>https://linw1995.com/tags/Asyncio/</loc>
     <lastmod>2019-07-17T23:59:59+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://linw1995.com/en/tags/Asyncio/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://linw1995.com/tags/Asyncio/"
+                />
   </url>
   
   <url>
     <loc>https://linw1995.com/tags/MultiThreading/</loc>
     <lastmod>2019-07-17T23:59:59+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://linw1995.com/en/tags/MultiThreading/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://linw1995.com/tags/MultiThreading/"
+                />
   </url>
   
   <url>

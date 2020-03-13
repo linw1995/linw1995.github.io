@@ -2,7 +2,6 @@
 <html lang="zh-cn">
 
 <head>
-	<meta name="generator" content="Hugo 0.67.0" />
 <meta charset="utf-8">
 <meta name="HandheldFriendly" content="True">
 <meta name="MobileOptimized" content="320">
@@ -16,24 +15,24 @@
 <meta property="og:site_name" content="linw1995" />
 <meta property="og:locale" content="zh-cn" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://linw1995.com/en/" />
-<meta property="og:title" content="linw1995" />
-<meta property="twitter:title" content="linw1995">
+<meta property="og:url" content="https://linw1995.com/en/blog/Run-Asyncio-Event-Loop-in-another-thread/" />
+<meta property="og:title" content="Run Asyncio Event Loop in another thread" />
+<meta property="twitter:title" content="Run Asyncio Event Loop in another thread">
 
     <meta property="og:image" content="https://linw1995.com//img/banner.png">
     <meta property="twitter:card" content="summary">
     <meta property="twitter:image" content="https://linw1995.com//img/banner.png">
 
-<meta property="og:description" content="Example blog">
-<meta property="twitter:description" content="Example blog">
+<meta property="og:description" content="How to run Asyncio Event Loop in another thread.">
+<meta property="twitter:description" content="How to run Asyncio Event Loop in another thread.">
 
 <title>
 
 
-     linw1995 - linw1995 
+     linw1995 - Run Asyncio Event Loop in another thread 
 
 </title>
-<link rel="canonical" href="https://linw1995.com/en/">
+<link rel="canonical" href="https://linw1995.com/en/blog/Run-Asyncio-Event-Loop-in-another-thread/">
 
 
 <style media="screen">
@@ -1071,8 +1070,6 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
 
 
 
-  <link href="https://linw1995.com/en/index.xml" rel="alternate" type="application/rss+xml" title="linw1995" />
-
 
 </head>
 
@@ -1101,81 +1098,237 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
                     
                 </ul>
                 
-<hr>
-<ul>
-    
-    <li>
-        <a href="https://linw1995.com/">中文 </a>
-    </li>
-    
-</ul>
-
 
             </nav>
         </div>
     </div>
 </div>
 
-<div class="main column">
+
+
+
+
+<div class="main post non-narrow zero-top-spacing column">
     <div class="container">
         <div class="content">
-            
+            <div class="front-matter">
+                <div class="title-container">
+                    <div class="page-heading">
 
-            <div class="posts">
-            
-                
-                
-                
-                    <div class="page-heading">Latest posts</div>
-                    <ul>
+    
+    Run Asyncio Event Loop in another thread
+    
+
+</div>
+
+                </div>
+                <div class="meta">
+                    <div class="date" title="Sat Mar 14 2020 00:15:59 CST">Mar 14, 2020</div>
                     
-                        <li class="groupby">Mar, 2020</li>
-                        
-                            <li class="post-item">
-    <span class="meta">Mar 14, 2020</span>
-    
-    <a href="https://linw1995.com/en/blog/Run-Asyncio-Event-Loop-in-another-thread/"><span>Run Asyncio Event Loop in another thread</span></a>
-    
-</li>
-
                         
                     
-                        <li class="groupby">Feb, 2020</li>
-                        
-                            <li class="post-item">
-    <span class="meta">Feb 28, 2020</span>
-    
-    <a href="https://linw1995.com/en/blog/How-To-Override-Geolocation-on-Headless-Chrome/"><span>How To Override Geolocation on Headless Chrome</span></a>
-    
-</li>
-
-                        
                     
-                        <li class="groupby">Dec, 2018</li>
-                        
-                            <li class="post-item">
-    <span class="meta">Dec 27, 2018</span>
-    
-    <a href="https://linw1995.com/en/blog/Run-Twisted-in-another-thread/"><span>Run Twisted in another thread</span></a>
-    
-</li>
-
-                        
+                    <div class="reading-time middot">2 minute read</div>
                     
-                    </ul>
-
                     
-                
-            
+                      <div class="tags">
+                    
+                        <ul>
+                          
+                            <li class="middot"><a href="https://linw1995.com/en/tags/Python">Python</a> </li>
+                          
+                            <li class="middot"><a href="https://linw1995.com/en/tags/Asyncio">Asyncio</a> </li>
+                          
+                            <li class="middot"><a href="https://linw1995.com/en/tags/MultiThreading">MultiThreading</a> </li>
+                          
+                        </ul>
+                    </div>
+                    <div class="tags">
+                        <ul>
+                          
+                          
+                        </ul>
+                    </div>
+                </div>
             </div>
+            <div class="markdown">
+                
+    
+    
 
-            <div class="best-posts">
-            
-            
+<p>When using a web framework not supports to write concurrent code using the async/await syntax,
+want to use concurrent to speed the connection up with another service,
+like connecting Redis, making a lot of requests, etc. So it&rsquo;s why we need to run the asyncio event loop in another thread.</p>
+
+<h2 id="create-a-thread-that-runs-asyncio-event-loop-forever">Create a thread that runs asyncio event loop forever</h2>
+
+<p><strong>Attention, This example is not fully tested.</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> asyncio
+<span style="color:#f92672">import</span> threading
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">AsyncioEventLoopThread</span>(threading<span style="color:#f92672">.</span>Thread):
+    <span style="color:#66d9ef">def</span> __init__(self, <span style="color:#f92672">*</span>args, loop<span style="color:#f92672">=</span>None, <span style="color:#f92672">**</span>kwargs):
+        super()<span style="color:#f92672">.</span>__init__(<span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs)
+        self<span style="color:#f92672">.</span>loop <span style="color:#f92672">=</span> loop <span style="color:#f92672">or</span> asyncio<span style="color:#f92672">.</span>new_event_loop()
+        self<span style="color:#f92672">.</span>running <span style="color:#f92672">=</span> False
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">run</span>(self):
+        self<span style="color:#f92672">.</span>running <span style="color:#f92672">=</span> True
+        self<span style="color:#f92672">.</span>loop<span style="color:#f92672">.</span>run_forever()
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">run_coro</span>(self, coro):
+        <span style="color:#66d9ef">return</span> asyncio<span style="color:#f92672">.</span>run_coroutine_threadsafe(coro, loop<span style="color:#f92672">=</span>self<span style="color:#f92672">.</span>loop)<span style="color:#f92672">.</span>result()
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">stop</span>(self):
+        self<span style="color:#f92672">.</span>loop<span style="color:#f92672">.</span>call_soon_threadsafe(self<span style="color:#f92672">.</span>loop<span style="color:#f92672">.</span>stop)
+        self<span style="color:#f92672">.</span>join()
+        self<span style="color:#f92672">.</span>running <span style="color:#f92672">=</span> False</code></pre></div>
+<p>There is a simple example below to demonstrate how to use it.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">async <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">hello_world</span>():
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;hello world&#34;</span>)
+
+async <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">make_request</span>():
+    await asyncio<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">1</span>)
+
+thr <span style="color:#f92672">=</span> AsyncioEventLoopThread()
+thr<span style="color:#f92672">.</span>start()
+<span style="color:#66d9ef">try</span>:
+    thr<span style="color:#f92672">.</span>run_coro(hello_world())
+    thr<span style="color:#f92672">.</span>run_coro(make_request())
+<span style="color:#66d9ef">finally</span>:
+    thr<span style="color:#f92672">.</span>stop()</code></pre></div>
+<p><strong>Attention, don&rsquo;t run the same coroutine in two different event loops.</strong></p>
+
+<h2 id="share-objects-between-coroutines">Share objects between coroutines</h2>
+
+<p>you should inherit the <code>AsyncioEventLoopThread</code>
+or just modify it to hold the objects you need to share between coroutines.</p>
+
+<p>Using the <code>contextvars</code> to share objects between coroutines,
+shared values must be stored into <code>asyncio.Context</code> before running coroutines.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> contextvars
+<span style="color:#f92672">import</span> aiohttp
+
+var_session <span style="color:#f92672">=</span> contextvars<span style="color:#f92672">.</span>ContextVar(<span style="color:#e6db74">&#39;session&#39;</span>)
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">FetcherThread</span>(AsyncioEventLoopThread):
+    <span style="color:#66d9ef">def</span> __init__(self, <span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs):
+        super()<span style="color:#f92672">.</span>__init__(<span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs)
+        self<span style="color:#f92672">.</span>_session <span style="color:#f92672">=</span> None
+        self<span style="color:#f92672">.</span>_event_session_created <span style="color:#f92672">=</span> threading<span style="color:#f92672">.</span>Event()
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">run_coro</span>(self, coro):
+        self<span style="color:#f92672">.</span>_event_session_created<span style="color:#f92672">.</span>wait()
+        var_session<span style="color:#f92672">.</span>set(self<span style="color:#f92672">.</span>session)
+        <span style="color:#66d9ef">return</span> super()<span style="color:#f92672">.</span>run_coro(coro)
+
+    async <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">_create_session</span>(self):
+        self<span style="color:#f92672">.</span>session <span style="color:#f92672">=</span> aiohttp<span style="color:#f92672">.</span>ClientSession()
+
+    async <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">_close_session</span>(self):
+        await self<span style="color:#f92672">.</span>session<span style="color:#f92672">.</span>close()
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">run</span>(self):
+        fut <span style="color:#f92672">=</span> asyncio<span style="color:#f92672">.</span>run_coroutine_threadsafe(self<span style="color:#f92672">.</span>_create_session(), loop<span style="color:#f92672">=</span>self<span style="color:#f92672">.</span>loop)
+        fut<span style="color:#f92672">.</span>add_done_callback(<span style="color:#66d9ef">lambda</span> _: self<span style="color:#f92672">.</span>_event_session_created<span style="color:#f92672">.</span>set())
+        super()<span style="color:#f92672">.</span>run()
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">stop</span>(self):
+        self<span style="color:#f92672">.</span>run_coro(self<span style="color:#f92672">.</span>_close_session())
+        super()<span style="color:#f92672">.</span>stop()</code></pre></div>
+<p>There is a simple example below to fetch the source code of website <a href="https://github.com">github.com</a>.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">async <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">make_request</span>():
+    session <span style="color:#f92672">=</span> var_session<span style="color:#f92672">.</span>get()
+    async <span style="color:#66d9ef">with</span> session<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;https://github.com&#34;</span>) <span style="color:#66d9ef">as</span> resp:
+        resp<span style="color:#f92672">.</span>raise_for_status()
+        <span style="color:#66d9ef">return</span> await resp<span style="color:#f92672">.</span>text()
+
+
+thr <span style="color:#f92672">=</span> FetcherThread()
+thr<span style="color:#f92672">.</span>start()
+<span style="color:#66d9ef">try</span>:
+    text <span style="color:#f92672">=</span> thr<span style="color:#f92672">.</span>run_coro(make_request())
+    <span style="color:#66d9ef">print</span>(text)
+<span style="color:#66d9ef">finally</span>:
+    thr<span style="color:#f92672">.</span>stop()</code></pre></div>
+<h2 id="references">References</h2>
+
+<ul>
+<li><a href="https://docs.python.org/3/library/asyncio-dev.html#concurrency-and-multithreading">Concurrency and Multithreading | Developing with asyncio</a></li>
+<li><a href="https://docs.python.org/3/library/contextvars.html#asyncio-support">asyncio support | contextvars — Context Variables</a></li>
+<li><a href="https://docs.python.org/3/library/threading.html#event-objects">Event Objects | threading — Thread-based parallelism</a></li>
+</ul>
+
+
             </div>
+            
+            <br>
+            <div class="share">
+                  
+                  <a href="" class="ssk ssk-facebook"></a>
+                  
+                  
+                  <a href="" class="ssk ssk-twitter"></a>
+                  
+                  
+                  <a href="" class="ssk ssk-google-plus"></a>
+                  
+                  
+                  <a href="" class="ssk ssk-linkedin"></a>
+                  
+            </div>
+            
+            
+            <br>
+            <div class="navigation">
+                
+                <div>
+                    <img class="icon" src="https://linw1995.com/img/back.svg" alt="back" />
+                    <a href="https://linw1995.com/en/blog/How-To-Override-Geolocation-on-Headless-Chrome/">How To Override Geolocation on Headless Chrome</a>
+                </div>
+                
+                <div style="width: 100%;"></div>
+                
+            </div>
+            
+            
+            <br>
+            <div class="disqus">
+                <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "linw1995" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+            </div>
+            
+
+            
+            
+
+            
+
+            
         </div>
     </div>
 </div>
+
+
+
 <div class="footer column">
     <div class="container">
 
@@ -1238,10 +1391,6 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
             </a>
         
 
-        
-            <a href="https://linw1995.com/en/index.xml">
-                <img class="icon" src="https://linw1995.com/img/rss.svg" alt="rss" />
-            </a>
         
 
         </div>

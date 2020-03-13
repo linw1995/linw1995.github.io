@@ -6,10 +6,37 @@
     <description>Recent content in Tags on linw1995</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Fri, 28 Feb 2020 23:59:59 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 14 Mar 2020 00:15:59 +0800</lastBuildDate>
     
 	<atom:link href="https://linw1995.com/en/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Asyncio</title>
+      <link>https://linw1995.com/en/tags/Asyncio/</link>
+      <pubDate>Sat, 14 Mar 2020 00:15:59 +0800</pubDate>
+      
+      <guid>https://linw1995.com/en/tags/Asyncio/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>MultiThreading</title>
+      <link>https://linw1995.com/en/tags/MultiThreading/</link>
+      <pubDate>Sat, 14 Mar 2020 00:15:59 +0800</pubDate>
+      
+      <guid>https://linw1995.com/en/tags/MultiThreading/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Python</title>
+      <link>https://linw1995.com/en/tags/Python/</link>
+      <pubDate>Sat, 14 Mar 2020 00:15:59 +0800</pubDate>
+      
+      <guid>https://linw1995.com/en/tags/Python/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Automation</title>
@@ -35,15 +62,6 @@
       <pubDate>Fri, 28 Feb 2020 23:59:59 +0800</pubDate>
       
       <guid>https://linw1995.com/en/tags/Crawler/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Python</title>
-      <link>https://linw1995.com/en/tags/Python/</link>
-      <pubDate>Fri, 28 Feb 2020 23:59:59 +0800</pubDate>
-      
-      <guid>https://linw1995.com/en/tags/Python/</guid>
       <description></description>
     </item>
     

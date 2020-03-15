@@ -1098,6 +1098,15 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
                     
                 </ul>
                 
+<hr>
+<ul>
+    
+    <li>
+        <a href="https://linw1995.com/blog/%E5%A6%82%E4%BD%95%E5%9C%A8%E7%BA%BF%E7%A8%8B%E9%87%8C%E8%B7%91%E5%8D%8F%E7%A8%8B/">中文  </a>
+    </li>
+    
+</ul>
+
 
             </nav>
         </div>
@@ -1183,6 +1192,8 @@ like connecting Redis, making a lot of requests, etc. So it&rsquo;s why we need 
         self<span style="color:#f92672">.</span>loop<span style="color:#f92672">.</span>call_soon_threadsafe(self<span style="color:#f92672">.</span>loop<span style="color:#f92672">.</span>stop)
         self<span style="color:#f92672">.</span>join()
         self<span style="color:#f92672">.</span>running <span style="color:#f92672">=</span> False</code></pre></div>
+<p>Due to the <a href="https://docs.python.org/3/library/asyncio-task.html#asyncio.run_coroutine_threadsafe"><code>asyncio.run_coroutine_threadsafe</code></a> function returns a <a href="https://docs.python.org/3/library/concurrent.futures.html#concurrent.futures.Future"><code>concurrent.futures.Future</code></a> object, so we just execute the <a href="https://docs.python.org/3/library/concurrent.futures.html#concurrent.futures.Future.result"><code>result</code></a> method to get the coroutine result. It will wait for the coroutine finished.</p>
+
 <p>There is a simple example below to demonstrate how to use it.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">async <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">hello_world</span>():
     <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;hello world&#34;</span>)
@@ -1205,7 +1216,7 @@ thr<span style="color:#f92672">.</span>start()
 or just modify it to hold the objects you need to share between coroutines.</p>
 
 <p>Using the <code>contextvars</code> to share objects between coroutines,
-shared values must be stored into <code>asyncio.Context</code> before running coroutines.</p>
+shared values must be stored into <code>contextvars.Context</code> before running coroutines.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> contextvars
 <span style="color:#f92672">import</span> aiohttp
 

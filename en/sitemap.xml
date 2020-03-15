@@ -80,6 +80,16 @@
   <url>
     <loc>https://linw1995.com/en/blog/Run-Asyncio-Event-Loop-in-another-thread/</loc>
     <lastmod>2020-03-14T00:15:59+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://linw1995.com/blog/%E5%A6%82%E4%BD%95%E5%9C%A8%E7%BA%BF%E7%A8%8B%E9%87%8C%E8%B7%91%E5%8D%8F%E7%A8%8B/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://linw1995.com/en/blog/Run-Asyncio-Event-Loop-in-another-thread/"
+                />
   </url>
   
   <url>

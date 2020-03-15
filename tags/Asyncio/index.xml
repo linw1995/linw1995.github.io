@@ -6,10 +6,22 @@
     <description>Recent content in Asyncio on linw1995</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Wed, 17 Jul 2019 23:59:59 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 15 Mar 2020 11:49:59 +0800</lastBuildDate>
     
 	<atom:link href="https://linw1995.com/tags/Asyncio/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>如何在线程里跑协程</title>
+      <link>https://linw1995.com/blog/%E5%A6%82%E4%BD%95%E5%9C%A8%E7%BA%BF%E7%A8%8B%E9%87%8C%E8%B7%91%E5%8D%8F%E7%A8%8B/</link>
+      <pubDate>Sun, 15 Mar 2020 11:49:59 +0800</pubDate>
+      
+      <guid>https://linw1995.com/blog/%E5%A6%82%E4%BD%95%E5%9C%A8%E7%BA%BF%E7%A8%8B%E9%87%8C%E8%B7%91%E5%8D%8F%E7%A8%8B/</guid>
+      <description>当使用不支持 async/await 协程的 web 框架时，想去使用协程来加快与其他服务的链接， 比如链接 Redis，发起大量网络请求等。所以我们需要在线程里跑 asyncio event loop。
+创建用来跑 asyncio event loop 线程 import asyncio import threading class AsyncioEventLoopThread(threading.Thread): def __init__(self, *args, loop=None, **kwargs): super().__init__(*args, **kwargs) self.loop = loop or asyncio.new_event_loop() self.running = False def run(self): self.running = True self.loop.run_forever() def run_coro(self, coro): return asyncio.run_coroutine_threadsafe(coro, loop=self.loop).result() def stop(self): self.loop.call_soon_threadsafe(self.loop.stop) self.join() self.running = False 因为 asyncio.run_coroutine_threadsafe 的返回值为 concurrent.futures.Future，可以直接执行其 result 方法，函数会等待直到协程执行完毕并返回结果。
+下面的例子展示了如何使用 AsyncioEventLoopThread
+async def hello_world(): print(&amp;#34;hello world&amp;#34;) async def make_request(): await asyncio.</description>
+    </item>
     
     <item>
       <title>用多线程加速爬虫的 lxml 解析</title>

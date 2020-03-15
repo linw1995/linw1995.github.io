@@ -15,9 +15,9 @@
 <meta property="og:site_name" content="linw1995" />
 <meta property="og:locale" content="zh-cn" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://linw1995.com/tags/Asyncio/" />
-<meta property="og:title" content="Asyncio" />
-<meta property="twitter:title" content="Asyncio">
+<meta property="og:url" content="https://linw1995.com/blog/%E5%A6%82%E4%BD%95%E5%9C%A8%E7%BA%BF%E7%A8%8B%E9%87%8C%E8%B7%91%E5%8D%8F%E7%A8%8B/" />
+<meta property="og:title" content="如何在线程里跑协程" />
+<meta property="twitter:title" content="如何在线程里跑协程">
 
     <meta property="og:image" content="https://linw1995.com//img/banner.png">
     <meta property="twitter:card" content="summary">
@@ -29,10 +29,10 @@
 <title>
 
 
-     linw1995 - Asyncio 
+     linw1995 - 如何在线程里跑协程 
 
 </title>
-<link rel="canonical" href="https://linw1995.com/tags/Asyncio/">
+<link rel="canonical" href="https://linw1995.com/blog/%E5%A6%82%E4%BD%95%E5%9C%A8%E7%BA%BF%E7%A8%8B%E9%87%8C%E8%B7%91%E5%8D%8F%E7%A8%8B/">
 
 
 <style media="screen">
@@ -1070,8 +1070,6 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
 
 
 
-  <link href="https://linw1995.com/tags/Asyncio/index.xml" rel="alternate" type="application/rss+xml" title="linw1995" />
-
 
 </head>
 
@@ -1104,7 +1102,7 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
 <ul>
     
     <li>
-        <a href="https://linw1995.com/en/tags/Asyncio/">English </a>
+        <a href="https://linw1995.com/en/blog/Run-Asyncio-Event-Loop-in-another-thread/">English  </a>
     </li>
     
 </ul>
@@ -1115,34 +1113,228 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
     </div>
 </div>
 
-<div class="main column">
+
+
+
+
+<div class="main post non-narrow zero-top-spacing column">
     <div class="container">
         <div class="content">
-            <div class="posts">
-                <div class="page-heading">Posts about Asyncio</div>
-                <ul>
-                    
-                        <li class="post-item">
-    <span class="meta">Jul 17, 2019</span>
-    
-    <a href="https://linw1995.com/blog/%E7%94%A8%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%8A%A0%E9%80%9F%E7%88%AC%E8%99%AB%E7%9A%84-lxml-%E8%A7%A3%E6%9E%90/"><span>用多线程加速爬虫的 lxml 解析</span></a>
-    
-</li>
+            <div class="front-matter">
+                <div class="title-container">
+                    <div class="page-heading">
 
-                    
-                        <li class="post-item">
-    <span class="meta">Mar 15, 2020</span>
     
-    <a href="https://linw1995.com/blog/%E5%A6%82%E4%BD%95%E5%9C%A8%E7%BA%BF%E7%A8%8B%E9%87%8C%E8%B7%91%E5%8D%8F%E7%A8%8B/"><span>如何在线程里跑协程</span></a>
+    如何在线程里跑协程
     
-</li>
 
+</div>
+
+                </div>
+                <div class="meta">
+                    <div class="date" title="Sun Mar 15 2020 11:49:59 CST">Mar 15, 2020</div>
                     
-                </ul>
+                        
+                    
+                    
+                    <div class="reading-time middot">1 minute read</div>
+                    
+                    
+                      <div class="tags">
+                    
+                        <ul>
+                          
+                            <li class="middot"><a href="https://linw1995.com/tags/Python">Python</a> </li>
+                          
+                            <li class="middot"><a href="https://linw1995.com/tags/Asyncio">Asyncio</a> </li>
+                          
+                            <li class="middot"><a href="https://linw1995.com/tags/MultiThreading">MultiThreading</a> </li>
+                          
+                        </ul>
+                    </div>
+                    <div class="tags">
+                        <ul>
+                          
+                          
+                        </ul>
+                    </div>
+                </div>
             </div>
+            <div class="markdown">
+                
+    
+    
+
+<p>当使用不支持 async/await 协程的 web 框架时，想去使用协程来加快与其他服务的链接，
+比如链接 Redis，发起大量网络请求等。所以我们需要在线程里跑 asyncio event loop。</p>
+
+<h2 id="创建用来跑-asyncio-event-loop-线程">创建用来跑 asyncio event loop 线程</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> asyncio
+<span style="color:#f92672">import</span> threading
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">AsyncioEventLoopThread</span>(threading<span style="color:#f92672">.</span>Thread):
+    <span style="color:#66d9ef">def</span> __init__(self, <span style="color:#f92672">*</span>args, loop<span style="color:#f92672">=</span>None, <span style="color:#f92672">**</span>kwargs):
+        super()<span style="color:#f92672">.</span>__init__(<span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs)
+        self<span style="color:#f92672">.</span>loop <span style="color:#f92672">=</span> loop <span style="color:#f92672">or</span> asyncio<span style="color:#f92672">.</span>new_event_loop()
+        self<span style="color:#f92672">.</span>running <span style="color:#f92672">=</span> False
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">run</span>(self):
+        self<span style="color:#f92672">.</span>running <span style="color:#f92672">=</span> True
+        self<span style="color:#f92672">.</span>loop<span style="color:#f92672">.</span>run_forever()
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">run_coro</span>(self, coro):
+        <span style="color:#66d9ef">return</span> asyncio<span style="color:#f92672">.</span>run_coroutine_threadsafe(coro, loop<span style="color:#f92672">=</span>self<span style="color:#f92672">.</span>loop)<span style="color:#f92672">.</span>result()
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">stop</span>(self):
+        self<span style="color:#f92672">.</span>loop<span style="color:#f92672">.</span>call_soon_threadsafe(self<span style="color:#f92672">.</span>loop<span style="color:#f92672">.</span>stop)
+        self<span style="color:#f92672">.</span>join()
+        self<span style="color:#f92672">.</span>running <span style="color:#f92672">=</span> False</code></pre></div>
+<p>因为 <a href="https://docs.python.org/3/library/asyncio-task.html#asyncio.run_coroutine_threadsafe"><code>asyncio.run_coroutine_threadsafe</code></a> 的返回值为 <a href="https://docs.python.org/3/library/concurrent.futures.html#concurrent.futures.Future"><code>concurrent.futures.Future</code></a>，可以直接执行其 <a href="https://docs.python.org/3/library/concurrent.futures.html#concurrent.futures.Future.result"><code>result</code></a> 方法，函数会等待直到协程执行完毕并返回结果。</p>
+
+<p>下面的例子展示了如何使用 <code>AsyncioEventLoopThread</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">async <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">hello_world</span>():
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;hello world&#34;</span>)
+
+async <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">make_request</span>():
+    await asyncio<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">1</span>)
+
+thr <span style="color:#f92672">=</span> AsyncioEventLoopThread()
+thr<span style="color:#f92672">.</span>start()
+<span style="color:#66d9ef">try</span>:
+    thr<span style="color:#f92672">.</span>run_coro(hello_world())
+    thr<span style="color:#f92672">.</span>run_coro(make_request())
+<span style="color:#66d9ef">finally</span>:
+    thr<span style="color:#f92672">.</span>stop()</code></pre></div>
+<p><strong>注意，不要用两个不同的 event loop 运行同样的协程</strong></p>
+
+<h2 id="在不同的协程中分享对象">在不同的协程中分享对象</h2>
+
+<p>为了达到这个目的，应该继承 <code>AsyncioEventLoopThread</code> 或直接修改它，来持用需要在协程间被分享的对象。</p>
+
+<p>使用 <code>contextvars</code> 去在协程间分享对象时，在运行协程前必须要把需要分享的对象保存在 <code>contextvars.Context</code> 里面。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> contextvars
+<span style="color:#f92672">import</span> aiohttp
+
+var_session <span style="color:#f92672">=</span> contextvars<span style="color:#f92672">.</span>ContextVar(<span style="color:#e6db74">&#39;session&#39;</span>)
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">FetcherThread</span>(AsyncioEventLoopThread):
+    <span style="color:#66d9ef">def</span> __init__(self, <span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs):
+        super()<span style="color:#f92672">.</span>__init__(<span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs)
+        self<span style="color:#f92672">.</span>_session <span style="color:#f92672">=</span> None
+        self<span style="color:#f92672">.</span>_event_session_created <span style="color:#f92672">=</span> threading<span style="color:#f92672">.</span>Event()
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">run_coro</span>(self, coro):
+        self<span style="color:#f92672">.</span>_event_session_created<span style="color:#f92672">.</span>wait()
+        var_session<span style="color:#f92672">.</span>set(self<span style="color:#f92672">.</span>session)
+        <span style="color:#66d9ef">return</span> super()<span style="color:#f92672">.</span>run_coro(coro)
+
+    async <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">_create_session</span>(self):
+        self<span style="color:#f92672">.</span>session <span style="color:#f92672">=</span> aiohttp<span style="color:#f92672">.</span>ClientSession()
+
+    async <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">_close_session</span>(self):
+        await self<span style="color:#f92672">.</span>session<span style="color:#f92672">.</span>close()
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">run</span>(self):
+        fut <span style="color:#f92672">=</span> asyncio<span style="color:#f92672">.</span>run_coroutine_threadsafe(self<span style="color:#f92672">.</span>_create_session(), loop<span style="color:#f92672">=</span>self<span style="color:#f92672">.</span>loop)
+        fut<span style="color:#f92672">.</span>add_done_callback(<span style="color:#66d9ef">lambda</span> _: self<span style="color:#f92672">.</span>_event_session_created<span style="color:#f92672">.</span>set())
+        super()<span style="color:#f92672">.</span>run()
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">stop</span>(self):
+        self<span style="color:#f92672">.</span>run_coro(self<span style="color:#f92672">.</span>_close_session())
+        super()<span style="color:#f92672">.</span>stop()</code></pre></div>
+<p>下面的例子展示了如何爬取 <a href="https://github.com">github.com</a> 的网页源码。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">async <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">make_request</span>():
+    session <span style="color:#f92672">=</span> var_session<span style="color:#f92672">.</span>get()
+    async <span style="color:#66d9ef">with</span> session<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;https://github.com&#34;</span>) <span style="color:#66d9ef">as</span> resp:
+        resp<span style="color:#f92672">.</span>raise_for_status()
+        <span style="color:#66d9ef">return</span> await resp<span style="color:#f92672">.</span>text()
+
+
+thr <span style="color:#f92672">=</span> FetcherThread()
+thr<span style="color:#f92672">.</span>start()
+<span style="color:#66d9ef">try</span>:
+    text <span style="color:#f92672">=</span> thr<span style="color:#f92672">.</span>run_coro(make_request())
+    <span style="color:#66d9ef">print</span>(text)
+<span style="color:#66d9ef">finally</span>:
+    thr<span style="color:#f92672">.</span>stop()</code></pre></div>
+<h2 id="参考">参考</h2>
+
+<ul>
+<li><a href="https://docs.python.org/3/library/asyncio-dev.html#concurrency-and-multithreading">Concurrency and Multithreading | Developing with asyncio</a></li>
+<li><a href="https://docs.python.org/3/library/contextvars.html#asyncio-support">asyncio support | contextvars — Context Variables</a></li>
+<li><a href="https://docs.python.org/3/library/threading.html#event-objects">Event Objects | threading — Thread-based parallelism</a></li>
+</ul>
+
+
+            </div>
+            
+            <br>
+            <div class="share">
+                  
+                  <a href="" class="ssk ssk-facebook"></a>
+                  
+                  
+                  <a href="" class="ssk ssk-twitter"></a>
+                  
+                  
+                  <a href="" class="ssk ssk-google-plus"></a>
+                  
+                  
+                  <a href="" class="ssk ssk-linkedin"></a>
+                  
+            </div>
+            
+            
+            <br>
+            <div class="navigation">
+                
+                <div>
+                    <img class="icon" src="https://linw1995.com/img/back.svg" alt="back" />
+                    <a href="https://linw1995.com/blog/%E6%88%91%E7%9A%84-Shell-%E9%85%8D%E7%BD%AE/">我的 Shell 配置</a>
+                </div>
+                
+                <div style="width: 100%;"></div>
+                
+            </div>
+            
+            
+            <br>
+            <div class="disqus">
+                <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "linw1995" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+            </div>
+            
+
+            
+            
+
+            
+
+            
         </div>
     </div>
 </div>
+
+
+
 <div class="footer column">
     <div class="container">
 
@@ -1205,10 +1397,6 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
             </a>
         
 
-        
-            <a href="https://linw1995.com/tags/Asyncio/index.xml">
-                <img class="icon" src="https://linw1995.com/img/rss.svg" alt="rss" />
-            </a>
         
 
         </div>

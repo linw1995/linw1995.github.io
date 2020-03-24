@@ -17,10 +17,7 @@
       <pubDate>Mon, 23 Mar 2020 22:45:59 +0800</pubDate>
       
       <guid>https://linw1995.com/blog/%E5%A6%82%E4%BD%95%E7%94%A8-c-%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA-Python-Awaitable-%E5%87%BD%E6%95%B0/</guid>
-      <description>这是一个取巧的方式，用 C 实现一个普通的 Python 函数，但返回一个 asyncio.Future 对象。用副线程去执行，等到执行有结果后，再调用 asyncio.Future.set_result 方法去设置函数的结果。先看一下直接用 Python 的话，是怎么实现这个的。
-import asyncio import os import threading def call_system(cmd: str, fut: asyncio.Future): exit_code = os.system(cmd) loop = fut.get_loop() loop.call_soon_threadsafe(fut.set_result, exit_code) def system(cmd): fut = asyncio.Future() threading.Thread(target=call_system, args=(cmd, fut)).start() return fut 可以注意到副线程并没有直接执行 Future.set_result 。 因为从副线程回调的话，必须调用 loop.call_soon_threadsafe 去让 loop 去调度回调。 避免了执行await spam.system(&#39;ls&#39;) 卡住。
-现在需要做的事，就是把以上的代码翻译成 C 代码
-#define PY_SSIZE_T_CLEAN #include &amp;lt;Python.h&amp;gt;#include &amp;lt;pthread.h&amp;gt;#include &amp;lt;stdio.h&amp;gt; struct call_system_ctx { char *command; PyObject *fut; }; static void *call_system(void *args) { printf(&amp;#34;=== pthread launch\n&amp;#34;); struct call_system_ctx *ctx = (struct call_system_ctx *)args; printf(&amp;#34;=== call system(%s)\n&amp;#34;, ctx-&amp;gt;command); int exit_code = system(ctx-&amp;gt;command); printf(&amp;#34;=== call system(%s) done\n&amp;#34;, ctx-&amp;gt;command); printf(&amp;#34;=== acquire GIL\n&amp;#34;); PyGILState_STATE gstate = PyGILState_Ensure(); PyObject *loop = PyObject_CallMethod(ctx-&amp;gt;fut, &amp;#34;get_loop&amp;#34;, NULL); PyObject *set_result = PyObject_GetAttrString(ctx-&amp;gt;fut, &amp;#34;set_result&amp;#34;); printf(&amp;#34;=== schedule callback\n&amp;#34;); PyObject *handler = PyObject_CallMethod(loop, &amp;#34;call_soon_threadsafe&amp;#34;, &amp;#34;(O,i)&amp;#34;, set_result, exit_code); Py_DECREF(handler); Py_DECREF(set_result); Py_DECREF(loop); Py_DECREF(ctx-&amp;gt;fut); printf(&amp;#34;=== release GIL\n&amp;#34;); PyGILState_Release(gstate); printf(&amp;#34;=== pthread exit\n&amp;#34;); free(ctx); pthread_exit(NULL); return 0; } static PyObject *spam_system(PyObject *self, PyObject *args) { char *command; if (!</description>
+      <description></description>
     </item>
     
     <item>
@@ -29,10 +26,7 @@ import asyncio import os import threading def call_system(cmd: str, fut: asyncio
       <pubDate>Sun, 15 Mar 2020 11:49:59 +0800</pubDate>
       
       <guid>https://linw1995.com/blog/%E5%A6%82%E4%BD%95%E5%9C%A8%E7%BA%BF%E7%A8%8B%E9%87%8C%E8%B7%91%E5%8D%8F%E7%A8%8B/</guid>
-      <description>当使用不支持 async/await 协程的 web 框架时，想去使用协程来加快与其他服务的链接， 比如链接 Redis，发起大量网络请求等。所以我们需要在线程里跑 asyncio event loop。
-创建用来跑 asyncio event loop 线程 import asyncio import threading class AsyncioEventLoopThread(threading.Thread): def __init__(self, *args, loop=None, **kwargs): super().__init__(*args, **kwargs) self.loop = loop or asyncio.new_event_loop() self.running = False def run(self): self.running = True self.loop.run_forever() def run_coro(self, coro): return asyncio.run_coroutine_threadsafe(coro, loop=self.loop).result() def stop(self): self.loop.call_soon_threadsafe(self.loop.stop) self.join() self.running = False 因为 asyncio.run_coroutine_threadsafe 的返回值为 concurrent.futures.Future，可以直接执行其 result 方法，函数会等待直到协程执行完毕并返回结果。
-下面的例子展示了如何使用 AsyncioEventLoopThread
-async def hello_world(): print(&amp;#34;hello world&amp;#34;) async def make_request(): await asyncio.</description>
+      <description></description>
     </item>
     
     <item>
@@ -41,17 +35,7 @@ async def hello_world(): print(&amp;#34;hello world&amp;#34;) async def make_req
       <pubDate>Fri, 13 Mar 2020 00:02:00 +0800</pubDate>
       
       <guid>https://linw1995.com/blog/%E6%88%91%E7%9A%84-Shell-%E9%85%8D%E7%BD%AE/</guid>
-      <description>统一各个开发环境，有助于平滑地切换，避免每次切换导致的生疏感，降低码力。当然公司的环境就别瞎搞了。
-
- 这个 GIF 示例来自 starship 的 README。 其 Shell 为 fish Shell ，所以自带了自动补全、历史命令展示和命令高亮等功能。 fish 也是一个很好用的 Shell，感兴趣的可以自行体验一下。
- 以下是需要安装的工具列表
- zsh ohmyzsh starship antibody  本文只以 MacOS 为例，而其他 OS 的安装方式，请仔细阅读以上工具的文档。
- 安装 zsh
-brew install zsh chsh -s /bin/zsh 执行以上命令安装 zsh，再重启终端即可发现 Shell 变成了 zsh。
- 安装 ohmyzsh
-sh -c &amp;#34;$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)&amp;#34; 执行以上命令安装 ohmyzsh
- 安装 starship
-brew install starship 执行以上命令安装 starship，然后把 eval &amp;quot;$(starship init zsh)&amp;quot; 写入到 ~/.zshrc 文件末尾。 再执行 $SHELL 就可以看到 Shell 变漂亮了～</description>
+      <description>分享并记录一下我的 Shell 配置</description>
     </item>
     
     <item>
@@ -60,17 +44,7 @@ brew install starship 执行以上命令安装 starship，然后把 eval &amp;qu
       <pubDate>Tue, 10 Mar 2020 01:15:00 +0800</pubDate>
       
       <guid>https://linw1995.com/blog/%E7%BD%91%E7%AB%99%E8%A7%82%E6%B5%8B%E5%B7%A5%E5%85%B7/</guid>
-      <description>通过 Chrome 本身的支持及集成 mitmproxy 这一伟大的工具对一个网站观测（爬取分析），做到开箱即用，完全沙盒，全程中间人抓包。
-环境配置  安装 chrome
-这就不需要多说什么了吧。如果是 MacOS 安装的 Chrome，其 CLI 路径为 /Applications/Google Chrome.app/Contents/MacOS/Google Chrome
- 安装 mitm_chrome
-CLI 工具，整合了 mitmproxy 与 Chrome 。能十分方便地快速启动，即开即用。
-可以通过 pip 安装
-pip install git+https://github.com/linw1995/mitm_chrome.git@master 证书安装
-参考 mitmproxy 的文档安装一下，About Certificates | mitmproxy
-  使用姿势 在 MacOS 上
-mitm_chrome --chrome-path=&amp;#39;/Applications/Google Chrome.app/Contents/MacOS/Google Chrome&amp;#39; mitmproxy 在有 chrome 命令情况下，无需指定 --chrome-path 参数
-mitm_chrome mitmproxy 后记 目前，我发现 Chrome 无法通过 CLI 去指定使用自定的证书，只能使用预先安装好的证书。应该有办法的，不然 seleniumwire 项目怎么做到抓包的，这个以后有时间再研究研究吧。</description>
+      <description>如何搭建一个即开即用的网站观测工具</description>
     </item>
     
     <item>
@@ -79,10 +53,7 @@ mitm_chrome mitmproxy 后记 目前，我发现 Chrome 无法通过 CLI 去指�
       <pubDate>Fri, 28 Feb 2020 23:59:59 +0800</pubDate>
       
       <guid>https://linw1995.com/blog/%E5%A6%82%E4%BD%95%E5%9C%A8%E6%97%A0%E5%A4%B4%E6%A8%A1%E5%BC%8F%E4%B8%8B%E7%9A%84%E8%B0%B7%E6%AD%8C%E6%B5%8F%E8%A7%88%E5%99%A8%E8%AE%BE%E7%BD%AE%E5%9C%B0%E7%90%86%E4%BD%8D%E7%BD%AE/</guid>
-      <description> 谷歌到很多方法。试了一个又一个，但大部分方法都过时了。所幸最后发现了个解决办法，就是用 Chrome Devtools Protocol。
-以下是一个简单的例子，用最常用的 selenium 来执行 Chrome Devtools Protocol 命令。
-import time from selenium.webdriver import Chrome, ChromeOptions options = ChromeOptions() options.add_argument(&amp;#34;--headless&amp;#34;) driver = Chrome(options=options) driver.execute_cdp_cmd( &amp;#34;Browser.grantPermissions&amp;#34;, { &amp;#34;origin&amp;#34;: &amp;#34;https://www.openstreetmap.org/&amp;#34;, &amp;#34;permissions&amp;#34;: [&amp;#34;geolocation&amp;#34;] }, ) driver.execute_cdp_cmd( &amp;#34;Emulation.setGeolocationOverride&amp;#34;, { &amp;#34;latitude&amp;#34;: 35.689487, &amp;#34;longitude&amp;#34;: 139.691706, &amp;#34;accuracy&amp;#34;: 100, }, ) driver.get(&amp;#34;https://www.openstreetmap.org/&amp;#34;) driver.find_element_by_xpath(&amp;#34;//span[@class=&amp;#39;icon geolocate&amp;#39;]&amp;#34;).click() time.sleep(3) # wait for the page full loaded driver.get_screenshot_as_file(&amp;#34;screenshot.png&amp;#34;) 
-Refecences  Browser.grantPermissions | Chrome Devtools Protocol Emulation.setGeolocationOverride | Chrome Devtools Protocol  </description>
+      <description>How to grant geolocation permission and override it on headless Chrome.</description>
     </item>
     
     <item>
@@ -91,11 +62,7 @@ Refecences  Browser.grantPermissions | Chrome Devtools Protocol Emulation.setGeo
       <pubDate>Fri, 17 Jan 2020 23:59:59 +0000</pubDate>
       
       <guid>https://linw1995.com/blog/%E6%A0%91%E8%8E%93%E6%B4%BE%E7%B3%BB%E7%BB%9F%E7%83%A7%E5%BD%95%E5%8F%8A-SSH-%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5/</guid>
-      <description>很久之前入了个树莓派 3B+，本来打算来搭个 nas 的。但后来买了群晖ds218+，树莓派就置灰了许久。最近入了个 Nintendo Switch，打算折腾一下用来和基友们联机，就翻出置灰许久的树莓派。本文就来记录一下是怎么折腾这台树莓派。
-系统烧录 使用到的硬件  树莓派本体（三代 B+ 型） 电源 5V2.5A（Micro USB接口） SD 卡 （32 GB） SD 卡 USB 读卡器  新到的机子没有安装系统，甚至没有存储媒介。没有的话，需要购买一个大小合适的 SD 卡。 到官网下载合适的系统镜像，本文下载的是最简的镜像 Raspbian Buster Lite，内核版本为 4.19。下载完成后解压，得到 *.img 镜像文件，再用 balenaEtcher 软件来烧录到 SD 卡中。
- Installing operating system images
- 无界面链接 Wi-Fi（用网线的可跳过） 无界面怎么配置 Wi-Fi 链接呢？通过在烧录好的 SD 卡的 boot 分区，写入一个配置文件 wpa_supplicant.conf。其内容如下，替换尖括号的内容即可。刚烧录好的读卡器要重新拔插一次。
-ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev update_config=1 country=&amp;lt;Insert country code here&amp;gt; network={ ssid=&amp;#34;&amp;lt;Name of your WiFi&amp;gt;&amp;#34; psk=&amp;#34;&amp;lt;Password for your WiFi&amp;gt;&amp;#34; } 国家代码请看 ISO3166 | Wikipedia，中国的就是 CN</description>
+      <description>入手了个树莓派，记录一下折腾姿势</description>
     </item>
     
     <item>
@@ -104,8 +71,7 @@ ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev update_config=1 country=
       <pubDate>Sat, 09 Nov 2019 21:11:36 +0800</pubDate>
       
       <guid>https://linw1995.com/projects/jsonpath/</guid>
-      <description>用来提取 JSON 数据的表达式。
- 源码  </description>
+      <description></description>
     </item>
     
     <item>
@@ -114,9 +80,7 @@ ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev update_config=1 country=
       <pubDate>Sun, 18 Aug 2019 23:59:59 +0000</pubDate>
       
       <guid>https://linw1995.com/blog/%E6%84%89%E5%BF%AB%E5%9C%B0%E7%94%A8-C-%E5%9C%A8-LeetCode-%E4%B8%8A%E5%88%B7%E9%A2%98/</guid>
-      <description>当在用 C 在 LeetCode 上刷题，难免无法一次 AC。而在 LeetCode 上又无法调试，只能用 printf 大法，输出一些简单的日志，比如代码运行时的变量值等。当代码 AC 后，为了降低代码运行的时间消耗，则需要把 printf 的代码删除或者注释掉。这就有点麻烦了，因为使用 printf 的代码越多，需要删除或注释掉的地方就越多。
-通过使用C的预处理指令 #define, #ifdef, #else, #endif 这几个简单的指令，再加上函数式的宏（Function-like Macros），就可以只注释一行代码，即可把日志输出去掉。听起来是不是很方便呢？接下来就用 LeetCode 的第 2 题，两数相加，来据一个简单的例子。
-#define __WITH_LOG__  #ifdef __WITH_LOG__ #include &amp;lt;stdio.h&amp;gt;#define LOG(message, args...) \ fprintf(stdout, &amp;#34;| %s:%d | &amp;#34; message &amp;#34;\n&amp;#34;, __FUNCTION__, __LINE__, ##args) #else #define LOG(message, args...) #endif  struct ListNode *addTwoNumbers(struct ListNode *l1, struct ListNode *l2) { struct ListNode dummy; struct ListNode *last = &amp;amp;dummy; int inc = 0; while (inc || l1 || l2) { last-&amp;gt;next = malloc(sizeof(struct ListNode)); last = last-&amp;gt;next; last-&amp;gt;val = inc; LOG(&amp;#34;last-&amp;gt;val=inc; val=%d&amp;#34;, inc); if (l1) { last-&amp;gt;val += l1-&amp;gt;val; LOG(&amp;#34;last-&amp;gt;val+=l1-&amp;gt;val; l1-&amp;gt;val=%d, last-&amp;gt;val=%d&amp;#34;, l1-&amp;gt;val, last-&amp;gt;val); } if (l2) { last-&amp;gt;val += l2-&amp;gt;val; LOG(&amp;#34;last-&amp;gt;val+=l2-&amp;gt;val; l2-&amp;gt;val=%d, last-&amp;gt;val=%d&amp;#34;, l2-&amp;gt;val, last-&amp;gt;val); } if (last-&amp;gt;val &amp;gt; 9) { last-&amp;gt;val -= 10; inc = 1; } else { inc = 0; } if (l1) l1 = l1-&amp;gt;next; if (l2) l2 = l2-&amp;gt;next; } last-&amp;gt;next = 0; return dummy.</description>
+      <description>通过宏来打日志，愉快地用 C 在 LeetCode 上刷题</description>
     </item>
     
     <item>
@@ -125,10 +89,7 @@ ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev update_config=1 country=
       <pubDate>Sun, 04 Aug 2019 23:59:59 +0000</pubDate>
       
       <guid>https://linw1995.com/blog/%E7%94%A8-docker-compose-%E9%83%A8%E7%BD%B2-MongoDB-Replica-Set-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/</guid>
-      <description>前言 话不多说，直接进正题
-如何搭建和配置 把以下内容写入 docker-compose.yml 文件中。然后运行 docker-compose up -d --scale mongo=3，就可以启动三个 MongoDB 服务。接下来我们要把这三个 MongoDB 节点配置成一组 Replica Set
-version: &amp;#39;3.5&amp;#39; services: mongo: image: mongo ports: - &amp;#34;27017-27118:27017&amp;#34; command: mongod --replSet main 把以下内容写入 utils.py 文件中
-import subprocess as sp def get_node_ports(): ports = [] idx = 1 while True: try: output = sp.check_output( f&amp;#34;docker-compose port --index {idx} mongo 27017&amp;#34;, shell=True, encoding=&amp;#34;utf-8&amp;#34;, stderr=sp.DEVNULL, ) except sp.CalledProcessError: break port = output.split(&amp;#34;:&amp;#34;)[1] ports.append(int(port)) idx += 1 if not ports: raise RuntimeError(&amp;#34;no node is running.</description>
+      <description>用 docker-compose 搭建一组 MongoDB Replica Set 来支持 MongoDB ChangeStream 的开发环境，在通过 motor 或者 pymongo 去使用，以便开发测试</description>
     </item>
     
     <item>
@@ -137,14 +98,7 @@ import subprocess as sp def get_node_ports(): ports = [] idx = 1 while True: try
       <pubDate>Mon, 29 Jul 2019 23:59:59 +0000</pubDate>
       
       <guid>https://linw1995.com/blog/Scrapy-%E7%9A%84%E5%B9%B6%E5%8F%91%E5%A4%84%E7%90%86/</guid>
-      <description>前言 看大型项目的源码时，经常摸不着头脑，耗时但收益少，所以也就不容易坚持下去。但如果带着问题来看的话，屏蔽掉问题无关的代码，专注于相关的，看看能不能真正的从源码中学习到好东西
-问题: Scrapy 的并发处理 在 Scrapy 的文档中提到可以通过配置 DOWNLOAD_DELAY 来控制请求（request）间的时间间隔，配置 CONCURRENT_REQUESTS 来限制请求（request）的并发数（粒度可基于域名，或者 IP 地址）。甚至可以通过使用 Auto-Throttling 自动节流插件，来自动地且动态的调整这些配置项。
-这样我们就有了以下这两个问题
- 如何并发地处理请求 如何动态地改变配置项  以下的源码分析基于版本号为 1.7.2 的 scrapy 项目
-如何并发地处理请求 scrapy/core/downloader/__init__.pyL138-L160 里的 Downloader 类的类方法 _process_queue 就负责处理 scrapy 的并发请求
-为了更好的理解这函数的代码，首先要确定什么情况下 _process_queue 才会被调用
- 当新的请求进入队列时 L135 当请求完成网络处理时 L186 当不满足 DONWLOAD_DELAY 时的延迟调用 L148  以下就是该函数的代码，加上了些注释方便大家理解
-def _process_queue(self, spider, slot): if slot.latercall and slot.latercall.active(): # 由于同个 slot 会被 _process_queue 重复调用多次，情况 1，2 # 当情况 3 在处理时，则不执行 return # Delay queue processing if a download_delay is configured now = time() # 获取下载延迟，若是启用了 randomize_delay 则每次会获取到不同的下载延迟 delay = slot.</description>
+      <description>关于 Scrapy 的并发处理的一些思考</description>
     </item>
     
     <item>
@@ -153,11 +107,7 @@ def _process_queue(self, spider, slot): if slot.latercall and slot.latercall.act
       <pubDate>Wed, 17 Jul 2019 23:59:59 +0000</pubDate>
       
       <guid>https://linw1995.com/blog/%E7%94%A8%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%8A%A0%E9%80%9F%E7%88%AC%E8%99%AB%E7%9A%84-lxml-%E8%A7%A3%E6%9E%90/</guid>
-      <description>当编写一个爬虫时，会使用 lxml 库来解析 HTML 文件。当爬取到了一个超大且复杂的 HTML 文件，解析起来十分耗费时间，进而影响了爬虫的正常运行
-为了不影响爬虫的正常运行，尝试把解析任务交给线程池来处理
-模拟爬虫 先随便准备一个 html 文件，就直接从 lxml 的文档上下载一个
-wget https://lxml.de/tutorial.html -O example.html 举一个重解析的模拟爬虫例子，每次请求的 io 时间假定为 0.01s ，请求并发数无上限，总量为 2000 个。
-import asyncio import time from pathlib import Path from lxml import html _html_text = None _latest_fetched = 0 async def fetch_text(): # 模拟爬取 await asyncio.sleep(0.01) # 记录最后的一个请求的结束时间 global _latest_fetched _latest_fetched = time.perf_counter() return _html_text def get_title(text): doc = html.fromstring(text) return doc.xpath(&amp;#34;//title/text()&amp;#34;)[0] async def create_task(): text = await fetch_text() title = get_title(text) return title async def main(): futs = [] for _ in range(2000): fut = asyncio.</description>
+      <description></description>
     </item>
     
     <item>
@@ -166,8 +116,7 @@ import asyncio import time from pathlib import Path from lxml import html _html_
       <pubDate>Thu, 18 Apr 2019 00:29:50 +0000</pubDate>
       
       <guid>https://linw1995.com/projects/data_extractor/</guid>
-      <description>整合 XPath，CSS 选择器和 JSONPath 用来提取互联网上的数据。
- 源码 文档  </description>
+      <description></description>
     </item>
     
     <item>
@@ -176,13 +125,7 @@ import asyncio import time from pathlib import Path from lxml import html _html_
       <pubDate>Tue, 29 Jan 2019 23:59:59 +0000</pubDate>
       
       <guid>https://linw1995.com/blog/%E4%B8%A4%E7%A7%8D%E6%96%B9%E5%BC%8F%E6%9D%A5%E7%94%A8-Python-logging-%E8%AE%B0%E5%BD%95%E9%A2%9D%E5%A4%96%E7%9A%84%E5%80%BC/</guid>
-      <description>前言 有两种方式来用 Python logging 记录额外的值
- 使用 extra 参数 向 args 传入字典结构的数据  使用 extra 参数 通过 log 方法的 extra 参数可以来记录而外的值。通过 LogRecord.extra 获取，配合 LogFilter 及 LoggerAdapter 使用。还可以通过配置 Formatter 打印出该值
-logging.basicConfig(format=&amp;#34;%(ip)s- %(message)s&amp;#34;) logging.info(&amp;#34;test message&amp;#34;, extra={&amp;#34;ip&amp;#34;: &amp;#34;127.0.0.1&amp;#34;}) 其输出
-127.0.0.1 - test message 使用 Formatter 十分方便，但一旦没有通过 extra 传入对应的键值，则会导致日志写出异常
-logger = logging.getLogger() adapted_logger = logging.LoggerAdapter(logger, extra={&amp;#34;ip&amp;#34;: &amp;#34;127.0.0.1&amp;#34;}) adapted_logger.info(&amp;#34;test message&amp;#34;) 可通过 LoggerAdapter 来给所有 log 方法加上 extra 参数
-不过官方的实现很奇怪，直接覆盖掉了原本的 extra 参数。
- LoggerAdapter.process LoggerAdapter.log  通过继承它，修改 process 方法即可</description>
+      <description></description>
     </item>
     
     <item>
@@ -191,15 +134,7 @@ logger = logging.getLogger() adapted_logger = logging.LoggerAdapter(logger, extr
       <pubDate>Sat, 22 Dec 2018 22:45:00 +0000</pubDate>
       
       <guid>https://linw1995.com/blog/Python-%E7%89%88%E6%9C%AC%E5%8F%8A%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86%E7%9A%84%E6%9C%80%E7%BB%88%E6%96%B9%E6%A1%88-pyenv-Pipenv/</guid>
-      <description>前言 作为个程序员，总会遇到这些问题：如何升级系统的 Python 版本；如何安装多个 Python 版本；如何隔离项目的依赖；在开发机上好好的，为什么线上、CI 就运行失败了呢
- 通过下载 Python 源码编译安装（最好不要覆盖掉系统原有的 Python，可安装在自己的 home 目录或者其他路径下） 通过 Virtualenv 来隔离项目 Python 环境 通过 pip freeze &amp;gt; requirements.txt 和 pip install -r requirements.txt来固定依赖的版本，来确保重新安装后的 Python 环境是一致  随着开发项目的增多，mac 上的 Python 环境越来越复杂，就像下面这张图一样。面对这样的复杂的环境，管理起来太折磨人了，且会因冗余而浪费硬盘空间。
-
-那么我们如何来管理越来越复杂的 Python 环境？解决该问题的最终方案是：使用 pyenv 管理多个 python 版本；使用 Pipenv 管理项目所需要的依赖。
-pyenv Github Repo: pyenv/pyenv
-参照此教程安装 pyenv
- installation | pyenv
- 使用
-pyenv install --list # 列出所有可安装的版本 pyenv install 3.7.1 # 安装指定版本 pyenv shell 3.</description>
+      <description>pyenv - python多版本管理；Pipenv - 项目依赖管理</description>
     </item>
     
     <item>
@@ -208,12 +143,7 @@ pyenv install --list # 列出所有可安装的版本 pyenv install 3.7.1 # 安�
       <pubDate>Tue, 24 Oct 2017 08:52:58 +0000</pubDate>
       
       <guid>https://linw1995.com/blog/%E8%87%AA%E5%B7%B1%E6%9D%A5%E5%86%99%E5%8E%8B%E7%BC%A9%E7%AE%97%E6%B3%95LZW/</guid>
-      <description>之前用哈夫曼算法，把固定长的字符编码根据其出现次数，编码为不固定长的编码。而这次介绍的算法恰恰相反，该算法是把不等长的字符串，编码为固定长的编码。
-LZW 蓝博-立夫-卫曲编码法（Lempel-Ziv-Welch，缩写LZW），是亚伯拉罕·蓝波、杰可布·立夫与泰瑞·卫曲共同提出的一种无损数据压缩演算法。与霍夫曼编码相比，LZW把不同长度的字符串转换为固定长的编码。该方法不需要事先对数据做任何分析，所以可以流式地对文件进行处理。
-原理 编码 举个简单的例子，如果有一份数据，内容中的字符只有&amp;rsquo;abc&amp;rsquo;三种。那么如何对它进行编码呢？
-首先先将单字符建立成一个字符串编码表，分别给予编号。
-| string | code | |--------|------| | a | 0 | | b | 1 | | c | 2 | 若数据为aabcaac，进过LZW编码后结果为 [0,0,1,2,3,2,]，过程如下
-| No. | cur | prefix | prefix + cur | in str-&amp;gt;code | code | add into str-&amp;gt;code | | --- | --- | ------ | ------------ | ------------ | ---- | ------------------ | | 1 | a | | a | true | | | | 2 | a | a | aa | false | 0 | aa -&amp;gt; 3 | | 3 | b | a | ab | false | 0 | ab -&amp;gt; 4 | | 4 | c | b | bc | false | 1 | bc -&amp;gt; 5 | | 5 | a | c | ca | false | 2 | ca -&amp;gt; 6 | | 6 | a | a | aa | true | | | | 7 | c | aa | aac | false | 3 | aac -&amp;gt; 7 | | 8 | | c | | | 2 | | 整个算法过程如下：</description>
+      <description>压缩算法究竟是怎么做到压缩的？本文就介绍一种简单的压缩算法，LZW算法</description>
     </item>
     
     <item>
@@ -222,12 +152,7 @@ LZW 蓝博-立夫-卫曲编码法（Lempel-Ziv-Welch，缩写LZW），是亚伯�
       <pubDate>Sun, 24 Sep 2017 22:24:08 +0000</pubDate>
       
       <guid>https://linw1995.com/blog/%E8%87%AA%E5%B7%B1%E6%9D%A5%E5%86%99%E5%8E%8B%E7%BC%A9%E7%AE%97%E6%B3%95%E5%93%88%E5%A4%AB%E6%9B%BC%E7%AE%97%E6%B3%95/</guid>
-      <description>一般文件的编码都是等长的，一些常用字符的编码与很少用到的等长，可若是编码是变长的呢？无疑可以使整个文件大小减小。为了解码时不遇到任何歧义的问题，则每个有效字符所代表的变长编码不能是其它字符的前缀，这种编码也叫做前缀编码。而如何做到这一点呢，接下的内容会尽可能地讲明白。
-哈夫曼算法 若是把等长的编码(一字节)用平衡二叉树来表示，字符共有256个，那么树的深度就有 $\log_{2}{256}=8$ 。
-如果变作变长编码，那么所有有儿子（child）的节点（node）都不能用来表示，唯有子叶（leaf，没有儿子的节点）才可以用来表示。这是因为每个有效字符所代表的变长编码不能是其它字符的前缀。而且树结构也不可能是平衡二叉树了，树的深度肯定会大于8。
-例如，有一份MIT-LICENCE.txt文件，其中空格&#39;&amp;nbsp;&#39;有163个，而字母&#39;v&#39;却只有一个。那么让&#39;&amp;nbsp;&#39;表示为110,&#39;v&#39;表示为0111011101，那么得省$(8 - 3) \times 163 - (8 - 10) \times 1 = 817$个bit。可见变长编码确确实实能起到压缩的作用。
-哈夫曼树 哈夫曼树Huffman Tree，也叫做最优二叉树，是一种带权路径长度最短的二叉树。所谓树的带权路径长度，就是树中所有的叶结点的权值乘上其到根结点的路径长度（若根结点为$0$层，叶结点到根结点的路径长度为叶结点的层数）。树的路径长度是从树根到每一结点的路径长度之和，记为$\operatorname{WPL}=(W_1 \times L_ 1+W_2 \times L_2+W_3 \times L_3+&amp;hellip;+W_n \times L_n)$，$N$个权值$W_i(i=1,2,&amp;hellip;n)$构成一棵有$N$个叶结点的二叉树，相应的叶结点的路径长度为$L_i(i=1,2,&amp;hellip;n)$。可以证明霍夫曼树的$\operatorname{WPL}$是最小的。
-/-40 /-40 /-40 /-| /-| /-| | \-48 | \-48 | | /-48 --| | | \-| | /-60 --| /-60 --| \-18 \-| | /-| | | /-30 | | \-20 | /-60 \-| \-| | /-| | /-18 | /-30 \-| \-20 \-| \-| | \-20 \-18 \-30 (0) (1) (2) 计算上面三颗树的$\operatorname{WPL}$：</description>
+      <description>压缩算法究竟是怎么做到压缩的？本文就介绍一种简单的压缩算法，哈夫曼算法</description>
     </item>
     
     <item>
@@ -236,9 +161,7 @@ LZW 蓝博-立夫-卫曲编码法（Lempel-Ziv-Welch，缩写LZW），是亚伯�
       <pubDate>Sun, 16 Jul 2017 21:28:07 +0000</pubDate>
       
       <guid>https://linw1995.com/blog/%E5%88%9D%E8%A7%A3Python%E5%B9%B6%E5%8F%91/</guid>
-      <description>前言 昨天（2017年7月15日）偶然看到这个视频，看完之后豁然开朗，忍不住要分享给大家。
-  并发Demo 视频中举了个例子，用socket写了个迷你服务，只有一个作用，计算Fibonacci……
-# -*- coding: utf-8 -*- # server.py import socket def fib(n): if n &amp;lt;= 2: return 1 else: return fib(n - 1) + fib(n - 2) def server(addr, port): sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM) sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1) sock.bind((addr, port)) sock.listen(5) while True: client, addr = sock.accept() print(&amp;#39;Connection&amp;#39;, addr) handler(client) def handler(client): while True: req = client.recv(100) if not req: break n = int(req) result = fib(n) resp = str(result).</description>
+      <description></description>
     </item>
     
     <item>
@@ -247,16 +170,7 @@ LZW 蓝博-立夫-卫曲编码法（Lempel-Ziv-Welch，缩写LZW），是亚伯�
       <pubDate>Sun, 21 May 2017 03:03:20 +0000</pubDate>
       
       <guid>https://linw1995.com/blog/%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%96%B9%E6%B3%95%E5%8F%8A%E5%BA%94%E7%94%A8/</guid>
-      <description>蒙特卡洛方法（英语：Monte Carlo method），也称统计模拟方法，是1940年代中期由于科学技术的发展和电子计算机的发明，而提出的一种以概率统计理论为指导的数值计算方法。是指使用随机数（或更常见的伪随机数）来解决很多计算问题的方法。
-20世纪40年代，在冯·诺伊曼，斯塔尼斯拉夫·乌拉姆和尼古拉斯·梅特罗波利斯在洛斯阿拉莫斯国家实验室为核武器计划工作时，发明了蒙特卡洛方法。因为乌拉姆的叔叔经常在摩纳哥的蒙特卡洛赌场输钱得名，而蒙特卡罗方法正是以概率为基础的方法。
-与它对应的是确定性算法。
-蒙特卡洛方法在金融工程学，宏观经济学，生物医学，计算物理学（如粒子输运计算、量子热力学计算、空气动力学计算）等领域应用广泛。
- 基本思想 把所求解的问题转换为某种随机分布的特征数，例如随机事件出现的概率，或者随机变量的期望值。通过随机抽样的方法，以随机事件出现的频率估计其概率，或者一抽样的数字特征估算随机变量的数学特征，并将其作为问题的解。
-应用 求解圆周率 圆形的面积为$A_s=\pi r^2$，正方形的面积为$A_q=(2r)^2$, 则产生一对随机数$(x_i, y_i)$落在圆内的概率为： $$ p=\frac{A_s}{A_q}=\frac{\pi r^2}{(2r)^2}=\frac{\pi}{4} $$ 只要不断产生一对对随机数$(x_i, y_i)$，由于大数法则（Law of large numbers），能以随机事件（落在圆内）出现的频率估计其概率，再求解$\pi$。
- 代码 Gist | Monte Carlo method applied to approximating the value of π.
- 计算定积分 假设我们要求解$f(x)=x^2$在$[0, 2]$间的积分，即下图函数曲线与$x$轴围成的面积
-其实，求解圆周率其实是在求函数$f(x)=\sqrt{1 - x^2}$在区间$[0, 1]$上的积分。
-偶然命中法 像求解圆周率那样，只要求解出一对随机数$(x_i,y_i),x_i\in[0,2],y_i\in[0,4]$落在曲线下方的概率，即可求出$f(x)=x^2$在$[0, 2]$间的积分结果。 $$ H(x, y)=\begin{cases} 1\qquad&amp;amp;if\quad y \le f(x) \\ 0 &amp;amp;else \end{cases}\\ F_n=A \frac{1}{n} \sum^{n}_{i=1} H(x_i,y_i) = h(b-a) \frac{1}{n}\sum^{n}_{i=1} H(x_i,y_i) $$ 抽样平均法 还有另外一种蒙特卡罗积分方法是基于计算的平均值理论，即函数的积分结果取决被积函数$f(x)$在$a\le x\le b$的平均值。为了确定这个平均值，用随机的$x_i$来取代规律的$x_i$，抽样平均值方法的积分估计值$F_n$为： $$ F_n=(b-a)\left\lt f\right\gt=\frac{b-a}{n}\sum^n_{i=1}f(x_i) $$</description>
+      <description>使用随机数来解决问题</description>
     </item>
     
     <item>
@@ -265,10 +179,7 @@ LZW 蓝博-立夫-卫曲编码法（Lempel-Ziv-Welch，缩写LZW），是亚伯�
       <pubDate>Fri, 05 May 2017 22:42:12 +0000</pubDate>
       
       <guid>https://linw1995.com/blog/%E4%BC%AA%E9%9A%8F%E6%9C%BA%E6%95%B0/</guid>
-      <description>序  伪随机性（英语：Pseudorandomness）是指一个过程似乎是随机的，但实际上并不是。例如伪随机数（或称伪乱数），是使用一个确定性的算法计算出来的似乎是随机的数序，因此伪随机数实际上并不随机。在计算伪随机数时假如使用的开始值不变的话，那么伪随机数的数序也不变。伪随机数的随机性可以用它的统计特性来衡量，其主要特征是每个数出现的可能性和它出现时与数序中其它数的关系。伪随机数的优点是它的计算比较简单，而且只使用少数数值很难推算出计算它的算法。一般人们使用一个假的随机数，比如电脑上的时间作为计算伪随机数的开始值。
- 产生随机数的方法  线性同余法 平方取中法 M-Sequence 梅森旋转算法 伪随机数二进制数列  其中使用最多的是线性同余法和梅森旋转算法，下面主要介绍一下线性同余法
-线性同余法（LCG linear congruential generator） 线性同余方法（LCG）是个产生伪随机数的方法。 它是根据递归公式： $$N_{j+1}\equiv (A\times N_{j}+C){\pmod {M}}$$ 其中$A,C,M$是产生器设定的常数。
-Python implementation class Random: def __init__(self, A, C, M, seed=0): self._A = A self._C = C self._M = M self._prev = seed % M def __call__(self): A = self._A C = self._C M = self._M prev = self._prev cur = self._prev = (A * prev + C) % M return cur / M def __repr__(self): return &amp;#39;Random(A={obj.</description>
+      <description>一般计算机产生的随机数都是伪随机数</description>
     </item>
     
     <item>
@@ -277,12 +188,7 @@ Python implementation class Random: def __init__(self, A, C, M, seed=0): self._A
       <pubDate>Thu, 27 Apr 2017 12:38:13 +0000</pubDate>
       
       <guid>https://linw1995.com/blog/AA%E6%A0%91%E7%9A%84%E5%B9%B3%E8%A1%A1%E4%B8%8E%E5%86%8D%E5%B9%B3%E8%A1%A1/</guid>
-      <description>介绍  AA 树在计算机科学一种形式的自平衡二叉查找树用于高效存储和检索序数据。 AA 树的名称是由它的发明者 Arne Andersson 而来。 AA 树是红黑树的一种变种，是 Arne Andersson 教授在1993年年在他的论文*&amp;ldquo;Balanced search trees made simple&amp;rdquo;*中介绍，设计的目的是减少红黑树考虑的不同情况，区别于红黑树的是， AA 树的红节点只能作为右叶子。换句话说，没有红节点可以是一个左子儿。这导致代替2-3-4树，从而大大简化了维护2-3树的模拟。维护红黑树的平衡需要考虑7种不同的情况:
-  因为 AA 树有严格的条件(红节点只能为右节点)，故只需考虑2种情形:
- AA 树是2-3树的模拟，2-3树和 AA 树是等距同构的。其节点类型如下
-平衡条件 树是用与高效的存储和检索数据的，为了维持其效率，必须维持其平衡结构。 平衡一颗红黑树需记录其颜色，而 AA 树是在每个节点记录其 level 这相当于红黑树节点的黑高度
- 所有叶节点的 level 都是1 每个左孩子的 level 恰好为其父亲的 level 减一 每个右孩子的 level 等于其父亲的 level 或为其父亲的 level 减一 每个右孙子的 level 严格小于其祖父节点的 level 每一个 level 大于1的节点有两个子节点  Skew &amp;amp; Split 对于 AA 树，维持其平衡的基本操作如下：
- 偏斜 Skew：使得子树中向左的水平边变成向右的。</description>
+      <description></description>
     </item>
     
     <item>
@@ -291,7 +197,7 @@ Python implementation class Random: def __init__(self, A, C, M, seed=0): self._A
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://linw1995.com/about/</guid>
-      <description>  毕业于 集美大学 · 应用物理学 现就职于 美图 · 爬虫工程师  社交链接  CodePen Codewars Github PSN stack overflow Steam Weibo  </description>
+      <description></description>
     </item>
     
     <item>
@@ -300,7 +206,7 @@ Python implementation class Random: def __init__(self, A, C, M, seed=0): self._A
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://linw1995.com/license/</guid>
-      <description>本作品采用知识共享署名-非商业性使用-禁止演绎 3.0 未本地化版本许可协议进行许可。</description>
+      <description></description>
     </item>
     
   </channel>

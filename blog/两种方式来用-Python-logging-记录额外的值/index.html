@@ -1163,7 +1163,7 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
 <li>向 args 传入字典结构的数据</li>
 </ol>
 
-<h2 id="使用-extra-参数">使用 <code>extra</code> 参数</h2>
+<h2 id="使用-extra-参数">使用 <code>extra</code> 参数</h2>
 
 <p>通过 <code>log</code> 方法的 <code>extra</code> 参数可以来记录而外的值。通过 <code>LogRecord.extra</code> 获取，配合 <code>LogFilter</code> 及 <code>LoggerAdapter</code> 使用。还可以通过配置 <code>Formatter</code> 打印出该值</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">logging<span style="color:#f92672">.</span>basicConfig(format<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">%(ip)s</span><span style="color:#e6db74"> - </span><span style="color:#e6db74">%(message)s</span><span style="color:#e6db74">&#34;</span>)
@@ -1196,7 +1196,7 @@ logging<span style="color:#f92672">.</span>info(<span style="color:#e6db74">&#34
 <p>其输出</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plain" data-lang="plain">test message from &#34;127.0.0.1&#34;
 test message from &#34;127.0.0.2&#34;</code></pre></div>
-<p>以这样的方式传入日志参数，比起 extra 来有更高的自由度。打日志时，可以随意的在 <code>msg</code> 中使用 <code>args</code></p>
+<p>以这样的方式传入日志参数，比起 extra 来有更高的自由度。打日志时，可以随意的在 <code>msg</code> 中使用 <code>args</code></p>
 
 <blockquote>
 <p>传入的 <code>args</code> 参数，可以从 <code>LogRecord.args</code> 获取

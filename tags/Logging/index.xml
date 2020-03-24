@@ -18,7 +18,7 @@
       
       <guid>https://linw1995.com/blog/%E4%B8%A4%E7%A7%8D%E6%96%B9%E5%BC%8F%E6%9D%A5%E7%94%A8-Python-logging-%E8%AE%B0%E5%BD%95%E9%A2%9D%E5%A4%96%E7%9A%84%E5%80%BC/</guid>
       <description>前言 有两种方式来用 Python logging 记录额外的值
- 使用 extra 参数 向 args 传入字典结构的数据  使用 extra 参数 通过 log 方法的 extra 参数可以来记录而外的值。通过 LogRecord.extra 获取，配合 LogFilter 及 LoggerAdapter 使用。还可以通过配置 Formatter 打印出该值
+ 使用 extra 参数 向 args 传入字典结构的数据  使用 extra 参数 通过 log 方法的 extra 参数可以来记录而外的值。通过 LogRecord.extra 获取，配合 LogFilter 及 LoggerAdapter 使用。还可以通过配置 Formatter 打印出该值
 logging.basicConfig(format=&amp;#34;%(ip)s- %(message)s&amp;#34;) logging.info(&amp;#34;test message&amp;#34;, extra={&amp;#34;ip&amp;#34;: &amp;#34;127.0.0.1&amp;#34;}) 其输出
 127.0.0.1 - test message 使用 Formatter 十分方便，但一旦没有通过 extra 传入对应的键值，则会导致日志写出异常
 logger = logging.getLogger() adapted_logger = logging.LoggerAdapter(logger, extra={&amp;#34;ip&amp;#34;: &amp;#34;127.0.0.1&amp;#34;}) adapted_logger.info(&amp;#34;test message&amp;#34;) 可通过 LoggerAdapter 来给所有 log 方法加上 extra 参数

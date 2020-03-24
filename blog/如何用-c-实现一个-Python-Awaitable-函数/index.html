@@ -1158,7 +1158,9 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
     
     
 
-<p>这是一个取巧的方式，用 C 实现一个普通的 Python 函数，但返回一个 <code>asyncio.Future</code> 对象。用副线程去执行，等到执行有结果后，再调用 <code>asyncio.Future.set_result</code> 方法去设置函数的结果。先看一下直接用 Python 的话，是怎么实现这个的。</p>
+<p>这是一个取巧的方式，用 C 实现一个普通的 Python 函数，但返回一个 <code>asyncio.Future</code> 对象。
+用副线程去执行，等到执行有结果后，再调用 <code>asyncio.Future.set_result</code> 方法去设置函数的结果。
+先看一下直接用 Python 的话，是怎么实现这个的。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> asyncio
 <span style="color:#f92672">import</span> os
 <span style="color:#f92672">import</span> threading
@@ -1174,7 +1176,7 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
     <span style="color:#66d9ef">return</span> fut</code></pre></div>
 <p>可以注意到副线程并没有直接执行 <code>Future.set_result</code> 。
 因为从副线程回调的话，必须调用 <code>loop.call_soon_threadsafe</code> 去让 <code>loop</code> 去调度回调。
-避免了执行<code>await spam.system('ls')</code> 卡住。</p>
+避免了执行 <code>await spam.system('ls')</code> 卡住。</p>
 
 <p>现在需要做的事，就是把以上的代码翻译成 C 代码</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#75715e">#define PY_SSIZE_T_CLEAN
@@ -1254,7 +1256,9 @@ PyMODINIT_FUNC <span style="color:#a6e22e">PyInit_spam</span>(<span style="color
 setup(name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;spam&#34;</span>, version<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;1.0&#34;</span>, ext_modules<span style="color:#f92672">=</span>[Extension(<span style="color:#e6db74">&#34;spam&#34;</span>, [<span style="color:#e6db74">&#34;spammodule.c&#34;</span>])])</code></pre></div>
 <h2 id="总结">总结</h2>
 
-<p>这个方法实现起来十分简单。当初在 Stackoverflow 看到一个回答，感觉很不错。链接给在下方了。大触只讲述了如何实现，但没有给具体的实现。所以本文算是对这个问题的一个补充。该回答提到的其他方式，有空我再补上其 C 代码的实现。展开的话，还可以分享一下 <code>async for</code> 和 <code>async with</code> 的 C 代码实现。</p>
+<p>这个方法实现起来十分简单。当初在 Stackoverflow 看到一个回答，感觉很不错。链接给在下方了。
+大触只讲述了如何实现，但没有给具体的实现。所以本文算是对这个问题的一个补充。
+该回答提到的其他方式，有空我再补上其 C 代码的实现。展开的话，还可以分享一下 <code>async for</code> 和 <code>async with</code> 的 C 代码实现。</p>
 
 <h2 id="参考">参考</h2>
 

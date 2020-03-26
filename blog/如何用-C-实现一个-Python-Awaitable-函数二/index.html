@@ -15,9 +15,9 @@
 <meta property="og:site_name" content="linw1995" />
 <meta property="og:locale" content="zh-cn" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://linw1995.com/blog/%E5%A6%82%E4%BD%95%E7%94%A8-C-%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA-Python-Awaitable-%E5%87%BD%E6%95%B0/" />
-<meta property="og:title" content="如何用 C 实现一个 Python Awaitable 函数" />
-<meta property="twitter:title" content="如何用 C 实现一个 Python Awaitable 函数">
+<meta property="og:url" content="https://linw1995.com/blog/%E5%A6%82%E4%BD%95%E7%94%A8-C-%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA-Python-Awaitable-%E5%87%BD%E6%95%B0%E4%BA%8C/" />
+<meta property="og:title" content="如何用 C 实现一个 Python Awaitable 函数（二）" />
+<meta property="twitter:title" content="如何用 C 实现一个 Python Awaitable 函数（二）">
 
     <meta property="og:image" content="https://linw1995.com//img/banner.png">
     <meta property="twitter:card" content="summary">
@@ -29,10 +29,10 @@
 <title>
 
 
-     linw1995 - 如何用 C 实现一个 Python Awaitable 函数 
+     linw1995 - 如何用 C 实现一个 Python Awaitable 函数（二） 
 
 </title>
-<link rel="canonical" href="https://linw1995.com/blog/%E5%A6%82%E4%BD%95%E7%94%A8-C-%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA-Python-Awaitable-%E5%87%BD%E6%95%B0/">
+<link rel="canonical" href="https://linw1995.com/blog/%E5%A6%82%E4%BD%95%E7%94%A8-C-%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA-Python-Awaitable-%E5%87%BD%E6%95%B0%E4%BA%8C/">
 
 
 <style media="screen">
@@ -1116,7 +1116,7 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
                     <div class="page-heading">
 
     
-    如何用 C 实现一个 Python Awaitable 函数
+    如何用 C 实现一个 Python Awaitable 函数（二）
     
 
 </div>
@@ -1128,7 +1128,7 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
                         
                     
                     
-                    <div class="reading-time middot">2 minute read</div>
+                    <div class="reading-time middot">1 minute read</div>
                     
                     
                       <div class="tags">
@@ -1158,116 +1158,17 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
     
     
 
-<p>这是一个取巧的方式，用 C 实现一个普通的 Python 函数，但返回一个 <code>asyncio.Future</code> 对象。
-用副线程去执行，等到执行有结果后，再调用 <code>asyncio.Future.set_result</code> 方法去设置函数的结果。
-先看一下直接用 Python 的话，是怎么实现这个的。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> asyncio
-<span style="color:#f92672">import</span> os
-<span style="color:#f92672">import</span> threading
+<h2 id="前言">前言</h2>
 
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">call_system</span>(cmd: str, fut: asyncio<span style="color:#f92672">.</span>Future):
-    exit_code <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>system(cmd)
-    loop <span style="color:#f92672">=</span> fut<span style="color:#f92672">.</span>get_loop()
-    loop<span style="color:#f92672">.</span>call_soon_threadsafe(fut<span style="color:#f92672">.</span>set_result, exit_code)
+<p>协程只是包装过的生成器，在实现生成器的基础上铁甲了</p>
 
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">system</span>(cmd):
-    fut <span style="color:#f92672">=</span> asyncio<span style="color:#f92672">.</span>Future()
-    threading<span style="color:#f92672">.</span>Thread(target<span style="color:#f92672">=</span>call_system, args<span style="color:#f92672">=</span>(cmd, fut))<span style="color:#f92672">.</span>start()
-    <span style="color:#66d9ef">return</span> fut</code></pre></div>
-<p>可以注意到副线程并没有直接执行 <code>Future.set_result</code> 。
-因为从副线程回调的话，必须调用 <code>loop.call_soon_threadsafe</code> 去让 <code>loop</code> 去调度回调。
-避免了执行 <code>await spam.system('ls')</code> 卡住。</p>
+<h2 id="python-实现">Python 实现</h2>
 
-<p>现在需要做的事，就是把以上的代码翻译成 C 代码</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#75715e">#define PY_SSIZE_T_CLEAN
-</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;Python.h&gt;</span><span style="color:#75715e">
-</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;pthread.h&gt;</span><span style="color:#75715e">
-</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
-</span><span style="color:#75715e"></span>
-<span style="color:#66d9ef">struct</span> call_system_ctx {
-  <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>command;
-  PyObject <span style="color:#f92672">*</span>fut;
-};
+<h2 id="c-实现">C 实现</h2>
 
-<span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">call_system</span>(<span style="color:#66d9ef">void</span> <span style="color:#f92672">*</span>args) {
-  printf(<span style="color:#e6db74">&#34;=== pthread launch</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
-  <span style="color:#66d9ef">struct</span> call_system_ctx <span style="color:#f92672">*</span>ctx <span style="color:#f92672">=</span> (<span style="color:#66d9ef">struct</span> call_system_ctx <span style="color:#f92672">*</span>)args;
-  printf(<span style="color:#e6db74">&#34;=== call system(%s)</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, ctx<span style="color:#f92672">-&gt;</span>command);
-  <span style="color:#66d9ef">int</span> exit_code <span style="color:#f92672">=</span> system(ctx<span style="color:#f92672">-&gt;</span>command);
-  printf(<span style="color:#e6db74">&#34;=== call system(%s) done</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, ctx<span style="color:#f92672">-&gt;</span>command);
-
-  printf(<span style="color:#e6db74">&#34;=== acquire GIL</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
-  PyGILState_STATE gstate <span style="color:#f92672">=</span> PyGILState_Ensure();
-  PyObject <span style="color:#f92672">*</span>loop <span style="color:#f92672">=</span> PyObject_CallMethod(ctx<span style="color:#f92672">-&gt;</span>fut, <span style="color:#e6db74">&#34;get_loop&#34;</span>, NULL);
-  PyObject <span style="color:#f92672">*</span>set_result <span style="color:#f92672">=</span> PyObject_GetAttrString(ctx<span style="color:#f92672">-&gt;</span>fut, <span style="color:#e6db74">&#34;set_result&#34;</span>);
-  printf(<span style="color:#e6db74">&#34;=== schedule callback</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
-  PyObject <span style="color:#f92672">*</span>handler <span style="color:#f92672">=</span> PyObject_CallMethod(loop, <span style="color:#e6db74">&#34;call_soon_threadsafe&#34;</span>, <span style="color:#e6db74">&#34;(O,i)&#34;</span>,
-                                          set_result, exit_code);
-  Py_DECREF(handler);
-  Py_DECREF(set_result);
-  Py_DECREF(loop);
-  Py_DECREF(ctx<span style="color:#f92672">-&gt;</span>fut);
-  printf(<span style="color:#e6db74">&#34;=== release GIL</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
-  PyGILState_Release(gstate);
-  printf(<span style="color:#e6db74">&#34;=== pthread exit</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
-  free(ctx);
-  pthread_exit(NULL);
-  <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-}
-
-<span style="color:#66d9ef">static</span> PyObject <span style="color:#f92672">*</span><span style="color:#a6e22e">spam_system</span>(PyObject <span style="color:#f92672">*</span>self, PyObject <span style="color:#f92672">*</span>args) {
-  <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>command;
-
-  <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>PyArg_ParseTuple(args, <span style="color:#e6db74">&#34;s&#34;</span>, <span style="color:#f92672">&amp;</span>command))
-    <span style="color:#66d9ef">return</span> NULL;
-
-  <span style="color:#75715e">// create a asyncio.Future object
-</span><span style="color:#75715e"></span>  PyObject <span style="color:#f92672">*</span>asyncio_module <span style="color:#f92672">=</span> PyImport_ImportModule(<span style="color:#e6db74">&#34;asyncio&#34;</span>);
-  PyObject <span style="color:#f92672">*</span>fut <span style="color:#f92672">=</span> PyObject_CallMethod(asyncio_module, <span style="color:#e6db74">&#34;Future&#34;</span>, NULL);
-  Py_DECREF(asyncio_module);
-  <span style="color:#75715e">// pass command and fut parameters
-</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">struct</span> call_system_ctx <span style="color:#f92672">*</span>ctx <span style="color:#f92672">=</span> malloc(<span style="color:#66d9ef">sizeof</span>(<span style="color:#66d9ef">struct</span> call_system_ctx));
-  ctx<span style="color:#f92672">-&gt;</span>command <span style="color:#f92672">=</span> command;
-  ctx<span style="color:#f92672">-&gt;</span>fut <span style="color:#f92672">=</span> fut;
-  <span style="color:#75715e">// increase the reference count of the asyncio.Future object, in case the
-</span><span style="color:#75715e"></span>  <span style="color:#75715e">// caller does not keep it
-</span><span style="color:#75715e"></span>  Py_INCREF(fut);
-  <span style="color:#75715e">// create a thread to call system
-</span><span style="color:#75715e"></span>  pthread_t thread_id;
-  <span style="color:#66d9ef">int</span> rc <span style="color:#f92672">=</span> pthread_create(<span style="color:#f92672">&amp;</span>thread_id, NULL, call_system, (<span style="color:#66d9ef">void</span> <span style="color:#f92672">*</span>)ctx);
-  <span style="color:#66d9ef">if</span> (rc) {
-    printf(<span style="color:#e6db74">&#34;=== Fail to create thread</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
-  }
-  <span style="color:#75715e">// return the unfinished asyncio.Future object
-</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">return</span> fut;
-}
-
-<span style="color:#66d9ef">static</span> PyMethodDef SpamMethods[] <span style="color:#f92672">=</span> {
-    {<span style="color:#e6db74">&#34;system&#34;</span>, spam_system, METH_VARARGS, <span style="color:#e6db74">&#34;Execute a shell command.&#34;</span>},
-    {NULL, NULL, <span style="color:#ae81ff">0</span>, NULL}};
-
-<span style="color:#66d9ef">static</span> <span style="color:#66d9ef">struct</span> PyModuleDef spammodule <span style="color:#f92672">=</span> {PyModuleDef_HEAD_INIT, <span style="color:#e6db74">&#34;spam&#34;</span>, NULL, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>,
-                                        SpamMethods};
-
-PyMODINIT_FUNC <span style="color:#a6e22e">PyInit_spam</span>(<span style="color:#66d9ef">void</span>) { <span style="color:#66d9ef">return</span> PyModule_Create(<span style="color:#f92672">&amp;</span>spammodule); }</code></pre></div>
-<p>再补上 <code>setup.py</code>，执行 <code>python setup.py install</code> 就可以编译安装成一个 Python 的第三方函数库了。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> distutils.core <span style="color:#f92672">import</span> setup, Extension
-
-setup(name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;spam&#34;</span>, version<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;1.0&#34;</span>, ext_modules<span style="color:#f92672">=</span>[Extension(<span style="color:#e6db74">&#34;spam&#34;</span>, [<span style="color:#e6db74">&#34;spammodule.c&#34;</span>])])</code></pre></div>
 <h2 id="总结">总结</h2>
 
-<p>这个方法实现起来十分简单。当初在 Stackoverflow 看到一个回答，感觉很不错。链接给在下方了。
-大触只讲述了如何实现，但没有给具体的实现。所以本文算是对这个问题的一个补充。
-该回答提到的其他方式，有空我再补上其 C 代码的实现。展开的话，还可以分享一下 <code>async for</code> 和 <code>async with</code> 的 C 代码实现。</p>
-
 <h2 id="参考">参考</h2>
-
-<ul>
-<li><a href="https://docs.python.org/3/library/asyncio-dev.html#concurrency-and-multithreading">Concurrency and Multithreading | Developing with asyncio</a></li>
-<li><a href="https://docs.python.org/3/c-api/init.html#non-python-created-threads">Non-Python created threads | Python/C API Reference Manual</a></li>
-<li><a href="https://docs.python.org/3/extending/index.html">Extending and Embedding the Python Interpreter | Python Documentation</a></li>
-<li><a href="https://stackoverflow.com/a/51115745/7035932">how to implement a C-function as awaitable (coroutine) | Stackoverflow</a></li>
-</ul>
 
 
             </div>
@@ -1298,6 +1199,11 @@ setup(name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;s
                 </div>
                 
                 <div style="width: 100%;"></div>
+                
+                <div>
+                    <a href="https://linw1995.com/blog/%E5%A6%82%E4%BD%95%E7%94%A8-C-%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA-Python-Awaitable-%E5%87%BD%E6%95%B0/">如何用 C 实现一个 Python Awaitable 函数</a>
+                    <img class="icon" src="https://linw1995.com/img/next.svg" alt="next" />
+                </div>
                 
             </div>
             

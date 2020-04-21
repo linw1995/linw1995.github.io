@@ -3,6 +3,71 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://linw1995.com/</loc>
+    <lastmod>2020-04-22T00:30:00+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://linw1995.com/en/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://linw1995.com/"
+                />
+  </url>
+  
+  <url>
+    <loc>https://linw1995.com/tags/Python/</loc>
+    <lastmod>2020-04-22T00:30:00+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://linw1995.com/en/tags/Python/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://linw1995.com/tags/Python/"
+                />
+  </url>
+  
+  <url>
+    <loc>https://linw1995.com/tags/</loc>
+    <lastmod>2020-04-22T00:30:00+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://linw1995.com/en/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://linw1995.com/tags/"
+                />
+  </url>
+  
+  <url>
+    <loc>https://linw1995.com/blog/</loc>
+    <lastmod>2020-04-22T00:30:00+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://linw1995.com/en/blog/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://linw1995.com/blog/"
+                />
+  </url>
+  
+  <url>
+    <loc>https://linw1995.com/blog/%E6%B5%85%E8%B0%88-Python-%E7%94%9F%E6%88%90%E5%99%A8/</loc>
+    <lastmod>2020-04-22T00:30:00+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://linw1995.com/tags/Asyncio/</loc>
     <lastmod>2020-03-23T22:45:59+08:00</lastmod>
     <xhtml:link
@@ -23,21 +88,6 @@
   </url>
   
   <url>
-    <loc>https://linw1995.com/</loc>
-    <lastmod>2020-03-23T22:45:59+08:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://linw1995.com/en/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh-cn"
-                href="https://linw1995.com/"
-                />
-  </url>
-  
-  <url>
     <loc>https://linw1995.com/tags/MultiThreading/</loc>
     <lastmod>2020-03-23T22:45:59+08:00</lastmod>
     <xhtml:link
@@ -49,51 +99,6 @@
                 rel="alternate"
                 hreflang="zh-cn"
                 href="https://linw1995.com/tags/MultiThreading/"
-                />
-  </url>
-  
-  <url>
-    <loc>https://linw1995.com/tags/Python/</loc>
-    <lastmod>2020-03-23T22:45:59+08:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://linw1995.com/en/tags/Python/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh-cn"
-                href="https://linw1995.com/tags/Python/"
-                />
-  </url>
-  
-  <url>
-    <loc>https://linw1995.com/tags/</loc>
-    <lastmod>2020-03-23T22:45:59+08:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://linw1995.com/en/tags/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh-cn"
-                href="https://linw1995.com/tags/"
-                />
-  </url>
-  
-  <url>
-    <loc>https://linw1995.com/blog/</loc>
-    <lastmod>2020-03-23T22:45:59+08:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://linw1995.com/en/blog/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh-cn"
-                href="https://linw1995.com/blog/"
                 />
   </url>
   

@@ -6,10 +6,26 @@
     <description>Recent content in 博客 on linw1995</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Mon, 23 Mar 2020 22:45:59 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 22 Apr 2020 00:30:00 +0800</lastBuildDate>
     
 	<atom:link href="https://linw1995.com/blog/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>浅谈 Python 生成器</title>
+      <link>https://linw1995.com/blog/%E6%B5%85%E8%B0%88-Python-%E7%94%9F%E6%88%90%E5%99%A8/</link>
+      <pubDate>Wed, 22 Apr 2020 00:30:00 +0800</pubDate>
+      
+      <guid>https://linw1995.com/blog/%E6%B5%85%E8%B0%88-Python-%E7%94%9F%E6%88%90%E5%99%A8/</guid>
+      <description>生成器是本人最喜欢的语法糖之一。通过简单 yield 表达式即可实现各种奇妙用法。它解决用 Python 语言实现生产者-消费者模型的一些痛点。在没有生成器语法前，差不多有四种方式来处理生产者-消费者模型问题。
+四种实现生产者-消费者模型的方法  通过传递回调函数，通过回调函数消费每次生产的变量（或者通过回调生产每次需要消费的变量）。
+def countdown(number: int, handler): while number &amp;gt; 0: number -= 1 handler(number) countdown(3, print) # 2 # 1 # 0 通过以上简单的例子，似乎这方法没有啥痛点的。 如果是实现语法分析器的话。在把单词流转换为语法树的过程中，回调函数就需要通过全局变量来维护分析器的状态。这样就会导致全局变量满天飞，不仅难以实现正确，而且代码可阅读性也不高。
+ 这个例子举的不是很恰当，毕竟用生成器实现起来也不简单（难点完全不在这里）。为了避免以上提到的问题，还可以通过闭包或者面向对象编程来解决。
+ 若通过以下的三个方法中的任意一个去实现的话，则可以就地去做处理，避免了全局变量漫天飞的情况。
+ 直接等生产结束，返回一个超长的列表，再进行消费。
+def countdown(number: int): rv = [] while number &amp;gt; 0: number -= 1 rv.append(number) return rv countdown(3) # [2, 1, 0] 这例子所存在的问题很容易看出来
+ 一次性产生完会耗费大量的内存，甚至会导致 OOM； 无法实现无限制地生产； 在只需要前几个变量的情况下，一次性生产所有未免太浪费了。不仅会浪费时间，还会浪费内存（可能会造成不必要的内存毛刺）。  按照 Iterator 迭代器接口的定义类，以类变量来维护自身状态，定义魔法方法 __next__ 来生产变量。 （不一定要按照迭代器接口实现，实现个普通类及普通方法也可以的。但实现迭代器接口的话，还可以使用 for-in 语法糖哟）。</description>
+    </item>
     
     <item>
       <title>如何用 C 实现一个 Python Awaitable 函数</title>

@@ -4,7 +4,7 @@
   
   <url>
     <loc>https://linw1995.com/en/tags/Asyncio/</loc>
-    <lastmod>2020-03-14T00:15:59+08:00</lastmod>
+    <lastmod>2020-05-16T16:15:59+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
@@ -19,7 +19,7 @@
   
   <url>
     <loc>https://linw1995.com/en/blog/</loc>
-    <lastmod>2020-03-14T00:15:59+08:00</lastmod>
+    <lastmod>2020-05-16T16:15:59+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
@@ -33,8 +33,13 @@
   </url>
   
   <url>
+    <loc>https://linw1995.com/en/blog/How-To-Write-Asynchronous-Code-With-Contextvars-Properly/</loc>
+    <lastmod>2020-05-16T16:15:59+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://linw1995.com/en/</loc>
-    <lastmod>2020-03-14T00:15:59+08:00</lastmod>
+    <lastmod>2020-05-16T16:15:59+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
@@ -49,7 +54,7 @@
   
   <url>
     <loc>https://linw1995.com/en/tags/MultiThreading/</loc>
-    <lastmod>2020-03-14T00:15:59+08:00</lastmod>
+    <lastmod>2020-05-16T16:15:59+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
@@ -63,8 +68,13 @@
   </url>
   
   <url>
+    <loc>https://linw1995.com/en/tags/pytest/</loc>
+    <lastmod>2020-05-16T16:15:59+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://linw1995.com/en/tags/Python/</loc>
-    <lastmod>2020-03-14T00:15:59+08:00</lastmod>
+    <lastmod>2020-05-16T16:15:59+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
@@ -74,6 +84,21 @@
                 rel="alternate"
                 hreflang="en"
                 href="https://linw1995.com/en/tags/Python/"
+                />
+  </url>
+  
+  <url>
+    <loc>https://linw1995.com/en/tags/</loc>
+    <lastmod>2020-05-16T16:15:59+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://linw1995.com/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://linw1995.com/en/tags/"
                 />
   </url>
   
@@ -89,21 +114,6 @@
                 rel="alternate"
                 hreflang="en"
                 href="https://linw1995.com/en/blog/Run-Asyncio-Event-Loop-in-another-thread/"
-                />
-  </url>
-  
-  <url>
-    <loc>https://linw1995.com/en/tags/</loc>
-    <lastmod>2020-03-14T00:15:59+08:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh-cn"
-                href="https://linw1995.com/tags/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://linw1995.com/en/tags/"
                 />
   </url>
   

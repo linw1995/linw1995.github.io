@@ -1244,7 +1244,6 @@ async <span style="color:#66d9ef">with</span> create_app_context(settings) <span
     <span style="color:#66d9ef">return</span> {<span style="color:#e6db74">&#34;redis_uri&#34;</span>: <span style="color:#e6db74">&#34;redis://...&#34;</span>}
 
 <span style="color:#a6e22e">@pytest.fixture</span>
-<span style="color:#a6e22e">@pytest.mark.asyncio</span>
 async <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">app_ctx</span>(settings):
     async <span style="color:#66d9ef">with</span> create_app_context(settings) <span style="color:#66d9ef">as</span> ctx:
         <span style="color:#75715e"># Use the yield_fixture to set up and share the app context.</span>
@@ -1270,7 +1269,7 @@ async <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_wi
         var<span style="color:#f92672">.</span>set(ctx[var])
 
 <span style="color:#a6e22e">@pytest.mark.asyncio</span>
-async <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_within_context</span>(app_ctx):
+async <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_within_context</span>(app_ctx, redis_client):
     <span style="color:#75715e"># Must update the current context,</span>
     <span style="color:#75715e"># so you can use Redis client in the body of the testing function.</span>
     apply_context(app_ctx)

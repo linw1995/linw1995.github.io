@@ -1128,7 +1128,7 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
                         
                     
                     
-                    <div class="reading-time middot">3 minute read</div>
+                    <div class="reading-time middot">4 minute read</div>
                     
                     
                       <div class="tags">
@@ -1188,14 +1188,19 @@ coroutine_2 <span style="color:#f92672">=</span> hello()
 <span style="color:#66d9ef">assert</span> await task_2 <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;hello world&#34;</span>
 <span style="color:#66d9ef">assert</span> await coroutine_1 <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;hello world&#34;</span>
 <span style="color:#66d9ef">assert</span> await coroutine_2 <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;hello world&#34;</span></code></pre></div>
-<p>The objects of <code>coroutine</code> are unable to keep the context in track.
-Only the objects of <code>asyncio.Task</code> will store the current context when they been created.</p>
+<p>This example uses <code>ContextVar</code> object to store and access the value of the pre-defined field &ldquo;what&rdquo; from the current context.
+And you see the problem came up from this example
+that the objects of <code>coroutine</code> are unable to keep the context in track.
+Because of only the objects of <code>asyncio.Task</code> will store the current context when they been created.</p>
 
 <p>See also the document of <a href="https://docs.python.org/3/library/contextvars.html"><strong>contextvars</strong></a> for additional details.</p>
 
 <h2 id="best-practices">Best Practices</h2>
 
-<p>The first thing to do is create a context, then run tasks within the context, destroy and clean up the context at last.</p>
+<p>If you want to set up a context,
+the first thing to do is creating some resources that stored in the context,
+then run some async tasks within the context,
+clean up resources from the context at last.</p>
 
 <p>The best way to do that is by using <code>contextlib.asynccontextmanager</code> function as a decorator.</p>
 
@@ -1232,7 +1237,7 @@ async <span style="color:#66d9ef">with</span> create_app_context(settings) <span
     <span style="color:#66d9ef">assert</span> var_redis_client<span style="color:#f92672">.</span>get() <span style="color:#f92672">is</span> app_ctx[var_redis_client]</code></pre></div>
 <h2 id="test-your-codes">Test Your Codes</h2>
 
-<p>Use pytest fixtures to set up and share the app context.</p>
+<p>Use pytest fixtures to set up the app context, is easy to access in test functions.</p>
 
 <blockquote>
 <p><code>@pytest.mark.asyncio</code> decorator comes from <strong>pytest-asyncio</strong> package.</p>
@@ -1246,7 +1251,7 @@ async <span style="color:#66d9ef">with</span> create_app_context(settings) <span
 <span style="color:#a6e22e">@pytest.fixture</span>
 async <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">app_ctx</span>(settings):
     async <span style="color:#66d9ef">with</span> create_app_context(settings) <span style="color:#66d9ef">as</span> ctx:
-        <span style="color:#75715e"># Use the yield_fixture to set up and share the app context.</span>
+        <span style="color:#75715e"># Use the yield_fixture to set up the app context.</span>
         <span style="color:#66d9ef">yield</span> ctx
 
 <span style="color:#a6e22e">@pytest.fixture</span>
@@ -1276,11 +1281,13 @@ async <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_wi
 
     <span style="color:#66d9ef">assert</span> var_redis_client <span style="color:#f92672">in</span> copy_context()
     <span style="color:#66d9ef">assert</span> redis_client <span style="color:#f92672">is</span> app_ctx[var_redis_client]</code></pre></div>
-<p>The point is that the async yield_fixture is unable to pass the context to other fixtures or test functions.
-IMHO, it is better to keep the context if the fixture is marked by <code>@pytest.mark.asyncio</code> decorator,
-even needs to combine the different contexts from fixtures.</p>
+<p>The problem came up from the above example is the context from the yield_fixture is not propagated to the test functions.
+So it needs to pass the context explicitly to the other fixtures of test functions.
+I code a function called <code>apply_context</code> to apply the given context to the current context.
+It needs to be executed first every time if need a context in fixtures of test functions.</p>
 
-<p>So, I explicitly pass the app context to the test function and apply it to update the current context in the test function.</p>
+<p>IMHO, it is better to keep the context if the fixture is marked by <code>@pytest.mark.asyncio</code> decorator,
+even needs to combine the different contexts from fixtures.</p>
 
 <h2 id="references">References</h2>
 

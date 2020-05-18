@@ -1098,6 +1098,15 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
                     
                 </ul>
                 
+<hr>
+<ul>
+    
+    <li>
+        <a href="https://linw1995.com/blog/%E5%A6%82%E4%BD%95%E5%9C%A8%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B%E4%B8%AD%E6%AD%A3%E7%A1%AE%E5%9C%B0%E4%BD%BF%E7%94%A8-Contextvars/">中文  </a>
+    </li>
+    
+</ul>
+
 
             </nav>
         </div>
@@ -1281,12 +1290,12 @@ async <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_wi
 
     <span style="color:#66d9ef">assert</span> var_redis_client <span style="color:#f92672">in</span> copy_context()
     <span style="color:#66d9ef">assert</span> redis_client <span style="color:#f92672">is</span> app_ctx[var_redis_client]</code></pre></div>
-<p>The problem that came up from the above example is the context from the yield_fixture is not propagated to the other fixtures or test functions. So it needs to pass the context explicitly.
+<p>The problem that came up from the above example is the context from the async yield_fixture is not propagated to the other fixtures or test functions. So it needs to pass the context explicitly.
 I code a function called <code>apply_context</code> to apply the given context to the current context.
 It needs to be executed first every time if need a context in fixtures or test functions.</p>
 
-<p>IMHO, it is better to keep the context of fixtures if their test functions is marked by <code>@pytest.mark.asyncio</code> decorator,
-even needs to combine the different contexts from fixtures.</p>
+<p>IMHO, it is better to keep the context of async yield_fixtures if their test functions is marked by <code>@pytest.mark.asyncio</code> decorator,
+even needs to combine the different contexts from async yield_fixtures.</p>
 
 <h2 id="references">References</h2>
 

@@ -6,10 +6,21 @@
     <description>Recent content in MultiThreading on linw1995</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Mon, 23 Mar 2020 22:45:59 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 16 May 2020 16:15:59 +0800</lastBuildDate>
     
 	<atom:link href="https://linw1995.com/tags/MultiThreading/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>如何在异步编程中正确地使用 Contextvars</title>
+      <link>https://linw1995.com/blog/%E5%A6%82%E4%BD%95%E5%9C%A8%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B%E4%B8%AD%E6%AD%A3%E7%A1%AE%E5%9C%B0%E4%BD%BF%E7%94%A8-Contextvars/</link>
+      <pubDate>Sat, 16 May 2020 16:15:59 +0800</pubDate>
+      
+      <guid>https://linw1995.com/blog/%E5%A6%82%E4%BD%95%E5%9C%A8%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B%E4%B8%AD%E6%AD%A3%E7%A1%AE%E5%9C%B0%E4%BD%BF%E7%94%A8-Contextvars/</guid>
+      <description>最近我对一个用 async/await 语法去做异步编程的项目做贡献。 经过一段时间不停地码代码，测试及修复，我总结了如何在异步编程中正确地使用 Contextvars 的经验。
+What Is contextvars contextvars 来源于 PEP-567 ，它提供了 APIs 允许开发者去保存，访问及管理 local context。 它与 thread-local storage (TLS) 类似。但它还支持维护异步代码的 context.
+import asyncio from contextvars import ContextVar, Context var_what = ContextVar(&amp;#34;what&amp;#34;) async def hello(): try: return f&amp;#34;hello {var_what.get()}&amp;#34; except LookupError: return &amp;#34;hello?&amp;#34; # 以下代码通过 `python -m asyncio` 去执行 assert await hello() == &amp;#34;hello?&amp;#34; task_1 = asyncio.create_task(hello()) coroutine_1 = hello() var_what.set(&amp;#34;world&amp;#34;) task_2 = asyncio.create_task(hello()) coroutine_2 = hello() assert await task_1 == &amp;#34;hello?</description>
+    </item>
     
     <item>
       <title>如何用 C 实现一个 Python Awaitable 函数</title>

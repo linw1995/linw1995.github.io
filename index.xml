@@ -6,10 +6,19 @@
     <description>Recent content on linw1995</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Wed, 22 Apr 2020 00:30:00 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 16 May 2020 16:15:59 +0800</lastBuildDate>
     
 	<atom:link href="https://linw1995.com/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>如何在异步编程中正确地使用 Contextvars</title>
+      <link>https://linw1995.com/blog/%E5%A6%82%E4%BD%95%E5%9C%A8%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B%E4%B8%AD%E6%AD%A3%E7%A1%AE%E5%9C%B0%E4%BD%BF%E7%94%A8-Contextvars/</link>
+      <pubDate>Sat, 16 May 2020 16:15:59 +0800</pubDate>
+      
+      <guid>https://linw1995.com/blog/%E5%A6%82%E4%BD%95%E5%9C%A8%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B%E4%B8%AD%E6%AD%A3%E7%A1%AE%E5%9C%B0%E4%BD%BF%E7%94%A8-Contextvars/</guid>
+      <description>如何在异步编程中正确地使用 Contextvars</description>
+    </item>
     
     <item>
       <title>浅谈 Python 生成器</title>

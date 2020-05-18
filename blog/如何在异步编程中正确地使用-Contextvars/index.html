@@ -2,7 +2,6 @@
 <html lang="zh-cn">
 
 <head>
-	<meta name="generator" content="Hugo 0.70.0" />
 <meta charset="utf-8">
 <meta name="HandheldFriendly" content="True">
 <meta name="MobileOptimized" content="320">
@@ -16,24 +15,24 @@
 <meta property="og:site_name" content="linw1995" />
 <meta property="og:locale" content="zh-cn" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://linw1995.com/" />
-<meta property="og:title" content="linw1995" />
-<meta property="twitter:title" content="linw1995">
+<meta property="og:url" content="https://linw1995.com/blog/%E5%A6%82%E4%BD%95%E5%9C%A8%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B%E4%B8%AD%E6%AD%A3%E7%A1%AE%E5%9C%B0%E4%BD%BF%E7%94%A8-Contextvars/" />
+<meta property="og:title" content="如何在异步编程中正确地使用 Contextvars" />
+<meta property="twitter:title" content="如何在异步编程中正确地使用 Contextvars">
 
     <meta property="og:image" content="https://linw1995.com//img/banner.png">
     <meta property="twitter:card" content="summary">
     <meta property="twitter:image" content="https://linw1995.com//img/banner.png">
 
-<meta property="og:description" content="">
-<meta property="twitter:description" content="">
+<meta property="og:description" content="如何在异步编程中正确地使用 Contextvars">
+<meta property="twitter:description" content="如何在异步编程中正确地使用 Contextvars">
 
 <title>
 
 
-    linw1995
+     linw1995 - 如何在异步编程中正确地使用 Contextvars 
 
 </title>
-<link rel="canonical" href="https://linw1995.com/">
+<link rel="canonical" href="https://linw1995.com/blog/%E5%A6%82%E4%BD%95%E5%9C%A8%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B%E4%B8%AD%E6%AD%A3%E7%A1%AE%E5%9C%B0%E4%BD%BF%E7%94%A8-Contextvars/">
 
 
 <style media="screen">
@@ -1071,8 +1070,6 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
 
 
 
-  <link href="https://linw1995.com/index.xml" rel="alternate" type="application/rss+xml" title="linw1995" />
-
 
 </head>
 
@@ -1105,7 +1102,7 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
 <ul>
     
     <li>
-        <a href="https://linw1995.com/en/">English </a>
+        <a href="https://linw1995.com/en/blog/How-To-Write-Asynchronous-Code-With-Contextvars-Properly/">English  </a>
     </li>
     
 </ul>
@@ -1116,85 +1113,256 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
     </div>
 </div>
 
-<div class="main column">
+
+
+
+
+<div class="main post non-narrow zero-top-spacing column">
     <div class="container">
         <div class="content">
-            
+            <div class="front-matter">
+                <div class="title-container">
+                    <div class="page-heading">
 
-            
-                <div class="posts">
-                
-                
-                
-                    <div class="page-heading">Latest posts</div>
-                    <ul>
+    
+    如何在异步编程中正确地使用 Contextvars
+    
 
-                    
-                        <li class="groupby">May, 2020</li>
-                        
-                            <li class="post-item">
-    <span class="meta">May 16, 2020</span>
-    
-    <a href="https://linw1995.com/blog/%E5%A6%82%E4%BD%95%E5%9C%A8%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B%E4%B8%AD%E6%AD%A3%E7%A1%AE%E5%9C%B0%E4%BD%BF%E7%94%A8-Contextvars/"><span>如何在异步编程中正确地使用 Contextvars</span></a>
-    
-</li>
+</div>
 
-                        
-                    
-                        <li class="groupby">Apr, 2020</li>
-                        
-                            <li class="post-item">
-    <span class="meta">Apr 22, 2020</span>
-    
-    <a href="https://linw1995.com/blog/%E6%B5%85%E8%B0%88-Python-%E7%94%9F%E6%88%90%E5%99%A8/"><span>浅谈 Python 生成器</span></a>
-    
-</li>
-
-                        
-                    
-                        <li class="groupby">Mar, 2020</li>
-                        
-                            <li class="post-item">
-    <span class="meta">Mar 23, 2020</span>
-    
-    <a href="https://linw1995.com/blog/%E5%A6%82%E4%BD%95%E7%94%A8-C-%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA-Python-Awaitable-%E5%87%BD%E6%95%B0/"><span>如何用 C 实现一个 Python Awaitable 函数</span></a>
-    
-</li>
-
-                        
-                            <li class="post-item">
-    <span class="meta">Mar 15, 2020</span>
-    
-    <a href="https://linw1995.com/blog/%E5%A6%82%E4%BD%95%E5%9C%A8%E7%BA%BF%E7%A8%8B%E9%87%8C%E8%B7%91%E5%8D%8F%E7%A8%8B/"><span>如何在线程里跑协程</span></a>
-    
-</li>
-
-                        
-                            <li class="post-item">
-    <span class="meta">Mar 13, 2020</span>
-    
-    <a href="https://linw1995.com/blog/%E6%88%91%E7%9A%84-Shell-%E9%85%8D%E7%BD%AE/"><span>我的 Shell 配置</span></a>
-    
-</li>
-
-                        
-                    
-                    </ul>
-
-                    
-                        <a href="./blog/" class="see-more">See more ...</a>
-                    
-                
                 </div>
+                <div class="meta">
+                    <div class="date" title="Sat May 16 2020 16:15:59 CST">May 16, 2020</div>
+                    
+                        
+                    
+                    
+                    <div class="reading-time middot">2 minute read</div>
+                    
+                    
+                      <div class="tags">
+                    
+                        <ul>
+                          
+                            <li class="middot"><a href="https://linw1995.com/tags/Python">Python</a> </li>
+                          
+                            <li class="middot"><a href="https://linw1995.com/tags/MultiThreading">MultiThreading</a> </li>
+                          
+                            <li class="middot"><a href="https://linw1995.com/tags/Asyncio">Asyncio</a> </li>
+                          
+                            <li class="middot"><a href="https://linw1995.com/tags/pytest">pytest</a> </li>
+                          
+                        </ul>
+                    </div>
+                    <div class="tags">
+                        <ul>
+                          
+                          
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="markdown">
+                
+    
+    
+
+<p>最近我对一个用 <strong>async/await</strong> 语法去做异步编程的项目做贡献。
+经过一段时间不停地码代码，测试及修复，我总结了如何在异步编程中正确地使用 Contextvars 的经验。</p>
+
+<h2 id="what-is-contextvars">What Is contextvars</h2>
+
+<p><strong>contextvars</strong> 来源于 <a href="https://www.python.org/dev/peps/pep-0567/">PEP-567</a> ，它提供了 APIs 允许开发者去保存，访问及管理 local context。
+它与 thread-local storage (TLS) 类似。但它还支持维护异步代码的 context.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> asyncio
+<span style="color:#f92672">from</span> contextvars <span style="color:#f92672">import</span> ContextVar, Context
+
+var_what <span style="color:#f92672">=</span> ContextVar(<span style="color:#e6db74">&#34;what&#34;</span>)
+
+async <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">hello</span>():
+    <span style="color:#66d9ef">try</span>:
+        <span style="color:#66d9ef">return</span> f<span style="color:#e6db74">&#34;hello {var_what.get()}&#34;</span>
+    <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">LookupError</span>:
+        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;hello?&#34;</span>
+
+<span style="color:#75715e"># 以下代码通过 `python -m asyncio` 去执行</span>
+<span style="color:#66d9ef">assert</span> await hello() <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;hello?&#34;</span>
+task_1 <span style="color:#f92672">=</span> asyncio<span style="color:#f92672">.</span>create_task(hello())
+coroutine_1 <span style="color:#f92672">=</span> hello()
+var_what<span style="color:#f92672">.</span>set(<span style="color:#e6db74">&#34;world&#34;</span>)
+task_2 <span style="color:#f92672">=</span> asyncio<span style="color:#f92672">.</span>create_task(hello())
+coroutine_2 <span style="color:#f92672">=</span> hello()
+<span style="color:#66d9ef">assert</span> await task_1 <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;hello?&#34;</span>
+<span style="color:#66d9ef">assert</span> await task_2 <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;hello world&#34;</span>
+<span style="color:#66d9ef">assert</span> await coroutine_1 <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;hello world&#34;</span>
+<span style="color:#66d9ef">assert</span> await coroutine_2 <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;hello world&#34;</span></code></pre></div>
+<p>这个例子使用预先创造好的 <code>ContextVar</code> 对象去保存及访问当前 context 里的 what 变量。
+这例子还暴露了一个问题，就是 <code>coroutine</code> 对象无法处理异步代码的 context 。
+只有 <code>asyncio.Task</code> 在创建的时候会保存当前的 context，及自动的应用该 context 。</p>
+
+<p>查看 <a href="https://docs.python.org/3/library/contextvars.html"><strong>contextvars</strong></a> 文档以了解更多信息及用法。</p>
+
+<h2 id="最佳示例">最佳示例</h2>
+
+<p>如果你要创建一个 context，首先要做的是创建一些资源，保存在 context 中，然后在该 context 下执行异步代码，最后清理掉 context 中不需要的资源 。
+最好的方式是使用 <code>contextlib.asynccontextmanager</code> 函数去做装饰器。</p>
+
+<ul>
+<li>能够用 <strong>async-with</strong> 语法显得更符合 Python 哲学</li>
+<li>资源初始化及清理代码处于同个函数内，更具有可读性</li>
+</ul>
+
+<p>在实际情况下，我们在 web 应用中需要保存请求相关的数据，比如安全密钥及请求参数；需要共享全局资源，比如数据库连接池。所以我码了个如何在异步编程中使用 contextvars 的例子。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> contextlib <span style="color:#f92672">import</span> asynccontextmanager
+<span style="color:#f92672">from</span> contextvars <span style="color:#f92672">import</span> copy_context, ContextVar
+
+var_redis_client <span style="color:#f92672">=</span> ContextVar(<span style="color:#e6db74">&#34;redis_client&#34;</span>)
+
+<span style="color:#a6e22e">@asynccontextmanager</span>
+async <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">create_app_context</span>(settings):
+    <span style="color:#75715e"># 资源初始化过程</span>
+    redis_client <span style="color:#f92672">=</span> object()  <span style="color:#75715e"># FIXME: 创建 Redis 客户端实例</span>
+    var_redis_client<span style="color:#f92672">.</span>set(redis_client)
+    <span style="color:#66d9ef">try</span>:
+        <span style="color:#75715e"># 生产当前的 context</span>
+        <span style="color:#66d9ef">yield</span> copy_context()
+    <span style="color:#66d9ef">finally</span>:
+        <span style="color:#75715e"># 资源清理过程</span>
+        <span style="color:#75715e"># FIXME: 清理 Redis 客户端实例</span>
+        <span style="color:#66d9ef">pass</span>
+
+<span style="color:#75715e"># 以下代码通过 `python -m asyncio` 去执行</span>
+settings <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#34;redis_uri&#34;</span>: <span style="color:#e6db74">&#34;redis://...&#34;</span>}
+async <span style="color:#66d9ef">with</span> create_app_context(settings) <span style="color:#66d9ef">as</span> app_ctx:
+    <span style="color:#66d9ef">assert</span> var_redis_client <span style="color:#f92672">in</span> copy_context()
+    <span style="color:#75715e"># 用两种方式去获取被保存在当前 context 的 Redis 客户端</span>
+    <span style="color:#66d9ef">assert</span> var_redis_client<span style="color:#f92672">.</span>get() <span style="color:#f92672">is</span> app_ctx[var_redis_client]</code></pre></div>
+<h2 id="测试代码">测试代码</h2>
+
+<p>使用 pytest fixtures 去创建 app context。这样能让测试样例很容易地访问使用</p>
+
+<blockquote>
+<p><code>@pytest.mark.asyncio</code> 装饰器来自 <strong>pytest-asyncio</strong> 第三方库.</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> pytest
+
+<span style="color:#a6e22e">@pytest.fixture</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">settings</span>():
+    <span style="color:#66d9ef">return</span> {<span style="color:#e6db74">&#34;redis_uri&#34;</span>: <span style="color:#e6db74">&#34;redis://...&#34;</span>}
+
+<span style="color:#a6e22e">@pytest.fixture</span>
+async <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">app_ctx</span>(settings):
+    async <span style="color:#66d9ef">with</span> create_app_context(settings) <span style="color:#66d9ef">as</span> ctx:
+        <span style="color:#75715e"># 使用 yield fixture 去初始化，产生 context 方便测试样例访问</span>
+        <span style="color:#66d9ef">yield</span> ctx
+
+<span style="color:#a6e22e">@pytest.fixture</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">redis_client</span>(app_ctx):
+    <span style="color:#66d9ef">return</span> app_ctx[var_redis_client]
+
+
+<span style="color:#a6e22e">@pytest.mark.asyncio</span>
+async <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_without_context</span>(app_ctx, redis_client):
+    <span style="color:#66d9ef">assert</span> var_redis_client <span style="color:#f92672">not</span> <span style="color:#f92672">in</span> copy_context()
+    <span style="color:#75715e"># 虽然当前 context 没有 Redis 客户端实例</span>
+    <span style="color:#75715e"># 但仍然可以通过 app_ctx 去访问 Redis 客户端实例</span>
+    <span style="color:#66d9ef">assert</span> redis_client <span style="color:#f92672">is</span> app_ctx[var_redis_client]
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">apply_context</span>(ctx):
+    <span style="color:#e6db74">&#34;&#34;&#34;
+</span><span style="color:#e6db74">    更新当前的 context
+</span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+    <span style="color:#66d9ef">for</span> var <span style="color:#f92672">in</span> ctx:
+        var<span style="color:#f92672">.</span>set(ctx[var])
+
+<span style="color:#a6e22e">@pytest.mark.asyncio</span>
+async <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_within_context</span>(app_ctx, redis_client):
+    <span style="color:#75715e"># 必须更新当前的 context，这样才能在测试函数体内访问到 Redis 客户端</span>
+    apply_context(app_ctx)
+
+    <span style="color:#66d9ef">assert</span> var_redis_client <span style="color:#f92672">in</span> copy_context()
+    <span style="color:#66d9ef">assert</span> redis_client <span style="color:#f92672">is</span> app_ctx[var_redis_client]</code></pre></div>
+<p>因为来自异步 yield_fixture 的 context 无法传递给其他 fixtures 或测试函数，所以我们需要显式地传递 app context。我还写了个简单的函数 <code>apply_context</code> 去把传递进来的 context 应用到当前的 context 里。如果 fixtures 或者测试函数需要 context 的话，就需要先调用这个函数。</p>
+
+<p>如果测试函数被标记成 <code>@pytest.mark.asyncio</code> 的话，最好能把它的异步 yield_fixtures 里的 context，传递给其他 fixtures 及测试函数。还可能要合并来自不同 async yield_fixtures 的 context。</p>
+
+<h2 id="references">References</h2>
+
+<ul>
+<li><a href="https://www.python.org/dev/peps/pep-0567/">PEP 567 &ndash; Context Variables</a></li>
+<li><a href="https://docs.python.org/3/library/contextvars.html">contextvars — Context Variables | Python Docs</a></li>
+</ul>
+
+
+            </div>
+            
+            <br>
+            <div class="share">
+                  
+                  <a href="" class="ssk ssk-facebook"></a>
+                  
+                  
+                  <a href="" class="ssk ssk-twitter"></a>
+                  
+                  
+                  <a href="" class="ssk ssk-google-plus"></a>
+                  
+                  
+                  <a href="" class="ssk ssk-linkedin"></a>
+                  
+            </div>
+            
+            
+            <br>
+            <div class="navigation">
+                
+                <div>
+                    <img class="icon" src="https://linw1995.com/img/back.svg" alt="back" />
+                    <a href="https://linw1995.com/blog/%E6%B5%85%E8%B0%88-Python-%E7%94%9F%E6%88%90%E5%99%A8/">浅谈 Python 生成器</a>
+                </div>
+                
+                <div style="width: 100%;"></div>
+                
+            </div>
+            
+            
+            <br>
+            <div class="disqus">
+                <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "linw1995" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+            </div>
             
 
-            <div class="best-posts">
             
             
-            </div>
+
+            
+
+            
         </div>
     </div>
 </div>
+
+
+
 <div class="footer column">
     <div class="container">
 
@@ -1257,10 +1425,6 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
             </a>
         
 
-        
-            <a href="https://linw1995.com/index.xml">
-                <img class="icon" src="https://linw1995.com/img/rss.svg" alt="rss" />
-            </a>
         
 
         </div>

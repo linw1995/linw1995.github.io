@@ -1281,12 +1281,11 @@ async <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_wi
 
     <span style="color:#66d9ef">assert</span> var_redis_client <span style="color:#f92672">in</span> copy_context()
     <span style="color:#66d9ef">assert</span> redis_client <span style="color:#f92672">is</span> app_ctx[var_redis_client]</code></pre></div>
-<p>The problem came up from the above example is the context from the yield_fixture is not propagated to the test functions.
-So it needs to pass the context explicitly to the other fixtures of test functions.
+<p>The problem that came up from the above example is the context from the yield_fixture is not propagated to the other fixtures or test functions. So it needs to pass the context explicitly.
 I code a function called <code>apply_context</code> to apply the given context to the current context.
-It needs to be executed first every time if need a context in fixtures of test functions.</p>
+It needs to be executed first every time if need a context in fixtures or test functions.</p>
 
-<p>IMHO, it is better to keep the context if the fixture is marked by <code>@pytest.mark.asyncio</code> decorator,
+<p>IMHO, it is better to keep the context of fixtures if their test functions is marked by <code>@pytest.mark.asyncio</code> decorator,
 even needs to combine the different contexts from fixtures.</p>
 
 <h2 id="references">References</h2>

@@ -1284,7 +1284,7 @@ async <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_wi
     <span style="color:#66d9ef">assert</span> redis_client <span style="color:#f92672">is</span> app_ctx[var_redis_client]</code></pre></div>
 <p>因为来自异步 yield_fixture 的 context 无法传递给其他 fixtures 或测试函数，所以我们需要显式地传递 app context。我还写了个简单的函数 <code>apply_context</code> 去把传递进来的 context 应用到当前的 context 里。如果 fixtures 或者测试函数需要 context 的话，就需要先调用这个函数。</p>
 
-<p>如果测试函数被标记成 <code>@pytest.mark.asyncio</code> 的话，最好能把它的异步 yield_fixtures 里的 context，传递给其他 fixtures 及测试函数。还可能要合并来自不同 async yield_fixtures 的 context。</p>
+<p>如果测试函数被标记成 <code>@pytest.mark.asyncio</code> 的话，最好能隐式地把它的异步 yield_fixtures 里的 context，传递给其他 fixtures 及测试函数。所以我向 <strong>pytest-asyncio</strong> 提了个 <a href="https://github.com/pytest-dev/pytest-asyncio/pull/161">PR</a> ，如果能被合并就好了。</p>
 
 <h2 id="references">References</h2>
 

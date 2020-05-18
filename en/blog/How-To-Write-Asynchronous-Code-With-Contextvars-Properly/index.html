@@ -1294,8 +1294,9 @@ async <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_wi
 I code a function called <code>apply_context</code> to apply the given context to the current context.
 It needs to be executed first every time if need a context in fixtures or test functions.</p>
 
-<p>IMHO, it is better to keep the context of async yield_fixtures if their test functions is marked by <code>@pytest.mark.asyncio</code> decorator,
-even needs to combine the different contexts from async yield_fixtures.</p>
+<p>IMHO, it is better if the context from async yield_fixtures is propagated implicitly to other fixtures or test functions when async yield_fixtures&rsquo; test function is marked by <code>@pytest.mark.asyncio</code> decorator.
+So I create a pull request <a href="https://github.com/pytest-dev/pytest-asyncio/pull/161">#161</a> to <strong>pytest-asyncio</strong>.
+Hopefully, it can be merged into the master branch.</p>
 
 <h2 id="references">References</h2>
 

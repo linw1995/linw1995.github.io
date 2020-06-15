@@ -1279,9 +1279,9 @@ make install</code></pre></div>
 <span style="color:#75715e">;; look the same as in the user&#39;s shell.</span>
 (<span style="color:#a6e22e">use-package</span> exec-path-from-shell
   <span style="color:#e6db74">:straight</span> <span style="color:#66d9ef">t</span>
+  <span style="color:#e6db74">:if</span> (memq window-system <span style="color:#f92672">&#39;</span>(mac ns))
   <span style="color:#e6db74">:config</span>
-  (when (memq window-system <span style="color:#f92672">&#39;</span>(mac ns x))
-    (exec-path-from-shell-initialize)))</code></pre></div>
+  (exec-path-from-shell-initialize))</code></pre></div>
 
             </div>
             

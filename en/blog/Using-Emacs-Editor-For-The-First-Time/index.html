@@ -15,24 +15,24 @@
 <meta property="og:site_name" content="linw1995" />
 <meta property="og:locale" content="zh-cn" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://linw1995.com/blog/%E6%88%91%E7%9A%84-Shell-%E9%85%8D%E7%BD%AE/" />
-<meta property="og:title" content="我的 Shell 配置" />
-<meta property="twitter:title" content="我的 Shell 配置">
+<meta property="og:url" content="https://linw1995.com/en/blog/Using-Emacs-Editor-For-The-First-Time/" />
+<meta property="og:title" content="Using Emacs Editor For The First Time" />
+<meta property="twitter:title" content="Using Emacs Editor For The First Time">
 
     <meta property="og:image" content="https://linw1995.com//img/banner.png">
     <meta property="twitter:card" content="summary">
     <meta property="twitter:image" content="https://linw1995.com//img/banner.png">
 
-<meta property="og:description" content="分享并记录一下我的 Shell 配置">
-<meta property="twitter:description" content="分享并记录一下我的 Shell 配置">
+<meta property="og:description" content="How to install emacs and configure a beautiful editor?">
+<meta property="twitter:description" content="How to install emacs and configure a beautiful editor?">
 
 <title>
 
 
-     linw1995 - 我的 Shell 配置 
+     linw1995 - Using Emacs Editor For The First Time 
 
 </title>
-<link rel="canonical" href="https://linw1995.com/blog/%E6%88%91%E7%9A%84-Shell-%E9%85%8D%E7%BD%AE/">
+<link rel="canonical" href="https://linw1995.com/en/blog/Using-Emacs-Editor-For-The-First-Time/">
 
 
 <style media="screen">
@@ -1087,14 +1087,14 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
             <nav>
                 <ul>
                     
-                        <li><a href="https://linw1995.com/blog/">博客</a></li>
+                        <li><a href="https://linw1995.com/en/blog/">Blog</a></li>
                     
-                        <li><a href="https://linw1995.com/projects/">项目</a></li>
+                        <li><a href="https://linw1995.com/en/projects/">Projects</a></li>
                     
                     
-                        <li><a href="https://linw1995.com/about/">关于</a></li>
+                        <li><a href="https://linw1995.com/en/about/">About</a></li>
                     
-                        <li><a href="https://linw1995.com/license/">许可</a></li>
+                        <li><a href="https://linw1995.com/en/license/">License</a></li>
                     
                 </ul>
                 
@@ -1116,28 +1116,26 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
                     <div class="page-heading">
 
     
-    我的 Shell 配置
+    Using Emacs Editor For The First Time
     
 
 </div>
 
                 </div>
                 <div class="meta">
-                    <div class="date" title="Fri Mar 13 2020 00:02:00 CST">Mar 13, 2020</div>
+                    <div class="date" title="Mon Jun 15 2020 01:15:59 CST">Jun 15, 2020</div>
                     
                         
                     
                     
-                    <div class="reading-time middot">1 minute read</div>
+                    <div class="reading-time middot">4 minute read</div>
                     
                     
                       <div class="tags">
                     
                         <ul>
                           
-                            <li class="middot"><a href="https://linw1995.com/tags/Develop">Develop</a> </li>
-                          
-                            <li class="middot"><a href="https://linw1995.com/tags/MacOS">MacOS</a> </li>
+                            <li class="middot"><a href="https://linw1995.com/en/tags/Emacs">Emacs</a> </li>
                           
                         </ul>
                     </div>
@@ -1152,67 +1150,138 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
             <div class="markdown">
                 
     
-    <p>统一各个开发环境，有助于平滑地切换，避免每次切换导致的生疏感，降低码力。当然公司的环境就别瞎搞了。</p>
+    
 
-<p><a href="https://github.com/starship/starship"><img src="./demo.gif" alt="Demo from starship README.md" /></a></p>
+<p>Recently I had been learning how to programs in Racket language. editors like VSCode and vim support poorly for the Racket language. And in the document of Racket, it recommends Emacs for developing Racket project. So I decided to give it a try. The main purpose of this blog is to record some solutions to problems that happened while I using it.</p>
 
-<blockquote>
-<p>这个 GIF 示例来自 starship 的 README。
-其 Shell 为 <a href="http://fishshell.com/">fish Shell</a> ，所以自带了自动补全、历史命令展示和命令高亮等功能。
-fish 也是一个很好用的 Shell，感兴趣的可以自行体验一下。</p>
-</blockquote>
+<p><img src="./Emacs_startup.png" alt="Emacs GUI" /></p>
 
-<p>以下是需要安装的工具列表</p>
+<h2 id="installation">Installation</h2>
 
-<ul>
-<li><a href="https://www.zsh.org/">zsh</a></li>
-<li><a href="https://github.com/ohmyzsh/ohmyzsh">ohmyzsh</a></li>
-<li><a href="https://github.com/starship/starship">starship</a></li>
-<li><a href="https://github.com/getantibody/antibody">antibody</a></li>
-</ul>
+<p>Follow the installation section of Emacs document, I installed latest Emacs 26.3 successfully on the platforms Ubuntu 18.04 and MacOS 10.15.4</p>
 
-<p>本文只以 MacOS 为例，而其他 OS 的安装方式，请仔细阅读以上工具的文档。</p>
+<p>On Ubuntu 18.04, download the source codes of Emacs, following this <a href="https://www.gnu.org/software/emacs/download.html#gnu-linux">section</a> of the document.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">wget http://mirrors.ustc.edu.cn/gnu/emacs/emacs-26.3.tar.xz</code></pre></div>
+<p>Decompress it, compile the source codes and then install Emacs.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e"># decompress</span>
+tar -xvf emacs-26.3.tar.xz
+cd emacs-26.3
+<span style="color:#75715e"># with GUI</span>
+./configure
+<span style="color:#75715e"># or without GUI</span>
+./configure <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --with-x-toolkit<span style="color:#f92672">=</span>no <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --with-xpm<span style="color:#f92672">=</span>no <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --with-jpeg<span style="color:#f92672">=</span>no <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --with-gif<span style="color:#f92672">=</span>no <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --with-tiff<span style="color:#f92672">=</span>no
+<span style="color:#75715e"># compile and install</span>
+make install</code></pre></div>
+<p>On MacOS 10.15.4, Emacs can be easily installed by using Homebrew.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">brew cask install emacs</code></pre></div>
+<h2 id="make-emacs-more-beautiful">Make Emacs More Beautiful</h2>
 
-<ol>
-<li><p>安装 zsh</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">brew install zsh
-chsh -s /bin/zsh</code></pre></div>
-<p>执行以上命令安装 zsh，再重启终端即可发现 Shell 变成了 zsh。</p></li>
+<p>The main topic of this blog is how to configure the Emacs more beautiful. The beautiful editor did improve my programming efficiency :)</p>
 
-<li><p>安装 ohmyzsh</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">sh -c <span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh<span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span></code></pre></div>
-<p>执行以上命令安装 ohmyzsh</p></li>
+<h3 id="package-manager">Package manager</h3>
 
-<li><p>安装 starship</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">brew install starship</code></pre></div>
-<p>执行以上命令安装 starship，然后把 <code>eval &quot;$(starship init zsh)&quot;</code> 写入到 <code>~/.zshrc</code> 文件末尾。
-再执行 <code>$SHELL</code> 就可以看到 Shell 变漂亮了～</p>
+<p>Using <a href="https://github.com/raxod502/straight.el#user-manual">straight</a> with <a href="https://github.com/jwiegley/use-package#getting-started">use-package</a> for package managing. Create a <code>.emacs</code> file in the home directory with the below text.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp"><span style="color:#75715e">;;; Package manager</span>
+<span style="color:#75715e">;; Bootstrapping straight.el</span>
+(defvar bootstrap-version)
+(<span style="color:#66d9ef">let</span> ((bootstrap-file
+       (expand-file-name <span style="color:#e6db74">&#34;straight/repos/straight.el/bootstrap.el&#34;</span> user-emacs-directory))
+      (bootstrap-version <span style="color:#ae81ff">5</span>))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+        (url-retrieve-synchronously
+         <span style="color:#e6db74">&#34;https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el&#34;</span>
+         <span style="color:#e6db74">&#39;silent</span> <span style="color:#e6db74">&#39;inhibit-cookies</span>)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (<span style="color:#a6e22e">load</span> bootstrap-file <span style="color:#66d9ef">nil</span> <span style="color:#e6db74">&#39;nomessage</span>))
+<span style="color:#75715e">;; Integration with use-package</span>
+(straight-use-package <span style="color:#e6db74">&#39;use-package</span>)</code></pre></div>
+<p>After setting-up the package manager, we can use it to install almost any package we want.</p>
 
-<p>但没法像这个 demo 一样，因为有 <a href="http://fishshell.com/">fish Shell</a> 的加持，有将历史命令以阴影的方式展现展现出来，命令自动补全等功能。
-这就需要安装相应的插件，接下来需要安装的 antibody ，正是用来安装管理这些组件的。</p></li>
+<h3 id="theme">Theme</h3>
 
-<li><p>安装 antibody</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">brew install getantibody/tap/antibody</code></pre></div>
-<p>执行以上命令安装 antibody，然后创建 <code>~/.zsh_plugins.txt</code>。
-它保存着需要安装的 zsh 插件，每行都是一个 Github Repos 名称。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plain" data-lang="plain">zsh-users/zsh-completions
-zsh-users/zsh-history-substring-search
-zsh-users/zsh-syntax-highlighting
-zsh-users/zsh-autosuggestions</code></pre></div>
-<p>再把以下内容写入到 <code>~/.zshrc</code> 文件末尾。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">source &lt;<span style="color:#f92672">(</span>antibody init<span style="color:#f92672">)</span>
-antibody bundle &lt; ~/.zsh_plugins.txt</code></pre></div>
-<p>执行 <code>$SHELL</code> 或者重新打开终端即可生效。
-更改 <code>~/.zsh_plugins.txt</code> 后，首次打开 Shell 会安装不存在的插件。稍微等待一下，即可享受这颜值与实力并存的生产力工具了。</p></li>
-</ol>
+<p><a href="https://github.com/hlissner/emacs-doom-themes">doom-themes</a> seems pretty good. Copy the below example configure codes, append it into <code>.emacs</code> file.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp"><span style="color:#75715e">;;; Theme Config</span>
+(<span style="color:#a6e22e">use-package</span> doom-themes
+  <span style="color:#e6db74">:straight</span> <span style="color:#66d9ef">t</span>
+  <span style="color:#e6db74">:config</span>
+  <span style="color:#75715e">;; Global settings (defaults)</span>
+  (<span style="color:#66d9ef">setq</span> doom-themes-enable-bold <span style="color:#66d9ef">t</span>    <span style="color:#75715e">; if nil, bold is universally disabled</span>
+        doom-themes-enable-italic <span style="color:#66d9ef">t</span>) <span style="color:#75715e">; if nil, italics is universally disabled</span>
+  (load-theme <span style="color:#e6db74">&#39;doom-one-light</span> <span style="color:#66d9ef">t</span>)
+  <span style="color:#75715e">;; Enable flashing mode-line on errors</span>
+  (doom-themes-visual-bell-config)
+  <span style="color:#75715e">;; Enable custom neotree theme (all-the-icons must be installed!)</span>
+  (doom-themes-neotree-config)
+  <span style="color:#75715e">;; or for treemacs users</span>
+  (<span style="color:#66d9ef">setq</span> doom-themes-treemacs-theme <span style="color:#e6db74">&#34;doom-colors&#34;</span>) <span style="color:#75715e">; use the colorful treemacs theme</span>
+  (doom-themes-treemacs-config)
+  <span style="color:#75715e">;; Corrects (and improves) org-mode&#39;s native fontification.</span>
+  (doom-themes-org-config))</code></pre></div>
+<h3 id="dashboard">Dashboard</h3>
 
-<blockquote>
-<p>关于具体怎么安装 zsh，ohmyzsh 的 Wiki 里解答的太好了。
-<a href="https://github.com/ohmyzsh/ohmyzsh/wiki/Installing-ZSH">Installing ZSH | ohmyzsh Wiki</a></p>
+<p>Setting-up a neat and pretty startup screen. Appends below code into <code>.emacs</code> file to install and setup.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp"><span style="color:#75715e">;;; Dashboard</span>
+(<span style="color:#a6e22e">use-package</span> dashboard
+  <span style="color:#e6db74">:straight</span> <span style="color:#66d9ef">t</span>
+  <span style="color:#e6db74">:config</span>
+  (dashboard-setup-startup-hook))</code></pre></div>
+<p>See <a href="https://github.com/emacs-dashboard/emacs-dashboard">repos</a> of <strong>emacs-dashboard</strong> for additional details.</p>
 
-<p>具体如何使用 antibody 直接看其文档 <a href="https://getantibody.github.io/">getantibody | Github.io</a></p>
-</blockquote>
+<h3 id="configure-gui-on-macos">Configure GUI on MacOS</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp"><span style="color:#75715e">;;; GUI Config</span>
+(when (<span style="color:#a6e22e">eq</span> system-type <span style="color:#e6db74">&#39;darwin</span>)
+  <span style="color:#75715e">;; Make the title bar and toolbar to be transparent.</span>
+  (add-to-list <span style="color:#e6db74">&#39;default-frame-alist</span>
+               <span style="color:#f92672">&#39;</span>(ns-transparent-titlebar <span style="color:#f92672">.</span> <span style="color:#66d9ef">t</span>))
+  (add-to-list <span style="color:#e6db74">&#39;default-frame-alist</span>
+               <span style="color:#f92672">&#39;</span>(ns-appearance <span style="color:#f92672">.</span> dark))
+  <span style="color:#75715e">;; Change the opacity of the frame.</span>
+  (add-to-list <span style="color:#e6db74">&#39;default-frame-alist</span>
+               <span style="color:#f92672">&#39;</span>(alpha <span style="color:#f92672">.</span> (<span style="color:#ae81ff">80</span> <span style="color:#f92672">.</span> <span style="color:#ae81ff">75</span>))))
+<span style="color:#75715e">;; Disable dialog box</span>
+(<span style="color:#66d9ef">setq</span> use-file-dialog        <span style="color:#66d9ef">nil</span>
+      use-dialog-box         <span style="color:#66d9ef">nil</span>)
+<span style="color:#75715e">;; Hide toolbar</span>
+(when (<span style="color:#a6e22e">fboundp</span> <span style="color:#e6db74">&#39;tool-bar-mode</span>)
+  (tool-bar-mode <span style="color:#ae81ff">-1</span>))
+<span style="color:#75715e">;; Hide scrollbar</span>
+(when (<span style="color:#a6e22e">fboundp</span> <span style="color:#e6db74">&#39;set-scroll-bar-mode</span>)
+  (set-scroll-bar-mode <span style="color:#66d9ef">nil</span>))</code></pre></div>
+<h2 id="weird-problems-happened-while-using-emacs">Weird Problems Happened While Using Emacs</h2>
 
+<h3 id="produces-weird-output-while-running-shell-in-emacs">Produces Weird Output While Running Shell In Emacs</h3>
+
+<p>Use <code>&lt;M-x&gt; shell &lt;RET&gt;</code> to launch shell in Emacs. It produces weird output while prompt appearing every time. Some outputs like this <code>'1337;Remote Host...CurrentDir'</code>. It is caused by iTerm2 Shell Integration when using iTerm2 on macOS. Adding a condition <code>[ $TERM != &quot;dumb&quot; ]</code> according to the <a href="https://www.gnu.org/software/emacs/manual/html_node/tramp/Frequently-Asked-Questions.html">FAQ</a> will resolve this problem.</p>
+
+<p>But the shell launched inside the Emacs still has some weird output, but launch it with GUI will not produce those weird output. Such as <code>&quot;^[]2;&quot;</code>, <code>&quot;^G^[]1;&quot;</code> and <code>&quot;^G&quot;</code>. Those maybe are ANSI escape codes, which Emacs shell does not support currently. Use <code>&lt;M-x&gt; ansi-term &lt;RET&gt;</code> to get better ANSI escape code support for shell. But launching shell with <code>ansi-term</code> will set <code>TERM=&quot;eterm-color&quot;</code>. So it needs to add a new condition <code>[ $TERM != &quot;eterm-color&quot; ]</code> to apply iTerm2 Shell Integration.</p>
+
+<p>I use ZSH shell, so need to modify <code>.zshrc</code> file to use the correct way for enabling iTerm2 Shell Integration.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e"># iTerm2 Shell Integration</span>
+<span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> $TERM !<span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;dumb&#34;</span> <span style="color:#f92672">]</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#f92672">[</span> $TERM !<span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;eterm-color&#34;</span> <span style="color:#f92672">]</span>; <span style="color:#66d9ef">then</span>
+  <span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> -e <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>HOME<span style="color:#e6db74">}</span><span style="color:#e6db74">/.iterm2_shell_integration.zsh&#34;</span> <span style="color:#f92672">]</span>; <span style="color:#66d9ef">then</span>
+    source <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>HOME<span style="color:#e6db74">}</span><span style="color:#e6db74">/.iterm2_shell_integration.zsh&#34;</span>
+  <span style="color:#66d9ef">fi</span>
+<span style="color:#66d9ef">fi</span></code></pre></div>
+<h3 id="environment-variables-are-different-from-user-shell-to-emacs-shell">Environment Variables Are Different From User Shell To Emacs Shell</h3>
+
+<p>Launch shell in Emacs with <code>$PATH</code> variable has been changed. I google a lot of solutions but none of working fine. Luckily I find out this repository perfectly solves my problem. Using <a href="https://github.com/purcell/exec-path-from-shell"><code>exec-path-from-shell</code></a> to ensure environment variables inside Emacs look the same as in the user&rsquo;s shell.</p>
+
+<p>Appending below codes into <code>.emacs</code> file and it will work fine.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp"><span style="color:#75715e">;;; Shell Configure</span>
+<span style="color:#75715e">;; Ensure environment variables inside Emacs</span>
+<span style="color:#75715e">;; look the same as in the user&#39;s shell.</span>
+(<span style="color:#a6e22e">use-package</span> exec-path-from-shell
+  <span style="color:#e6db74">:straight</span> <span style="color:#66d9ef">t</span>
+  <span style="color:#e6db74">:config</span>
+  (when (memq window-system <span style="color:#f92672">&#39;</span>(mac ns x))
+    (exec-path-from-shell-initialize)))</code></pre></div>
 
             </div>
             
@@ -1238,15 +1307,10 @@ antibody bundle &lt; ~/.zsh_plugins.txt</code></pre></div>
                 
                 <div>
                     <img class="icon" src="https://linw1995.com/img/back.svg" alt="back" />
-                    <a href="https://linw1995.com/blog/%E7%BD%91%E7%AB%99%E8%A7%82%E6%B5%8B%E5%B7%A5%E5%85%B7/">网站观测工具</a>
+                    <a href="https://linw1995.com/en/blog/How-To-Write-Asynchronous-Code-With-Contextvars-Properly/">How To Write Asynchronous Code With Contextvars Properly</a>
                 </div>
                 
                 <div style="width: 100%;"></div>
-                
-                <div>
-                    <a href="https://linw1995.com/blog/%E5%A6%82%E4%BD%95%E5%9C%A8%E7%BA%BF%E7%A8%8B%E9%87%8C%E8%B7%91%E5%8D%8F%E7%A8%8B/">如何在线程里跑协程</a>
-                    <img class="icon" src="https://linw1995.com/img/next.svg" alt="next" />
-                </div>
                 
             </div>
             
@@ -1299,7 +1363,7 @@ antibody bundle &lt; ~/.zsh_plugins.txt</code></pre></div>
 
         
             
-                <a href="https://linw1995.com/license">Copyright © 2020 linw1995</a>
+                <a href="https://linw1995.com/en/license">Copyright © 2020 linw1995</a>
             
         
 

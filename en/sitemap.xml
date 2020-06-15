@@ -3,6 +3,61 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://linw1995.com/en/blog/</loc>
+    <lastmod>2020-06-15T01:15:59+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://linw1995.com/blog/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://linw1995.com/en/blog/"
+                />
+  </url>
+  
+  <url>
+    <loc>https://linw1995.com/en/tags/Emacs/</loc>
+    <lastmod>2020-06-15T01:15:59+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://linw1995.com/en/</loc>
+    <lastmod>2020-06-15T01:15:59+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://linw1995.com/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://linw1995.com/en/"
+                />
+  </url>
+  
+  <url>
+    <loc>https://linw1995.com/en/tags/</loc>
+    <lastmod>2020-06-15T01:15:59+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://linw1995.com/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://linw1995.com/en/tags/"
+                />
+  </url>
+  
+  <url>
+    <loc>https://linw1995.com/en/blog/Using-Emacs-Editor-For-The-First-Time/</loc>
+    <lastmod>2020-06-15T01:15:59+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://linw1995.com/en/tags/Asyncio/</loc>
     <lastmod>2020-05-16T16:15:59+08:00</lastmod>
     <xhtml:link
@@ -18,21 +73,6 @@
   </url>
   
   <url>
-    <loc>https://linw1995.com/en/blog/</loc>
-    <lastmod>2020-05-16T16:15:59+08:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh-cn"
-                href="https://linw1995.com/blog/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://linw1995.com/en/blog/"
-                />
-  </url>
-  
-  <url>
     <loc>https://linw1995.com/en/blog/How-To-Write-Asynchronous-Code-With-Contextvars-Properly/</loc>
     <lastmod>2020-05-16T16:15:59+08:00</lastmod>
     <xhtml:link
@@ -44,21 +84,6 @@
                 rel="alternate"
                 hreflang="en"
                 href="https://linw1995.com/en/blog/How-To-Write-Asynchronous-Code-With-Contextvars-Properly/"
-                />
-  </url>
-  
-  <url>
-    <loc>https://linw1995.com/en/</loc>
-    <lastmod>2020-05-16T16:15:59+08:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh-cn"
-                href="https://linw1995.com/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://linw1995.com/en/"
                 />
   </url>
   
@@ -104,21 +129,6 @@
                 rel="alternate"
                 hreflang="en"
                 href="https://linw1995.com/en/tags/Python/"
-                />
-  </url>
-  
-  <url>
-    <loc>https://linw1995.com/en/tags/</loc>
-    <lastmod>2020-05-16T16:15:59+08:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh-cn"
-                href="https://linw1995.com/tags/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://linw1995.com/en/tags/"
                 />
   </url>
   

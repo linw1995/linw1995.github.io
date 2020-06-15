@@ -6,10 +6,20 @@
     <description>Recent content in Blog on linw1995</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sat, 16 May 2020 16:15:59 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 15 Jun 2020 01:15:59 +0800</lastBuildDate>
     
 	<atom:link href="https://linw1995.com/en/blog/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Using Emacs Editor For The First Time</title>
+      <link>https://linw1995.com/en/blog/Using-Emacs-Editor-For-The-First-Time/</link>
+      <pubDate>Mon, 15 Jun 2020 01:15:59 +0800</pubDate>
+      
+      <guid>https://linw1995.com/en/blog/Using-Emacs-Editor-For-The-First-Time/</guid>
+      <description>Recently I had been learning how to programs in Racket language. editors like VSCode and vim support poorly for the Racket language. And in the document of Racket, it recommends Emacs for developing Racket project. So I decided to give it a try. The main purpose of this blog is to record some solutions to problems that happened while I using it.
+Installation Follow the installation section of Emacs document, I installed latest Emacs 26.</description>
+    </item>
     
     <item>
       <title>How To Write Asynchronous Code With Contextvars Properly</title>

@@ -1128,7 +1128,7 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
                         
                     
                     
-                    <div class="reading-time middot">4 minute read</div>
+                    <div class="reading-time middot">5 minute read</div>
                     
                     
                       <div class="tags">
@@ -1179,6 +1179,14 @@ cd emacs-26.3
 make install</code></pre></div>
 <p>On MacOS 10.15.4, Emacs can be easily installed by using Homebrew.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">brew cask install emacs</code></pre></div>
+<h3 id="new-installation-on-macos-updated-at-2020-06-16">New Installation On MacOS Updated At 2020-06-16</h3>
+
+<p>Using <code>brew cask install emacs</code> to install emacs will be unable to get full disk accessing on macOS, even if the user granting. Using <a href="https://github.com/d12frosted/homebrew-emacs-plus">emacs-plus</a> instead, run below commands to install it.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">brew tap d12frosted/emacs-plus
+brew install emacs-plus@27 --with-modern-icon-pen
+ln -s /usr/local/opt/emacs-plus@27/Emacs.app /Applications</code></pre></div>
+<p>Emacs-plus 27 is able to get full disk accessing on macOS if user granting. Many Thanks to <a href="https://gist.github.com/dive/f64c645a9086afce8e5dd2590071dbf9#gistcomment-3267770">dive/fix-emacs-permissions-catalina.el</a></p>
+
 <h2 id="make-emacs-more-beautiful">Make Emacs More Beautiful</h2>
 
 <p>The main topic of this blog is how to configure the Emacs more beautiful. The beautiful editor did improve my programming efficiency :)</p>
@@ -1255,6 +1263,14 @@ make install</code></pre></div>
 (when (<span style="color:#a6e22e">fboundp</span> <span style="color:#e6db74">&#39;set-scroll-bar-mode</span>)
   (set-scroll-bar-mode <span style="color:#66d9ef">nil</span>))</code></pre></div>
 <h2 id="weird-problems-happened-while-using-emacs">Weird Problems Happened While Using Emacs</h2>
+
+<h3 id="macos-misc-updated-at-2020-06-16">MacOS Misc (Updated at 2020-06-16)</h3>
+
+<p>Dired is a directory editor on Emacs. It uses <code>ls</code> program. On macOS, <code>ls</code> does not support <code>--dired</code> option. Appending below codes into <code>.emacs</code> file to configure <strong>dired</strong> using <code>ls</code> without <code>--dired</code>.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp"><span style="color:#75715e">;;; MacOS Misc</span>
+(when (<span style="color:#a6e22e">string=</span> system-type <span style="color:#e6db74">&#34;darwin&#34;</span>)
+  (<span style="color:#66d9ef">setq</span> dired-use-ls-dired <span style="color:#66d9ef">nil</span>))</code></pre></div>
+<p>See <a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Dired-Enter.html#Dired-Enter">Dired</a> for addition details.</p>
 
 <h3 id="produces-weird-output-while-running-shell-in-emacs">Produces Weird Output While Running Shell In Emacs</h3>
 

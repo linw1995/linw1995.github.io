@@ -4,7 +4,7 @@
   
   <url>
     <loc>https://linw1995.com/en/blog/</loc>
-    <lastmod>2020-07-13T01:30:00+08:00</lastmod>
+    <lastmod>2020-07-13T23:34:59+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
@@ -19,12 +19,12 @@
   
   <url>
     <loc>https://linw1995.com/en/tags/Emacs/</loc>
-    <lastmod>2020-07-13T01:30:00+08:00</lastmod>
+    <lastmod>2020-07-13T23:34:59+08:00</lastmod>
   </url>
   
   <url>
     <loc>https://linw1995.com/en/</loc>
-    <lastmod>2020-07-13T01:30:00+08:00</lastmod>
+    <lastmod>2020-07-13T23:34:59+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
@@ -38,13 +38,13 @@
   </url>
   
   <url>
-    <loc>https://linw1995.com/en/tags/Racket/</loc>
-    <lastmod>2020-07-13T01:30:00+08:00</lastmod>
+    <loc>https://linw1995.com/en/blog/Share-My-Emacs-Configuration/</loc>
+    <lastmod>2020-07-13T23:34:59+08:00</lastmod>
   </url>
   
   <url>
     <loc>https://linw1995.com/en/tags/</loc>
-    <lastmod>2020-07-13T01:30:00+08:00</lastmod>
+    <lastmod>2020-07-13T23:34:59+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
@@ -55,6 +55,11 @@
                 hreflang="en"
                 href="https://linw1995.com/en/tags/"
                 />
+  </url>
+  
+  <url>
+    <loc>https://linw1995.com/en/tags/Racket/</loc>
+    <lastmod>2020-07-13T01:30:00+08:00</lastmod>
   </url>
   
   <url>

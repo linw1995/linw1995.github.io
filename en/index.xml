@@ -6,10 +6,19 @@
     <description>Recent content on linw1995</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Mon, 13 Jul 2020 01:30:00 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 13 Jul 2020 23:34:59 +0800</lastBuildDate>
     
 	<atom:link href="https://linw1995.com/en/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Share My Emacs Configuration</title>
+      <link>https://linw1995.com/en/blog/Share-My-Emacs-Configuration/</link>
+      <pubDate>Mon, 13 Jul 2020 23:34:59 +0800</pubDate>
+      
+      <guid>https://linw1995.com/en/blog/Share-My-Emacs-Configuration/</guid>
+      <description>My Emacs Configuration Repository: [linw1995/.emacs.d](https://github.com/linw1995/.emacs.d).</description>
+    </item>
     
     <item>
       <title>Write Racket With Emacs</title>

@@ -6,10 +6,19 @@
     <description>Recent content on linw1995</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sat, 16 May 2020 16:15:59 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 21 Jul 2020 01:30:00 +0800</lastBuildDate>
     
 	<atom:link href="https://linw1995.com/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>如何写一个简单的 DSL 从 JSON 中提取数据</title>
+      <link>https://linw1995.com/blog/%E5%A6%82%E4%BD%95%E5%86%99%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84-DSL-%E4%BB%8E-JSON-%E4%B8%AD%E6%8F%90%E5%8F%96%E6%95%B0%E6%8D%AE/</link>
+      <pubDate>Tue, 21 Jul 2020 01:30:00 +0800</pubDate>
+      
+      <guid>https://linw1995.com/blog/%E5%A6%82%E4%BD%95%E5%86%99%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84-DSL-%E4%BB%8E-JSON-%E4%B8%AD%E6%8F%90%E5%8F%96%E6%95%B0%E6%8D%AE/</guid>
+      <description>如何写一个简单的 DSL 从 JSON 中提取数据</description>
+    </item>
     
     <item>
       <title>如何在异步编程中正确地使用 Contextvars</title>

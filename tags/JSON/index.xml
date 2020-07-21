@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>JSON on linw1995</title>
+    <link>https://linw1995.com/tags/JSON/</link>
+    <description>Recent content in JSON on linw1995</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Tue, 21 Jul 2020 01:30:00 +0800</lastBuildDate>
+    
+	<atom:link href="https://linw1995.com/tags/JSON/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>如何写一个简单的 DSL 从 JSON 中提取数据</title>
+      <link>https://linw1995.com/blog/%E5%A6%82%E4%BD%95%E5%86%99%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84-DSL-%E4%BB%8E-JSON-%E4%B8%AD%E6%8F%90%E5%8F%96%E6%95%B0%E6%8D%AE/</link>
+      <pubDate>Tue, 21 Jul 2020 01:30:00 +0800</pubDate>
+      
+      <guid>https://linw1995.com/blog/%E5%A6%82%E4%BD%95%E5%86%99%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84-DSL-%E4%BB%8E-JSON-%E4%B8%AD%E6%8F%90%E5%8F%96%E6%95%B0%E6%8D%AE/</guid>
+      <description>前言 在进入正题之前，先简单地介绍下什么是 DSL(Domain Specific Language)。 就是专用于特定领域的语言， 比如 HTML，Markdown，Org，RST 等这些文本标记语言（CSS 也是 DSL，用来描述 HTML 的展示形式）； 比如 Regex 来做文本匹配提取； 比如 YAML，TOML，XML 这样的配置文件格式； 比如 Graphviz 的 DOT 语言来描述图形信息； SQL 用来描述如何从数据库中获取数据。
+与 DSL 相对应的就有 GPL(General Purpose Language) ，即通用的计算机编程语言。 GPL 是可以用来编写任意计算机程序的，并且能表达任何的可被计算的逻辑，同时也是图灵完备的语言。 比如 Python，C，C++，Java 等编程语言。
+使用一门优秀的 DSL 就可以真正的提升生产力，减少不必要的工作，在一些领域帮助我们更快的实现需求。
+工作面临的痛点 写爬虫难免会处理各种各样的数据，其中最常见的就是 JSON 及 HTML 文本了。解析 HTML 并提取数据，我们有好用的轮子，比如 lxml ，及用来提取数据的 DSL 即 XPath（或者 CSS-Selectors ）。 面对复杂的 JSON 嵌套结构，解析可以用标准库 json。而提取数据则没有好用的 DSL，所以我们难免会写出这样的代码
+data = json.load(text) username = data[&amp;#34;info&amp;#34;][&amp;#34;author&amp;#34;][&amp;#34;username&amp;#34;] blogs = [] for raw in data[&amp;#34;info&amp;#34;][&amp;#34;blogs&amp;#34;]: blogs.</description>
+    </item>
+    
+  </channel>
+</rss>

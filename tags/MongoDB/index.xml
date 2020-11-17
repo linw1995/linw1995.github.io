@@ -6,11 +6,7 @@
     <description>Recent content in MongoDB on linw1995</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sun, 04 Aug 2019 23:59:59 +0000</lastBuildDate>
-    
-	<atom:link href="https://linw1995.com/tags/MongoDB/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Sun, 04 Aug 2019 23:59:59 +0000</lastBuildDate><atom:link href="https://linw1995.com/tags/MongoDB/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>用 docker-compose 部署 MongoDB Replica Set 开发环境</title>
       <link>https://linw1995.com/blog/%E7%94%A8-docker-compose-%E9%83%A8%E7%BD%B2-MongoDB-Replica-Set-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/</link>

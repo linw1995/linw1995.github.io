@@ -5,10 +5,6 @@
     <link>https://linw1995.com/en/categories/</link>
     <description>Recent content in Categories on linw1995</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
-    
-	<atom:link href="https://linw1995.com/en/categories/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <language>zh-cn</language><atom:link href="https://linw1995.com/en/categories/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>

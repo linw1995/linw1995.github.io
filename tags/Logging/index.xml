@@ -6,11 +6,7 @@
     <description>Recent content in Logging on linw1995</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Tue, 29 Jan 2019 23:59:59 +0000</lastBuildDate>
-    
-	<atom:link href="https://linw1995.com/tags/Logging/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Tue, 29 Jan 2019 23:59:59 +0000</lastBuildDate><atom:link href="https://linw1995.com/tags/Logging/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>两种方式来用 Python logging 记录额外的值</title>
       <link>https://linw1995.com/blog/%E4%B8%A4%E7%A7%8D%E6%96%B9%E5%BC%8F%E6%9D%A5%E7%94%A8-Python-logging-%E8%AE%B0%E5%BD%95%E9%A2%9D%E5%A4%96%E7%9A%84%E5%80%BC/</link>

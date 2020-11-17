@@ -15,24 +15,24 @@
 <meta property="og:site_name" content="linw1995" />
 <meta property="og:locale" content="zh-cn" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://linw1995.com/blog/%E5%A6%82%E4%BD%95%E5%86%99%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84-DSL-%E4%BB%8E-JSON-%E4%B8%AD%E6%8F%90%E5%8F%96%E6%95%B0%E6%8D%AE/" />
-<meta property="og:title" content="如何写一个简单的 DSL 从 JSON 中提取数据" />
-<meta property="twitter:title" content="如何写一个简单的 DSL 从 JSON 中提取数据">
+<meta property="og:url" content="https://linw1995.com/blog/%E5%A6%82%E4%BD%95%E5%86%99%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84-DSL-%E4%BB%8E-JSON-%E4%B8%AD%E6%8F%90%E5%8F%96%E6%95%B0%E6%8D%AE%E4%BA%8C/" />
+<meta property="og:title" content="如何写一个简单的 DSL 从 JSON 中提取数据（二）" />
+<meta property="twitter:title" content="如何写一个简单的 DSL 从 JSON 中提取数据（二）">
 
     <meta property="og:image" content="/img/banner.png">
     <meta property="twitter:card" content="summary">
     <meta property="twitter:image" content="/img/banner.png">
 
-<meta property="og:description" content="如何写一个简单的 DSL 从 JSON 中提取数据">
-<meta property="twitter:description" content="如何写一个简单的 DSL 从 JSON 中提取数据">
+<meta property="og:description" content="如何写一个简单的 DSL 从 JSON 中提取数据（二）">
+<meta property="twitter:description" content="如何写一个简单的 DSL 从 JSON 中提取数据（二）">
 
 <title>
 
 
-     linw1995 - 如何写一个简单的 DSL 从 JSON 中提取数据 
+     linw1995 - 如何写一个简单的 DSL 从 JSON 中提取数据（二） 
 
 </title>
-<link rel="canonical" href="https://linw1995.com/blog/%E5%A6%82%E4%BD%95%E5%86%99%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84-DSL-%E4%BB%8E-JSON-%E4%B8%AD%E6%8F%90%E5%8F%96%E6%95%B0%E6%8D%AE/">
+<link rel="canonical" href="https://linw1995.com/blog/%E5%A6%82%E4%BD%95%E5%86%99%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84-DSL-%E4%BB%8E-JSON-%E4%B8%AD%E6%8F%90%E5%8F%96%E6%95%B0%E6%8D%AE%E4%BA%8C/">
 
 
 <style media="screen">
@@ -1117,19 +1117,19 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
                     <div class="page-heading">
 
     
-    如何写一个简单的 DSL 从 JSON 中提取数据
+    如何写一个简单的 DSL 从 JSON 中提取数据（二）
     
 
 </div>
 
                 </div>
                 <div class="meta">
-                    <div class="date" title="Tue Jul 21 2020 01:30:00 CST">Jul 21, 2020</div>
+                    <div class="date" title="Tue Nov 17 2020 01:30:00 CST">Nov 17, 2020</div>
                     
                         
                     
                     
-                    <div class="reading-time middot">3 minute read</div>
+                    <div class="reading-time middot">5 minute read</div>
                     
                     
                       <div class="tags">
@@ -1159,199 +1159,572 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
 
 <h2 id="前言">前言</h2>
 
-<p>在进入正题之前，先简单地介绍下什么是 DSL(Domain Specific Language)。
-就是专用于特定领域的语言，
-比如 HTML，Markdown，Org，RST 等这些文本标记语言（CSS 也是 DSL，用来描述 HTML 的展示形式）；
-比如 Regex 来做文本匹配提取；
-比如 YAML，TOML，XML 这样的配置文件格式；
-比如 Graphviz 的 DOT 语言来描述图形信息；
-SQL 用来描述如何从数据库中获取数据。</p>
+<p>拖更了这么久的原因，主要是因为谈了女朋友，就没什么时间静下写东西了。
+言归正传，这一期主要是讲一下一些设计 JSONPath 表达式的想法。</p>
 
-<p>与 DSL 相对应的就有 GPL(General Purpose Language) ，即通用的计算机编程语言。
-GPL 是可以用来编写任意计算机程序的，并且能表达任何的可被计算的逻辑，同时也是图灵完备的语言。
-比如 Python，C，C++，Java 等编程语言。</p>
+<p>JSON 数据的基本的数据类型（整型，浮点型，字符串，布尔）与 Python 都有分别相对应的数据类型。
+还有两大支持数据嵌套的结构，即 <strong>Array</strong> 和 <strong>Object</strong>。他们解析成 Python 对象后分别是 <code>list</code> 和 <code>dict</code> 对象。
+这样通过 <code>json.load</code> or <code>json.loads</code> 可以把 JSON 文本变成了对应的 Python 数据。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">assert</span> json<span style="color:#f92672">.</span>loads(
+    <span style="color:#e6db74">&#39;{&#34;data&#34;: [{&#34;name&#34;: &#34;bar&#34;}]}&#39;</span>
+) <span style="color:#f92672">==</span> {<span style="color:#e6db74">&#39;data&#39;</span>: [{<span style="color:#e6db74">&#39;name&#39;</span>: <span style="color:#e6db74">&#39;bar&#39;</span>}]}</code></pre></div>
+<p>而 JSONPath 表达式，就是用来简洁明了地表示，如何从这中 JSON 结构数据中提取目标数据。
+这样的表达式就需要较高的易读性和表达力。</p>
 
-<p>使用一门优秀的 DSL 就可以真正的提升生产力，减少不必要的工作，在一些领域帮助我们更快的实现需求。</p>
+<p>上一期通过几个简单的函数实现了 JSONPath 表达式的执行，展示了实现 DSL 的基本方法。
+如果要实现 production-ready 的轮子的话，光这样是远远不够的。
+上一期 demo 的缺点很明显，缺少必要的调试方法，缺少一些 corner-cases 的处理，难以持续地扩展维护等问题。</p>
 
-<h2 id="工作面临的痛点">工作面临的痛点</h2>
+<h2 id="executable-的设计">Executable 的设计</h2>
 
-<p>写爬虫难免会处理各种各样的数据，其中最常见的就是 JSON 及 HTML 文本了。解析 HTML 并提取数据，我们有好用的轮子，比如 lxml ，及用来提取数据的 DSL 即 XPath（或者 CSS-Selectors ）。
-面对复杂的 JSON 嵌套结构，解析可以用标准库 <code>json</code>。而提取数据则没有好用的 DSL，所以我们难免会写出这样的代码</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">data <span style="color:#f92672">=</span> json<span style="color:#f92672">.</span>load(text)
-username <span style="color:#f92672">=</span> data[<span style="color:#e6db74">&#34;info&#34;</span>][<span style="color:#e6db74">&#34;author&#34;</span>][<span style="color:#e6db74">&#34;username&#34;</span>]
-blogs <span style="color:#f92672">=</span> []
-<span style="color:#66d9ef">for</span> raw <span style="color:#f92672">in</span> data[<span style="color:#e6db74">&#34;info&#34;</span>][<span style="color:#e6db74">&#34;blogs&#34;</span>]:
-    blogs<span style="color:#f92672">.</span>append({
-        <span style="color:#e6db74">&#34;title&#34;</span>: raw[<span style="color:#e6db74">&#34;header&#34;</span>]
-        <span style="color:#e6db74">&#34;content&#34;</span>: raw[<span style="color:#e6db74">&#34;text&#34;</span>]
-    })</code></pre></div>
-<p>为了避免字段丢失而抛出 <code>KeyError</code> 异常，我们常常会添加些而外的代码进行处理。比如套几个 try-except 代码块， 代码就会变成这样</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">try</span>:
-    username <span style="color:#f92672">=</span> data[<span style="color:#e6db74">&#34;info&#34;</span>][<span style="color:#e6db74">&#34;author&#34;</span>][<span style="color:#e6db74">&#34;username&#34;</span>]
-<span style="color:#66d9ef">except</span> <span style="color:#a6e22e">KeyError</span>:
-    username <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>
-
-blogs <span style="color:#f92672">=</span> []
-<span style="color:#66d9ef">try</span>:
-    <span style="color:#66d9ef">for</span> raw <span style="color:#f92672">in</span> data[<span style="color:#e6db74">&#34;info&#34;</span>][<span style="color:#e6db74">&#34;blogs&#34;</span>]:
-        <span style="color:#66d9ef">try</span>:
-            blogs<span style="color:#f92672">.</span>append({
-                <span style="color:#e6db74">&#34;title&#34;</span>: raw[<span style="color:#e6db74">&#34;header&#34;</span>]
-                <span style="color:#e6db74">&#34;content&#34;</span>: raw[<span style="color:#e6db74">&#34;text&#34;</span>]
-            })
-        <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">KeyError</span>:
-            <span style="color:#66d9ef">pass</span>
-<span style="color:#66d9ef">except</span> <span style="color:#a6e22e">KeyError</span>:
-    <span style="color:#66d9ef">pass</span></code></pre></div>
-<p>或者直接调用 <code>dict.get</code> 方法去获取，当字段不存在时，而使用缺省值。则代码会变成这样</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">username <span style="color:#f92672">=</span> data<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;info&#34;</span>, {})<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;author&#34;</span>, {})<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;username&#34;</span>, <span style="color:#e6db74">&#34;&#34;</span>)
-blogs <span style="color:#f92672">=</span> []
-<span style="color:#66d9ef">for</span> raw <span style="color:#f92672">in</span> data<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;info&#34;</span>, {})<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;blogs&#34;</span>, []):
-    blogs<span style="color:#f92672">.</span>append({
-        <span style="color:#e6db74">&#34;title&#34;</span>: raw<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;header&#34;</span>, <span style="color:#e6db74">&#34;&#34;</span>)
-        <span style="color:#e6db74">&#34;content&#34;</span>: raw<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;text&#34;</span>, <span style="color:#e6db74">&#34;&#34;</span>)
-    })</code></pre></div>
-<p>明明就是只是想避免代码抛出 <code>KeyError</code> 异常，就把代码平白增添这么多，十分不符合 Python 哲学。
-也为了减少写重复的代码，所以我们得想办法把这段程序的代码写的简单点。</p>
-
-<h2 id="dsl-能解放生产力">DSL 能解放生产力</h2>
-
-<p>通过实现一种 DSL 像 XPath 那样来从 JSON 数据中提取想要的数据。</p>
-
-<p>JSON 数据的<a href="https://www.json.org/json-zh.html">语法</a>支持嵌套，如果平展开来，就像一层层的树状结构。
-从根部开始出发，经过一个个节点（节点却有不同的结构 key-value (object) 和 idx-value (array) ）最终到叶节点，也就是变量值（布尔值，Null，数字及字符串）。</p>
-
-<p>我们通过字段名 key 当路径的名称，以半角句号隔开，来代表我们走过的一个个节点（一层层嵌套的对象），即可得到 <code>&quot;info.author.username&quot;</code>。这样我们就可以通过这简单的表达式，来定位我们想要的数据。</p>
-
-<p>那怎么表示 JSON 的列表呢？以列表的下标来表示的话，我们可以写出 <code>&quot;info.blogs.0&quot;</code>，虽然能用，但这样又会与前面的表示形式起冲突。
-如果用中括号来表示列表，数字来表示下标的话，就能得到我们所熟悉的表达式 <code>&quot;info.blogs[0]&quot;</code>，常见于许多编程语言。</p>
-
-<p>我就可以以这些表达式，来描述 JSON 里某个特定节点上的数据。比如以下代码，就是我理想中的实现。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">username <span style="color:#f92672">=</span> parse(<span style="color:#e6db74">&#34;info.author.username&#34;</span>)<span style="color:#f92672">.</span>find(data)
-blogs <span style="color:#f92672">=</span> parse(<span style="color:#e6db74">&#34;info.blogs[*]{title:header, content:text}&#34;</span>)<span style="color:#f92672">.</span>find(data)</code></pre></div>
-<blockquote>
-<p>如果用过 JQ 的人可能会对这些写法 <code>&quot;info.author.username&quot;</code> 及 <code>&quot;info.blogs[*]{title:header, content:text}&quot;</code> 感到熟悉。</p>
-</blockquote>
-
-<p>接下来我们就来实现我梦里的 DSL(Domain-specific language 领域特定语言)。</p>
-
-<h2 id="实现一个-dsl-来从-json-中提取数据">实现一个 DSL 来从 JSON 中提取数据</h2>
-
-<p>只要简单三步即可</p>
+<p>一个 JSONPath 表达式从字符串转换成可执行的算法，需要通过以下三个环节</p>
 
 <ol>
-<li>实现解析器 Parser，把 DSL 转换成 AST(Abstract Syntax Tree 抽象语法树)</li>
-<li>实现可执行程序 Executable，把数据从 JSON 中提取出来</li>
-<li>实现转换器 Transformer，把 AST 转成可执行可执行程序 (Code Generation)</li>
+<li>Parser 解析器</li>
+<li>Transformer 转换器</li>
+<li>Executable 执行器</li>
 </ol>
 
-<h3 id="实现解析器-parser">实现解析器 Parser</h3>
+<p>开发 DSL 的三个环节，其中最重要的就是 Executable 这一部分了。
+先粗略地列一下作为 Executable 要支持哪些基本功能</p>
 
-<p>这边用一个第三方开源库 <a href="https://github.com/lark-parser/lark">lark-parser/lark</a> 去实现。它基于 EBNF 实现了自己的扩展写法。支持多种解析算法。接下来用个例子来介绍一下，它是如何使用的。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> lark <span style="color:#f92672">import</span> Lark
+<ol>
+<li><p>Executable 能通过链式调用构建出来</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">jp <span style="color:#f92672">=</span> Name(<span style="color:#e6db74">&#34;bar&#34;</span>)<span style="color:#f92672">.</span>Name(<span style="color:#e6db74">&#34;boo&#34;</span>)
+<span style="color:#66d9ef">assert</span> jp<span style="color:#f92672">.</span>find({<span style="color:#e6db74">&#34;bar&#34;</span>: {<span style="color:#e6db74">&#34;boo&#34;</span>: <span style="color:#ae81ff">1</span>}}) <span style="color:#f92672">==</span> [<span style="color:#ae81ff">1</span>]</code></pre></div></li>
 
-parser <span style="color:#f92672">=</span> Lark(<span style="color:#e6db74">&#39;&#39;&#39;?start: path
-</span><span style="color:#e6db74">                 ?path: path &#34;.&#34; name          -&gt; chained_path
-</span><span style="color:#e6db74">                     | name
-</span><span style="color:#e6db74">                 name: CNAME
-</span><span style="color:#e6db74">
-</span><span style="color:#e6db74">                 </span><span style="color:#e6db74">%i</span><span style="color:#e6db74">mport common.CNAME         -&gt; CNAME
-</span><span style="color:#e6db74">                 </span><span style="color:#e6db74">%i</span><span style="color:#e6db74">mport common.WS_INLINE
-</span><span style="color:#e6db74">
-</span><span style="color:#e6db74">                 </span><span style="color:#e6db74">%i</span><span style="color:#e6db74">gnore WS_INLINE
-</span><span style="color:#e6db74">              &#39;&#39;&#39;</span>)
+<li><p>Executable 与 Expression 能相互转换</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">jp <span style="color:#f92672">=</span> parse(<span style="color:#e6db74">&#34;bar.boo&#34;</span>)
+<span style="color:#66d9ef">assert</span> jp<span style="color:#f92672">.</span>get_expression() <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;bar.boo&#34;</span></code></pre></div></li>
 
-tree <span style="color:#f92672">=</span> parser<span style="color:#f92672">.</span>parse(<span style="color:#e6db74">&#34;info.author.name&#34;</span>)
-<span style="color:#66d9ef">print</span>(tree)
-<span style="color:#66d9ef">print</span>(tree<span style="color:#f92672">.</span>pretty())</code></pre></div>
-<p>运行以上代码，终端就会输出解析到的 AST 结果。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">Tree(chained_path, [Tree(chained_path, [Tree(name, [Token(CNAME, <span style="color:#e6db74">&#39;info&#39;</span>)]), Tree(name, [Token(CNAME, <span style="color:#e6db74">&#39;author&#39;</span>)])]), Tree(name, [Token(CNAME, <span style="color:#e6db74">&#39;name&#39;</span>)])])
-chained_path
-  chained_path
-    name    info
-    name    author
-  name  name</code></pre></div>
-<h3 id="实现执行程序-executable">实现执行程序 Executable</h3>
+<li><p>通过继承基类的方式，使其易于扩展</p></li>
+</ol>
 
-<p>接下来要实现一个可执行的算法。目前只是为了举例，写的比较粗暴。实现一个高阶函数 <code>getter</code> 来创建相应的提取函数，在函数中先粗暴地拦截掉所有 <code>KeyError</code> 异常，返回成 None。再实现一个高阶函数 <code>chain</code> 来创建级联提取函数。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> operator
+<h3 id="数据结构">数据结构</h3>
 
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">getter</span>(name):
+<p>为了使其能通过链式调用而创建 Executable 实例，需要实现一个类链表的结构。
+链式调用的结果为尾节点，所以 caller 只能持有尾节点的饮用。</p>
 
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">_getter</span>(data):
-        <span style="color:#66d9ef">try</span>:
-            <span style="color:#66d9ef">return</span> operator<span style="color:#f92672">.</span>getitem(data, name)
-        <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">KeyError</span>:
-            <span style="color:#66d9ef">return</span> None
+<p>这样整个数据结构需要满足以下条件</p>
 
-    <span style="color:#66d9ef">return</span> _getter
+<ol>
+<li>尾节点保留头节点的引用</li>
 
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">chain</span>(current, next):
+<li><p>每个节点（除了尾节点）都要保持右节点的引用</p>
 
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">pair</span>(data):
-        <span style="color:#66d9ef">return</span> next(current(data))
+<p>这样才能在尾节点调用方法，按顺序遍历头节点直到尾节点。</p>
 
-    <span style="color:#66d9ef">return</span> pair</code></pre></div>
-<h3 id="实现转换器-transformer">实现转换器 Transformer</h3>
+<p><img src="./linked-list-with-cycle-ref.svg" alt="linked list with cycle ref" /></p>
 
-<p>再实现个把 AST 转换成执行代码的转换器。
-只要自底向上从左到右遍历树结构（后序遍历），根据节点的树结构类型去执行对应的转换函数，构建我们的执行算法。
-比如 <code>name</code> 就只有一个子节点 <code>CNAME</code>；而 <code>chained_path</code> 就有两个子节点，表达式的历史路径，及表达式的下一个路径 <code>name</code>。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plain" data-lang="plain">?path: path &#34;.&#34; name -&gt; chained_path
-    | name
-name: CNAME</code></pre></div>
-<p>虽然我们需要遍历树结构，但我们没有必要去实现相应的算法。
-这是因为 lark-parser 提供特别方便的 visitors 模块去让开发者使用。以类方法来转换 AST 上对应的结构。就是把 <code>CNAME</code> token 转换成字符串，把 <code>name</code> 结构转换成提取函数，把 <code>chained_path</code> 转换成级联（链式）提取函数。代码如下</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> lark.visitors <span style="color:#f92672">import</span> Transformer, v_args
+<p>为了避免引用成环，所以要使用 <code>weakref.ref</code> 来做成弱引用。</p>
 
-<span style="color:#a6e22e">@v_args</span>(inline<span style="color:#f92672">=</span>True)
-<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">JSONPathTransformer</span>(Transformer):
-    CNAME <span style="color:#f92672">=</span> str
+<p><img src="./bad-linked-list-with-weakref.svg" alt="bad linked list with weakref" /></p>
 
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">name</span>(self, cname):
-        <span style="color:#66d9ef">return</span> getter(cname)
+<p>但这样会引入新的问题，除了尾节点以外的节点，会因为引用计数归零而被回收。
+为了避免这问题，则需要引入新的条件 3</p></li>
 
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">chained_path</span>(self, previous_path, name):
-        <span style="color:#66d9ef">return</span> chain(previous_path, name)
+<li><p>每个节点都要保留左节点的<strong>实引用</strong></p>
 
-transformer <span style="color:#f92672">=</span> JSONPathTransformer()</code></pre></div>
-<h3 id="验证">验证</h3>
+<p><img src="./doubly-linked-list-with-weakref.svg" alt="doubly linked list with weakref" /></p></li>
+</ol>
 
-<p>接下来我们写几个简单的测试，测试一下</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">parse</span>(text):
-    <span style="color:#66d9ef">return</span> transformer<span style="color:#f92672">.</span>transform(parser<span style="color:#f92672">.</span>parse(text))
+<p>这样所有节点都不会因为引用计数归零而被回收。
+也为了避免引用成环，条件 1 与 2 的引用都要用 <code>weakref.ref</code> 改成<strong>弱引用</strong>。</p>
 
-<span style="color:#66d9ef">assert</span> parse(<span style="color:#e6db74">&#34;info.author.name&#34;</span>)(
-        {<span style="color:#e6db74">&#34;info&#34;</span>: {<span style="color:#e6db74">&#34;author&#34;</span>: {<span style="color:#e6db74">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;Jack&#34;</span>}}}
-    ) <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;Jack&#34;</span>
-<span style="color:#66d9ef">assert</span> parse(<span style="color:#e6db74">&#34;data&#34;</span>)({<span style="color:#e6db74">&#34;info&#34;</span>:<span style="color:#e6db74">&#34;boo&#34;</span>}) <span style="color:#f92672">is</span> None
-<span style="color:#66d9ef">assert</span> parse(<span style="color:#e6db74">&#34;info&#34;</span>)({<span style="color:#e6db74">&#34;info&#34;</span>:<span style="color:#e6db74">&#34;boo&#34;</span>}) <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;boo</span></code></pre></div>
-<p>之前 Executable 部分的代码有个 bug ，不知道大家能不能一眼看出来。我给个提示，执行以下代码就会抛出异常，这又该怎么修复呢？</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">assert</span> parse(<span style="color:#e6db74">&#34;info.author&#34;</span>)({}) <span style="color:#f92672">is</span> None</code></pre></div>
-<p>答案就是 <code>getter</code> 得处理参数 <code>data=None</code> 的情况，不然以上代码就会抛出 <code>TypeError</code> 异常。</p>
+<p>以下为具体的代码实现</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> weakref
+<span style="color:#f92672">from</span> typing <span style="color:#f92672">import</span> Optional
 
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Expr</span>:
+    <span style="color:#66d9ef">def</span> __init__(self):
+        self<span style="color:#f92672">.</span>left <span style="color:#f92672">=</span> None
+        self<span style="color:#f92672">.</span>ref_right <span style="color:#f92672">=</span> None
+        self<span style="color:#f92672">.</span>ref_begin <span style="color:#f92672">=</span> None
+
+    <span style="color:#a6e22e">@property</span>
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">begin</span>(self) <span style="color:#f92672">-&gt;</span> <span style="color:#e6db74">&#34;Expr&#34;</span>:
+        <span style="color:#66d9ef">if</span> self<span style="color:#f92672">.</span>ref_begin <span style="color:#f92672">is</span> None:
+            <span style="color:#66d9ef">return</span> self
+        <span style="color:#66d9ef">else</span>:
+            begin <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>ref_begin()
+            <span style="color:#66d9ef">return</span> begin
+
+    <span style="color:#a6e22e">@property</span>
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">right</span>(self) <span style="color:#f92672">-&gt;</span> Optional[<span style="color:#e6db74">&#34;Expr&#34;</span>]:
+        <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>ref_right <span style="color:#f92672">and</span> self<span style="color:#f92672">.</span>ref_right()
+
+    <span style="color:#a6e22e">@staticmethod</span>
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">chain</span>(left: <span style="color:#e6db74">&#34;Expr&#34;</span>, right: <span style="color:#e6db74">&#34;Expr&#34;</span>):
+        <span style="color:#66d9ef">if</span> left<span style="color:#f92672">.</span>ref_begin <span style="color:#f92672">is</span> None:
+            left<span style="color:#f92672">.</span>ref_begin <span style="color:#f92672">=</span> weakref<span style="color:#f92672">.</span>ref(left)
+
+        right<span style="color:#f92672">.</span>ref_begin <span style="color:#f92672">=</span> left<span style="color:#f92672">.</span>ref_begin
+        right<span style="color:#f92672">.</span>left <span style="color:#f92672">=</span> left
+        left<span style="color:#f92672">.</span>ref_right <span style="color:#f92672">=</span> weakref<span style="color:#f92672">.</span>ref(right)
+        <span style="color:#66d9ef">return</span> right
+        </code></pre></div>
+<h3 id="链式调用">链式调用</h3>
+
+<p>这样解决了 Executable 数据结构的问题，那现在要实现的是链式调用。
+可以通过 Python 魔术类方法 (magic methods) <code>__getattr__</code> 来实现。</p>
+
+<blockquote>
+<p><code>__getattr__</code> 在 obj.XXX 获取不到时，才会调用到。</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">...</span>
+<span style="color:#f92672">from</span> typing <span style="color:#f92672">import</span> Callable
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Expr</span>:
+    _classes <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#34;Name&#34;</span>: Name}
+    <span style="color:#f92672">...</span>
+    <span style="color:#66d9ef">def</span> __getattr__(self, name: str) <span style="color:#f92672">-&gt;</span> Callable[<span style="color:#f92672">...</span>, <span style="color:#e6db74">&#34;Expr&#34;</span>]:
+        <span style="color:#66d9ef">if</span> name <span style="color:#f92672">not</span> <span style="color:#f92672">in</span> Expr<span style="color:#f92672">.</span>_classes:
+            <span style="color:#66d9ef">return</span> super()<span style="color:#f92672">.</span>__getattribute__(name)  <span style="color:#75715e"># for raising AttributeError</span>
+
+        cls <span style="color:#f92672">=</span> Expr<span style="color:#f92672">.</span>_classes[name]
+
+        <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">cls_</span>(<span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs) <span style="color:#f92672">-&gt;</span> Expr:
+            right <span style="color:#f92672">=</span> cls(<span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs)
+            <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>chain(left<span style="color:#f92672">=</span>self, right<span style="color:#f92672">=</span>right)
+
+        <span style="color:#66d9ef">return</span> cls_</code></pre></div>
+<p>以上代码，在 <code>__getattr__</code> 调用 <code>__getattribute__</code> 是为了方便抛出 <code>AttributeError</code>。懒得自己写哟。</p>
+
+<p>还引入了一个类变量 <code>Expr._classes</code> 用来保存所有 Component class。
+这样每次扩展，定义新的 Component class 的时候，都要把新类注册到 <code>Expr._classes</code> 中。</p>
+
+<p>如果通过元类方法 <code>type.__new__</code>，就能在定义新类的时候，自动把新类注册到 <code>Expr._classes</code> 中。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">...</span>
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ExprMeta</span>(type):
+    _classes <span style="color:#f92672">=</span> {}
+
+    <span style="color:#66d9ef">def</span> __new__(metacls, name: str, bases, attr_dict):
+        cls <span style="color:#f92672">=</span> type<span style="color:#f92672">.</span>__new__(metacls, name, bases, attr_dict)
+        metacls<span style="color:#f92672">.</span>_classes[name] <span style="color:#f92672">=</span> cls
+        <span style="color:#66d9ef">return</span> cls
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Expr</span>(metaclass<span style="color:#f92672">=</span>ExprMeta):
+    <span style="color:#f92672">...</span></code></pre></div>
+<h3 id="数据流">数据流</h3>
+
+<p>设计完了数据结构，再通过 Python 的魔术方法及其元类编程范式实现了链式调用。
+现在开始设计数据在整个 Executable 链中的执行流。</p>
+
+<p>各个 Component 类都需要实现 <code>find</code> 方法，用来从数据中提取目的数据。
+通过链式调用构建出一个 Executable 对象，当尾节点的 <code>find</code> 方法调用后。
+从头节点到未节点一连串地执行 <code>find</code> 方法去提取，
+每个节点 <code>find</code> 所执行的数据都是上个节点执行 <code>find</code> 的提取结果。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">...</span>
+<span style="color:#f92672">from</span> abc <span style="color:#f92672">import</span> abstractmethod
+
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Expr</span>(metaclass<span style="color:#f92672">=</span>ExprMeta):
+    <span style="color:#f92672">...</span>
+    <span style="color:#a6e22e">@abstractmethod</span>
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">find</span>(self, data):
+        <span style="color:#66d9ef">raise</span> <span style="color:#a6e22e">NotImplementedError</span></code></pre></div>
+<p>现在定义了个抽象方法 <code>Expr.find</code>。
+可如何让尾节点调用 <code>find</code> 方法的时候，实际上，数据是从头节点一连串地提取到未节点呢？</p>
+
+<p>可以定义一个新方法 <code>actual_find</code> 替换掉 <code>find</code>，用来执行 Component 实际的提取算法。
+而 <code>find</code> 变为一个普通方法，每次执行都会从 Executable 的头节点执行 <code>actual_find</code>，执行到当前节点。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">...</span>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Expr</span>(metaclass<span style="color:#f92672">=</span>ExprMeta):
+    <span style="color:#f92672">...</span>
+    <span style="color:#a6e22e">@abstractmethod</span>
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">actual_find</span>(self, data):
+        <span style="color:#66d9ef">raise</span> <span style="color:#a6e22e">NotImplementedError</span>
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">find</span>(self, data):
+        curr <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>begin
+        <span style="color:#66d9ef">while</span> True:
+            data <span style="color:#f92672">=</span> curr<span style="color:#f92672">.</span>actual_find(data)
+            <span style="color:#66d9ef">if</span> curr <span style="color:#f92672">is</span> self:
+                <span style="color:#66d9ef">break</span>
+
+            curr <span style="color:#f92672">=</span> curr<span style="color:#f92672">.</span>right
+
+        <span style="color:#66d9ef">return</span> data</code></pre></div>
+<p>修改完后看似没有任何问题的代码，实际上这样写有 Bug，稍后就讲到缘由。</p>
+
+<p>以上大概的讲了一下 Executable 的数据提取流程，现在讲一下数据提取过程中数据流的变化情况。
+先分析一下数据，JSON 结构的数据为树状结构，其中能分叉的节点变量的类型为 list 及 dict。</p>
+
+<ul>
+<li>dict 结构为多对无序的键值对（Key Value pairs）</li>
+<li>list 结构为多对有序的键值对（Index Value pairs）。</li>
+</ul>
+
+<blockquote>
+<p>其中 list 的有序键相当于其对应值在 list 结构的第几个位置（以 1 开始计数），
+或者离第一个偏移的多少个位置（以 0 开始计数）</p>
+</blockquote>
+
+<p>这样我们可以通过一连串的键去找到我们想要的数据。</p>
+
+<p>例如通过 <code>&quot;goods&quot; -&gt; 1 -&gt; &quot;category&quot;</code> 这三个键，获取第二个货物的类目为 magazine。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+    <span style="color:#f92672">&#34;goods&#34;</span>: [
+        {<span style="color:#f92672">&#34;price&#34;</span>: <span style="color:#ae81ff">100</span>, <span style="color:#f92672">&#34;category&#34;</span>: <span style="color:#e6db74">&#34;Comic book&#34;</span>},
+        {<span style="color:#f92672">&#34;price&#34;</span>: <span style="color:#ae81ff">200</span>, <span style="color:#f92672">&#34;category&#34;</span>: <span style="color:#e6db74">&#34;magazine&#34;</span>},
+        {<span style="color:#f92672">&#34;price&#34;</span>: <span style="color:#ae81ff">200</span>, <span style="color:#f92672">&#34;no category&#34;</span>: <span style="color:#e6db74">&#34;&#34;</span>}
+    ],
+    <span style="color:#f92672">&#34;targetCategory&#34;</span>: <span style="color:#e6db74">&#34;book&#34;</span>
+}</code></pre></div>
+<p>各个部分的执行过程中的数据变化，如下表。</p>
+
+<table>
+<thead>
+<tr>
+<th>depth</th>
+<th>key/index</th>
+<th>data</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>1</td>
+<td>goods</td>
+<td>[{&hellip;}, {&hellip;}, {&hellip;}]</td>
+</tr>
+
+<tr>
+<td>2</td>
+<td>1</td>
+<td>{&ldquo;price&rdquo;: 200, &ldquo;category&rdquo;: &ldquo;magazine&rdquo;}</td>
+</tr>
+
+<tr>
+<td>3</td>
+<td>category</td>
+<td>&ldquo;magazine&rdquo;</td>
+</tr>
+</tbody>
+</table>
+
+<p>如果要获取整个商品列表下的所有类目，这样势必要迭代整个商品列表。
+我们用星号 <code>&quot;*&quot;</code> 来表示任意键，这样情况会变成这样子。</p>
+
+<table>
+<thead>
+<tr>
+<th>depth</th>
+<th>key/index</th>
+<th>data</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>1</td>
+<td>goods</td>
+<td>[{&hellip;}, {&hellip;}, {&hellip;}]</td>
+</tr>
+
+<tr>
+<td>2</td>
+<td>*</td>
+<td>[{&hellip;}, {&hellip;}, {&hellip;}]</td>
+</tr>
+
+<tr>
+<td>3</td>
+<td>category</td>
+<td>[&ldquo;Comic book&rdquo;, &ldquo;magazine&rdquo;, None]</td>
+</tr>
+</tbody>
+</table>
+
+<p>现在可以看明白，为啥刚刚讲的代码会有 Bug 了嘛，因为处理不了以上这种需要迭代提取的情况。</p>
+
+<p>为了处理这种需要迭代处理情况，就需要在<code>find</code>中添加判断条件，
+判断上个 Component 会不会产生需要迭代的数据。
+还需要添加处理迭代提取数据的逻辑，再对数据结果用下个 Component 去提取……是不是脑袋都要炸了。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">...</span>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Expr</span>(metaclass<span style="color:#f92672">=</span>ExprMeta):
+    <span style="color:#f92672">...</span>
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">find</span>(self, data):
+        curr <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>begin
+        <span style="color:#66d9ef">while</span> True:
+            data <span style="color:#f92672">=</span> curr<span style="color:#f92672">.</span>actual_find(data)
+            <span style="color:#66d9ef">if</span> isinstance(curr, Array):
+                data <span style="color:#f92672">=</span> [<span style="color:#f92672">...</span> <span style="color:#66d9ef">for</span> item <span style="color:#f92672">in</span> data]
+                <span style="color:#75715e"># 这样写下去，又会写出新的 bug</span>
+
+            <span style="color:#66d9ef">if</span> curr <span style="color:#f92672">is</span> self:
+                <span style="color:#66d9ef">break</span>
+
+            curr <span style="color:#f92672">=</span> curr<span style="color:#f92672">.</span>right
+
+        <span style="color:#66d9ef">return</span> data</code></pre></div>
+<p>迭代提取必会引入新的变量来维护，开发出套娃且复杂的代码逻辑，导致函数的代码复杂度提高。
+虽然用 loop 是可以硬写提取逻辑，但是写递归函数的话，开发起来更方便，有效降低代码复杂度，更有助于理解。
+再统一一下输出结构，就可以去掉多余的条件判断，又可以很方便地以递归的方式提取数据。</p>
+
+<p>Component 提取的结果无论是单个还是多个，单个结果用 list 包裹一下，没有结果就用空列表。
+这样方便接下来的 Component 去处理，能少写一些判断。</p>
+
+<p>统一后，数据流就会变成这样</p>
+
+<table>
+<thead>
+<tr>
+<th>depth</th>
+<th>key/index</th>
+<th>data</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>1</td>
+<td>goods</td>
+<td>[{&hellip;}, {&hellip;}, {&hellip;}]</td>
+</tr>
+
+<tr>
+<td>2</td>
+<td>1</td>
+<td>[{&ldquo;price&rdquo;: 200, &ldquo;category&rdquo;: &ldquo;magazine&rdquo;}]</td>
+</tr>
+
+<tr>
+<td>3</td>
+<td>category</td>
+<td>[&ldquo;magazine&rdquo;]</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">...</span>
+<span style="color:#f92672">from</span> typing <span style="color:#f92672">import</span> Iterable, Any
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Expr</span>(metaclass<span style="color:#f92672">=</span>ExprMeta):
+    <span style="color:#f92672">...</span>
+    <span style="color:#a6e22e">@abstractmethod</span>
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">actual_find</span>(self, data) <span style="color:#f92672">-&gt;</span> Iterable[Any]:
+        <span style="color:#66d9ef">raise</span> <span style="color:#a6e22e">NotImplementedError</span>
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">_dfs_find</span>(self, curr: <span style="color:#e6db74">&#34;Expr&#34;</span>, data_list: List[Any]) <span style="color:#f92672">-&gt;</span> Iterable[Any]:
+        right <span style="color:#f92672">=</span> curr<span style="color:#f92672">.</span>right
+        <span style="color:#66d9ef">for</span> data <span style="color:#f92672">in</span> data_list:
+            found <span style="color:#f92672">=</span> curr<span style="color:#f92672">.</span>actual_find(data)
+            <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> found:
+                <span style="color:#66d9ef">continue</span>
+
+            <span style="color:#66d9ef">if</span> curr <span style="color:#f92672">is</span> self:
+                <span style="color:#66d9ef">yield</span> <span style="color:#f92672">from</span> found
+                <span style="color:#66d9ef">continue</span>
+
+            <span style="color:#66d9ef">yield</span> <span style="color:#f92672">from</span> self._dfs_find(right, found)
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">find</span>(self, data) <span style="color:#f92672">-&gt;</span> Iterable[Any]:
+        <span style="color:#66d9ef">yield</span> <span style="color:#f92672">from</span> self._dfs_find(curr<span style="color:#f92672">=</span>self<span style="color:#f92672">.</span>begin, data_list<span style="color:#f92672">=</span>[data])</code></pre></div>
+<p>深度优先遍历整个 JSON 结构，遍历的深度就看链式构建的 Executable 的“长度”了。
+沿着 JSON 结构的某一支提取下去，直到 Executable 的尾节点，就可以把提取到的数据送出。
+再退回上一个需要迭代提取的位置，再沿着下一个兄弟枝干提取下去。
+如此反复即可提取到所有需要的数据。</p>
+
+<h2 id="debug-mode">Debug mode</h2>
+
+<p>面对复杂的 JSON 文本数据，写错 JSONPath 是难以避免的。
+为了写 JSONPath 写得更快更好，这就需要让 Executable 有调试方法，让我们边观察提取结果边更改表达式。
+这个功能这期就不讲了，<del>其实我还没想好，只能</del>等到后面几期再来讲了。</p>
+
+<h2 id="表达式设计">表达式设计</h2>
+
+<p>因为 Parser 及 Transformer 部分不是本期的重点，所以就先忽略这个。
+先简单讲一下表达式的设计就好咯。</p>
+
+<p>这期只以实现 JSONPath 的基本功能为例，通过 dict 的键名 及 list 的下标来提取数据。
+这样 JSONPath 表达式先简单表示为以点 <code>.</code> 相隔的 Component 列表。
+其中以中括号包裹整数 <code>[1]</code> 或星号 <code>[*]</code> 来代表处理的值类型为 list 类型。
+既然 list 变量可以用 <code>[*]</code> 去迭代，那 dict 变量为何不能这样呢，用 <code>*</code> 表示。</p>
+
+<table>
+<thead>
+<tr>
+<th>处理的数据类型</th>
+<th>表达式例子</th>
+<th>功能描述</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>object/dict</td>
+<td>goods</td>
+<td>提取 dict 中对应键 goods 的值</td>
+</tr>
+
+<tr>
+<td>object/dict</td>
+<td>*</td>
+<td>遍历提取 dict 中所有键的值</td>
+</tr>
+
+<tr>
+<td>Array/list</td>
+<td>[0]</td>
+<td>提取 list 中对应下标 0 的值</td>
+</tr>
+
+<tr>
+<td>Array/list</td>
+<td>[*]</td>
+<td>遍历提取 list 中所有值</td>
+</tr>
+</tbody>
+</table>
+
+<p>JSONPath 表达式既然通过 Parser 及 Executable 生成相应的 Excutable；
+那么 JSONPath Excutable 也可以生成对应的表达式。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">...</span>
+<span style="color:#f92672">from</span> typing <span style="color:#f92672">import</span> List
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Expr</span>(metaclass<span style="color:#f92672">=</span>ExprMeta):
+    <span style="color:#f92672">...</span>
+    <span style="color:#a6e22e">@abstractmethod</span>
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">_get_partial_expression</span>(self) <span style="color:#f92672">-&gt;</span> str:
+        <span style="color:#66d9ef">raise</span> <span style="color:#a6e22e">NotImplementedError</span>
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_expression</span>(self) <span style="color:#f92672">-&gt;</span> str:
+        curr <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>begin
+        parts: List[str] <span style="color:#f92672">=</span> []
+        <span style="color:#66d9ef">while</span> True:
+            part <span style="color:#f92672">=</span> curr<span style="color:#f92672">.</span>_get_partial_expression()
+            parts<span style="color:#f92672">.</span>append(part)
+            <span style="color:#66d9ef">if</span> curr <span style="color:#f92672">is</span> self:
+                <span style="color:#66d9ef">break</span>
+
+            curr <span style="color:#f92672">=</span> curr<span style="color:#f92672">.</span>right
+
+        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;.&#34;</span><span style="color:#f92672">.</span>join(parts)
+
+    <span style="color:#66d9ef">def</span> __repr__(self):
+        <span style="color:#66d9ef">return</span> f<span style="color:#e6db74">&#39;JSONPath({self.get_expression()!r})&#39;</span></code></pre></div>
+<p>引入一个新的抽象方法 <code>_get_partial_expression</code>，方法 <code>get_expression</code> 及方法 <code>__repr__</code>。</p>
+
+<ul>
+<li><code>_get_partial_expression</code> 用来获取在 Executable 中某个节点的字符串表示</li>
+<li><code>get_expression</code> 可获取完整的表达式（实际可以截断到某个节点，看调用的节点位置）</li>
+<li><code>__repr__</code> 方便阅读调试（从日志或者标准输出流）</li>
+</ul>
+
+<p>为了表达式更为简练，表达式<code>goods.[1].category</code> 可忽略掉<code>goods</code>与<code>[1]</code>间的分隔符<code>.</code>，简化为 <code>goods[1].category</code>。
+所以在后面具体实现的时候，还要对以上的代码进行修改。</p>
+
+<h2 id="executable-component-实现">Executable Component 实现</h2>
+
+<p>通过继承的方式，实现对应几个抽象方法 <code>actual_find</code> 及 <code>_get_partial_expression</code>，就可以方便地扩展 JSONPath Executable 功能。</p>
+
+<h3 id="name-实现">Name 实现</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">...</span>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Name</span>(Expr):
+    <span style="color:#66d9ef">def</span> __init__(self, name: Optional[str] <span style="color:#f92672">=</span> None):
+        super()<span style="color:#f92672">.</span>__init__()
+        self<span style="color:#f92672">.</span>name <span style="color:#f92672">=</span> name
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">actual_find</span>(self, data):
+        <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> isinstance(data, dict):
+            <span style="color:#66d9ef">return</span> []
+
+        <span style="color:#66d9ef">if</span> self<span style="color:#f92672">.</span>name <span style="color:#f92672">is</span> None:
+            <span style="color:#66d9ef">return</span> data<span style="color:#f92672">.</span>values()
+        <span style="color:#66d9ef">else</span>:
+            <span style="color:#66d9ef">if</span> self<span style="color:#f92672">.</span>name <span style="color:#f92672">not</span> <span style="color:#f92672">in</span> data:
+                <span style="color:#66d9ef">return</span> []
+
+            <span style="color:#66d9ef">return</span> [data[self<span style="color:#f92672">.</span>name]]
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">_get_partial_expression</span>(self):
+        <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>name <span style="color:#f92672">or</span> <span style="color:#e6db74">&#34;*&#34;</span></code></pre></div>
+<p>简单的测试一下。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">executable <span style="color:#f92672">=</span> Name()<span style="color:#f92672">.</span>Name(<span style="color:#e6db74">&#34;a&#34;</span>)
+<span style="color:#66d9ef">assert</span> <span style="color:#e6db74">&#34;*.a&#34;</span> <span style="color:#f92672">==</span> executable<span style="color:#f92672">.</span>get_expression()
+<span style="color:#66d9ef">assert</span> [<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>] <span style="color:#f92672">==</span> list(
+    executable<span style="color:#f92672">.</span>find({
+        <span style="color:#e6db74">&#34;a&#34;</span>: {<span style="color:#e6db74">&#34;a&#34;</span>: <span style="color:#ae81ff">1</span>},
+        <span style="color:#e6db74">&#34;b&#34;</span>: {<span style="color:#e6db74">&#34;a&#34;</span>: <span style="color:#ae81ff">1</span>},
+        <span style="color:#e6db74">&#34;c&#34;</span>: {<span style="color:#e6db74">&#34;b&#34;</span>: <span style="color:#ae81ff">2</span>}
+    })
+)</code></pre></div>
+<h3 id="array-实现">Array 实现</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">...</span>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Array</span>(Expr):
+    <span style="color:#66d9ef">def</span> __init__(self, idx: Optional[int] <span style="color:#f92672">=</span> None):
+        super()<span style="color:#f92672">.</span>__init__()
+        self<span style="color:#f92672">.</span>idx <span style="color:#f92672">=</span> idx
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">actual_find</span>(self, data):
+        <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> isinstance(data, list):
+            <span style="color:#66d9ef">return</span> []
+
+        <span style="color:#66d9ef">if</span> self<span style="color:#f92672">.</span>idx <span style="color:#f92672">is</span> None:
+            <span style="color:#66d9ef">return</span> data
+        <span style="color:#66d9ef">else</span>:
+            <span style="color:#66d9ef">return</span> data[self<span style="color:#f92672">.</span>idx : self<span style="color:#f92672">.</span>idx <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>]
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">_get_partial_expression</span>(self):
+        <span style="color:#66d9ef">return</span> f<span style="color:#e6db74">&#34;[{self.idx or &#39;*&#39;}]&#34;</span></code></pre></div>
+<p>由于要简化表达式，省略 Name 与 Array 间的分隔号 <code>.</code> ，这样得对 <code>Expr.get_expression</code> 进行修改。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Expr</span>(metaclass<span style="color:#f92672">=</span>ExprMeta):
+    <span style="color:#f92672">...</span>
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_expression</span>(self) <span style="color:#f92672">-&gt;</span> str:
+        curr <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>begin
+        parts: List[str] <span style="color:#f92672">=</span> []
+        <span style="color:#66d9ef">while</span> True:
+            part <span style="color:#f92672">=</span> curr<span style="color:#f92672">.</span>_get_partial_expression()
+            <span style="color:#66d9ef">if</span> isinstance(curr, Array):
+                parts[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>] <span style="color:#f92672">+=</span> part
+            <span style="color:#66d9ef">else</span>:
+                parts<span style="color:#f92672">.</span>append(part)
+            <span style="color:#66d9ef">if</span> curr <span style="color:#f92672">is</span> self:
+                <span style="color:#66d9ef">break</span>
+
+            curr <span style="color:#f92672">=</span> curr<span style="color:#f92672">.</span>right
+
+        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;.&#34;</span><span style="color:#f92672">.</span>join(parts)</code></pre></div>
+<p>再简单的测试一下。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">executable <span style="color:#f92672">=</span> Name(<span style="color:#e6db74">&#34;goods&#34;</span>)<span style="color:#f92672">.</span>Array()<span style="color:#f92672">.</span>Name(<span style="color:#e6db74">&#34;category&#34;</span>)
+<span style="color:#66d9ef">assert</span> <span style="color:#e6db74">&#34;goods[*].category&#34;</span> <span style="color:#f92672">==</span> executable<span style="color:#f92672">.</span>get_expression()
+<span style="color:#66d9ef">assert</span> [<span style="color:#e6db74">&#34;Comic book&#34;</span>, <span style="color:#e6db74">&#34;magazine&#34;</span>] <span style="color:#f92672">==</span> (
+    list(
+        executable<span style="color:#f92672">.</span>find(
+            {
+                <span style="color:#e6db74">&#34;goods&#34;</span>: [
+                    {<span style="color:#e6db74">&#34;price&#34;</span>: <span style="color:#ae81ff">100</span>, <span style="color:#e6db74">&#34;category&#34;</span>: <span style="color:#e6db74">&#34;Comic book&#34;</span>},
+                    {<span style="color:#e6db74">&#34;price&#34;</span>: <span style="color:#ae81ff">200</span>, <span style="color:#e6db74">&#34;category&#34;</span>: <span style="color:#e6db74">&#34;magazine&#34;</span>},
+                    {<span style="color:#e6db74">&#34;price&#34;</span>: <span style="color:#ae81ff">200</span>, <span style="color:#e6db74">&#34;no category&#34;</span>: <span style="color:#e6db74">&#34;&#34;</span>},
+                ],
+                <span style="color:#e6db74">&#34;targetCategory&#34;</span>: <span style="color:#e6db74">&#34;book&#34;</span>,
+            }
+        )
+    )
+)</code></pre></div>
 <h2 id="总结">总结</h2>
 
-<p>以上只是个简单的例子来展示如何写个 DSL 来从 JSON 中提取数据，让大家对整个过程有个大概的了解。如果让大家自己来开发自己工作上想要的 DSL ，会是什么样的呢？是像 Regex 来做文本匹配提取，像 TOML， YAML 这样的配置文件格式，像 Graphviz 的 DOT 语言描述图形信息，像 SQL 用来描述如何从数据库中获取数据。大家以后可以开动一下脑洞，看看自己有领域上有什么工作可以用 DSL 来描述（当然创建一门 DSL 是来方便大家用的，而不是来给别人造麻烦的）。</p>
+<p>相比上一期，这一期的内容比较多一点。这也难免，因为一涉及到具体代码，可以讲的东西就变得很多。
+为了不让这期内容变得难以理解，各个部分的内容都进行了调整。
+适当的缩减内容，避免偏离主题；改变前后内容顺序，使其前后联接，让大家更容易理解。</p>
 
-<h2 id="下期预告-如何实现生产可用的-dsl">下期预告 如何实现生产可用的 DSL</h2>
+<p>这样时不时通过把自己的思路设计讲述给大家，分享给大家，对自己也有实实在在的好处。
+让我想通了很多东西，也有了很多新点子，又可以重构一波代码了，实现新功能。</p>
 
-<p>当然以上那么点代码，如果用在工程上肯定是远远不够的。
-要做一个优秀的轮子，不能止于能用就行。
-还需要简单易懂的文档，大量的单元及功能测试，良好的代码设计，优秀的代码测试覆盖率，大量的代码注释等等。</p>
-
-<p>如果大家觉得这个有趣，对这个感兴趣的话，下次我还可以再分享相关的内容。</p>
+<p>博客更新得慢，实际是因为我太懒了。别骂了别骂了（逃</p>
 
 <h2 id="衍生阅读">衍生阅读</h2>
 
-<p>这篇文章只是粗浅的介绍了怎么实现一门描述如何从 JSON 中提取数据的 DSL。如果对这背后的原理感兴趣的话，可以去看下编译原理前端这一部分的内容。或者对接下来 JSON 提取表达式怎么实现感兴趣的话，可以去搜搜看学习一下别人的实现（想当初我也是参考了很多轮子）。大家可以想一下，怎么实现比较好？</p>
+<p>这次就没有啥衍生阅读了，但希望大家多多思考。</p>
 
-<ul>
-<li><a href="https://draveness.me/dsl/">谈谈 DSL 以及 DSL 的应用（以 CocoaPods 为例）</a></li>
-<li><a href="https://github.com/lark-parser/lark">lark-parser/lark</a></li>
-<li>JSON 的标准可以查看这个 <a href="https://tools.ietf.org/html/rfc7159">RFC 7159 The JavaScript Object Notation (JSON) Data Interchange Format</a>。</li>
-<li>什么是 <a href="https://zh.wikipedia.org/wiki/%E6%89%A9%E5%B1%95%E5%B7%B4%E7%A7%91%E6%96%AF%E8%8C%83%E5%BC%8F">EBNF</a></li>
-</ul>
+<p>不过最近读了一个系列的文章，十分有意思，忍不住想推荐给大家一下。</p>
+
+<blockquote>
+<p><a href="https://github.com/piglei/one-python-craftsman">『Python 工匠』是什么？</a>
+来自一位 Pythonista 的编程经验分享，内容涵盖编码技巧、最佳实践与思维模式等方面。</p>
+</blockquote>
 
 
             </div>
@@ -1378,15 +1751,10 @@ transformer <span style="color:#f92672">=</span> JSONPathTransformer()</code></p
                 
                 <div>
                     <img class="icon" src="../../img/back.svg" alt="back" />
-                    <a href="../../blog/%E5%A6%82%E4%BD%95%E5%9C%A8%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B%E4%B8%AD%E6%AD%A3%E7%A1%AE%E5%9C%B0%E4%BD%BF%E7%94%A8-Contextvars/">如何在异步编程中正确地使用 Contextvars</a>
+                    <a href="../../blog/%E5%A6%82%E4%BD%95%E5%86%99%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84-DSL-%E4%BB%8E-JSON-%E4%B8%AD%E6%8F%90%E5%8F%96%E6%95%B0%E6%8D%AE/">如何写一个简单的 DSL 从 JSON 中提取数据</a>
                 </div>
                 
                 <div style="width: 100%;"></div>
-                
-                <div>
-                    <a href="../../blog/%E5%A6%82%E4%BD%95%E5%86%99%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84-DSL-%E4%BB%8E-JSON-%E4%B8%AD%E6%8F%90%E5%8F%96%E6%95%B0%E6%8D%AE%E4%BA%8C/">如何写一个简单的 DSL 从 JSON 中提取数据（二）</a>
-                    <img class="icon" src="../../img/next.svg" alt="next" />
-                </div>
                 
             </div>
             

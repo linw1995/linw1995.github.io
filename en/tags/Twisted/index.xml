@@ -6,11 +6,7 @@
     <description>Recent content in Twisted on linw1995</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Thu, 27 Dec 2018 23:59:59 +0000</lastBuildDate>
-    
-	<atom:link href="https://linw1995.com/en/tags/Twisted/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Thu, 27 Dec 2018 23:59:59 +0000</lastBuildDate><atom:link href="https://linw1995.com/en/tags/Twisted/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Run Twisted in another thread</title>
       <link>https://linw1995.com/en/blog/Run-Twisted-in-another-thread/</link>

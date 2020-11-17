@@ -6,10 +6,20 @@
     <description>Recent content in Python on linw1995</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Tue, 21 Jul 2020 01:30:00 +0800</lastBuildDate>
-    
-	<atom:link href="https://linw1995.com/tags/Python/index.xml" rel="self" type="application/rss+xml" />
-    
+    <lastBuildDate>Tue, 17 Nov 2020 01:30:00 +0800</lastBuildDate><atom:link href="https://linw1995.com/tags/Python/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>如何写一个简单的 DSL 从 JSON 中提取数据（二）</title>
+      <link>https://linw1995.com/blog/%E5%A6%82%E4%BD%95%E5%86%99%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84-DSL-%E4%BB%8E-JSON-%E4%B8%AD%E6%8F%90%E5%8F%96%E6%95%B0%E6%8D%AE%E4%BA%8C/</link>
+      <pubDate>Tue, 17 Nov 2020 01:30:00 +0800</pubDate>
+      
+      <guid>https://linw1995.com/blog/%E5%A6%82%E4%BD%95%E5%86%99%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84-DSL-%E4%BB%8E-JSON-%E4%B8%AD%E6%8F%90%E5%8F%96%E6%95%B0%E6%8D%AE%E4%BA%8C/</guid>
+      <description>前言 拖更了这么久的原因，主要是因为谈了女朋友，就没什么时间静下写东西了。 言归正传，这一期主要是讲一下一些设计 JSONPath 表达式的想法。
+JSON 数据的基本的数据类型（整型，浮点型，字符串，布尔）与 Python 都有分别相对应的数据类型。 还有两大支持数据嵌套的结构，即 Array 和 Object。他们解析成 Python 对象后分别是 list 和 dict 对象。 这样通过 json.load or json.loads 可以把 JSON 文本变成了对应的 Python 数据。
+assert json.loads( &amp;#39;{&amp;#34;data&amp;#34;: [{&amp;#34;name&amp;#34;: &amp;#34;bar&amp;#34;}]}&amp;#39; ) == {&amp;#39;data&amp;#39;: [{&amp;#39;name&amp;#39;: &amp;#39;bar&amp;#39;}]} 而 JSONPath 表达式，就是用来简洁明了地表示，如何从这中 JSON 结构数据中提取目标数据。 这样的表达式就需要较高的易读性和表达力。
+上一期通过几个简单的函数实现了 JSONPath 表达式的执行，展示了实现 DSL 的基本方法。 如果要实现 production-ready 的轮子的话，光这样是远远不够的。 上一期 demo 的缺点很明显，缺少必要的调试方法，缺少一些 corner-cases 的处理，难以持续地扩展维护等问题。
+Executable 的设计 一个 JSONPath 表达式从字符串转换成可执行的算法，需要通过以下三个环节
+ Parser 解析器 Transformer 转换器 Executable 执行器  开发 DSL 的三个环节，其中最重要的就是 Executable 这一部分了。 先粗略地列一下作为 Executable 要支持哪些基本功能</description>
+    </item>
     
     <item>
       <title>如何写一个简单的 DSL 从 JSON 中提取数据</title>

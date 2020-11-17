@@ -1166,13 +1166,13 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
 <h2 id="如何搭建和配置">如何搭建和配置</h2>
 
 <p>把以下内容写入 <code>docker-compose.yml</code> 文件中。然后运行 <code>docker-compose up -d --scale mongo=3</code>，就可以启动三个 MongoDB 服务。接下来我们要把这三个 MongoDB 节点配置成一组 Replica Set</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">version</span>: <span style="color:#e6db74">&#39;3.5&#39;</span>
-<span style="color:#66d9ef">services</span>:
-  <span style="color:#66d9ef">mongo</span>:
-    <span style="color:#66d9ef">image</span>: mongo
-    <span style="color:#66d9ef">ports</span>:
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">version</span>: <span style="color:#e6db74">&#39;3.5&#39;</span>
+<span style="color:#f92672">services</span>:
+  <span style="color:#f92672">mongo</span>:
+    <span style="color:#f92672">image</span>: <span style="color:#ae81ff">mongo</span>
+    <span style="color:#f92672">ports</span>:
       - <span style="color:#e6db74">&#34;27017-27118:27017&#34;</span>
-    <span style="color:#66d9ef">command</span>: mongod --replSet main</code></pre></div>
+    <span style="color:#f92672">command</span>: <span style="color:#ae81ff">mongod --replSet main</span></code></pre></div>
 <p>把以下内容写入 <code>utils.py</code> 文件中</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> subprocess <span style="color:#f92672">as</span> sp
 

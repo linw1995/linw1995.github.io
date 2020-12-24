@@ -6,7 +6,16 @@
     <description>Recent content in Blog on linw1995</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Mon, 13 Jul 2020 23:34:59 +0800</lastBuildDate><atom:link href="https://linw1995.com/en/blog/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 24 Dec 2020 21:00:00 +0800</lastBuildDate><atom:link href="https://linw1995.com/en/blog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Python Decorators Advance</title>
+      <link>https://linw1995.com/en/blog/Python-Decorators-Advance/</link>
+      <pubDate>Thu, 24 Dec 2020 21:00:00 +0800</pubDate>
+      
+      <guid>https://linw1995.com/en/blog/Python-Decorators-Advance/</guid>
+      <description>Accessing Wrapped Function Parameters In An Easy Way import functools def decorator(func): @functools.wraps(func) def wrap(*args, **kwargs): print(args, kwargs) return func(*args, **kwargs) return wrap @decorator def boo(a, b, c): pass boo(1, b=2, c=3)((1,), {&amp;#39;c&amp;#39;: 3, &amp;#39;b&amp;#39;: 2}) The above codes is a general decorator function we always writen. The wrap inside the decorator uses (*args, **kwargs) as parameters for full compatibility with the wrapped func if we don&amp;rsquo;t know what parameters will be received.</description>
+    </item>
+    
     <item>
       <title>Share My Emacs Configuration</title>
       <link>https://linw1995.com/en/blog/Share-My-Emacs-Configuration/</link>

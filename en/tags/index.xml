@@ -6,7 +6,25 @@
     <description>Recent content in Tags on linw1995</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Thu, 24 Dec 2020 21:00:00 +0800</lastBuildDate><atom:link href="https://linw1995.com/en/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 04 Mar 2021 20:00:00 +0800</lastBuildDate><atom:link href="https://linw1995.com/en/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Bash</title>
+      <link>https://linw1995.com/en/tags/Bash/</link>
+      <pubDate>Thu, 04 Mar 2021 20:00:00 +0800</pubDate>
+      
+      <guid>https://linw1995.com/en/tags/Bash/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Unix</title>
+      <link>https://linw1995.com/en/tags/Unix/</link>
+      <pubDate>Thu, 04 Mar 2021 20:00:00 +0800</pubDate>
+      
+      <guid>https://linw1995.com/en/tags/Unix/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>Python</title>
       <link>https://linw1995.com/en/tags/Python/</link>

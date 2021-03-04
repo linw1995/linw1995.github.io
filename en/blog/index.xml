@@ -6,7 +6,18 @@
     <description>Recent content in Blog on linw1995</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Thu, 24 Dec 2020 21:00:00 +0800</lastBuildDate><atom:link href="https://linw1995.com/en/blog/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 04 Mar 2021 20:00:00 +0800</lastBuildDate><atom:link href="https://linw1995.com/en/blog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Right way to write bash script to launch background processes</title>
+      <link>https://linw1995.com/en/blog/Right-way-to-write-bash-script-to-launch-background-processes/</link>
+      <pubDate>Thu, 04 Mar 2021 20:00:00 +0800</pubDate>
+      
+      <guid>https://linw1995.com/en/blog/Right-way-to-write-bash-script-to-launch-background-processes/</guid>
+      <description>Table of Contents  Interesting problem occurred Behind the scenes  Job Control  Bash send SIGHUP on exit  Conclusion  
+Interesting problem occurred Recently I use bash script to launch some processes running in background. Due to not familiar with Unix, I handle the signals improperly. I do something like this.
+I write a helper script to launch a background process, which is the &amp;ldquo;sleep&amp;rdquo; command in this case.</description>
+    </item>
+    
     <item>
       <title>Python Decorators Advance</title>
       <link>https://linw1995.com/en/blog/Python-Decorators-Advance/</link>

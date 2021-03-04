@@ -15,9 +15,9 @@
 <meta property="og:site_name" content="linw1995" />
 <meta property="og:locale" content="zh-cn" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://linw1995.com/en/tags/" />
-<meta property="og:title" content="Tags" />
-<meta property="twitter:title" content="Tags">
+<meta property="og:url" content="https://linw1995.com/en/blog/Right-way-to-write-bash-script-to-launch-background-processes/" />
+<meta property="og:title" content="Right way to write bash script to launch background processes" />
+<meta property="twitter:title" content="Right way to write bash script to launch background processes">
 
     <meta property="og:image" content="/img/banner.png">
     <meta property="twitter:card" content="summary">
@@ -29,10 +29,10 @@
 <title>
 
 
-     linw1995 - Tags 
+     linw1995 - Right way to write bash script to launch background processes 
 
 </title>
-<link rel="canonical" href="https://linw1995.com/en/tags/">
+<link rel="canonical" href="https://linw1995.com/en/blog/Right-way-to-write-bash-script-to-launch-background-processes/">
 
 
 <style media="screen">
@@ -1057,21 +1057,19 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
 
 
 
-  <link rel="stylesheet" href="../../css/main.css">
+  <link rel="stylesheet" href="../../../css/main.css">
 
-  <link rel="stylesheet" href="../../css/codeblock.css">
+  <link rel="stylesheet" href="../../../css/codeblock.css">
 
 
 
 <link rel="shortcut icon"
 
-    href="../../img/favicon.png"
+    href="../../../img/favicon.png"
 
 >
 
 
-
-  <link href="../../en/tags/index.xml" rel="alternate" type="application/rss+xml" title="linw1995" />
 
 
 </head>
@@ -1083,33 +1081,24 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
 
     <div class="container">
         
-        <a href="../../"><img class="logo" src="../../img/logo.svg" alt="logo"></a>
+        <a href="../../../"><img class="logo" src="../../../img/logo.svg" alt="logo"></a>
         
         <div class="content">
-            <a href="../../"><div class="name"><h1>linw1995</h1></div></a>
+            <a href="../../../"><div class="name"><h1>linw1995</h1></div></a>
             <nav>
                 <ul>
                     
-                        <li><a href="../../en/blog/">Blog</a></li>
+                        <li><a href="../../../en/blog/">Blog</a></li>
                     
-                        <li><a href="../../en/projects/">Projects</a></li>
+                        <li><a href="../../../en/projects/">Projects</a></li>
                     
                     
-                        <li><a href="../../en/about/">About</a></li>
+                        <li><a href="../../../en/about/">About</a></li>
                     
-                        <li><a href="../../en/license/">License</a></li>
+                        <li><a href="../../../en/license/">License</a></li>
                     
                 </ul>
                 
-<hr>
-<ul>
-    
-    <li>
-        <a href="../../tags/">中文 </a>
-    </li>
-    
-</ul>
-
 
             </nav>
         </div>
@@ -1117,95 +1106,283 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
 </div>
 
 
-<h1>Tags</h1>
 
-<ul class="terms">
-  
-  <li>
-    <a href="../../tags/Asyncio">
-      Asyncio
-    </a>
-    (2)
-  </li>
-  
-  <li>
-    <a href="../../tags/Automation">
-      Automation
-    </a>
-    (1)
-  </li>
-  
-  <li>
-    <a href="../../tags/Bash">
-      Bash
-    </a>
-    (1)
-  </li>
-  
-  <li>
-    <a href="../../tags/Chrome">
-      Chrome
-    </a>
-    (1)
-  </li>
-  
-  <li>
-    <a href="../../tags/Crawler">
-      Crawler
-    </a>
-    (1)
-  </li>
-  
-  <li>
-    <a href="../../tags/Emacs">
-      Emacs
-    </a>
-    (3)
-  </li>
-  
-  <li>
-    <a href="../../tags/MultiThreading">
-      MultiThreading
-    </a>
-    (2)
-  </li>
-  
-  <li>
-    <a href="../../tags/Python">
-      Python
-    </a>
-    (5)
-  </li>
-  
-  <li>
-    <a href="../../tags/Racket">
-      Racket
-    </a>
-    (1)
-  </li>
-  
-  <li>
-    <a href="../../tags/Twisted">
-      Twisted
-    </a>
-    (1)
-  </li>
-  
-  <li>
-    <a href="../../tags/Unix">
-      Unix
-    </a>
-    (1)
-  </li>
-  
-  <li>
-    <a href="../../tags/pytest">
-      pytest
-    </a>
-    (1)
-  </li>
-  
+
+
+<div class="main post non-narrow zero-top-spacing column">
+    <div class="container">
+        <div class="content">
+            <div class="front-matter">
+                <div class="title-container">
+                    <div class="page-heading">
+
+    
+    Right way to write bash script to launch background processes
+    
+
+</div>
+
+                </div>
+                <div class="meta">
+                    <div class="date" title="Thu Mar 4 2021 20:00:00 CST">Mar 4, 2021</div>
+                    
+                        
+                    
+                    
+                    <div class="reading-time middot">4 minute read</div>
+                    
+                    
+                      <div class="tags">
+                    
+                        <ul>
+                          
+                            <li class="middot"><a href="../../../en/tags/Bash">Bash</a> </li>
+                          
+                            <li class="middot"><a href="../../../en/tags/Unix">Unix</a> </li>
+                          
+                        </ul>
+                    </div>
+                    <div class="tags">
+                        <ul>
+                          
+                          
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="markdown">
+                
+    
+    
+
+<h1 id="table-of-contents">Table of Contents</h1>
+
+<ol>
+<li><a href="#org9aee8fa">Interesting problem occurred</a></li>
+<li><a href="#org4df32a4">Behind the scenes</a>
+
+<ol>
+<li><a href="#orge72595e">Job Control </a></li>
+<li><a href="#orgdfd0308">Bash send SIGHUP on exit</a></li>
+</ol></li>
+<li><a href="#org4957550">Conclusion</a></li>
+</ol>
+
+<p><a id="org9aee8fa"></a></p>
+
+<h1 id="interesting-problem-occurred">Interesting problem occurred</h1>
+
+<p>Recently I use bash script to launch some processes running in background.
+Due to not familiar with Unix, I handle the signals improperly. I do something like this.</p>
+
+<p>I write a helper script to launch a background process, which is the &ldquo;sleep&rdquo; command in this case.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#!/bin/bash
+</span><span style="color:#75715e"></span>sleep <span style="color:#ae81ff">1000</span> &amp;
+PID<span style="color:#f92672">=</span>$!
+echo $PID launched
+echo $PID &gt;pid</code></pre></div>
+<p>And then I want to use <code>kill -2 $PID</code> to send the <code>SIGINT</code> <sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup> to stop this process.
+But it does not work at all.</p>
+
+<p><a id="org4df32a4"></a></p>
+
+<h1 id="behind-the-scenes">Behind the scenes</h1>
+
+<p>After checking the process status file of this process, I find out it ignore the <code>SIGINT</code> <sup><a id="fnr.1.100" class="footref" href="#fn.1">1</a></sup> signal.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cat /proc/<span style="color:#e6db74">`</span>cat pid<span style="color:#e6db74">`</span>/status | grep Sig</code></pre></div>
+<p>The value of <code>&quot;SigIgn&quot;</code> field of process status file is <code>6</code>, is <code>110</code> in bit representation.
+This value means the <code>SIGINT</code> and <code>SIGQUIT</code> signals <sup><a id="fnr.1.100" class="footref" href="#fn.1">1</a></sup> being ignored. <sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup></p>
+<pre><code>SigQ:   0/3793
+SigPnd: 0000000000000000
+SigBlk: 0000000000000000
+SigIgn: 0000000000000006
+SigCgt: 0000000000000000</code></pre>
+<p>Run below useful script to see whole procedures.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#!/bin/bash
+</span><span style="color:#75715e"></span>
+sleep <span style="color:#ae81ff">1000</span> &amp;
+PID<span style="color:#f92672">=</span>$!
+
+ps $PID &gt;/dev/null 2&gt;&amp;<span style="color:#ae81ff">1</span>
+<span style="color:#66d9ef">if</span> <span style="color:#f92672">[[</span> $? -eq <span style="color:#ae81ff">0</span> <span style="color:#f92672">]]</span>; <span style="color:#66d9ef">then</span>
+    echo Process is alive
+<span style="color:#66d9ef">fi</span>
+
+cat /proc/$PID/status | grep SigIgn
+
+kill -2 $PID
+ps $PID &gt;/dev/null 2&gt;&amp;<span style="color:#ae81ff">1</span>
+<span style="color:#66d9ef">if</span> <span style="color:#f92672">[[</span> $? -eq <span style="color:#ae81ff">0</span> <span style="color:#f92672">]]</span>; <span style="color:#66d9ef">then</span>
+    echo Process is still alive
+
+    kill $PID
+
+    ps $PID &gt;/dev/null 2&gt;&amp;<span style="color:#ae81ff">1</span>
+    <span style="color:#66d9ef">if</span> <span style="color:#f92672">[[</span> $? -eq <span style="color:#ae81ff">1</span> <span style="color:#f92672">]]</span>; <span style="color:#66d9ef">then</span>
+        echo Process is killed
+    <span style="color:#66d9ef">fi</span>
+<span style="color:#66d9ef">fi</span></code></pre></div>
+<p>If we execute the above script <code>./demo_with_kill.sh</code> in interactive mode, <code>bash -i ./demo_with_kill.sh</code> <sup><a id="fnr.3" class="footref" href="#fn.3">3</a></sup>.
+We will see the different result outcomes.
+We can see the <code>sleep</code> process which <code>&quot;SigIgn&quot;</code> value is <code>0</code> can receive <code>SIGINT</code> <sup><a id="fnr.1.100" class="footref" href="#fn.1">1</a></sup>.</p>
+<pre><code>Process is alive
+SigIgn: 0000000000000000</code></pre>
+<p>What is the different between interactive mode and non-interactive mode of bash?
+The <code>monitor mode</code>, aka <code>Job Control</code> <sup><a id="fnr.4" class="footref" href="#fn.4">4</a></sup>, is disabled by default in non-interactive mode.</p>
+
+<blockquote>
+<p>-m</p>
+
+<p>Monitor mode. Job control is enabled.
+This option is on by default for interactive shells on systems that support it (see JOB CONTROL above).
+Background processes run in a separate process group and a line containing their exit status is printed upon their completion.    &#x2014; is quoted from &ldquo;<a href="https://linux.die.net/man/1/bash">man 1 bash</a>&ldquo;</p>
+</blockquote>
+
+<p><a id="orge72595e"></a></p>
+
+<h2 id="job-control-sup-a-id-fnr-4-100-class-footref-href-fn-4-4-a-sup">Job Control <sup><a id="fnr.4.100" class="footref" href="#fn.4">4</a></sup></h2>
+
+<p>Job control refers to the protocol for allowing a user to move between multiple process groups (or jobs) within a single login session.
+Bash runs without it will make background child process ignoring <code>SIGINT</code> and <code>SIGQUIT</code> signals <sup><a id="fnr.1.100" class="footref" href="#fn.1">1</a></sup>.</p>
+
+<p>I belive <code>SIGINT</code> and <code>SIGQUIT</code> signals <sup><a id="fnr.1.100" class="footref" href="#fn.1">1</a></sup> are set ignored by below fragment codes come from <a href="https://github.com/bminor/bash/blob/8868edaf2250e09c4e9a1c75ffe3274f28f38581/execute_cmd.c#L5394-L5415">bash/execute_cmd.c#L5394-L541</a>.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#66d9ef">void</span>
+<span style="color:#a6e22e">setup_async_signals</span> ()
+{
+<span style="color:#75715e">#if defined (__BEOS__)
+</span><span style="color:#75715e"></span>  set_signal_handler (SIGHUP, SIG_IGN);	<span style="color:#75715e">/* they want csh-like behavior */</span>
+<span style="color:#75715e">#endif
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">#if defined (JOB_CONTROL)
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">if</span> (job_control <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>)
+<span style="color:#75715e">#endif
+</span><span style="color:#75715e"></span>    {
+      <span style="color:#75715e">/* Make sure we get the original signal dispositions now so we don&#39;t
+</span><span style="color:#75715e">         confuse the trap builtin later if the subshell tries to use it to
+</span><span style="color:#75715e">         reset SIGINT/SIGQUIT.  Don&#39;t call set_signal_ignored; that sets
+</span><span style="color:#75715e">         the value of original_signals to SIG_IGN. Posix interpretation 751. */</span>
+      get_original_signal (SIGINT);
+      set_signal_handler (SIGINT, SIG_IGN);
+
+      get_original_signal (SIGQUIT);
+      set_signal_handler (SIGQUIT, SIG_IGN);
+    }
+}</code></pre></div>
+<p><a id="orgdfd0308"></a></p>
+
+<h2 id="bash-send-sighup-on-exit">Bash send SIGHUP on exit</h2>
+
+<p>Bash will send all child processes <code>SIGHUP</code> signal <sup><a id="fnr.1.100" class="footref" href="#fn.1">1</a></sup> on exit if it being enabled <code>huponexit</code> <sup><a id="fnr.5" class="footref" href="#fn.5">5</a></sup> option.</p>
+
+<ul>
+<li>Execute cmd <code>shopt -s huponexit</code> to enable it.</li>
+<li>Execute cmd <code>shopt -u huponexit</code> to disable it. <sup><a id="fnr.5.100" class="footref" href="#fn.5">5</a></sup></li>
 </ul>
+
+<p>It is looked like being disabled by default in my case,
+not acting like the <a href="https://www.gnu.org/software/libc/manual/html_node/Orphaned-Process-Groups.html">Orphaned Process Groups | The GNU C Library Reference Manual</a> saying.</p>
+
+<p><a id="org4957550"></a></p>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p>So the better way to write a background job script is</p>
+
+<ol>
+<li><code>shopt -u huponexit</code> <sup><a id="fnr.5.100" class="footref" href="#fn.5">5</a></sup> disable <code>huponexit</code> <sup><a id="fnr.5.100" class="footref" href="#fn.5">5</a></sup> shell option to avoid bash sending background processes <code>SIGHUP</code> signal on exit.</li>
+
+<li><p><code>set -m</code> <sup><a id="fnr.3.100" class="footref" href="#fn.3">3</a></sup> enable job control to avoid background processes ignoring <code>SIGQUIT</code> and <code>SIGINT</code> signals.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#!/bin/bash
+</span><span style="color:#75715e"></span>shopt -u huponexit
+set -m</code></pre></div></li>
+</ol>
+
+<h1 id="footnotes">Footnotes</h1>
+
+<p><sup><a id="fn.1" href="#fnr.1">1</a></sup> <a href="https://www.gnu.org/software/libc/manual/html_node/Termination-Signals.html">24.2.2 Termination Signals | The GNU C Library Reference Manual</a></p>
+
+<p><sup><a id="fn.2" href="#fnr.2">2</a></sup> <a href="https://access.redhat.com/solutions/3478631">How to read bitmask for the signals | Red Hat Customer Portal</a></p>
+
+<p><sup><a id="fn.3" href="#fnr.3">3</a></sup> <a href="https://www.gnu.org/software/bash/manual/bash.html#The-Set-Builtin">The Set Builtin | bash manual</a></p>
+
+<p><sup><a id="fn.4" href="#fnr.4">4</a></sup> References</p>
+
+<ul>
+<li><a href="https://www.gnu.org/software/bash/manual/bash.html#Job-Control">Job Control | bash manual</a></li>
+<li><a href="https://www.gnu.org/software/libc/manual/html_node/Job-Control.html#Job-Control">28 Job Control | The GNU C Library Reference Manual</a></li>
+</ul>
+
+<p><sup><a id="fn.5" href="#fnr.5">5</a></sup> <a href="https://www.gnu.org/software/bash/manual/bash.html#The-Shopt-Builtin">The Shopt Builtin | bash manual</a></p>
+
+
+            </div>
+            
+            <br>
+            <div class="share">
+                  
+                  <a href="" class="ssk ssk-facebook"></a>
+                  
+                  
+                  <a href="" class="ssk ssk-twitter"></a>
+                  
+                  
+                  <a href="" class="ssk ssk-google-plus"></a>
+                  
+                  
+                  <a href="" class="ssk ssk-linkedin"></a>
+                  
+            </div>
+            
+            
+            <br>
+            <div class="navigation">
+                
+                <div>
+                    <img class="icon" src="../../../img/back.svg" alt="back" />
+                    <a href="../../../en/blog/Python-Decorators-Advance/">Python Decorators Advance</a>
+                </div>
+                
+                <div style="width: 100%;"></div>
+                
+            </div>
+            
+            
+            <br>
+            <div class="disqus">
+                <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "linw1995" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+            </div>
+            
+
+            
+            
+
+            
+
+            
+        </div>
+    </div>
+</div>
+
+
 
 <div class="footer column">
     <div class="container">
@@ -1218,7 +1395,7 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
 
         
             
-                <a href="../../en/license">Copyright © 2021 linw1995</a>
+                <a href="../../../en/license">Copyright © 2021 linw1995</a>
             
         
 
@@ -1233,7 +1410,7 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
 
         
             <a href="https://www.instagram.com/linw1995" rel=me target="_blank">
-                <img class="icon" src="../../img/instagram.svg" alt="instagram" />
+                <img class="icon" src="../../../img/instagram.svg" alt="instagram" />
             </a>
         
 
@@ -1243,19 +1420,19 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
 
         
             <a href="https://github.com/linw1995" rel=me target="_blank">
-                <img class="icon" src="../../img/github.svg" alt="github" />
+                <img class="icon" src="../../../img/github.svg" alt="github" />
             </a>
         
 
         
             <a href="https://twitter.com/linw1995" rel=me target="_blank">
-                <img class="icon" src="../../img/twitter.svg" alt="twitter" />
+                <img class="icon" src="../../../img/twitter.svg" alt="twitter" />
             </a>
         
 
         
             <a href="https://www.linkedin.com/in/%e7%8e%ae-%e6%9e%97-061655126" rel=me target="_blank">
-                <img class="icon" src="../../img/linkedin.svg" alt="linkedin" />
+                <img class="icon" src="../../../img/linkedin.svg" alt="linkedin" />
             </a>
         
 
@@ -1265,14 +1442,10 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
 
         
             <a href="mailto:linw1995@icloud.com">
-                <img class="icon" src="../../img/email.svg" alt="email" />
+                <img class="icon" src="../../../img/email.svg" alt="email" />
             </a>
         
 
-        
-            <a href="../../en/tags/index.xml">
-                <img class="icon" src="../../img/rss.svg" alt="rss" />
-            </a>
         
 
         </div>
@@ -1291,16 +1464,16 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
 
 
 
-  <script src="../../js/highlight.min.js" defer></script>
+  <script src="../../../js/highlight.min.js" defer></script>
   
 
 
 
-  <script src="../../js/progressively.min.js" defer></script>
+  <script src="../../../js/progressively.min.js" defer></script>
 
 
 
-  <script src="../../js/social-share-kit.min.js" defer></script>
+  <script src="../../../js/social-share-kit.min.js" defer></script>
 
 
 

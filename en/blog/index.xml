@@ -14,7 +14,7 @@
       
       <guid>https://linw1995.com/en/blog/Right-way-to-write-bash-script-to-launch-background-processes/</guid>
       <description>Table of Contents  Interesting problem occurred Behind the scenes  Job Control  Bash send SIGHUP on exit  Conclusion  
-Interesting problem occurred Recently I use bash script to launch some processes running in background. Due to not familiar with Unix, I handle the signals improperly. I do something like this.
+Interesting problem occurred Recently I use bash script to launch some processes running in background. I handle the process termination improperly due to being not familiar with Unix and with Bash. I do something like this.
 I write a helper script to launch a background process, which is the &amp;ldquo;sleep&amp;rdquo; command in this case.</description>
     </item>
     

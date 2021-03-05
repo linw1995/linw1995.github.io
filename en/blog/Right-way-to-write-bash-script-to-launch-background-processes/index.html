@@ -1172,7 +1172,7 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
 
 <h1 id="interesting-problem-occurred">Interesting problem occurred</h1>
 
-<p>Recently I use bash script to launch some processes running in background.
+<p>Recently I use a bash script to launch some processes running in the background.
 I handle the process termination improperly due to being not familiar with Unix and with Bash. I do something like this.</p>
 
 <p>I write a helper script to launch a background process, which is the &ldquo;sleep&rdquo; command in this case.</p>
@@ -1190,7 +1190,7 @@ But it does not work at all.</p>
 
 <p>After checking the process status file of this process, I find out it ignore the <code>SIGINT</code> <sup><a id="fnr.1.100" class="footref" href="#fn.1">1</a></sup> signal.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cat /proc/<span style="color:#e6db74">`</span>cat pid<span style="color:#e6db74">`</span>/status | grep Sig</code></pre></div>
-<p>The value of <code>&quot;SigIgn&quot;</code> field of process status file is <code>6</code>, is <code>110</code> in bit representation.
+<p>The value of the <code>&quot;SigIgn&quot;</code> field of process status file is <code>6</code>, which is <code>110</code> in bit representation.
 This value means the <code>SIGINT</code> and <code>SIGQUIT</code> signals <sup><a id="fnr.1.100" class="footref" href="#fn.1">1</a></sup> being ignored. <sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup></p>
 <pre><code>SigQ:   0/3793
 SigPnd: 0000000000000000
@@ -1224,10 +1224,10 @@ ps $PID &gt;/dev/null 2&gt;&amp;<span style="color:#ae81ff">1</span>
 <span style="color:#66d9ef">fi</span></code></pre></div>
 <p>If we execute the above script <code>./demo_with_kill.sh</code> in interactive mode, <code>bash -i ./demo_with_kill.sh</code> <sup><a id="fnr.3" class="footref" href="#fn.3">3</a></sup>.
 We will see the different result outcomes.
-We can see the <code>sleep</code> process which <code>&quot;SigIgn&quot;</code> value is <code>0</code> can receive <code>SIGINT</code> <sup><a id="fnr.1.100" class="footref" href="#fn.1">1</a></sup>.</p>
+We can see the <code>sleep</code> process&rsquo;s <code>&quot;SigIgn&quot;</code> value is <code>0</code> can receive <code>SIGINT</code> <sup><a id="fnr.1.100" class="footref" href="#fn.1">1</a></sup>.</p>
 <pre><code>Process is alive
 SigIgn: 0000000000000000</code></pre>
-<p>What is the different between interactive mode and non-interactive mode of bash?
+<p>What is the difference between interactive mode and non-interactive mode of bash?
 The <code>monitor mode</code>, aka <code>Job Control</code> <sup><a id="fnr.4" class="footref" href="#fn.4">4</a></sup>, is disabled by default in non-interactive mode.</p>
 
 <blockquote>
@@ -1245,7 +1245,7 @@ Background processes run in a separate process group and a line containing their
 <p>Job control refers to the protocol for allowing a user to move between multiple process groups (or jobs) within a single login session.
 Bash runs without it will make background child process ignoring <code>SIGINT</code> and <code>SIGQUIT</code> signals <sup><a id="fnr.1.100" class="footref" href="#fn.1">1</a></sup>.</p>
 
-<p>I belive <code>SIGINT</code> and <code>SIGQUIT</code> signals <sup><a id="fnr.1.100" class="footref" href="#fn.1">1</a></sup> are set ignored by below fragment codes come from <a href="https://github.com/bminor/bash/blob/8868edaf2250e09c4e9a1c75ffe3274f28f38581/execute_cmd.c#L5394-L5415">bash/execute_cmd.c#L5394-L541</a>.</p>
+<p>I believe <code>SIGINT</code> and <code>SIGQUIT</code> signals <sup><a id="fnr.1.100" class="footref" href="#fn.1">1</a></sup> are set ignored by below fragment codes come from <a href="https://github.com/bminor/bash/blob/8868edaf2250e09c4e9a1c75ffe3274f28f38581/execute_cmd.c#L5394-L5415">bash/execute_cmd.c#L5394-L541</a>.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#66d9ef">void</span>
 <span style="color:#a6e22e">setup_async_signals</span> ()
 {

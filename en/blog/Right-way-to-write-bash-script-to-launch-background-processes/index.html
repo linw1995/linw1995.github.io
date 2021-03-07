@@ -1155,7 +1155,7 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
     
     
 
-<h1 id="table-of-contents">Table of Contents</h1>
+<h2 id="table-of-contents">Table of Contents</h2>
 
 <ol>
 <li><a href="#org9aee8fa">Interesting problem occurred</a></li>
@@ -1170,10 +1170,11 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
 
 <p><a id="org9aee8fa"></a></p>
 
-<h1 id="interesting-problem-occurred">Interesting problem occurred</h1>
+<h2 id="interesting-problem-occurred">Interesting problem occurred</h2>
 
 <p>Recently I use a bash script to launch some processes running in the background.
-I handle the process termination improperly due to being not familiar with Unix and with Bash. I do something like this.</p>
+I handle the process termination improperly due to being not familiar with Unix and with Bash.
+I do something like this.</p>
 
 <p>I write a helper script to launch a background process, which is the &ldquo;sleep&rdquo; command in this case.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#!/bin/bash
@@ -1186,11 +1187,11 @@ But it does not work at all.</p>
 
 <p><a id="org4df32a4"></a></p>
 
-<h1 id="behind-the-scenes">Behind the scenes</h1>
+<h2 id="behind-the-scenes">Behind the scenes</h2>
 
-<p>After checking the process status file of this process, I find out it ignore the <code>SIGINT</code> <sup><a id="fnr.1.100" class="footref" href="#fn.1">1</a></sup> signal.</p>
+<p>After checking the process status file of this process, I find out that it ignores the <code>SIGINT</code> <sup><a id="fnr.1.100" class="footref" href="#fn.1">1</a></sup> signal.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cat /proc/<span style="color:#e6db74">`</span>cat pid<span style="color:#e6db74">`</span>/status | grep Sig</code></pre></div>
-<p>The value of the <code>&quot;SigIgn&quot;</code> field of process status file is <code>6</code>, which is <code>110</code> in bit representation.
+<p>The value of the <code>&quot;SigIgn&quot;</code> field of the process status file is <code>6</code>, which is <code>110</code> in bit representation.
 This value means the <code>SIGINT</code> and <code>SIGQUIT</code> signals <sup><a id="fnr.1.100" class="footref" href="#fn.1">1</a></sup> being ignored. <sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup></p>
 <pre><code>SigQ:   0/3793
 SigPnd: 0000000000000000
@@ -1224,7 +1225,8 @@ ps $PID &gt;/dev/null 2&gt;&amp;<span style="color:#ae81ff">1</span>
 <span style="color:#66d9ef">fi</span></code></pre></div>
 <p>If we execute the above script <code>./demo_with_kill.sh</code> in interactive mode, <code>bash -i ./demo_with_kill.sh</code> <sup><a id="fnr.3" class="footref" href="#fn.3">3</a></sup>.
 We will see the different result outcomes.
-We can see the <code>sleep</code> process&rsquo;s <code>&quot;SigIgn&quot;</code> value is <code>0</code> can receive <code>SIGINT</code> <sup><a id="fnr.1.100" class="footref" href="#fn.1">1</a></sup>.</p>
+We can see the <code>sleep</code> process&rsquo;s <code>&quot;SigIgn&quot;</code> value being <code>0</code>.
+This means it can receive <code>SIGINT</code> <sup><a id="fnr.1.100" class="footref" href="#fn.1">1</a></sup> now.</p>
 <pre><code>Process is alive
 SigIgn: 0000000000000000</code></pre>
 <p>What is the difference between interactive mode and non-interactive mode of bash?
@@ -1240,7 +1242,7 @@ Background processes run in a separate process group and a line containing their
 
 <p><a id="orge72595e"></a></p>
 
-<h2 id="job-control-sup-a-id-fnr-4-100-class-footref-href-fn-4-4-a-sup">Job Control <sup><a id="fnr.4.100" class="footref" href="#fn.4">4</a></sup></h2>
+<h3 id="job-control-sup-a-id-fnr-4-100-class-footref-href-fn-4-4-a-sup">Job Control <sup><a id="fnr.4.100" class="footref" href="#fn.4">4</a></sup></h3>
 
 <p>Job control refers to the protocol for allowing a user to move between multiple process groups (or jobs) within a single login session.
 Bash runs without it will make background child process ignoring <code>SIGINT</code> and <code>SIGQUIT</code> signals <sup><a id="fnr.1.100" class="footref" href="#fn.1">1</a></sup>.</p>
@@ -1270,7 +1272,7 @@ Bash runs without it will make background child process ignoring <code>SIGINT</c
 }</code></pre></div>
 <p><a id="orgdfd0308"></a></p>
 
-<h2 id="bash-send-sighup-on-exit">Bash send SIGHUP on exit</h2>
+<h3 id="bash-send-sighup-on-exit">Bash send SIGHUP on exit</h3>
 
 <p>Bash will send all child processes <code>SIGHUP</code> signal <sup><a id="fnr.1.100" class="footref" href="#fn.1">1</a></sup> on exit if it being enabled <code>huponexit</code> <sup><a id="fnr.5" class="footref" href="#fn.5">5</a></sup> option.</p>
 
@@ -1284,7 +1286,7 @@ not acting like the <a href="https://www.gnu.org/software/libc/manual/html_node/
 
 <p><a id="org4957550"></a></p>
 
-<h1 id="conclusion">Conclusion</h1>
+<h2 id="conclusion">Conclusion</h2>
 
 <p>So the better way to write a background job script is</p>
 
@@ -1297,7 +1299,7 @@ not acting like the <a href="https://www.gnu.org/software/libc/manual/html_node/
 set -m</code></pre></div></li>
 </ol>
 
-<h1 id="footnotes">Footnotes</h1>
+<h2 id="footnotes">Footnotes</h2>
 
 <p><sup><a id="fn.1" href="#fnr.1">1</a></sup> <a href="https://www.gnu.org/software/libc/manual/html_node/Termination-Signals.html">24.2.2 Termination Signals | The GNU C Library Reference Manual</a></p>
 

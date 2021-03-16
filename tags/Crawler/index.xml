@@ -6,7 +6,19 @@
     <description>Recent content in Crawler on linw1995</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Tue, 10 Mar 2020 01:15:00 +0800</lastBuildDate><atom:link href="https://linw1995.com/tags/Crawler/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 16 Mar 2021 01:30:00 +0800</lastBuildDate><atom:link href="https://linw1995.com/tags/Crawler/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>我是怎么开发一个数据提取轮子 DataExtractor</title>
+      <link>https://linw1995.com/blog/%E6%88%91%E6%98%AF%E6%80%8E%E4%B9%88%E5%BC%80%E5%8F%91%E4%B8%80%E4%B8%AA%E6%95%B0%E6%8D%AE%E6%8F%90%E5%8F%96%E8%BD%AE%E5%AD%90-DataExtractor/</link>
+      <pubDate>Tue, 16 Mar 2021 01:30:00 +0800</pubDate>
+      
+      <guid>https://linw1995.com/blog/%E6%88%91%E6%98%AF%E6%80%8E%E4%B9%88%E5%BC%80%E5%8F%91%E4%B8%80%E4%B8%AA%E6%95%B0%E6%8D%AE%E6%8F%90%E5%8F%96%E8%BD%AE%E5%AD%90-DataExtractor/</guid>
+      <description>前言 理想中轮子的模样 实现  数据格式及其查询表达式 实现提取器，适配不同的场景 复杂的数据提取场景  轮子们功能对比 展望  
+前言 数据提取对于爬虫开发来说可占了不少开发时间，是其中及其重要的一部分。 为了降低这方面的时间和心智成本，我调研且使用了不少轮子。
+ 像使用 XPath 作为选择器的 XSLT 1，对应 Python 的轮子就是最经典且好用的 lxml 2； 像在 Scrapy 中使用的的 Selectors 3，来自 Parsel 4; 像 Ruia 内置的 Data Item 5； 像到现在刚从 Scrapy 中重构独立出来的 Item Loaders 6 ，来自 itemloaders 7；  这些轮子有的很久远，比如 XSLT 1，只支持文本 to 文本的转换。
+其间 Scrapy 的 Parsel 支持用 CSS Selectors 8 及 XPath 9 去对 HTML(XML) 10 文本数据进行提取。 而 itemloaders 通过更高层的抽象，基于 Parsel 定义提取器类，去对文本进行复杂的数据提取， 支持嵌套提取（不支持类定以嵌套，支持函数调用式去提取），还支持对原始数据进行格式转换等处理。</description>
+    </item>
+    
     <item>
       <title>网站观测工具</title>
       <link>https://linw1995.com/blog/%E7%BD%91%E7%AB%99%E8%A7%82%E6%B5%8B%E5%B7%A5%E5%85%B7/</link>

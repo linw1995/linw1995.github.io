@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>MITM on linw1995</title>
+    <link>https://linw1995.com/tags/MITM/</link>
+    <description>Recent content in MITM on linw1995</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Fri, 09 Apr 2021 00:08:00 +0800</lastBuildDate><atom:link href="https://linw1995.com/tags/MITM/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>中间人与自动化</title>
+      <link>https://linw1995.com/blog/%E4%B8%AD%E9%97%B4%E4%BA%BA%E4%B8%8E%E8%87%AA%E5%8A%A8%E5%8C%96/</link>
+      <pubDate>Fri, 09 Apr 2021 00:08:00 +0800</pubDate>
+      
+      <guid>https://linw1995.com/blog/%E4%B8%AD%E9%97%B4%E4%BA%BA%E4%B8%8E%E8%87%AA%E5%8A%A8%E5%8C%96/</guid>
+      <description>前言 自动化控制 App 爬取数据 实现  中间人代理配置 Android 配置 抓包分析 mitmproxy 插件功能 自动化控制 集成  中间人与自动化  
+前言 自动化控制的技术一般是来做 App 测试的，但对于爬虫工程师来说，这项技术也可以用来爬取数据。
+正常来说，爬虫工程师开发爬虫，首先要对 App 进行抓包分析，分析其功能所用的服务端接口。 找出调用接口所需要的方式及所支持的参数。之后就可以愉快地构造接口请求，对其服务端接口发起请求，获取我们所需要的数据。
+但如今的 App 厂商往往为了避免这些服务端接口被恶意利用，会使用很多种方法或者技术去防止这种情况的发生。
+比如在接口层面上，添加签名及时间戳参数。 添加签名参数的原因，一是防止参数被中间人修改，二是防止接口被调用； 那添加时间戳参数就是为了避免同样的参数被反复调用。
+或者对请求及响应的内容进行加密。这样抓包看到的都是密文，接口分析工作就无从下手了。
+在网络通信应用层面上，可以替换掉通信协议。这样连抓包都不好抓包了，不是熟悉的 HTTP 协议…
+这些方法一般都只能通过对 App 进行逆向分析，找出加签加密算法；找出负责网络通信的模块。 再逆向出算法或协议来，或者沙盒去直接调用它。
+
+自动化控制 App 爬取数据 但逆向是真的麻烦…这时候，自动化控制就派上用场了～
+ 本博客以 Android App 为例子来解释说明。但实际上这个方法可以用在各种场景，无论是通过浏览器去访问某个网页，IOS App，甚至是小程序…
+ 如果所需要的数据展示在 Android App 界面上，就可以通过自动化技术控制 App ，再解析界面的 XML 数据 1，直接获取到这些数据。
+如果所需要的数据没有展示，自动化控制技术再配合上中间人抓包，就能获取到这些数据了。 这种情况很常见，服务端接口返回数据的结构是展示的超集（为了复用嘛，也不是 App 的服务端接口都会用上 GraphQL 2 的）。</description>
+    </item>
+    
+  </channel>
+</rss>

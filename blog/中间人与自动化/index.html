@@ -1314,6 +1314,7 @@ async <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">main</s
         <span style="color:#75715e"># It will make the process being unable to exit.</span>
         <span style="color:#75715e"># And I don&#39;t know what is causing this.</span>
         master<span style="color:#f92672">.</span>should_exit<span style="color:#f92672">.</span>set()
+        server<span style="color:#f92672">.</span>shutdown()
 
 
 <span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;__main__&#34;</span>:

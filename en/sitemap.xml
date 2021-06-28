@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  
   <url>
     <loc>https://linw1995.com/en/tags/Bash/</loc>
     <lastmod>2021-03-04T20:00:00+08:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://linw1995.com/en/blog/</loc>
     <lastmod>2021-03-04T20:00:00+08:00</lastmod>
     <xhtml:link
@@ -20,9 +17,7 @@
                 hreflang="en"
                 href="https://linw1995.com/en/blog/"
                 />
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://linw1995.com/en/</loc>
     <lastmod>2021-03-04T20:00:00+08:00</lastmod>
     <xhtml:link
@@ -35,14 +30,10 @@
                 hreflang="en"
                 href="https://linw1995.com/en/"
                 />
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://linw1995.com/en/blog/Right-way-to-write-bash-script-to-launch-background-processes/</loc>
     <lastmod>2021-03-04T20:00:00+08:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://linw1995.com/en/tags/</loc>
     <lastmod>2021-03-04T20:00:00+08:00</lastmod>
     <xhtml:link
@@ -55,14 +46,10 @@
                 hreflang="en"
                 href="https://linw1995.com/en/tags/"
                 />
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://linw1995.com/en/tags/Unix/</loc>
     <lastmod>2021-03-04T20:00:00+08:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://linw1995.com/en/tags/Python/</loc>
     <lastmod>2020-12-24T21:00:00+08:00</lastmod>
     <xhtml:link
@@ -75,39 +62,25 @@
                 hreflang="en"
                 href="https://linw1995.com/en/tags/Python/"
                 />
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://linw1995.com/en/blog/Python-Decorators-Advance/</loc>
     <lastmod>2020-12-24T21:00:00+08:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://linw1995.com/en/tags/Emacs/</loc>
     <lastmod>2020-07-13T23:34:59+08:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://linw1995.com/en/blog/Share-My-Emacs-Configuration/</loc>
     <lastmod>2020-07-13T23:34:59+08:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://linw1995.com/en/tags/Racket/</loc>
     <lastmod>2020-07-13T01:30:00+08:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://linw1995.com/en/blog/Write-Racket-With-Emacs/</loc>
     <lastmod>2020-07-13T01:30:00+08:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://linw1995.com/en/blog/Using-Emacs-Editor-For-The-First-Time/</loc>
     <lastmod>2020-06-15T01:15:59+08:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://linw1995.com/en/tags/Asyncio/</loc>
     <lastmod>2020-05-16T16:15:59+08:00</lastmod>
     <xhtml:link
@@ -120,9 +93,7 @@
                 hreflang="en"
                 href="https://linw1995.com/en/tags/Asyncio/"
                 />
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://linw1995.com/en/blog/How-To-Write-Asynchronous-Code-With-Contextvars-Properly/</loc>
     <lastmod>2020-05-16T16:15:59+08:00</lastmod>
     <xhtml:link
@@ -135,9 +106,7 @@
                 hreflang="en"
                 href="https://linw1995.com/en/blog/How-To-Write-Asynchronous-Code-With-Contextvars-Properly/"
                 />
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://linw1995.com/en/tags/MultiThreading/</loc>
     <lastmod>2020-05-16T16:15:59+08:00</lastmod>
     <xhtml:link
@@ -150,9 +119,7 @@
                 hreflang="en"
                 href="https://linw1995.com/en/tags/MultiThreading/"
                 />
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://linw1995.com/en/tags/pytest/</loc>
     <lastmod>2020-05-16T16:15:59+08:00</lastmod>
     <xhtml:link
@@ -165,9 +132,7 @@
                 hreflang="en"
                 href="https://linw1995.com/en/tags/pytest/"
                 />
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://linw1995.com/en/blog/Run-Asyncio-Event-Loop-in-another-thread/</loc>
     <lastmod>2020-03-14T00:15:59+08:00</lastmod>
     <xhtml:link
@@ -180,9 +145,7 @@
                 hreflang="en"
                 href="https://linw1995.com/en/blog/Run-Asyncio-Event-Loop-in-another-thread/"
                 />
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://linw1995.com/en/tags/Automation/</loc>
     <lastmod>2020-02-28T23:59:59+08:00</lastmod>
     <xhtml:link
@@ -195,9 +158,7 @@
                 hreflang="en"
                 href="https://linw1995.com/en/tags/Automation/"
                 />
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://linw1995.com/en/tags/Chrome/</loc>
     <lastmod>2020-02-28T23:59:59+08:00</lastmod>
     <xhtml:link
@@ -210,9 +171,7 @@
                 hreflang="en"
                 href="https://linw1995.com/en/tags/Chrome/"
                 />
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://linw1995.com/en/tags/Crawler/</loc>
     <lastmod>2020-02-28T23:59:59+08:00</lastmod>
     <xhtml:link
@@ -225,9 +184,7 @@
                 hreflang="en"
                 href="https://linw1995.com/en/tags/Crawler/"
                 />
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://linw1995.com/en/blog/How-To-Override-Geolocation-on-Headless-Chrome/</loc>
     <lastmod>2020-02-28T23:59:59+08:00</lastmod>
     <xhtml:link
@@ -240,9 +197,7 @@
                 hreflang="en"
                 href="https://linw1995.com/en/blog/How-To-Override-Geolocation-on-Headless-Chrome/"
                 />
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://linw1995.com/en/projects/jsonpath/</loc>
     <lastmod>2019-11-09T21:11:36+08:00</lastmod>
     <xhtml:link
@@ -255,9 +210,7 @@
                 hreflang="en"
                 href="https://linw1995.com/en/projects/jsonpath/"
                 />
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://linw1995.com/en/projects/</loc>
     <lastmod>2019-11-09T21:11:36+08:00</lastmod>
     <xhtml:link
@@ -270,9 +223,7 @@
                 hreflang="en"
                 href="https://linw1995.com/en/projects/"
                 />
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://linw1995.com/en/projects/data_extractor/</loc>
     <lastmod>2019-04-18T00:29:50+08:00</lastmod>
     <xhtml:link
@@ -285,19 +236,13 @@
                 hreflang="en"
                 href="https://linw1995.com/en/projects/data_extractor/"
                 />
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://linw1995.com/en/blog/Run-Twisted-in-another-thread/</loc>
     <lastmod>2018-12-27T23:59:59+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://linw1995.com/en/tags/Twisted/</loc>
     <lastmod>2018-12-27T23:59:59+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://linw1995.com/en/about/</loc>
     <xhtml:link
                 rel="alternate"
@@ -309,9 +254,7 @@
                 hreflang="en"
                 href="https://linw1995.com/en/about/"
                 />
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://linw1995.com/en/categories/</loc>
     <xhtml:link
                 rel="alternate"
@@ -323,9 +266,7 @@
                 hreflang="en"
                 href="https://linw1995.com/en/categories/"
                 />
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://linw1995.com/en/license/</loc>
     <xhtml:link
                 rel="alternate"
@@ -338,5 +279,4 @@
                 href="https://linw1995.com/en/license/"
                 />
   </url>
-  
 </urlset>

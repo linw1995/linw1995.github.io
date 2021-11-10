@@ -14,18 +14,17 @@
 
 <meta property="og:site_name" content="linw1995" />
 <meta property="og:locale" content="zh-cn" />
-<meta property="og:type" content="article" />
+<meta property="og:type" content="website" />
 <meta property="og:url" content="https://linw1995.com/en/blog/Using-Emacs-Editor-For-The-First-Time/" />
 <meta property="og:title" content="Using Emacs Editor For The First Time" />
 <meta property="twitter:title" content="Using Emacs Editor For The First Time">
 
-    <meta property="og:image" content="/img/banner.png">
-    <meta property="twitter:card" content="summary">
-    <meta property="twitter:image" content="/img/banner.png">
+    <meta property="og:image" content="https://linw1995.com/img/banner.jpeg">
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:image" content="https://linw1995.com/img/banner.jpeg">
 
 <meta property="og:description" content="How to install emacs and configure a beautiful editor?">
 <meta property="twitter:description" content="How to install emacs and configure a beautiful editor?">
-
 <title>
 
 
@@ -1162,9 +1161,9 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
 <p>Follow the installation section of Emacs document, I installed latest Emacs 26.3 successfully on the platforms Ubuntu 18.04 and MacOS 10.15.4</p>
 
 <p>On Ubuntu 18.04, download the source codes of Emacs, following this <a href="https://www.gnu.org/software/emacs/download.html#gnu-linux">section</a> of the document.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">wget http://mirrors.ustc.edu.cn/gnu/emacs/emacs-26.3.tar.xz</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">wget http://mirrors.ustc.edu.cn/gnu/emacs/emacs-26.3.tar.xz</code></pre></div>
 <p>Decompress it, compile the source codes and then install Emacs.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e"># decompress</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e"># decompress</span>
 tar -xvf emacs-26.3.tar.xz
 cd emacs-26.3
 <span style="color:#75715e"># with GUI</span>
@@ -1179,11 +1178,11 @@ cd emacs-26.3
 <span style="color:#75715e"># compile and install</span>
 make install</code></pre></div>
 <p>On MacOS 10.15.4, Emacs can be easily installed by using Homebrew.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">brew cask install emacs</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">brew cask install emacs</code></pre></div>
 <h3 id="new-installation-on-macos-updated-at-2020-06-16">New Installation On MacOS (Updated At 2020-06-16)</h3>
 
 <p>Using <code>brew cask install emacs</code> to install emacs will be unable to get full disk accessing on macOS, even if the user granting. Using <a href="https://github.com/d12frosted/homebrew-emacs-plus">emacs-plus</a> instead, run below commands to install it.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">brew tap d12frosted/emacs-plus
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">brew tap d12frosted/emacs-plus
 brew install emacs-plus@27 --with-modern-icon-pen
 ln -s /usr/local/opt/emacs-plus@27/Emacs.app /Applications</code></pre></div>
 <p>Emacs-plus 27 is able to get full disk accessing on macOS if user granting. Many Thanks to <a href="https://gist.github.com/dive/f64c645a9086afce8e5dd2590071dbf9#gistcomment-3267770">dive/fix-emacs-permissions-catalina.el</a></p>
@@ -1195,7 +1194,7 @@ ln -s /usr/local/opt/emacs-plus@27/Emacs.app /Applications</code></pre></div>
 <h3 id="package-manager">Package manager</h3>
 
 <p>Using <a href="https://github.com/raxod502/straight.el#user-manual">straight</a> with <a href="https://github.com/jwiegley/use-package#getting-started">use-package</a> for package managing. Create a <code>.emacs</code> file in the home directory with the below text.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp"><span style="color:#75715e">;;; Package manager</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp"><span style="color:#75715e">;;; Package manager</span>
 <span style="color:#75715e">;; Bootstrapping straight.el</span>
 (defvar bootstrap-version)
 (<span style="color:#66d9ef">let</span> ((bootstrap-file
@@ -1216,7 +1215,7 @@ ln -s /usr/local/opt/emacs-plus@27/Emacs.app /Applications</code></pre></div>
 <h3 id="theme">Theme</h3>
 
 <p><a href="https://github.com/hlissner/emacs-doom-themes">doom-themes</a> seems pretty good. Copy the below example configure codes, append it into <code>.emacs</code> file.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp"><span style="color:#75715e">;;; Theme Config</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp"><span style="color:#75715e">;;; Theme Config</span>
 (<span style="color:#a6e22e">use-package</span> doom-themes
   <span style="color:#e6db74">:straight</span> <span style="color:#66d9ef">t</span>
   <span style="color:#e6db74">:config</span>
@@ -1236,7 +1235,7 @@ ln -s /usr/local/opt/emacs-plus@27/Emacs.app /Applications</code></pre></div>
 <h3 id="dashboard">Dashboard</h3>
 
 <p>Setting-up a neat and pretty startup screen. Appends below code into <code>.emacs</code> file to install and setup.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp"><span style="color:#75715e">;;; Dashboard</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp"><span style="color:#75715e">;;; Dashboard</span>
 (<span style="color:#a6e22e">use-package</span> dashboard
   <span style="color:#e6db74">:straight</span> <span style="color:#66d9ef">t</span>
   <span style="color:#e6db74">:config</span>
@@ -1244,7 +1243,7 @@ ln -s /usr/local/opt/emacs-plus@27/Emacs.app /Applications</code></pre></div>
 <p>See <a href="https://github.com/emacs-dashboard/emacs-dashboard">repos</a> of <strong>emacs-dashboard</strong> for additional details.</p>
 
 <h3 id="configure-gui-on-macos">Configure GUI on MacOS</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp"><span style="color:#75715e">;;; GUI Config</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp"><span style="color:#75715e">;;; GUI Config</span>
 (when (<span style="color:#a6e22e">eq</span> system-type <span style="color:#e6db74">&#39;darwin</span>)
   <span style="color:#75715e">;; Make the title bar and toolbar to be transparent.</span>
   (add-to-list <span style="color:#e6db74">&#39;default-frame-alist</span>
@@ -1268,7 +1267,7 @@ ln -s /usr/local/opt/emacs-plus@27/Emacs.app /Applications</code></pre></div>
 <h3 id="macos-misc-updated-at-2020-06-16">MacOS Misc (Updated at 2020-06-16)</h3>
 
 <p>Dired is a directory editor on Emacs. It uses <code>ls</code> program. On macOS, <code>ls</code> does not support <code>--dired</code> option. Appending below codes into <code>.emacs</code> file to configure <strong>dired</strong> using <code>ls</code> without <code>--dired</code>.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp"><span style="color:#75715e">;;; MacOS Misc</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp"><span style="color:#75715e">;;; MacOS Misc</span>
 (when (<span style="color:#a6e22e">string=</span> system-type <span style="color:#e6db74">&#34;darwin&#34;</span>)
   (<span style="color:#66d9ef">setq</span> dired-use-ls-dired <span style="color:#66d9ef">nil</span>))</code></pre></div>
 <p>See <a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Dired-Enter.html#Dired-Enter">Dired</a> for addition details.</p>
@@ -1280,7 +1279,7 @@ ln -s /usr/local/opt/emacs-plus@27/Emacs.app /Applications</code></pre></div>
 <p>But the shell launched inside the Emacs still has some weird output, but launch it with GUI will not produce those weird output. Such as <code>&quot;^[]2;&quot;</code>, <code>&quot;^G^[]1;&quot;</code> and <code>&quot;^G&quot;</code>. Those maybe are ANSI escape codes, which Emacs shell does not support currently. Use <code>&lt;M-x&gt; ansi-term &lt;RET&gt;</code> to get better ANSI escape code support for shell. But launching shell with <code>ansi-term</code> will set <code>TERM=&quot;eterm-color&quot;</code>. So it needs to add a new condition <code>[ $TERM != &quot;eterm-color&quot; ]</code> to apply iTerm2 Shell Integration.</p>
 
 <p>I use ZSH shell, so need to modify <code>.zshrc</code> file to use the correct way for enabling iTerm2 Shell Integration.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e"># iTerm2 Shell Integration</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e"># iTerm2 Shell Integration</span>
 <span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> $TERM !<span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;dumb&#34;</span> <span style="color:#f92672">]</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#f92672">[</span> $TERM !<span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;eterm-color&#34;</span> <span style="color:#f92672">]</span>; <span style="color:#66d9ef">then</span>
   <span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> -e <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>HOME<span style="color:#e6db74">}</span><span style="color:#e6db74">/.iterm2_shell_integration.zsh&#34;</span> <span style="color:#f92672">]</span>; <span style="color:#66d9ef">then</span>
     source <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>HOME<span style="color:#e6db74">}</span><span style="color:#e6db74">/.iterm2_shell_integration.zsh&#34;</span>
@@ -1291,7 +1290,7 @@ ln -s /usr/local/opt/emacs-plus@27/Emacs.app /Applications</code></pre></div>
 <p>Launch shell in Emacs with <code>$PATH</code> variable has been changed. I google a lot of solutions but none of working fine. Luckily I find out this repository perfectly solves my problem. Using <a href="https://github.com/purcell/exec-path-from-shell"><code>exec-path-from-shell</code></a> to ensure environment variables inside Emacs look the same as in the user&rsquo;s shell.</p>
 
 <p>Appending below codes into <code>.emacs</code> file and it will work fine.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp"><span style="color:#75715e">;;; Shell Configure</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp"><span style="color:#75715e">;;; Shell Configure</span>
 <span style="color:#75715e">;; Ensure environment variables inside Emacs</span>
 <span style="color:#75715e">;; look the same as in the user&#39;s shell.</span>
 (<span style="color:#a6e22e">use-package</span> exec-path-from-shell

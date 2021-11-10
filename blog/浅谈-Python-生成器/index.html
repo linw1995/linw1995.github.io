@@ -14,18 +14,17 @@
 
 <meta property="og:site_name" content="linw1995" />
 <meta property="og:locale" content="zh-cn" />
-<meta property="og:type" content="article" />
+<meta property="og:type" content="website" />
 <meta property="og:url" content="https://linw1995.com/blog/%E6%B5%85%E8%B0%88-Python-%E7%94%9F%E6%88%90%E5%99%A8/" />
 <meta property="og:title" content="浅谈 Python 生成器" />
 <meta property="twitter:title" content="浅谈 Python 生成器">
 
-    <meta property="og:image" content="/img/banner.png">
-    <meta property="twitter:card" content="summary">
-    <meta property="twitter:image" content="/img/banner.png">
+    <meta property="og:image" content="https://linw1995.com/img/banner.jpeg">
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:image" content="https://linw1995.com/img/banner.jpeg">
 
 <meta property="og:description" content="生成器是本人最喜欢的语法糖之一。通过简单 `yield` 表达式即可实现各种奇妙用法。">
 <meta property="twitter:description" content="生成器是本人最喜欢的语法糖之一。通过简单 `yield` 表达式即可实现各种奇妙用法。">
-
 <title>
 
 
@@ -1159,12 +1158,12 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
 
 <ol>
 <li><p>通过传递回调函数，通过回调函数消费每次生产的变量（或者通过回调生产每次需要消费的变量）。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">countdown</span>(number: int, handler):
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">countdown</span>(number: int, handler):
     <span style="color:#66d9ef">while</span> number <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>:
         number <span style="color:#f92672">-=</span> <span style="color:#ae81ff">1</span>
         handler(number)
 
-countdown(<span style="color:#ae81ff">3</span>, <span style="color:#66d9ef">print</span>)
+countdown(<span style="color:#ae81ff">3</span>, print)
 <span style="color:#75715e"># 2</span>
 <span style="color:#75715e"># 1</span>
 <span style="color:#75715e"># 0</span></code></pre></div>
@@ -1178,7 +1177,7 @@ countdown(<span style="color:#ae81ff">3</span>, <span style="color:#66d9ef">prin
 <p>若通过以下的三个方法中的任意一个去实现的话，则可以就地去做处理，避免了全局变量漫天飞的情况。</p></li>
 
 <li><p>直接等生产结束，返回一个超长的列表，再进行消费。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">countdown</span>(number: int):
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">countdown</span>(number: int):
     rv <span style="color:#f92672">=</span> []
     <span style="color:#66d9ef">while</span> number <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>:
         number <span style="color:#f92672">-=</span> <span style="color:#ae81ff">1</span>
@@ -1197,11 +1196,11 @@ countdown(<span style="color:#ae81ff">3</span>)
 
 <li><p>按照 <strong>Iterator</strong> 迭代器接口的定义类，以类变量来维护自身状态，定义魔法方法 <code>__next__</code> 来生产变量。
 （不一定要按照迭代器接口实现，实现个普通类及普通方法也可以的。但实现迭代器接口的话，还可以使用 <code>for-in</code> 语法糖哟）。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">countdown</span>:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">countdown</span>:
     <span style="color:#66d9ef">def</span> __init__(self, number: int):
         self<span style="color:#f92672">.</span>number <span style="color:#f92672">=</span> number
 
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">__next__</span>(self):
+    <span style="color:#66d9ef">def</span> __next__(self):
         <span style="color:#66d9ef">if</span> self<span style="color:#f92672">.</span>number <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>:
             self<span style="color:#f92672">.</span>number <span style="color:#f92672">-=</span> <span style="color:#ae81ff">1</span>
             <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>number
@@ -1211,7 +1210,7 @@ countdown(<span style="color:#ae81ff">3</span>)
         <span style="color:#66d9ef">return</span> countdown(self<span style="color:#f92672">.</span>number)
 
 <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> countdown(<span style="color:#ae81ff">3</span>):
-    <span style="color:#66d9ef">print</span>(i)
+    print(i)
 
 <span style="color:#75715e"># 2</span>
 <span style="color:#75715e"># 1</span>
@@ -1219,7 +1218,7 @@ countdown(<span style="color:#ae81ff">3</span>)
 <p>缺点只能说是，实现起来太麻烦了。</p></li>
 
 <li><p>通过使用线程 + 队列，并发地生产及消费。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> threading
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> threading
 
 <span style="color:#f92672">from</span> queue <span style="color:#f92672">import</span> Queue
 
@@ -1228,14 +1227,14 @@ countdown(<span style="color:#ae81ff">3</span>)
         number <span style="color:#f92672">-=</span> <span style="color:#ae81ff">1</span>
         q_out<span style="color:#f92672">.</span>put(number)
 
-    q_out<span style="color:#f92672">.</span>put(None)
+    q_out<span style="color:#f92672">.</span>put(<span style="color:#66d9ef">None</span>)
 
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">consumer</span>(q_in: Queue):
-    <span style="color:#66d9ef">while</span> True:
+    <span style="color:#66d9ef">while</span> <span style="color:#66d9ef">True</span>:
         v <span style="color:#f92672">=</span> q_in<span style="color:#f92672">.</span>get()
-        <span style="color:#66d9ef">if</span> v <span style="color:#f92672">is</span> None:
+        <span style="color:#66d9ef">if</span> v <span style="color:#f92672">is</span> <span style="color:#66d9ef">None</span>:
             <span style="color:#66d9ef">break</span>
-        <span style="color:#66d9ef">print</span>(v)
+        print(v)
 
 q <span style="color:#f92672">=</span> Queue()
 thr_consumer <span style="color:#f92672">=</span> threading<span style="color:#f92672">.</span>Thread(target<span style="color:#f92672">=</span>consumer, args<span style="color:#f92672">=</span>(q, ))
@@ -1265,13 +1264,13 @@ thr_consumer<span style="color:#f92672">.</span>join()
 <h2 id="yield-关键字">yield 关键字</h2>
 
 <p>只要在函数中使用 <code>yield</code> 表达式，即可实现一个 <strong>Generator</strong> 生成器函数。相比较之前的四个方法，是不是显得非常简单且直观。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">countdown</span>(number):
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">countdown</span>(number):
     <span style="color:#66d9ef">while</span> number <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>:
         number <span style="color:#f92672">-=</span> <span style="color:#ae81ff">1</span>
         <span style="color:#66d9ef">yield</span> number</code></pre></div>
 <p>以 <code>countdown(3)</code> 调用后生成 <strong>Generator Iterator</strong> 生成器，通过 <strong>for-in</strong> 即可从 2 数到 0。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">for</span> number <span style="color:#f92672">in</span> countdown(<span style="color:#ae81ff">3</span>):
-    <span style="color:#66d9ef">print</span>(number)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">for</span> number <span style="color:#f92672">in</span> countdown(<span style="color:#ae81ff">3</span>):
+    print(number)
 
 <span style="color:#75715e"># 2</span>
 <span style="color:#75715e"># 1</span>
@@ -1329,8 +1328,8 @@ thr_consumer<span style="color:#f92672">.</span>join()
 <li><code>__next__()</code> 等同于 <code>send(None)</code>，可以通过内建函数 <code>next</code> 去调用。</li>
 
 <li><p><code>__iter__()</code> 获取可迭代对象，即生成器本身</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">__next__</span>(self):
-    <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>send(None)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> __next__(self):
+    <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>send(<span style="color:#66d9ef">None</span>)
 
 <span style="color:#66d9ef">def</span> __iter__(self):
     <span style="color:#66d9ef">return</span> self</code></pre></div></li>
@@ -1348,14 +1347,14 @@ thr_consumer<span style="color:#f92672">.</span>join()
 <h3 id="send">send</h3>
 
 <p><code>send(value)</code> 用来使生成器继续运行，而 <code>value</code> 为 <code>yield</code> 表达式的值。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">receiver</span>():
-    <span style="color:#66d9ef">while</span> True:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">receiver</span>():
+    <span style="color:#66d9ef">while</span> <span style="color:#66d9ef">True</span>:
         value <span style="color:#f92672">=</span> <span style="color:#66d9ef">yield</span>
-        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;receive&#34;</span>, value)
+        print(<span style="color:#e6db74">&#34;receive&#34;</span>, value)
 
 recv <span style="color:#f92672">=</span> receiver()
 <span style="color:#75715e"># equal to `next(recv)` and `recv.__next__()`. Evaluate the first next call.</span>
-recv<span style="color:#f92672">.</span>send(None)
+recv<span style="color:#f92672">.</span>send(<span style="color:#66d9ef">None</span>)
 recv<span style="color:#f92672">.</span>send(<span style="color:#ae81ff">1</span>)
 <span style="color:#75715e"># receive 1</span>
 recv<span style="color:#f92672">.</span>send(<span style="color:#e6db74">&#34;abc&#34;</span>)
@@ -1363,19 +1362,19 @@ recv<span style="color:#f92672">.</span>send(<span style="color:#e6db74">&#34;ab
 <h3 id="throw">throw</h3>
 
 <p><code>throw(type, value=None, traceback=None)</code> 也是用来使生成器继续运行，在生成器停止的位置抛出传递的异常。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">catcher</span>():
-    <span style="color:#66d9ef">while</span> True:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">catcher</span>():
+    <span style="color:#66d9ef">while</span> <span style="color:#66d9ef">True</span>:
         <span style="color:#66d9ef">try</span>:
             <span style="color:#66d9ef">yield</span>
         <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">Exception</span>:
-            <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;catch&#34;</span>, sys<span style="color:#f92672">.</span>exc_info())
+            print(<span style="color:#e6db74">&#34;catch&#34;</span>, sys<span style="color:#f92672">.</span>exc_info())
 c <span style="color:#f92672">=</span>  catcher()
-c<span style="color:#f92672">.</span>send(None)
-c<span style="color:#f92672">.</span>throw(TimeoutError)
-c<span style="color:#f92672">.</span>throw(TimeoutError(<span style="color:#e6db74">&#34;boo&#34;</span>))
-c<span style="color:#f92672">.</span>throw(TimeoutError, TimeoutError(<span style="color:#e6db74">&#34;boo&#34;</span>))
-c<span style="color:#f92672">.</span>throw(TimeoutError, <span style="color:#e6db74">&#34;boo&#34;</span>)
-c<span style="color:#f92672">.</span>throw(TimeoutError, (<span style="color:#e6db74">&#34;boo&#34;</span>, <span style="color:#ae81ff">1</span>))
+c<span style="color:#f92672">.</span>send(<span style="color:#66d9ef">None</span>)
+c<span style="color:#f92672">.</span>throw(<span style="color:#a6e22e">TimeoutError</span>)
+c<span style="color:#f92672">.</span>throw(<span style="color:#a6e22e">TimeoutError</span>(<span style="color:#e6db74">&#34;boo&#34;</span>))
+c<span style="color:#f92672">.</span>throw(<span style="color:#a6e22e">TimeoutError</span>, <span style="color:#a6e22e">TimeoutError</span>(<span style="color:#e6db74">&#34;boo&#34;</span>))
+c<span style="color:#f92672">.</span>throw(<span style="color:#a6e22e">TimeoutError</span>, <span style="color:#e6db74">&#34;boo&#34;</span>)
+c<span style="color:#f92672">.</span>throw(<span style="color:#a6e22e">TimeoutError</span>, (<span style="color:#e6db74">&#34;boo&#34;</span>, <span style="color:#ae81ff">1</span>))
 <span style="color:#75715e"># catch (&lt;class &#39;TimeoutError&#39;&gt;, TimeoutError(), &lt;traceback object at 0x107335700&gt;)</span>
 <span style="color:#75715e"># catch (&lt;class &#39;TimeoutError&#39;&gt;, TimeoutError(&#39;boo&#39;), &lt;traceback object at 0x107335700&gt;)</span>
 <span style="color:#75715e"># catch (&lt;class &#39;TimeoutError&#39;&gt;, TimeoutError(&#39;boo&#39;), &lt;traceback object at 0x107267bc0&gt;)</span>
@@ -1398,7 +1397,7 @@ c<span style="color:#f92672">.</span>throw(TimeoutError, (<span style="color:#e6
 <h3 id="close">close</h3>
 
 <p>通过调用 <code>close</code> 来完全停止生成器，其定义可以参考下面的语义等同的 Python 代码（原生的肯定是用 C 实现的）。这函数就简单地利用一下 <code>throw</code> 方法在生成器停止的位 <code>yield</code> 表达式位置处抛出 <code>GeneratorExit</code> 异常，使得生成器完全停止。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">close</span>(self):
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">close</span>(self):
     <span style="color:#66d9ef">try</span>:
         self<span style="color:#f92672">.</span>throw(<span style="color:#a6e22e">GeneratorExit</span>)
     <span style="color:#66d9ef">except</span> (<span style="color:#a6e22e">GeneratorExit</span>, <span style="color:#a6e22e">StopIteration</span>):
@@ -1414,7 +1413,7 @@ c<span style="color:#f92672">.</span>throw(TimeoutError, (<span style="color:#e6
 <h3 id="resource-management">Resource Management</h3>
 
 <p>举个例子，用生成器函数来实现一个用来过滤重复项的 Pipeline。这就需要一个超大集合用来判断是否重复，可能是通过读写磁盘，或者外部服务等方式实现的，难免会需要在使用结束后做一些清理工作。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">filter_duplicated</span>(sequence):
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">filter_duplicated</span>(sequence):
     big_set <span style="color:#f92672">=</span> <span style="color:#f92672">...</span>
     <span style="color:#66d9ef">try</span>:
         <span style="color:#66d9ef">for</span> value <span style="color:#f92672">in</span> sequence:
@@ -1427,14 +1426,14 @@ c<span style="color:#f92672">.</span>throw(TimeoutError, (<span style="color:#e6
         big_set<span style="color:#f92672">.</span>close()
 
 cursor <span style="color:#f92672">=</span> con<span style="color:#f92672">.</span>execute()
-original_seq <span style="color:#f92672">=</span> iter(cursor<span style="color:#f92672">.</span>fetchone, None)
+original_seq <span style="color:#f92672">=</span> iter(cursor<span style="color:#f92672">.</span>fetchone, <span style="color:#66d9ef">None</span>)
 filtered_seq <span style="color:#f92672">=</span> filter_duplicated(map(<span style="color:#66d9ef">lambda</span> row: row[<span style="color:#ae81ff">0</span>], original_seq))
 <span style="color:#66d9ef">for</span> url <span style="color:#f92672">in</span> filtered_seq:
     <span style="color:#f92672">...</span></code></pre></div>
 <p>若是要在生成器完全停止前做清理，只要在 yield 表达式外面套一层 try-finally。在 finally 代码块做清理工作。当主动调用 <code>close</code> 方法时，会在之前暂停的 <code>yield</code> 表达式位置处抛出 <code>GeneratorExit</code> 异常。因在 try 代码块中抛出，所以一定会执行 finally 代码块。</p>
 
 <p>同样利用生成器做资源回收的 <a href="https://docs.python.org/3/library/contextlib.html#contextlib.contextmanager">contextlib.contextmanager</a>，简单地通过装饰生成器函数，即可使用 <code>with</code> 语法对资源进行管理。如果对这一部分是如何做到抱有疑问，且感兴趣的话可以自行查看源码哟</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> contextlib <span style="color:#f92672">import</span> contextmanager
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> contextlib <span style="color:#f92672">import</span> contextmanager
 
 <span style="color:#a6e22e">@contextmanager</span>
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">managed_resource</span>(<span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwds):
@@ -1452,7 +1451,7 @@ filtered_seq <span style="color:#f92672">=</span> filter_duplicated(map(<span st
 <h3 id="return">Return</h3>
 
 <p>当生成器函数结束时，会抛出 <code>StopIteration</code>。若是函数有返回值的话，相当于抛出个带参数的 <code>StopIteration</code> 异常。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">gen_with_return</span>():
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">gen_with_return</span>():
     <span style="color:#66d9ef">yield</span>
     <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>  <span style="color:#75715e"># equal to `raise StopIteration(1)`</span>
 
@@ -1467,9 +1466,9 @@ next(gen)
 <h3 id="yield-from-表达式">yield from 表达式</h3>
 
 <p>超方便，不需要写重复的代码。看 <a href="https://www.python.org/dev/peps/pep-0380/#formal-semantics">PEP 380</a> 里的等价代码，就知道要正确的处理子生成器是一件麻烦而又重复的事。接下来举个超简单的例子</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">chain</span>(<span style="color:#f92672">*</span>gens):
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">chain</span>(<span style="color:#f92672">*</span>gens):
     <span style="color:#66d9ef">for</span> gen <span style="color:#f92672">in</span> gens:
-        <span style="color:#66d9ef">yield</span> <span style="color:#f92672">from</span> gen</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">chain</span>(<span style="color:#f92672">*</span>gens):
+        <span style="color:#66d9ef">yield from</span> gen</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">chain</span>(<span style="color:#f92672">*</span>gens):
     <span style="color:#66d9ef">for</span> gen <span style="color:#f92672">in</span> gens:
         <span style="color:#66d9ef">for</span> v <span style="color:#f92672">in</span> gen:
             <span style="color:#66d9ef">yield</span> v</code></pre></div>
@@ -1480,17 +1479,17 @@ next(gen)
 
 <p>前面提到在生成器中 <code>return 1</code> 相当于抛出一个带参数的 <code>StopIteration(1)</code>。
 如果该生成器被 <code>yield from</code> 的话，则 <code>yield from</code> 表达式的值为 <code>1</code> 哟。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">bottom</span>():
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">bottom</span>():
     <span style="color:#66d9ef">return</span> (<span style="color:#66d9ef">yield</span>)
 
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">middle</span>():
-    <span style="color:#66d9ef">return</span> (<span style="color:#66d9ef">yield</span> <span style="color:#f92672">from</span> bottom())
+    <span style="color:#66d9ef">return</span> (<span style="color:#66d9ef">yield from</span> bottom())
 
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">top</span>():
-    <span style="color:#66d9ef">return</span> (<span style="color:#66d9ef">yield</span> <span style="color:#f92672">from</span> middle())
+    <span style="color:#66d9ef">return</span> (<span style="color:#66d9ef">yield from</span> middle())
 
 g <span style="color:#f92672">=</span> top()
-g<span style="color:#f92672">.</span>send(None)
+g<span style="color:#f92672">.</span>send(<span style="color:#66d9ef">None</span>)
 <span style="color:#66d9ef">try</span>:
     g<span style="color:#f92672">.</span>send(<span style="color:#ae81ff">13</span>)
 <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">StopIteration</span> <span style="color:#66d9ef">as</span> exc:

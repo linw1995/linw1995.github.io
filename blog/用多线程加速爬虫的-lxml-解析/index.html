@@ -14,18 +14,17 @@
 
 <meta property="og:site_name" content="linw1995" />
 <meta property="og:locale" content="zh-cn" />
-<meta property="og:type" content="article" />
+<meta property="og:type" content="website" />
 <meta property="og:url" content="https://linw1995.com/blog/%E7%94%A8%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%8A%A0%E9%80%9F%E7%88%AC%E8%99%AB%E7%9A%84-lxml-%E8%A7%A3%E6%9E%90/" />
 <meta property="og:title" content="用多线程加速爬虫的 lxml 解析" />
 <meta property="twitter:title" content="用多线程加速爬虫的 lxml 解析">
 
-    <meta property="og:image" content="/img/banner.png">
-    <meta property="twitter:card" content="summary">
-    <meta property="twitter:image" content="/img/banner.png">
+    <meta property="og:image" content="https://linw1995.com/img/banner.jpeg">
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:image" content="https://linw1995.com/img/banner.jpeg">
 
 <meta property="og:description" content="">
 <meta property="twitter:description" content="">
-
 <title>
 
 
@@ -1168,21 +1167,21 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
 <h2 id="模拟爬虫">模拟爬虫</h2>
 
 <p>先随便准备一个 html 文件，就直接从 lxml 的文档上下载一个</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">wget https://lxml.de/tutorial.html -O example.html</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">wget https://lxml.de/tutorial.html -O example.html</code></pre></div>
 <p>举一个重解析的模拟爬虫例子，每次请求的 io 时间假定为 0.01s ，请求并发数无上限，总量为 2000 个。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> asyncio
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> asyncio
 <span style="color:#f92672">import</span> time
 <span style="color:#f92672">from</span> pathlib <span style="color:#f92672">import</span> Path
 
 <span style="color:#f92672">from</span> lxml <span style="color:#f92672">import</span> html
 
-_html_text <span style="color:#f92672">=</span> None
+_html_text <span style="color:#f92672">=</span> <span style="color:#66d9ef">None</span>
 _latest_fetched <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
 
 
-async <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">fetch_text</span>():
+<span style="color:#66d9ef">async</span> <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">fetch_text</span>():
     <span style="color:#75715e"># 模拟爬取</span>
-    await asyncio<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">0.01</span>)
+    <span style="color:#66d9ef">await</span> asyncio<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">0.01</span>)
     <span style="color:#75715e"># 记录最后的一个请求的结束时间</span>
     <span style="color:#66d9ef">global</span> _latest_fetched
     _latest_fetched <span style="color:#f92672">=</span> time<span style="color:#f92672">.</span>perf_counter()
@@ -1194,19 +1193,19 @@ async <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">fetch_t
     <span style="color:#66d9ef">return</span> doc<span style="color:#f92672">.</span>xpath(<span style="color:#e6db74">&#34;//title/text()&#34;</span>)[<span style="color:#ae81ff">0</span>]
 
 
-async <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">create_task</span>():
-    text <span style="color:#f92672">=</span> await fetch_text()
+<span style="color:#66d9ef">async</span> <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">create_task</span>():
+    text <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> fetch_text()
     title <span style="color:#f92672">=</span> get_title(text)
     <span style="color:#66d9ef">return</span> title
 
 
-async <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">main</span>():
+<span style="color:#66d9ef">async</span> <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">main</span>():
     futs <span style="color:#f92672">=</span> []
     <span style="color:#66d9ef">for</span> _ <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">2000</span>):
         fut <span style="color:#f92672">=</span> asyncio<span style="color:#f92672">.</span>ensure_future(create_task())
         futs<span style="color:#f92672">.</span>append(fut)
 
-    await asyncio<span style="color:#f92672">.</span>gather(<span style="color:#f92672">*</span>futs)
+    <span style="color:#66d9ef">await</span> asyncio<span style="color:#f92672">.</span>gather(<span style="color:#f92672">*</span>futs)
 
 
 <span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;__main__&#34;</span>:
@@ -1215,30 +1214,30 @@ async <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">main</s
     t_start <span style="color:#f92672">=</span> time<span style="color:#f92672">.</span>perf_counter()
     asyncio<span style="color:#f92672">.</span>run(main())
     t_end <span style="color:#f92672">=</span> time<span style="color:#f92672">.</span>perf_counter()
-    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;total:&#34;</span>, (t_end <span style="color:#f92672">-</span> t_start))
-    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;latest fetched:&#34;</span>, _latest_fetched <span style="color:#f92672">-</span> t_start)</code></pre></div>
+    print(<span style="color:#e6db74">&#34;total:&#34;</span>, (t_end <span style="color:#f92672">-</span> t_start))
+    print(<span style="color:#e6db74">&#34;latest fetched:&#34;</span>, _latest_fetched <span style="color:#f92672">-</span> t_start)</code></pre></div>
 <p>这段代码执行的结果如下</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plain" data-lang="plain">total: 46.338736165
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plain" data-lang="plain">total: 46.338736165
 latest fetched: 38.004939187</code></pre></div>
 <p>模拟爬虫网络请求的耗时为 0.01 s，而且没有设置并发数，按道理说应该在极短的时间内完成所有网络请求</p>
 
 <p>可实际上最后一个请求的结束时间却十分的大，这说明该代码的解析处理已经大大影响了爬虫的正常工作</p>
 
 <h2 id="用-threadpoolexecutor-把解析任务交给线程池">用 ThreadPoolExecutor 把解析任务交给线程池</h2>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#960050;background-color:#1e0010">@@</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">22</span>,<span style="color:#ae81ff">16</span> <span style="color:#f92672">+</span><span style="color:#ae81ff">22</span>,<span style="color:#ae81ff">20</span> <span style="color:#960050;background-color:#1e0010">@@</span> <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_title</span>(text):
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">@@</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">22</span>,<span style="color:#ae81ff">16</span> <span style="color:#f92672">+</span><span style="color:#ae81ff">22</span>,<span style="color:#ae81ff">20</span> <span style="color:#f92672">@@</span> <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_title</span>(text):
      <span style="color:#66d9ef">return</span> doc<span style="color:#f92672">.</span>xpath(<span style="color:#e6db74">&#34;//title/text()&#34;</span>)[<span style="color:#ae81ff">0</span>]
 
 
-<span style="color:#f92672">-</span>async <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">create_task</span>():
-<span style="color:#f92672">+</span>async <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">create_task</span>(loop):
-     text <span style="color:#f92672">=</span> await fetch_text()
+<span style="color:#f92672">-</span><span style="color:#66d9ef">async</span> <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">create_task</span>():
+<span style="color:#f92672">+</span><span style="color:#66d9ef">async</span> <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">create_task</span>(loop):
+     text <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> fetch_text()
 <span style="color:#f92672">-</span>    title <span style="color:#f92672">=</span> get_title(text)
 <span style="color:#f92672">+</span>    <span style="color:#75715e"># 把解析任务交给线程池</span>
-<span style="color:#f92672">+</span>    title <span style="color:#f92672">=</span> await loop<span style="color:#f92672">.</span>run_in_executor(None, get_title, text)
+<span style="color:#f92672">+</span>    title <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> loop<span style="color:#f92672">.</span>run_in_executor(<span style="color:#66d9ef">None</span>, get_title, text)
      <span style="color:#66d9ef">return</span> title
 
 
- async <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">main</span>():
+ <span style="color:#66d9ef">async</span> <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">main</span>():
 <span style="color:#f92672">+</span>    loop <span style="color:#f92672">=</span> asyncio<span style="color:#f92672">.</span>get_event_loop()
 <span style="color:#f92672">+</span>    <span style="color:#75715e"># 可以用 loop.set_default_executor 来配置默认的线程池</span>
 <span style="color:#f92672">+</span>
@@ -1248,9 +1247,9 @@ latest fetched: 38.004939187</code></pre></div>
 <span style="color:#f92672">+</span>        fut <span style="color:#f92672">=</span> asyncio<span style="color:#f92672">.</span>ensure_future(create_task(loop))
          futs<span style="color:#f92672">.</span>append(fut)
 
-     await asyncio<span style="color:#f92672">.</span>gather(<span style="color:#f92672">*</span>futs)</code></pre></div>
+     <span style="color:#66d9ef">await</span> asyncio<span style="color:#f92672">.</span>gather(<span style="color:#f92672">*</span>futs)</code></pre></div>
 <p>照以上更改后，代码执行的结果如下</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plain" data-lang="plain">total: 46.996482637
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plain" data-lang="plain">total: 46.996482637
 latest fetched: 0.087005389</code></pre></div>
 <p>最后一次爬取的结束时间就如我们预料，十分的小。可以看出使用多线程来做解析，就不会影响到主线程的爬虫工作</p>
 
@@ -1259,21 +1258,21 @@ latest fetched: 0.087005389</code></pre></div>
 <h2 id="在解析时-避免-gil-的解决方案">在解析时，避免 GIL 的解决方案</h2>
 
 <p>而幸运的是如果使用的是包含 1.1 版本以后的 lxml，可以通过以下方法来避开 GIL</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#960050;background-color:#1e0010">@@</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">4</span> <span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">5</span> <span style="color:#960050;background-color:#1e0010">@@</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">@@</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">4</span> <span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">5</span> <span style="color:#f92672">@@</span>
  <span style="color:#f92672">import</span> asyncio
 <span style="color:#f92672">+</span><span style="color:#f92672">import</span> threading
  <span style="color:#f92672">import</span> time
  <span style="color:#f92672">from</span> pathlib <span style="color:#f92672">import</span> Path
 
-<span style="color:#960050;background-color:#1e0010">@@</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">6</span>,<span style="color:#ae81ff">6</span> <span style="color:#f92672">+</span><span style="color:#ae81ff">7</span>,<span style="color:#ae81ff">7</span> <span style="color:#960050;background-color:#1e0010">@@</span> <span style="color:#f92672">from</span> lxml <span style="color:#f92672">import</span> html
+<span style="color:#f92672">@@</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">6</span>,<span style="color:#ae81ff">6</span> <span style="color:#f92672">+</span><span style="color:#ae81ff">7</span>,<span style="color:#ae81ff">7</span> <span style="color:#f92672">@@</span> <span style="color:#f92672">from</span> lxml <span style="color:#f92672">import</span> html
 
- _html_text <span style="color:#f92672">=</span> None
+ _html_text <span style="color:#f92672">=</span> <span style="color:#66d9ef">None</span>
  _latest_fetched <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
 <span style="color:#f92672">+</span>_local <span style="color:#f92672">=</span> threading<span style="color:#f92672">.</span>local()
 
 
- async <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">fetch_text</span>():
-<span style="color:#960050;background-color:#1e0010">@@</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">18</span>,<span style="color:#ae81ff">7</span> <span style="color:#f92672">+</span><span style="color:#ae81ff">20</span>,<span style="color:#ae81ff">12</span> <span style="color:#960050;background-color:#1e0010">@@</span> async <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">fetch_text</span>():
+ <span style="color:#66d9ef">async</span> <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">fetch_text</span>():
+<span style="color:#f92672">@@</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">18</span>,<span style="color:#ae81ff">7</span> <span style="color:#f92672">+</span><span style="color:#ae81ff">20</span>,<span style="color:#ae81ff">12</span> <span style="color:#f92672">@@</span> <span style="color:#66d9ef">async</span> <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">fetch_text</span>():
 
 
  <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_title</span>(text):
@@ -1286,7 +1285,7 @@ latest fetched: 0.087005389</code></pre></div>
 <span style="color:#f92672">+</span>    doc <span style="color:#f92672">=</span> html<span style="color:#f92672">.</span>fromstring(text, parser<span style="color:#f92672">=</span>_local<span style="color:#f92672">.</span>parser)
      <span style="color:#66d9ef">return</span> doc<span style="color:#f92672">.</span>xpath(<span style="color:#e6db74">&#34;//title/text()&#34;</span>)[<span style="color:#ae81ff">0</span>]</code></pre></div>
 <p>照以上更改后，代码执行的结果如下下</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plain" data-lang="plain">total: 27.775925195000003
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plain" data-lang="plain">total: 27.775925195000003
 latest fetched: 0.425428249</code></pre></div>
 <p>这样的处理相比之前的，由于解析的过程中释放了 GIL，程序就能利用到多核 CPU 的优势，加快了处理速度，减少了运行时间</p>
 
@@ -1298,9 +1297,9 @@ latest fetched: 0.425428249</code></pre></div>
 <h3 id="使用-lxml-时-有哪些情况会释放掉-gil">使用 lxml 时，有哪些情况会释放掉 GIL</h3>
 
 <p>通过查看 lxml 的变更历史，看看具体哪些情况会释放掉 GIL</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">curl -sSL https://github.com/lxml/lxml/raw/master/CHANGES.txt | grep GIL</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">curl -sSL https://github.com/lxml/lxml/raw/master/CHANGES.txt | grep GIL</code></pre></div>
 <p>运行以上命令，得出的结果如下</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plain" data-lang="plain">* Parsing from a plain file object frees the GIL under Python 2.x.
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plain" data-lang="plain">* Parsing from a plain file object frees the GIL under Python 2.x.
 * Running ``iterparse()`` on a plain file (or filename) frees the GIL
 * Unlock the GIL for deep copying documents and for XPath()
   * All in-memory operations (tostring, parse(StringIO), etc.) free the GIL
@@ -1320,28 +1319,28 @@ latest fetched: 0.425428249</code></pre></div>
 <p>但在合适的应用场景，如果正确使用多进程，就能更快地处理</p>
 
 <p>在第一个多线程例子的代码中，把 executor 置换成 ProcessPoolExecutor 即可使用多进程处理</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#960050;background-color:#1e0010">@@</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">5</span> <span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">6</span> <span style="color:#960050;background-color:#1e0010">@@</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">@@</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">5</span> <span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">6</span> <span style="color:#f92672">@@</span>
  <span style="color:#f92672">import</span> asyncio
  <span style="color:#f92672">import</span> time
 <span style="color:#f92672">+</span><span style="color:#f92672">from</span> concurrent.futures <span style="color:#f92672">import</span> ProcessPoolExecutor
  <span style="color:#f92672">from</span> pathlib <span style="color:#f92672">import</span> Path
 
  <span style="color:#f92672">from</span> lxml <span style="color:#f92672">import</span> html
-<span style="color:#960050;background-color:#1e0010">@@</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">22</span>,<span style="color:#ae81ff">20</span> <span style="color:#f92672">+</span><span style="color:#ae81ff">23</span>,<span style="color:#ae81ff">20</span> <span style="color:#960050;background-color:#1e0010">@@</span> <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_title</span>(text):
+<span style="color:#f92672">@@</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">22</span>,<span style="color:#ae81ff">20</span> <span style="color:#f92672">+</span><span style="color:#ae81ff">23</span>,<span style="color:#ae81ff">20</span> <span style="color:#f92672">@@</span> <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_title</span>(text):
      <span style="color:#66d9ef">return</span> doc<span style="color:#f92672">.</span>xpath(<span style="color:#e6db74">&#34;//title/text()&#34;</span>)[<span style="color:#ae81ff">0</span>]
 
 
-<span style="color:#f92672">-</span>async <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">create_task</span>(loop):
-<span style="color:#f92672">+</span>async <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">create_task</span>(loop, executor):
-     text <span style="color:#f92672">=</span> await fetch_text()
+<span style="color:#f92672">-</span><span style="color:#66d9ef">async</span> <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">create_task</span>(loop):
+<span style="color:#f92672">+</span><span style="color:#66d9ef">async</span> <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">create_task</span>(loop, executor):
+     text <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> fetch_text()
 <span style="color:#f92672">-</span>    <span style="color:#75715e"># 把解析任务交给线程池</span>
-<span style="color:#f92672">-</span>    title <span style="color:#f92672">=</span> await loop<span style="color:#f92672">.</span>run_in_executor(None, get_title, text)
+<span style="color:#f92672">-</span>    title <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> loop<span style="color:#f92672">.</span>run_in_executor(<span style="color:#66d9ef">None</span>, get_title, text)
 <span style="color:#f92672">+</span>    <span style="color:#75715e"># 把解析任务交给进程池</span>
-<span style="color:#f92672">+</span>    title <span style="color:#f92672">=</span> await loop<span style="color:#f92672">.</span>run_in_executor(executor, get_title, text)
+<span style="color:#f92672">+</span>    title <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> loop<span style="color:#f92672">.</span>run_in_executor(executor, get_title, text)
      <span style="color:#66d9ef">return</span> title
 
 
- async <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">main</span>():
+ <span style="color:#66d9ef">async</span> <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">main</span>():
      loop <span style="color:#f92672">=</span> asyncio<span style="color:#f92672">.</span>get_event_loop()
 <span style="color:#f92672">-</span>    <span style="color:#75715e"># 可以用 loop.set_default_executor 来配置默认的线程池</span>
 <span style="color:#f92672">+</span>    executor <span style="color:#f92672">=</span> ProcessPoolExecutor()
@@ -1352,9 +1351,9 @@ latest fetched: 0.425428249</code></pre></div>
 <span style="color:#f92672">+</span>        fut <span style="color:#f92672">=</span> asyncio<span style="color:#f92672">.</span>ensure_future(create_task(loop, executor))
          futs<span style="color:#f92672">.</span>append(fut)
 
-     await asyncio<span style="color:#f92672">.</span>gather(<span style="color:#f92672">*</span>futs)</code></pre></div>
+     <span style="color:#66d9ef">await</span> asyncio<span style="color:#f92672">.</span>gather(<span style="color:#f92672">*</span>futs)</code></pre></div>
 <p>照以上更改后，代码执行的结果如下</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plain" data-lang="plain">total: 23.120031775
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plain" data-lang="plain">total: 23.120031775
 latest fetched: 0.16141446800000003</code></pre></div>
 <p>这种简单的解析处理，从完成速度来看，用多进程处理的效果比多线程的稍好些</p>
 

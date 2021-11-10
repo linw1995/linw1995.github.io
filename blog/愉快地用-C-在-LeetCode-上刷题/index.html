@@ -14,18 +14,17 @@
 
 <meta property="og:site_name" content="linw1995" />
 <meta property="og:locale" content="zh-cn" />
-<meta property="og:type" content="article" />
+<meta property="og:type" content="website" />
 <meta property="og:url" content="https://linw1995.com/blog/%E6%84%89%E5%BF%AB%E5%9C%B0%E7%94%A8-C-%E5%9C%A8-LeetCode-%E4%B8%8A%E5%88%B7%E9%A2%98/" />
 <meta property="og:title" content="愉快地用 C 在 LeetCode 上刷题" />
 <meta property="twitter:title" content="愉快地用 C 在 LeetCode 上刷题">
 
-    <meta property="og:image" content="/img/banner.png">
-    <meta property="twitter:card" content="summary">
-    <meta property="twitter:image" content="/img/banner.png">
+    <meta property="og:image" content="https://linw1995.com/img/banner.jpeg">
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:image" content="https://linw1995.com/img/banner.jpeg">
 
 <meta property="og:description" content="通过宏来打日志，愉快地用 C 在 LeetCode 上刷题">
 <meta property="twitter:description" content="通过宏来打日志，愉快地用 C 在 LeetCode 上刷题">
-
 <title>
 
 
@@ -1158,7 +1157,7 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
 <p>当在用 C 在 LeetCode 上刷题，难免无法一次 AC。而在 LeetCode 上又无法调试，只能用 printf 大法，输出一些简单的日志，比如代码运行时的变量值等。当代码 AC 后，为了降低代码运行的时间消耗，则需要把 printf 的代码删除或者注释掉。这就有点麻烦了，因为使用 printf 的代码越多，需要删除或注释掉的地方就越多。</p>
 
 <p>通过使用C的预处理指令 <code>#define</code>, <code>#ifdef</code>, <code>#else</code>, <code>#endif</code> 这几个简单的指令，再加上函数式的宏（Function-like Macros），就可以只注释一行代码，即可把日志输出去掉。听起来是不是很方便呢？接下来就用 LeetCode 的第 2 题，两数相加，来据一个简单的例子。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#75715e">#define __WITH_LOG__
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#75715e">#define __WITH_LOG__
 </span><span style="color:#75715e"></span>
 <span style="color:#75715e">#ifdef __WITH_LOG__
 </span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
@@ -1207,7 +1206,7 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
 <blockquote>
 <p>以下是在 VSCode 使用 LeetCode 插件 <a href="https://github.com/jdneo/vscode-leetcode">jdneo/vscode-leetcode</a> 使用默认测试用例测试所输出的结果</p>
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plain" data-lang="plain">Input data:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plain" data-lang="plain">Input data:
 [2,4,3]
 [5,6,4]
 

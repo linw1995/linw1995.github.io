@@ -14,18 +14,17 @@
 
 <meta property="og:site_name" content="linw1995" />
 <meta property="og:locale" content="zh-cn" />
-<meta property="og:type" content="article" />
+<meta property="og:type" content="website" />
 <meta property="og:url" content="https://linw1995.com/en/blog/Run-Twisted-in-another-thread/" />
 <meta property="og:title" content="Run Twisted in another thread" />
 <meta property="twitter:title" content="Run Twisted in another thread">
 
-    <meta property="og:image" content="/img/banner.png">
-    <meta property="twitter:card" content="summary">
-    <meta property="twitter:image" content="/img/banner.png">
+    <meta property="og:image" content="https://linw1995.com/img/banner.jpeg">
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:image" content="https://linw1995.com/img/banner.jpeg">
 
 <meta property="og:description" content="Develop a project related to a service project base on Twisted, and consider how to test it.">
 <meta property="twitter:description" content="Develop a project related to a service project base on Twisted, and consider how to test it.">
-
 <title>
 
 
@@ -1159,17 +1158,17 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
 This is a solution. Run Twisted&rsquo;s reactor in another thread and delegating the Twisted functions calling into it.</p>
 
 <p>Use this fixture run a reactor in another thread. Due to the reactor is not restartable, so the fixture&rsquo;s scope is &ldquo;session&rdquo;.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> pytest
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> pytest
 
 <span style="color:#f92672">from</span> twisted.internet <span style="color:#f92672">import</span> reactor <span style="color:#66d9ef">as</span> twisted_reactor
 
 
-<span style="color:#a6e22e">@pytest.fixture</span>(scope<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;session&#34;</span>, autouse<span style="color:#f92672">=</span>True)
+<span style="color:#a6e22e">@pytest</span><span style="color:#f92672">.</span>fixture(scope<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;session&#34;</span>, autouse<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">reactor</span>():
     t <span style="color:#f92672">=</span> threading<span style="color:#f92672">.</span>Thread(
         target<span style="color:#f92672">=</span>twisted_reactor<span style="color:#f92672">.</span>run,
-        kwargs<span style="color:#f92672">=</span>{<span style="color:#e6db74">&#34;installSignalHandlers&#34;</span>: False},
-        daemon<span style="color:#f92672">=</span>True,
+        kwargs<span style="color:#f92672">=</span>{<span style="color:#e6db74">&#34;installSignalHandlers&#34;</span>: <span style="color:#66d9ef">False</span>},
+        daemon<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>,
     )
     t<span style="color:#f92672">.</span>start()
 
@@ -1178,7 +1177,7 @@ This is a solution. Run Twisted&rsquo;s reactor in another thread and delegating
     twisted_reactor<span style="color:#f92672">.</span>callFromThread(twisted_reactor<span style="color:#f92672">.</span>stop)
     t<span style="color:#f92672">.</span>join()</code></pre></div>
 <p>Write a simple Echo Protocol for example.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> twisted.internet.protocol <span style="color:#f92672">import</span> Protocol, Factory
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> twisted.internet.protocol <span style="color:#f92672">import</span> Protocol, Factory
 
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Echo</span>(Protocol):
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">dataReceived</span>(self, data):
@@ -1189,7 +1188,7 @@ This is a solution. Run Twisted&rsquo;s reactor in another thread and delegating
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">buildProtocol</span>(self, addr):
         <span style="color:#66d9ef">return</span> Echo()</code></pre></div>
 <p>Use Pytest fixture to run an echo service.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> socket
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> socket
 <span style="color:#f92672">import</span> threading
 
 <span style="color:#f92672">import</span> pytest
@@ -1197,7 +1196,7 @@ This is a solution. Run Twisted&rsquo;s reactor in another thread and delegating
 <span style="color:#f92672">from</span> twisted.application <span style="color:#f92672">import</span> internet
 
 
-<span style="color:#a6e22e">@pytest.fixture</span>
+<span style="color:#a6e22e">@pytest</span><span style="color:#f92672">.</span>fixture
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_unused_port</span>():
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">unused_port_getter</span>():
         s <span style="color:#f92672">=</span> socket<span style="color:#f92672">.</span>socket(socket<span style="color:#f92672">.</span>AF_INET, socket<span style="color:#f92672">.</span>SOCK_STREAM)
@@ -1209,12 +1208,12 @@ This is a solution. Run Twisted&rsquo;s reactor in another thread and delegating
     <span style="color:#66d9ef">return</span> unused_port_getter
 
 
-<span style="color:#a6e22e">@pytest.fixture</span>
+<span style="color:#a6e22e">@pytest</span><span style="color:#f92672">.</span>fixture
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">port</span>(get_unused_port):
     <span style="color:#66d9ef">return</span> get_unused_port()
 
 
-<span style="color:#a6e22e">@pytest.fixture</span>
+<span style="color:#a6e22e">@pytest</span><span style="color:#f92672">.</span>fixture
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">echo_service</span>(reactor, port):
     echo_service <span style="color:#f92672">=</span> internet<span style="color:#f92672">.</span>TCPServer(port, EchoFactory())
 
@@ -1241,7 +1240,7 @@ This is a solution. Run Twisted&rsquo;s reactor in another thread and delegating
     reactor<span style="color:#f92672">.</span>callFromThread(wait_stoped)
     stoped<span style="color:#f92672">.</span>wait()</code></pre></div>
 <p>Now, write and run a simple test.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_echo_service</span>(echo_service, port):
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_echo_service</span>(echo_service, port):
     conn <span style="color:#f92672">=</span> socket<span style="color:#f92672">.</span>create_connection((<span style="color:#e6db74">&#34;&#34;</span>, port))
     msg <span style="color:#f92672">=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;abcdefg&#34;</span>
     conn<span style="color:#f92672">.</span>send(msg)

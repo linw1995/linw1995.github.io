@@ -14,18 +14,17 @@
 
 <meta property="og:site_name" content="linw1995" />
 <meta property="og:locale" content="zh-cn" />
-<meta property="og:type" content="article" />
+<meta property="og:type" content="website" />
 <meta property="og:url" content="https://linw1995.com/blog/%E6%88%91%E6%98%AF%E6%80%8E%E4%B9%88%E5%BC%80%E5%8F%91%E4%B8%80%E4%B8%AA%E6%95%B0%E6%8D%AE%E6%8F%90%E5%8F%96%E8%BD%AE%E5%AD%90-DataExtractor/" />
 <meta property="og:title" content="我是怎么开发一个数据提取轮子 DataExtractor" />
 <meta property="twitter:title" content="我是怎么开发一个数据提取轮子 DataExtractor">
 
-    <meta property="og:image" content="/img/banner.png">
-    <meta property="twitter:card" content="summary">
-    <meta property="twitter:image" content="/img/banner.png">
+    <meta property="og:image" content="https://linw1995.com/img/banner.jpeg">
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:image" content="https://linw1995.com/img/banner.jpeg">
 
 <meta property="og:description" content="">
 <meta property="twitter:description" content="">
-
 <title>
 
 
@@ -1232,7 +1231,7 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
 <li><p>CSS Selectors <sup><a id="fnr.8.100" class="footref" href="#fn.8">8</a></sup></p>
 
 <p>CSS 全称是层叠样式表（ Cascading Style Sheets）。CSS Selectors 本来是用来标记哪些节点的样式，让浏览器知道如何去渲染，比如渲染字体颜色，图片大小等。 比如，以下代码就是用来把所有 class 带 bar 的 h1 节点的字体渲染成绿色。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-css" data-lang="css"><span style="color:#f92672">h1</span>.<span style="color:#a6e22e">bar</span> { <span style="color:#66d9ef">color</span>: <span style="color:#66d9ef">green</span> }  <span style="color:#75715e">/* h1 elements with class~=bar */</span></code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-css" data-lang="css"><span style="color:#f92672">h1</span>.<span style="color:#a6e22e">bar</span> { <span style="color:#66d9ef">color</span>: <span style="color:#66d9ef">green</span> }  <span style="color:#75715e">/* h1 elements with class~=bar */</span></code></pre></div>
 <p>由于 CSS Selectors 用起来也挺方便的，且简短，也经常用来定位数据。 回到刚 RSS 文件的例子，通过 CSS Selectors 表达式 <code>channel &gt; title</code> 也可以定位到这个 RSS 文件的频道名称</p></li>
 </ul>
 
@@ -1258,7 +1257,7 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
 
 <ul>
 <li><p>解析刚刚的用到的 RSS 文件，再提取出所有文章标题。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> requests
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> requests
 <span style="color:#f92672">from</span> lxml.etree <span style="color:#f92672">import</span> fromstring
     
 rss_file_url <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;http://www.rssboard.org/files/sample-rss-2.xml&#34;</span>
@@ -1266,11 +1265,11 @@ resp <span style="color:#f92672">=</span> requests<span style="color:#f92672">.<
     
 root <span style="color:#f92672">=</span> fromstring(resp<span style="color:#f92672">.</span>text)
 xpath_expr <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;//channel/item/title/text()&#34;</span>
-<span style="color:#66d9ef">print</span>(f<span style="color:#e6db74">&#34;xpath: {xpath_expr!r} result:</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, root<span style="color:#f92672">.</span>xpath(xpath_expr))
+print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;xpath: </span><span style="color:#e6db74">{</span>xpath_expr<span style="color:#e6db74">!r}</span><span style="color:#e6db74"> result:</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, root<span style="color:#f92672">.</span>xpath(xpath_expr))
     
 cssselect_expr <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;channel &gt; item &gt; title&#34;</span>
-<span style="color:#66d9ef">print</span>(
-    f<span style="color:#e6db74">&#34;cssselect: {cssselect_expr!r} result:</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>,
+print(
+    <span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;cssselect: </span><span style="color:#e6db74">{</span>cssselect_expr<span style="color:#e6db74">!r}</span><span style="color:#e6db74"> result:</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>,
     [el<span style="color:#f92672">.</span>text <span style="color:#66d9ef">for</span> el <span style="color:#f92672">in</span> root<span style="color:#f92672">.</span>cssselect(cssselect_expr)],
 )
     
@@ -1278,9 +1277,9 @@ cssselect_expr <span style="color:#f92672">=</span> <span style="color:#e6db74">
 <span style="color:#f92672">from</span> lxml.etree <span style="color:#f92672">import</span> XPath
     
 sel <span style="color:#f92672">=</span> XPath(GenericTranslator()<span style="color:#f92672">.</span>css_to_xpath(cssselect_expr))
-<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;css2xpath result:&#34;</span>, sel)</code></pre></div>
+print(<span style="color:#e6db74">&#34;css2xpath result:&#34;</span>, sel)</code></pre></div>
 <p>代码执行结果</p>
-<pre><code class="language-fundamental" data-lang="fundamental">xpath: &#39;//channel/item/title/text()&#39; result:
+<pre tabindex="0"><code class="language-fundamental" data-lang="fundamental">xpath: &#39;//channel/item/title/text()&#39; result:
  [&#39;Star City&#39;, &#39;The Engine That Does More&#39;, &#34;Astronauts&#39; Dirty Laundry&#34;]
 cssselect: &#39;channel &gt; item &gt; title&#39; result:
  [&#39;Star City&#39;, &#39;The Engine That Does More&#39;, &#34;Astronauts&#39; Dirty Laundry&#34;]
@@ -1288,7 +1287,7 @@ css2xpath result: descendant-or-self::channel/item/title</code></pre>
 <p>从 lxml 文档中关于 <a href="https://lxml.de/cssselect.html">cssselect</a> 的说明，了解到 CSS Selectors 实际上是转换成 XPath 表达式，再用 XPath 的接口去执行查询的。 感兴趣的话，可以去看一下 lxml 中相关的源码。顺便提一下，其源码绝大部分是 cython 写的。</p></li>
 
 <li><p>解析 JSON 文本，再通过 JSONPath 表达式提取所需要的数据。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> json
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> json
     
 <span style="color:#f92672">from</span> jsonpath <span style="color:#f92672">import</span> parse
     
@@ -1304,17 +1303,17 @@ raw <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;&
 data <span style="color:#f92672">=</span> json<span style="color:#f92672">.</span>loads(raw)
     
     
-<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;get all prices:</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, parse(<span style="color:#e6db74">&#34;$.goods[*].price&#34;</span>)<span style="color:#f92672">.</span>find(data))
-<span style="color:#66d9ef">print</span>(
+print(<span style="color:#e6db74">&#34;get all prices:</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, parse(<span style="color:#e6db74">&#34;$.goods[*].price&#34;</span>)<span style="color:#f92672">.</span>find(data))
+print(
     <span style="color:#e6db74">&#34;query goods which price is lower than 150:</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>,
     parse(<span style="color:#e6db74">&#34;$.goods[@.price &lt; 150]&#34;</span>)<span style="color:#f92672">.</span>find(data),
 )
-<span style="color:#66d9ef">print</span>(
+print(
     <span style="color:#e6db74">&#34;more complex:</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>,
     parse(<span style="color:#e6db74">&#34;$.goods[contains(@.category, $.targetCategory)]&#34;</span>)<span style="color:#f92672">.</span>find(data),
 )</code></pre></div>
 <p>代码执行结果</p>
-<pre><code class="language-fundamental" data-lang="fundamental">get all prices:
+<pre tabindex="0"><code class="language-fundamental" data-lang="fundamental">get all prices:
  [100, 200, 200]
 query goods which price is lower than 150:
  [{&#39;price&#39;: 100, &#39;category&#39;: &#39;Comic book&#39;}]
@@ -1344,7 +1343,7 @@ more complex:
 </ul>
 
 <p>为了兼容不同场景下的使用，求同存异，我定义了一个抽象类（对应文件 <code>data_extractor/core.py</code> ）。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> abc <span style="color:#f92672">import</span> abstractmethod
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> abc <span style="color:#f92672">import</span> abstractmethod
 <span style="color:#f92672">from</span> typing <span style="color:#f92672">import</span> Any, List
 
 sentinel <span style="color:#f92672">=</span> object()
@@ -1357,13 +1356,13 @@ sentinel <span style="color:#f92672">=</span> object()
 
     <span style="color:#66d9ef">def</span> __str__(self) <span style="color:#f92672">-&gt;</span> str:
         <span style="color:#66d9ef">return</span> (
-            f<span style="color:#e6db74">&#34;ExprError with {self.exc!r} &#34;</span>
-            f<span style="color:#e6db74">&#34;raised by {self.extractor!r} extracting&#34;</span>
+            <span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;ExprError with </span><span style="color:#e6db74">{</span>self<span style="color:#f92672">.</span>exc<span style="color:#e6db74">!r}</span><span style="color:#e6db74"> &#34;</span>
+            <span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;raised by </span><span style="color:#e6db74">{</span>self<span style="color:#f92672">.</span>extractor<span style="color:#e6db74">!r}</span><span style="color:#e6db74"> extracting&#34;</span>
         )
 
     <span style="color:#66d9ef">def</span> __repr__(self) <span style="color:#f92672">-&gt;</span> str:
         <span style="color:#66d9ef">return</span> (
-            f<span style="color:#e6db74">&#34;{self.__class__.__name__}({self.extractor!r}, exc={self.exc!r})&#34;</span>
+            <span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">{</span>self<span style="color:#f92672">.</span>__class__<span style="color:#f92672">.</span>__name__<span style="color:#e6db74">}</span><span style="color:#e6db74">(</span><span style="color:#e6db74">{</span>self<span style="color:#f92672">.</span>extractor<span style="color:#e6db74">!r}</span><span style="color:#e6db74">, exc=</span><span style="color:#e6db74">{</span>self<span style="color:#f92672">.</span>exc<span style="color:#e6db74">!r}</span><span style="color:#e6db74">)&#34;</span>
         )
 
 
@@ -1392,7 +1391,7 @@ sentinel <span style="color:#f92672">=</span> object()
 </ul>
 
 <p>现以 XPath 及 CSS Selectors 为例子，定义提取器 （对应文件 <code>data_extractor/lxml.py</code> ）。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> typing <span style="color:#f92672">import</span> List, Union
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> typing <span style="color:#f92672">import</span> List, Union
 
 <span style="color:#f92672">from</span> cssselect <span style="color:#f92672">import</span> GenericTranslator
 <span style="color:#f92672">from</span> cssselect.parser <span style="color:#f92672">import</span> SelectorError
@@ -1442,7 +1441,7 @@ sentinel <span style="color:#f92672">=</span> object()
 <p>由于 <code>CSSExtractor</code> 的结果只能为 <code>Element</code> 类实例，不是我们想要的字符串格式。 所以，需要实现一个 <code>TextCSSExtractor</code> 来调用 <code>Element.text</code> 属性来获取节点的文本数据。 不像 <code>XPathExtractor</code> 可以直接修改 XPath 表达式来获取 text 属性的数据。 例如： <code>//channel/item/title</code> 只能获取到文章的标题元素，修改成 <code>//channel/item/title/text()</code> 即可获取其文本内容。</p>
 
 <p>那现在以同样的场景来测试一下，统一接口后的提取器模块。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> requests
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> requests
 <span style="color:#f92672">from</span> lxml.etree <span style="color:#f92672">import</span> fromstring
 
 <span style="color:#f92672">from</span> data_extractor.lxml <span style="color:#f92672">import</span> TextCSSExtractor, XPathExtractor
@@ -1452,17 +1451,17 @@ resp <span style="color:#f92672">=</span> requests<span style="color:#f92672">.<
 
 root <span style="color:#f92672">=</span> fromstring(resp<span style="color:#f92672">.</span>text)
 xpath_expr <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;//channel/item/title/text()&#34;</span>
-<span style="color:#66d9ef">print</span>(
-    f<span style="color:#e6db74">&#34;xpath: {xpath_expr!r} result:</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, XPathExtractor(xpath_expr)<span style="color:#f92672">.</span>extract(root)
+print(
+    <span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;xpath: </span><span style="color:#e6db74">{</span>xpath_expr<span style="color:#e6db74">!r}</span><span style="color:#e6db74"> result:</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, XPathExtractor(xpath_expr)<span style="color:#f92672">.</span>extract(root)
 )
 
 cssselect_expr <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;channel &gt; item &gt; title&#34;</span>
-<span style="color:#66d9ef">print</span>(
-    f<span style="color:#e6db74">&#34;cssselect: {cssselect_expr!r} result:</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>,
+print(
+    <span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;cssselect: </span><span style="color:#e6db74">{</span>cssselect_expr<span style="color:#e6db74">!r}</span><span style="color:#e6db74"> result:</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>,
     TextCSSExtractor(cssselect_expr)<span style="color:#f92672">.</span>extract(root),
 )</code></pre></div>
 <p>代码执行结果</p>
-<pre><code class="language-fundamental" data-lang="fundamental">xpath: &#39;//channel/item/title/text()&#39; result:
+<pre tabindex="0"><code class="language-fundamental" data-lang="fundamental">xpath: &#39;//channel/item/title/text()&#39; result:
  [&#39;Star City&#39;, &#39;The Engine That Does More&#39;, &#34;Astronauts&#39; Dirty Laundry&#34;]
 cssselect: &#39;channel &gt; item &gt; title&#39; result:
  [&#39;Star City&#39;, &#39;The Engine That Does More&#39;, &#34;Astronauts&#39; Dirty Laundry&#34;]</code></pre>
@@ -1484,7 +1483,7 @@ cssselect: &#39;channel &gt; item &gt; title&#39; result:
 </ul>
 
 <p>那我们赶紧用刚实现的模块，去做数据提取。看看效果怎么样</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> pprint
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> pprint
 
 <span style="color:#f92672">import</span> requests
 <span style="color:#f92672">from</span> lxml.etree <span style="color:#f92672">import</span> fromstring
@@ -1504,15 +1503,15 @@ X <span style="color:#f92672">=</span> XPathExtractor  <span style="color:#75715
         <span style="color:#e6db74">&#34;title&#34;</span>: X(<span style="color:#e6db74">&#34;./title/text()&#34;</span>)<span style="color:#f92672">.</span>extract_first(node, default<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#34;</span>),
         <span style="color:#e6db74">&#34;link&#34;</span>: X(<span style="color:#e6db74">&#34;./link/text()&#34;</span>)<span style="color:#f92672">.</span>extract_first(node, default<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#34;</span>),
         <span style="color:#e6db74">&#34;desc&#34;</span>: X(<span style="color:#e6db74">&#34;./description/text()&#34;</span>)<span style="color:#f92672">.</span>extract_first(node, default<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#34;</span>),
-        <span style="color:#e6db74">&#34;published&#34;</span>: X(<span style="color:#e6db74">&#34;./pubDate/text()&#34;</span>)<span style="color:#f92672">.</span>extract_first(node, default<span style="color:#f92672">=</span>None),
+        <span style="color:#e6db74">&#34;published&#34;</span>: X(<span style="color:#e6db74">&#34;./pubDate/text()&#34;</span>)<span style="color:#f92672">.</span>extract_first(node, default<span style="color:#f92672">=</span><span style="color:#66d9ef">None</span>),
     }
     articles<span style="color:#f92672">.</span>append(article)
 
 
-<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;extracted result:&#34;</span>)
+print(<span style="color:#e6db74">&#34;extracted result:&#34;</span>)
 pprint<span style="color:#f92672">.</span>pprint(articles[:<span style="color:#ae81ff">2</span>], width<span style="color:#f92672">=</span><span style="color:#ae81ff">80</span>)  <span style="color:#75715e"># beautify extracted result</span></code></pre></div>
 <p>代码运行结果</p>
-<pre><code class="language-fundamental" data-lang="fundamental">extracted result:
+<pre tabindex="0"><code class="language-fundamental" data-lang="fundamental">extracted result:
 [{&#39;desc&#39;: &#39;How do Americans get ready to work with Russians aboard the &#39;
           &#39;International Space Station? They take a crash course in culture, &#39;
           &#34;language and protocol at Russia&#39;s &lt;a &#34;
@@ -1562,7 +1561,7 @@ pprint<span style="color:#f92672">.</span>pprint(articles[:<span style="color:#a
 </ol>
 
 <p>以下就是新的抽象（对应文件 <code>data_extractor/item.py</code> ）</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> typing <span style="color:#f92672">import</span> Any, Dict, Iterator, Tuple
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> typing <span style="color:#f92672">import</span> Any, Dict, Iterator, Tuple
 
 <span style="color:#f92672">from</span> .core <span style="color:#f92672">import</span> AbstractSimpleExtractor, ExprError, sentinel
 
@@ -1592,17 +1591,17 @@ pprint<span style="color:#f92672">.</span>pprint(articles[:<span style="color:#a
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Field</span>(metaclass<span style="color:#f92672">=</span>ComplexExtractorMeta):
     <span style="color:#66d9ef">def</span> __init__(
         self,
-        extractor: AbstractSimpleExtractor <span style="color:#f92672">=</span> None,
-        name: str <span style="color:#f92672">=</span> None,
+        extractor: AbstractSimpleExtractor <span style="color:#f92672">=</span> <span style="color:#66d9ef">None</span>,
+        name: str <span style="color:#f92672">=</span> <span style="color:#66d9ef">None</span>,
         default: Any <span style="color:#f92672">=</span> sentinel,
-        is_many: bool <span style="color:#f92672">=</span> False,
+        is_many: bool <span style="color:#f92672">=</span> <span style="color:#66d9ef">False</span>,
     ):
-        <span style="color:#66d9ef">if</span> extractor <span style="color:#f92672">is</span> <span style="color:#f92672">not</span> None <span style="color:#f92672">and</span> <span style="color:#f92672">not</span> is_simple_extractor(extractor):
-            <span style="color:#66d9ef">raise</span> <span style="color:#a6e22e">ValueError</span>(f<span style="color:#e6db74">&#34;Invalid SimpleExtractor: {extractor!r}&#34;</span>)
+        <span style="color:#66d9ef">if</span> extractor <span style="color:#f92672">is</span> <span style="color:#f92672">not</span> <span style="color:#66d9ef">None</span> <span style="color:#f92672">and</span> <span style="color:#f92672">not</span> is_simple_extractor(extractor):
+            <span style="color:#66d9ef">raise</span> <span style="color:#a6e22e">ValueError</span>(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Invalid SimpleExtractor: </span><span style="color:#e6db74">{</span>extractor<span style="color:#e6db74">!r}</span><span style="color:#e6db74">&#34;</span>)
 
         <span style="color:#66d9ef">if</span> default <span style="color:#f92672">is</span> <span style="color:#f92672">not</span> sentinel <span style="color:#f92672">and</span> is_many:
             <span style="color:#66d9ef">raise</span> <span style="color:#a6e22e">ValueError</span>(
-                f<span style="color:#e6db74">&#34;Can&#39;t both set default={default} and is_many=True&#34;</span>
+                <span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Can&#39;t both set default=</span><span style="color:#e6db74">{</span>default<span style="color:#e6db74">}</span><span style="color:#e6db74"> and is_many=True&#34;</span>
             )
 
         self<span style="color:#f92672">.</span>extractor <span style="color:#f92672">=</span> extractor
@@ -1611,17 +1610,17 @@ pprint<span style="color:#f92672">.</span>pprint(articles[:<span style="color:#a
         self<span style="color:#f92672">.</span>is_many <span style="color:#f92672">=</span> is_many
 
     <span style="color:#66d9ef">def</span> __repr__(self) <span style="color:#f92672">-&gt;</span> str:
-        args <span style="color:#f92672">=</span> [f<span style="color:#e6db74">&#34;{self.extractor!r}&#34;</span>]
-        <span style="color:#66d9ef">if</span> self<span style="color:#f92672">.</span>name <span style="color:#f92672">is</span> <span style="color:#f92672">not</span> None:
-            args<span style="color:#f92672">.</span>append(f<span style="color:#e6db74">&#34;name={self.name!r}&#34;</span>)
+        args <span style="color:#f92672">=</span> [<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">{</span>self<span style="color:#f92672">.</span>extractor<span style="color:#e6db74">!r}</span><span style="color:#e6db74">&#34;</span>]
+        <span style="color:#66d9ef">if</span> self<span style="color:#f92672">.</span>name <span style="color:#f92672">is</span> <span style="color:#f92672">not</span> <span style="color:#66d9ef">None</span>:
+            args<span style="color:#f92672">.</span>append(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;name=</span><span style="color:#e6db74">{</span>self<span style="color:#f92672">.</span>name<span style="color:#e6db74">!r}</span><span style="color:#e6db74">&#34;</span>)
 
         <span style="color:#66d9ef">if</span> self<span style="color:#f92672">.</span>default <span style="color:#f92672">is</span> <span style="color:#f92672">not</span> sentinel:
-            args<span style="color:#f92672">.</span>append(f<span style="color:#e6db74">&#34;default={self.default!r}&#34;</span>)
+            args<span style="color:#f92672">.</span>append(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;default=</span><span style="color:#e6db74">{</span>self<span style="color:#f92672">.</span>default<span style="color:#e6db74">!r}</span><span style="color:#e6db74">&#34;</span>)
 
         <span style="color:#66d9ef">if</span> self<span style="color:#f92672">.</span>is_many:
-            args<span style="color:#f92672">.</span>append(f<span style="color:#e6db74">&#34;is_many={self.is_many!r}&#34;</span>)
+            args<span style="color:#f92672">.</span>append(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;is_many=</span><span style="color:#e6db74">{</span>self<span style="color:#f92672">.</span>is_many<span style="color:#e6db74">!r}</span><span style="color:#e6db74">&#34;</span>)
 
-        <span style="color:#66d9ef">return</span> f<span style="color:#e6db74">&#34;{self.__class__.__name__}({&#39;, &#39;.join(args)})&#34;</span>
+        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">{</span>self<span style="color:#f92672">.</span>__class__<span style="color:#f92672">.</span>__name__<span style="color:#e6db74">}</span><span style="color:#e6db74">(</span><span style="color:#e6db74">{</span><span style="color:#e6db74">&#39;, &#39;</span><span style="color:#f92672">.</span>join(args)<span style="color:#e6db74">}</span><span style="color:#e6db74">)&#34;</span>
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">extract</span>(self, element: Any) <span style="color:#f92672">-&gt;</span> Any:
         rv <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>extractor<span style="color:#f92672">.</span>extract(element)
@@ -1647,7 +1646,7 @@ pprint<span style="color:#f92672">.</span>pprint(articles[:<span style="color:#a
         <span style="color:#66d9ef">for</span> field <span style="color:#f92672">in</span> self<span style="color:#f92672">.</span>field_names():
             <span style="color:#66d9ef">try</span>:
                 extractor <span style="color:#f92672">=</span> getattr(self, field)
-                <span style="color:#66d9ef">if</span> extractor<span style="color:#f92672">.</span>name <span style="color:#f92672">is</span> <span style="color:#f92672">not</span> None:
+                <span style="color:#66d9ef">if</span> extractor<span style="color:#f92672">.</span>name <span style="color:#f92672">is</span> <span style="color:#f92672">not</span> <span style="color:#66d9ef">None</span>:
                     field <span style="color:#f92672">=</span> extractor<span style="color:#f92672">.</span>name
 
                 rv[field] <span style="color:#f92672">=</span> extractor<span style="color:#f92672">.</span>extract(element)
@@ -1658,9 +1657,9 @@ pprint<span style="color:#f92672">.</span>pprint(articles[:<span style="color:#a
 
     <span style="color:#a6e22e">@classmethod</span>
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">field_names</span>(cls) <span style="color:#f92672">-&gt;</span> Iterator[str]:
-        <span style="color:#66d9ef">yield</span> <span style="color:#f92672">from</span> cls._field_names</code></pre></div>
+        <span style="color:#66d9ef">yield from</span> cls<span style="color:#f92672">.</span>_field_names</code></pre></div>
 <p>现在用这个新模块再试验一下，看看使用起来感觉怎么样？</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> pprint
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> pprint
 
 <span style="color:#f92672">import</span> requests
 <span style="color:#f92672">from</span> lxml.etree <span style="color:#f92672">import</span> fromstring
@@ -1678,14 +1677,14 @@ root <span style="color:#f92672">=</span> fromstring(resp<span style="color:#f92
     title <span style="color:#f92672">=</span> F(X(<span style="color:#e6db74">&#34;./title/text()&#34;</span>), default<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#34;</span>)
     link <span style="color:#f92672">=</span> F(X(<span style="color:#e6db74">&#34;./link/text()&#34;</span>), default<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#34;</span>)
     desc <span style="color:#f92672">=</span> F(X(<span style="color:#e6db74">&#34;./description/text()&#34;</span>), default<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#34;</span>)
-    published <span style="color:#f92672">=</span> F(X(<span style="color:#e6db74">&#34;./pubDate/text()&#34;</span>), default<span style="color:#f92672">=</span>None)
+    published <span style="color:#f92672">=</span> F(X(<span style="color:#e6db74">&#34;./pubDate/text()&#34;</span>), default<span style="color:#f92672">=</span><span style="color:#66d9ef">None</span>)
 
 
-articles <span style="color:#f92672">=</span> Article(X(<span style="color:#e6db74">&#34;//channel/item&#34;</span>), is_many<span style="color:#f92672">=</span>True)<span style="color:#f92672">.</span>extract(root)
-<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;extracted result:&#34;</span>)
+articles <span style="color:#f92672">=</span> Article(X(<span style="color:#e6db74">&#34;//channel/item&#34;</span>), is_many<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)<span style="color:#f92672">.</span>extract(root)
+print(<span style="color:#e6db74">&#34;extracted result:&#34;</span>)
 pprint<span style="color:#f92672">.</span>pprint(articles[:<span style="color:#ae81ff">2</span>], width<span style="color:#f92672">=</span><span style="color:#ae81ff">80</span>)  <span style="color:#75715e"># beautify extracted result</span></code></pre></div>
 <p>代码运行结果如下</p>
-<pre><code class="language-fundamental" data-lang="fundamental">extracted result:
+<pre tabindex="0"><code class="language-fundamental" data-lang="fundamental">extracted result:
 [{&#39;desc&#39;: &#39;How do Americans get ready to work with Russians aboard the &#39;
           &#39;International Space Station? They take a crash course in culture, &#39;
           &#34;language and protocol at Russia&#39;s &lt;a &#34;

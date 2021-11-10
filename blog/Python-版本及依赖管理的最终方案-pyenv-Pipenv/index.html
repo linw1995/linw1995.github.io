@@ -14,18 +14,17 @@
 
 <meta property="og:site_name" content="linw1995" />
 <meta property="og:locale" content="zh-cn" />
-<meta property="og:type" content="article" />
+<meta property="og:type" content="website" />
 <meta property="og:url" content="https://linw1995.com/blog/Python-%E7%89%88%E6%9C%AC%E5%8F%8A%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86%E7%9A%84%E6%9C%80%E7%BB%88%E6%96%B9%E6%A1%88-pyenv-Pipenv/" />
 <meta property="og:title" content="Python 版本及依赖管理的最终方案 pyenv &#43; Pipenv" />
 <meta property="twitter:title" content="Python 版本及依赖管理的最终方案 pyenv &#43; Pipenv">
 
-    <meta property="og:image" content="/img/banner.png">
-    <meta property="twitter:card" content="summary">
-    <meta property="twitter:image" content="/img/banner.png">
+    <meta property="og:image" content="https://linw1995.com/img/banner.jpeg">
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:image" content="https://linw1995.com/img/banner.jpeg">
 
 <meta property="og:description" content="pyenv - python多版本管理；Pipenv - 项目依赖管理">
 <meta property="twitter:description" content="pyenv - python多版本管理；Pipenv - 项目依赖管理">
-
 <title>
 
 
@@ -1182,7 +1181,7 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
 </blockquote>
 
 <p>使用</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">pyenv install --list  <span style="color:#75715e"># 列出所有可安装的版本</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">pyenv install --list  <span style="color:#75715e"># 列出所有可安装的版本</span>
 pyenv install 3.7.1  <span style="color:#75715e"># 安装指定版本</span>
 pyenv shell 3.7.1  <span style="color:#75715e"># 激活该版本环境</span>
 pyenv global 3.7.1  <span style="color:#75715e"># 设置全局为该版本</span>
@@ -1198,7 +1197,7 @@ pyenv local 3.7.1  <span style="color:#75715e"># 设置进入当前目录后，P
 <p>Github Repo: <a href="https://github.com/pypa/pipenv">pypa/pipenv</a></p>
 
 <p>使用其管理各项目的依赖</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">pipenv --python 3.7  <span style="color:#75715e"># 创建 Python 3.7 的虚拟环境</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">pipenv --python 3.7  <span style="color:#75715e"># 创建 Python 3.7 的虚拟环境</span>
 pipenv install requests  <span style="color:#75715e"># 安装依赖</span>
 pipenv install black rope isort flake8 --dev  <span style="color:#75715e"># 安装开发依赖</span>
 pipenv shell  <span style="color:#75715e"># 激活该虚拟环境</span>

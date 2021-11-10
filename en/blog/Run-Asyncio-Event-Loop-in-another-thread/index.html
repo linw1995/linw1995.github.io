@@ -14,18 +14,17 @@
 
 <meta property="og:site_name" content="linw1995" />
 <meta property="og:locale" content="zh-cn" />
-<meta property="og:type" content="article" />
+<meta property="og:type" content="website" />
 <meta property="og:url" content="https://linw1995.com/en/blog/Run-Asyncio-Event-Loop-in-another-thread/" />
 <meta property="og:title" content="Run Asyncio Event Loop in another thread" />
 <meta property="twitter:title" content="Run Asyncio Event Loop in another thread">
 
-    <meta property="og:image" content="/img/banner.png">
-    <meta property="twitter:card" content="summary">
-    <meta property="twitter:image" content="/img/banner.png">
+    <meta property="og:image" content="https://linw1995.com/img/banner.jpeg">
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:image" content="https://linw1995.com/img/banner.jpeg">
 
 <meta property="og:description" content="How to run Asyncio Event Loop in another thread.">
 <meta property="twitter:description" content="How to run Asyncio Event Loop in another thread.">
-
 <title>
 
 
@@ -1173,17 +1172,17 @@ like connecting Redis, making a lot of requests, etc. So it&rsquo;s why we need 
 <h2 id="create-a-thread-that-runs-asyncio-event-loop-forever">Create a thread that runs asyncio event loop forever</h2>
 
 <p><strong>Attention, This example is not fully tested.</strong></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> asyncio
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> asyncio
 <span style="color:#f92672">import</span> threading
 
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">AsyncioEventLoopThread</span>(threading<span style="color:#f92672">.</span>Thread):
-    <span style="color:#66d9ef">def</span> __init__(self, <span style="color:#f92672">*</span>args, loop<span style="color:#f92672">=</span>None, <span style="color:#f92672">**</span>kwargs):
+    <span style="color:#66d9ef">def</span> __init__(self, <span style="color:#f92672">*</span>args, loop<span style="color:#f92672">=</span><span style="color:#66d9ef">None</span>, <span style="color:#f92672">**</span>kwargs):
         super()<span style="color:#f92672">.</span>__init__(<span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs)
         self<span style="color:#f92672">.</span>loop <span style="color:#f92672">=</span> loop <span style="color:#f92672">or</span> asyncio<span style="color:#f92672">.</span>new_event_loop()
-        self<span style="color:#f92672">.</span>running <span style="color:#f92672">=</span> False
+        self<span style="color:#f92672">.</span>running <span style="color:#f92672">=</span> <span style="color:#66d9ef">False</span>
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">run</span>(self):
-        self<span style="color:#f92672">.</span>running <span style="color:#f92672">=</span> True
+        self<span style="color:#f92672">.</span>running <span style="color:#f92672">=</span> <span style="color:#66d9ef">True</span>
         self<span style="color:#f92672">.</span>loop<span style="color:#f92672">.</span>run_forever()
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">run_coro</span>(self, coro):
@@ -1192,15 +1191,15 @@ like connecting Redis, making a lot of requests, etc. So it&rsquo;s why we need 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">stop</span>(self):
         self<span style="color:#f92672">.</span>loop<span style="color:#f92672">.</span>call_soon_threadsafe(self<span style="color:#f92672">.</span>loop<span style="color:#f92672">.</span>stop)
         self<span style="color:#f92672">.</span>join()
-        self<span style="color:#f92672">.</span>running <span style="color:#f92672">=</span> False</code></pre></div>
+        self<span style="color:#f92672">.</span>running <span style="color:#f92672">=</span> <span style="color:#66d9ef">False</span></code></pre></div>
 <p>Due to the <a href="https://docs.python.org/3/library/asyncio-task.html#asyncio.run_coroutine_threadsafe"><code>asyncio.run_coroutine_threadsafe</code></a> function returns a <a href="https://docs.python.org/3/library/concurrent.futures.html#concurrent.futures.Future"><code>concurrent.futures.Future</code></a> object, so we just execute the <a href="https://docs.python.org/3/library/concurrent.futures.html#concurrent.futures.Future.result"><code>result</code></a> method to get the coroutine result. It will wait for the coroutine finished.</p>
 
 <p>There is a simple example below to demonstrate how to use it.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">async <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">hello_world</span>():
-    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;hello world&#34;</span>)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">async</span> <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">hello_world</span>():
+    print(<span style="color:#e6db74">&#34;hello world&#34;</span>)
 
-async <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">make_request</span>():
-    await asyncio<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">1</span>)
+<span style="color:#66d9ef">async</span> <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">make_request</span>():
+    <span style="color:#66d9ef">await</span> asyncio<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">1</span>)
 
 thr <span style="color:#f92672">=</span> AsyncioEventLoopThread()
 thr<span style="color:#f92672">.</span>start()
@@ -1218,7 +1217,7 @@ or just modify it to hold the objects you need to share between coroutines.</p>
 
 <p>Using the <code>contextvars</code> to share objects between coroutines,
 shared values must be stored into <code>contextvars.Context</code> before running coroutines.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> contextvars
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> contextvars
 <span style="color:#f92672">import</span> aiohttp
 
 var_session <span style="color:#f92672">=</span> contextvars<span style="color:#f92672">.</span>ContextVar(<span style="color:#e6db74">&#39;session&#39;</span>)
@@ -1226,7 +1225,7 @@ var_session <span style="color:#f92672">=</span> contextvars<span style="color:#
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">FetcherThread</span>(AsyncioEventLoopThread):
     <span style="color:#66d9ef">def</span> __init__(self, <span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs):
         super()<span style="color:#f92672">.</span>__init__(<span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs)
-        self<span style="color:#f92672">.</span>_session <span style="color:#f92672">=</span> None
+        self<span style="color:#f92672">.</span>_session <span style="color:#f92672">=</span> <span style="color:#66d9ef">None</span>
         self<span style="color:#f92672">.</span>_event_session_created <span style="color:#f92672">=</span> threading<span style="color:#f92672">.</span>Event()
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">run_coro</span>(self, coro):
@@ -1234,11 +1233,11 @@ var_session <span style="color:#f92672">=</span> contextvars<span style="color:#
         var_session<span style="color:#f92672">.</span>set(self<span style="color:#f92672">.</span>session)
         <span style="color:#66d9ef">return</span> super()<span style="color:#f92672">.</span>run_coro(coro)
 
-    async <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">_create_session</span>(self):
+    <span style="color:#66d9ef">async</span> <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">_create_session</span>(self):
         self<span style="color:#f92672">.</span>session <span style="color:#f92672">=</span> aiohttp<span style="color:#f92672">.</span>ClientSession()
 
-    async <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">_close_session</span>(self):
-        await self<span style="color:#f92672">.</span>session<span style="color:#f92672">.</span>close()
+    <span style="color:#66d9ef">async</span> <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">_close_session</span>(self):
+        <span style="color:#66d9ef">await</span> self<span style="color:#f92672">.</span>session<span style="color:#f92672">.</span>close()
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">run</span>(self):
         fut <span style="color:#f92672">=</span> asyncio<span style="color:#f92672">.</span>run_coroutine_threadsafe(self<span style="color:#f92672">.</span>_create_session(), loop<span style="color:#f92672">=</span>self<span style="color:#f92672">.</span>loop)
@@ -1249,18 +1248,18 @@ var_session <span style="color:#f92672">=</span> contextvars<span style="color:#
         self<span style="color:#f92672">.</span>run_coro(self<span style="color:#f92672">.</span>_close_session())
         super()<span style="color:#f92672">.</span>stop()</code></pre></div>
 <p>There is a simple example below to fetch the source code of website <a href="https://github.com">github.com</a>.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">async <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">make_request</span>():
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">async</span> <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">make_request</span>():
     session <span style="color:#f92672">=</span> var_session<span style="color:#f92672">.</span>get()
-    async <span style="color:#66d9ef">with</span> session<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;https://github.com&#34;</span>) <span style="color:#66d9ef">as</span> resp:
+    <span style="color:#66d9ef">async</span> <span style="color:#66d9ef">with</span> session<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;https://github.com&#34;</span>) <span style="color:#66d9ef">as</span> resp:
         resp<span style="color:#f92672">.</span>raise_for_status()
-        <span style="color:#66d9ef">return</span> await resp<span style="color:#f92672">.</span>text()
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">await</span> resp<span style="color:#f92672">.</span>text()
 
 
 thr <span style="color:#f92672">=</span> FetcherThread()
 thr<span style="color:#f92672">.</span>start()
 <span style="color:#66d9ef">try</span>:
     text <span style="color:#f92672">=</span> thr<span style="color:#f92672">.</span>run_coro(make_request())
-    <span style="color:#66d9ef">print</span>(text)
+    print(text)
 <span style="color:#66d9ef">finally</span>:
     thr<span style="color:#f92672">.</span>stop()</code></pre></div>
 <h2 id="references">References</h2>

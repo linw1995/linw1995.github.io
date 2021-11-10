@@ -14,18 +14,17 @@
 
 <meta property="og:site_name" content="linw1995" />
 <meta property="og:locale" content="zh-cn" />
-<meta property="og:type" content="article" />
+<meta property="og:type" content="website" />
 <meta property="og:url" content="https://linw1995.com/blog/%E4%B8%AD%E9%97%B4%E4%BA%BA%E4%B8%8E%E8%87%AA%E5%8A%A8%E5%8C%96/" />
 <meta property="og:title" content="中间人与自动化" />
 <meta property="twitter:title" content="中间人与自动化">
 
-    <meta property="og:image" content="/img/banner.png">
-    <meta property="twitter:card" content="summary">
-    <meta property="twitter:image" content="/img/banner.png">
+    <meta property="og:image" content="https://linw1995.com/img/banner.jpeg">
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:image" content="https://linw1995.com/img/banner.jpeg">
 
 <meta property="og:description" content="">
 <meta property="twitter:description" content="">
-
 <title>
 
 
@@ -1244,7 +1243,7 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
 <h2 id="mitmproxy-插件功能">mitmproxy 插件功能</h2>
 
 <p>mitmproxy 除了能抓包网络流量，还支持自定义编写插件对流量进行读取，重写等操作。 根据 mitmproxy 提供的插件功能 <sup><a id="fnr.8" class="footref" href="#fn.8">8</a></sup> <sup>, </sup><sup><a id="fnr.9" class="footref" href="#fn.9">9</a></sup>，我们很方便就可以写出，从该 App 的网络流量中获取数据的代码。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> mitmproxy.http
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> mitmproxy.http
 <span style="color:#f92672">from</span> yarl <span style="color:#f92672">import</span> URL
 
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Interceptor</span>:
@@ -1253,11 +1252,11 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
         <span style="color:#66d9ef">if</span> respose_url<span style="color:#f92672">.</span>path <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#34;/feed&#34;</span>:  <span style="color:#75715e"># drop the flows we dont need</span>
             <span style="color:#66d9ef">return</span>
 
-        <span style="color:#66d9ef">assert</span> flow<span style="color:#f92672">.</span>response <span style="color:#f92672">is</span> <span style="color:#f92672">not</span> None
+        <span style="color:#66d9ef">assert</span> flow<span style="color:#f92672">.</span>response <span style="color:#f92672">is</span> <span style="color:#f92672">not</span> <span style="color:#66d9ef">None</span>
         response_text <span style="color:#f92672">=</span> flow<span style="color:#f92672">.</span>response<span style="color:#f92672">.</span>text
         <span style="color:#75715e"># parsing and extracting</span>
         data <span style="color:#f92672">=</span> json<span style="color:#f92672">.</span>loads(response_text)
-        <span style="color:#66d9ef">print</span>(do_extracting(data))
+        print(do_extracting(data))
 
 addons <span style="color:#f92672">=</span> [
     Interceptor()
@@ -1271,7 +1270,7 @@ addons <span style="color:#f92672">=</span> [
 <h2 id="自动化控制">自动化控制</h2>
 
 <p>本文以 <a href="https://github.com/openatx/uiautomator2">uiautomator2</a> 这个轮子来实现对 Android App 的自动化控制。 它通过对 <a href="https://developer.android.com/training/testing/ui-automator.html">UI Automator</a> 进行封装，封装成为一个 RPC 服务，部署在 Android 上。 再通过这个轮子提供的函数库，对这个服务暴露的接口进行调用，达到自动化控制的目的。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> uiautomator2 <span style="color:#f92672">as</span> u2
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> uiautomator2 <span style="color:#66d9ef">as</span> u2
 
 d <span style="color:#f92672">=</span> u2<span style="color:#f92672">.</span>connect() <span style="color:#75715e"># connect to device</span>
 d<span style="color:#f92672">.</span>app_start(<span style="color:#e6db74">&#34;com.android.XXX&#34;</span>)
@@ -1289,13 +1288,13 @@ d<span style="color:#f92672">.</span>app_start(<span style="color:#e6db74">&#34;
 <p>在 <code>mitmproxy.tools.main.run</code> 函数中可以看出，要先创建 <code>mitmproxy.options.Options</code> 和 <code>mitmproxy.proxy.ProxyConfig</code> 对象用来传递参数，再创建 <code>mitmproxy.master.Master</code> 及 <code>mitmproxy.proxy.ProxyServer</code> 对象。 由于底层会用到 <code>mitmproxy.addons.core.Core</code> 所注册的参数 <sup><a id="fnr.10" class="footref" href="#fn.10">10</a></sup> ， 所以需要添加进来。好像会在下个大版本后删除，但目前就只能加上这行代码了。</p>
 
 <p>你应该还会注意到，以下代码没有用 <code>Master.shutdown</code> 去关闭 MITM 。 因为该方法导致进程不能正常退出，所以用以下两行代码来代替。 <sup><a id="fnr.11" class="footref" href="#fn.11">11</a></sup> （但是不懂为啥会出现这个情况，不过应该跟 all non-daemon threads 有关系，得进一步排查看看）</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> mitmproxy.addons <span style="color:#f92672">import</span> core
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> mitmproxy.addons <span style="color:#f92672">import</span> core
 <span style="color:#f92672">from</span> mitmproxy.master <span style="color:#f92672">import</span> Master
 <span style="color:#f92672">from</span> mitmproxy.options <span style="color:#f92672">import</span> Options
 <span style="color:#f92672">from</span> mitmproxy.proxy <span style="color:#f92672">import</span> ProxyConfig, ProxyServer
 
 
-async <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">main</span>() <span style="color:#f92672">-&gt;</span> None:
+<span style="color:#66d9ef">async</span> <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">main</span>() <span style="color:#f92672">-&gt;</span> <span style="color:#66d9ef">None</span>:
     options <span style="color:#f92672">=</span> Options(listen_host<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;0.0.0.0&#34;</span>, listen_port<span style="color:#f92672">=</span><span style="color:#ae81ff">8080</span>)
     master <span style="color:#f92672">=</span> Master(options)
     master<span style="color:#f92672">.</span>server <span style="color:#f92672">=</span> server <span style="color:#f92672">=</span> ProxyServer(ProxyConfig(options))
@@ -1304,7 +1303,7 @@ async <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">main</s
     master<span style="color:#f92672">.</span>addons<span style="color:#f92672">.</span>add(core<span style="color:#f92672">.</span>Core())
 
     master<span style="color:#f92672">.</span>start()
-    await master<span style="color:#f92672">.</span>running()
+    <span style="color:#66d9ef">await</span> master<span style="color:#f92672">.</span>running()
     loop <span style="color:#f92672">=</span> asyncio<span style="color:#f92672">.</span>get_event_loop()
     <span style="color:#66d9ef">try</span>:
         <span style="color:#75715e"># Do thing with MITM</span>
@@ -1322,35 +1321,35 @@ async <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">main</s
 <p>用以上代码即可用脚本代码去运行 MITM 。那接下来需要实现的功能就是，能方便的注册及反注册钩子，被不同网络事件（像 TCP 链接，HTTP 请求发出等事件）触发。 <sup><a id="fnr.12" class="footref" href="#fn.12">12</a></sup></p>
 
 <p>文档中提到可以注册的钩子有很多，但通常情况下我们只需要的就是 HTTP 响应的钩子。 通过注册自定的 addon 达到注册 HTTP 响应钩子的目的。 但每次都注册都要整个 Addon 类，还是挺麻烦的。 直接一步到位，实现一个可以自由切换钩子的 Addon 类即可。顺便重构一下启动 MITM 的代码，使其支持上下文管理器语法，更易用。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">...</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">...</span>
 <span style="color:#f92672">import</span> contextlib
 
 <span style="color:#f92672">...</span>
 <span style="color:#f92672">from</span> mitmproxy.http <span style="color:#f92672">import</span> HTTPFlow
 
 
-ResponseHook <span style="color:#f92672">=</span> Callable[[HTTPFlow], None]
+ResponseHook <span style="color:#f92672">=</span> Callable[[HTTPFlow], <span style="color:#66d9ef">None</span>]
 
 
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Interceptor</span>:
     <span style="color:#66d9ef">def</span> __init__(self):
-        self<span style="color:#f92672">.</span>response_hook: Optional[ResponseHook] <span style="color:#f92672">=</span> None
+        self<span style="color:#f92672">.</span>response_hook: Optional[ResponseHook] <span style="color:#f92672">=</span> <span style="color:#66d9ef">None</span>
 
-    <span style="color:#a6e22e">@contextlib.contextmanager</span>
+    <span style="color:#a6e22e">@contextlib</span><span style="color:#f92672">.</span>contextmanager
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">hook_response</span>(self, hook_function: ResponseHook):
         self<span style="color:#f92672">.</span>response_hook <span style="color:#f92672">=</span> hook_function
         <span style="color:#66d9ef">try</span>:
             <span style="color:#66d9ef">yield</span>
         <span style="color:#66d9ef">finally</span>:
-            self<span style="color:#f92672">.</span>response_hook <span style="color:#f92672">=</span> None
+            self<span style="color:#f92672">.</span>response_hook <span style="color:#f92672">=</span> <span style="color:#66d9ef">None</span>
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">response</span>(self, flow: HTTPFlow):
-        <span style="color:#66d9ef">if</span> self<span style="color:#f92672">.</span>response_hook <span style="color:#f92672">is</span> <span style="color:#f92672">not</span> None:
+        <span style="color:#66d9ef">if</span> self<span style="color:#f92672">.</span>response_hook <span style="color:#f92672">is</span> <span style="color:#f92672">not</span> <span style="color:#66d9ef">None</span>:
             self<span style="color:#f92672">.</span>response_hook(flow)
 
 
-<span style="color:#a6e22e">@contextlib.asynccontextmanager</span>
-async <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">intercept</span>(listen_port: int <span style="color:#f92672">=</span> <span style="color:#ae81ff">8080</span>) <span style="color:#f92672">-&gt;</span> None:
+<span style="color:#a6e22e">@contextlib</span><span style="color:#f92672">.</span>asynccontextmanager
+<span style="color:#66d9ef">async</span> <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">intercept</span>(listen_port: int <span style="color:#f92672">=</span> <span style="color:#ae81ff">8080</span>) <span style="color:#f92672">-&gt;</span> <span style="color:#66d9ef">None</span>:
     options <span style="color:#f92672">=</span> Options(listen_host<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;0.0.0.0&#34;</span>, listen_port<span style="color:#f92672">=</span>listen_port)
     master <span style="color:#f92672">=</span> Master(options)
     master<span style="color:#f92672">.</span>server <span style="color:#f92672">=</span> server <span style="color:#f92672">=</span> ProxyServer(ProxyConfig(options))
@@ -1359,7 +1358,7 @@ async <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">interce
     master<span style="color:#f92672">.</span>addons<span style="color:#f92672">.</span>add(core<span style="color:#f92672">.</span>Core())
 
     master<span style="color:#f92672">.</span>start()
-    await master<span style="color:#f92672">.</span>running()
+    <span style="color:#66d9ef">await</span> master<span style="color:#f92672">.</span>running()
 
     interceptor <span style="color:#f92672">=</span> Interceptor()
     master<span style="color:#f92672">.</span>addons<span style="color:#f92672">.</span>add(interceptor)
@@ -1374,7 +1373,7 @@ async <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">interce
 <p>以下是使用例子。 以 <strong>httpx</strong> <sup><a id="fnr.13" class="footref" href="#fn.13">13</a></sup> HTTP 客户端为例子，通过配置 MITM 为代理，通过对 <strong>httpbin.org</strong> 做网络请求，就会触发 HTTP 响应钩子。 两份函数做的事情都是一样的，只是演示一下如何处理会堵塞主线程的代码。 由于 <code>control</code> 函数如果直接跑的话，会堵塞住主线程，这样导致了 MITM 不能正常工作。 所以要把这个函数通过 <code>asyncio.to_thread</code> 让该函数在另一个线程去跑，这样才不会阻塞主线程。 而 <code>async_control</code> 函数是协程函数，不会堵塞住主进程的，所以直接跑就好了。</p>
 
 <p>无论是 <code>httpx.Client</code> 还是 <code>httpx.AsyncClient</code> 都是通过相同的参数 <code>proxies</code> 去配置其所使用代理服务。 由于是对 <a href="https://httpbin.org">https://httpbin.org</a> 做请求，需要安装证书才能正常处理经过 MITM 的网络流量。 <sup><a id="fnr.7.100" class="footref" href="#fn.7">7</a></sup> 只需通过参数 <code>verify</code> 去配置。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> pathlib <span style="color:#f92672">import</span> Path
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> pathlib <span style="color:#f92672">import</span> Path
 
 <span style="color:#f92672">import</span> httpx
 
@@ -1385,11 +1384,11 @@ CAFILE_PATH <span style="color:#f92672">=</span> Path(<span style="color:#e6db74
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">control</span>(interceptor: Interceptor, proxy_port: int):
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">wait_resposne</span>(flow: HTTPFlow):
         <span style="color:#75715e"># run in main thread</span>
-        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;in sync control&#34;</span>)
-        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;received response url:&#34;</span>, flow<span style="color:#f92672">.</span>request<span style="color:#f92672">.</span>url)
+        print(<span style="color:#e6db74">&#34;in sync control&#34;</span>)
+        print(<span style="color:#e6db74">&#34;received response url:&#34;</span>, flow<span style="color:#f92672">.</span>request<span style="color:#f92672">.</span>url)
 
     <span style="color:#66d9ef">with</span> httpx<span style="color:#f92672">.</span>Client(
-        proxies<span style="color:#f92672">=</span>f<span style="color:#e6db74">&#34;http://localhost:{proxy_port}&#34;</span>, verify<span style="color:#f92672">=</span>CAFILE_PATH
+        proxies<span style="color:#f92672">=</span><span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;http://localhost:</span><span style="color:#e6db74">{</span>proxy_port<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>, verify<span style="color:#f92672">=</span>CAFILE_PATH
     ) <span style="color:#66d9ef">as</span> client:
         <span style="color:#75715e"># run in another thread</span>
         <span style="color:#66d9ef">with</span> interceptor<span style="color:#f92672">.</span>hook_response(wait_resposne):
@@ -1400,38 +1399,38 @@ CAFILE_PATH <span style="color:#f92672">=</span> Path(<span style="color:#e6db74
         resp<span style="color:#f92672">.</span>raise_for_status()
 
 
-async <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">async_control</span>(interceptor: Interceptor, proxy_port: int):
+<span style="color:#66d9ef">async</span> <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">async_control</span>(interceptor: Interceptor, proxy_port: int):
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">wait_resposne</span>(flow: HTTPFlow):
-        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;in async control&#34;</span>)
-        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;received response url:&#34;</span>, flow<span style="color:#f92672">.</span>request<span style="color:#f92672">.</span>url)
+        print(<span style="color:#e6db74">&#34;in async control&#34;</span>)
+        print(<span style="color:#e6db74">&#34;received response url:&#34;</span>, flow<span style="color:#f92672">.</span>request<span style="color:#f92672">.</span>url)
 
-    async <span style="color:#66d9ef">with</span> httpx<span style="color:#f92672">.</span>AsyncClient(
-        proxies<span style="color:#f92672">=</span>f<span style="color:#e6db74">&#34;http://localhost:{proxy_port}&#34;</span>,
+    <span style="color:#66d9ef">async</span> <span style="color:#66d9ef">with</span> httpx<span style="color:#f92672">.</span>AsyncClient(
+        proxies<span style="color:#f92672">=</span><span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;http://localhost:</span><span style="color:#e6db74">{</span>proxy_port<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>,
         verify<span style="color:#f92672">=</span>CAFILE_PATH,
     ) <span style="color:#66d9ef">as</span> client:
         <span style="color:#66d9ef">with</span> interceptor<span style="color:#f92672">.</span>hook_response(wait_resposne):
-            resp <span style="color:#f92672">=</span> await client<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;https://httpbin.org/get&#34;</span>)
+            resp <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> client<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;https://httpbin.org/get&#34;</span>)
             resp<span style="color:#f92672">.</span>raise_for_status()
 
-        resp <span style="color:#f92672">=</span> await client<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;https://httpbin.org/get&#34;</span>)
+        resp <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> client<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;https://httpbin.org/get&#34;</span>)
         resp<span style="color:#f92672">.</span>raise_for_status()
 
 
-async <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">main</span>():
+<span style="color:#66d9ef">async</span> <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">main</span>():
     loop <span style="color:#f92672">=</span> asyncio<span style="color:#f92672">.</span>get_event_loop()
     port <span style="color:#f92672">=</span> <span style="color:#ae81ff">8888</span>
-    async <span style="color:#66d9ef">with</span> intercept(listen_port<span style="color:#f92672">=</span>port) <span style="color:#66d9ef">as</span> interceptor:
+    <span style="color:#66d9ef">async</span> <span style="color:#66d9ef">with</span> intercept(listen_port<span style="color:#f92672">=</span>port) <span style="color:#66d9ef">as</span> interceptor:
         <span style="color:#75715e"># run in other thread to avoid blocking main thread</span>
-        await loop<span style="color:#f92672">.</span>run_in_executor(None, control, interceptor, port)
+        <span style="color:#66d9ef">await</span> loop<span style="color:#f92672">.</span>run_in_executor(<span style="color:#66d9ef">None</span>, control, interceptor, port)
 
         <span style="color:#75715e"># async function is invoked normally via await statement</span>
-        await async_control(interceptor, port)
+        <span style="color:#66d9ef">await</span> async_control(interceptor, port)
 
 
 <span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;__main__&#34;</span>:
     asyncio<span style="color:#f92672">.</span>run(main())</code></pre></div>
 <p>查看运行的结果，跟我们预料的一样，两个函数各做了两次请求，不过都只触发了一次钩子。</p>
-<pre><code class="language-fundamental" data-lang="fundamental">in sync control
+<pre tabindex="0"><code class="language-fundamental" data-lang="fundamental">in sync control
 received response url: http://httpbin.org/get
 in async control
 received response url: http://httpbin.org/get</code></pre>
@@ -1442,7 +1441,7 @@ received response url: http://httpbin.org/get</code></pre>
 <h1 id="中间人与自动化">中间人与自动化</h1>
 
 <p>现在结合 uiautomator2 和一台 Android 设备，无论是虚拟机，云手机还是实体机，都可以通过以下方式中间人获取 App 的网络数据。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">configure_remote_proxy</span>(proxy_port):
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">configure_remote_proxy</span>(proxy_port):
     <span style="color:#66d9ef">raise</span> <span style="color:#a6e22e">NotImplementedError</span>
 
 
@@ -1450,13 +1449,13 @@ received response url: http://httpbin.org/get</code></pre>
     <span style="color:#66d9ef">raise</span> <span style="color:#a6e22e">NotImplementedError</span>
 
 
-async <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">main</span>():
+<span style="color:#66d9ef">async</span> <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">main</span>():
     port <span style="color:#f92672">=</span> <span style="color:#ae81ff">8888</span>
-    async <span style="color:#66d9ef">with</span> intercept(listen_port<span style="color:#f92672">=</span>port) <span style="color:#66d9ef">as</span> interceptor:
+    <span style="color:#66d9ef">async</span> <span style="color:#66d9ef">with</span> intercept(listen_port<span style="color:#f92672">=</span>port) <span style="color:#66d9ef">as</span> interceptor:
         <span style="color:#75715e"># Run automation script to configure proxy setting of remote device.</span>
-        await asyncio<span style="color:#f92672">.</span>to_thread(configure_remote_proxy, proxy_port<span style="color:#f92672">=</span>port)
+        <span style="color:#66d9ef">await</span> asyncio<span style="color:#f92672">.</span>to_thread(configure_remote_proxy, proxy_port<span style="color:#f92672">=</span>port)
         <span style="color:#75715e"># Due to the uiautomator2 does not support asyncio</span>
-        await asyncio<span style="color:#f92672">.</span>to_thread(control, interceptor<span style="color:#f92672">=</span>interceptor)
+        <span style="color:#66d9ef">await</span> asyncio<span style="color:#f92672">.</span>to_thread(control, interceptor<span style="color:#f92672">=</span>interceptor)
 
 
 

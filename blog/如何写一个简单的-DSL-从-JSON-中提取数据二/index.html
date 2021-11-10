@@ -14,18 +14,17 @@
 
 <meta property="og:site_name" content="linw1995" />
 <meta property="og:locale" content="zh-cn" />
-<meta property="og:type" content="article" />
+<meta property="og:type" content="website" />
 <meta property="og:url" content="https://linw1995.com/blog/%E5%A6%82%E4%BD%95%E5%86%99%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84-DSL-%E4%BB%8E-JSON-%E4%B8%AD%E6%8F%90%E5%8F%96%E6%95%B0%E6%8D%AE%E4%BA%8C/" />
 <meta property="og:title" content="如何写一个简单的 DSL 从 JSON 中提取数据（二）" />
 <meta property="twitter:title" content="如何写一个简单的 DSL 从 JSON 中提取数据（二）">
 
-    <meta property="og:image" content="/img/banner.png">
-    <meta property="twitter:card" content="summary">
-    <meta property="twitter:image" content="/img/banner.png">
+    <meta property="og:image" content="https://linw1995.com/img/banner.jpeg">
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:image" content="https://linw1995.com/img/banner.jpeg">
 
 <meta property="og:description" content="如何写一个简单的 DSL 从 JSON 中提取数据（二）">
 <meta property="twitter:description" content="如何写一个简单的 DSL 从 JSON 中提取数据（二）">
-
 <title>
 
 
@@ -1165,7 +1164,7 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
 <p>JSON 数据的基本的数据类型（整型，浮点型，字符串，布尔）与 Python 都有分别相对应的数据类型。
 还有两大支持数据嵌套的结构，即 <strong>Array</strong> 和 <strong>Object</strong>。他们解析成 Python 对象后分别是 <code>list</code> 和 <code>dict</code> 对象。
 这样通过 <code>json.load</code> or <code>json.loads</code> 可以把 JSON 文本变成了对应的 Python 数据。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">assert</span> json<span style="color:#f92672">.</span>loads(
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">assert</span> json<span style="color:#f92672">.</span>loads(
     <span style="color:#e6db74">&#39;{&#34;data&#34;: [{&#34;name&#34;: &#34;bar&#34;}]}&#39;</span>
 ) <span style="color:#f92672">==</span> {<span style="color:#e6db74">&#39;data&#39;</span>: [{<span style="color:#e6db74">&#39;name&#39;</span>: <span style="color:#e6db74">&#39;bar&#39;</span>}]}</code></pre></div>
 <p>而 JSONPath 表达式，就是用来简洁明了地表示，如何从这中 JSON 结构数据中提取目标数据。
@@ -1190,11 +1189,11 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
 
 <ol>
 <li><p>Executable 能通过链式调用构建出来</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">jp <span style="color:#f92672">=</span> Name(<span style="color:#e6db74">&#34;bar&#34;</span>)<span style="color:#f92672">.</span>Name(<span style="color:#e6db74">&#34;boo&#34;</span>)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">jp <span style="color:#f92672">=</span> Name(<span style="color:#e6db74">&#34;bar&#34;</span>)<span style="color:#f92672">.</span>Name(<span style="color:#e6db74">&#34;boo&#34;</span>)
 <span style="color:#66d9ef">assert</span> jp<span style="color:#f92672">.</span>find({<span style="color:#e6db74">&#34;bar&#34;</span>: {<span style="color:#e6db74">&#34;boo&#34;</span>: <span style="color:#ae81ff">1</span>}}) <span style="color:#f92672">==</span> [<span style="color:#ae81ff">1</span>]</code></pre></div></li>
 
 <li><p>Executable 与 Expression 能相互转换</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">jp <span style="color:#f92672">=</span> parse(<span style="color:#e6db74">&#34;bar.boo&#34;</span>)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">jp <span style="color:#f92672">=</span> parse(<span style="color:#e6db74">&#34;bar.boo&#34;</span>)
 <span style="color:#66d9ef">assert</span> jp<span style="color:#f92672">.</span>get_expression() <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;bar.boo&#34;</span></code></pre></div></li>
 
 <li><p>通过继承基类的方式，使其易于扩展</p></li>
@@ -1232,19 +1231,19 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
 也为了避免引用成环，条件 1 与 2 的引用都要用 <code>weakref.ref</code> 改成<strong>弱引用</strong>。</p>
 
 <p>以下为具体的代码实现</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> weakref
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> weakref
 <span style="color:#f92672">from</span> typing <span style="color:#f92672">import</span> Optional
 
 
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Expr</span>:
     <span style="color:#66d9ef">def</span> __init__(self):
-        self<span style="color:#f92672">.</span>left <span style="color:#f92672">=</span> None
-        self<span style="color:#f92672">.</span>ref_right <span style="color:#f92672">=</span> None
-        self<span style="color:#f92672">.</span>ref_begin <span style="color:#f92672">=</span> None
+        self<span style="color:#f92672">.</span>left <span style="color:#f92672">=</span> <span style="color:#66d9ef">None</span>
+        self<span style="color:#f92672">.</span>ref_right <span style="color:#f92672">=</span> <span style="color:#66d9ef">None</span>
+        self<span style="color:#f92672">.</span>ref_begin <span style="color:#f92672">=</span> <span style="color:#66d9ef">None</span>
 
     <span style="color:#a6e22e">@property</span>
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">begin</span>(self) <span style="color:#f92672">-&gt;</span> <span style="color:#e6db74">&#34;Expr&#34;</span>:
-        <span style="color:#66d9ef">if</span> self<span style="color:#f92672">.</span>ref_begin <span style="color:#f92672">is</span> None:
+        <span style="color:#66d9ef">if</span> self<span style="color:#f92672">.</span>ref_begin <span style="color:#f92672">is</span> <span style="color:#66d9ef">None</span>:
             <span style="color:#66d9ef">return</span> self
         <span style="color:#66d9ef">else</span>:
             begin <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>ref_begin()
@@ -1256,7 +1255,7 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
 
     <span style="color:#a6e22e">@staticmethod</span>
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">chain</span>(left: <span style="color:#e6db74">&#34;Expr&#34;</span>, right: <span style="color:#e6db74">&#34;Expr&#34;</span>):
-        <span style="color:#66d9ef">if</span> left<span style="color:#f92672">.</span>ref_begin <span style="color:#f92672">is</span> None:
+        <span style="color:#66d9ef">if</span> left<span style="color:#f92672">.</span>ref_begin <span style="color:#f92672">is</span> <span style="color:#66d9ef">None</span>:
             left<span style="color:#f92672">.</span>ref_begin <span style="color:#f92672">=</span> weakref<span style="color:#f92672">.</span>ref(left)
 
         right<span style="color:#f92672">.</span>ref_begin <span style="color:#f92672">=</span> left<span style="color:#f92672">.</span>ref_begin
@@ -1272,7 +1271,7 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
 <blockquote>
 <p><code>__getattr__</code> 在 obj.XXX 获取不到时，才会调用到。</p>
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">...</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">...</span>
 <span style="color:#f92672">from</span> typing <span style="color:#f92672">import</span> Callable
 
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Expr</span>:
@@ -1295,7 +1294,7 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
 这样每次扩展，定义新的 Component class 的时候，都要把新类注册到 <code>Expr._classes</code> 中。</p>
 
 <p>如果通过元类方法 <code>type.__new__</code>，就能在定义新类的时候，自动把新类注册到 <code>Expr._classes</code> 中。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">...</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">...</span>
 
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ExprMeta</span>(type):
     _classes <span style="color:#f92672">=</span> {}
@@ -1316,7 +1315,7 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
 通过链式调用构建出一个 Executable 对象，当尾节点的 <code>find</code> 方法调用后。
 从头节点到未节点一连串地执行 <code>find</code> 方法去提取，
 每个节点 <code>find</code> 所执行的数据都是上个节点执行 <code>find</code> 的提取结果。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">...</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">...</span>
 <span style="color:#f92672">from</span> abc <span style="color:#f92672">import</span> abstractmethod
 
 
@@ -1330,7 +1329,7 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
 
 <p>可以定义一个新方法 <code>actual_find</code> 替换掉 <code>find</code>，用来执行 Component 实际的提取算法。
 而 <code>find</code> 变为一个普通方法，每次执行都会从 Executable 的头节点执行 <code>actual_find</code>，执行到当前节点。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">...</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">...</span>
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Expr</span>(metaclass<span style="color:#f92672">=</span>ExprMeta):
     <span style="color:#f92672">...</span>
     <span style="color:#a6e22e">@abstractmethod</span>
@@ -1339,7 +1338,7 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">find</span>(self, data):
         curr <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>begin
-        <span style="color:#66d9ef">while</span> True:
+        <span style="color:#66d9ef">while</span> <span style="color:#66d9ef">True</span>:
             data <span style="color:#f92672">=</span> curr<span style="color:#f92672">.</span>actual_find(data)
             <span style="color:#66d9ef">if</span> curr <span style="color:#f92672">is</span> self:
                 <span style="color:#66d9ef">break</span>
@@ -1365,7 +1364,7 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
 <p>这样我们可以通过一连串的键去找到我们想要的数据。</p>
 
 <p>例如通过 <code>&quot;goods&quot; -&gt; 1 -&gt; &quot;category&quot;</code> 这三个键，获取第二个货物的类目为 magazine。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
     <span style="color:#f92672">&#34;goods&#34;</span>: [
         {<span style="color:#f92672">&#34;price&#34;</span>: <span style="color:#ae81ff">100</span>, <span style="color:#f92672">&#34;category&#34;</span>: <span style="color:#e6db74">&#34;Comic book&#34;</span>},
         {<span style="color:#f92672">&#34;price&#34;</span>: <span style="color:#ae81ff">200</span>, <span style="color:#f92672">&#34;category&#34;</span>: <span style="color:#e6db74">&#34;magazine&#34;</span>},
@@ -1443,12 +1442,12 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
 <p>为了处理这种需要迭代处理情况，就需要在<code>find</code>中添加判断条件，
 判断上个 Component 会不会产生需要迭代的数据。
 还需要添加处理迭代提取数据的逻辑，再对数据结果用下个 Component 去提取……是不是脑袋都要炸了。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">...</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">...</span>
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Expr</span>(metaclass<span style="color:#f92672">=</span>ExprMeta):
     <span style="color:#f92672">...</span>
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">find</span>(self, data):
         curr <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>begin
-        <span style="color:#66d9ef">while</span> True:
+        <span style="color:#66d9ef">while</span> <span style="color:#66d9ef">True</span>:
             data <span style="color:#f92672">=</span> curr<span style="color:#f92672">.</span>actual_find(data)
             <span style="color:#66d9ef">if</span> isinstance(curr, Array):
                 data <span style="color:#f92672">=</span> [<span style="color:#f92672">...</span> <span style="color:#66d9ef">for</span> item <span style="color:#f92672">in</span> data]
@@ -1498,7 +1497,7 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
 </tr>
 </tbody>
 </table>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">...</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">...</span>
 <span style="color:#f92672">from</span> typing <span style="color:#f92672">import</span> Iterable, Any
 
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Expr</span>(metaclass<span style="color:#f92672">=</span>ExprMeta):
@@ -1515,13 +1514,13 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
                 <span style="color:#66d9ef">continue</span>
 
             <span style="color:#66d9ef">if</span> curr <span style="color:#f92672">is</span> self:
-                <span style="color:#66d9ef">yield</span> <span style="color:#f92672">from</span> found
+                <span style="color:#66d9ef">yield from</span> found
                 <span style="color:#66d9ef">continue</span>
 
-            <span style="color:#66d9ef">yield</span> <span style="color:#f92672">from</span> self._dfs_find(right, found)
+            <span style="color:#66d9ef">yield from</span> self<span style="color:#f92672">.</span>_dfs_find(right, found)
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">find</span>(self, data) <span style="color:#f92672">-&gt;</span> Iterable[Any]:
-        <span style="color:#66d9ef">yield</span> <span style="color:#f92672">from</span> self._dfs_find(curr<span style="color:#f92672">=</span>self<span style="color:#f92672">.</span>begin, data_list<span style="color:#f92672">=</span>[data])</code></pre></div>
+        <span style="color:#66d9ef">yield from</span> self<span style="color:#f92672">.</span>_dfs_find(curr<span style="color:#f92672">=</span>self<span style="color:#f92672">.</span>begin, data_list<span style="color:#f92672">=</span>[data])</code></pre></div>
 <p>深度优先遍历整个 JSON 结构，遍历的深度就看链式构建的 Executable 的“长度”了。
 沿着 JSON 结构的某一支提取下去，直到 Executable 的尾节点，就可以把提取到的数据送出。
 再退回上一个需要迭代提取的位置，再沿着下一个兄弟枝干提取下去。
@@ -1581,7 +1580,7 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
 
 <p>JSONPath 表达式既然通过 Parser 及 Executable 生成相应的 Excutable；
 那么 JSONPath Excutable 也可以生成对应的表达式。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">...</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">...</span>
 <span style="color:#f92672">from</span> typing <span style="color:#f92672">import</span> List
 
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Expr</span>(metaclass<span style="color:#f92672">=</span>ExprMeta):
@@ -1593,7 +1592,7 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_expression</span>(self) <span style="color:#f92672">-&gt;</span> str:
         curr <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>begin
         parts: List[str] <span style="color:#f92672">=</span> []
-        <span style="color:#66d9ef">while</span> True:
+        <span style="color:#66d9ef">while</span> <span style="color:#66d9ef">True</span>:
             part <span style="color:#f92672">=</span> curr<span style="color:#f92672">.</span>_get_partial_expression()
             parts<span style="color:#f92672">.</span>append(part)
             <span style="color:#66d9ef">if</span> curr <span style="color:#f92672">is</span> self:
@@ -1604,7 +1603,7 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
         <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;.&#34;</span><span style="color:#f92672">.</span>join(parts)
 
     <span style="color:#66d9ef">def</span> __repr__(self):
-        <span style="color:#66d9ef">return</span> f<span style="color:#e6db74">&#39;JSONPath({self.get_expression()!r})&#39;</span></code></pre></div>
+        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;JSONPath(</span><span style="color:#e6db74">{</span>self<span style="color:#f92672">.</span>get_expression()<span style="color:#e6db74">!r}</span><span style="color:#e6db74">)&#39;</span></code></pre></div>
 <p>引入一个新的抽象方法 <code>_get_partial_expression</code>，方法 <code>get_expression</code> 及方法 <code>__repr__</code>。</p>
 
 <ul>
@@ -1621,9 +1620,9 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
 <p>通过继承的方式，实现对应几个抽象方法 <code>actual_find</code> 及 <code>_get_partial_expression</code>，就可以方便地扩展 JSONPath Executable 功能。</p>
 
 <h3 id="name-实现">Name 实现</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">...</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">...</span>
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Name</span>(Expr):
-    <span style="color:#66d9ef">def</span> __init__(self, name: Optional[str] <span style="color:#f92672">=</span> None):
+    <span style="color:#66d9ef">def</span> __init__(self, name: Optional[str] <span style="color:#f92672">=</span> <span style="color:#66d9ef">None</span>):
         super()<span style="color:#f92672">.</span>__init__()
         self<span style="color:#f92672">.</span>name <span style="color:#f92672">=</span> name
 
@@ -1631,7 +1630,7 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
         <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> isinstance(data, dict):
             <span style="color:#66d9ef">return</span> []
 
-        <span style="color:#66d9ef">if</span> self<span style="color:#f92672">.</span>name <span style="color:#f92672">is</span> None:
+        <span style="color:#66d9ef">if</span> self<span style="color:#f92672">.</span>name <span style="color:#f92672">is</span> <span style="color:#66d9ef">None</span>:
             <span style="color:#66d9ef">return</span> data<span style="color:#f92672">.</span>values()
         <span style="color:#66d9ef">else</span>:
             <span style="color:#66d9ef">if</span> self<span style="color:#f92672">.</span>name <span style="color:#f92672">not</span> <span style="color:#f92672">in</span> data:
@@ -1642,7 +1641,7 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">_get_partial_expression</span>(self):
         <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>name <span style="color:#f92672">or</span> <span style="color:#e6db74">&#34;*&#34;</span></code></pre></div>
 <p>简单的测试一下。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">executable <span style="color:#f92672">=</span> Name()<span style="color:#f92672">.</span>Name(<span style="color:#e6db74">&#34;a&#34;</span>)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">executable <span style="color:#f92672">=</span> Name()<span style="color:#f92672">.</span>Name(<span style="color:#e6db74">&#34;a&#34;</span>)
 <span style="color:#66d9ef">assert</span> <span style="color:#e6db74">&#34;*.a&#34;</span> <span style="color:#f92672">==</span> executable<span style="color:#f92672">.</span>get_expression()
 <span style="color:#66d9ef">assert</span> [<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>] <span style="color:#f92672">==</span> list(
     executable<span style="color:#f92672">.</span>find({
@@ -1652,9 +1651,9 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
     })
 )</code></pre></div>
 <h3 id="array-实现">Array 实现</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">...</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">...</span>
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Array</span>(Expr):
-    <span style="color:#66d9ef">def</span> __init__(self, idx: Optional[int] <span style="color:#f92672">=</span> None):
+    <span style="color:#66d9ef">def</span> __init__(self, idx: Optional[int] <span style="color:#f92672">=</span> <span style="color:#66d9ef">None</span>):
         super()<span style="color:#f92672">.</span>__init__()
         self<span style="color:#f92672">.</span>idx <span style="color:#f92672">=</span> idx
 
@@ -1662,20 +1661,20 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
         <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> isinstance(data, list):
             <span style="color:#66d9ef">return</span> []
 
-        <span style="color:#66d9ef">if</span> self<span style="color:#f92672">.</span>idx <span style="color:#f92672">is</span> None:
+        <span style="color:#66d9ef">if</span> self<span style="color:#f92672">.</span>idx <span style="color:#f92672">is</span> <span style="color:#66d9ef">None</span>:
             <span style="color:#66d9ef">return</span> data
         <span style="color:#66d9ef">else</span>:
             <span style="color:#66d9ef">return</span> data[self<span style="color:#f92672">.</span>idx : self<span style="color:#f92672">.</span>idx <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>]
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">_get_partial_expression</span>(self):
-        <span style="color:#66d9ef">return</span> f<span style="color:#e6db74">&#34;[{self.idx or &#39;*&#39;}]&#34;</span></code></pre></div>
+        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;[</span><span style="color:#e6db74">{</span>self<span style="color:#f92672">.</span>idx <span style="color:#f92672">or</span> <span style="color:#e6db74">&#39;*&#39;</span><span style="color:#e6db74">}</span><span style="color:#e6db74">]&#34;</span></code></pre></div>
 <p>由于要简化表达式，省略 Name 与 Array 间的分隔号 <code>.</code> ，这样得对 <code>Expr.get_expression</code> 进行修改。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Expr</span>(metaclass<span style="color:#f92672">=</span>ExprMeta):
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Expr</span>(metaclass<span style="color:#f92672">=</span>ExprMeta):
     <span style="color:#f92672">...</span>
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_expression</span>(self) <span style="color:#f92672">-&gt;</span> str:
         curr <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>begin
         parts: List[str] <span style="color:#f92672">=</span> []
-        <span style="color:#66d9ef">while</span> True:
+        <span style="color:#66d9ef">while</span> <span style="color:#66d9ef">True</span>:
             part <span style="color:#f92672">=</span> curr<span style="color:#f92672">.</span>_get_partial_expression()
             <span style="color:#66d9ef">if</span> isinstance(curr, Array):
                 parts[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>] <span style="color:#f92672">+=</span> part
@@ -1688,7 +1687,7 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
 
         <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;.&#34;</span><span style="color:#f92672">.</span>join(parts)</code></pre></div>
 <p>再简单的测试一下。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">executable <span style="color:#f92672">=</span> Name(<span style="color:#e6db74">&#34;goods&#34;</span>)<span style="color:#f92672">.</span>Array()<span style="color:#f92672">.</span>Name(<span style="color:#e6db74">&#34;category&#34;</span>)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">executable <span style="color:#f92672">=</span> Name(<span style="color:#e6db74">&#34;goods&#34;</span>)<span style="color:#f92672">.</span>Array()<span style="color:#f92672">.</span>Name(<span style="color:#e6db74">&#34;category&#34;</span>)
 <span style="color:#66d9ef">assert</span> <span style="color:#e6db74">&#34;goods[*].category&#34;</span> <span style="color:#f92672">==</span> executable<span style="color:#f92672">.</span>get_expression()
 <span style="color:#66d9ef">assert</span> [<span style="color:#e6db74">&#34;Comic book&#34;</span>, <span style="color:#e6db74">&#34;magazine&#34;</span>] <span style="color:#f92672">==</span> (
     list(

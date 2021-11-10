@@ -14,18 +14,17 @@
 
 <meta property="og:site_name" content="linw1995" />
 <meta property="og:locale" content="zh-cn" />
-<meta property="og:type" content="article" />
+<meta property="og:type" content="website" />
 <meta property="og:url" content="https://linw1995.com/blog/%E5%A6%82%E4%BD%95%E5%9C%A8%E6%97%A0%E5%A4%B4%E6%A8%A1%E5%BC%8F%E4%B8%8B%E7%9A%84%E8%B0%B7%E6%AD%8C%E6%B5%8F%E8%A7%88%E5%99%A8%E8%AE%BE%E7%BD%AE%E5%9C%B0%E7%90%86%E4%BD%8D%E7%BD%AE/" />
 <meta property="og:title" content="如何在无头模式下的谷歌浏览器设置地理位置" />
 <meta property="twitter:title" content="如何在无头模式下的谷歌浏览器设置地理位置">
 
-    <meta property="og:image" content="/img/banner.png">
-    <meta property="twitter:card" content="summary">
-    <meta property="twitter:image" content="/img/banner.png">
+    <meta property="og:image" content="https://linw1995.com/img/banner.jpeg">
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:image" content="https://linw1995.com/img/banner.jpeg">
 
 <meta property="og:description" content="How to grant geolocation permission and override it on headless Chrome.">
 <meta property="twitter:description" content="How to grant geolocation permission and override it on headless Chrome.">
-
 <title>
 
 
@@ -1171,7 +1170,7 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
 <p>谷歌到很多方法。试了一个又一个，但大部分方法都过时了。所幸最后发现了个解决办法，就是用 Chrome Devtools Protocol。</p>
 
 <p>以下是一个简单的例子，用最常用的 selenium 来执行 Chrome Devtools Protocol 命令。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> time
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> time
 
 <span style="color:#f92672">from</span> selenium.webdriver <span style="color:#f92672">import</span> Chrome, ChromeOptions
 

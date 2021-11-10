@@ -14,18 +14,17 @@
 
 <meta property="og:site_name" content="linw1995" />
 <meta property="og:locale" content="zh-cn" />
-<meta property="og:type" content="article" />
+<meta property="og:type" content="website" />
 <meta property="og:url" content="https://linw1995.com/blog/%E8%87%AA%E5%B7%B1%E6%9D%A5%E5%86%99%E5%8E%8B%E7%BC%A9%E7%AE%97%E6%B3%95LZW/" />
 <meta property="og:title" content="自己来写压缩算法——LZW" />
 <meta property="twitter:title" content="自己来写压缩算法——LZW">
 
-    <meta property="og:image" content="/img/banner.png">
-    <meta property="twitter:card" content="summary">
-    <meta property="twitter:image" content="/img/banner.png">
+    <meta property="og:image" content="https://linw1995.com/img/banner.jpeg">
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:image" content="https://linw1995.com/img/banner.jpeg">
 
 <meta property="og:description" content="压缩算法究竟是怎么做到压缩的？本文就介绍一种简单的压缩算法，LZW算法">
 <meta property="twitter:description" content="压缩算法究竟是怎么做到压缩的？本文就介绍一种简单的压缩算法，LZW算法">
-
 <title>
 
 
@@ -1168,13 +1167,13 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
 <p>举个简单的例子，如果有一份数据，内容中的字符只有&rsquo;abc&rsquo;三种。那么如何对它进行编码呢？</p>
 
 <p>首先先将单字符建立成一个字符串编码表，分别给予编号。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plain" data-lang="plain">| string | code |
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plain" data-lang="plain">| string | code |
 |--------|------|
 | a      | 0    |
 | b      | 1    |
 | c      | 2    |</code></pre></div>
 <p>若数据为<code>aabcaac</code>，进过LZW编码后结果为 <code>[0,0,1,2,3,2,]</code>，过程如下</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plain" data-lang="plain">| No. | cur | prefix | prefix + cur | in str-&gt;code | code | add into str-&gt;code |
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plain" data-lang="plain">| No. | cur | prefix | prefix + cur | in str-&gt;code | code | add into str-&gt;code |
 | --- | --- | ------ | ------------ | ------------ | ---- | ------------------ |
 | 1   | a   |        | a            | true         |      |                    |
 | 2   | a   | a      | aa           | false        | 0    | aa -&gt; 3            |
@@ -1201,7 +1200,7 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
 </ol>
 
 <h3 id="解码">解码</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plain" data-lang="plain">| string | code |
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plain" data-lang="plain">| string | code |
 |--------|------|
 | a      | 0    |
 | b      | 1    |
@@ -1209,7 +1208,7 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
 <p>一开始的字符串编码都是同一个，那么如何把 <code>[0,0,1,2,3,2,]</code> 解码为 <code>aabcaac</code> ？</p>
 
 <p>解码过程如下：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plain" data-lang="plain">| No. | code | str | char | prefix | prefix + char | in str-&gt;code | add into str-&gt;code | result  |
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plain" data-lang="plain">| No. | code | str | char | prefix | prefix + char | in str-&gt;code | add into str-&gt;code | result  |
 | --- | ---- | --- | ---- | ------ | ------------- | ------------ | ------------------ | ------- |
 | 1   | 0    | a   | a    |        | a             | true         |                    | a       |
 | 2   | 0    | a   | a    | a      | aa            | false        | aa -&gt; 3            | aa      |
@@ -1247,7 +1246,7 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
 <h3 id="核心代码">核心代码</h3>
 
 <p>照着算法步骤，我们很容易地写出以下的代码：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> six <span style="color:#f92672">import</span> int2byte
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> six <span style="color:#f92672">import</span> int2byte
 
 
 <span style="color:#75715e"># 初始字符串编码表</span>

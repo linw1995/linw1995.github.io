@@ -14,18 +14,17 @@
 
 <meta property="og:site_name" content="linw1995" />
 <meta property="og:locale" content="zh-cn" />
-<meta property="og:type" content="article" />
+<meta property="og:type" content="website" />
 <meta property="og:url" content="https://linw1995.com/en/blog/Right-way-to-write-bash-script-to-launch-background-processes/" />
 <meta property="og:title" content="Right way to write bash script to launch background processes" />
 <meta property="twitter:title" content="Right way to write bash script to launch background processes">
 
-    <meta property="og:image" content="/img/banner.png">
-    <meta property="twitter:card" content="summary">
-    <meta property="twitter:image" content="/img/banner.png">
+    <meta property="og:image" content="https://linw1995.com/img/banner.jpeg">
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:image" content="https://linw1995.com/img/banner.jpeg">
 
 <meta property="og:description" content="">
 <meta property="twitter:description" content="">
-
 <title>
 
 
@@ -1177,7 +1176,7 @@ I handle the process termination improperly due to being not familiar with Unix 
 I do something like this.</p>
 
 <p>I write a helper script to launch a background process, which is the &ldquo;sleep&rdquo; command in this case.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#!/bin/bash
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#!/bin/bash
 </span><span style="color:#75715e"></span>sleep <span style="color:#ae81ff">1000</span> &amp;
 PID<span style="color:#f92672">=</span>$!
 echo $PID launched
@@ -1190,16 +1189,16 @@ But it does not work at all.</p>
 <h2 id="behind-the-scenes">Behind the scenes</h2>
 
 <p>After checking the process status file of this process, I find out that it ignores the <code>SIGINT</code> <sup><a id="fnr.1.100" class="footref" href="#fn.1">1</a></sup> signal.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cat /proc/<span style="color:#e6db74">`</span>cat pid<span style="color:#e6db74">`</span>/status | grep Sig</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cat /proc/<span style="color:#e6db74">`</span>cat pid<span style="color:#e6db74">`</span>/status | grep Sig</code></pre></div>
 <p>The value of the <code>&quot;SigIgn&quot;</code> field of the process status file is <code>6</code>, which is <code>110</code> in bit representation.
 This value means the <code>SIGINT</code> and <code>SIGQUIT</code> signals <sup><a id="fnr.1.100" class="footref" href="#fn.1">1</a></sup> being ignored. <sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup></p>
-<pre><code>SigQ:   0/3793
+<pre tabindex="0"><code>SigQ:   0/3793
 SigPnd: 0000000000000000
 SigBlk: 0000000000000000
 SigIgn: 0000000000000006
 SigCgt: 0000000000000000</code></pre>
 <p>Run below useful script to see whole procedures.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#!/bin/bash
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#!/bin/bash
 </span><span style="color:#75715e"></span>
 sleep <span style="color:#ae81ff">1000</span> &amp;
 PID<span style="color:#f92672">=</span>$!
@@ -1227,7 +1226,7 @@ ps $PID &gt;/dev/null 2&gt;&amp;<span style="color:#ae81ff">1</span>
 We will see the different result outcomes.
 We can see the <code>sleep</code> process&rsquo;s <code>&quot;SigIgn&quot;</code> value being <code>0</code>.
 This means it can receive <code>SIGINT</code> <sup><a id="fnr.1.100" class="footref" href="#fn.1">1</a></sup> now.</p>
-<pre><code>Process is alive
+<pre tabindex="0"><code>Process is alive
 SigIgn: 0000000000000000</code></pre>
 <p>What is the difference between interactive mode and non-interactive mode of bash?
 The <code>monitor mode</code>, aka <code>Job Control</code> <sup><a id="fnr.4" class="footref" href="#fn.4">4</a></sup>, is disabled by default in non-interactive mode.</p>
@@ -1248,7 +1247,7 @@ Background processes run in a separate process group and a line containing their
 Bash runs without it will make background child process ignoring <code>SIGINT</code> and <code>SIGQUIT</code> signals <sup><a id="fnr.1.100" class="footref" href="#fn.1">1</a></sup>.</p>
 
 <p>I believe <code>SIGINT</code> and <code>SIGQUIT</code> signals <sup><a id="fnr.1.100" class="footref" href="#fn.1">1</a></sup> are set ignored by below fragment codes come from <a href="https://github.com/bminor/bash/blob/8868edaf2250e09c4e9a1c75ffe3274f28f38581/execute_cmd.c#L5394-L5415">bash/execute_cmd.c#L5394-L541</a>.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#66d9ef">void</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#66d9ef">void</span>
 <span style="color:#a6e22e">setup_async_signals</span> ()
 {
 <span style="color:#75715e">#if defined (__BEOS__)
@@ -1294,7 +1293,7 @@ not acting like the <a href="https://www.gnu.org/software/libc/manual/html_node/
 <li><code>shopt -u huponexit</code> <sup><a id="fnr.5.100" class="footref" href="#fn.5">5</a></sup> disable <code>huponexit</code> <sup><a id="fnr.5.100" class="footref" href="#fn.5">5</a></sup> shell option to avoid bash sending background processes <code>SIGHUP</code> signal on exit.</li>
 
 <li><p><code>set -m</code> <sup><a id="fnr.3.100" class="footref" href="#fn.3">3</a></sup> enable job control to avoid background processes ignoring <code>SIGQUIT</code> and <code>SIGINT</code> signals.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#!/bin/bash
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#!/bin/bash
 </span><span style="color:#75715e"></span>shopt -u huponexit
 set -m</code></pre></div></li>
 </ol>

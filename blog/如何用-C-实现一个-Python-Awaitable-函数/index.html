@@ -14,18 +14,17 @@
 
 <meta property="og:site_name" content="linw1995" />
 <meta property="og:locale" content="zh-cn" />
-<meta property="og:type" content="article" />
+<meta property="og:type" content="website" />
 <meta property="og:url" content="https://linw1995.com/blog/%E5%A6%82%E4%BD%95%E7%94%A8-C-%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA-Python-Awaitable-%E5%87%BD%E6%95%B0/" />
 <meta property="og:title" content="如何用 C 实现一个 Python Awaitable 函数" />
 <meta property="twitter:title" content="如何用 C 实现一个 Python Awaitable 函数">
 
-    <meta property="og:image" content="/img/banner.png">
-    <meta property="twitter:card" content="summary">
-    <meta property="twitter:image" content="/img/banner.png">
+    <meta property="og:image" content="https://linw1995.com/img/banner.jpeg">
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:image" content="https://linw1995.com/img/banner.jpeg">
 
 <meta property="og:description" content="">
 <meta property="twitter:description" content="">
-
 <title>
 
 
@@ -1162,7 +1161,7 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
 <p>这是一个取巧的方式，用 C 实现一个普通的 Python 函数，但返回一个 <code>asyncio.Future</code> 对象。
 用副线程去执行，等到执行有结果后，再调用 <code>asyncio.Future.set_result</code> 方法去设置函数的结果。
 先看一下直接用 Python 的话，是怎么实现这个的。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> asyncio
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> asyncio
 <span style="color:#f92672">import</span> os
 <span style="color:#f92672">import</span> threading
 
@@ -1180,7 +1179,7 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
 避免了执行 <code>await spam.system('ls')</code> 卡住。</p>
 
 <p>现在需要做的事，就是把以上的代码翻译成 C 代码</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#75715e">#define PY_SSIZE_T_CLEAN
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#75715e">#define PY_SSIZE_T_CLEAN
 </span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;Python.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;pthread.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
@@ -1252,7 +1251,7 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
 
 PyMODINIT_FUNC <span style="color:#a6e22e">PyInit_spam</span>(<span style="color:#66d9ef">void</span>) { <span style="color:#66d9ef">return</span> PyModule_Create(<span style="color:#f92672">&amp;</span>spammodule); }</code></pre></div>
 <p>再补上 <code>setup.py</code>，执行 <code>python setup.py install</code> 就可以编译安装成一个 Python 的第三方函数库了。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> distutils.core <span style="color:#f92672">import</span> setup, Extension
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> distutils.core <span style="color:#f92672">import</span> setup, Extension
 
 setup(name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;spam&#34;</span>, version<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;1.0&#34;</span>, ext_modules<span style="color:#f92672">=</span>[Extension(<span style="color:#e6db74">&#34;spam&#34;</span>, [<span style="color:#e6db74">&#34;spammodule.c&#34;</span>])])</code></pre></div>
 <h2 id="总结">总结</h2>

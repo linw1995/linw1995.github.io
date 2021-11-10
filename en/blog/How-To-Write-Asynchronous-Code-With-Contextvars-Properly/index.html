@@ -14,18 +14,17 @@
 
 <meta property="og:site_name" content="linw1995" />
 <meta property="og:locale" content="zh-cn" />
-<meta property="og:type" content="article" />
+<meta property="og:type" content="website" />
 <meta property="og:url" content="https://linw1995.com/en/blog/How-To-Write-Asynchronous-Code-With-Contextvars-Properly/" />
 <meta property="og:title" content="How To Write Asynchronous Code With Contextvars Properly" />
 <meta property="twitter:title" content="How To Write Asynchronous Code With Contextvars Properly">
 
-    <meta property="og:image" content="/img/banner.png">
-    <meta property="twitter:card" content="summary">
-    <meta property="twitter:image" content="/img/banner.png">
+    <meta property="og:image" content="https://linw1995.com/img/banner.jpeg">
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:image" content="https://linw1995.com/img/banner.jpeg">
 
 <meta property="og:description" content="How to write asynchronous code with contextvars properly">
 <meta property="twitter:description" content="How to write asynchronous code with contextvars properly">
-
 <title>
 
 
@@ -1176,28 +1175,28 @@ After coding, testing, and fixing repeatedly, I summary out how to use write asy
 <p>Package <strong>contextvars</strong> comes from <a href="https://www.python.org/dev/peps/pep-0567/">PEP-567</a> and provides APIs that allow developers to store, access and manage the local context.
 It&rsquo;s similar to thread-local storage (TLS),
 but, unlike TLS, it also allows correctly keeping track of values per asynchronous task.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> asyncio
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> asyncio
 <span style="color:#f92672">from</span> contextvars <span style="color:#f92672">import</span> ContextVar, Context
 
 var_what <span style="color:#f92672">=</span> ContextVar(<span style="color:#e6db74">&#34;what&#34;</span>)
 
-async <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">hello</span>():
+<span style="color:#66d9ef">async</span> <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">hello</span>():
     <span style="color:#66d9ef">try</span>:
-        <span style="color:#66d9ef">return</span> f<span style="color:#e6db74">&#34;hello {var_what.get()}&#34;</span>
+        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;hello </span><span style="color:#e6db74">{</span>var_what<span style="color:#f92672">.</span>get()<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
     <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">LookupError</span>:
         <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;hello?&#34;</span>
 
 <span style="color:#75715e"># evaluated by `python -m asyncio` instead of calling `asyncio.run`</span>
-<span style="color:#66d9ef">assert</span> await hello() <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;hello?&#34;</span>
+<span style="color:#66d9ef">assert</span> <span style="color:#66d9ef">await</span> hello() <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;hello?&#34;</span>
 task_1 <span style="color:#f92672">=</span> asyncio<span style="color:#f92672">.</span>create_task(hello())
 coroutine_1 <span style="color:#f92672">=</span> hello()
 var_what<span style="color:#f92672">.</span>set(<span style="color:#e6db74">&#34;world&#34;</span>)
 task_2 <span style="color:#f92672">=</span> asyncio<span style="color:#f92672">.</span>create_task(hello())
 coroutine_2 <span style="color:#f92672">=</span> hello()
-<span style="color:#66d9ef">assert</span> await task_1 <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;hello?&#34;</span>
-<span style="color:#66d9ef">assert</span> await task_2 <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;hello world&#34;</span>
-<span style="color:#66d9ef">assert</span> await coroutine_1 <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;hello world&#34;</span>
-<span style="color:#66d9ef">assert</span> await coroutine_2 <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;hello world&#34;</span></code></pre></div>
+<span style="color:#66d9ef">assert</span> <span style="color:#66d9ef">await</span> task_1 <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;hello?&#34;</span>
+<span style="color:#66d9ef">assert</span> <span style="color:#66d9ef">await</span> task_2 <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;hello world&#34;</span>
+<span style="color:#66d9ef">assert</span> <span style="color:#66d9ef">await</span> coroutine_1 <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;hello world&#34;</span>
+<span style="color:#66d9ef">assert</span> <span style="color:#66d9ef">await</span> coroutine_2 <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;hello world&#34;</span></code></pre></div>
 <p>This example uses <code>ContextVar</code> object to store and access the value of the pre-defined field &ldquo;what&rdquo; from the current context.
 And you see the problem came up from this example
 that the objects of <code>coroutine</code> are unable to keep the context in track.
@@ -1220,13 +1219,13 @@ clean up resources from the context at last.</p>
 </ul>
 
 <p>In the real situation, we need to keep the request-related data, such as security tokens and request data, share global resources, such as databases in web applications. So I code an example below that shows you how to use contextvars in asynchronous programming properly.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> contextlib <span style="color:#f92672">import</span> asynccontextmanager
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> contextlib <span style="color:#f92672">import</span> asynccontextmanager
 <span style="color:#f92672">from</span> contextvars <span style="color:#f92672">import</span> copy_context, ContextVar
 
 var_redis_client <span style="color:#f92672">=</span> ContextVar(<span style="color:#e6db74">&#34;redis_client&#34;</span>)
 
 <span style="color:#a6e22e">@asynccontextmanager</span>
-async <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">create_app_context</span>(settings):
+<span style="color:#66d9ef">async</span> <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">create_app_context</span>(settings):
     <span style="color:#75715e"># Initialization process</span>
     redis_client <span style="color:#f92672">=</span> object()  <span style="color:#75715e"># FIXME: create a Redis client</span>
     var_redis_client<span style="color:#f92672">.</span>set(redis_client)
@@ -1240,7 +1239,7 @@ async <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">create_
 
 <span style="color:#75715e"># evaluated by `python -m asyncio` instead of calling `asyncio.run`</span>
 settings <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#34;redis_uri&#34;</span>: <span style="color:#e6db74">&#34;redis://...&#34;</span>}
-async <span style="color:#66d9ef">with</span> create_app_context(settings) <span style="color:#66d9ef">as</span> app_ctx:
+<span style="color:#66d9ef">async</span> <span style="color:#66d9ef">with</span> create_app_context(settings) <span style="color:#66d9ef">as</span> app_ctx:
     <span style="color:#66d9ef">assert</span> var_redis_client <span style="color:#f92672">in</span> copy_context()
     <span style="color:#75715e"># There are two ways to get the Redis client</span>
     <span style="color:#75715e"># that been stored in the current context.</span>
@@ -1252,25 +1251,25 @@ async <span style="color:#66d9ef">with</span> create_app_context(settings) <span
 <blockquote>
 <p><code>@pytest.mark.asyncio</code> decorator comes from <strong>pytest-asyncio</strong> package.</p>
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> pytest
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> pytest
 
-<span style="color:#a6e22e">@pytest.fixture</span>
+<span style="color:#a6e22e">@pytest</span><span style="color:#f92672">.</span>fixture
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">settings</span>():
     <span style="color:#66d9ef">return</span> {<span style="color:#e6db74">&#34;redis_uri&#34;</span>: <span style="color:#e6db74">&#34;redis://...&#34;</span>}
 
-<span style="color:#a6e22e">@pytest.fixture</span>
-async <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">app_ctx</span>(settings):
-    async <span style="color:#66d9ef">with</span> create_app_context(settings) <span style="color:#66d9ef">as</span> ctx:
+<span style="color:#a6e22e">@pytest</span><span style="color:#f92672">.</span>fixture
+<span style="color:#66d9ef">async</span> <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">app_ctx</span>(settings):
+    <span style="color:#66d9ef">async</span> <span style="color:#66d9ef">with</span> create_app_context(settings) <span style="color:#66d9ef">as</span> ctx:
         <span style="color:#75715e"># Use the yield_fixture to set up the app context.</span>
         <span style="color:#66d9ef">yield</span> ctx
 
-<span style="color:#a6e22e">@pytest.fixture</span>
+<span style="color:#a6e22e">@pytest</span><span style="color:#f92672">.</span>fixture
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">redis_client</span>(app_ctx):
     <span style="color:#66d9ef">return</span> app_ctx[var_redis_client]
 
 
-<span style="color:#a6e22e">@pytest.mark.asyncio</span>
-async <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_without_context</span>(app_ctx, redis_client):
+<span style="color:#a6e22e">@pytest</span><span style="color:#f92672">.</span>mark<span style="color:#f92672">.</span>asyncio
+<span style="color:#66d9ef">async</span> <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_without_context</span>(app_ctx, redis_client):
     <span style="color:#66d9ef">assert</span> var_redis_client <span style="color:#f92672">not</span> <span style="color:#f92672">in</span> copy_context()
     <span style="color:#75715e"># Although the current context does not have a Redis client,</span>
     <span style="color:#75715e"># you still be able to access it in context from fixtures.</span>
@@ -1283,8 +1282,8 @@ async <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_wi
     <span style="color:#66d9ef">for</span> var <span style="color:#f92672">in</span> ctx:
         var<span style="color:#f92672">.</span>set(ctx[var])
 
-<span style="color:#a6e22e">@pytest.mark.asyncio</span>
-async <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_within_context</span>(app_ctx, redis_client):
+<span style="color:#a6e22e">@pytest</span><span style="color:#f92672">.</span>mark<span style="color:#f92672">.</span>asyncio
+<span style="color:#66d9ef">async</span> <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_within_context</span>(app_ctx, redis_client):
     <span style="color:#75715e"># Must update the current context,</span>
     <span style="color:#75715e"># so you can use Redis client in the body of the testing function.</span>
     apply_context(app_ctx)

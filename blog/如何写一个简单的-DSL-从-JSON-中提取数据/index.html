@@ -14,18 +14,17 @@
 
 <meta property="og:site_name" content="linw1995" />
 <meta property="og:locale" content="zh-cn" />
-<meta property="og:type" content="article" />
+<meta property="og:type" content="website" />
 <meta property="og:url" content="https://linw1995.com/blog/%E5%A6%82%E4%BD%95%E5%86%99%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84-DSL-%E4%BB%8E-JSON-%E4%B8%AD%E6%8F%90%E5%8F%96%E6%95%B0%E6%8D%AE/" />
 <meta property="og:title" content="如何写一个简单的 DSL 从 JSON 中提取数据" />
 <meta property="twitter:title" content="如何写一个简单的 DSL 从 JSON 中提取数据">
 
-    <meta property="og:image" content="/img/banner.png">
-    <meta property="twitter:card" content="summary">
-    <meta property="twitter:image" content="/img/banner.png">
+    <meta property="og:image" content="https://linw1995.com/img/banner.jpeg">
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:image" content="https://linw1995.com/img/banner.jpeg">
 
 <meta property="og:description" content="如何写一个简单的 DSL 从 JSON 中提取数据">
 <meta property="twitter:description" content="如何写一个简单的 DSL 从 JSON 中提取数据">
-
 <title>
 
 
@@ -1177,7 +1176,7 @@ GPL 是可以用来编写任意计算机程序的，并且能表达任何的可�
 
 <p>写爬虫难免会处理各种各样的数据，其中最常见的就是 JSON 及 HTML 文本了。解析 HTML 并提取数据，我们有好用的轮子，比如 lxml ，及用来提取数据的 DSL 即 XPath（或者 CSS-Selectors ）。
 面对复杂的 JSON 嵌套结构，解析可以用标准库 <code>json</code>。而提取数据则没有好用的 DSL，所以我们难免会写出这样的代码</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">data <span style="color:#f92672">=</span> json<span style="color:#f92672">.</span>load(text)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">data <span style="color:#f92672">=</span> json<span style="color:#f92672">.</span>load(text)
 username <span style="color:#f92672">=</span> data[<span style="color:#e6db74">&#34;info&#34;</span>][<span style="color:#e6db74">&#34;author&#34;</span>][<span style="color:#e6db74">&#34;username&#34;</span>]
 blogs <span style="color:#f92672">=</span> []
 <span style="color:#66d9ef">for</span> raw <span style="color:#f92672">in</span> data[<span style="color:#e6db74">&#34;info&#34;</span>][<span style="color:#e6db74">&#34;blogs&#34;</span>]:
@@ -1186,7 +1185,7 @@ blogs <span style="color:#f92672">=</span> []
         <span style="color:#e6db74">&#34;content&#34;</span>: raw[<span style="color:#e6db74">&#34;text&#34;</span>]
     })</code></pre></div>
 <p>为了避免字段丢失而抛出 <code>KeyError</code> 异常，我们常常会添加些而外的代码进行处理。比如套几个 try-except 代码块， 代码就会变成这样</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">try</span>:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">try</span>:
     username <span style="color:#f92672">=</span> data[<span style="color:#e6db74">&#34;info&#34;</span>][<span style="color:#e6db74">&#34;author&#34;</span>][<span style="color:#e6db74">&#34;username&#34;</span>]
 <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">KeyError</span>:
     username <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>
@@ -1204,7 +1203,7 @@ blogs <span style="color:#f92672">=</span> []
 <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">KeyError</span>:
     <span style="color:#66d9ef">pass</span></code></pre></div>
 <p>或者直接调用 <code>dict.get</code> 方法去获取，当字段不存在时，而使用缺省值。则代码会变成这样</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">username <span style="color:#f92672">=</span> data<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;info&#34;</span>, {})<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;author&#34;</span>, {})<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;username&#34;</span>, <span style="color:#e6db74">&#34;&#34;</span>)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">username <span style="color:#f92672">=</span> data<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;info&#34;</span>, {})<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;author&#34;</span>, {})<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;username&#34;</span>, <span style="color:#e6db74">&#34;&#34;</span>)
 blogs <span style="color:#f92672">=</span> []
 <span style="color:#66d9ef">for</span> raw <span style="color:#f92672">in</span> data<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;info&#34;</span>, {})<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;blogs&#34;</span>, []):
     blogs<span style="color:#f92672">.</span>append({
@@ -1227,7 +1226,7 @@ blogs <span style="color:#f92672">=</span> []
 如果用中括号来表示列表，数字来表示下标的话，就能得到我们所熟悉的表达式 <code>&quot;info.blogs[0]&quot;</code>，常见于许多编程语言。</p>
 
 <p>我就可以以这些表达式，来描述 JSON 里某个特定节点上的数据。比如以下代码，就是我理想中的实现。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">username <span style="color:#f92672">=</span> parse(<span style="color:#e6db74">&#34;info.author.username&#34;</span>)<span style="color:#f92672">.</span>find(data)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">username <span style="color:#f92672">=</span> parse(<span style="color:#e6db74">&#34;info.author.username&#34;</span>)<span style="color:#f92672">.</span>find(data)
 blogs <span style="color:#f92672">=</span> parse(<span style="color:#e6db74">&#34;info.blogs[*]{title:header, content:text}&#34;</span>)<span style="color:#f92672">.</span>find(data)</code></pre></div>
 <blockquote>
 <p>如果用过 JQ 的人可能会对这些写法 <code>&quot;info.author.username&quot;</code> 及 <code>&quot;info.blogs[*]{title:header, content:text}&quot;</code> 感到熟悉。</p>
@@ -1248,7 +1247,7 @@ blogs <span style="color:#f92672">=</span> parse(<span style="color:#e6db74">&#3
 <h3 id="实现解析器-parser">实现解析器 Parser</h3>
 
 <p>这边用一个第三方开源库 <a href="https://github.com/lark-parser/lark">lark-parser/lark</a> 去实现。它基于 EBNF 实现了自己的扩展写法。支持多种解析算法。接下来用个例子来介绍一下，它是如何使用的。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> lark <span style="color:#f92672">import</span> Lark
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> lark <span style="color:#f92672">import</span> Lark
 
 parser <span style="color:#f92672">=</span> Lark(<span style="color:#e6db74">&#39;&#39;&#39;?start: path
 </span><span style="color:#e6db74">                 ?path: path &#34;.&#34; name          -&gt; chained_path
@@ -1262,10 +1261,10 @@ parser <span style="color:#f92672">=</span> Lark(<span style="color:#e6db74">&#3
 </span><span style="color:#e6db74">              &#39;&#39;&#39;</span>)
 
 tree <span style="color:#f92672">=</span> parser<span style="color:#f92672">.</span>parse(<span style="color:#e6db74">&#34;info.author.name&#34;</span>)
-<span style="color:#66d9ef">print</span>(tree)
-<span style="color:#66d9ef">print</span>(tree<span style="color:#f92672">.</span>pretty())</code></pre></div>
+print(tree)
+print(tree<span style="color:#f92672">.</span>pretty())</code></pre></div>
 <p>运行以上代码，终端就会输出解析到的 AST 结果。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">Tree(chained_path, [Tree(chained_path, [Tree(name, [Token(CNAME, <span style="color:#e6db74">&#39;info&#39;</span>)]), Tree(name, [Token(CNAME, <span style="color:#e6db74">&#39;author&#39;</span>)])]), Tree(name, [Token(CNAME, <span style="color:#e6db74">&#39;name&#39;</span>)])])
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">Tree(chained_path, [Tree(chained_path, [Tree(name, [Token(CNAME, <span style="color:#e6db74">&#39;info&#39;</span>)]), Tree(name, [Token(CNAME, <span style="color:#e6db74">&#39;author&#39;</span>)])]), Tree(name, [Token(CNAME, <span style="color:#e6db74">&#39;name&#39;</span>)])])
 chained_path
   chained_path
     name    info
@@ -1274,7 +1273,7 @@ chained_path
 <h3 id="实现执行程序-executable">实现执行程序 Executable</h3>
 
 <p>接下来要实现一个可执行的算法。目前只是为了举例，写的比较粗暴。实现一个高阶函数 <code>getter</code> 来创建相应的提取函数，在函数中先粗暴地拦截掉所有 <code>KeyError</code> 异常，返回成 None。再实现一个高阶函数 <code>chain</code> 来创建级联提取函数。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> operator
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> operator
 
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">getter</span>(name):
 
@@ -1282,7 +1281,7 @@ chained_path
         <span style="color:#66d9ef">try</span>:
             <span style="color:#66d9ef">return</span> operator<span style="color:#f92672">.</span>getitem(data, name)
         <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">KeyError</span>:
-            <span style="color:#66d9ef">return</span> None
+            <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">None</span>
 
     <span style="color:#66d9ef">return</span> _getter
 
@@ -1297,14 +1296,14 @@ chained_path
 <p>再实现个把 AST 转换成执行代码的转换器。
 只要自底向上从左到右遍历树结构（后序遍历），根据节点的树结构类型去执行对应的转换函数，构建我们的执行算法。
 比如 <code>name</code> 就只有一个子节点 <code>CNAME</code>；而 <code>chained_path</code> 就有两个子节点，表达式的历史路径，及表达式的下一个路径 <code>name</code>。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plain" data-lang="plain">?path: path &#34;.&#34; name -&gt; chained_path
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plain" data-lang="plain">?path: path &#34;.&#34; name -&gt; chained_path
     | name
 name: CNAME</code></pre></div>
 <p>虽然我们需要遍历树结构，但我们没有必要去实现相应的算法。
 这是因为 lark-parser 提供特别方便的 visitors 模块去让开发者使用。以类方法来转换 AST 上对应的结构。就是把 <code>CNAME</code> token 转换成字符串，把 <code>name</code> 结构转换成提取函数，把 <code>chained_path</code> 转换成级联（链式）提取函数。代码如下</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> lark.visitors <span style="color:#f92672">import</span> Transformer, v_args
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> lark.visitors <span style="color:#f92672">import</span> Transformer, v_args
 
-<span style="color:#a6e22e">@v_args</span>(inline<span style="color:#f92672">=</span>True)
+<span style="color:#a6e22e">@v_args</span>(inline<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">JSONPathTransformer</span>(Transformer):
     CNAME <span style="color:#f92672">=</span> str
 
@@ -1318,16 +1317,16 @@ transformer <span style="color:#f92672">=</span> JSONPathTransformer()</code></p
 <h3 id="验证">验证</h3>
 
 <p>接下来我们写几个简单的测试，测试一下</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">parse</span>(text):
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">parse</span>(text):
     <span style="color:#66d9ef">return</span> transformer<span style="color:#f92672">.</span>transform(parser<span style="color:#f92672">.</span>parse(text))
 
 <span style="color:#66d9ef">assert</span> parse(<span style="color:#e6db74">&#34;info.author.name&#34;</span>)(
         {<span style="color:#e6db74">&#34;info&#34;</span>: {<span style="color:#e6db74">&#34;author&#34;</span>: {<span style="color:#e6db74">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;Jack&#34;</span>}}}
     ) <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;Jack&#34;</span>
-<span style="color:#66d9ef">assert</span> parse(<span style="color:#e6db74">&#34;data&#34;</span>)({<span style="color:#e6db74">&#34;info&#34;</span>:<span style="color:#e6db74">&#34;boo&#34;</span>}) <span style="color:#f92672">is</span> None
+<span style="color:#66d9ef">assert</span> parse(<span style="color:#e6db74">&#34;data&#34;</span>)({<span style="color:#e6db74">&#34;info&#34;</span>:<span style="color:#e6db74">&#34;boo&#34;</span>}) <span style="color:#f92672">is</span> <span style="color:#66d9ef">None</span>
 <span style="color:#66d9ef">assert</span> parse(<span style="color:#e6db74">&#34;info&#34;</span>)({<span style="color:#e6db74">&#34;info&#34;</span>:<span style="color:#e6db74">&#34;boo&#34;</span>}) <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;boo</span></code></pre></div>
 <p>之前 Executable 部分的代码有个 bug ，不知道大家能不能一眼看出来。我给个提示，执行以下代码就会抛出异常，这又该怎么修复呢？</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">assert</span> parse(<span style="color:#e6db74">&#34;info.author&#34;</span>)({}) <span style="color:#f92672">is</span> None</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">assert</span> parse(<span style="color:#e6db74">&#34;info.author&#34;</span>)({}) <span style="color:#f92672">is</span> <span style="color:#66d9ef">None</span></code></pre></div>
 <p>答案就是 <code>getter</code> 得处理参数 <code>data=None</code> 的情况，不然以上代码就会抛出 <code>TypeError</code> 异常。</p>
 
 <h2 id="总结">总结</h2>

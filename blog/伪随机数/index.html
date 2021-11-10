@@ -14,18 +14,17 @@
 
 <meta property="og:site_name" content="linw1995" />
 <meta property="og:locale" content="zh-cn" />
-<meta property="og:type" content="article" />
+<meta property="og:type" content="website" />
 <meta property="og:url" content="https://linw1995.com/blog/%E4%BC%AA%E9%9A%8F%E6%9C%BA%E6%95%B0/" />
 <meta property="og:title" content="伪随机数" />
 <meta property="twitter:title" content="伪随机数">
 
-    <meta property="og:image" content="/img/banner.png">
-    <meta property="twitter:card" content="summary">
-    <meta property="twitter:image" content="/img/banner.png">
+    <meta property="og:image" content="https://linw1995.com/img/banner.jpeg">
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:image" content="https://linw1995.com/img/banner.jpeg">
 
 <meta property="og:description" content="一般计算机产生的随机数都是伪随机数">
 <meta property="twitter:description" content="一般计算机产生的随机数都是伪随机数">
-
 <title>
 
 
@@ -1181,7 +1180,7 @@ $$N_{j+1}\equiv (A\times N_{j}+C){\pmod {M}}$$
 其中$A,C,M$是产生器设定的常数。</p>
 
 <h3 id="python-implementation">Python implementation</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Random</span>:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Random</span>:
     <span style="color:#66d9ef">def</span> __init__(self, A, C, M, seed<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>):
         self<span style="color:#f92672">.</span>_A <span style="color:#f92672">=</span> A
         self<span style="color:#f92672">.</span>_C <span style="color:#f92672">=</span> C
@@ -1198,7 +1197,7 @@ $$N_{j+1}\equiv (A\times N_{j}+C){\pmod {M}}$$
         <span style="color:#66d9ef">return</span> cur <span style="color:#f92672">/</span> M
 
     <span style="color:#66d9ef">def</span> __repr__(self):
-        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;Random(A={obj._A!r}, C={obj._C!r}, M={obj._M!r})&#39;</span><span style="color:#f92672">.</span>format(obj<span style="color:#f92672">=</span>self)</code></pre></div>
+        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;Random(A=</span><span style="color:#e6db74">{obj._A!r}</span><span style="color:#e6db74">, C=</span><span style="color:#e6db74">{obj._C!r}</span><span style="color:#e6db74">, M=</span><span style="color:#e6db74">{obj._M!r}</span><span style="color:#e6db74">)&#39;</span><span style="color:#f92672">.</span>format(obj<span style="color:#f92672">=</span>self)</code></pre></div>
 <h3 id="随机数序列周期长度">随机数序列周期长度</h3>
 
 <p><img src="./Linear_congruential_generator_visualisation.svg" alt="Linear_congruential_generator_visualisation.svg" />
@@ -1268,7 +1267,7 @@ $$
 <p>利用上面的公式我们就可以产生符合均匀分布的随机数。这个过程就叫做<strong>反变换法</strong>。</p>
 
 <h4 id="python-implementation-1">Python implementation</h4>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">random <span style="color:#f92672">=</span> Random(A<span style="color:#f92672">=</span><span style="color:#ae81ff">65539</span>, C<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>, M<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span><span style="color:#f92672">**</span><span style="color:#ae81ff">31</span>, seed<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">random <span style="color:#f92672">=</span> Random(A<span style="color:#f92672">=</span><span style="color:#ae81ff">65539</span>, C<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>, M<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span><span style="color:#f92672">**</span><span style="color:#ae81ff">31</span>, seed<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
 
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">uniformDistributionFactory</span>(a, b):
     <span style="color:#66d9ef">if</span> a <span style="color:#f92672">&gt;</span> b:
@@ -1315,7 +1314,7 @@ $$
 </p>
 
 <h4 id="python-implementation-2">Python implementation</h4>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> math
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> math
 
 random <span style="color:#f92672">=</span> Random(A<span style="color:#f92672">=</span><span style="color:#ae81ff">65539</span>, C<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>, M<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span><span style="color:#f92672">**</span><span style="color:#ae81ff">31</span>, seed<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
 
@@ -1397,7 +1396,7 @@ $$
 利用以上任意一式即可生成符合正态分布的随机数，这个过程称作<strong>Box-Muller变换</strong>。</p>
 
 <h4 id="python-implementation-3">Python implementation</h4>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> math
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> math
 
 random <span style="color:#f92672">=</span> Random(A<span style="color:#f92672">=</span><span style="color:#ae81ff">65539</span>, C<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>, M<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span><span style="color:#f92672">**</span><span style="color:#ae81ff">31</span>, seed<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
 

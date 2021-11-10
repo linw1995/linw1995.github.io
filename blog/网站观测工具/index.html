@@ -14,18 +14,17 @@
 
 <meta property="og:site_name" content="linw1995" />
 <meta property="og:locale" content="zh-cn" />
-<meta property="og:type" content="article" />
+<meta property="og:type" content="website" />
 <meta property="og:url" content="https://linw1995.com/blog/%E7%BD%91%E7%AB%99%E8%A7%82%E6%B5%8B%E5%B7%A5%E5%85%B7/" />
 <meta property="og:title" content="网站观测工具" />
 <meta property="twitter:title" content="网站观测工具">
 
-    <meta property="og:image" content="/img/banner.png">
-    <meta property="twitter:card" content="summary">
-    <meta property="twitter:image" content="/img/banner.png">
+    <meta property="og:image" content="https://linw1995.com/img/banner.jpeg">
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:image" content="https://linw1995.com/img/banner.jpeg">
 
 <meta property="og:description" content="如何搭建一个即开即用的网站观测工具">
 <meta property="twitter:description" content="如何搭建一个即开即用的网站观测工具">
-
 <title>
 
 
@@ -1173,7 +1172,7 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
 <p>CLI 工具，整合了 mitmproxy 与 Chrome 。能十分方便地快速启动，即开即用。</p>
 
 <p>可以通过 pip 安装</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">pip install git+https://github.com/linw1995/mitm_chrome.git@master</code></pre></div></li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">pip install git+https://github.com/linw1995/mitm_chrome.git@master</code></pre></div></li>
 
 <li><p>证书安装</p>
 
@@ -1183,9 +1182,9 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
 <h2 id="使用姿势">使用姿势</h2>
 
 <p>在 MacOS 上</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">mitm_chrome --chrome-path<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;/Applications/Google Chrome.app/Contents/MacOS/Google Chrome&#39;</span> mitmproxy</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">mitm_chrome --chrome-path<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;/Applications/Google Chrome.app/Contents/MacOS/Google Chrome&#39;</span> mitmproxy</code></pre></div>
 <p>在有 <code>chrome</code> 命令情况下，无需指定 <code>--chrome-path</code> 参数</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">mitm_chrome mitmproxy</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">mitm_chrome mitmproxy</code></pre></div>
 <h2 id="后记">后记</h2>
 
 <p>目前，我发现 Chrome 无法通过 CLI 去指定使用自定的证书，只能使用预先安装好的证书。应该有办法的，不然 seleniumwire 项目怎么做到抓包的，这个以后有时间再研究研究吧。</p>

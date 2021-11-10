@@ -14,18 +14,17 @@
 
 <meta property="og:site_name" content="linw1995" />
 <meta property="og:locale" content="zh-cn" />
-<meta property="og:type" content="article" />
+<meta property="og:type" content="website" />
 <meta property="og:url" content="https://linw1995.com/en/blog/Write-Racket-With-Emacs/" />
 <meta property="og:title" content="Write Racket With Emacs" />
 <meta property="twitter:title" content="Write Racket With Emacs">
 
-    <meta property="og:image" content="/img/banner.png">
-    <meta property="twitter:card" content="summary">
-    <meta property="twitter:image" content="/img/banner.png">
+    <meta property="og:image" content="https://linw1995.com/img/banner.jpeg">
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:image" content="https://linw1995.com/img/banner.jpeg">
 
 <meta property="og:description" content="Configure Emacs for better Racket programming experience.">
 <meta property="twitter:description" content="Configure Emacs for better Racket programming experience.">
-
 <title>
 
 
@@ -1163,7 +1162,7 @@ Now it&rsquo;s the time to share my Emacs configuration and some humble opinions
 <p>In Emacs, almost every programming language has its own <a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Major-Modes.html">major mode</a>.
 And the Racket language has no exception.
 <a href="https://github.com/greghendershott/racket-mode">racket-mode</a> is the only and powerful Emacs major mode package.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp">(<span style="color:#a6e22e">use-package</span> racket-mode
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp">(<span style="color:#a6e22e">use-package</span> racket-mode
   <span style="color:#e6db74">:straight</span> <span style="color:#66d9ef">t</span>
   <span style="color:#e6db74">:hook</span> (racket-mode <span style="color:#f92672">.</span> racket-xp-mode))</code></pre></div>
 <p>Add the above configuration codes into your Emacs configuration for installation and configuration.
@@ -1183,7 +1182,7 @@ You can know how to install them in my <a href="../../../en/blog/Using-Emacs-Edi
 <p>Use <a href="http://company-mode.github.io/">company-mode</a> for text completion.
 The company-mode is able to cooperate with the <code>completion-at-point-functions</code>(<a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/Completion-in-Buffers.html">capf</a>) variable.
 And the racket-mode will configure this variable automatically while activating.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp">(<span style="color:#a6e22e">use-package</span> company
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp">(<span style="color:#a6e22e">use-package</span> company
   <span style="color:#e6db74">:straight</span> <span style="color:#66d9ef">t</span>
   <span style="color:#e6db74">:config</span>
   (<span style="color:#66d9ef">setq</span> company-minimum-prefix-length <span style="color:#ae81ff">2</span>)
@@ -1196,7 +1195,7 @@ And the racket-mode will configure this variable automatically while activating.
 
 <p>Use <a href="https://github.com/Fanael/rainbow-delimiters">rainbow-delimiters</a> to highlight delimiters such as parentheses,
 brackets or braces, in rainbow-colors according to their depth.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp">(<span style="color:#a6e22e">use-package</span> rainbow-delimiters
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp">(<span style="color:#a6e22e">use-package</span> rainbow-delimiters
   <span style="color:#e6db74">:straight</span> <span style="color:#66d9ef">t</span>
   <span style="color:#e6db74">:hook</span>
   ((racket-mode <span style="color:#f92672">.</span> rainbow-delimiters-mode)
@@ -1209,7 +1208,7 @@ Paredit helps keep parentheses balanced and adds many keys for moving S-expressi
 </blockquote>
 
 <p>See <a href="http://danmidwood.com/content/2014/11/21/animated-paredit.html">The Animated Guide to Paredit</a> for more details.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp">(<span style="color:#a6e22e">use-package</span> paredit
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp">(<span style="color:#a6e22e">use-package</span> paredit
   <span style="color:#e6db74">:straight</span> <span style="color:#66d9ef">t</span>
   <span style="color:#e6db74">:hook</span>
   ((racket-mode <span style="color:#f92672">.</span> paredit-mode)
@@ -1221,7 +1220,7 @@ See more details from <a href="https://www.racket-mode.com/">www.racket-mode.com
 
 <p>Open Emacs and type <code>&lt;C-x C-f&gt;</code> (<code>find-file</code>) to open a new file <code>&quot;fibonacci.rkt&quot;</code>.
 Typing below code writes a function to calculate Fibonacci numbers.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme"><span style="color:#f92672">#</span>lang racket/base
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme"><span style="color:#f92672">#</span>lang racket/base
 
 (<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">fibonacci</span> n)
   (<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">iter</span> a b count)
@@ -1276,7 +1275,7 @@ Same as above, it also has <code>racket-repl-visit-definition</code> command for
 <h3 id="testing">Testing</h3>
 
 <p>Type <code>&lt;C-c C-t&gt;</code> or <code>&lt;C-f5&gt;</code> to run the command <code>racket-test</code>, it will run the submodule test of the current file. If any rackunit test failure messages showing, we can use <code>&lt;C-x `&gt;</code> to jump to the location of each failing test.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(<span style="color:#a6e22e">module+</span> test
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(<span style="color:#a6e22e">module+</span> test
   (<span style="color:#a6e22e">require</span> rackunit)
   (<span style="color:#a6e22e">check-eq?</span> (<span style="color:#a6e22e">fibonacci</span> <span style="color:#ae81ff">0</span>) <span style="color:#ae81ff">0</span>)
   (<span style="color:#a6e22e">check-eq?</span> (<span style="color:#a6e22e">fibonacci</span> <span style="color:#ae81ff">1</span>) <span style="color:#ae81ff">1</span>)

@@ -14,18 +14,17 @@
 
 <meta property="og:site_name" content="linw1995" />
 <meta property="og:locale" content="zh-cn" />
-<meta property="og:type" content="article" />
+<meta property="og:type" content="website" />
 <meta property="og:url" content="https://linw1995.com/en/blog/Python-Decorators-Advance/" />
 <meta property="og:title" content="Python Decorators Advance" />
 <meta property="twitter:title" content="Python Decorators Advance">
 
-    <meta property="og:image" content="/img/banner.png">
-    <meta property="twitter:card" content="summary">
-    <meta property="twitter:image" content="/img/banner.png">
+    <meta property="og:image" content="https://linw1995.com/img/banner.jpeg">
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:image" content="https://linw1995.com/img/banner.jpeg">
 
 <meta property="og:description" content="Accessing Wrapped Function Parameters In An Easy Way.">
 <meta property="twitter:description" content="Accessing Wrapped Function Parameters In An Easy Way.">
-
 <title>
 
 
@@ -1154,13 +1153,13 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
     
 
 <h3 id="accessing-wrapped-function-parameters-in-an-easy-way">Accessing Wrapped Function Parameters In An Easy Way</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> functools
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> functools
 
 
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">decorator</span>(func):
-    <span style="color:#a6e22e">@functools.wraps</span>(func)
+    <span style="color:#a6e22e">@functools</span><span style="color:#f92672">.</span>wraps(func)
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">wrap</span>(<span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs):
-        <span style="color:#66d9ef">print</span>(args, kwargs)
+        print(args, kwargs)
         <span style="color:#66d9ef">return</span> func(<span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs)
 
     <span style="color:#66d9ef">return</span> wrap
@@ -1169,17 +1168,17 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">boo</span>(a, b, c):
     <span style="color:#66d9ef">pass</span>
 
-boo(<span style="color:#ae81ff">1</span>, b<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>, c<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>)</code></pre></div><pre><code>((1,), {&#39;c&#39;: 3, &#39;b&#39;: 2})</code></pre>
+boo(<span style="color:#ae81ff">1</span>, b<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>, c<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>)</code></pre></div><pre tabindex="0"><code>((1,), {&#39;c&#39;: 3, &#39;b&#39;: 2})</code></pre>
 <p>The above codes is a general decorator function we always writen. The <code>wrap</code> inside the <code>decorator</code> uses <code>(*args, **kwargs)</code> as parameters for full compatibility with the wrapped <code>func</code> if we don&rsquo;t know what parameters will be received.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> sys
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> sys
 <span style="color:#f92672">import</span> functools
 <span style="color:#f92672">import</span> traceback
 
 
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">decorator</span>(func):
-    <span style="color:#a6e22e">@functools.wraps</span>(func)
+    <span style="color:#a6e22e">@functools</span><span style="color:#f92672">.</span>wraps(func)
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">wrap</span>(<span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs):
-        <span style="color:#66d9ef">print</span>(args, kwargs)
+        print(args, kwargs)
         <span style="color:#66d9ef">return</span> func(<span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs)
 
     <span style="color:#66d9ef">return</span> wrap
@@ -1191,7 +1190,7 @@ boo(<span style="color:#ae81ff">1</span>, b<span style="color:#f92672">=</span><
 <span style="color:#66d9ef">try</span>:
     boo(<span style="color:#ae81ff">1</span>, b<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>, c<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>, d<span style="color:#f92672">=</span><span style="color:#ae81ff">4</span>)
 <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">TypeError</span>:
-    traceback<span style="color:#f92672">.</span>print_exc(file<span style="color:#f92672">=</span>sys<span style="color:#f92672">.</span>stdout)</code></pre></div><pre><code>((1,), {&#39;c&#39;: 3, &#39;b&#39;: 2, &#39;d&#39;: 4})
+    traceback<span style="color:#f92672">.</span>print_exc(file<span style="color:#f92672">=</span>sys<span style="color:#f92672">.</span>stdout)</code></pre></div><pre tabindex="0"><code>((1,), {&#39;c&#39;: 3, &#39;b&#39;: 2, &#39;d&#39;: 4})
 Traceback (most recent call last):
   File &#34;&lt;stdin&gt;&#34;, line 19, in &lt;module&gt;
   File &#34;&lt;stdin&gt;&#34;, line 10, in wrap
@@ -1205,7 +1204,7 @@ TypeError: boo() got an unexpected keyword argument &#39;d&#39;</code></pre>
 <p>To achieve that we need to inspect the parameter signatures of the wrapped function.</p>
 
 <p>Use <code>inspect.signature</code><sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup> to do that.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> sys
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> sys
 <span style="color:#f92672">import</span> inspect
 <span style="color:#f92672">import</span> traceback
 
@@ -1215,18 +1214,18 @@ TypeError: boo() got an unexpected keyword argument &#39;d&#39;</code></pre>
 
 sig <span style="color:#f92672">=</span> inspect<span style="color:#f92672">.</span>signature(boo)
 
-<span style="color:#66d9ef">print</span>(sig)
+print(sig)
 
 <span style="color:#75715e"># accessing the specific parameter</span>
 bound_arguments <span style="color:#f92672">=</span> sig<span style="color:#f92672">.</span>bind(<span style="color:#ae81ff">1</span>, b<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>, c<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>)
-<span style="color:#66d9ef">print</span>(bound_arguments)
-<span style="color:#66d9ef">print</span>(bound_arguments<span style="color:#f92672">.</span>arguments[<span style="color:#e6db74">&#39;a&#39;</span>])
+print(bound_arguments)
+print(bound_arguments<span style="color:#f92672">.</span>arguments[<span style="color:#e6db74">&#39;a&#39;</span>])
 
 <span style="color:#66d9ef">try</span>:
     <span style="color:#75715e"># validate the arguments</span>
     sig<span style="color:#f92672">.</span>bind(<span style="color:#ae81ff">1</span>, b<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>, c<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>, d<span style="color:#f92672">=</span><span style="color:#ae81ff">4</span>)
 <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">TypeError</span>:
-    traceback<span style="color:#f92672">.</span>print_exc(file<span style="color:#f92672">=</span>sys<span style="color:#f92672">.</span>stdout)</code></pre></div><pre><code>(a, b, c)
+    traceback<span style="color:#f92672">.</span>print_exc(file<span style="color:#f92672">=</span>sys<span style="color:#f92672">.</span>stdout)</code></pre></div><pre tabindex="0"><code>(a, b, c)
 &lt;BoundArguments (a=1, b=2, c=3)&gt;
 1
 Traceback (most recent call last):
@@ -1239,7 +1238,7 @@ TypeError: got an unexpected keyword argument &#39;d&#39;</code></pre>
 <p>We see the <code>Signature.bind</code> method can be used easily to validate and to access the specific parameter.</p>
 
 <p>Now we combine them together.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> sys
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> sys
 <span style="color:#f92672">import</span> inspect
 <span style="color:#f92672">import</span> functools
 <span style="color:#f92672">import</span> traceback
@@ -1248,11 +1247,11 @@ TypeError: got an unexpected keyword argument &#39;d&#39;</code></pre>
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">decorator</span>(func):
     sig <span style="color:#f92672">=</span> inspect<span style="color:#f92672">.</span>signature(func)
 
-    <span style="color:#a6e22e">@functools.wraps</span>(func)
+    <span style="color:#a6e22e">@functools</span><span style="color:#f92672">.</span>wraps(func)
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">wrap</span>(<span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs):
         bound_arguments <span style="color:#f92672">=</span> sig<span style="color:#f92672">.</span>bind(<span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs)
         bound_arguments<span style="color:#f92672">.</span>apply_defaults()
-        <span style="color:#66d9ef">print</span>(bound_arguments)
+        print(bound_arguments)
         <span style="color:#66d9ef">return</span> func(<span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs)
 
     <span style="color:#66d9ef">return</span> wrap
@@ -1267,7 +1266,7 @@ boo(<span style="color:#ae81ff">1</span>, b<span style="color:#f92672">=</span><
 <span style="color:#66d9ef">try</span>:
     boo(<span style="color:#ae81ff">1</span>, b<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>, c<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>, d<span style="color:#f92672">=</span><span style="color:#ae81ff">4</span>)
 <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">TypeError</span>:
-    traceback<span style="color:#f92672">.</span>print_exc(file<span style="color:#f92672">=</span>sys<span style="color:#f92672">.</span>stdout)</code></pre></div><pre><code>&lt;BoundArguments (a=1, b=2, c=3)&gt;
+    traceback<span style="color:#f92672">.</span>print_exc(file<span style="color:#f92672">=</span>sys<span style="color:#f92672">.</span>stdout)</code></pre></div><pre tabindex="0"><code>&lt;BoundArguments (a=1, b=2, c=3)&gt;
 Traceback (most recent call last):
   File &#34;&lt;stdin&gt;&#34;, line 27, in &lt;module&gt;
   File &#34;&lt;stdin&gt;&#34;, line 12, in wrap

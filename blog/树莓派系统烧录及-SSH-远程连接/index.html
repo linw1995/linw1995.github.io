@@ -19,9 +19,9 @@
 <meta property="og:title" content="树莓派系统烧录及 SSH 远程连接" />
 <meta property="twitter:title" content="树莓派系统烧录及 SSH 远程连接">
 
-    <meta property="og:image" content="/img/banner.png">
+    <meta property="og:image" content="/img/banner.jpeg">
     <meta property="twitter:card" content="summary">
-    <meta property="twitter:image" content="/img/banner.png">
+    <meta property="twitter:image" content="/img/banner.jpeg">
 
 <meta property="og:description" content="入手了个树莓派，记录一下折腾姿势">
 <meta property="twitter:description" content="入手了个树莓派，记录一下折腾姿势">
@@ -1176,7 +1176,7 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
 <h2 id="无界面链接-wi-fi-用网线的可跳过">无界面链接 Wi-Fi（用网线的可跳过）</h2>
 
 <p>无界面怎么配置 Wi-Fi 链接呢？通过在烧录好的 SD 卡的 boot 分区，写入一个配置文件 <strong>wpa_supplicant.conf</strong>。其内容如下，替换尖括号的内容即可。刚烧录好的读卡器要重新拔插一次。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plain" data-lang="plain">ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plain" data-lang="plain">ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
 update_config=1
 country=&lt;Insert country code here&gt;
 

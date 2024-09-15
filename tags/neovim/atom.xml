@@ -4,12 +4,12 @@
     <link rel="self" type="application/atom+xml" href="https://www.linw1995.com/tags/neovim/atom.xml"/>
     <link rel="alternate" type="text/html" href="https://www.linw1995.com/"/>
     <generator uri="https://www.getzola.org/">Zola</generator>
-    <updated>2024-09-14T00:00:00+00:00</updated>
+    <updated>2024-09-16T00:00:00+00:00</updated>
     <id>https://www.linw1995.com/tags/neovim/atom.xml</id>
     <entry xml:lang="zh">
         <title>在 NixOS 中配置 Neovim </title>
         <published>2024-09-14T00:00:00+00:00</published>
-        <updated>2024-09-14T00:00:00+00:00</updated>
+        <updated>2024-09-16T00:00:00+00:00</updated>
         
         <author>
           <name>
@@ -19,10 +19,10 @@
           </name>
         </author>
         
-        <link rel="alternate" type="text/html" href="https://www.linw1995.com/setup-neovim-in-nixos-zh/"/>
-        <id>https://www.linw1995.com/setup-neovim-in-nixos-zh/</id>
+        <link rel="alternate" type="text/html" href="https://www.linw1995.com/setup-neovim-in-nixos/"/>
+        <id>https://www.linw1995.com/setup-neovim-in-nixos/</id>
         
-        <content type="html" xml:base="https://www.linw1995.com/setup-neovim-in-nixos-zh/">&lt;h2 id=&quot;qian-yan&quot;&gt;前言&lt;&#x2F;h2&gt;
+        <content type="html" xml:base="https://www.linw1995.com/setup-neovim-in-nixos/">&lt;h2 id=&quot;qian-yan&quot;&gt;前言&lt;&#x2F;h2&gt;
 &lt;p&gt;最近在需要在一个巨大的 Rust 项目中做开发工作，但我的笔记本已经不堪重负，无法做高效的开发。
 So, 我决定购买一台新的迷你 PC 来专门处理这个问题。&lt;&#x2F;p&gt;
 
@@ -77,7 +77,7 @@ So, 我决定购买一台新的迷你 PC 来专门处理这个问题。&lt;&#x2F
 &lt;p&gt;通过直接挂载递归 &lt;code&gt;.&#x2F;config&lt;&#x2F;code&gt; 目录，我们可以较为方便在其中增加自定的配置。
 我们以增加 Rust 开发所需要插件配置为例。&lt;&#x2F;p&gt;
 &lt;p&gt;首先参照 &lt;a href=&quot;https:&#x2F;&#x2F;www.lazyvim.org&#x2F;configuration&#x2F;lazy.nvim&quot;&gt;LazyVim Setup&lt;&#x2F;a&gt;
-编辑 &lt;code&gt;.&#x2F;config&#x2F;plugins&#x2F;core.lua&lt;&#x2F;code&gt; 增加 LazyVim 配置。&lt;&#x2F;p&gt;
+编辑 &lt;code&gt;.&#x2F;config&#x2F;lua&#x2F;plugins&#x2F;core.lua&lt;&#x2F;code&gt; 增加 LazyVim 配置。&lt;&#x2F;p&gt;
 &lt;pre data-lang=&quot;lua&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-lua &quot;&gt;&lt;code class=&quot;language-lua&quot; data-lang=&quot;lua&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span&gt;{
 &lt;&#x2F;span&gt;&lt;span&gt; { &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;folke&#x2F;lazy.nvim&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;version &lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;false &lt;&#x2F;span&gt;&lt;span&gt;},
 &lt;&#x2F;span&gt;&lt;span&gt; { &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;LazyVim&#x2F;LazyVim&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;version &lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;false&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;import &lt;&#x2F;span&gt;&lt;span&gt;= &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;lazyvim.plugins&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot; },
@@ -91,7 +91,7 @@ So, 我决定购买一台新的迷你 PC 来专门处理这个问题。&lt;&#x2F
 &lt;p&gt;由于需要 C 编译器来构建 nvim-treesitter 。如果没有 &lt;code&gt;cc&lt;&#x2F;code&gt; 命令，
 可以先执行 &lt;code&gt;nix shell nixpkgs#gcc&lt;&#x2F;code&gt; 再执行 nvim 来替代。&lt;&#x2F;p&gt;
 &lt;&#x2F;blockquote&gt;
-&lt;p&gt;编辑 &lt;code&gt;.&#x2F;config&#x2F;plugins&#x2F;custom&#x2F;rust.lua&lt;&#x2F;code&gt; 增加及配置 Rust 开发插件。&lt;&#x2F;p&gt;
+&lt;p&gt;编辑 &lt;code&gt;.&#x2F;config&#x2F;lua&#x2F;plugins&#x2F;custom&#x2F;rust.lua&lt;&#x2F;code&gt; 增加及配置 Rust 开发插件。&lt;&#x2F;p&gt;
 &lt;pre data-lang=&quot;lua&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-lua &quot;&gt;&lt;code class=&quot;language-lua&quot; data-lang=&quot;lua&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span&gt;{
 &lt;&#x2F;span&gt;&lt;span&gt; { &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;import &lt;&#x2F;span&gt;&lt;span&gt;= &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;lazyvim.plugins.extras.lang.rust&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot; },
 &lt;&#x2F;span&gt;&lt;span&gt;
@@ -187,22 +187,19 @@ So, 我决定购买一台新的迷你 PC 来专门处理这个问题。&lt;&#x2F
 &lt;p&gt;Rust-Analyzer 需要手动安装，可以执行 &lt;code&gt;rustup component add rust-analyzer&lt;&#x2F;code&gt; 来添加&lt;&#x2F;p&gt;
 &lt;&#x2F;blockquote&gt;
 &lt;h2 id=&quot;za-xiang&quot;&gt;杂项&lt;&#x2F;h2&gt;
-&lt;ul&gt;
-&lt;li&gt;Mini-PC 是铭凡 UM790 XTX
+&lt;p&gt;Mini-PC 品牌型号是： &lt;strong&gt;铭凡 UM790 XTX&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
 &lt;ul&gt;
 &lt;li&gt;CPU：AMD Ryzen 9 7940HS&lt;&#x2F;li&gt;
 &lt;li&gt;内存：Crucial DDR5-5600 16G * 2&lt;&#x2F;li&gt;
 &lt;li&gt;硬盘：致态 TiPlus7100 1TB&lt;&#x2F;li&gt;
 &lt;&#x2F;ul&gt;
-&lt;&#x2F;li&gt;
-&lt;li&gt;Mini-PC 的 Batman 灯效是 3D 打印替换的
+&lt;p&gt;图片中 Mini-PC 的 Batman 灯效是通过 3D 打印替换的。&lt;&#x2F;p&gt;
 &lt;ul&gt;
 &lt;li&gt;模型模板： &lt;a href=&quot;https:&#x2F;&#x2F;www.printables.com&#x2F;model&#x2F;814075-minisforum-um780-xtx-led-plate&quot;&gt;Minisforum UM780 XTX LED plate&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
 &lt;li&gt;Batman 模型：&lt;a href=&quot;https:&#x2F;&#x2F;www.printables.com&#x2F;model&#x2F;118622-batman-cutout-wall-art&quot;&gt;Batman Cutout Wall Art&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
 &lt;&#x2F;ul&gt;
-&lt;&#x2F;li&gt;
-&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;makerworld.com&#x2F;zh&#x2F;models&#x2F;617886&quot;&gt;iPhone 15 Pro Max 待机模式底座模型&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
-&lt;&#x2F;ul&gt;
+&lt;p&gt;图片主体是 &lt;a href=&quot;https:&#x2F;&#x2F;makerworld.com&#x2F;zh&#x2F;models&#x2F;617886&quot;&gt;iPhone 15 Pro Max 待机模式底座&lt;&#x2F;a&gt;，
+通过 3D 打印制作。它可以用来给手机及耳机充电。&lt;&#x2F;p&gt;
 </content>
         
     </entry>

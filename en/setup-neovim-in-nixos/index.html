@@ -2,7 +2,7 @@
 <html lang="zh">
 
 <head>
-    <title>在 NixOS 中配置 Neovim </title>
+    <title>Setup Neovim in NixOS</title>
     
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
@@ -16,15 +16,15 @@
     <meta name="description" content="">
 
     <meta property="og:description" content="">
-    <meta property="og:title" content="在 NixOS 中配置 Neovim ">
+    <meta property="og:title" content="Setup Neovim in NixOS">
     <meta property="og:type" content="article">
-    <meta property="og:url" content="https://www.linw1995.com/setup-neovim-in-nixos/">
+    <meta property="og:url" content="https://www.linw1995.com/en/setup-neovim-in-nixos/">
 
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:description" content="">
-    <meta name="twitter:title" content="在 NixOS 中配置 Neovim ">
+    <meta name="twitter:title" content="Setup Neovim in NixOS">
     <meta property="twitter:domain" content="www.linw1995.com&#x2F;">
-    <meta property="twitter:url" content="https://www.linw1995.com/setup-neovim-in-nixos/">
+    <meta property="twitter:url" content="https://www.linw1995.com/en/setup-neovim-in-nixos/">
 
     </head>
 
@@ -45,7 +45,7 @@
             </div>
               
 <ul class="menu menu--desktop menu--language-selector">
-  <li class="menu__trigger">Chinese&nbsp;▾</li>
+  <li class="menu__trigger">English&nbsp;▾</li>
   <li>
     <ul class="menu__dropdown">
         <li><a href="https:&#x2F;&#x2F;www.linw1995.com&#x2F;setup-neovim-in-nixos&#x2F;">中文</a></li>
@@ -80,11 +80,11 @@
         
 <div class="post">
     
-    <h1 class="post-title"><a href="https://www.linw1995.com/setup-neovim-in-nixos/">在 NixOS 中配置 Neovim </a></h1>
+    <h1 class="post-title"><a href="https://www.linw1995.com/en/setup-neovim-in-nixos/">Setup Neovim in NixOS</a></h1>
     <div class="post-meta-inline">
         
     <span class="post-date">
-            2024-09-14
+            2024-09-16
         </span>
 
     </div>
@@ -98,9 +98,10 @@
     
 
     <div class="post-content">
-            <h2 id="qian-yan">前言</h2>
-<p>最近在需要在一个巨大的 Rust 项目中做开发工作，但我的笔记本已经不堪重负，无法做高效的开发。
-So, 我决定购买一台新的迷你 PC 来专门处理这个问题。</p>
+            <p>Recently,
+I've been working on a large project in Rust,
+but my laptop isn't powerful enough to handle it efficiently.
+So, I decided to buy a new mini-PC specifically for this task.</p>
 
   
   
@@ -109,14 +110,19 @@ So, 我决定购买一台新的迷你 PC 来专门处理这个问题。</p>
   
   <img src="https://www.linw1995.com/images/setup_neovim_in_nixos-mini_pc.jpg" alt="mini PC is put on the left of my phone rack" class="left" style="border-radius: 8px;" decoding="async" loading="lazy"/>
 
-<p>由于还是习惯在 MacOS 上开发，且又不想折腾 Hackintosh，
-我给这台新的迷你 PC 安装了 NixOS 。最早是打算继续使用 VSCode，
-后面发现 Neovim 也是一个不错的选择。</p>
-<span id="continue-reading"></span><h2 id="an-zhuang-neovim">安装 Neovim</h2>
-<p>我是用 home-manager 做配置管理的，但通过 <code>programs.neovim = {}</code> 使用 nixos-unstable 会有构建失败的问题。
-所以先直接引入即可。</p>
+<p>Since I’m still more accustomed to developing on macOS
+and didn’t want to go through the hassle of setting up a Hackintosh,
+I decided to install NixOS on my new mini PC.
+Initially, I planned to continue using VSCode,
+but later discovered that Neovim is also a great alternative.</p>
+<span id="continue-reading"></span><h2 id="install-neovim">Install Neovim</h2>
+<p>I manage my configurations using home-manager,
+but encountered build failures
+when using nixos-unstable with <code>programs.neovim = {}</code>.
+To avoid this issue, I opted to include it directly for now.</p>
 <blockquote>
-<p>为啥要用 nixos-unstable ，是因为想用到最新的 neovim 版本 <code>v0.10.1</code> 。</p>
+<p>The reason for using nixos-unstable
+is that I wanted to access the latest Neovim version, <code>v0.10.1</code>.</p>
 </blockquote>
 <pre data-lang="nix" style="background-color:#2b303b;color:#c0c5ce;" class="language-nix "><code class="language-nix" data-lang="nix"><span style="color:#8fa1b3;">{</span><span>inputs, ...</span><span style="color:#8fa1b3;">}</span><span>: </span><span style="color:#b48ead;">let
 </span><span>  </span><span style="color:#d08770;">pkgs </span><span>= </span><span style="color:#96b5b4;">import </span><span style="color:#bf616a;">inputs</span><span>.</span><span style="color:#bf616a;">nixpkgs-unstable </span><span>{};
@@ -131,10 +137,10 @@ So, 我决定购买一台新的迷你 PC 来专门处理这个问题。</p>
 </span><span>  </span><span style="color:#65737e;"># };
 </span><span>}
 </span></code></pre>
-<h2 id="pei-zhi-lazy-nvim">配置 lazy.nvim</h2>
-<p>直接使用 lua 脚本来配置 lazy.nvim 。
-参照安装文档 <a href="https://lazy.folke.io/installation">Single File Setup</a> ，
-复制内容增加 <code>config/init.lua</code> 文件。</p>
+<h2 id="configure-lazy-nvim">Configure lazy.nvim</h2>
+<p>Directly use a Lua script to configure lazy.nvim.
+Refer to the installation documentation for the <a href="https://lazy.folke.io/installation">Single File Setup</a>,
+copy the content and add it to the <code>config/init.lua</code> file.</p>
 <pre data-lang="nix" style="background-color:#2b303b;color:#c0c5ce;" class="language-nix "><code class="language-nix" data-lang="nix"><span style="color:#8fa1b3;">{</span><span>inputs, ...</span><span style="color:#8fa1b3;">}</span><span>: </span><span style="color:#b48ead;">let
 </span><span>  </span><span style="color:#d08770;">pkgs </span><span>= </span><span style="color:#96b5b4;">import </span><span style="color:#bf616a;">inputs</span><span>.</span><span style="color:#bf616a;">nixpkgs-unstable </span><span>{};
 </span><span style="color:#b48ead;">in </span><span>{
@@ -148,12 +154,15 @@ So, 我决定购买一台新的迷你 PC 来专门处理这个问题。</p>
 </span></mark><mark style="background-color:#65737e30;"><span>  };
 </span></mark><span>}
 </span></code></pre>
-<p>执行 rebuild switch 成功后运行 nvim 即可看到 lazy.nvim 自动走初始化流程。</p>
-<h2 id="an-zhuang-ji-pei-zhi-cha-jian">安装及配置插件</h2>
-<p>通过直接挂载递归 <code>./config</code> 目录，我们可以较为方便在其中增加自定的配置。
-我们以增加 Rust 开发所需要插件配置为例。</p>
-<p>首先参照 <a href="https://www.lazyvim.org/configuration/lazy.nvim">LazyVim Setup</a>
-编辑 <code>./config/lua/plugins/core.lua</code> 增加 LazyVim 配置。</p>
+<p>After successfully executing <strong>rebuild switch</strong>,
+run <code>nvim</code> and you will see lazy.nvim automatically go through
+the initialization process.</p>
+<h2 id="install-and-configure-plugins">Install and Configure Plugins</h2>
+<p>By directly mounting the recursive <code>./config</code> directory,
+we can easily add custom configurations.
+As an example, let's add the necessary plugin configuration for Rust development.
+First, refer to the <a href="https://www.lazyvim.org/configuration/lazy.nvim">LazyVim Setup</a>
+and edit <code>./config/lua/plugins/core.lua</code> to add the LazyVim configuration.</p>
 <pre data-lang="lua" style="background-color:#2b303b;color:#c0c5ce;" class="language-lua "><code class="language-lua" data-lang="lua"><span style="color:#b48ead;">return </span><span>{
 </span><span> { &quot;</span><span style="color:#a3be8c;">folke/lazy.nvim</span><span>&quot;, </span><span style="color:#a3be8c;">version </span><span>= </span><span style="color:#d08770;">false </span><span>},
 </span><span> { &quot;</span><span style="color:#a3be8c;">LazyVim/LazyVim</span><span>&quot;, </span><span style="color:#a3be8c;">version </span><span>= </span><span style="color:#d08770;">false</span><span>, </span><span style="color:#a3be8c;">import </span><span>= &quot;</span><span style="color:#a3be8c;">lazyvim.plugins</span><span>&quot; },
@@ -164,10 +173,12 @@ So, 我决定购买一台新的迷你 PC 来专门处理这个问题。</p>
 </span><span>}
 </span></code></pre>
 <blockquote>
-<p>由于需要 C 编译器来构建 nvim-treesitter 。如果没有 <code>cc</code> 命令，
-可以先执行 <code>nix shell nixpkgs#gcc</code> 再执行 nvim 来替代。</p>
+<p>Since a C compiler is needed to build nvim-treesitter,
+if the <code>cc</code> command is not available,
+you can run <code>nix shell nixpkgs#gcc</code> before executing <code>nvim</code> as an alternative.</p>
 </blockquote>
-<p>编辑 <code>./config/lua/plugins/custom/rust.lua</code> 增加及配置 Rust 开发插件。</p>
+<p>Edit <code>./config/lua/plugins/custom/rust.lua</code> to add
+and configure Rust development plugins.</p>
 <pre data-lang="lua" style="background-color:#2b303b;color:#c0c5ce;" class="language-lua "><code class="language-lua" data-lang="lua"><span style="color:#b48ead;">return </span><span>{
 </span><span> { </span><span style="color:#a3be8c;">import </span><span>= &quot;</span><span style="color:#a3be8c;">lazyvim.plugins.extras.lang.rust</span><span>&quot; },
 </span><span>
@@ -204,7 +215,8 @@ So, 我决定购买一台新的迷你 PC 来专门处理这个问题。</p>
 </span><span> },
 </span><span>}
 </span></code></pre>
-<p>如果需要代码调试，则需要增加 dap 配置。增加 <code>./config/lua/plugins/custom/dap.lua</code> 配置</p>
+<p>If code debugging is required, you need to add DAP configuration.
+Add the configuration to <code>./config/lua/plugins/custom/dap.lua</code>.</p>
 <pre data-lang="lua" style="background-color:#2b303b;color:#c0c5ce;" class="language-lua "><code class="language-lua" data-lang="lua"><span style="color:#b48ead;">return </span><span>{
 </span><span>  { </span><span style="color:#a3be8c;">import </span><span>= &quot;</span><span style="color:#a3be8c;">lazyvim.plugins.extras.dap.core</span><span>&quot; },
 </span><span>
@@ -223,8 +235,9 @@ So, 我决定购买一台新的迷你 PC 来专门处理这个问题。</p>
 </span><span>  }
 </span><span>}
 </span></code></pre>
-<p>通过 mason 自动安装 codelldb 还需要额外的依赖。</p>
-<p>常用的就直接通过 <code>home.packages</code> 引入即可，全局使用。</p>
+<p>To automatically install codelldb via Mason, additional dependencies are required.</p>
+<p>For common dependencies,
+you can simply include them through <code>home.packages</code> for global use.</p>
 <pre data-lang="nix" style="background-color:#2b303b;color:#c0c5ce;" class="language-nix "><code class="language-nix" data-lang="nix"><span style="color:#8fa1b3;">{</span><span>pkgs,...</span><span style="color:#8fa1b3;">}</span><span>: {
 </span><span>  </span><span style="color:#d08770;">home</span><span>.</span><span style="color:#d08770;">packages </span><span>= </span><span style="color:#b48ead;">with </span><span style="color:#bf616a;">pkgs</span><span>; [
 </span><span>    </span><span style="color:#bf616a;">curl
@@ -237,7 +250,9 @@ So, 我决定购买一台新的迷你 PC 来专门处理这个问题。</p>
 </span><span>  ];
 </span><span>}
 </span></code></pre>
-<p>但像 nodejs 的，这类不想全局生效的环境。可以通过以下方式引入</p>
+<p>For environments like Node.js
+that you don't want to be globally effective,
+you can include them using the following method:</p>
 <pre data-lang="nix" style="background-color:#2b303b;color:#c0c5ce;" class="language-nix "><code class="language-nix" data-lang="nix"><span style="color:#8fa1b3;">{</span><span>inputs, ...</span><span style="color:#8fa1b3;">}</span><span>: </span><span style="color:#b48ead;">let
 </span><span>  </span><span style="color:#d08770;">pkgs </span><span>= </span><span style="color:#96b5b4;">import </span><span style="color:#bf616a;">inputs</span><span>.</span><span style="color:#bf616a;">nixpkgs-unstable </span><span>{};
 </span><span style="color:#b48ead;">in </span><span>{
@@ -258,24 +273,28 @@ So, 我决定购买一台新的迷你 PC 来专门处理这个问题。</p>
 </span><span>  };
 </span><span>}
 </span></code></pre>
-<p>配置完成后，通过 nvim 打开 Rust 项目编辑 *.rs 文件时，就会自动加载对应插件。</p>
+<p>Once configured, when you open a Rust project and edit <code>*.rs</code> files in <code>nvim</code>,
+the corresponding plugins will be automatically loaded.</p>
 <blockquote>
-<p>Rust-Analyzer 需要手动安装，可以执行 <code>rustup component add rust-analyzer</code> 来添加</p>
+<p>Rust-Analyzer needs to be installed manually.
+You can add it by running <code>rustup component add rust-analyzer</code>.</p>
 </blockquote>
-<h2 id="za-xiang">杂项</h2>
-<p>Mini-PC 品牌型号是： <strong>铭凡 UM790 XTX</strong></p>
+<h2 id="miscellaneous">Miscellaneous</h2>
+<p>The Mini-PC brand and model are: <strong>Minisforum UM790 XTX</strong></p>
 <ul>
-<li>CPU：AMD Ryzen 9 7940HS</li>
-<li>内存：Crucial DDR5-5600 16G * 2</li>
-<li>硬盘：致态 TiPlus7100 1TB</li>
+<li>CPU: AMD Ryzen 9 7940HS</li>
+<li>RAM: Crucial DDR5-5600 16G * 2</li>
+<li>Storage: ZhiTai TiPlus7100 1TB</li>
 </ul>
-<p>图片中 Mini-PC 的 Batman 灯效是通过 3D 打印替换的。</p>
+<p>The Batman lighting effect on the Mini-PC in the image is
+replaced with a 3D-Printing part.</p>
 <ul>
-<li>模型模板： <a href="https://www.printables.com/model/814075-minisforum-um780-xtx-led-plate">Minisforum UM780 XTX LED plate</a></li>
-<li>Batman 模型：<a href="https://www.printables.com/model/118622-batman-cutout-wall-art">Batman Cutout Wall Art</a></li>
+<li>Model template: <a href="https://www.printables.com/model/814075-minisforum-um780-xtx-led-plate">Minisforum UM780 XTX LED plate</a></li>
+<li>Batman model: <a href="https://www.printables.com/model/118622-batman-cutout-wall-art">Batman Cutout Wall Art</a></li>
 </ul>
-<p>图片主体是 <a href="https://makerworld.com/zh/models/617886">iPhone 15 Pro Max 待机模式底座</a>，
-通过 3D 打印制作。它可以用来给手机及耳机充电。</p>
+<p>The main item in the image is the <a href="https://makerworld.com/zh/models/617886">iPhone 15 Pro Max standby mode base</a>,
+made using 3D Printing.
+It can be used to charge both your phone and AirPods Pro.</p>
 
         </div>
 
@@ -306,7 +325,7 @@ So, 我决定购买一台新的迷你 PC 来专门处理这个问题。</p>
     data-emit-metadata="0"
     data-input-position="top"
     data-theme="dark"
-    data-lang="zh-CN"
+    data-lang="en"
     data-loading="lazy"
     crossorigin="anonymous"
     async></script>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title> - neovim</title>
+    <link rel="self" type="application/atom+xml" href="https://www.linw1995.com/en/tags/neovim/atom.xml"/>
+    <link rel="alternate" type="text/html" href="https://www.linw1995.com/"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2024-09-16T00:00:00+00:00</updated>
+    <id>https://www.linw1995.com/en/tags/neovim/atom.xml</id>
+    <entry xml:lang="en">
+        <title>Setup Neovim in NixOS</title>
+        <published>2024-09-16T00:00:00+00:00</published>
+        <updated>2024-09-16T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://www.linw1995.com/en/setup-neovim-in-nixos/"/>
+        <id>https://www.linw1995.com/en/setup-neovim-in-nixos/</id>
+        
+        <summary type="html">&lt;p&gt;Recently,
+I&#x27;ve been working on a large project in Rust,
+but my laptop isn&#x27;t powerful enough to handle it efficiently.
+So, I decided to buy a new mini-PC specifically for this task.&lt;&#x2F;p&gt;
+
+  
+  
+    
+    
+  
+  &lt;img src=&quot;https:&#x2F;&#x2F;www.linw1995.com&#x2F;images&#x2F;setup_neovim_in_nixos-mini_pc.jpg&quot; alt=&quot;mini PC is put on the left of my phone rack&quot; class=&quot;left&quot; style=&quot;border-radius: 8px;&quot; decoding=&quot;async&quot; loading=&quot;lazy&quot;&#x2F;&gt;
+
+&lt;p&gt;Since I’m still more accustomed to developing on macOS
+and didn’t want to go through the hassle of setting up a Hackintosh,
+I decided to install NixOS on my new mini PC.
+Initially, I planned to continue using VSCode,
+but later discovered that Neovim is also a great alternative.&lt;&#x2F;p&gt;
+</summary>
+        
+    </entry>
+</feed>

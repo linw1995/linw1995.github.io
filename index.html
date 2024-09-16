@@ -100,7 +100,8 @@
     
 
 
-                    <div class="post-content">
+                    
+        <div class="post-content">
             <h2 id="qian-yan">前言</h2>
 <p>最近在需要在一个巨大的 Rust 项目中做开发工作，但我的笔记本已经不堪重负，无法做高效的开发。
 So, 我决定购买一台新的迷你 PC 来专门处理这个问题。</p>
@@ -115,172 +116,16 @@ So, 我决定购买一台新的迷你 PC 来专门处理这个问题。</p>
 <p>由于还是习惯在 MacOS 上开发，且又不想折腾 Hackintosh，
 我给这台新的迷你 PC 安装了 NixOS 。最早是打算继续使用 VSCode，
 后面发现 Neovim 也是一个不错的选择。</p>
-<h2 id="an-zhuang-neovim">安装 Neovim</h2>
-<p>我是用 home-manager 做配置管理的，但通过 <code>programs.neovim = {}</code> 使用 nixos-unstable 会有构建失败的问题。
-所以先直接引入即可。</p>
-<blockquote>
-<p>为啥要用 nixos-unstable ，是因为想用到最新的 neovim 版本 <code>v0.10.1</code> 。</p>
-</blockquote>
-<pre data-lang="nix" style="background-color:#2b303b;color:#c0c5ce;" class="language-nix "><code class="language-nix" data-lang="nix"><span style="color:#8fa1b3;">{</span><span>inputs, ...</span><span style="color:#8fa1b3;">}</span><span>: </span><span style="color:#b48ead;">let
-</span><span>  </span><span style="color:#d08770;">pkgs </span><span>= </span><span style="color:#96b5b4;">import </span><span style="color:#bf616a;">inputs</span><span>.</span><span style="color:#bf616a;">nixpkgs-unstable </span><span>{};
-</span><span style="color:#b48ead;">in </span><span>{
-</span><span>  </span><span style="color:#d08770;">home</span><span>.</span><span style="color:#d08770;">packages </span><span>= </span><span style="color:#b48ead;">with </span><span style="color:#bf616a;">pkgs</span><span>; [
-</span><span>    </span><span style="color:#bf616a;">neovim
-</span><span>  ];
-</span><span>
-</span><span>  </span><span style="color:#65737e;"># programs.neovim = {
-</span><span>  </span><span style="color:#65737e;">#   enable = true;
-</span><span>  </span><span style="color:#65737e;">#   package = pkgs.neovim;
-</span><span>  </span><span style="color:#65737e;"># };
-</span><span>}
-</span></code></pre>
-<h2 id="pei-zhi-lazy-nvim">配置 lazy.nvim</h2>
-<p>直接使用 lua 脚本来配置 lazy.nvim 。
-参照安装文档 <a href="https://lazy.folke.io/installation">Single File Setup</a> ，
-复制内容增加 <code>config/init.lua</code> 文件。</p>
-<pre data-lang="nix" style="background-color:#2b303b;color:#c0c5ce;" class="language-nix "><code class="language-nix" data-lang="nix"><span style="color:#8fa1b3;">{</span><span>inputs, ...</span><span style="color:#8fa1b3;">}</span><span>: </span><span style="color:#b48ead;">let
-</span><span>  </span><span style="color:#d08770;">pkgs </span><span>= </span><span style="color:#96b5b4;">import </span><span style="color:#bf616a;">inputs</span><span>.</span><span style="color:#bf616a;">nixpkgs-unstable </span><span>{};
-</span><span style="color:#b48ead;">in </span><span>{
-</span><span>  </span><span style="color:#d08770;">home</span><span>.</span><span style="color:#d08770;">packages </span><span>= </span><span style="color:#b48ead;">with </span><span style="color:#bf616a;">pkgs</span><span>; [
-</span><span>    </span><span style="color:#bf616a;">neovim
-</span><span>  ];
-</span><span>
-</span><mark style="background-color:#65737e30;"><span>  </span><span style="color:#d08770;">home</span><span>.</span><span style="color:#d08770;">file</span><span>.&quot;</span><span style="color:#a3be8c;">./.config/nvim/</span><span>&quot; = {
-</span></mark><mark style="background-color:#65737e30;"><span>    </span><span style="color:#d08770;">source </span><span>= </span><span style="color:#a3be8c;">./config</span><span>;
-</span></mark><mark style="background-color:#65737e30;"><span>    </span><span style="color:#d08770;">recursive </span><span>= </span><span style="color:#d08770;">true</span><span>;
-</span></mark><mark style="background-color:#65737e30;"><span>  };
-</span></mark><span>}
-</span></code></pre>
-<p>执行 rebuild switch 成功后运行 nvim 即可看到 lazy.nvim 自动走初始化流程。</p>
-<h2 id="an-zhuang-ji-pei-zhi-cha-jian">安装及配置插件</h2>
-<p>通过直接挂载递归 <code>./config</code> 目录，我们可以较为方便在其中增加自定的配置。
-我们以增加 Rust 开发所需要插件配置为例。</p>
-<p>首先参照 <a href="https://www.lazyvim.org/configuration/lazy.nvim">LazyVim Setup</a>
-编辑 <code>./config/lua/plugins/core.lua</code> 增加 LazyVim 配置。</p>
-<pre data-lang="lua" style="background-color:#2b303b;color:#c0c5ce;" class="language-lua "><code class="language-lua" data-lang="lua"><span style="color:#b48ead;">return </span><span>{
-</span><span> { &quot;</span><span style="color:#a3be8c;">folke/lazy.nvim</span><span>&quot;, </span><span style="color:#a3be8c;">version </span><span>= </span><span style="color:#d08770;">false </span><span>},
-</span><span> { &quot;</span><span style="color:#a3be8c;">LazyVim/LazyVim</span><span>&quot;, </span><span style="color:#a3be8c;">version </span><span>= </span><span style="color:#d08770;">false</span><span>, </span><span style="color:#a3be8c;">import </span><span>= &quot;</span><span style="color:#a3be8c;">lazyvim.plugins</span><span>&quot; },
-</span><span> 
-</span><span> </span><span style="color:#65737e;">-- NOTE: The import below can automatically add your own plugins, 
-</span><span> </span><span style="color:#65737e;">-- configuration, etc from `lua/plugins/custom/*.lua`
-</span><span> { </span><span style="color:#a3be8c;">import </span><span>= &quot;</span><span style="color:#a3be8c;">plugins.custom</span><span>&quot; },
-</span><span>}
-</span></code></pre>
-<blockquote>
-<p>由于需要 C 编译器来构建 nvim-treesitter 。如果没有 <code>cc</code> 命令，
-可以先执行 <code>nix shell nixpkgs#gcc</code> 再执行 nvim 来替代。</p>
-</blockquote>
-<p>编辑 <code>./config/lua/plugins/custom/rust.lua</code> 增加及配置 Rust 开发插件。</p>
-<pre data-lang="lua" style="background-color:#2b303b;color:#c0c5ce;" class="language-lua "><code class="language-lua" data-lang="lua"><span style="color:#b48ead;">return </span><span>{
-</span><span> { </span><span style="color:#a3be8c;">import </span><span>= &quot;</span><span style="color:#a3be8c;">lazyvim.plugins.extras.lang.rust</span><span>&quot; },
-</span><span>
-</span><span> {
-</span><span>  &quot;</span><span style="color:#a3be8c;">mrcjkb/rustaceanvim</span><span>&quot;,
-</span><span>  </span><span style="color:#a3be8c;">version </span><span>= &quot;</span><span style="color:#a3be8c;">^4</span><span>&quot;, </span><span style="color:#65737e;">-- Recommended
-</span><span>  </span><span style="color:#8fa1b3;">opts </span><span>= </span><span style="color:#b48ead;">function</span><span>(_, opts)
-</span><span>   </span><span style="color:#bf616a;">opts</span><span>.server.default_settings[&quot;</span><span style="color:#a3be8c;">rust-analyzer</span><span>&quot;] = {
-</span><span>    </span><span style="color:#a3be8c;">cargo </span><span>= {
-</span><span>     </span><span style="color:#a3be8c;">loadOutDirsFromCheck </span><span>= </span><span style="color:#d08770;">true</span><span>,
-</span><span>     </span><span style="color:#a3be8c;">buildScripts </span><span>= {
-</span><span>      </span><span style="color:#a3be8c;">enable </span><span>= </span><span style="color:#d08770;">true</span><span>,
-</span><span>     },
-</span><span>    },
-</span><span>    </span><span style="color:#a3be8c;">checkOnSave </span><span>= </span><span style="color:#d08770;">true</span><span>,
-</span><span>    </span><span style="color:#a3be8c;">procMacro </span><span>= {
-</span><span>     </span><span style="color:#a3be8c;">enable </span><span>= </span><span style="color:#d08770;">true</span><span>,
-</span><span>     </span><span style="color:#a3be8c;">ignored </span><span>= {},
-</span><span>    },
-</span><span>    </span><span style="color:#a3be8c;">files </span><span>= {
-</span><span>     </span><span style="color:#a3be8c;">watcher </span><span>= &quot;</span><span style="color:#a3be8c;">client</span><span>&quot;,
-</span><span>     </span><span style="color:#a3be8c;">excludeDirs </span><span>= { &quot;</span><span style="color:#a3be8c;">.direnv</span><span>&quot;, &quot;</span><span style="color:#a3be8c;">.git</span><span>&quot; },
-</span><span>    },
-</span><span>   }
-</span><span>  </span><span style="color:#b48ead;">end</span><span>,
-</span><span> },
-</span><span> {
-</span><span>  &quot;</span><span style="color:#a3be8c;">nvim-neotest/neotest</span><span>&quot;,
-</span><span>  </span><span style="color:#a3be8c;">opts </span><span>= {
-</span><span>   </span><span style="color:#a3be8c;">adapters </span><span>= {
-</span><span>    [&quot;</span><span style="color:#a3be8c;">rustaceanvim.neotest</span><span>&quot;] = {},
-</span><span>   },
-</span><span>  },
-</span><span> },
-</span><span>}
-</span></code></pre>
-<p>如果需要代码调试，则需要增加 dap 配置。增加 <code>./config/lua/plugins/custom/dap.lua</code> 配置</p>
-<pre data-lang="lua" style="background-color:#2b303b;color:#c0c5ce;" class="language-lua "><code class="language-lua" data-lang="lua"><span style="color:#b48ead;">return </span><span>{
-</span><span>  { </span><span style="color:#a3be8c;">import </span><span>= &quot;</span><span style="color:#a3be8c;">lazyvim.plugins.extras.dap.core</span><span>&quot; },
-</span><span>
-</span><span>  {
-</span><span>    &quot;</span><span style="color:#a3be8c;">jay-babu/mason-nvim-dap.nvim</span><span>&quot;,
-</span><span>
-</span><span>    </span><span style="color:#a3be8c;">opts </span><span>= {
-</span><span>      </span><span style="color:#a3be8c;">automatic_installation </span><span>= </span><span style="color:#d08770;">true</span><span>,
-</span><span>
-</span><span>      </span><span style="color:#a3be8c;">handlers </span><span>= {},
-</span><span>
-</span><span>      </span><span style="color:#a3be8c;">ensure_installed </span><span>= {
-</span><span>        &quot;</span><span style="color:#a3be8c;">codelldb</span><span>&quot;
-</span><span>      },
-</span><span>    }
-</span><span>  }
-</span><span>}
-</span></code></pre>
-<p>通过 mason 自动安装 codelldb 还需要额外的依赖。</p>
-<p>常用的就直接通过 <code>home.packages</code> 引入即可，全局使用。</p>
-<pre data-lang="nix" style="background-color:#2b303b;color:#c0c5ce;" class="language-nix "><code class="language-nix" data-lang="nix"><span style="color:#8fa1b3;">{</span><span>pkgs,...</span><span style="color:#8fa1b3;">}</span><span>: {
-</span><span>  </span><span style="color:#d08770;">home</span><span>.</span><span style="color:#d08770;">packages </span><span>= </span><span style="color:#b48ead;">with </span><span style="color:#bf616a;">pkgs</span><span>; [
-</span><span>    </span><span style="color:#bf616a;">curl
-</span><span>    </span><span style="color:#bf616a;">wget
-</span><span>    </span><span style="color:#bf616a;">git
-</span><span>
-</span><span>    </span><span style="color:#bf616a;">unzip
-</span><span>    </span><span style="color:#bf616a;">gnutar
-</span><span>    </span><span style="color:#bf616a;">gzip
-</span><span>  ];
-</span><span>}
-</span></code></pre>
-<p>但像 nodejs 的，这类不想全局生效的环境。可以通过以下方式引入</p>
-<pre data-lang="nix" style="background-color:#2b303b;color:#c0c5ce;" class="language-nix "><code class="language-nix" data-lang="nix"><span style="color:#8fa1b3;">{</span><span>inputs, ...</span><span style="color:#8fa1b3;">}</span><span>: </span><span style="color:#b48ead;">let
-</span><span>  </span><span style="color:#d08770;">pkgs </span><span>= </span><span style="color:#96b5b4;">import </span><span style="color:#bf616a;">inputs</span><span>.</span><span style="color:#bf616a;">nixpkgs-unstable </span><span>{};
-</span><span style="color:#b48ead;">in </span><span>{
-</span><span>  </span><span style="color:#d08770;">home</span><span>.</span><span style="color:#d08770;">packages </span><span>= </span><span style="color:#b48ead;">with </span><span style="color:#bf616a;">pkgs</span><span>; [
-</span><span>    </span><span style="color:#bf616a;">neovim
-</span><span>  ];
-</span><span>
-</span><span>  </span><span style="color:#d08770;">home</span><span>.</span><span style="color:#d08770;">file</span><span>.&quot;</span><span style="color:#a3be8c;">./.config/nvim/</span><span>&quot; = {
-</span><span>    </span><span style="color:#d08770;">source </span><span>= </span><span style="color:#a3be8c;">./config</span><span>;
-</span><span>    </span><span style="color:#d08770;">recursive </span><span>= </span><span style="color:#d08770;">true</span><span>;
-</span><span>  };
-</span><span>
-</span><span>  </span><span style="color:#d08770;">home</span><span>.</span><span style="color:#d08770;">file</span><span>.&quot;</span><span style="color:#a3be8c;">./.config/nvim/lua/config/options.lua</span><span>&quot; = {
-</span><span>    </span><span style="color:#d08770;">text </span><span>= &#39;&#39;
-</span><span style="color:#a3be8c;">      -- npm is required for mason
-</span><span style="color:#a3be8c;">      vim.env.PATH = vim.env.PATH .. &quot;:</span><span style="font-style:italic;color:#ab7967;">${</span><span style="font-style:italic;color:#bf616a;">pkgs</span><span style="font-style:italic;color:#c0c5ce;">.</span><span style="font-style:italic;color:#bf616a;">nodejs</span><span style="font-style:italic;color:#ab7967;">}</span><span style="color:#a3be8c;">/bin&quot;
-</span><span style="color:#a3be8c;">    </span><span>&#39;&#39;;
-</span><span>  };
-</span><span>}
-</span></code></pre>
-<p>配置完成后，通过 nvim 打开 Rust 项目编辑 *.rs 文件时，就会自动加载对应插件。</p>
-<blockquote>
-<p>Rust-Analyzer 需要手动安装，可以执行 <code>rustup component add rust-analyzer</code> 来添加</p>
-</blockquote>
-<h2 id="za-xiang">杂项</h2>
-<p>Mini-PC 品牌型号是： <strong>铭凡 UM790 XTX</strong></p>
-<ul>
-<li>CPU：AMD Ryzen 9 7940HS</li>
-<li>内存：Crucial DDR5-5600 16G * 2</li>
-<li>硬盘：致态 TiPlus7100 1TB</li>
-</ul>
-<p>图片中 Mini-PC 的 Batman 灯效是通过 3D 打印替换的。</p>
-<ul>
-<li>模型模板： <a href="https://www.printables.com/model/814075-minisforum-um780-xtx-led-plate">Minisforum UM780 XTX LED plate</a></li>
-<li>Batman 模型：<a href="https://www.printables.com/model/118622-batman-cutout-wall-art">Batman Cutout Wall Art</a></li>
-</ul>
-<p>图片主体是 <a href="https://makerworld.com/zh/models/617886">iPhone 15 Pro Max 待机模式底座</a>，
-通过 3D 打印制作。它可以用来给手机及耳机充电。</p>
 
         </div>
+        <div>
+            <!-- &#xFE0E; -- force text style - some devices render this as emoji -->
+            <a class="read-more button" href="https://www.linw1995.com/setup-neovim-in-nixos/">
+                <span class="button__text">Read more</span>&nbsp;
+                <span class="button__icon">&#8617;&#xFE0E;</span>
+            </a>
+        </div>
+    
 
                 </div>
             <div class="pagination">
@@ -299,7 +144,7 @@ So, 我决定购买一台新的迷你 PC 来专门处理这个问题。</p>
     
 
 </div>
-    <script type="text/javascript" src="/js/menu.js"></script>
+<script type="text/javascript" src="/js/menu.js"></script>
 </body>
 
 </html>

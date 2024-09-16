@@ -48,9 +48,9 @@
   <li class="menu__trigger">Chinese&nbsp;▾</li>
   <li>
     <ul class="menu__dropdown">
-        <li><a href="https:&#x2F;&#x2F;www.linw1995.com&#x2F;setup-neovim-in-nixos&#x2F;">中文</a></li>
-      
         <li><a href="https:&#x2F;&#x2F;www.linw1995.com&#x2F;en&#x2F;setup-neovim-in-nixos&#x2F;">English</a></li>
+      
+        <li><a href="https:&#x2F;&#x2F;www.linw1995.com&#x2F;setup-neovim-in-nixos&#x2F;">中文</a></li>
       </ul>
   </li>
 </ul>
@@ -110,7 +110,7 @@ So, 我决定购买一台新的迷你 PC 来专门处理这个问题。</p>
   <img src="https://www.linw1995.com/images/setup_neovim_in_nixos-mini_pc.jpg" alt="mini PC is put on the left of my phone rack" class="left" style="border-radius: 8px;" decoding="async" loading="lazy"/>
 
 <p>由于还是习惯在 MacOS 上开发，且又不想折腾 Hackintosh，
-我给这台新的迷你 PC 安装了 NixOS 。最早是打算继续使用 VSCode，
+我给这台新的迷你 PC 安装了 NixOS 。最早是打算继续使用 VSCode 远程开发，
 后面发现 Neovim 也是一个不错的选择。</p>
 <span id="continue-reading"></span><h2 id="an-zhuang-neovim">安装 Neovim</h2>
 <p>我是用 home-manager 做配置管理的，但通过 <code>programs.neovim = {}</code> 使用 nixos-unstable 会有构建失败的问题。

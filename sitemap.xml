@@ -10,6 +10,9 @@
         <loc>https://www.linw1995.com/en/</loc>
     </url>
     <url>
+        <loc>https://www.linw1995.com/en/about/</loc>
+    </url>
+    <url>
         <loc>https://www.linw1995.com/en/setup-neovim-in-nixos/</loc>
         <lastmod>2024-09-17</lastmod>
     </url>

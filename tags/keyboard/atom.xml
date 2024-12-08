@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="zh"><title>
+    linw1995&#x27;s blog - keyboard</title>
+    <link rel="self" type="application/atom+xml" href="https://www.linw1995.com/tags/keyboard/atom.xml"/>
+    <link rel="alternate" type="text/html" href="https://www.linw1995.com/"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <icon>https://www.linw1995.com/favicon.ico</icon>
+    <logo>https://www.linw1995.com/favicon.png</logo>
+    <updated>2024-12-04T00:00:00+00:00</updated>
+    <id>https://www.linw1995.com/tags/keyboard/atom.xml</id>
+    <follow_challenge><feedId>72476326505512960</feedId><userId>57795710219398144</userId></follow_challenge>
+    <entry xml:lang="zh"><title>可乐是键盘杀手</title><published>2024-12-04T00:00:00+00:00</published><updated>2024-12-04T00:00:00+00:00</updated>
+        
+        <author><name>
+            
+              linw1995
+            
+          </name></author>
+        
+        <link rel="alternate" type="text/html" href="https://www.linw1995.com/keyboard-killer/"/>
+        <id>https://www.linw1995.com/keyboard-killer/</id>
+        
+        <summary type="html">&lt;p&gt;周五晚上和女票在玩游戏 &lt;strong&gt;Go-Go Town !&lt;&#x2F;strong&gt;  。游戏很上头，太专注了，不小心把可乐打翻了。
+可乐撒了一丢丢在键盘上，当时是擦干净了，使用也没啥问题。&lt;&#x2F;p&gt;
+&lt;p&gt;隔天早上起来用的时候，就发现它坏了。&lt;br&gt; &lt;a href=&quot;https://www.linw1995.com/keyboard-killer/&quot; target=&quot;_blank&quot;&gt;Read more&lt;/a&gt;</summary>
+        
+        <content type="html" xml:base="https://www.linw1995.com/keyboard-killer/">&lt;p&gt;周五晚上和女票在玩游戏 &lt;strong&gt;Go-Go Town !&lt;&#x2F;strong&gt;  。游戏很上头，太专注了，不小心把可乐打翻了。
+可乐撒了一丢丢在键盘上，当时是擦干净了，使用也没啥问题。&lt;&#x2F;p&gt;
+&lt;p&gt;隔天早上起来用的时候，就发现它坏了。&lt;span id=&quot;continue-reading&quot;&gt;&lt;&#x2F;span&gt; 呜呜呜，陪伴5年的键盘。&lt;&#x2F;p&gt;
+&lt;p&gt;因为键盘坏了，没法写代码（也没法玩游戏）。
+先用小时达下单了个 27 米的键盘来临时用用。
+然后在等待的过程中，找到了这个键盘 &lt;strong&gt;Keychron Q60 Max&lt;&#x2F;strong&gt; 。
+HHKB 配列的键盘，距离上次选购都 5 年了，现在看能选择还是一样少。&lt;&#x2F;p&gt;
+&lt;p&gt;临时键盘当天早上就到了，但隔天早上新键盘也到了（顺丰快递，速度真快）。
+所以临时键盘就没用了，当场下岗。等它下次上岗，也不知道会是什么时候了。&lt;&#x2F;p&gt;
+
+  
+  
+    
+    
+  
+  &lt;img src=&quot;https:&#x2F;&#x2F;www.linw1995.com&#x2F;images&#x2F;keyboard_keychron_q60_max.jpg&quot; alt=&quot;新键盘&quot; class=&quot;center&quot; style=&quot;border-radius: 8px;&quot; decoding=&quot;async&quot; loading=&quot;lazy&quot;&#x2F;&gt;
+
+&lt;p&gt;到手的第一件事，就是改键位。
+原版 HHKB 可以通过拨动背面功能滑块，
+选择交换 &lt;kbd&gt;Delete&lt;&#x2F;kbd&gt; 与 &lt;kbd&gt;Backspace&lt;&#x2F;kbd&gt; 按键。
+不然要向左删除的时候，需同时按下 &lt;kbd&gt;FN&lt;&#x2F;kbd&gt; + &lt;kbd&gt;Delete&lt;&#x2F;kbd&gt; ，不是很方便。
+但遗憾的是，这个新键盘不支持这样方便的方式。但它支持 QMK 固件，这也让它更好用。&lt;&#x2F;p&gt;
+&lt;p&gt;随机送的小手册，提供个网站可以直接编辑键位。感觉很方便，但有 BUG 无法正常使用。
+那就只有自己动手刷固件了，这也是我买这个键盘的原因之一。用的是开源固件 QMK。&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;gu-jian-shua-xie&quot;&gt;固件刷写&lt;&#x2F;h2&gt;
+&lt;p&gt;由于 keychron 源码没有合并近主仓库，得这么操作。&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# 下载源码
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;gti&lt;&#x2F;span&gt;&lt;span&gt; clone https:&#x2F;&#x2F;github.com&#x2F;Keychron&#x2F;qmk_firmware.git \
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;  --depth&lt;&#x2F;span&gt;&lt;span&gt; 1 \
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;  --branch&lt;&#x2F;span&gt;&lt;span&gt; wireless_playground
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;cd&lt;&#x2F;span&gt;&lt;span&gt; .&#x2F;qmk_firmware
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# 安装 qmk
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;brew&lt;&#x2F;span&gt;&lt;span&gt; install qmk&#x2F;qmk&#x2F;qmk
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;刷固件前，别忘了修改下键位。&lt;&#x2F;p&gt;
+&lt;!-- markdownlint-disable line-length --&gt;
+&lt;pre data-lang=&quot;diff&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-diff &quot;&gt;&lt;code class=&quot;language-diff&quot; data-lang=&quot;diff&quot;&gt;&lt;span&gt;diff --git a&#x2F;keyboards&#x2F;keychron&#x2F;q60_max&#x2F;ansi&#x2F;keymaps&#x2F;default&#x2F;keymap.c b&#x2F;keyboards&#x2F;keychron&#x2F;q60_max&#x2F;ansi&#x2F;keymaps&#x2F;default&#x2F;keymap.c
+&lt;&#x2F;span&gt;&lt;span&gt;index a39ed4b9a2..37adca928b 100644
+&lt;&#x2F;span&gt;&lt;span&gt;--- a&#x2F;keyboards&#x2F;keychron&#x2F;q60_max&#x2F;ansi&#x2F;keymaps&#x2F;default&#x2F;keymap.c
+&lt;&#x2F;span&gt;&lt;span&gt;+++ b&#x2F;keyboards&#x2F;keychron&#x2F;q60_max&#x2F;ansi&#x2F;keymaps&#x2F;default&#x2F;keymap.c
+&lt;&#x2F;span&gt;&lt;span&gt;@@ -29,7 +29,7 @@ &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;enum layers {
+&lt;&#x2F;span&gt;&lt;span&gt; const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
+&lt;&#x2F;span&gt;&lt;span&gt;     [MAC_BASE] = LAYOUT_ansi_60(
+&lt;&#x2F;span&gt;&lt;span&gt;         KC_ESC,  KC_1,     KC_2,     KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS,  KC_EQL,    KC_BSLS, KC_GRV,
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;-        KC_TAB,  KC_Q,     KC_W,     KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_LBRC,  KC_RBRC,            KC_DEL,
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;+        KC_TAB,  KC_Q,     KC_W,     KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_LBRC,  KC_RBRC,            KC_BSPC,
+&lt;&#x2F;span&gt;&lt;span&gt;         KC_LCTL, KC_A,     KC_S,     KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,                      KC_ENT,
+&lt;&#x2F;span&gt;&lt;span&gt;         KC_LSFT,           KC_Z,     KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH,             KC_RSFT, MO(FN),
+&lt;&#x2F;span&gt;&lt;span&gt;                            KC_LOPTN, KC_LCMMD,                           KC_SPC,                             KC_RCMMD, KC_ROPTN),
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;!-- markdownlint-enable line-length --&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# 构建环境配置
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;brew&lt;&#x2F;span&gt;&lt;span&gt; link&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; --force&lt;&#x2F;span&gt;&lt;span&gt; avr-gcc@8
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;brew&lt;&#x2F;span&gt;&lt;span&gt; link&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; --force&lt;&#x2F;span&gt;&lt;span&gt; arm-none-eabi-binutils
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;brew&lt;&#x2F;span&gt;&lt;span&gt; link&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; --force&lt;&#x2F;span&gt;&lt;span&gt; arm-none-eabi-gcc@8
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# 固件构建并刷写
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;make&lt;&#x2F;span&gt;&lt;span&gt; keychron&#x2F;q60_max&#x2F;ansi:default:flash
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# 待构建完成后，会进监听模式。此时把下键盘，再长按 &amp;lt;kbd&amp;gt;Esc&amp;lt;&#x2F;kbd&amp;gt; 键，同时再插上键盘。
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# 等待固件刷写完成。
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h2 id=&quot;za-xiang&quot;&gt;杂项&lt;&#x2F;h2&gt;
+&lt;ul&gt;
+&lt;li&gt;键盘官方产品详情 &lt;a href=&quot;https:&#x2F;&#x2F;www.keychron.com&#x2F;products&#x2F;keychron-q60-max-qmk-via-wireless-custom-mechanical-keyboard&quot;&gt;Keychron Q60 Max QMK&#x2F;VIA Wireless Custom Mechanical Keyboard&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;固件源码 &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;Keychron&#x2F;qmk_firmware&#x2F;tree&#x2F;ebdaa0469c57bc94798b670976adcca24201467e&#x2F;keyboards&#x2F;keychron&#x2F;q60_max&quot;&gt;qmk&#x2F;qmk_firmware&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+</content>
+    </entry>
+</feed>

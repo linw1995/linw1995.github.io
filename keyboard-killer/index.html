@@ -165,6 +165,16 @@ HHKB 配列的键盘，距离上次选购都 5 年了，现在看能选择还是
 </span><span style="color:#65737e;"># 待构建完成后，会进监听模式。此时把下键盘，再长按 &lt;kbd&gt;Esc&lt;/kbd&gt; 键，同时再插上键盘。
 </span><span style="color:#65737e;"># 等待固件刷写完成。
 </span></code></pre>
+<h2 id="rgb-deng-xiao-she-bei-shui-mian-hou-bu-hui-fu-de-jie-jue-fang-an">RGB 灯效设备睡眠后不恢复的解决方案</h2>
+<p>这个 Bug 不知道哪里导致的。但有个短平快的方案就是禁止 RGB 灯效跟着睡眠。</p>
+<pre data-lang="diff" style="background-color:#2b303b;color:#c0c5ce;" class="language-diff "><code class="language-diff" data-lang="diff"><span>--- a/keyboards/keychron/q60_max/ansi/rules.mk
+</span><span>+++ b/keyboards/keychron/q60_max/ansi/rules.mk
+</span><span>@@ -1 +1 @@
+</span><span style="color:#bf616a;">-# This file intentionally left blank
+</span><span>\ No newline at end of file
+</span><span style="color:#a3be8c;">+SLEEP_LED_ENABLE = yes
+</span></code></pre>
+<p>重新构建固件并刷写即可。</p>
 <h2 id="za-xiang">杂项</h2>
 <ul>
 <li>键盘官方产品详情 <a href="https://www.keychron.com/products/keychron-q60-max-qmk-via-wireless-custom-mechanical-keyboard">Keychron Q60 Max QMK/VIA Wireless Custom Mechanical Keyboard</a></li>

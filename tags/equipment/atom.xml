@@ -6,10 +6,10 @@
     <generator uri="https://www.getzola.org/">Zola</generator>
     <icon>https://www.linw1995.com/favicon.ico</icon>
     <logo>https://www.linw1995.com/favicon.png</logo>
-    <updated>2024-12-04T00:00:00+00:00</updated>
+    <updated>2024-12-10T00:00:00+00:00</updated>
     <id>https://www.linw1995.com/tags/equipment/atom.xml</id>
     <follow_challenge><feedId>72476326505512960</feedId><userId>57795710219398144</userId></follow_challenge>
-    <entry xml:lang="zh"><title>可乐是键盘杀手</title><published>2024-12-04T00:00:00+00:00</published><updated>2024-12-04T00:00:00+00:00</updated>
+    <entry xml:lang="zh"><title>可乐是键盘杀手</title><published>2024-12-04T00:00:00+00:00</published><updated>2024-12-10T00:00:00+00:00</updated>
         
         <author><name>
             
@@ -87,6 +87,16 @@ HHKB 配列的键盘，距离上次选购都 5 年了，现在看能选择还是
 &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# 待构建完成后，会进监听模式。此时把下键盘，再长按 &amp;lt;kbd&amp;gt;Esc&amp;lt;&#x2F;kbd&amp;gt; 键，同时再插上键盘。
 &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# 等待固件刷写完成。
 &lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h2 id=&quot;rgb-deng-xiao-she-bei-shui-mian-hou-bu-hui-fu-de-jie-jue-fang-an&quot;&gt;RGB 灯效设备睡眠后不恢复的解决方案&lt;&#x2F;h2&gt;
+&lt;p&gt;这个 Bug 不知道哪里导致的。但有个短平快的方案就是禁止 RGB 灯效跟着睡眠。&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;diff&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-diff &quot;&gt;&lt;code class=&quot;language-diff&quot; data-lang=&quot;diff&quot;&gt;&lt;span&gt;--- a&#x2F;keyboards&#x2F;keychron&#x2F;q60_max&#x2F;ansi&#x2F;rules.mk
+&lt;&#x2F;span&gt;&lt;span&gt;+++ b&#x2F;keyboards&#x2F;keychron&#x2F;q60_max&#x2F;ansi&#x2F;rules.mk
+&lt;&#x2F;span&gt;&lt;span&gt;@@ -1 +1 @@
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;-# This file intentionally left blank
+&lt;&#x2F;span&gt;&lt;span&gt;\ No newline at end of file
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;+SLEEP_LED_ENABLE = yes
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;重新构建固件并刷写即可。&lt;&#x2F;p&gt;
 &lt;h2 id=&quot;za-xiang&quot;&gt;杂项&lt;&#x2F;h2&gt;
 &lt;ul&gt;
 &lt;li&gt;键盘官方产品详情 &lt;a href=&quot;https:&#x2F;&#x2F;www.keychron.com&#x2F;products&#x2F;keychron-q60-max-qmk-via-wireless-custom-mechanical-keyboard&quot;&gt;Keychron Q60 Max QMK&#x2F;VIA Wireless Custom Mechanical Keyboard&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;

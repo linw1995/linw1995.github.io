@@ -162,9 +162,10 @@ HHKB 配列的键盘，距离上次选购都 5 年了，现在看能选择还是
 </span><span>
 </span><span style="color:#65737e;"># 固件构建并刷写
 </span><span style="color:#bf616a;">make</span><span> keychron/q60_max/ansi:default:flash
-</span><span style="color:#65737e;"># 待构建完成后，会进监听模式。此时把下键盘，再长按 &lt;kbd&gt;Esc&lt;/kbd&gt; 键，同时再插上键盘。
-</span><span style="color:#65737e;"># 等待固件刷写完成。
 </span></code></pre>
+<p>待构建完成后，会进监听模式。
+此时拔下键盘，再长按 <kbd>Esc</kbd> 键的同时，再插上键盘。
+等待片刻，固件刷写。完成后，键盘会自动重启。就能正常使用了。</p>
 <h2 id="rgb-deng-xiao-she-bei-shui-mian-hou-bu-hui-fu-de-jie-jue-fang-an">RGB 灯效设备睡眠后不恢复的解决方案</h2>
 <p>这个 Bug 不知道哪里导致的。但有个短平快的方案就是禁止 RGB 灯效跟着睡眠。</p>
 <pre data-lang="diff" style="background-color:#2b303b;color:#c0c5ce;" class="language-diff "><code class="language-diff" data-lang="diff"><span>--- a/keyboards/keychron/q60_max/ansi/rules.mk

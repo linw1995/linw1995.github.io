@@ -85,6 +85,57 @@
         <div class="posts">
                 <div class="post on-list">
                     
+    <h1 class="post-title"><a href="https://www.linw1995.com/my-dns/">实现 DNS App</a></h1>
+    <div class="post-meta-inline">
+        
+    <span class="post-date">
+            2024-12-25
+        </span>
+
+    </div>
+
+    
+        <span class="post-tags-inline">
+                :: tags:&nbsp;
+                <a class="post-tag" href="https://www.linw1995.com/tags/note/">#note</a></span>
+    
+
+
+                    
+        <div class="post-content">
+            <h2 id="qian-yan">前言</h2>
+<p><img src="https://www.linw1995.com/my-dns/Logo_of_WireGuard.png" alt="Logo of WireGuard" /></p>
+<p>家里的 NAS 通过 WireGuard 配合小水管云主机搭建了一个私有网络，方便我在外面访问家里的设备。
+通过 Surge 可以定义简单的规则，把特定域名或 IP 段用 WireGuard 代理，这样就可以访问家里的设备了。
+再通过 SSID 判断当前网络环境，在家就直连。</p>
+<p>这样从理论上看是挺好的，但会遇到些问题。 IP 段可能会冲突，只能给每个地址配置域名，只用域名规则。
+虽然很麻烦，但也没法子。配置域名可以在 Surge 上配置，也可以通过 <code>/etc/hosts</code> 。
+但 Surge 更方便，可以配置 Unix Shell Style 通配符，减少些配置。</p>
+<p>但这个方案有个问题，只能在 MacOS 和 iOS 上使用。而且 Surge 也很贵。
+不太方便别人照搬方案（虽然我认识的基本都是 Surge 的用户）。
+如果没有 Surge 呢，或者在不在 MacOS 上，又该如何处理。所以我诞生了自己实现 DNS 的想法。</p>
+<blockquote>
+<p>不久前入了台 Mini-PC 装了 NixOS 后，就遇到这样的问题。
+虽然用 sing-box （还免费）也能达到同样的效果，
+但自己动手实现 DNS 也是种有益身心的消遣方式。</p>
+</blockquote>
+<p>需要实现的功能十分简单，只要类似 <code>/etc/hosts</code> 文件，但又能像 Surge 这样配置统配符。
+还能通过配置哪些行是在 WiFi SSID 为某个值时生效，就能实现我想要的功能了。</p>
+
+        </div>
+        <div>
+            <!-- &#xFE0E; -- force text style - some devices render this as emoji -->
+            <a class="read-more button" href="https://www.linw1995.com/my-dns/">
+                <span class="button__text">Read more</span>&nbsp;
+                <span class="button__icon">&#8617;&#xFE0E;</span>
+            </a>
+        </div>
+    
+
+                </div>
+            
+                <div class="post on-list">
+                    
     <h1 class="post-title"><a href="https://www.linw1995.com/keyboard-killer/">可乐是键盘杀手</a></h1>
     <div class="post-meta-inline">
         

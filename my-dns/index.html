@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <title>实现 DNS App</title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="robots" content="noodp"/>
+
+    <link rel="stylesheet" href="https://www.linw1995.com/style.css">
+    <link rel="stylesheet" href="https://www.linw1995.com/color/blue.css">
+
+    <link rel="stylesheet" href="https://www.linw1995.com/font-hack.css">
+
+    <meta name="description" content="">
+
+    <meta property="og:description" content="">
+    <meta property="og:title" content="实现 DNS App">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://www.linw1995.com/my-dns/">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:description" content="">
+    <meta name="twitter:title" content="实现 DNS App">
+    <meta property="twitter:domain" content="www.linw1995.com&#x2F;">
+    <meta property="twitter:url" content="https://www.linw1995.com/my-dns/">
+
+                <link rel="alternate" type="application/atom+xml" title="linw1995&#x27;s blog Atom Feed" href="https://www.linw1995.com/atom.xml" />
+        <link rel="shortcut icon" type="image/png" href="/favicon.png">
+    
+    <link rel="stylesheet" href="https://www.linw1995.com/license.css">
+</head>
+
+<body class="">
+<div class="container">
+    
+    <header class="header">
+        <div class="header__inner">
+            <div class="header__logo">
+                    
+                <a href="https://www.linw1995.com/" style="text-decoration: none;">
+                    <div class="logo">
+                      
+                            linw1995
+                        
+                    </div>
+                </a>
+            </div>
+              
+<ul class="menu menu--desktop menu--language-selector">
+  <li class="menu__trigger">Chinese&nbsp;▾</li>
+  <li>
+    <ul class="menu__dropdown">
+        <li><a href="https:&#x2F;&#x2F;www.linw1995.com&#x2F;my-dns&#x2F;">中文</a></li>
+      </ul>
+  </li>
+</ul>
+</div>
+
+        
+        <nav class="menu">
+            <ul class="menu__inner">
+                <li><a href="/">blog</a></li>
+            
+                <li><a href="/tags">tags</a></li>
+            
+                <li><a href="/about">about me</a></li>
+            
+                <li><a href="https://old-blog.linw1995.com/" target="_blank" rel="noopener noreferrer">old blog</a></li>
+            
+                <li><a href="https://github.com/linw1995" target="_blank" rel="noopener noreferrer">github</a></li>
+            </ul>
+        </nav>
+    
+    
+        
+    </header>
+    
+
+    <div class="content">
+        
+<div class="post">
+    
+    <h1 class="post-title"><a href="https://www.linw1995.com/my-dns/">实现 DNS App</a></h1>
+    <div class="post-meta-inline">
+        
+    <span class="post-date">
+            2024-12-25
+        </span>
+
+    </div>
+
+    
+        <span class="post-tags-inline">
+                :: tags:&nbsp;
+                <a class="post-tag" href="https://www.linw1995.com/tags/note/">#note</a></span>
+    
+
+    <div class="post-content">
+            <h2 id="qian-yan">前言</h2>
+<p><img src="https://www.linw1995.com/my-dns/Logo_of_WireGuard.png" alt="Logo of WireGuard" /></p>
+<p>家里的 NAS 通过 WireGuard 配合小水管云主机搭建了一个私有网络，方便我在外面访问家里的设备。
+通过 Surge 可以定义简单的规则，把特定域名或 IP 段用 WireGuard 代理，这样就可以访问家里的设备了。
+再通过 SSID 判断当前网络环境，在家就直连。</p>
+<p>这样从理论上看是挺好的，但会遇到些问题。 IP 段可能会冲突，只能给每个地址配置域名，只用域名规则。
+虽然很麻烦，但也没法子。配置域名可以在 Surge 上配置，也可以通过 <code>/etc/hosts</code> 。
+但 Surge 更方便，可以配置 Unix Shell Style 通配符，减少些配置。</p>
+<p>但这个方案有个问题，只能在 MacOS 和 iOS 上使用。而且 Surge 也很贵。
+不太方便别人照搬方案（虽然我认识的基本都是 Surge 的用户）。
+如果没有 Surge 呢，或者在不在 MacOS 上，又该如何处理。所以我诞生了自己实现 DNS 的想法。</p>
+<blockquote>
+<p>不久前入了台 Mini-PC 装了 NixOS 后，就遇到这样的问题。
+虽然用 sing-box （还免费）也能达到同样的效果，
+但自己动手实现 DNS 也是种有益身心的消遣方式。</p>
+</blockquote>
+<p>需要实现的功能十分简单，只要类似 <code>/etc/hosts</code> 文件，但又能像 Surge 这样配置统配符。
+还能通过配置哪些行是在 WiFi SSID 为某个值时生效，就能实现我想要的功能了。</p>
+<span id="continue-reading"></span><h2 id="dns-xie-yi-shi-xian">DNS 协议实现</h2>
+<p>十分推荐的这个手把手教程 <a href="https://github.com/EmilHernvall/dnsguide">EmilHernvall/dnsguide</a>，
+还有这个声明式的二进制协议读写库 <a href="https://github.com/sharksforarms/deku">sharksforarms/deku</a>，
+大概 300 行代码就完成能支撑起我整个需求的 DNS 包读写模块。</p>
+<h2 id="wang-luo-huan-jing-jian-ting">网络环境监听</h2>
+<p>由于 MacBook Pro 才是我日常用的移动设备，所以优先在 MacOS 上实现这个功能。</p>
+<p>通过一些 MacOS 内置的 CLI 命令，实际上就可以获取到当前的网络环境，比如当前设备所链接 Wi-Fi 的 SSID。
+但这样就太简单了，难度跟消遣都不搭边。得上点强度，再成功就能更身心愉悦～</p>
+<p>而且能再优雅点吗？调研了一番，发现通过使用 Network Apple Framework 中的 NWPathMonitor 类，
+就能优雅的监听网络变化。一旦网络环境变化，回调就会被调用，获取到最新的网络状态。</p>
+<p>通过 Launchd 也是可以的，我们只需要提供个更新状态命令，配置在网络状态变更时调用即可。
+但我感觉这个方案没有对接系统模块来的优雅。</p>
+<p>对接 Network Apple Framework，需要用 Swift 或者 Objective-C 来实现。
+出于技术栈的统一，开始寻找通过能用 Rust 调用 Framework 的 Binding 库。
+找到了个神仙项目 <a href="https://github.com/madsmtm/objc2">madsmtm/objc2</a>，
+不仅实现了 Rust 与 Objective-C 间 Bridging 库，
+还顺带实现了很多 Apple Frameworks 的 Binding 。
+可惜是我需要用到的模块和函数均没有。</p>
+<p>然后我开始反复观看该项目的文档，和已实现 Binding 的源码。
+过了几天终于技能进度条读到了实现功能的下限。</p>
+<p><img src="https://www.linw1995.com/my-dns/NWPathMonitor.png" alt="NWPathMonitor" /></p>
+<p>不过在实现完，测试的时候发现了个意料之外的问题：<strong>获取到 SSID 居然是空字符串。</strong></p>
+<h2 id="wang-luo-jian-ting-xu-yao-ding-wei-quan-xian">网络监听需要定位权限</h2>
+<p>最开始以为是写了 Bug，反复排查了一番也没有找到问题。然后开始高强度网上冲浪，
+浏览一番搜索结果和文档后，怀疑是因为没有获取到定位权限导致的。</p>
+<blockquote>
+<p>Wi-Fi SSID 涉及达到用户的隐私，理论上可以高精度地定位使用者的位置。</p>
+</blockquote>
+<p>要验证是不是这样子，就得写个 App ，才能在系统配置中添加位置权限。
+这样验证也太麻烦了。冷静了一下，想起了之前调研网络环境监听功能怎么实现的时候，还试过 Apple Script 的方案。
+直接给它定位权限去了，再试一下，果然获取到了空字符串。</p>
+<p>那非得实现成一个 MacOS App 了。</p>
+<h2 id="tauri-leptos">Tauri + Leptos</h2>
+<p>想起了很早之前收藏的 <a href="https://github.com/tauri-apps/tauri">Tauri</a>
+（最近还更新到了 V2 ） ，仔细看了一遍文档。
+感觉实现起来的难度，还是比较简单。 Leptos 就类似 React , 也可以继续用 tailwindcss 。
+若是用原生 SwiftUI 的话，就没法沿用 Web 开发的经验。 看到这里肯定有人想，
+那为什么不用 Electron 呢？首先打包后的 App 会比较大，硬盘空间寸土寸金（尤其是学了 Rust 和用上了 NixOS 后）;
+Tauri + Leptos 就可以 All In Rust，代码写起来比较跟手；最后，说实话也没那么喜欢写 Web。</p>
+<h3 id="tauri-wen-ding-xing-de-wen-ti">Tauri 稳定性的问题</h3>
+<p>天天网上冲浪的我，当然能看到很多人对 Tauri 的各种吐槽。
+那为啥要用呢，初生牛犊不怕虎吧，而且我这是消遣呀。
+而且说些实在的，我是没有遇到什么很难甚至没法解决的问题
+（实际上感觉，写 bridging 造胶水是真麻烦。尤其是给完全不会的语言写)</p>
+<h2 id="da-bao-fen-fa">打包分发</h2>
+<p>要给 Apple 设备分发 App 的话，需要花 688 元每年来购买开发者项目订阅。
+不然要给每台设备安装的话，都得一台一台就地重新构建。为了省事 688 元就花了。
+然后钱花出去了后，就想到为啥不直接上架 app store 呢？
+直接一步到位，顺便实现下 IAP 说不定成本就收回来了（白日梦想家）。</p>
+<h2 id="iap">IAP</h2>
+<p>因为 StoreKit Apple Framework 目前只支持 Swift 代码调用，所以之前弄的 Objective-C Bridging 就不行啦。
+所以再一次高强度网上冲浪，寻寻觅觅，
+就发现了 <a href="https://github.com/Brendonovich/swift-rs">Brendonovich/swift-rs</a> 项目。</p>
+<p>临时学了一下 Swift 代码，动手写起来就发现了个问题。 StoreKit 的用法都是异步的，
+虽然 swift-rs 项目不支持调用异步函数，
+但从这个 <a href="https://github.com/Brendonovich/swift-rs/issues/31">swift-rs #31</a> issue 中我得到了启发.
+最终方案就是通过传递函数指针来执行异步的回调。</p>
+<h2 id="jie-lun">结论</h2>
+<p>整体花了近三个月的时间完成了开发和上架，现在的现状是运营基本不用，宣发基本没有。
+但为了接受问题反馈和文档编写，
+利用了 <a href="https://github.com/Smart-Hosts">GitHub Org</a> 来作为 App 的 Landing Page 和文档，
+GitHub Discussions 来作为问题反馈的地方。</p>
+<p>从上架到现在，刚好过了一个月。也没收到什么评价和反馈，而且唯一付费的人也只有我。</p>
+<p><img src="https://www.linw1995.com/my-dns/./App_Store_Connect.png" alt="App Store Connect" /></p>
+<p>已经有些新功能的想法，但选择暂缓开发。我得玩段时间游戏先～</p>
+
+        </div>
+
+    
+            <div class="pagination">
+                <div class="pagination__title">
+                    <span class="pagination__title-h">Thanks for reading! Read other posts?</span>
+                    <hr />
+                </div>
+                <div class="pagination__buttons">
+                        <span class="button previous">
+                            <a href="https://www.linw1995.com/keyboard-killer/">
+                                <span class="button__icon">←</span>&nbsp;
+                                <span class="button__text">可乐是键盘杀手</span>
+                            </a>
+                        </span>
+                    
+                    </div>
+            </div>
+        
+
+    <p id="license" xmlns:cc="http://creativecommons.org/ns#" >
+        This work by <span property="cc:attributionName">林玮 (Jade Lin)</span> is licensed under 
+        <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">
+            CC BY-NC-ND 4.0
+            <img src="https://www.linw1995.com/images/by-nc-nd.png" alt="">
+        </a>
+    </p>
+
+    <div class="giscus" style="margin-top: 4rem"></div>
+</div>
+
+    </div>
+
+    
+    <footer class="footer">
+        <div class="footer__inner">
+                <div class="copyright copyright--user"><b>Copyright ©</b>  &nbsp; 2024 linw1995</div>
+            </div>
+    </footer>
+    
+
+</div>
+<script type="text/javascript" src="/js/menu.js"></script>
+
+<script src="https://giscus.app/client.js"
+    data-repo="linw1995/linw1995.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnk3MDkyNjU4NA=="
+    data-category="General"
+    data-category-id="DIC_kwDOBDpA-M4CigfM"
+    data-mapping="og:title"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="top"
+    data-theme="dark"
+    data-lang="zh-CN"
+    data-loading="lazy"
+    crossorigin="anonymous"
+    async></script>
+
+</body>
+
+</html>

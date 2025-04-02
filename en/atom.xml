@@ -1,14 +1,135 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><title>
     </title>
-    <link rel="self" type="application/atom+xml" href="https://www.linw1995.com/en/atom.xml"/>
-    <link rel="alternate" type="text/html" href="https://www.linw1995.com/"/>
+    <link rel="self" type="application/atom+xml" href="/en/atom.xml"/>
+    <link rel="alternate" type="text/html" href="/"/>
     <generator uri="https://www.getzola.org/">Zola</generator>
-    <icon>https://www.linw1995.com/favicon.ico</icon>
-    <logo>https://www.linw1995.com/favicon.png</logo>
-    <updated>2024-09-17T00:00:00+00:00</updated>
-    <id>https://www.linw1995.com/en/atom.xml</id>
+    <icon>/favicon.ico</icon>
+    <logo>/favicon.png</logo>
+    <updated>2025-04-02T00:00:00+00:00</updated>
+    <id>/en/atom.xml</id>
     <follow_challenge><feedId>72476326505512960</feedId><userId>57795710219398144</userId></follow_challenge>
+    <entry xml:lang="en"><title>Rust Cross-compilation Tips</title><published>2025-04-02T00:00:00+00:00</published><updated>2025-04-02T00:00:00+00:00</updated>
+        
+        <author><name>
+            
+              linw1995
+            
+          </name></author>
+        
+        <link rel="alternate" type="text/html" href="/en/rust-cross-compilation-tips/"/>
+        <id>/en/rust-cross-compilation-tips/</id>
+        
+        <content type="html" xml:base="/en/rust-cross-compilation-tips/">&lt;h2 id=&quot;setting-up-a-basic-cross-platform-rust-build-environment-with-nix-flake&quot;&gt;Setting Up a Basic Cross-Platform Rust Build Environment with Nix Flake&lt;&#x2F;h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Add a &lt;code&gt;flake.nix&lt;&#x2F;code&gt; file and run &lt;code&gt;git add flake.nix&lt;&#x2F;code&gt;:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;nix&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-nix &quot;&gt;&lt;code class=&quot;language-nix&quot; data-lang=&quot;nix&quot;&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;inputs &lt;&#x2F;span&gt;&lt;span&gt;= {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;utils&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;url &lt;&#x2F;span&gt;&lt;span&gt;= &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;github:numtide&#x2F;flake-utils&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;nixpkgs&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;url &lt;&#x2F;span&gt;&lt;span&gt;= &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;github:NixOS&#x2F;nixpkgs&#x2F;nixos-24.11&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;;
+&lt;&#x2F;span&gt;&lt;span&gt;  };
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;outputs &lt;&#x2F;span&gt;&lt;span&gt;= {
+&lt;&#x2F;span&gt;&lt;span&gt;    nixpkgs,
+&lt;&#x2F;span&gt;&lt;span&gt;    utils,
+&lt;&#x2F;span&gt;&lt;span&gt;    ...
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;}&lt;&#x2F;span&gt;&lt;span&gt;:
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;utils&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;lib&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;eachDefaultSystem &lt;&#x2F;span&gt;&lt;span&gt;(system: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let
+&lt;&#x2F;span&gt;&lt;span&gt;      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;pkgs &lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;import &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;nixpkgs &lt;&#x2F;span&gt;&lt;span&gt;{&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;inherit &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;system&lt;&#x2F;span&gt;&lt;span&gt;;};
+&lt;&#x2F;span&gt;&lt;span&gt;      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;lib &lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;pkgs&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;lib&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;in &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;devShells &lt;&#x2F;span&gt;&lt;span&gt;=
+&lt;&#x2F;span&gt;&lt;span&gt;        {
+&lt;&#x2F;span&gt;&lt;span&gt;          &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;default &lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;pkgs&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;mkShell &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;            &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;nativeBuildInputs &lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;with &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;pkgs&lt;&#x2F;span&gt;&lt;span&gt;; [
+&lt;&#x2F;span&gt;&lt;span&gt;              &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;pkg-config
+&lt;&#x2F;span&gt;&lt;span&gt;              &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;gcc
+&lt;&#x2F;span&gt;&lt;span&gt;            ];
+&lt;&#x2F;span&gt;&lt;span&gt;          };
+&lt;&#x2F;span&gt;&lt;span&gt;        }
+&lt;&#x2F;span&gt;&lt;span&gt;        &#x2F;&#x2F; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;builtins&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;listToAttrs &lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;map &lt;&#x2F;span&gt;&lt;span&gt;(target: {
+&lt;&#x2F;span&gt;&lt;span&gt;          &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;name &lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;target&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;          &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;value &lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let
+&lt;&#x2F;span&gt;&lt;span&gt;            &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;cross &lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;import &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;nixpkgs &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;              &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;inherit &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;system&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;              &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;crossSystem &lt;&#x2F;span&gt;&lt;span&gt;= {&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;config &lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;target&lt;&#x2F;span&gt;&lt;span&gt;;};
+&lt;&#x2F;span&gt;&lt;span&gt;            };
+&lt;&#x2F;span&gt;&lt;span&gt;            &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;cpkgs &lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;cross&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;pkgsMusl&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;          &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;in
+&lt;&#x2F;span&gt;&lt;span&gt;            &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;cross&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;mkShell &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;              &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;nativeBuildInputs &lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;with &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;pkgs&lt;&#x2F;span&gt;&lt;span&gt;; [
+&lt;&#x2F;span&gt;&lt;span&gt;                &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;pkg-config
+&lt;&#x2F;span&gt;&lt;span&gt;                &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;gcc &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Required for compiling proc macros and other dependencies
+&lt;&#x2F;span&gt;&lt;span&gt;              ];
+&lt;&#x2F;span&gt;&lt;span&gt;              &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;env &lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let
+&lt;&#x2F;span&gt;&lt;span&gt;                &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;normalized &lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;lib&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;strings&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;toUpper &lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;builtins&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;replaceStrings &lt;&#x2F;span&gt;&lt;span&gt;[&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;-&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;] [&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;_&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;] &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;target&lt;&#x2F;span&gt;&lt;span&gt;);
+&lt;&#x2F;span&gt;&lt;span&gt;              &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;in
+&lt;&#x2F;span&gt;&lt;span&gt;                &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;with &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;cpkgs&lt;&#x2F;span&gt;&lt;span&gt;; {
+&lt;&#x2F;span&gt;&lt;span&gt;                  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# https:&#x2F;&#x2F;doc.rust-lang.org&#x2F;cargo&#x2F;reference&#x2F;environment-variables.html#configuration-environment-variables
+&lt;&#x2F;span&gt;&lt;span&gt;                  &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;CARGO_TARGET_&lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#ab7967;&quot;&gt;${&lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#bf616a;&quot;&gt;normalized&lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#ab7967;&quot;&gt;}&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;_LINKER&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot; = &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#ab7967;&quot;&gt;${&lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#bf616a;&quot;&gt;stdenv&lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#c0c5ce;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#bf616a;&quot;&gt;cc&lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#c0c5ce;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#bf616a;&quot;&gt;targetPrefix&lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#ab7967;&quot;&gt;}&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;cc&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;;
+&lt;&#x2F;span&gt;&lt;span&gt;                };
+&lt;&#x2F;span&gt;&lt;span&gt;            };
+&lt;&#x2F;span&gt;&lt;span&gt;        }) [&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;x86_64-unknown-linux-musl&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot; &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;aarch64-unknown-linux-musl&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;]);
+&lt;&#x2F;span&gt;&lt;span&gt;    });
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;Build the project:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Local build
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;nix&lt;&#x2F;span&gt;&lt;span&gt; develop .#default&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; --command &lt;&#x2F;span&gt;&lt;span&gt;\
+&lt;&#x2F;span&gt;&lt;span&gt;  cargo build
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Cross-platform build
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;#
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Ensure the required Rust targets are installed:
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# rustup target add aarch64-unknown-linux-musl
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# rustup target add x86_64-unknown-linux-musl
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;TARGET&lt;&#x2F;span&gt;&lt;span&gt;=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;x86_64-unknown-linux-musl &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;nix&lt;&#x2F;span&gt;&lt;span&gt; develop .#$&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;TARGET --command &lt;&#x2F;span&gt;&lt;span&gt;\
+&lt;&#x2F;span&gt;&lt;span&gt;  cargo build&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; --target &lt;&#x2F;span&gt;&lt;span&gt;$&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;TARGET
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;h2 id=&quot;handling-c-c-dependencies-e-g-openssl-pq&quot;&gt;Handling C&#x2F;C++ Dependencies (e.g., OpenSSL, PQ)&lt;&#x2F;h2&gt;
+&lt;p&gt;Use static linking and vendor-based bindings (which package C&#x2F;C++ source code) to ensure stable and reproducible builds.&lt;&#x2F;p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Add target-specific dependencies in &lt;code&gt;Cargo.toml&lt;&#x2F;code&gt;:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;toml&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-toml &quot;&gt;&lt;code class=&quot;language-toml&quot; data-lang=&quot;toml&quot;&gt;&lt;span&gt;[target.x86_64-unknown-linux-musl.dependencies]
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;openssl-sys &lt;&#x2F;span&gt;&lt;span&gt;= { &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;version &lt;&#x2F;span&gt;&lt;span&gt;= &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;0.9&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;features &lt;&#x2F;span&gt;&lt;span&gt;= [&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;vendored&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;] }
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;pq-sys &lt;&#x2F;span&gt;&lt;span&gt;= { &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;version &lt;&#x2F;span&gt;&lt;span&gt;= &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;0.7&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;features &lt;&#x2F;span&gt;&lt;span&gt;= [&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;bundled&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;] }
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;[target.aarch64-unknown-linux-musl.dependencies]
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;openssl-sys &lt;&#x2F;span&gt;&lt;span&gt;= { &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;version &lt;&#x2F;span&gt;&lt;span&gt;= &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;0.9&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;features &lt;&#x2F;span&gt;&lt;span&gt;= [&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;vendored&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;] }
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;pq-sys &lt;&#x2F;span&gt;&lt;span&gt;= { &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;version &lt;&#x2F;span&gt;&lt;span&gt;= &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;0.7&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;features &lt;&#x2F;span&gt;&lt;span&gt;= [&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;bundled&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;] }
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;Build the project:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Static linking may require setting RUSTFLAGS.
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# However, this setting may not work for all architectures.
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;RUSTFLAGS&lt;&#x2F;span&gt;&lt;span&gt;=&amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;-C target-feature=+crt-static&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;cargo&lt;&#x2F;span&gt;&lt;span&gt; build
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# x86_64-unknown-linux-musl enables crt-static by default, so no extra flags are needed.
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;TARGET&lt;&#x2F;span&gt;&lt;span&gt;=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;x86_64-unknown-linux-musl &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;nix&lt;&#x2F;span&gt;&lt;span&gt; develop .#$&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;TARGET --command &lt;&#x2F;span&gt;&lt;span&gt;\
+&lt;&#x2F;span&gt;&lt;span&gt;  cargo build&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; --target &lt;&#x2F;span&gt;&lt;span&gt;$&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;TARGET
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;CRT stands for the C runtime.
+The default &lt;strong&gt;crt-static&lt;&#x2F;strong&gt; setting varies by target.
+For example, &lt;strong&gt;x86_64-unknown-linux-musl&lt;&#x2F;strong&gt; enables it by default,
+whereas &lt;strong&gt;arm-unknown-linux-musleabi&lt;&#x2F;strong&gt; does not.
+&lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#1&quot;&gt;1&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;div class=&quot;footnote-definition&quot; id=&quot;1&quot;&gt;&lt;sup class=&quot;footnote-definition-label&quot;&gt;1&lt;&#x2F;sup&gt;
+&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;rust-lang.github.io&#x2F;rfcs&#x2F;1721-crt-static.html&quot;&gt;RFC 1721: crt-static&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
+</content>
+    </entry>
     <entry xml:lang="en"><title>Setup Neovim in NixOS</title><published>2024-09-16T00:00:00+00:00</published><updated>2024-09-17T00:00:00+00:00</updated>
         
         <author><name>
@@ -17,8 +138,8 @@
             
           </name></author>
         
-        <link rel="alternate" type="text/html" href="https://www.linw1995.com/en/setup-neovim-in-nixos/"/>
-        <id>https://www.linw1995.com/en/setup-neovim-in-nixos/</id>
+        <link rel="alternate" type="text/html" href="/en/setup-neovim-in-nixos/"/>
+        <id>/en/setup-neovim-in-nixos/</id>
         
         <summary type="html">&lt;p&gt;Recently,
 I&#x27;ve been working on a large project in Rust,
@@ -30,16 +151,16 @@ So, I decided to buy a new mini-PC specifically for this task.&lt;&#x2F;p&gt;
     
     
   
-  &lt;img src=&quot;https:&#x2F;&#x2F;www.linw1995.com&#x2F;images&#x2F;setup_neovim_in_nixos-mini_pc.jpg&quot; alt=&quot;mini PC is put on the left of my phone rack&quot; class=&quot;left&quot; style=&quot;border-radius: 8px;&quot; decoding=&quot;async&quot; loading=&quot;lazy&quot;&#x2F;&gt;
+  &lt;img src=&quot;&#x2F;images&#x2F;setup_neovim_in_nixos-mini_pc.jpg&quot; alt=&quot;mini PC is put on the left of my phone rack&quot; class=&quot;left&quot; style=&quot;border-radius: 8px;&quot; decoding=&quot;async&quot; loading=&quot;lazy&quot;&#x2F;&gt;
 
 &lt;p&gt;Since I’m still more accustomed to developing on macOS
 and didn’t want to go through the hassle of setting up a Hackintosh,
 I decided to install NixOS on my new mini PC.
 Initially, I planned to continue using VSCode for remote development,
 but later realized that Neovim is also a great option.&lt;&#x2F;p&gt;
-&lt;br&gt; &lt;a href=&quot;https://www.linw1995.com/en/setup-neovim-in-nixos/&quot; target=&quot;_blank&quot;&gt;Read more&lt;/a&gt;</summary>
+&lt;br&gt; &lt;a href=&quot;/en/setup-neovim-in-nixos/&quot; target=&quot;_blank&quot;&gt;Read more&lt;/a&gt;</summary>
         
-        <content type="html" xml:base="https://www.linw1995.com/en/setup-neovim-in-nixos/">&lt;p&gt;Recently,
+        <content type="html" xml:base="/en/setup-neovim-in-nixos/">&lt;p&gt;Recently,
 I&#x27;ve been working on a large project in Rust,
 but my laptop isn&#x27;t powerful enough to handle it efficiently.
 So, I decided to buy a new mini-PC specifically for this task.&lt;&#x2F;p&gt;
@@ -49,7 +170,7 @@ So, I decided to buy a new mini-PC specifically for this task.&lt;&#x2F;p&gt;
     
     
   
-  &lt;img src=&quot;https:&#x2F;&#x2F;www.linw1995.com&#x2F;images&#x2F;setup_neovim_in_nixos-mini_pc.jpg&quot; alt=&quot;mini PC is put on the left of my phone rack&quot; class=&quot;left&quot; style=&quot;border-radius: 8px;&quot; decoding=&quot;async&quot; loading=&quot;lazy&quot;&#x2F;&gt;
+  &lt;img src=&quot;&#x2F;images&#x2F;setup_neovim_in_nixos-mini_pc.jpg&quot; alt=&quot;mini PC is put on the left of my phone rack&quot; class=&quot;left&quot; style=&quot;border-radius: 8px;&quot; decoding=&quot;async&quot; loading=&quot;lazy&quot;&#x2F;&gt;
 
 &lt;p&gt;Since I’m still more accustomed to developing on macOS
 and didn’t want to go through the hassle of setting up a Hackintosh,

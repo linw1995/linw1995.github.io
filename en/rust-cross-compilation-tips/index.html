@@ -2,7 +2,7 @@
 <html lang="zh">
 
 <head>
-    <title></title>
+    <title>Rust Cross-compilation Tips</title>
     
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
@@ -16,20 +16,21 @@
     <meta name="description" content="">
 
     <meta property="og:description" content="">
-    <meta property="og:title" content="">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="/en/">
+    <meta property="og:title" content="Rust Cross-compilation Tips">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/en/rust-cross-compilation-tips/">
 
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:description" content="">
-    <meta name="twitter:title" content="">
+    <meta name="twitter:title" content="Rust Cross-compilation Tips">
     <meta property="twitter:domain" content="&#x2F;">
-    <meta property="twitter:url" content="/en/">
+    <meta property="twitter:url" content="/en/rust-cross-compilation-tips/">
 
                 <link rel="alternate" type="application/atom+xml" title=" Atom Feed" href="/en/atom.xml" />
         <link rel="shortcut icon" type="image/png" href="/favicon.png">
     
-    </head>
+    <link rel="stylesheet" href="/license.css">
+</head>
 
 <body class="">
 <div class="container">
@@ -52,7 +53,7 @@
   <li>
     <ul class="menu__dropdown">
       
-            <li><a href="&#x2F;">中文</a></li>
+            <li><a href="&#x2F;rust-cross-compilation-tips&#x2F;">中文</a></li>
           </ul>
   </li>
 </ul>
@@ -81,9 +82,8 @@
 
     <div class="content">
         
-        <div class="posts">
-                <div class="post on-list">
-                    
+<div class="post">
+    
     <h1 class="post-title"><a href="/en/rust-cross-compilation-tips/">Rust Cross-compilation Tips</a></h1>
     <div class="post-meta-inline">
         
@@ -100,8 +100,7 @@
                 <a class="post-tag" href="/en/tags/rust/">#rust</a></span>
     
 
-
-                    <div class="post-content">
+    <div class="post-content">
             <h2 id="setting-up-a-basic-cross-platform-rust-build-environment-with-nix-flake">Setting Up a Basic Cross-Platform Rust Build Environment with Nix Flake</h2>
 <ol>
 <li>
@@ -213,64 +212,35 @@ whereas <strong>arm-unknown-linux-musleabi</strong> does not.
 
         </div>
 
-                </div>
-            
-                <div class="post on-list">
-                    
-    <h1 class="post-title"><a href="/en/setup-neovim-in-nixos/">Setup Neovim in NixOS</a></h1>
-    <div class="post-meta-inline">
-        
-    <span class="post-date">
-            2024-09-16
-        </span>
-
-    </div>
-
     
-        <span class="post-tags-inline">
-                :: tags:&nbsp;
-                <a class="post-tag" href="/en/tags/neovim/">#neovim</a>&nbsp;
-                <a class="post-tag" href="/en/tags/nixos/">#nixos</a>&nbsp;
-                <a class="post-tag" href="/en/tags/rust/">#rust</a></span>
-    
-
-
-                    
-        <div class="post-content">
-            <p>Recently,
-I've been working on a large project in Rust,
-but my laptop isn't powerful enough to handle it efficiently.
-So, I decided to buy a new mini-PC specifically for this task.</p>
-
-  
-  
-    
-    
-  
-  <img src="/images/setup_neovim_in_nixos-mini_pc.jpg" alt="mini PC is put on the left of my phone rack" class="left" style="border-radius: 8px;" decoding="async" loading="lazy"/>
-
-<p>Since I’m still more accustomed to developing on macOS
-and didn’t want to go through the hassle of setting up a Hackintosh,
-I decided to install NixOS on my new mini PC.
-Initially, I planned to continue using VSCode for remote development,
-but later realized that Neovim is also a great option.</p>
-
-        </div>
-        <div>
-            <!-- &#xFE0E; -- force text style - some devices render this as emoji -->
-            <a class="read-more button" href="/en/setup-neovim-in-nixos/">
-                <span class="button__text">Read more</span>&nbsp;
-                <span class="button__icon">&#8617;&#xFE0E;</span>
-            </a>
-        </div>
-    
-
-                </div>
             <div class="pagination">
-                <div class="pagination__buttons"></div>
+                <div class="pagination__title">
+                    <span class="pagination__title-h">Thanks for reading! Read other posts?</span>
+                    <hr />
+                </div>
+                <div class="pagination__buttons">
+                        <span class="button previous">
+                            <a href="/en/setup-neovim-in-nixos/">
+                                <span class="button__icon">←</span>&nbsp;
+                                <span class="button__text">Setup Neovim in NixOS</span>
+                            </a>
+                        </span>
+                    
+                    </div>
             </div>
-        </div>
         
+
+    <p id="license" xmlns:cc="http://creativecommons.org/ns#" >
+        This work by <span property="cc:attributionName">林玮 (Jade Lin)</span> is licensed under 
+        <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">
+            CC BY-NC-ND 4.0
+            <img src="/images/by-nc-nd.png" alt="">
+        </a>
+    </p>
+
+    <div class="giscus" style="margin-top: 4rem"></div>
+</div>
+
     </div>
 
     
@@ -283,6 +253,23 @@ but later realized that Neovim is also a great option.</p>
 
 </div>
 <script type="text/javascript" src="/js/menu.js"></script>
+
+<script src="https://giscus.app/client.js"
+    data-repo="linw1995/linw1995.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnk3MDkyNjU4NA=="
+    data-category="General"
+    data-category-id="DIC_kwDOBDpA-M4CigfM"
+    data-mapping="og:title"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="top"
+    data-theme="dark"
+    data-lang="en"
+    data-loading="lazy"
+    crossorigin="anonymous"
+    async></script>
+
 </body>
 
 </html>

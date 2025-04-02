@@ -8,31 +8,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
     <meta name="robots" content="noodp"/>
 
-    <link rel="stylesheet" href="https://www.linw1995.com/style.css">
-    <link rel="stylesheet" href="https://www.linw1995.com/color/blue.css">
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/color/blue.css">
 
-    <link rel="stylesheet" href="https://www.linw1995.com/font-hack.css">
+    <link rel="stylesheet" href="/font-hack.css">
 
     <meta name="description" content="">
 
     <meta property="og:description" content="">
     <meta property="og:title" content="实现 DNS App">
     <meta property="og:type" content="article">
-    <meta property="og:url" content="https://www.linw1995.com/my-dns/">
+    <meta property="og:url" content="/my-dns/">
 
-    <meta property="og:image" content="https://www.linw1995.com/my-dns/Poster.zh.png">
-    <meta name="twitter:image" content="https://www.linw1995.com/my-dns/Poster.zh.png">
+    <meta property="og:image" content="/my-dns/Poster.zh.png">
+    <meta name="twitter:image" content="/my-dns/Poster.zh.png">
 
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:description" content="">
     <meta name="twitter:title" content="实现 DNS App">
-    <meta property="twitter:domain" content="www.linw1995.com&#x2F;">
-    <meta property="twitter:url" content="https://www.linw1995.com/my-dns/">
+    <meta property="twitter:domain" content="&#x2F;">
+    <meta property="twitter:url" content="/my-dns/">
 
-                <link rel="alternate" type="application/atom+xml" title="linw1995&#x27;s blog Atom Feed" href="https://www.linw1995.com/atom.xml" />
+                <link rel="alternate" type="application/atom+xml" title="linw1995&#x27;s blog Atom Feed" href="/atom.xml" />
         <link rel="shortcut icon" type="image/png" href="/favicon.png">
     
-    <link rel="stylesheet" href="https://www.linw1995.com/license.css">
+    <link rel="stylesheet" href="/license.css">
 </head>
 
 <body class="">
@@ -42,7 +42,7 @@
         <div class="header__inner">
             <div class="header__logo">
                     
-                <a href="https://www.linw1995.com/" style="text-decoration: none;">
+                <a href="/" style="text-decoration: none;">
                     <div class="logo">
                       
                             linw1995
@@ -55,16 +55,16 @@
   <li class="menu__trigger">Chinese&nbsp;▾</li>
   <li>
     <ul class="menu__dropdown">
-        <li><a href="https:&#x2F;&#x2F;www.linw1995.com&#x2F;my-dns&#x2F;">中文</a></li>
-      </ul>
+      <li class="menu__disabled">English</li></ul>
   </li>
 </ul>
 </div>
 
         
-        <nav class="menu">
+        
+                <nav class="menu">
             <ul class="menu__inner">
-                <li><a href="/">blog</a></li>
+                <li class="active"><a href="/">blog</a></li>
             
                 <li><a href="/tags">tags</a></li>
             
@@ -85,7 +85,7 @@
         
 <div class="post">
     
-    <h1 class="post-title"><a href="https://www.linw1995.com/my-dns/">实现 DNS App</a></h1>
+    <h1 class="post-title"><a href="/my-dns/">实现 DNS App</a></h1>
     <div class="post-meta-inline">
         
     <span class="post-date">
@@ -97,12 +97,12 @@
     
         <span class="post-tags-inline">
                 :: tags:&nbsp;
-                <a class="post-tag" href="https://www.linw1995.com/tags/note/">#note</a></span>
+                <a class="post-tag" href="/tags/note/">#note</a></span>
     
 
     <div class="post-content">
             <h2 id="qian-yan">前言</h2>
-<p><img src="https://www.linw1995.com/my-dns/Logo_of_WireGuard.png" alt="Logo of WireGuard" /></p>
+<p><img src="/my-dns/Logo_of_WireGuard.png" alt="Logo of WireGuard" /></p>
 <p>家里的 NAS 通过 WireGuard 配合小水管云主机搭建了一个私有网络，方便我在外面访问家里的设备。
 通过 Surge 可以定义简单的规则，把特定域名或 IP 段用 WireGuard 代理，这样就可以访问家里的设备了。
 再通过 SSID 判断当前网络环境，在家就直连。</p>
@@ -139,7 +139,7 @@
 可惜是我需要用到的模块和函数均没有。</p>
 <p>然后我开始反复观看该项目的文档，和已实现 Binding 的源码。
 过了几天终于技能进度条读到了实现功能的下限。</p>
-<p><img src="https://www.linw1995.com/my-dns/NWPathMonitor.png" alt="NWPathMonitor" /></p>
+<p><img src="/my-dns/NWPathMonitor.png" alt="NWPathMonitor" /></p>
 <p>不过在实现完，测试的时候发现了个意料之外的问题：<strong>获取到 SSID 居然是空字符串。</strong></p>
 <h2 id="wang-luo-jian-ting-xu-yao-ding-wei-quan-xian">网络监听需要定位权限</h2>
 <p>最开始以为是写了 Bug，反复排查了一番也没有找到问题。然后开始高强度网上冲浪，
@@ -181,9 +181,9 @@ Tauri + Leptos 就可以 All In Rust，代码写起来比较跟手；最后，�
 但为了接受问题反馈和文档编写，
 利用了 <a href="https://github.com/Smart-Hosts">GitHub Org</a> 来作为 App 的 Landing Page 和文档，
 GitHub Discussions 来作为问题反馈的地方。</p>
-<p><img src="https://www.linw1995.com/my-dns/Poster.zh.png" alt="Poster" /></p>
+<p><img src="/my-dns/Poster.zh.png" alt="Poster" /></p>
 <p>从上架到现在，刚好过了一个月。也没收到什么评价和反馈，而且唯一付费的人也只有我。</p>
-<p><img src="https://www.linw1995.com/my-dns/./App_Store_Connect.png" alt="App Store Connect" /></p>
+<p><img src="/my-dns/./App_Store_Connect.png" alt="App Store Connect" /></p>
 <p>已经有些新功能的想法，但选择暂缓开发。我得玩段时间游戏先～</p>
 
         </div>
@@ -196,12 +196,19 @@ GitHub Discussions 来作为问题反馈的地方。</p>
                 </div>
                 <div class="pagination__buttons">
                         <span class="button previous">
-                            <a href="https://www.linw1995.com/keyboard-killer/">
+                            <a href="/keyboard-killer/">
                                 <span class="button__icon">←</span>&nbsp;
                                 <span class="button__text">可乐是键盘杀手</span>
                             </a>
                         </span>
                     
+                    
+                        <span class="button next">
+                            <a href="/rust-cross-compilation-tips/">
+                                <span class="button__text">Rust 跨平台构建贴士</span>&nbsp;
+                                <span class="button__icon">→</span>
+                            </a>
+                        </span>
                     </div>
             </div>
         
@@ -210,7 +217,7 @@ GitHub Discussions 来作为问题反馈的地方。</p>
         This work by <span property="cc:attributionName">林玮 (Jade Lin)</span> is licensed under 
         <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">
             CC BY-NC-ND 4.0
-            <img src="https://www.linw1995.com/images/by-nc-nd.png" alt="">
+            <img src="/images/by-nc-nd.png" alt="">
         </a>
     </p>
 

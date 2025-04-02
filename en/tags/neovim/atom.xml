@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><title>
      - neovim</title>
-    <link rel="self" type="application/atom+xml" href="https://www.linw1995.com/en/tags/neovim/atom.xml"/>
-    <link rel="alternate" type="text/html" href="https://www.linw1995.com/"/>
+    <link rel="self" type="application/atom+xml" href="/en/tags/neovim/atom.xml"/>
+    <link rel="alternate" type="text/html" href="/"/>
     <generator uri="https://www.getzola.org/">Zola</generator>
-    <icon>https://www.linw1995.com/favicon.ico</icon>
-    <logo>https://www.linw1995.com/favicon.png</logo>
+    <icon>/favicon.ico</icon>
+    <logo>/favicon.png</logo>
     <updated>2024-09-17T00:00:00+00:00</updated>
-    <id>https://www.linw1995.com/en/tags/neovim/atom.xml</id>
+    <id>/en/tags/neovim/atom.xml</id>
     <follow_challenge><feedId>72476326505512960</feedId><userId>57795710219398144</userId></follow_challenge>
     <entry xml:lang="en"><title>Setup Neovim in NixOS</title><published>2024-09-16T00:00:00+00:00</published><updated>2024-09-17T00:00:00+00:00</updated>
         
@@ -17,8 +17,8 @@
             
           </name></author>
         
-        <link rel="alternate" type="text/html" href="https://www.linw1995.com/en/setup-neovim-in-nixos/"/>
-        <id>https://www.linw1995.com/en/setup-neovim-in-nixos/</id>
+        <link rel="alternate" type="text/html" href="/en/setup-neovim-in-nixos/"/>
+        <id>/en/setup-neovim-in-nixos/</id>
         
         <summary type="html">&lt;p&gt;Recently,
 I&#x27;ve been working on a large project in Rust,
@@ -30,16 +30,16 @@ So, I decided to buy a new mini-PC specifically for this task.&lt;&#x2F;p&gt;
     
     
   
-  &lt;img src=&quot;https:&#x2F;&#x2F;www.linw1995.com&#x2F;images&#x2F;setup_neovim_in_nixos-mini_pc.jpg&quot; alt=&quot;mini PC is put on the left of my phone rack&quot; class=&quot;left&quot; style=&quot;border-radius: 8px;&quot; decoding=&quot;async&quot; loading=&quot;lazy&quot;&#x2F;&gt;
+  &lt;img src=&quot;&#x2F;images&#x2F;setup_neovim_in_nixos-mini_pc.jpg&quot; alt=&quot;mini PC is put on the left of my phone rack&quot; class=&quot;left&quot; style=&quot;border-radius: 8px;&quot; decoding=&quot;async&quot; loading=&quot;lazy&quot;&#x2F;&gt;
 
 &lt;p&gt;Since I’m still more accustomed to developing on macOS
 and didn’t want to go through the hassle of setting up a Hackintosh,
 I decided to install NixOS on my new mini PC.
 Initially, I planned to continue using VSCode for remote development,
 but later realized that Neovim is also a great option.&lt;&#x2F;p&gt;
-&lt;br&gt; &lt;a href=&quot;https://www.linw1995.com/en/setup-neovim-in-nixos/&quot; target=&quot;_blank&quot;&gt;Read more&lt;/a&gt;</summary>
+&lt;br&gt; &lt;a href=&quot;/en/setup-neovim-in-nixos/&quot; target=&quot;_blank&quot;&gt;Read more&lt;/a&gt;</summary>
         
-        <content type="html" xml:base="https://www.linw1995.com/en/setup-neovim-in-nixos/">&lt;p&gt;Recently,
+        <content type="html" xml:base="/en/setup-neovim-in-nixos/">&lt;p&gt;Recently,
 I&#x27;ve been working on a large project in Rust,
 but my laptop isn&#x27;t powerful enough to handle it efficiently.
 So, I decided to buy a new mini-PC specifically for this task.&lt;&#x2F;p&gt;
@@ -49,7 +49,7 @@ So, I decided to buy a new mini-PC specifically for this task.&lt;&#x2F;p&gt;
     
     
   
-  &lt;img src=&quot;https:&#x2F;&#x2F;www.linw1995.com&#x2F;images&#x2F;setup_neovim_in_nixos-mini_pc.jpg&quot; alt=&quot;mini PC is put on the left of my phone rack&quot; class=&quot;left&quot; style=&quot;border-radius: 8px;&quot; decoding=&quot;async&quot; loading=&quot;lazy&quot;&#x2F;&gt;
+  &lt;img src=&quot;&#x2F;images&#x2F;setup_neovim_in_nixos-mini_pc.jpg&quot; alt=&quot;mini PC is put on the left of my phone rack&quot; class=&quot;left&quot; style=&quot;border-radius: 8px;&quot; decoding=&quot;async&quot; loading=&quot;lazy&quot;&#x2F;&gt;
 
 &lt;p&gt;Since I’m still more accustomed to developing on macOS
 and didn’t want to go through the hassle of setting up a Hackintosh,

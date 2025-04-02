@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="zh"><title>
     linw1995&#x27;s blog - keyboard</title>
-    <link rel="self" type="application/atom+xml" href="https://www.linw1995.com/tags/keyboard/atom.xml"/>
-    <link rel="alternate" type="text/html" href="https://www.linw1995.com/"/>
+    <link rel="self" type="application/atom+xml" href="/tags/keyboard/atom.xml"/>
+    <link rel="alternate" type="text/html" href="/"/>
     <generator uri="https://www.getzola.org/">Zola</generator>
-    <icon>https://www.linw1995.com/favicon.ico</icon>
-    <logo>https://www.linw1995.com/favicon.png</logo>
+    <icon>/favicon.ico</icon>
+    <logo>/favicon.png</logo>
     <updated>2024-12-10T00:00:00+00:00</updated>
-    <id>https://www.linw1995.com/tags/keyboard/atom.xml</id>
+    <id>/tags/keyboard/atom.xml</id>
     <follow_challenge><feedId>72476326505512960</feedId><userId>57795710219398144</userId></follow_challenge>
     <entry xml:lang="zh"><title>可乐是键盘杀手</title><published>2024-12-04T00:00:00+00:00</published><updated>2024-12-10T00:00:00+00:00</updated>
         
@@ -17,15 +17,15 @@
             
           </name></author>
         
-        <link rel="alternate" type="text/html" href="https://www.linw1995.com/keyboard-killer/"/>
-        <id>https://www.linw1995.com/keyboard-killer/</id>
+        <link rel="alternate" type="text/html" href="/keyboard-killer/"/>
+        <id>/keyboard-killer/</id>
         
         <summary type="html">&lt;p&gt;周五晚上和女票在玩游戏 &lt;strong&gt;Go-Go Town !&lt;&#x2F;strong&gt;  。游戏很上头，太专注了，不小心把可乐打翻了。
 可乐撒了一丢丢在键盘上，当时是擦干净了，使用也没啥问题。&lt;&#x2F;p&gt;
 &lt;p&gt;隔天早上起来用的时候，就发现它坏了。呜呜呜，陪伴5年的键盘。&lt;&#x2F;p&gt;
-&lt;br&gt; &lt;a href=&quot;https://www.linw1995.com/keyboard-killer/&quot; target=&quot;_blank&quot;&gt;Read more&lt;/a&gt;</summary>
+&lt;br&gt; &lt;a href=&quot;/keyboard-killer/&quot; target=&quot;_blank&quot;&gt;Read more&lt;/a&gt;</summary>
         
-        <content type="html" xml:base="https://www.linw1995.com/keyboard-killer/">&lt;p&gt;周五晚上和女票在玩游戏 &lt;strong&gt;Go-Go Town !&lt;&#x2F;strong&gt;  。游戏很上头，太专注了，不小心把可乐打翻了。
+        <content type="html" xml:base="/keyboard-killer/">&lt;p&gt;周五晚上和女票在玩游戏 &lt;strong&gt;Go-Go Town !&lt;&#x2F;strong&gt;  。游戏很上头，太专注了，不小心把可乐打翻了。
 可乐撒了一丢丢在键盘上，当时是擦干净了，使用也没啥问题。&lt;&#x2F;p&gt;
 &lt;p&gt;隔天早上起来用的时候，就发现它坏了。呜呜呜，陪伴5年的键盘。&lt;&#x2F;p&gt;
 &lt;span id=&quot;continue-reading&quot;&gt;&lt;&#x2F;span&gt;
@@ -41,7 +41,7 @@ HHKB 配列的键盘，距离上次选购都 5 年了，现在看能选择还是
     
     
   
-  &lt;img src=&quot;https:&#x2F;&#x2F;www.linw1995.com&#x2F;images&#x2F;keyboard_keychron_q60_max.jpg&quot; alt=&quot;新键盘&quot; class=&quot;center&quot; style=&quot;border-radius: 8px;&quot; decoding=&quot;async&quot; loading=&quot;lazy&quot;&#x2F;&gt;
+  &lt;img src=&quot;&#x2F;images&#x2F;keyboard_keychron_q60_max.jpg&quot; alt=&quot;新键盘&quot; class=&quot;center&quot; style=&quot;border-radius: 8px;&quot; decoding=&quot;async&quot; loading=&quot;lazy&quot;&#x2F;&gt;
 
 &lt;p&gt;到手的第一件事，就是改键位。
 原版 HHKB 可以通过拨动背面功能滑块，

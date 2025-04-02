@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="zh"><title>
     linw1995&#x27;s blog - note</title>
-    <link rel="self" type="application/atom+xml" href="https://www.linw1995.com/tags/note/atom.xml"/>
-    <link rel="alternate" type="text/html" href="https://www.linw1995.com/"/>
+    <link rel="self" type="application/atom+xml" href="/tags/note/atom.xml"/>
+    <link rel="alternate" type="text/html" href="/"/>
     <generator uri="https://www.getzola.org/">Zola</generator>
-    <icon>https://www.linw1995.com/favicon.ico</icon>
-    <logo>https://www.linw1995.com/favicon.png</logo>
+    <icon>/favicon.ico</icon>
+    <logo>/favicon.png</logo>
     <updated>2024-12-25T00:00:00+00:00</updated>
-    <id>https://www.linw1995.com/tags/note/atom.xml</id>
+    <id>/tags/note/atom.xml</id>
     <follow_challenge><feedId>72476326505512960</feedId><userId>57795710219398144</userId></follow_challenge>
     <entry xml:lang="zh"><title>实现 DNS App</title><published>2024-12-25T00:00:00+00:00</published><updated>2024-12-25T00:00:00+00:00</updated>
         
@@ -17,11 +17,11 @@
             
           </name></author>
         
-        <link rel="alternate" type="text/html" href="https://www.linw1995.com/my-dns/"/>
-        <id>https://www.linw1995.com/my-dns/</id>
+        <link rel="alternate" type="text/html" href="/my-dns/"/>
+        <id>/my-dns/</id>
         
         <summary type="html">&lt;h2 id=&quot;qian-yan&quot;&gt;前言&lt;&#x2F;h2&gt;
-&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;www.linw1995.com&#x2F;my-dns&#x2F;Logo_of_WireGuard.png&quot; alt=&quot;Logo of WireGuard&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;&#x2F;my-dns&#x2F;Logo_of_WireGuard.png&quot; alt=&quot;Logo of WireGuard&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
 &lt;p&gt;家里的 NAS 通过 WireGuard 配合小水管云主机搭建了一个私有网络，方便我在外面访问家里的设备。
 通过 Surge 可以定义简单的规则，把特定域名或 IP 段用 WireGuard 代理，这样就可以访问家里的设备了。
 再通过 SSID 判断当前网络环境，在家就直连。&lt;&#x2F;p&gt;
@@ -38,10 +38,10 @@
 &lt;&#x2F;blockquote&gt;
 &lt;p&gt;需要实现的功能十分简单，只要类似 &lt;code&gt;&#x2F;etc&#x2F;hosts&lt;&#x2F;code&gt; 文件，但又能像 Surge 这样配置统配符。
 还能通过配置哪些行是在 WiFi SSID 为某个值时生效，就能实现我想要的功能了。&lt;&#x2F;p&gt;
-&lt;br&gt; &lt;a href=&quot;https://www.linw1995.com/my-dns/&quot; target=&quot;_blank&quot;&gt;Read more&lt;/a&gt;</summary>
+&lt;br&gt; &lt;a href=&quot;/my-dns/&quot; target=&quot;_blank&quot;&gt;Read more&lt;/a&gt;</summary>
         
-        <content type="html" xml:base="https://www.linw1995.com/my-dns/">&lt;h2 id=&quot;qian-yan&quot;&gt;前言&lt;&#x2F;h2&gt;
-&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;www.linw1995.com&#x2F;my-dns&#x2F;Logo_of_WireGuard.png&quot; alt=&quot;Logo of WireGuard&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+        <content type="html" xml:base="/my-dns/">&lt;h2 id=&quot;qian-yan&quot;&gt;前言&lt;&#x2F;h2&gt;
+&lt;p&gt;&lt;img src=&quot;&#x2F;my-dns&#x2F;Logo_of_WireGuard.png&quot; alt=&quot;Logo of WireGuard&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
 &lt;p&gt;家里的 NAS 通过 WireGuard 配合小水管云主机搭建了一个私有网络，方便我在外面访问家里的设备。
 通过 Surge 可以定义简单的规则，把特定域名或 IP 段用 WireGuard 代理，这样就可以访问家里的设备了。
 再通过 SSID 判断当前网络环境，在家就直连。&lt;&#x2F;p&gt;
@@ -78,7 +78,7 @@
 可惜是我需要用到的模块和函数均没有。&lt;&#x2F;p&gt;
 &lt;p&gt;然后我开始反复观看该项目的文档，和已实现 Binding 的源码。
 过了几天终于技能进度条读到了实现功能的下限。&lt;&#x2F;p&gt;
-&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;www.linw1995.com&#x2F;my-dns&#x2F;NWPathMonitor.png&quot; alt=&quot;NWPathMonitor&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;&#x2F;my-dns&#x2F;NWPathMonitor.png&quot; alt=&quot;NWPathMonitor&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
 &lt;p&gt;不过在实现完，测试的时候发现了个意料之外的问题：&lt;strong&gt;获取到 SSID 居然是空字符串。&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
 &lt;h2 id=&quot;wang-luo-jian-ting-xu-yao-ding-wei-quan-xian&quot;&gt;网络监听需要定位权限&lt;&#x2F;h2&gt;
 &lt;p&gt;最开始以为是写了 Bug，反复排查了一番也没有找到问题。然后开始高强度网上冲浪，
@@ -120,9 +120,9 @@ Tauri + Leptos 就可以 All In Rust，代码写起来比较跟手；最后，�
 但为了接受问题反馈和文档编写，
 利用了 &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;Smart-Hosts&quot;&gt;GitHub Org&lt;&#x2F;a&gt; 来作为 App 的 Landing Page 和文档，
 GitHub Discussions 来作为问题反馈的地方。&lt;&#x2F;p&gt;
-&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;www.linw1995.com&#x2F;my-dns&#x2F;Poster.zh.png&quot; alt=&quot;Poster&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;&#x2F;my-dns&#x2F;Poster.zh.png&quot; alt=&quot;Poster&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
 &lt;p&gt;从上架到现在，刚好过了一个月。也没收到什么评价和反馈，而且唯一付费的人也只有我。&lt;&#x2F;p&gt;
-&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;www.linw1995.com&#x2F;my-dns&#x2F;.&#x2F;App_Store_Connect.png&quot; alt=&quot;App Store Connect&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;&#x2F;my-dns&#x2F;.&#x2F;App_Store_Connect.png&quot; alt=&quot;App Store Connect&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
 &lt;p&gt;已经有些新功能的想法，但选择暂缓开发。我得玩段时间游戏先～&lt;&#x2F;p&gt;
 </content>
     </entry>

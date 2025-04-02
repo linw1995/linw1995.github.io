@@ -1,64 +1,72 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-        <loc>https://www.linw1995.com/</loc>
+        <loc>/</loc>
     </url>
     <url>
-        <loc>https://www.linw1995.com/about/</loc>
+        <loc>/about/</loc>
     </url>
     <url>
-        <loc>https://www.linw1995.com/en/</loc>
+        <loc>/en/</loc>
     </url>
     <url>
-        <loc>https://www.linw1995.com/en/about/</loc>
+        <loc>/en/about/</loc>
     </url>
     <url>
-        <loc>https://www.linw1995.com/en/setup-neovim-in-nixos/</loc>
+        <loc>/en/rust-cross-compilation-tips/</loc>
+        <lastmod>2025-04-02</lastmod>
+    </url>
+    <url>
+        <loc>/en/setup-neovim-in-nixos/</loc>
         <lastmod>2024-09-17</lastmod>
     </url>
     <url>
-        <loc>https://www.linw1995.com/en/tags/</loc>
+        <loc>/en/tags/</loc>
     </url>
     <url>
-        <loc>https://www.linw1995.com/en/tags/neovim/</loc>
+        <loc>/en/tags/neovim/</loc>
     </url>
     <url>
-        <loc>https://www.linw1995.com/en/tags/nixos/</loc>
+        <loc>/en/tags/nixos/</loc>
     </url>
     <url>
-        <loc>https://www.linw1995.com/en/tags/rust/</loc>
+        <loc>/en/tags/rust/</loc>
     </url>
     <url>
-        <loc>https://www.linw1995.com/keyboard-killer/</loc>
+        <loc>/keyboard-killer/</loc>
         <lastmod>2024-12-10</lastmod>
     </url>
     <url>
-        <loc>https://www.linw1995.com/my-dns/</loc>
+        <loc>/my-dns/</loc>
         <lastmod>2024-12-25</lastmod>
     </url>
     <url>
-        <loc>https://www.linw1995.com/setup-neovim-in-nixos/</loc>
+        <loc>/rust-cross-compilation-tips/</loc>
+        <lastmod>2025-04-02</lastmod>
+    </url>
+    <url>
+        <loc>/setup-neovim-in-nixos/</loc>
         <lastmod>2024-09-17</lastmod>
     </url>
     <url>
-        <loc>https://www.linw1995.com/tags/</loc>
+        <loc>/tags/</loc>
     </url>
     <url>
-        <loc>https://www.linw1995.com/tags/equipment/</loc>
+        <loc>/tags/equipment/</loc>
     </url>
     <url>
-        <loc>https://www.linw1995.com/tags/keyboard/</loc>
+        <loc>/tags/keyboard/</loc>
     </url>
     <url>
-        <loc>https://www.linw1995.com/tags/neovim/</loc>
+        <loc>/tags/neovim/</loc>
     </url>
     <url>
-        <loc>https://www.linw1995.com/tags/nixos/</loc>
+        <loc>/tags/nixos/</loc>
     </url>
     <url>
-        <loc>https://www.linw1995.com/tags/note/</loc>
+        <loc>/tags/note/</loc>
     </url>
     <url>
-        <loc>https://www.linw1995.com/tags/rust/</loc>
+        <loc>/tags/rust/</loc>
     </url>
 </urlset>

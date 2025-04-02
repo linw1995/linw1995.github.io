@@ -1,14 +1,136 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="zh"><title>
     linw1995&#x27;s blog</title>
-    <link rel="self" type="application/atom+xml" href="https://www.linw1995.com/atom.xml"/>
-    <link rel="alternate" type="text/html" href="https://www.linw1995.com/"/>
+    <link rel="self" type="application/atom+xml" href="/atom.xml"/>
+    <link rel="alternate" type="text/html" href="/"/>
     <generator uri="https://www.getzola.org/">Zola</generator>
-    <icon>https://www.linw1995.com/favicon.ico</icon>
-    <logo>https://www.linw1995.com/favicon.png</logo>
-    <updated>2024-12-25T00:00:00+00:00</updated>
-    <id>https://www.linw1995.com/atom.xml</id>
+    <icon>/favicon.ico</icon>
+    <logo>/favicon.png</logo>
+    <updated>2025-04-02T00:00:00+00:00</updated>
+    <id>/atom.xml</id>
     <follow_challenge><feedId>72476326505512960</feedId><userId>57795710219398144</userId></follow_challenge>
+    <entry xml:lang="zh"><title>Rust 跨平台构建贴士</title><published>2025-04-02T00:00:00+00:00</published><updated>2025-04-02T00:00:00+00:00</updated>
+        
+        <author><name>
+            
+              linw1995
+            
+          </name></author>
+        
+        <link rel="alternate" type="text/html" href="/rust-cross-compilation-tips/"/>
+        <id>/rust-cross-compilation-tips/</id>
+        
+        <content type="html" xml:base="/rust-cross-compilation-tips/">&lt;h2 id=&quot;shi-yong-nix-flake-da-jian-ji-chu-de-rust-kua-ping-tai-gou-jian-huan-jing&quot;&gt;使用 Nix Flake 搭建基础的 Rust 跨平台构建环境&lt;&#x2F;h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;新增 flake.nix 文件，并执行 &lt;code&gt;git add flake.nix&lt;&#x2F;code&gt; 。&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;nix&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-nix &quot;&gt;&lt;code class=&quot;language-nix&quot; data-lang=&quot;nix&quot;&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;inputs &lt;&#x2F;span&gt;&lt;span&gt;= {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;utils&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;url &lt;&#x2F;span&gt;&lt;span&gt;= &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;github:numtide&#x2F;flake-utils&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;nixpkgs&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;url &lt;&#x2F;span&gt;&lt;span&gt;= &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;github:NixOS&#x2F;nixpkgs&#x2F;nixos-24.11&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;;
+&lt;&#x2F;span&gt;&lt;span&gt;  };
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;outputs &lt;&#x2F;span&gt;&lt;span&gt;= {
+&lt;&#x2F;span&gt;&lt;span&gt;    nixpkgs,
+&lt;&#x2F;span&gt;&lt;span&gt;    utils,
+&lt;&#x2F;span&gt;&lt;span&gt;    ...
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;}&lt;&#x2F;span&gt;&lt;span&gt;:
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;utils&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;lib&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;eachDefaultSystem
+&lt;&#x2F;span&gt;&lt;span&gt;    (
+&lt;&#x2F;span&gt;&lt;span&gt;      system: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;pkgs &lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;import &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;nixpkgs &lt;&#x2F;span&gt;&lt;span&gt;{&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;inherit &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;system&lt;&#x2F;span&gt;&lt;span&gt;;};
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;lib &lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;pkgs&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;lib&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;in &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;devShells &lt;&#x2F;span&gt;&lt;span&gt;=
+&lt;&#x2F;span&gt;&lt;span&gt;          {
+&lt;&#x2F;span&gt;&lt;span&gt;            &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;default &lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;pkgs&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;mkShell &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;              &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;nativeBuildInputs &lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;with &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;pkgs&lt;&#x2F;span&gt;&lt;span&gt;; [
+&lt;&#x2F;span&gt;&lt;span&gt;                &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;pkg-config
+&lt;&#x2F;span&gt;&lt;span&gt;                &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;gcc
+&lt;&#x2F;span&gt;&lt;span&gt;              ];
+&lt;&#x2F;span&gt;&lt;span&gt;            };
+&lt;&#x2F;span&gt;&lt;span&gt;          }
+&lt;&#x2F;span&gt;&lt;span&gt;          &#x2F;&#x2F; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;builtins&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;listToAttrs &lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;map &lt;&#x2F;span&gt;&lt;span&gt;(target: {
+&lt;&#x2F;span&gt;&lt;span&gt;            &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;name &lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;target&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;            &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;value &lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let
+&lt;&#x2F;span&gt;&lt;span&gt;              &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;cross &lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;import &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;nixpkgs &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;                &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;inherit &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;system&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;                &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;crossSystem &lt;&#x2F;span&gt;&lt;span&gt;= {&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;config &lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;target&lt;&#x2F;span&gt;&lt;span&gt;;};
+&lt;&#x2F;span&gt;&lt;span&gt;              };
+&lt;&#x2F;span&gt;&lt;span&gt;              &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;cpkgs &lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;cross&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;pkgsMusl&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;            &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;in &lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;cross&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;mkShell &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;              &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;nativeBuildInputs &lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;with &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;pkgs&lt;&#x2F;span&gt;&lt;span&gt;; [
+&lt;&#x2F;span&gt;&lt;span&gt;                &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;pkg-config
+&lt;&#x2F;span&gt;&lt;span&gt;                &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;gcc &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# proc macro 等编译过程，需要原架构 toolchians
+&lt;&#x2F;span&gt;&lt;span&gt;              ];
+&lt;&#x2F;span&gt;&lt;span&gt;              &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;env &lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let
+&lt;&#x2F;span&gt;&lt;span&gt;                &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;normalized &lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;lib&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;strings&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;toUpper &lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;builtins&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;replaceStrings &lt;&#x2F;span&gt;&lt;span&gt;[&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;-&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;] [&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;_&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;] &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;target&lt;&#x2F;span&gt;&lt;span&gt;);
+&lt;&#x2F;span&gt;&lt;span&gt;              &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;in
+&lt;&#x2F;span&gt;&lt;span&gt;                &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;with &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;cpkgs&lt;&#x2F;span&gt;&lt;span&gt;; {
+&lt;&#x2F;span&gt;&lt;span&gt;                  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# https:&#x2F;&#x2F;doc.rust-lang.org&#x2F;cargo&#x2F;reference&#x2F;environment-variables.html#configuration-environment-variables
+&lt;&#x2F;span&gt;&lt;span&gt;                  &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;CARGO_TARGET_&lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#ab7967;&quot;&gt;${&lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#bf616a;&quot;&gt;normalized&lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#ab7967;&quot;&gt;}&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;_LINKER&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot; = &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#ab7967;&quot;&gt;${&lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#bf616a;&quot;&gt;stdenv&lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#c0c5ce;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#bf616a;&quot;&gt;cc&lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#c0c5ce;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#bf616a;&quot;&gt;targetPrefix&lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#ab7967;&quot;&gt;}&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;cc&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;;
+&lt;&#x2F;span&gt;&lt;span&gt;                };
+&lt;&#x2F;span&gt;&lt;span&gt;            });
+&lt;&#x2F;span&gt;&lt;span&gt;          }) [&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;x86_64-unknown-linux-musl&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot; &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;aarch64-unknown-linux-musl&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;]);
+&lt;&#x2F;span&gt;&lt;span&gt;      }
+&lt;&#x2F;span&gt;&lt;span&gt;    );
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;执行构建&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# 本地构建
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;nix&lt;&#x2F;span&gt;&lt;span&gt; develop .#default&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; --command &lt;&#x2F;span&gt;&lt;span&gt;\
+&lt;&#x2F;span&gt;&lt;span&gt; cargo build
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# 跨平台构建
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;#
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# 别忘了先安装对应的 rustup 组件
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# rustup target add aarch64-unknown-linux-musl
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# rustup target add x86_64-unknown-linux-musl
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;TARGET&lt;&#x2F;span&gt;&lt;span&gt;=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;x86_64-unknown-linux-musl &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;nix&lt;&#x2F;span&gt;&lt;span&gt; develop .#$&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;TARGET --command &lt;&#x2F;span&gt;&lt;span&gt;\
+&lt;&#x2F;span&gt;&lt;span&gt; cargo build&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; --target &lt;&#x2F;span&gt;&lt;span&gt;$&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;TARGET
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;h2 id=&quot;openssl-pq-deng-c-c-yi-lai-chu-li&quot;&gt;openssl, pq 等 C&#x2F;C++ 依赖处理&lt;&#x2F;h2&gt;
+&lt;p&gt;使用静态编译，并使用有 vendor （打包 C&#x2F;C++ 源码 ）版本的 bindings 项目，把这些加入依赖管理，确保能稳定的可重复构建。&lt;&#x2F;p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;在 Cargo.toml 文件中增加对应 target 的依赖。&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;toml&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-toml &quot;&gt;&lt;code class=&quot;language-toml&quot; data-lang=&quot;toml&quot;&gt;&lt;span&gt;[target.x86_64-unknown-linux-musl.dependencies]
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;openssl-sys &lt;&#x2F;span&gt;&lt;span&gt;= { &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;version &lt;&#x2F;span&gt;&lt;span&gt;= &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;0.9&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;features &lt;&#x2F;span&gt;&lt;span&gt;= [&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;vendored&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;] }
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;pq-sys &lt;&#x2F;span&gt;&lt;span&gt;= { &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;version &lt;&#x2F;span&gt;&lt;span&gt;= &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;0.7&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;features &lt;&#x2F;span&gt;&lt;span&gt;= [&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;bundled&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;] }
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;[target.aarch64-unknown-linux-musl.dependencies]
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;openssl-sys &lt;&#x2F;span&gt;&lt;span&gt;= { &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;version &lt;&#x2F;span&gt;&lt;span&gt;= &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;0.9&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;features &lt;&#x2F;span&gt;&lt;span&gt;= [&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;vendored&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;] }
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;pq-sys &lt;&#x2F;span&gt;&lt;span&gt;= { &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;version &lt;&#x2F;span&gt;&lt;span&gt;= &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;0.7&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;features &lt;&#x2F;span&gt;&lt;span&gt;= [&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;bundled&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;] }
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;执行构建&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# 本地静态编译则需要指定 RUSTFLAGS。经实测，有些架构该配置无效
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;RUSTFLAGS&lt;&#x2F;span&gt;&lt;span&gt;=&amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;-C target-feature=+crt-static&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;cargo&lt;&#x2F;span&gt;&lt;span&gt; build
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# 而 x86_64-unknown-linux-musl 则不需要指定，默认启用
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;TARGET&lt;&#x2F;span&gt;&lt;span&gt;=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;x86_64-unknown-linux-musl &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;nix&lt;&#x2F;span&gt;&lt;span&gt; develop .#$&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;TARGET --command &lt;&#x2F;span&gt;&lt;span&gt;\
+&lt;&#x2F;span&gt;&lt;span&gt;  cargo build&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; --target &lt;&#x2F;span&gt;&lt;span&gt;$&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;TARGET
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;CRT means standard C runtime.
+The default of &lt;strong&gt;crt-static&lt;&#x2F;strong&gt; will be different depending on the target.
+For example &lt;strong&gt;x86_64-unknown-linux-musl&lt;&#x2F;strong&gt; will have it on by default,
+whereas &lt;strong&gt;arm-unknown-linux-musleabi&lt;&#x2F;strong&gt; will have it turned off by default.
+&lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#1&quot;&gt;1&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;div class=&quot;footnote-definition&quot; id=&quot;1&quot;&gt;&lt;sup class=&quot;footnote-definition-label&quot;&gt;1&lt;&#x2F;sup&gt;
+&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;rust-lang.github.io&#x2F;rfcs&#x2F;1721-crt-static.html&quot;&gt;RFC 1721 crt-static&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
+</content>
+    </entry>
     <entry xml:lang="zh"><title>实现 DNS App</title><published>2024-12-25T00:00:00+00:00</published><updated>2024-12-25T00:00:00+00:00</updated>
         
         <author><name>
@@ -17,11 +139,11 @@
             
           </name></author>
         
-        <link rel="alternate" type="text/html" href="https://www.linw1995.com/my-dns/"/>
-        <id>https://www.linw1995.com/my-dns/</id>
+        <link rel="alternate" type="text/html" href="/my-dns/"/>
+        <id>/my-dns/</id>
         
         <summary type="html">&lt;h2 id=&quot;qian-yan&quot;&gt;前言&lt;&#x2F;h2&gt;
-&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;www.linw1995.com&#x2F;my-dns&#x2F;Logo_of_WireGuard.png&quot; alt=&quot;Logo of WireGuard&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;&#x2F;my-dns&#x2F;Logo_of_WireGuard.png&quot; alt=&quot;Logo of WireGuard&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
 &lt;p&gt;家里的 NAS 通过 WireGuard 配合小水管云主机搭建了一个私有网络，方便我在外面访问家里的设备。
 通过 Surge 可以定义简单的规则，把特定域名或 IP 段用 WireGuard 代理，这样就可以访问家里的设备了。
 再通过 SSID 判断当前网络环境，在家就直连。&lt;&#x2F;p&gt;
@@ -38,10 +160,10 @@
 &lt;&#x2F;blockquote&gt;
 &lt;p&gt;需要实现的功能十分简单，只要类似 &lt;code&gt;&#x2F;etc&#x2F;hosts&lt;&#x2F;code&gt; 文件，但又能像 Surge 这样配置统配符。
 还能通过配置哪些行是在 WiFi SSID 为某个值时生效，就能实现我想要的功能了。&lt;&#x2F;p&gt;
-&lt;br&gt; &lt;a href=&quot;https://www.linw1995.com/my-dns/&quot; target=&quot;_blank&quot;&gt;Read more&lt;/a&gt;</summary>
+&lt;br&gt; &lt;a href=&quot;/my-dns/&quot; target=&quot;_blank&quot;&gt;Read more&lt;/a&gt;</summary>
         
-        <content type="html" xml:base="https://www.linw1995.com/my-dns/">&lt;h2 id=&quot;qian-yan&quot;&gt;前言&lt;&#x2F;h2&gt;
-&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;www.linw1995.com&#x2F;my-dns&#x2F;Logo_of_WireGuard.png&quot; alt=&quot;Logo of WireGuard&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+        <content type="html" xml:base="/my-dns/">&lt;h2 id=&quot;qian-yan&quot;&gt;前言&lt;&#x2F;h2&gt;
+&lt;p&gt;&lt;img src=&quot;&#x2F;my-dns&#x2F;Logo_of_WireGuard.png&quot; alt=&quot;Logo of WireGuard&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
 &lt;p&gt;家里的 NAS 通过 WireGuard 配合小水管云主机搭建了一个私有网络，方便我在外面访问家里的设备。
 通过 Surge 可以定义简单的规则，把特定域名或 IP 段用 WireGuard 代理，这样就可以访问家里的设备了。
 再通过 SSID 判断当前网络环境，在家就直连。&lt;&#x2F;p&gt;
@@ -78,7 +200,7 @@
 可惜是我需要用到的模块和函数均没有。&lt;&#x2F;p&gt;
 &lt;p&gt;然后我开始反复观看该项目的文档，和已实现 Binding 的源码。
 过了几天终于技能进度条读到了实现功能的下限。&lt;&#x2F;p&gt;
-&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;www.linw1995.com&#x2F;my-dns&#x2F;NWPathMonitor.png&quot; alt=&quot;NWPathMonitor&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;&#x2F;my-dns&#x2F;NWPathMonitor.png&quot; alt=&quot;NWPathMonitor&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
 &lt;p&gt;不过在实现完，测试的时候发现了个意料之外的问题：&lt;strong&gt;获取到 SSID 居然是空字符串。&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
 &lt;h2 id=&quot;wang-luo-jian-ting-xu-yao-ding-wei-quan-xian&quot;&gt;网络监听需要定位权限&lt;&#x2F;h2&gt;
 &lt;p&gt;最开始以为是写了 Bug，反复排查了一番也没有找到问题。然后开始高强度网上冲浪，
@@ -120,9 +242,9 @@ Tauri + Leptos 就可以 All In Rust，代码写起来比较跟手；最后，�
 但为了接受问题反馈和文档编写，
 利用了 &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;Smart-Hosts&quot;&gt;GitHub Org&lt;&#x2F;a&gt; 来作为 App 的 Landing Page 和文档，
 GitHub Discussions 来作为问题反馈的地方。&lt;&#x2F;p&gt;
-&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;www.linw1995.com&#x2F;my-dns&#x2F;Poster.zh.png&quot; alt=&quot;Poster&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;&#x2F;my-dns&#x2F;Poster.zh.png&quot; alt=&quot;Poster&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
 &lt;p&gt;从上架到现在，刚好过了一个月。也没收到什么评价和反馈，而且唯一付费的人也只有我。&lt;&#x2F;p&gt;
-&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;www.linw1995.com&#x2F;my-dns&#x2F;.&#x2F;App_Store_Connect.png&quot; alt=&quot;App Store Connect&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;&#x2F;my-dns&#x2F;.&#x2F;App_Store_Connect.png&quot; alt=&quot;App Store Connect&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
 &lt;p&gt;已经有些新功能的想法，但选择暂缓开发。我得玩段时间游戏先～&lt;&#x2F;p&gt;
 </content>
     </entry>
@@ -134,15 +256,15 @@ GitHub Discussions 来作为问题反馈的地方。&lt;&#x2F;p&gt;
             
           </name></author>
         
-        <link rel="alternate" type="text/html" href="https://www.linw1995.com/keyboard-killer/"/>
-        <id>https://www.linw1995.com/keyboard-killer/</id>
+        <link rel="alternate" type="text/html" href="/keyboard-killer/"/>
+        <id>/keyboard-killer/</id>
         
         <summary type="html">&lt;p&gt;周五晚上和女票在玩游戏 &lt;strong&gt;Go-Go Town !&lt;&#x2F;strong&gt;  。游戏很上头，太专注了，不小心把可乐打翻了。
 可乐撒了一丢丢在键盘上，当时是擦干净了，使用也没啥问题。&lt;&#x2F;p&gt;
 &lt;p&gt;隔天早上起来用的时候，就发现它坏了。呜呜呜，陪伴5年的键盘。&lt;&#x2F;p&gt;
-&lt;br&gt; &lt;a href=&quot;https://www.linw1995.com/keyboard-killer/&quot; target=&quot;_blank&quot;&gt;Read more&lt;/a&gt;</summary>
+&lt;br&gt; &lt;a href=&quot;/keyboard-killer/&quot; target=&quot;_blank&quot;&gt;Read more&lt;/a&gt;</summary>
         
-        <content type="html" xml:base="https://www.linw1995.com/keyboard-killer/">&lt;p&gt;周五晚上和女票在玩游戏 &lt;strong&gt;Go-Go Town !&lt;&#x2F;strong&gt;  。游戏很上头，太专注了，不小心把可乐打翻了。
+        <content type="html" xml:base="/keyboard-killer/">&lt;p&gt;周五晚上和女票在玩游戏 &lt;strong&gt;Go-Go Town !&lt;&#x2F;strong&gt;  。游戏很上头，太专注了，不小心把可乐打翻了。
 可乐撒了一丢丢在键盘上，当时是擦干净了，使用也没啥问题。&lt;&#x2F;p&gt;
 &lt;p&gt;隔天早上起来用的时候，就发现它坏了。呜呜呜，陪伴5年的键盘。&lt;&#x2F;p&gt;
 &lt;span id=&quot;continue-reading&quot;&gt;&lt;&#x2F;span&gt;
@@ -158,7 +280,7 @@ HHKB 配列的键盘，距离上次选购都 5 年了，现在看能选择还是
     
     
   
-  &lt;img src=&quot;https:&#x2F;&#x2F;www.linw1995.com&#x2F;images&#x2F;keyboard_keychron_q60_max.jpg&quot; alt=&quot;新键盘&quot; class=&quot;center&quot; style=&quot;border-radius: 8px;&quot; decoding=&quot;async&quot; loading=&quot;lazy&quot;&#x2F;&gt;
+  &lt;img src=&quot;&#x2F;images&#x2F;keyboard_keychron_q60_max.jpg&quot; alt=&quot;新键盘&quot; class=&quot;center&quot; style=&quot;border-radius: 8px;&quot; decoding=&quot;async&quot; loading=&quot;lazy&quot;&#x2F;&gt;
 
 &lt;p&gt;到手的第一件事，就是改键位。
 原版 HHKB 可以通过拨动背面功能滑块，
@@ -232,8 +354,8 @@ HHKB 配列的键盘，距离上次选购都 5 年了，现在看能选择还是
             
           </name></author>
         
-        <link rel="alternate" type="text/html" href="https://www.linw1995.com/setup-neovim-in-nixos/"/>
-        <id>https://www.linw1995.com/setup-neovim-in-nixos/</id>
+        <link rel="alternate" type="text/html" href="/setup-neovim-in-nixos/"/>
+        <id>/setup-neovim-in-nixos/</id>
         
         <summary type="html">&lt;h2 id=&quot;qian-yan&quot;&gt;前言&lt;&#x2F;h2&gt;
 &lt;p&gt;最近在需要在一个巨大的 Rust 项目中做开发工作，但我的笔记本已经不堪重负，无法做高效的开发。
@@ -244,14 +366,14 @@ So, 我决定购买一台新的迷你 PC 来专门处理这个问题。&lt;&#x2F
     
     
   
-  &lt;img src=&quot;https:&#x2F;&#x2F;www.linw1995.com&#x2F;images&#x2F;setup_neovim_in_nixos-mini_pc.jpg&quot; alt=&quot;mini PC is put on the left of my phone rack&quot; class=&quot;left&quot; style=&quot;border-radius: 8px;&quot; decoding=&quot;async&quot; loading=&quot;lazy&quot;&#x2F;&gt;
+  &lt;img src=&quot;&#x2F;images&#x2F;setup_neovim_in_nixos-mini_pc.jpg&quot; alt=&quot;mini PC is put on the left of my phone rack&quot; class=&quot;left&quot; style=&quot;border-radius: 8px;&quot; decoding=&quot;async&quot; loading=&quot;lazy&quot;&#x2F;&gt;
 
 &lt;p&gt;由于还是习惯在 MacOS 上开发，且又不想折腾 Hackintosh，
 我给这台新的迷你 PC 安装了 NixOS 。最早是打算继续使用 VSCode 远程开发，
 后面发现 Neovim 也是一个不错的选择。&lt;&#x2F;p&gt;
-&lt;br&gt; &lt;a href=&quot;https://www.linw1995.com/setup-neovim-in-nixos/&quot; target=&quot;_blank&quot;&gt;Read more&lt;/a&gt;</summary>
+&lt;br&gt; &lt;a href=&quot;/setup-neovim-in-nixos/&quot; target=&quot;_blank&quot;&gt;Read more&lt;/a&gt;</summary>
         
-        <content type="html" xml:base="https://www.linw1995.com/setup-neovim-in-nixos/">&lt;h2 id=&quot;qian-yan&quot;&gt;前言&lt;&#x2F;h2&gt;
+        <content type="html" xml:base="/setup-neovim-in-nixos/">&lt;h2 id=&quot;qian-yan&quot;&gt;前言&lt;&#x2F;h2&gt;
 &lt;p&gt;最近在需要在一个巨大的 Rust 项目中做开发工作，但我的笔记本已经不堪重负，无法做高效的开发。
 So, 我决定购买一台新的迷你 PC 来专门处理这个问题。&lt;&#x2F;p&gt;
 
@@ -260,7 +382,7 @@ So, 我决定购买一台新的迷你 PC 来专门处理这个问题。&lt;&#x2F
     
     
   
-  &lt;img src=&quot;https:&#x2F;&#x2F;www.linw1995.com&#x2F;images&#x2F;setup_neovim_in_nixos-mini_pc.jpg&quot; alt=&quot;mini PC is put on the left of my phone rack&quot; class=&quot;left&quot; style=&quot;border-radius: 8px;&quot; decoding=&quot;async&quot; loading=&quot;lazy&quot;&#x2F;&gt;
+  &lt;img src=&quot;&#x2F;images&#x2F;setup_neovim_in_nixos-mini_pc.jpg&quot; alt=&quot;mini PC is put on the left of my phone rack&quot; class=&quot;left&quot; style=&quot;border-radius: 8px;&quot; decoding=&quot;async&quot; loading=&quot;lazy&quot;&#x2F;&gt;
 
 &lt;p&gt;由于还是习惯在 MacOS 上开发，且又不想折腾 Hackintosh，
 我给这台新的迷你 PC 安装了 NixOS 。最早是打算继续使用 VSCode 远程开发，

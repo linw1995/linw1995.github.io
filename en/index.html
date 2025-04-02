@@ -8,24 +8,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
     <meta name="robots" content="noodp"/>
 
-    <link rel="stylesheet" href="https://www.linw1995.com/style.css">
-    <link rel="stylesheet" href="https://www.linw1995.com/color/blue.css">
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/color/blue.css">
 
-    <link rel="stylesheet" href="https://www.linw1995.com/font-hack.css">
+    <link rel="stylesheet" href="/font-hack.css">
 
     <meta name="description" content="">
 
     <meta property="og:description" content="">
     <meta property="og:title" content="">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://www.linw1995.com/en/">
+    <meta property="og:url" content="/en/">
 
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:description" content="">
     <meta name="twitter:title" content="">
-    <meta property="twitter:domain" content="www.linw1995.com&#x2F;">
-    <meta property="twitter:url" content="https://www.linw1995.com/en/">
+    <meta property="twitter:domain" content="&#x2F;">
+    <meta property="twitter:url" content="/en/">
 
+                <link rel="alternate" type="application/atom+xml" title=" Atom Feed" href="/en/atom.xml" />
+        <link rel="shortcut icon" type="image/png" href="/favicon.png">
+    
     </head>
 
 <body class="">
@@ -35,7 +38,7 @@
         <div class="header__inner">
             <div class="header__logo">
                     
-                <a href="https://www.linw1995.com/" style="text-decoration: none;">
+                <a href="/" style="text-decoration: none;">
                     <div class="logo">
                       
                             linw1995
@@ -48,19 +51,18 @@
   <li class="menu__trigger">English&nbsp;▾</li>
   <li>
     <ul class="menu__dropdown">
-        <li><a href="https:&#x2F;&#x2F;www.linw1995.com&#x2F;en&#x2F;">English</a></li>
       
-        <li><a href="https:&#x2F;&#x2F;www.linw1995.com&#x2F;">中文</a></li>
-      </ul>
+            <li><a href="&#x2F;">中文</a></li>
+          </ul>
   </li>
 </ul>
-
-            </div>
+</div>
 
         
-        <nav class="menu">
+        
+                <nav class="menu">
             <ul class="menu__inner">
-                <li><a href="/">blog</a></li>
+                <li class="active"><a href="/">blog</a></li>
             
                 <li><a href="/tags">tags</a></li>
             
@@ -79,7 +81,192 @@
 
     <div class="content">
         
-        <div class="posts"><div class="pagination">
+        <div class="posts">
+                <div class="post on-list">
+                    
+    <h1 class="post-title"><a href="/en/rust-cross-compilation-tips/">Rust Cross-compilation Tips</a></h1>
+    <div class="post-meta-inline">
+        
+    <span class="post-date">
+            2025-04-02
+        </span>
+
+    </div>
+
+    
+        <span class="post-tags-inline">
+                :: tags:&nbsp;
+                <a class="post-tag" href="/en/tags/nixos/">#nixos</a>&nbsp;
+                <a class="post-tag" href="/en/tags/rust/">#rust</a></span>
+    
+
+
+                    <div class="post-content">
+            <h2 id="setting-up-a-basic-cross-platform-rust-build-environment-with-nix-flake">Setting Up a Basic Cross-Platform Rust Build Environment with Nix Flake</h2>
+<ol>
+<li>
+<p>Add a <code>flake.nix</code> file and run <code>git add flake.nix</code>:</p>
+<pre data-lang="nix" style="background-color:#2b303b;color:#c0c5ce;" class="language-nix "><code class="language-nix" data-lang="nix"><span>{
+</span><span>  </span><span style="color:#d08770;">inputs </span><span>= {
+</span><span>    </span><span style="color:#d08770;">utils</span><span>.</span><span style="color:#d08770;">url </span><span>= &quot;</span><span style="color:#a3be8c;">github:numtide/flake-utils</span><span>&quot;;
+</span><span>    </span><span style="color:#d08770;">nixpkgs</span><span>.</span><span style="color:#d08770;">url </span><span>= &quot;</span><span style="color:#a3be8c;">github:NixOS/nixpkgs/nixos-24.11</span><span>&quot;;
+</span><span>  };
+</span><span>
+</span><span>  </span><span style="color:#d08770;">outputs </span><span>= {
+</span><span>    nixpkgs,
+</span><span>    utils,
+</span><span>    ...
+</span><span>  </span><span style="color:#8fa1b3;">}</span><span>:
+</span><span>    </span><span style="color:#bf616a;">utils</span><span>.</span><span style="color:#bf616a;">lib</span><span>.</span><span style="color:#bf616a;">eachDefaultSystem </span><span>(system: </span><span style="color:#b48ead;">let
+</span><span>      </span><span style="color:#d08770;">pkgs </span><span>= </span><span style="color:#96b5b4;">import </span><span style="color:#bf616a;">nixpkgs </span><span>{</span><span style="color:#b48ead;">inherit </span><span style="color:#d08770;">system</span><span>;};
+</span><span>      </span><span style="color:#d08770;">lib </span><span>= </span><span style="color:#bf616a;">pkgs</span><span>.</span><span style="color:#bf616a;">lib</span><span>;
+</span><span>    </span><span style="color:#b48ead;">in </span><span>{
+</span><span>      </span><span style="color:#d08770;">devShells </span><span>=
+</span><span>        {
+</span><span>          </span><span style="color:#d08770;">default </span><span>= </span><span style="color:#bf616a;">pkgs</span><span>.</span><span style="color:#bf616a;">mkShell </span><span>{
+</span><span>            </span><span style="color:#d08770;">nativeBuildInputs </span><span>= </span><span style="color:#b48ead;">with </span><span style="color:#bf616a;">pkgs</span><span>; [
+</span><span>              </span><span style="color:#bf616a;">pkg-config
+</span><span>              </span><span style="color:#bf616a;">gcc
+</span><span>            ];
+</span><span>          };
+</span><span>        }
+</span><span>        // </span><span style="color:#d08770;">builtins</span><span>.</span><span style="color:#bf616a;">listToAttrs </span><span>(</span><span style="color:#96b5b4;">map </span><span>(target: {
+</span><span>          </span><span style="color:#d08770;">name </span><span>= </span><span style="color:#bf616a;">target</span><span>;
+</span><span>          </span><span style="color:#d08770;">value </span><span>= </span><span style="color:#b48ead;">let
+</span><span>            </span><span style="color:#d08770;">cross </span><span>= </span><span style="color:#96b5b4;">import </span><span style="color:#bf616a;">nixpkgs </span><span>{
+</span><span>              </span><span style="color:#b48ead;">inherit </span><span style="color:#d08770;">system</span><span>;
+</span><span>              </span><span style="color:#d08770;">crossSystem </span><span>= {</span><span style="color:#d08770;">config </span><span>= </span><span style="color:#bf616a;">target</span><span>;};
+</span><span>            };
+</span><span>            </span><span style="color:#d08770;">cpkgs </span><span>= </span><span style="color:#bf616a;">cross</span><span>.</span><span style="color:#bf616a;">pkgsMusl</span><span>;
+</span><span>          </span><span style="color:#b48ead;">in
+</span><span>            </span><span style="color:#bf616a;">cross</span><span>.</span><span style="color:#bf616a;">mkShell </span><span>{
+</span><span>              </span><span style="color:#d08770;">nativeBuildInputs </span><span>= </span><span style="color:#b48ead;">with </span><span style="color:#bf616a;">pkgs</span><span>; [
+</span><span>                </span><span style="color:#bf616a;">pkg-config
+</span><span>                </span><span style="color:#bf616a;">gcc </span><span style="color:#65737e;"># Required for compiling proc macros and other dependencies
+</span><span>              ];
+</span><span>              </span><span style="color:#d08770;">env </span><span>= </span><span style="color:#b48ead;">let
+</span><span>                </span><span style="color:#d08770;">normalized </span><span>= </span><span style="color:#bf616a;">lib</span><span>.</span><span style="color:#bf616a;">strings</span><span>.</span><span style="color:#bf616a;">toUpper </span><span>(</span><span style="color:#d08770;">builtins</span><span>.</span><span style="color:#bf616a;">replaceStrings </span><span>[&quot;</span><span style="color:#a3be8c;">-</span><span>&quot;] [&quot;</span><span style="color:#a3be8c;">_</span><span>&quot;] </span><span style="color:#bf616a;">target</span><span>);
+</span><span>              </span><span style="color:#b48ead;">in
+</span><span>                </span><span style="color:#b48ead;">with </span><span style="color:#bf616a;">cpkgs</span><span>; {
+</span><span>                  </span><span style="color:#65737e;"># https://doc.rust-lang.org/cargo/reference/environment-variables.html#configuration-environment-variables
+</span><span>                  &quot;</span><span style="color:#a3be8c;">CARGO_TARGET_</span><span style="font-style:italic;color:#ab7967;">${</span><span style="font-style:italic;color:#bf616a;">normalized</span><span style="font-style:italic;color:#ab7967;">}</span><span style="color:#a3be8c;">_LINKER</span><span>&quot; = &quot;</span><span style="font-style:italic;color:#ab7967;">${</span><span style="font-style:italic;color:#bf616a;">stdenv</span><span style="font-style:italic;color:#c0c5ce;">.</span><span style="font-style:italic;color:#bf616a;">cc</span><span style="font-style:italic;color:#c0c5ce;">.</span><span style="font-style:italic;color:#bf616a;">targetPrefix</span><span style="font-style:italic;color:#ab7967;">}</span><span style="color:#a3be8c;">cc</span><span>&quot;;
+</span><span>                };
+</span><span>            };
+</span><span>        }) [&quot;</span><span style="color:#a3be8c;">x86_64-unknown-linux-musl</span><span>&quot; &quot;</span><span style="color:#a3be8c;">aarch64-unknown-linux-musl</span><span>&quot;]);
+</span><span>    });
+</span><span>}
+</span></code></pre>
+</li>
+<li>
+<p>Build the project:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#65737e;"># Local build
+</span><span style="color:#bf616a;">nix</span><span> develop .#default</span><span style="color:#bf616a;"> --command </span><span>\
+</span><span>  cargo build
+</span><span>
+</span><span style="color:#65737e;"># Cross-platform build
+</span><span style="color:#65737e;">#
+</span><span style="color:#65737e;"># Ensure the required Rust targets are installed:
+</span><span style="color:#65737e;"># rustup target add aarch64-unknown-linux-musl
+</span><span style="color:#65737e;"># rustup target add x86_64-unknown-linux-musl
+</span><span>
+</span><span style="color:#bf616a;">TARGET</span><span>=</span><span style="color:#a3be8c;">x86_64-unknown-linux-musl </span><span style="color:#bf616a;">nix</span><span> develop .#$</span><span style="color:#bf616a;">TARGET --command </span><span>\
+</span><span>  cargo build</span><span style="color:#bf616a;"> --target </span><span>$</span><span style="color:#bf616a;">TARGET
+</span></code></pre>
+</li>
+</ol>
+<h2 id="handling-c-c-dependencies-e-g-openssl-pq">Handling C/C++ Dependencies (e.g., OpenSSL, PQ)</h2>
+<p>Use static linking and vendor-based bindings (which package C/C++ source code) to ensure stable and reproducible builds.</p>
+<ol>
+<li>
+<p>Add target-specific dependencies in <code>Cargo.toml</code>:</p>
+<pre data-lang="toml" style="background-color:#2b303b;color:#c0c5ce;" class="language-toml "><code class="language-toml" data-lang="toml"><span>[target.x86_64-unknown-linux-musl.dependencies]
+</span><span style="color:#bf616a;">openssl-sys </span><span>= { </span><span style="color:#bf616a;">version </span><span>= &quot;</span><span style="color:#a3be8c;">0.9</span><span>&quot;, </span><span style="color:#bf616a;">features </span><span>= [&quot;</span><span style="color:#a3be8c;">vendored</span><span>&quot;] }
+</span><span style="color:#bf616a;">pq-sys </span><span>= { </span><span style="color:#bf616a;">version </span><span>= &quot;</span><span style="color:#a3be8c;">0.7</span><span>&quot;, </span><span style="color:#bf616a;">features </span><span>= [&quot;</span><span style="color:#a3be8c;">bundled</span><span>&quot;] }
+</span><span>
+</span><span>[target.aarch64-unknown-linux-musl.dependencies]
+</span><span style="color:#bf616a;">openssl-sys </span><span>= { </span><span style="color:#bf616a;">version </span><span>= &quot;</span><span style="color:#a3be8c;">0.9</span><span>&quot;, </span><span style="color:#bf616a;">features </span><span>= [&quot;</span><span style="color:#a3be8c;">vendored</span><span>&quot;] }
+</span><span style="color:#bf616a;">pq-sys </span><span>= { </span><span style="color:#bf616a;">version </span><span>= &quot;</span><span style="color:#a3be8c;">0.7</span><span>&quot;, </span><span style="color:#bf616a;">features </span><span>= [&quot;</span><span style="color:#a3be8c;">bundled</span><span>&quot;] }
+</span></code></pre>
+</li>
+<li>
+<p>Build the project:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#65737e;"># Static linking may require setting RUSTFLAGS.
+</span><span style="color:#65737e;"># However, this setting may not work for all architectures.
+</span><span style="color:#bf616a;">RUSTFLAGS</span><span>=&#39;</span><span style="color:#a3be8c;">-C target-feature=+crt-static</span><span>&#39; </span><span style="color:#bf616a;">cargo</span><span> build
+</span><span>
+</span><span style="color:#65737e;"># x86_64-unknown-linux-musl enables crt-static by default, so no extra flags are needed.
+</span><span style="color:#bf616a;">TARGET</span><span>=</span><span style="color:#a3be8c;">x86_64-unknown-linux-musl </span><span style="color:#bf616a;">nix</span><span> develop .#$</span><span style="color:#bf616a;">TARGET --command </span><span>\
+</span><span>  cargo build</span><span style="color:#bf616a;"> --target </span><span>$</span><span style="color:#bf616a;">TARGET
+</span></code></pre>
+</li>
+</ol>
+<blockquote>
+<p>CRT stands for the C runtime.
+The default <strong>crt-static</strong> setting varies by target.
+For example, <strong>x86_64-unknown-linux-musl</strong> enables it by default,
+whereas <strong>arm-unknown-linux-musleabi</strong> does not.
+<sup class="footnote-reference"><a href="#1">1</a></sup></p>
+</blockquote>
+<div class="footnote-definition" id="1"><sup class="footnote-definition-label">1</sup>
+<p><a href="https://rust-lang.github.io/rfcs/1721-crt-static.html">RFC 1721: crt-static</a></p>
+</div>
+
+        </div>
+
+                </div>
+            
+                <div class="post on-list">
+                    
+    <h1 class="post-title"><a href="/en/setup-neovim-in-nixos/">Setup Neovim in NixOS</a></h1>
+    <div class="post-meta-inline">
+        
+    <span class="post-date">
+            2024-09-16
+        </span>
+
+    </div>
+
+    
+        <span class="post-tags-inline">
+                :: tags:&nbsp;
+                <a class="post-tag" href="/en/tags/neovim/">#neovim</a>&nbsp;
+                <a class="post-tag" href="/en/tags/nixos/">#nixos</a>&nbsp;
+                <a class="post-tag" href="/en/tags/rust/">#rust</a></span>
+    
+
+
+                    
+        <div class="post-content">
+            <p>Recently,
+I've been working on a large project in Rust,
+but my laptop isn't powerful enough to handle it efficiently.
+So, I decided to buy a new mini-PC specifically for this task.</p>
+
+  
+  
+    
+    
+  
+  <img src="/images/setup_neovim_in_nixos-mini_pc.jpg" alt="mini PC is put on the left of my phone rack" class="left" style="border-radius: 8px;" decoding="async" loading="lazy"/>
+
+<p>Since I’m still more accustomed to developing on macOS
+and didn’t want to go through the hassle of setting up a Hackintosh,
+I decided to install NixOS on my new mini PC.
+Initially, I planned to continue using VSCode for remote development,
+but later realized that Neovim is also a great option.</p>
+
+        </div>
+        <div>
+            <!-- &#xFE0E; -- force text style - some devices render this as emoji -->
+            <a class="read-more button" href="/en/setup-neovim-in-nixos/">
+                <span class="button__text">Read more</span>&nbsp;
+                <span class="button__icon">&#8617;&#xFE0E;</span>
+            </a>
+        </div>
+    
+
+                </div>
+            <div class="pagination">
                 <div class="pagination__buttons"></div>
             </div>
         </div>
@@ -89,7 +276,7 @@
     
     <footer class="footer">
         <div class="footer__inner">
-                <div class="copyright copyright--user"><b>Copyright ©</b>  &nbsp; 2024 linw1995</div>
+                <div class="copyright copyright--user"><b>Copyright ©</b>  &nbsp; 2025 linw1995</div>
             </div>
     </footer>
     

@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <title>Setup Neovim in NixOS</title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="robots" content="noodp"/>
+
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/color/blue.css">
+
+    <link rel="stylesheet" href="/font-hack.css">
+
+        
+    <meta name="description" content="">
+
+    <meta property="og:description" content="">
+    <meta property="og:title" content="Setup Neovim in NixOS">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/en/setup-neovim-in-nixos/">
+
+    <meta property="og:image" content="/images/setup_neovim_in_nixos-mini_pc.jpg">
+    <meta name="twitter:image" content="/images/setup_neovim_in_nixos-mini_pc.jpg">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:description" content="">
+    <meta name="twitter:title" content="Setup Neovim in NixOS">
+    <meta property="twitter:domain" content="&#x2F;">
+    <meta property="twitter:url" content="/en/setup-neovim-in-nixos/">
+
+                <link rel="alternate" type="application/atom+xml" title=" Atom Feed" href="/en/atom.xml" />
+        <link rel="shortcut icon" type="image/png" href="/favicon.png">
+    
+    <link rel="stylesheet" href="/license.css">
+</head>
+
+<body class="">
+<div class="container">
+    
+    <header class="header">
+        <div class="header__inner">
+            <div class="header__logo">
+                    
+                <a href="/" style="text-decoration: none;">
+                    <div class="logo">
+                      
+                            linw1995
+                        
+                    </div>
+                </a>
+            </div>
+              
+<ul class="menu menu--desktop menu--language-selector">
+  <li class="menu__trigger">English&nbsp;▾</li>
+  <li>
+    <ul class="menu__dropdown">
+      
+            <li><a href="&#x2F;setup-neovim-in-nixos&#x2F;">中文</a></li>
+          </ul>
+  </li>
+</ul>
+</div>
+
+        
+        
+                <nav class="menu">
+            <ul class="menu__inner">
+                <li class="active"><a href="/">blog</a></li>
+            
+                <li><a href="/tags">tags</a></li>
+            
+                <li><a href="/about">about me</a></li>
+            
+                <li><a href="https://old-blog.linw1995.com/" target="_blank" rel="noopener noreferrer">old blog</a></li>
+            
+                <li><a href="https://github.com/linw1995" target="_blank" rel="noopener noreferrer">github</a></li>
+            </ul>
+        </nav>
+    
+    
+        
+    </header>
+    
+
+    <div class="content">
+        
+<div class="post">
+    
+    <h1 class="post-title"><a href="/en/setup-neovim-in-nixos/">Setup Neovim in NixOS</a></h1>
+    <div class="post-meta-inline">
+        
+    <span class="post-date">
+            2024-09-16
+        </span>
+
+    </div>
+
+    
+        <span class="post-tags-inline">
+                :: tags:&nbsp;
+                <a class="post-tag" href="/en/tags/neovim/">#neovim</a>&nbsp;
+                <a class="post-tag" href="/en/tags/nixos/">#nixos</a>&nbsp;
+                <a class="post-tag" href="/en/tags/rust/">#rust</a></span>
+    
+
+    <div class="post-content">
+            <p>Recently,
+I've been working on a large project in Rust,
+but my laptop isn't powerful enough to handle it efficiently.
+So, I decided to buy a new mini-PC specifically for this task.</p>
+
+  
+  
+    
+    
+  
+  <img src="/images/setup_neovim_in_nixos-mini_pc.jpg" alt="mini PC is put on the left of my phone rack" class="left" style="border-radius: 8px;" decoding="async" loading="lazy"/>
+
+<p>Since I’m still more accustomed to developing on macOS
+and didn’t want to go through the hassle of setting up a Hackintosh,
+I decided to install NixOS on my new mini PC.
+Initially, I planned to continue using VSCode for remote development,
+but later realized that Neovim is also a great option.</p>
+<span id="continue-reading"></span><h2 id="install-neovim">Install Neovim</h2>
+<p>I manage my configurations using home-manager,
+but encountered build failures
+when using nixos-unstable with <code>programs.neovim = {}</code>.
+To avoid this issue, I opted to include it directly for now.</p>
+<blockquote>
+<p>The reason for using nixos-unstable
+is that I wanted to access the latest Neovim version, <code>v0.10.1</code>.</p>
+</blockquote>
+<pre data-lang="nix" style="background-color:#2b303b;color:#c0c5ce;" class="language-nix "><code class="language-nix" data-lang="nix"><span style="color:#8fa1b3;">{</span><span>inputs, ...</span><span style="color:#8fa1b3;">}</span><span>: </span><span style="color:#b48ead;">let
+</span><span>  </span><span style="color:#d08770;">pkgs </span><span>= </span><span style="color:#96b5b4;">import </span><span style="color:#bf616a;">inputs</span><span>.</span><span style="color:#bf616a;">nixpkgs-unstable </span><span>{};
+</span><span style="color:#b48ead;">in </span><span>{
+</span><span>  </span><span style="color:#d08770;">home</span><span>.</span><span style="color:#d08770;">packages </span><span>= </span><span style="color:#b48ead;">with </span><span style="color:#bf616a;">pkgs</span><span>; [
+</span><span>    </span><span style="color:#bf616a;">neovim
+</span><span>  ];
+</span><span>
+</span><span>  </span><span style="color:#65737e;"># programs.neovim = {
+</span><span>  </span><span style="color:#65737e;">#   enable = true;
+</span><span>  </span><span style="color:#65737e;">#   package = pkgs.neovim;
+</span><span>  </span><span style="color:#65737e;"># };
+</span><span>}
+</span></code></pre>
+<h2 id="configure-lazy-nvim">Configure lazy.nvim</h2>
+<p>Directly use a Lua script to configure lazy.nvim.
+Refer to the installation documentation for the <a href="https://lazy.folke.io/installation">Single File Setup</a>,
+copy the content and add it to the <code>config/init.lua</code> file.</p>
+<pre data-lang="nix" style="background-color:#2b303b;color:#c0c5ce;" class="language-nix "><code class="language-nix" data-lang="nix"><span style="color:#8fa1b3;">{</span><span>inputs, ...</span><span style="color:#8fa1b3;">}</span><span>: </span><span style="color:#b48ead;">let
+</span><span>  </span><span style="color:#d08770;">pkgs </span><span>= </span><span style="color:#96b5b4;">import </span><span style="color:#bf616a;">inputs</span><span>.</span><span style="color:#bf616a;">nixpkgs-unstable </span><span>{};
+</span><span style="color:#b48ead;">in </span><span>{
+</span><span>  </span><span style="color:#d08770;">home</span><span>.</span><span style="color:#d08770;">packages </span><span>= </span><span style="color:#b48ead;">with </span><span style="color:#bf616a;">pkgs</span><span>; [
+</span><span>    </span><span style="color:#bf616a;">neovim
+</span><span>  ];
+</span><span>
+</span><mark style="background-color:#65737e30;"><span>  </span><span style="color:#d08770;">home</span><span>.</span><span style="color:#d08770;">file</span><span>.&quot;</span><span style="color:#a3be8c;">./.config/nvim/</span><span>&quot; = {
+</span></mark><mark style="background-color:#65737e30;"><span>    </span><span style="color:#d08770;">source </span><span>= </span><span style="color:#a3be8c;">./config</span><span>;
+</span></mark><mark style="background-color:#65737e30;"><span>    </span><span style="color:#d08770;">recursive </span><span>= </span><span style="color:#d08770;">true</span><span>;
+</span></mark><mark style="background-color:#65737e30;"><span>  };
+</span></mark><span>}
+</span></code></pre>
+<p>After successfully executing <strong>rebuild switch</strong>,
+run <code>nvim</code> and you will see lazy.nvim automatically go through
+the initialization process.</p>
+<h2 id="install-and-configure-plugins">Install and Configure Plugins</h2>
+<p>By directly mounting the recursive <code>./config</code> directory,
+we can easily add custom configurations.
+As an example, let's add the necessary plugin configuration for Rust development.
+First, refer to the <a href="https://www.lazyvim.org/configuration/lazy.nvim">LazyVim Setup</a>
+and edit <code>./config/lua/plugins/core.lua</code> to add the LazyVim configuration.</p>
+<pre data-lang="lua" style="background-color:#2b303b;color:#c0c5ce;" class="language-lua "><code class="language-lua" data-lang="lua"><span style="color:#b48ead;">return </span><span>{
+</span><span> { &quot;</span><span style="color:#a3be8c;">folke/lazy.nvim</span><span>&quot;, </span><span style="color:#a3be8c;">version </span><span>= </span><span style="color:#d08770;">false </span><span>},
+</span><span> { &quot;</span><span style="color:#a3be8c;">LazyVim/LazyVim</span><span>&quot;, </span><span style="color:#a3be8c;">version </span><span>= </span><span style="color:#d08770;">false</span><span>, </span><span style="color:#a3be8c;">import </span><span>= &quot;</span><span style="color:#a3be8c;">lazyvim.plugins</span><span>&quot; },
+</span><span> 
+</span><span> </span><span style="color:#65737e;">-- NOTE: The import below can automatically add your own plugins, 
+</span><span> </span><span style="color:#65737e;">-- configuration, etc from `lua/plugins/custom/*.lua`
+</span><span> { </span><span style="color:#a3be8c;">import </span><span>= &quot;</span><span style="color:#a3be8c;">plugins.custom</span><span>&quot; },
+</span><span>}
+</span></code></pre>
+<blockquote>
+<p>Since a C compiler is needed to build nvim-treesitter,
+if the <code>cc</code> command is not available,
+you can run <code>nix shell nixpkgs#gcc</code> before executing <code>nvim</code> as an alternative.</p>
+</blockquote>
+<p>Edit <code>./config/lua/plugins/custom/rust.lua</code> to add
+and configure Rust development plugins.</p>
+<pre data-lang="lua" style="background-color:#2b303b;color:#c0c5ce;" class="language-lua "><code class="language-lua" data-lang="lua"><span style="color:#b48ead;">return </span><span>{
+</span><span> { </span><span style="color:#a3be8c;">import </span><span>= &quot;</span><span style="color:#a3be8c;">lazyvim.plugins.extras.lang.rust</span><span>&quot; },
+</span><span>
+</span><span> {
+</span><span>  &quot;</span><span style="color:#a3be8c;">mrcjkb/rustaceanvim</span><span>&quot;,
+</span><span>  </span><span style="color:#a3be8c;">version </span><span>= &quot;</span><span style="color:#a3be8c;">^4</span><span>&quot;, </span><span style="color:#65737e;">-- Recommended
+</span><span>  </span><span style="color:#8fa1b3;">opts </span><span>= </span><span style="color:#b48ead;">function</span><span>(_, opts)
+</span><span>   </span><span style="color:#bf616a;">opts</span><span>.server.default_settings[&quot;</span><span style="color:#a3be8c;">rust-analyzer</span><span>&quot;] = {
+</span><span>    </span><span style="color:#a3be8c;">cargo </span><span>= {
+</span><span>     </span><span style="color:#a3be8c;">loadOutDirsFromCheck </span><span>= </span><span style="color:#d08770;">true</span><span>,
+</span><span>     </span><span style="color:#a3be8c;">buildScripts </span><span>= {
+</span><span>      </span><span style="color:#a3be8c;">enable </span><span>= </span><span style="color:#d08770;">true</span><span>,
+</span><span>     },
+</span><span>    },
+</span><span>    </span><span style="color:#a3be8c;">checkOnSave </span><span>= </span><span style="color:#d08770;">true</span><span>,
+</span><span>    </span><span style="color:#a3be8c;">procMacro </span><span>= {
+</span><span>     </span><span style="color:#a3be8c;">enable </span><span>= </span><span style="color:#d08770;">true</span><span>,
+</span><span>     </span><span style="color:#a3be8c;">ignored </span><span>= {},
+</span><span>    },
+</span><span>    </span><span style="color:#a3be8c;">files </span><span>= {
+</span><span>     </span><span style="color:#a3be8c;">watcher </span><span>= &quot;</span><span style="color:#a3be8c;">client</span><span>&quot;,
+</span><span>     </span><span style="color:#a3be8c;">excludeDirs </span><span>= { &quot;</span><span style="color:#a3be8c;">.direnv</span><span>&quot;, &quot;</span><span style="color:#a3be8c;">.git</span><span>&quot; },
+</span><span>    },
+</span><span>   }
+</span><span>  </span><span style="color:#b48ead;">end</span><span>,
+</span><span> },
+</span><span> {
+</span><span>  &quot;</span><span style="color:#a3be8c;">nvim-neotest/neotest</span><span>&quot;,
+</span><span>  </span><span style="color:#a3be8c;">opts </span><span>= {
+</span><span>   </span><span style="color:#a3be8c;">adapters </span><span>= {
+</span><span>    [&quot;</span><span style="color:#a3be8c;">rustaceanvim.neotest</span><span>&quot;] = {},
+</span><span>   },
+</span><span>  },
+</span><span> },
+</span><span>}
+</span></code></pre>
+<p>If code debugging is required, you need to add DAP configuration.
+Add the configuration to <code>./config/lua/plugins/custom/dap.lua</code>.</p>
+<pre data-lang="lua" style="background-color:#2b303b;color:#c0c5ce;" class="language-lua "><code class="language-lua" data-lang="lua"><span style="color:#b48ead;">return </span><span>{
+</span><span>  { </span><span style="color:#a3be8c;">import </span><span>= &quot;</span><span style="color:#a3be8c;">lazyvim.plugins.extras.dap.core</span><span>&quot; },
+</span><span>
+</span><span>  {
+</span><span>    &quot;</span><span style="color:#a3be8c;">jay-babu/mason-nvim-dap.nvim</span><span>&quot;,
+</span><span>
+</span><span>    </span><span style="color:#a3be8c;">opts </span><span>= {
+</span><span>      </span><span style="color:#a3be8c;">automatic_installation </span><span>= </span><span style="color:#d08770;">true</span><span>,
+</span><span>
+</span><span>      </span><span style="color:#a3be8c;">handlers </span><span>= {},
+</span><span>
+</span><span>      </span><span style="color:#a3be8c;">ensure_installed </span><span>= {
+</span><span>        &quot;</span><span style="color:#a3be8c;">codelldb</span><span>&quot;
+</span><span>      },
+</span><span>    }
+</span><span>  }
+</span><span>}
+</span></code></pre>
+<p>To automatically install codelldb via Mason, additional dependencies are required.</p>
+<p>For common dependencies,
+you can simply include them through <code>home.packages</code> for global use.</p>
+<pre data-lang="nix" style="background-color:#2b303b;color:#c0c5ce;" class="language-nix "><code class="language-nix" data-lang="nix"><span style="color:#8fa1b3;">{</span><span>pkgs,...</span><span style="color:#8fa1b3;">}</span><span>: {
+</span><span>  </span><span style="color:#d08770;">home</span><span>.</span><span style="color:#d08770;">packages </span><span>= </span><span style="color:#b48ead;">with </span><span style="color:#bf616a;">pkgs</span><span>; [
+</span><span>    </span><span style="color:#bf616a;">curl
+</span><span>    </span><span style="color:#bf616a;">wget
+</span><span>    </span><span style="color:#bf616a;">git
+</span><span>
+</span><span>    </span><span style="color:#bf616a;">unzip
+</span><span>    </span><span style="color:#bf616a;">gnutar
+</span><span>    </span><span style="color:#bf616a;">gzip
+</span><span>  ];
+</span><span>}
+</span></code></pre>
+<p>For environments like Node.js
+that you don't want to be globally effective,
+you can include them using the following method:</p>
+<pre data-lang="nix" style="background-color:#2b303b;color:#c0c5ce;" class="language-nix "><code class="language-nix" data-lang="nix"><span style="color:#8fa1b3;">{</span><span>inputs, ...</span><span style="color:#8fa1b3;">}</span><span>: </span><span style="color:#b48ead;">let
+</span><span>  </span><span style="color:#d08770;">pkgs </span><span>= </span><span style="color:#96b5b4;">import </span><span style="color:#bf616a;">inputs</span><span>.</span><span style="color:#bf616a;">nixpkgs-unstable </span><span>{};
+</span><span style="color:#b48ead;">in </span><span>{
+</span><span>  </span><span style="color:#d08770;">home</span><span>.</span><span style="color:#d08770;">packages </span><span>= </span><span style="color:#b48ead;">with </span><span style="color:#bf616a;">pkgs</span><span>; [
+</span><span>    </span><span style="color:#bf616a;">neovim
+</span><span>  ];
+</span><span>
+</span><span>  </span><span style="color:#d08770;">home</span><span>.</span><span style="color:#d08770;">file</span><span>.&quot;</span><span style="color:#a3be8c;">./.config/nvim/</span><span>&quot; = {
+</span><span>    </span><span style="color:#d08770;">source </span><span>= </span><span style="color:#a3be8c;">./config</span><span>;
+</span><span>    </span><span style="color:#d08770;">recursive </span><span>= </span><span style="color:#d08770;">true</span><span>;
+</span><span>  };
+</span><span>
+</span><span>  </span><span style="color:#d08770;">home</span><span>.</span><span style="color:#d08770;">file</span><span>.&quot;</span><span style="color:#a3be8c;">./.config/nvim/lua/config/options.lua</span><span>&quot; = {
+</span><span>    </span><span style="color:#d08770;">text </span><span>= &#39;&#39;
+</span><span style="color:#a3be8c;">      -- npm is required for mason
+</span><span style="color:#a3be8c;">      vim.env.PATH = vim.env.PATH .. &quot;:</span><span style="font-style:italic;color:#ab7967;">${</span><span style="font-style:italic;color:#bf616a;">pkgs</span><span style="font-style:italic;color:#c0c5ce;">.</span><span style="font-style:italic;color:#bf616a;">nodejs</span><span style="font-style:italic;color:#ab7967;">}</span><span style="color:#a3be8c;">/bin&quot;
+</span><span style="color:#a3be8c;">    </span><span>&#39;&#39;;
+</span><span>  };
+</span><span>}
+</span></code></pre>
+<p>Once configured, when you open a Rust project and edit <code>*.rs</code> files in <code>nvim</code>,
+the corresponding plugins will be automatically loaded.</p>
+<blockquote>
+<p>Rust-Analyzer needs to be installed manually.
+You can add it by running <code>rustup component add rust-analyzer</code>.</p>
+</blockquote>
+<h2 id="miscellaneous">Miscellaneous</h2>
+<p>The Mini-PC brand and model are: <strong>Minisforum UM790 XTX</strong></p>
+<ul>
+<li>CPU: AMD Ryzen 9 7940HS</li>
+<li>RAM: Crucial DDR5-5600 16G * 2</li>
+<li>Storage: ZhiTai TiPlus7100 1TB</li>
+</ul>
+<p>The Batman lighting effect on the Mini-PC in the image is
+replaced with a 3D-Printing part.</p>
+<ul>
+<li>Model template: <a href="https://www.printables.com/model/814075-minisforum-um780-xtx-led-plate">Minisforum UM780 XTX LED plate</a></li>
+<li>Batman model: <a href="https://www.printables.com/model/118622-batman-cutout-wall-art">Batman Cutout Wall Art</a></li>
+</ul>
+<p>The main item in the image is the <a href="https://makerworld.com/zh/models/617886">iPhone 15 Pro Max standby mode base</a>,
+made using 3D Printing.
+It can be used to charge both your phone and AirPods Pro.</p>
+
+        </div>
+
+    
+            <div class="pagination">
+                <div class="pagination__title">
+                    <span class="pagination__title-h">Thanks for reading! Read other posts?</span>
+                    <hr />
+                </div>
+                <div class="pagination__buttons">
+                    
+                        <span class="button next">
+                            <a href="/en/rust-cross-compilation-tips/">
+                                <span class="button__text">Rust Cross-compilation Tips</span>&nbsp;
+                                <span class="button__icon">→</span>
+                            </a>
+                        </span>
+                    </div>
+            </div>
+        
+
+    <p id="license" xmlns:cc="http://creativecommons.org/ns#" >
+        This work by <span property="cc:attributionName">林玮 (Jade Lin)</span> is licensed under 
+        <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">
+            CC BY-NC-ND 4.0
+            <img src="/images/by-nc-nd.png" alt="">
+        </a>
+    </p>
+
+    <div class="giscus" style="margin-top: 4rem"></div>
+</div>
+
+    </div>
+
+    
+    <footer class="footer">
+        <div class="footer__inner">
+                <div class="copyright copyright--user"><b>Copyright ©</b>  &nbsp; 2025 linw1995</div>
+            </div>
+    </footer>
+    
+
+</div>
+<script type="text/javascript" src="/js/menu.js"></script>
+
+<script src="https://giscus.app/client.js"
+    data-repo="linw1995/linw1995.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnk3MDkyNjU4NA=="
+    data-category="General"
+    data-category-id="DIC_kwDOBDpA-M4CigfM"
+    data-mapping="og:title"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="top"
+    data-theme="dark"
+    data-lang="en"
+    data-loading="lazy"
+    crossorigin="anonymous"
+    async></script>
+
+</body>
+
+</html>

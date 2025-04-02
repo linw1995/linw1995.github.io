@@ -1,26 +1,361 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="zh">
-    <title>linw1995&#x27;s blog</title>
-    <link rel="self" type="application/atom+xml" href="https://www.linw1995.com/atom.xml"/>
-    <link rel="alternate" type="text/html" href="https://www.linw1995.com/"/>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="zh"><title>
+    linw1995&#x27;s blog</title>
+    <link rel="self" type="application/atom+xml" href="/atom.xml"/>
+    <link rel="alternate" type="text/html" href="/"/>
     <generator uri="https://www.getzola.org/">Zola</generator>
-    <updated>2024-09-16T00:00:00+00:00</updated>
-    <id>https://www.linw1995.com/atom.xml</id>
-    <entry xml:lang="zh">
-        <title>在 NixOS 中配置 Neovim </title>
-        <published>2024-09-14T00:00:00+00:00</published>
-        <updated>2024-09-16T00:00:00+00:00</updated>
+    <icon>/favicon.ico</icon>
+    <logo>/favicon.png</logo>
+    <updated>2025-04-02T00:00:00+00:00</updated>
+    <id>/atom.xml</id>
+    <follow_challenge><feedId>72476326505512960</feedId><userId>57795710219398144</userId></follow_challenge>
+    <entry xml:lang="zh"><title>Rust 跨平台构建贴士</title><published>2025-04-02T00:00:00+00:00</published><updated>2025-04-02T00:00:00+00:00</updated>
         
-        <author>
-          <name>
+        <author><name>
             
-              Unknown
+              linw1995
             
-          </name>
-        </author>
+          </name></author>
         
-        <link rel="alternate" type="text/html" href="https://www.linw1995.com/setup-neovim-in-nixos/"/>
-        <id>https://www.linw1995.com/setup-neovim-in-nixos/</id>
+        <link rel="alternate" type="text/html" href="/rust-cross-compilation-tips/"/>
+        <id>/rust-cross-compilation-tips/</id>
+        
+        <content type="html" xml:base="/rust-cross-compilation-tips/">&lt;h2 id=&quot;shi-yong-nix-flake-da-jian-ji-chu-de-rust-kua-ping-tai-gou-jian-huan-jing&quot;&gt;使用 Nix Flake 搭建基础的 Rust 跨平台构建环境&lt;&#x2F;h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;新增 flake.nix 文件，并执行 &lt;code&gt;git add flake.nix&lt;&#x2F;code&gt; 。&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;nix&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-nix &quot;&gt;&lt;code class=&quot;language-nix&quot; data-lang=&quot;nix&quot;&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;inputs &lt;&#x2F;span&gt;&lt;span&gt;= {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;utils&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;url &lt;&#x2F;span&gt;&lt;span&gt;= &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;github:numtide&#x2F;flake-utils&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;nixpkgs&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;url &lt;&#x2F;span&gt;&lt;span&gt;= &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;github:NixOS&#x2F;nixpkgs&#x2F;nixos-24.11&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;;
+&lt;&#x2F;span&gt;&lt;span&gt;  };
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;outputs &lt;&#x2F;span&gt;&lt;span&gt;= {
+&lt;&#x2F;span&gt;&lt;span&gt;    nixpkgs,
+&lt;&#x2F;span&gt;&lt;span&gt;    utils,
+&lt;&#x2F;span&gt;&lt;span&gt;    ...
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;}&lt;&#x2F;span&gt;&lt;span&gt;:
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;utils&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;lib&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;eachDefaultSystem
+&lt;&#x2F;span&gt;&lt;span&gt;    (
+&lt;&#x2F;span&gt;&lt;span&gt;      system: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;pkgs &lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;import &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;nixpkgs &lt;&#x2F;span&gt;&lt;span&gt;{&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;inherit &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;system&lt;&#x2F;span&gt;&lt;span&gt;;};
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;lib &lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;pkgs&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;lib&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;in &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;devShells &lt;&#x2F;span&gt;&lt;span&gt;=
+&lt;&#x2F;span&gt;&lt;span&gt;          {
+&lt;&#x2F;span&gt;&lt;span&gt;            &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;default &lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;pkgs&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;mkShell &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;              &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;nativeBuildInputs &lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;with &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;pkgs&lt;&#x2F;span&gt;&lt;span&gt;; [
+&lt;&#x2F;span&gt;&lt;span&gt;                &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;pkg-config
+&lt;&#x2F;span&gt;&lt;span&gt;                &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;gcc
+&lt;&#x2F;span&gt;&lt;span&gt;              ];
+&lt;&#x2F;span&gt;&lt;span&gt;            };
+&lt;&#x2F;span&gt;&lt;span&gt;          }
+&lt;&#x2F;span&gt;&lt;span&gt;          &#x2F;&#x2F; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;builtins&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;listToAttrs &lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;map &lt;&#x2F;span&gt;&lt;span&gt;(target: {
+&lt;&#x2F;span&gt;&lt;span&gt;            &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;name &lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;target&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;            &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;value &lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let
+&lt;&#x2F;span&gt;&lt;span&gt;              &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;cross &lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;import &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;nixpkgs &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;                &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;inherit &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;system&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;                &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;crossSystem &lt;&#x2F;span&gt;&lt;span&gt;= {&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;config &lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;target&lt;&#x2F;span&gt;&lt;span&gt;;};
+&lt;&#x2F;span&gt;&lt;span&gt;              };
+&lt;&#x2F;span&gt;&lt;span&gt;              &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;cpkgs &lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;cross&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;pkgsMusl&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;            &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;in &lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;cross&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;mkShell &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;              &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;nativeBuildInputs &lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;with &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;pkgs&lt;&#x2F;span&gt;&lt;span&gt;; [
+&lt;&#x2F;span&gt;&lt;span&gt;                &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;pkg-config
+&lt;&#x2F;span&gt;&lt;span&gt;                &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;gcc &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# proc macro 等编译过程，需要原架构 toolchians
+&lt;&#x2F;span&gt;&lt;span&gt;              ];
+&lt;&#x2F;span&gt;&lt;span&gt;              &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;env &lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let
+&lt;&#x2F;span&gt;&lt;span&gt;                &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;normalized &lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;lib&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;strings&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;toUpper &lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;builtins&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;replaceStrings &lt;&#x2F;span&gt;&lt;span&gt;[&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;-&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;] [&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;_&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;] &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;target&lt;&#x2F;span&gt;&lt;span&gt;);
+&lt;&#x2F;span&gt;&lt;span&gt;              &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;in
+&lt;&#x2F;span&gt;&lt;span&gt;                &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;with &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;cpkgs&lt;&#x2F;span&gt;&lt;span&gt;; {
+&lt;&#x2F;span&gt;&lt;span&gt;                  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# https:&#x2F;&#x2F;doc.rust-lang.org&#x2F;cargo&#x2F;reference&#x2F;environment-variables.html#configuration-environment-variables
+&lt;&#x2F;span&gt;&lt;span&gt;                  &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;CARGO_TARGET_&lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#ab7967;&quot;&gt;${&lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#bf616a;&quot;&gt;normalized&lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#ab7967;&quot;&gt;}&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;_LINKER&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot; = &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#ab7967;&quot;&gt;${&lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#bf616a;&quot;&gt;stdenv&lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#c0c5ce;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#bf616a;&quot;&gt;cc&lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#c0c5ce;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#bf616a;&quot;&gt;targetPrefix&lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#ab7967;&quot;&gt;}&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;cc&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;;
+&lt;&#x2F;span&gt;&lt;span&gt;                };
+&lt;&#x2F;span&gt;&lt;span&gt;            });
+&lt;&#x2F;span&gt;&lt;span&gt;          }) [&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;x86_64-unknown-linux-musl&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot; &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;aarch64-unknown-linux-musl&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;]);
+&lt;&#x2F;span&gt;&lt;span&gt;      }
+&lt;&#x2F;span&gt;&lt;span&gt;    );
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;执行构建&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# 本地构建
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;nix&lt;&#x2F;span&gt;&lt;span&gt; develop .#default&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; --command &lt;&#x2F;span&gt;&lt;span&gt;\
+&lt;&#x2F;span&gt;&lt;span&gt; cargo build
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# 跨平台构建
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;#
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# 别忘了先安装对应的 rustup 组件
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# rustup target add aarch64-unknown-linux-musl
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# rustup target add x86_64-unknown-linux-musl
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;TARGET&lt;&#x2F;span&gt;&lt;span&gt;=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;x86_64-unknown-linux-musl &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;nix&lt;&#x2F;span&gt;&lt;span&gt; develop .#$&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;TARGET --command &lt;&#x2F;span&gt;&lt;span&gt;\
+&lt;&#x2F;span&gt;&lt;span&gt; cargo build&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; --target &lt;&#x2F;span&gt;&lt;span&gt;$&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;TARGET
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;h2 id=&quot;openssl-pq-deng-c-c-yi-lai-chu-li&quot;&gt;openssl, pq 等 C&#x2F;C++ 依赖处理&lt;&#x2F;h2&gt;
+&lt;p&gt;使用静态编译，并使用有 vendor （打包 C&#x2F;C++ 源码 ）版本的 bindings 项目，把这些加入依赖管理，确保能稳定的可重复构建。&lt;&#x2F;p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;在 Cargo.toml 文件中增加对应 target 的依赖。&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;toml&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-toml &quot;&gt;&lt;code class=&quot;language-toml&quot; data-lang=&quot;toml&quot;&gt;&lt;span&gt;[target.x86_64-unknown-linux-musl.dependencies]
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;openssl-sys &lt;&#x2F;span&gt;&lt;span&gt;= { &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;version &lt;&#x2F;span&gt;&lt;span&gt;= &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;0.9&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;features &lt;&#x2F;span&gt;&lt;span&gt;= [&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;vendored&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;] }
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;pq-sys &lt;&#x2F;span&gt;&lt;span&gt;= { &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;version &lt;&#x2F;span&gt;&lt;span&gt;= &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;0.7&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;features &lt;&#x2F;span&gt;&lt;span&gt;= [&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;bundled&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;] }
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;[target.aarch64-unknown-linux-musl.dependencies]
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;openssl-sys &lt;&#x2F;span&gt;&lt;span&gt;= { &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;version &lt;&#x2F;span&gt;&lt;span&gt;= &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;0.9&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;features &lt;&#x2F;span&gt;&lt;span&gt;= [&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;vendored&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;] }
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;pq-sys &lt;&#x2F;span&gt;&lt;span&gt;= { &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;version &lt;&#x2F;span&gt;&lt;span&gt;= &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;0.7&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;features &lt;&#x2F;span&gt;&lt;span&gt;= [&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;bundled&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;] }
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;执行构建&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# 本地静态编译则需要指定 RUSTFLAGS。经实测，有些架构该配置无效
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;RUSTFLAGS&lt;&#x2F;span&gt;&lt;span&gt;=&amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;-C target-feature=+crt-static&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;cargo&lt;&#x2F;span&gt;&lt;span&gt; build
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# 而 x86_64-unknown-linux-musl 则不需要指定，默认启用
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;TARGET&lt;&#x2F;span&gt;&lt;span&gt;=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;x86_64-unknown-linux-musl &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;nix&lt;&#x2F;span&gt;&lt;span&gt; develop .#$&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;TARGET --command &lt;&#x2F;span&gt;&lt;span&gt;\
+&lt;&#x2F;span&gt;&lt;span&gt;  cargo build&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; --target &lt;&#x2F;span&gt;&lt;span&gt;$&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;TARGET
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;CRT means standard C runtime.
+The default of &lt;strong&gt;crt-static&lt;&#x2F;strong&gt; will be different depending on the target.
+For example &lt;strong&gt;x86_64-unknown-linux-musl&lt;&#x2F;strong&gt; will have it on by default,
+whereas &lt;strong&gt;arm-unknown-linux-musleabi&lt;&#x2F;strong&gt; will have it turned off by default.
+&lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#1&quot;&gt;1&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;div class=&quot;footnote-definition&quot; id=&quot;1&quot;&gt;&lt;sup class=&quot;footnote-definition-label&quot;&gt;1&lt;&#x2F;sup&gt;
+&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;rust-lang.github.io&#x2F;rfcs&#x2F;1721-crt-static.html&quot;&gt;RFC 1721 crt-static&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
+</content>
+    </entry>
+    <entry xml:lang="zh"><title>实现 DNS App</title><published>2024-12-25T00:00:00+00:00</published><updated>2024-12-25T00:00:00+00:00</updated>
+        
+        <author><name>
+            
+              linw1995
+            
+          </name></author>
+        
+        <link rel="alternate" type="text/html" href="/my-dns/"/>
+        <id>/my-dns/</id>
+        
+        <summary type="html">&lt;h2 id=&quot;qian-yan&quot;&gt;前言&lt;&#x2F;h2&gt;
+&lt;p&gt;&lt;img src=&quot;&#x2F;my-dns&#x2F;Logo_of_WireGuard.png&quot; alt=&quot;Logo of WireGuard&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;家里的 NAS 通过 WireGuard 配合小水管云主机搭建了一个私有网络，方便我在外面访问家里的设备。
+通过 Surge 可以定义简单的规则，把特定域名或 IP 段用 WireGuard 代理，这样就可以访问家里的设备了。
+再通过 SSID 判断当前网络环境，在家就直连。&lt;&#x2F;p&gt;
+&lt;p&gt;这样从理论上看是挺好的，但会遇到些问题。 IP 段可能会冲突，只能给每个地址配置域名，只用域名规则。
+虽然很麻烦，但也没法子。配置域名可以在 Surge 上配置，也可以通过 &lt;code&gt;&#x2F;etc&#x2F;hosts&lt;&#x2F;code&gt; 。
+但 Surge 更方便，可以配置 Unix Shell Style 通配符，减少些配置。&lt;&#x2F;p&gt;
+&lt;p&gt;但这个方案有个问题，只能在 MacOS 和 iOS 上使用。而且 Surge 也很贵。
+不太方便别人照搬方案（虽然我认识的基本都是 Surge 的用户）。
+如果没有 Surge 呢，或者在不在 MacOS 上，又该如何处理。所以我诞生了自己实现 DNS 的想法。&lt;&#x2F;p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;不久前入了台 Mini-PC 装了 NixOS 后，就遇到这样的问题。
+虽然用 sing-box （还免费）也能达到同样的效果，
+但自己动手实现 DNS 也是种有益身心的消遣方式。&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;p&gt;需要实现的功能十分简单，只要类似 &lt;code&gt;&#x2F;etc&#x2F;hosts&lt;&#x2F;code&gt; 文件，但又能像 Surge 这样配置统配符。
+还能通过配置哪些行是在 WiFi SSID 为某个值时生效，就能实现我想要的功能了。&lt;&#x2F;p&gt;
+&lt;br&gt; &lt;a href=&quot;/my-dns/&quot; target=&quot;_blank&quot;&gt;Read more&lt;/a&gt;</summary>
+        
+        <content type="html" xml:base="/my-dns/">&lt;h2 id=&quot;qian-yan&quot;&gt;前言&lt;&#x2F;h2&gt;
+&lt;p&gt;&lt;img src=&quot;&#x2F;my-dns&#x2F;Logo_of_WireGuard.png&quot; alt=&quot;Logo of WireGuard&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;家里的 NAS 通过 WireGuard 配合小水管云主机搭建了一个私有网络，方便我在外面访问家里的设备。
+通过 Surge 可以定义简单的规则，把特定域名或 IP 段用 WireGuard 代理，这样就可以访问家里的设备了。
+再通过 SSID 判断当前网络环境，在家就直连。&lt;&#x2F;p&gt;
+&lt;p&gt;这样从理论上看是挺好的，但会遇到些问题。 IP 段可能会冲突，只能给每个地址配置域名，只用域名规则。
+虽然很麻烦，但也没法子。配置域名可以在 Surge 上配置，也可以通过 &lt;code&gt;&#x2F;etc&#x2F;hosts&lt;&#x2F;code&gt; 。
+但 Surge 更方便，可以配置 Unix Shell Style 通配符，减少些配置。&lt;&#x2F;p&gt;
+&lt;p&gt;但这个方案有个问题，只能在 MacOS 和 iOS 上使用。而且 Surge 也很贵。
+不太方便别人照搬方案（虽然我认识的基本都是 Surge 的用户）。
+如果没有 Surge 呢，或者在不在 MacOS 上，又该如何处理。所以我诞生了自己实现 DNS 的想法。&lt;&#x2F;p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;不久前入了台 Mini-PC 装了 NixOS 后，就遇到这样的问题。
+虽然用 sing-box （还免费）也能达到同样的效果，
+但自己动手实现 DNS 也是种有益身心的消遣方式。&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;p&gt;需要实现的功能十分简单，只要类似 &lt;code&gt;&#x2F;etc&#x2F;hosts&lt;&#x2F;code&gt; 文件，但又能像 Surge 这样配置统配符。
+还能通过配置哪些行是在 WiFi SSID 为某个值时生效，就能实现我想要的功能了。&lt;&#x2F;p&gt;
+&lt;span id=&quot;continue-reading&quot;&gt;&lt;&#x2F;span&gt;&lt;h2 id=&quot;dns-xie-yi-shi-xian&quot;&gt;DNS 协议实现&lt;&#x2F;h2&gt;
+&lt;p&gt;十分推荐的这个手把手教程 &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;EmilHernvall&#x2F;dnsguide&quot;&gt;EmilHernvall&#x2F;dnsguide&lt;&#x2F;a&gt;，
+还有这个声明式的二进制协议读写库 &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;sharksforarms&#x2F;deku&quot;&gt;sharksforarms&#x2F;deku&lt;&#x2F;a&gt;，
+大概 300 行代码就完成能支撑起我整个需求的 DNS 包读写模块。&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;wang-luo-huan-jing-jian-ting&quot;&gt;网络环境监听&lt;&#x2F;h2&gt;
+&lt;p&gt;由于 MacBook Pro 才是我日常用的移动设备，所以优先在 MacOS 上实现这个功能。&lt;&#x2F;p&gt;
+&lt;p&gt;通过一些 MacOS 内置的 CLI 命令，实际上就可以获取到当前的网络环境，比如当前设备所链接 Wi-Fi 的 SSID。
+但这样就太简单了，难度跟消遣都不搭边。得上点强度，再成功就能更身心愉悦～&lt;&#x2F;p&gt;
+&lt;p&gt;而且能再优雅点吗？调研了一番，发现通过使用 Network Apple Framework 中的 NWPathMonitor 类，
+就能优雅的监听网络变化。一旦网络环境变化，回调就会被调用，获取到最新的网络状态。&lt;&#x2F;p&gt;
+&lt;p&gt;通过 Launchd 也是可以的，我们只需要提供个更新状态命令，配置在网络状态变更时调用即可。
+但我感觉这个方案没有对接系统模块来的优雅。&lt;&#x2F;p&gt;
+&lt;p&gt;对接 Network Apple Framework，需要用 Swift 或者 Objective-C 来实现。
+出于技术栈的统一，开始寻找通过能用 Rust 调用 Framework 的 Binding 库。
+找到了个神仙项目 &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;madsmtm&#x2F;objc2&quot;&gt;madsmtm&#x2F;objc2&lt;&#x2F;a&gt;，
+不仅实现了 Rust 与 Objective-C 间 Bridging 库，
+还顺带实现了很多 Apple Frameworks 的 Binding 。
+可惜是我需要用到的模块和函数均没有。&lt;&#x2F;p&gt;
+&lt;p&gt;然后我开始反复观看该项目的文档，和已实现 Binding 的源码。
+过了几天终于技能进度条读到了实现功能的下限。&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;&#x2F;my-dns&#x2F;NWPathMonitor.png&quot; alt=&quot;NWPathMonitor&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;不过在实现完，测试的时候发现了个意料之外的问题：&lt;strong&gt;获取到 SSID 居然是空字符串。&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;wang-luo-jian-ting-xu-yao-ding-wei-quan-xian&quot;&gt;网络监听需要定位权限&lt;&#x2F;h2&gt;
+&lt;p&gt;最开始以为是写了 Bug，反复排查了一番也没有找到问题。然后开始高强度网上冲浪，
+浏览一番搜索结果和文档后，怀疑是因为没有获取到定位权限导致的。&lt;&#x2F;p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Wi-Fi SSID 涉及达到用户的隐私，理论上可以高精度地定位使用者的位置。&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;p&gt;要验证是不是这样子，就得写个 App ，才能在系统配置中添加位置权限。
+这样验证也太麻烦了。冷静了一下，想起了之前调研网络环境监听功能怎么实现的时候，还试过 Apple Script 的方案。
+直接给它定位权限去了，再试一下，果然获取到了空字符串。&lt;&#x2F;p&gt;
+&lt;p&gt;那非得实现成一个 MacOS App 了。&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;tauri-leptos&quot;&gt;Tauri + Leptos&lt;&#x2F;h2&gt;
+&lt;p&gt;想起了很早之前收藏的 &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;tauri-apps&#x2F;tauri&quot;&gt;Tauri&lt;&#x2F;a&gt;
+（最近还更新到了 V2 ） ，仔细看了一遍文档。
+感觉实现起来的难度，还是比较简单。 Leptos 就类似 React , 也可以继续用 tailwindcss 。
+若是用原生 SwiftUI 的话，就没法沿用 Web 开发的经验。 看到这里肯定有人想，
+那为什么不用 Electron 呢？首先打包后的 App 会比较大，硬盘空间寸土寸金（尤其是学了 Rust 和用上了 NixOS 后）;
+Tauri + Leptos 就可以 All In Rust，代码写起来比较跟手；最后，说实话也没那么喜欢写 Web。&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;tauri-wen-ding-xing-de-wen-ti&quot;&gt;Tauri 稳定性的问题&lt;&#x2F;h3&gt;
+&lt;p&gt;天天网上冲浪的我，当然能看到很多人对 Tauri 的各种吐槽。
+那为啥要用呢，初生牛犊不怕虎吧，而且我这是消遣呀。
+而且说些实在的，我是没有遇到什么很难甚至没法解决的问题
+（实际上感觉，写 bridging 造胶水是真麻烦。尤其是给完全不会的语言写)&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;da-bao-fen-fa&quot;&gt;打包分发&lt;&#x2F;h2&gt;
+&lt;p&gt;要给 Apple 设备分发 App 的话，需要花 688 元每年来购买开发者项目订阅。
+不然要给每台设备安装的话，都得一台一台就地重新构建。为了省事 688 元就花了。
+然后钱花出去了后，就想到为啥不直接上架 app store 呢？
+直接一步到位，顺便实现下 IAP 说不定成本就收回来了（白日梦想家）。&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;iap&quot;&gt;IAP&lt;&#x2F;h2&gt;
+&lt;p&gt;因为 StoreKit Apple Framework 目前只支持 Swift 代码调用，所以之前弄的 Objective-C Bridging 就不行啦。
+所以再一次高强度网上冲浪，寻寻觅觅，
+就发现了 &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;Brendonovich&#x2F;swift-rs&quot;&gt;Brendonovich&#x2F;swift-rs&lt;&#x2F;a&gt; 项目。&lt;&#x2F;p&gt;
+&lt;p&gt;临时学了一下 Swift 代码，动手写起来就发现了个问题。 StoreKit 的用法都是异步的，
+虽然 swift-rs 项目不支持调用异步函数，
+但从这个 &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;Brendonovich&#x2F;swift-rs&#x2F;issues&#x2F;31&quot;&gt;swift-rs #31&lt;&#x2F;a&gt; issue 中我得到了启发.
+最终方案就是通过传递函数指针来执行异步的回调。&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;jie-lun&quot;&gt;结论&lt;&#x2F;h2&gt;
+&lt;p&gt;整体花了近三个月的时间完成了开发和上架，现在的现状是运营基本不用，宣发基本没有。
+但为了接受问题反馈和文档编写，
+利用了 &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;Smart-Hosts&quot;&gt;GitHub Org&lt;&#x2F;a&gt; 来作为 App 的 Landing Page 和文档，
+GitHub Discussions 来作为问题反馈的地方。&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;&#x2F;my-dns&#x2F;Poster.zh.png&quot; alt=&quot;Poster&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;从上架到现在，刚好过了一个月。也没收到什么评价和反馈，而且唯一付费的人也只有我。&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;&#x2F;my-dns&#x2F;.&#x2F;App_Store_Connect.png&quot; alt=&quot;App Store Connect&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;已经有些新功能的想法，但选择暂缓开发。我得玩段时间游戏先～&lt;&#x2F;p&gt;
+</content>
+    </entry>
+    <entry xml:lang="zh"><title>可乐是键盘杀手</title><published>2024-12-04T00:00:00+00:00</published><updated>2024-12-10T00:00:00+00:00</updated>
+        
+        <author><name>
+            
+              linw1995
+            
+          </name></author>
+        
+        <link rel="alternate" type="text/html" href="/keyboard-killer/"/>
+        <id>/keyboard-killer/</id>
+        
+        <summary type="html">&lt;p&gt;周五晚上和女票在玩游戏 &lt;strong&gt;Go-Go Town !&lt;&#x2F;strong&gt;  。游戏很上头，太专注了，不小心把可乐打翻了。
+可乐撒了一丢丢在键盘上，当时是擦干净了，使用也没啥问题。&lt;&#x2F;p&gt;
+&lt;p&gt;隔天早上起来用的时候，就发现它坏了。呜呜呜，陪伴5年的键盘。&lt;&#x2F;p&gt;
+&lt;br&gt; &lt;a href=&quot;/keyboard-killer/&quot; target=&quot;_blank&quot;&gt;Read more&lt;/a&gt;</summary>
+        
+        <content type="html" xml:base="/keyboard-killer/">&lt;p&gt;周五晚上和女票在玩游戏 &lt;strong&gt;Go-Go Town !&lt;&#x2F;strong&gt;  。游戏很上头，太专注了，不小心把可乐打翻了。
+可乐撒了一丢丢在键盘上，当时是擦干净了，使用也没啥问题。&lt;&#x2F;p&gt;
+&lt;p&gt;隔天早上起来用的时候，就发现它坏了。呜呜呜，陪伴5年的键盘。&lt;&#x2F;p&gt;
+&lt;span id=&quot;continue-reading&quot;&gt;&lt;&#x2F;span&gt;
+&lt;p&gt;因为键盘坏了，没法写代码（也没法玩游戏）。
+先用小时达下单了个 27 米的键盘来临时用用。
+然后在等待的过程中，找到了这个键盘 &lt;strong&gt;Keychron Q60 Max&lt;&#x2F;strong&gt; 。
+HHKB 配列的键盘，距离上次选购都 5 年了，现在看能选择还是一样少。&lt;&#x2F;p&gt;
+&lt;p&gt;临时键盘当天早上就到了，但隔天早上新键盘也到了（顺丰快递，速度真快）。
+所以临时键盘就没用了，当场下岗。等它下次上岗，也不知道会是什么时候了。&lt;&#x2F;p&gt;
+
+  
+  
+    
+    
+  
+  &lt;img src=&quot;&#x2F;images&#x2F;keyboard_keychron_q60_max.jpg&quot; alt=&quot;新键盘&quot; class=&quot;center&quot; style=&quot;border-radius: 8px;&quot; decoding=&quot;async&quot; loading=&quot;lazy&quot;&#x2F;&gt;
+
+&lt;p&gt;到手的第一件事，就是改键位。
+原版 HHKB 可以通过拨动背面功能滑块，
+选择交换 &lt;kbd&gt;Delete&lt;&#x2F;kbd&gt; 与 &lt;kbd&gt;Backspace&lt;&#x2F;kbd&gt; 按键。
+不然要向左删除的时候，需同时按下 &lt;kbd&gt;FN&lt;&#x2F;kbd&gt; + &lt;kbd&gt;Delete&lt;&#x2F;kbd&gt; ，不是很方便。
+但遗憾的是，这个新键盘不支持这样方便的方式。但它支持 QMK 固件，这也让它更好用。&lt;&#x2F;p&gt;
+&lt;p&gt;随机送的小手册，提供个网站可以直接编辑键位。感觉很方便，但有 BUG 无法正常使用。
+那就只有自己动手刷固件了，这也是我买这个键盘的原因之一。用的是开源固件 QMK。&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;gu-jian-shua-xie&quot;&gt;固件刷写&lt;&#x2F;h2&gt;
+&lt;p&gt;由于 keychron 源码没有合并近主仓库，得这么操作。&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# 下载源码
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;gti&lt;&#x2F;span&gt;&lt;span&gt; clone https:&#x2F;&#x2F;github.com&#x2F;Keychron&#x2F;qmk_firmware.git \
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;  --depth&lt;&#x2F;span&gt;&lt;span&gt; 1 \
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;  --branch&lt;&#x2F;span&gt;&lt;span&gt; wireless_playground
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;cd&lt;&#x2F;span&gt;&lt;span&gt; .&#x2F;qmk_firmware
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# 安装 qmk
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;brew&lt;&#x2F;span&gt;&lt;span&gt; install qmk&#x2F;qmk&#x2F;qmk
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;刷固件前，别忘了修改下键位。&lt;&#x2F;p&gt;
+&lt;!-- markdownlint-disable line-length --&gt;
+&lt;pre data-lang=&quot;diff&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-diff &quot;&gt;&lt;code class=&quot;language-diff&quot; data-lang=&quot;diff&quot;&gt;&lt;span&gt;diff --git a&#x2F;keyboards&#x2F;keychron&#x2F;q60_max&#x2F;ansi&#x2F;keymaps&#x2F;default&#x2F;keymap.c b&#x2F;keyboards&#x2F;keychron&#x2F;q60_max&#x2F;ansi&#x2F;keymaps&#x2F;default&#x2F;keymap.c
+&lt;&#x2F;span&gt;&lt;span&gt;index a39ed4b9a2..37adca928b 100644
+&lt;&#x2F;span&gt;&lt;span&gt;--- a&#x2F;keyboards&#x2F;keychron&#x2F;q60_max&#x2F;ansi&#x2F;keymaps&#x2F;default&#x2F;keymap.c
+&lt;&#x2F;span&gt;&lt;span&gt;+++ b&#x2F;keyboards&#x2F;keychron&#x2F;q60_max&#x2F;ansi&#x2F;keymaps&#x2F;default&#x2F;keymap.c
+&lt;&#x2F;span&gt;&lt;span&gt;@@ -29,7 +29,7 @@ &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;enum layers {
+&lt;&#x2F;span&gt;&lt;span&gt; const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
+&lt;&#x2F;span&gt;&lt;span&gt;     [MAC_BASE] = LAYOUT_ansi_60(
+&lt;&#x2F;span&gt;&lt;span&gt;         KC_ESC,  KC_1,     KC_2,     KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS,  KC_EQL,    KC_BSLS, KC_GRV,
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;-        KC_TAB,  KC_Q,     KC_W,     KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_LBRC,  KC_RBRC,            KC_DEL,
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;+        KC_TAB,  KC_Q,     KC_W,     KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_LBRC,  KC_RBRC,            KC_BSPC,
+&lt;&#x2F;span&gt;&lt;span&gt;         KC_LCTL, KC_A,     KC_S,     KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,                      KC_ENT,
+&lt;&#x2F;span&gt;&lt;span&gt;         KC_LSFT,           KC_Z,     KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH,             KC_RSFT, MO(FN),
+&lt;&#x2F;span&gt;&lt;span&gt;                            KC_LOPTN, KC_LCMMD,                           KC_SPC,                             KC_RCMMD, KC_ROPTN),
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;!-- markdownlint-enable line-length --&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# 构建环境配置
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;brew&lt;&#x2F;span&gt;&lt;span&gt; link&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; --force&lt;&#x2F;span&gt;&lt;span&gt; avr-gcc@8
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;brew&lt;&#x2F;span&gt;&lt;span&gt; link&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; --force&lt;&#x2F;span&gt;&lt;span&gt; arm-none-eabi-binutils
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;brew&lt;&#x2F;span&gt;&lt;span&gt; link&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; --force&lt;&#x2F;span&gt;&lt;span&gt; arm-none-eabi-gcc@8
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# 固件构建并刷写
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;make&lt;&#x2F;span&gt;&lt;span&gt; keychron&#x2F;q60_max&#x2F;ansi:default:flash
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;待构建完成后，会进监听模式。
+此时拔下键盘，再长按 &lt;kbd&gt;Esc&lt;&#x2F;kbd&gt; 键的同时，再插上键盘。
+等待片刻，固件刷写。完成后，键盘会自动重启。就能正常使用了。&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;rgb-deng-xiao-she-bei-shui-mian-hou-bu-hui-fu-de-jie-jue-fang-an&quot;&gt;RGB 灯效设备睡眠后不恢复的解决方案&lt;&#x2F;h2&gt;
+&lt;p&gt;这个 Bug 不知道哪里导致的。但有个短平快的方案就是禁止 RGB 灯效跟着睡眠。&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;diff&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-diff &quot;&gt;&lt;code class=&quot;language-diff&quot; data-lang=&quot;diff&quot;&gt;&lt;span&gt;--- a&#x2F;keyboards&#x2F;keychron&#x2F;q60_max&#x2F;ansi&#x2F;rules.mk
+&lt;&#x2F;span&gt;&lt;span&gt;+++ b&#x2F;keyboards&#x2F;keychron&#x2F;q60_max&#x2F;ansi&#x2F;rules.mk
+&lt;&#x2F;span&gt;&lt;span&gt;@@ -1 +1 @@
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;-# This file intentionally left blank
+&lt;&#x2F;span&gt;&lt;span&gt;\ No newline at end of file
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;+SLEEP_LED_ENABLE = yes
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;重新构建固件并刷写即可。&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;za-xiang&quot;&gt;杂项&lt;&#x2F;h2&gt;
+&lt;ul&gt;
+&lt;li&gt;键盘官方产品详情 &lt;a href=&quot;https:&#x2F;&#x2F;www.keychron.com&#x2F;products&#x2F;keychron-q60-max-qmk-via-wireless-custom-mechanical-keyboard&quot;&gt;Keychron Q60 Max QMK&#x2F;VIA Wireless Custom Mechanical Keyboard&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;固件源码 &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;Keychron&#x2F;qmk_firmware&#x2F;tree&#x2F;ebdaa0469c57bc94798b670976adcca24201467e&#x2F;keyboards&#x2F;keychron&#x2F;q60_max&quot;&gt;qmk&#x2F;qmk_firmware&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+</content>
+    </entry>
+    <entry xml:lang="zh"><title>在 NixOS 中配置 Neovim </title><published>2024-09-14T00:00:00+00:00</published><updated>2024-09-17T00:00:00+00:00</updated>
+        
+        <author><name>
+            
+              linw1995
+            
+          </name></author>
+        
+        <link rel="alternate" type="text/html" href="/setup-neovim-in-nixos/"/>
+        <id>/setup-neovim-in-nixos/</id>
         
         <summary type="html">&lt;h2 id=&quot;qian-yan&quot;&gt;前言&lt;&#x2F;h2&gt;
 &lt;p&gt;最近在需要在一个巨大的 Rust 项目中做开发工作，但我的笔记本已经不堪重负，无法做高效的开发。
@@ -31,12 +366,191 @@ So, 我决定购买一台新的迷你 PC 来专门处理这个问题。&lt;&#x2F
     
     
   
-  &lt;img src=&quot;https:&#x2F;&#x2F;www.linw1995.com&#x2F;images&#x2F;setup_neovim_in_nixos-mini_pc.jpg&quot; alt=&quot;mini PC is put on the left of my phone rack&quot; class=&quot;left&quot; style=&quot;border-radius: 8px;&quot; decoding=&quot;async&quot; loading=&quot;lazy&quot;&#x2F;&gt;
+  &lt;img src=&quot;&#x2F;images&#x2F;setup_neovim_in_nixos-mini_pc.jpg&quot; alt=&quot;mini PC is put on the left of my phone rack&quot; class=&quot;left&quot; style=&quot;border-radius: 8px;&quot; decoding=&quot;async&quot; loading=&quot;lazy&quot;&#x2F;&gt;
 
 &lt;p&gt;由于还是习惯在 MacOS 上开发，且又不想折腾 Hackintosh，
-我给这台新的迷你 PC 安装了 NixOS 。最早是打算继续使用 VSCode，
+我给这台新的迷你 PC 安装了 NixOS 。最早是打算继续使用 VSCode 远程开发，
 后面发现 Neovim 也是一个不错的选择。&lt;&#x2F;p&gt;
-</summary>
+&lt;br&gt; &lt;a href=&quot;/setup-neovim-in-nixos/&quot; target=&quot;_blank&quot;&gt;Read more&lt;/a&gt;</summary>
         
+        <content type="html" xml:base="/setup-neovim-in-nixos/">&lt;h2 id=&quot;qian-yan&quot;&gt;前言&lt;&#x2F;h2&gt;
+&lt;p&gt;最近在需要在一个巨大的 Rust 项目中做开发工作，但我的笔记本已经不堪重负，无法做高效的开发。
+So, 我决定购买一台新的迷你 PC 来专门处理这个问题。&lt;&#x2F;p&gt;
+
+  
+  
+    
+    
+  
+  &lt;img src=&quot;&#x2F;images&#x2F;setup_neovim_in_nixos-mini_pc.jpg&quot; alt=&quot;mini PC is put on the left of my phone rack&quot; class=&quot;left&quot; style=&quot;border-radius: 8px;&quot; decoding=&quot;async&quot; loading=&quot;lazy&quot;&#x2F;&gt;
+
+&lt;p&gt;由于还是习惯在 MacOS 上开发，且又不想折腾 Hackintosh，
+我给这台新的迷你 PC 安装了 NixOS 。最早是打算继续使用 VSCode 远程开发，
+后面发现 Neovim 也是一个不错的选择。&lt;&#x2F;p&gt;
+&lt;span id=&quot;continue-reading&quot;&gt;&lt;&#x2F;span&gt;&lt;h2 id=&quot;an-zhuang-neovim&quot;&gt;安装 Neovim&lt;&#x2F;h2&gt;
+&lt;p&gt;我是用 home-manager 做配置管理的，但通过 &lt;code&gt;programs.neovim = {}&lt;&#x2F;code&gt; 使用 nixos-unstable 会有构建失败的问题。
+所以先直接引入即可。&lt;&#x2F;p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;为啥要用 nixos-unstable ，是因为想用到最新的 neovim 版本 &lt;code&gt;v0.10.1&lt;&#x2F;code&gt; 。&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;pre data-lang=&quot;nix&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-nix &quot;&gt;&lt;code class=&quot;language-nix&quot; data-lang=&quot;nix&quot;&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;{&lt;&#x2F;span&gt;&lt;span&gt;inputs, ...&lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;}&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;pkgs &lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;import &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;inputs&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;nixpkgs-unstable &lt;&#x2F;span&gt;&lt;span&gt;{};
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;in &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;home&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;packages &lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;with &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;pkgs&lt;&#x2F;span&gt;&lt;span&gt;; [
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;neovim
+&lt;&#x2F;span&gt;&lt;span&gt;  ];
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# programs.neovim = {
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;#   enable = true;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;#   package = pkgs.neovim;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# };
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h2 id=&quot;pei-zhi-lazy-nvim&quot;&gt;配置 lazy.nvim&lt;&#x2F;h2&gt;
+&lt;p&gt;直接使用 lua 脚本来配置 lazy.nvim 。
+参照安装文档 &lt;a href=&quot;https:&#x2F;&#x2F;lazy.folke.io&#x2F;installation&quot;&gt;Single File Setup&lt;&#x2F;a&gt; ，
+复制内容增加 &lt;code&gt;config&#x2F;init.lua&lt;&#x2F;code&gt; 文件。&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;nix&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-nix &quot;&gt;&lt;code class=&quot;language-nix&quot; data-lang=&quot;nix&quot;&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;{&lt;&#x2F;span&gt;&lt;span&gt;inputs, ...&lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;}&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;pkgs &lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;import &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;inputs&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;nixpkgs-unstable &lt;&#x2F;span&gt;&lt;span&gt;{};
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;in &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;home&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;packages &lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;with &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;pkgs&lt;&#x2F;span&gt;&lt;span&gt;; [
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;neovim
+&lt;&#x2F;span&gt;&lt;span&gt;  ];
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;mark style=&quot;background-color:#65737e30;&quot;&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;home&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;file&lt;&#x2F;span&gt;&lt;span&gt;.&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;.&#x2F;.config&#x2F;nvim&#x2F;&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot; = {
+&lt;&#x2F;span&gt;&lt;&#x2F;mark&gt;&lt;mark style=&quot;background-color:#65737e30;&quot;&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;source &lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;.&#x2F;config&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;&#x2F;mark&gt;&lt;mark style=&quot;background-color:#65737e30;&quot;&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;recursive &lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;true&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;&#x2F;mark&gt;&lt;mark style=&quot;background-color:#65737e30;&quot;&gt;&lt;span&gt;  };
+&lt;&#x2F;span&gt;&lt;&#x2F;mark&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;执行 rebuild switch 成功后运行 nvim 即可看到 lazy.nvim 自动走初始化流程。&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;an-zhuang-ji-pei-zhi-cha-jian&quot;&gt;安装及配置插件&lt;&#x2F;h2&gt;
+&lt;p&gt;通过直接挂载递归 &lt;code&gt;.&#x2F;config&lt;&#x2F;code&gt; 目录，我们可以较为方便在其中增加自定的配置。
+我们以增加 Rust 开发所需要插件配置为例。&lt;&#x2F;p&gt;
+&lt;p&gt;首先参照 &lt;a href=&quot;https:&#x2F;&#x2F;www.lazyvim.org&#x2F;configuration&#x2F;lazy.nvim&quot;&gt;LazyVim Setup&lt;&#x2F;a&gt;
+编辑 &lt;code&gt;.&#x2F;config&#x2F;lua&#x2F;plugins&#x2F;core.lua&lt;&#x2F;code&gt; 增加 LazyVim 配置。&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;lua&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-lua &quot;&gt;&lt;code class=&quot;language-lua&quot; data-lang=&quot;lua&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt; { &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;folke&#x2F;lazy.nvim&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;version &lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;false &lt;&#x2F;span&gt;&lt;span&gt;},
+&lt;&#x2F;span&gt;&lt;span&gt; { &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;LazyVim&#x2F;LazyVim&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;version &lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;false&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;import &lt;&#x2F;span&gt;&lt;span&gt;= &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;lazyvim.plugins&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot; },
+&lt;&#x2F;span&gt;&lt;span&gt; 
+&lt;&#x2F;span&gt;&lt;span&gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;-- NOTE: The import below can automatically add your own plugins, 
+&lt;&#x2F;span&gt;&lt;span&gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;-- configuration, etc from `lua&#x2F;plugins&#x2F;custom&#x2F;*.lua`
+&lt;&#x2F;span&gt;&lt;span&gt; { &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;import &lt;&#x2F;span&gt;&lt;span&gt;= &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;plugins.custom&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot; },
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;由于需要 C 编译器来构建 nvim-treesitter 。如果没有 &lt;code&gt;cc&lt;&#x2F;code&gt; 命令，
+可以先执行 &lt;code&gt;nix shell nixpkgs#gcc&lt;&#x2F;code&gt; 再执行 nvim 来替代。&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;p&gt;编辑 &lt;code&gt;.&#x2F;config&#x2F;lua&#x2F;plugins&#x2F;custom&#x2F;rust.lua&lt;&#x2F;code&gt; 增加及配置 Rust 开发插件。&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;lua&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-lua &quot;&gt;&lt;code class=&quot;language-lua&quot; data-lang=&quot;lua&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt; { &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;import &lt;&#x2F;span&gt;&lt;span&gt;= &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;lazyvim.plugins.extras.lang.rust&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot; },
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt; {
+&lt;&#x2F;span&gt;&lt;span&gt;  &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;mrcjkb&#x2F;rustaceanvim&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;,
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;version &lt;&#x2F;span&gt;&lt;span&gt;= &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;^4&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;-- Recommended
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;opts &lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;function&lt;&#x2F;span&gt;&lt;span&gt;(_, opts)
+&lt;&#x2F;span&gt;&lt;span&gt;   &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;opts&lt;&#x2F;span&gt;&lt;span&gt;.server.default_settings[&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;rust-analyzer&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;] = {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;cargo &lt;&#x2F;span&gt;&lt;span&gt;= {
+&lt;&#x2F;span&gt;&lt;span&gt;     &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;loadOutDirsFromCheck &lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;true&lt;&#x2F;span&gt;&lt;span&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;     &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;buildScripts &lt;&#x2F;span&gt;&lt;span&gt;= {
+&lt;&#x2F;span&gt;&lt;span&gt;      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;enable &lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;true&lt;&#x2F;span&gt;&lt;span&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;     },
+&lt;&#x2F;span&gt;&lt;span&gt;    },
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;checkOnSave &lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;true&lt;&#x2F;span&gt;&lt;span&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;procMacro &lt;&#x2F;span&gt;&lt;span&gt;= {
+&lt;&#x2F;span&gt;&lt;span&gt;     &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;enable &lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;true&lt;&#x2F;span&gt;&lt;span&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;     &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;ignored &lt;&#x2F;span&gt;&lt;span&gt;= {},
+&lt;&#x2F;span&gt;&lt;span&gt;    },
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;files &lt;&#x2F;span&gt;&lt;span&gt;= {
+&lt;&#x2F;span&gt;&lt;span&gt;     &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;watcher &lt;&#x2F;span&gt;&lt;span&gt;= &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;client&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;,
+&lt;&#x2F;span&gt;&lt;span&gt;     &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;excludeDirs &lt;&#x2F;span&gt;&lt;span&gt;= { &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;.direnv&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;.git&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot; },
+&lt;&#x2F;span&gt;&lt;span&gt;    },
+&lt;&#x2F;span&gt;&lt;span&gt;   }
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;end&lt;&#x2F;span&gt;&lt;span&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt; },
+&lt;&#x2F;span&gt;&lt;span&gt; {
+&lt;&#x2F;span&gt;&lt;span&gt;  &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;nvim-neotest&#x2F;neotest&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;,
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;opts &lt;&#x2F;span&gt;&lt;span&gt;= {
+&lt;&#x2F;span&gt;&lt;span&gt;   &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;adapters &lt;&#x2F;span&gt;&lt;span&gt;= {
+&lt;&#x2F;span&gt;&lt;span&gt;    [&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;rustaceanvim.neotest&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;] = {},
+&lt;&#x2F;span&gt;&lt;span&gt;   },
+&lt;&#x2F;span&gt;&lt;span&gt;  },
+&lt;&#x2F;span&gt;&lt;span&gt; },
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;如果需要代码调试，则需要增加 dap 配置。增加 &lt;code&gt;.&#x2F;config&#x2F;lua&#x2F;plugins&#x2F;custom&#x2F;dap.lua&lt;&#x2F;code&gt; 配置&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;lua&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-lua &quot;&gt;&lt;code class=&quot;language-lua&quot; data-lang=&quot;lua&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;  { &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;import &lt;&#x2F;span&gt;&lt;span&gt;= &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;lazyvim.plugins.extras.dap.core&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot; },
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  {
+&lt;&#x2F;span&gt;&lt;span&gt;    &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;jay-babu&#x2F;mason-nvim-dap.nvim&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;,
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;opts &lt;&#x2F;span&gt;&lt;span&gt;= {
+&lt;&#x2F;span&gt;&lt;span&gt;      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;automatic_installation &lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;true&lt;&#x2F;span&gt;&lt;span&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;handlers &lt;&#x2F;span&gt;&lt;span&gt;= {},
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;ensure_installed &lt;&#x2F;span&gt;&lt;span&gt;= {
+&lt;&#x2F;span&gt;&lt;span&gt;        &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;codelldb&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;      },
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;  }
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;通过 mason 自动安装 codelldb 还需要额外的依赖。&lt;&#x2F;p&gt;
+&lt;p&gt;常用的就直接通过 &lt;code&gt;home.packages&lt;&#x2F;code&gt; 引入即可，全局使用。&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;nix&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-nix &quot;&gt;&lt;code class=&quot;language-nix&quot; data-lang=&quot;nix&quot;&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;{&lt;&#x2F;span&gt;&lt;span&gt;pkgs,...&lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;}&lt;&#x2F;span&gt;&lt;span&gt;: {
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;home&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;packages &lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;with &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;pkgs&lt;&#x2F;span&gt;&lt;span&gt;; [
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;curl
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;wget
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;git
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;unzip
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;gnutar
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;gzip
+&lt;&#x2F;span&gt;&lt;span&gt;  ];
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;但像 nodejs 的，这类不想全局生效的环境。可以通过以下方式引入&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;nix&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-nix &quot;&gt;&lt;code class=&quot;language-nix&quot; data-lang=&quot;nix&quot;&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;{&lt;&#x2F;span&gt;&lt;span&gt;inputs, ...&lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;}&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;pkgs &lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;import &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;inputs&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;nixpkgs-unstable &lt;&#x2F;span&gt;&lt;span&gt;{};
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;in &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;home&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;packages &lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;with &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;pkgs&lt;&#x2F;span&gt;&lt;span&gt;; [
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;neovim
+&lt;&#x2F;span&gt;&lt;span&gt;  ];
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;home&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;file&lt;&#x2F;span&gt;&lt;span&gt;.&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;.&#x2F;.config&#x2F;nvim&#x2F;&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot; = {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;source &lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;.&#x2F;config&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;recursive &lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;true&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;  };
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;home&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;file&lt;&#x2F;span&gt;&lt;span&gt;.&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;.&#x2F;.config&#x2F;nvim&#x2F;lua&#x2F;config&#x2F;options.lua&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot; = {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;text &lt;&#x2F;span&gt;&lt;span&gt;= &amp;#39;&amp;#39;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;      -- npm is required for mason
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;      vim.env.PATH = vim.env.PATH .. &amp;quot;:&lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#ab7967;&quot;&gt;${&lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#bf616a;&quot;&gt;pkgs&lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#c0c5ce;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#bf616a;&quot;&gt;nodejs&lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#ab7967;&quot;&gt;}&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;&#x2F;bin&amp;quot;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;    &lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;&amp;#39;;
+&lt;&#x2F;span&gt;&lt;span&gt;  };
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;配置完成后，通过 nvim 打开 Rust 项目编辑 *.rs 文件时，就会自动加载对应插件。&lt;&#x2F;p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Rust-Analyzer 需要手动安装，可以执行 &lt;code&gt;rustup component add rust-analyzer&lt;&#x2F;code&gt; 来添加&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;h2 id=&quot;za-xiang&quot;&gt;杂项&lt;&#x2F;h2&gt;
+&lt;p&gt;Mini-PC 品牌型号是： &lt;strong&gt;铭凡 UM790 XTX&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;CPU：AMD Ryzen 9 7940HS&lt;&#x2F;li&gt;
+&lt;li&gt;内存：Crucial DDR5-5600 16G * 2&lt;&#x2F;li&gt;
+&lt;li&gt;硬盘：致态 TiPlus7100 1TB&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;图片中 Mini-PC 的 Batman 灯效是通过 3D 打印替换的。&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;模型模板： &lt;a href=&quot;https:&#x2F;&#x2F;www.printables.com&#x2F;model&#x2F;814075-minisforum-um780-xtx-led-plate&quot;&gt;Minisforum UM780 XTX LED plate&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;Batman 模型：&lt;a href=&quot;https:&#x2F;&#x2F;www.printables.com&#x2F;model&#x2F;118622-batman-cutout-wall-art&quot;&gt;Batman Cutout Wall Art&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;图片主体是 &lt;a href=&quot;https:&#x2F;&#x2F;makerworld.com&#x2F;zh&#x2F;models&#x2F;617886&quot;&gt;iPhone 15 Pro Max 待机模式底座&lt;&#x2F;a&gt;，
+通过 3D 打印制作。它可以用来给手机及耳机充电。&lt;&#x2F;p&gt;
+</content>
     </entry>
 </feed>

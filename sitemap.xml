@@ -1,28 +1,72 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-        <loc>https://www.linw1995.com/</loc>
+        <loc>/</loc>
     </url>
     <url>
-        <loc>https://www.linw1995.com/about/</loc>
+        <loc>/about/</loc>
     </url>
     <url>
-        <loc>https://www.linw1995.com/en/</loc>
+        <loc>/en/</loc>
     </url>
     <url>
-        <loc>https://www.linw1995.com/setup-neovim-in-nixos/</loc>
-        <lastmod>2024-09-16</lastmod>
+        <loc>/en/about/</loc>
     </url>
     <url>
-        <loc>https://www.linw1995.com/tags/</loc>
+        <loc>/en/rust-cross-compilation-tips/</loc>
+        <lastmod>2025-04-02</lastmod>
     </url>
     <url>
-        <loc>https://www.linw1995.com/tags/neovim/</loc>
+        <loc>/en/setup-neovim-in-nixos/</loc>
+        <lastmod>2024-09-17</lastmod>
     </url>
     <url>
-        <loc>https://www.linw1995.com/tags/nixos/</loc>
+        <loc>/en/tags/</loc>
     </url>
     <url>
-        <loc>https://www.linw1995.com/tags/rust/</loc>
+        <loc>/en/tags/neovim/</loc>
+    </url>
+    <url>
+        <loc>/en/tags/nixos/</loc>
+    </url>
+    <url>
+        <loc>/en/tags/rust/</loc>
+    </url>
+    <url>
+        <loc>/keyboard-killer/</loc>
+        <lastmod>2024-12-10</lastmod>
+    </url>
+    <url>
+        <loc>/my-dns/</loc>
+        <lastmod>2024-12-25</lastmod>
+    </url>
+    <url>
+        <loc>/rust-cross-compilation-tips/</loc>
+        <lastmod>2025-04-02</lastmod>
+    </url>
+    <url>
+        <loc>/setup-neovim-in-nixos/</loc>
+        <lastmod>2024-09-17</lastmod>
+    </url>
+    <url>
+        <loc>/tags/</loc>
+    </url>
+    <url>
+        <loc>/tags/equipment/</loc>
+    </url>
+    <url>
+        <loc>/tags/keyboard/</loc>
+    </url>
+    <url>
+        <loc>/tags/neovim/</loc>
+    </url>
+    <url>
+        <loc>/tags/nixos/</loc>
+    </url>
+    <url>
+        <loc>/tags/note/</loc>
+    </url>
+    <url>
+        <loc>/tags/rust/</loc>
     </url>
 </urlset>

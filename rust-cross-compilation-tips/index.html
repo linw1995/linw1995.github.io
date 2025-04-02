@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <title>Rust 跨平台构建贴士</title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="robots" content="noodp"/>
+
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/color/blue.css">
+
+    <link rel="stylesheet" href="/font-hack.css">
+
+    <meta name="description" content="">
+
+    <meta property="og:description" content="">
+    <meta property="og:title" content="Rust 跨平台构建贴士">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/rust-cross-compilation-tips/">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:description" content="">
+    <meta name="twitter:title" content="Rust 跨平台构建贴士">
+    <meta property="twitter:domain" content="&#x2F;">
+    <meta property="twitter:url" content="/rust-cross-compilation-tips/">
+
+                <link rel="alternate" type="application/atom+xml" title="linw1995&#x27;s blog Atom Feed" href="/atom.xml" />
+        <link rel="shortcut icon" type="image/png" href="/favicon.png">
+    
+    <link rel="stylesheet" href="/license.css">
+</head>
+
+<body class="">
+<div class="container">
+    
+    <header class="header">
+        <div class="header__inner">
+            <div class="header__logo">
+                    
+                <a href="/" style="text-decoration: none;">
+                    <div class="logo">
+                      
+                            linw1995
+                        
+                    </div>
+                </a>
+            </div>
+              
+<ul class="menu menu--desktop menu--language-selector">
+  <li class="menu__trigger">Chinese&nbsp;▾</li>
+  <li>
+    <ul class="menu__dropdown">
+      
+            <li><a href="&#x2F;en&#x2F;rust-cross-compilation-tips&#x2F;">English</a></li>
+          </ul>
+  </li>
+</ul>
+</div>
+
+        
+        
+                <nav class="menu">
+            <ul class="menu__inner">
+                <li class="active"><a href="/">blog</a></li>
+            
+                <li><a href="/tags">tags</a></li>
+            
+                <li><a href="/about">about me</a></li>
+            
+                <li><a href="https://old-blog.linw1995.com/" target="_blank" rel="noopener noreferrer">old blog</a></li>
+            
+                <li><a href="https://github.com/linw1995" target="_blank" rel="noopener noreferrer">github</a></li>
+            </ul>
+        </nav>
+    
+    
+        
+    </header>
+    
+
+    <div class="content">
+        
+<div class="post">
+    
+    <h1 class="post-title"><a href="/rust-cross-compilation-tips/">Rust 跨平台构建贴士</a></h1>
+    <div class="post-meta-inline">
+        
+    <span class="post-date">
+            2025-04-02
+        </span>
+
+    </div>
+
+    
+        <span class="post-tags-inline">
+                :: tags:&nbsp;
+                <a class="post-tag" href="/tags/nixos/">#nixos</a>&nbsp;
+                <a class="post-tag" href="/tags/rust/">#rust</a></span>
+    
+
+    <div class="post-content">
+            <h2 id="shi-yong-nix-flake-da-jian-ji-chu-de-rust-kua-ping-tai-gou-jian-huan-jing">使用 Nix Flake 搭建基础的 Rust 跨平台构建环境</h2>
+<ol>
+<li>
+<p>新增 flake.nix 文件，并执行 <code>git add flake.nix</code> 。</p>
+<pre data-lang="nix" style="background-color:#2b303b;color:#c0c5ce;" class="language-nix "><code class="language-nix" data-lang="nix"><span>{
+</span><span>  </span><span style="color:#d08770;">inputs </span><span>= {
+</span><span>    </span><span style="color:#d08770;">utils</span><span>.</span><span style="color:#d08770;">url </span><span>= &quot;</span><span style="color:#a3be8c;">github:numtide/flake-utils</span><span>&quot;;
+</span><span>    </span><span style="color:#d08770;">nixpkgs</span><span>.</span><span style="color:#d08770;">url </span><span>= &quot;</span><span style="color:#a3be8c;">github:NixOS/nixpkgs/nixos-24.11</span><span>&quot;;
+</span><span>  };
+</span><span>
+</span><span>  </span><span style="color:#d08770;">outputs </span><span>= {
+</span><span>    nixpkgs,
+</span><span>    utils,
+</span><span>    ...
+</span><span>  </span><span style="color:#8fa1b3;">}</span><span>:
+</span><span>    </span><span style="color:#bf616a;">utils</span><span>.</span><span style="color:#bf616a;">lib</span><span>.</span><span style="color:#bf616a;">eachDefaultSystem
+</span><span>    (
+</span><span>      system: </span><span style="color:#b48ead;">let
+</span><span>        </span><span style="color:#d08770;">pkgs </span><span>= </span><span style="color:#96b5b4;">import </span><span style="color:#bf616a;">nixpkgs </span><span>{</span><span style="color:#b48ead;">inherit </span><span style="color:#d08770;">system</span><span>;};
+</span><span>        </span><span style="color:#d08770;">lib </span><span>= </span><span style="color:#bf616a;">pkgs</span><span>.</span><span style="color:#bf616a;">lib</span><span>;
+</span><span>      </span><span style="color:#b48ead;">in </span><span>{
+</span><span>        </span><span style="color:#d08770;">devShells </span><span>=
+</span><span>          {
+</span><span>            </span><span style="color:#d08770;">default </span><span>= </span><span style="color:#bf616a;">pkgs</span><span>.</span><span style="color:#bf616a;">mkShell </span><span>{
+</span><span>              </span><span style="color:#d08770;">nativeBuildInputs </span><span>= </span><span style="color:#b48ead;">with </span><span style="color:#bf616a;">pkgs</span><span>; [
+</span><span>                </span><span style="color:#bf616a;">pkg-config
+</span><span>                </span><span style="color:#bf616a;">gcc
+</span><span>              ];
+</span><span>            };
+</span><span>          }
+</span><span>          // </span><span style="color:#d08770;">builtins</span><span>.</span><span style="color:#bf616a;">listToAttrs </span><span>(</span><span style="color:#96b5b4;">map </span><span>(target: {
+</span><span>            </span><span style="color:#d08770;">name </span><span>= </span><span style="color:#bf616a;">target</span><span>;
+</span><span>            </span><span style="color:#d08770;">value </span><span>= </span><span style="color:#b48ead;">let
+</span><span>              </span><span style="color:#d08770;">cross </span><span>= </span><span style="color:#96b5b4;">import </span><span style="color:#bf616a;">nixpkgs </span><span>{
+</span><span>                </span><span style="color:#b48ead;">inherit </span><span style="color:#d08770;">system</span><span>;
+</span><span>                </span><span style="color:#d08770;">crossSystem </span><span>= {</span><span style="color:#d08770;">config </span><span>= </span><span style="color:#bf616a;">target</span><span>;};
+</span><span>              };
+</span><span>              </span><span style="color:#d08770;">cpkgs </span><span>= </span><span style="color:#bf616a;">cross</span><span>.</span><span style="color:#bf616a;">pkgsMusl</span><span>;
+</span><span>            </span><span style="color:#b48ead;">in </span><span>(</span><span style="color:#bf616a;">cross</span><span>.</span><span style="color:#bf616a;">mkShell </span><span>{
+</span><span>              </span><span style="color:#d08770;">nativeBuildInputs </span><span>= </span><span style="color:#b48ead;">with </span><span style="color:#bf616a;">pkgs</span><span>; [
+</span><span>                </span><span style="color:#bf616a;">pkg-config
+</span><span>                </span><span style="color:#bf616a;">gcc </span><span style="color:#65737e;"># proc macro 等编译过程，需要原架构 toolchians
+</span><span>              ];
+</span><span>              </span><span style="color:#d08770;">env </span><span>= </span><span style="color:#b48ead;">let
+</span><span>                </span><span style="color:#d08770;">normalized </span><span>= </span><span style="color:#bf616a;">lib</span><span>.</span><span style="color:#bf616a;">strings</span><span>.</span><span style="color:#bf616a;">toUpper </span><span>(</span><span style="color:#d08770;">builtins</span><span>.</span><span style="color:#bf616a;">replaceStrings </span><span>[&quot;</span><span style="color:#a3be8c;">-</span><span>&quot;] [&quot;</span><span style="color:#a3be8c;">_</span><span>&quot;] </span><span style="color:#bf616a;">target</span><span>);
+</span><span>              </span><span style="color:#b48ead;">in
+</span><span>                </span><span style="color:#b48ead;">with </span><span style="color:#bf616a;">cpkgs</span><span>; {
+</span><span>                  </span><span style="color:#65737e;"># https://doc.rust-lang.org/cargo/reference/environment-variables.html#configuration-environment-variables
+</span><span>                  &quot;</span><span style="color:#a3be8c;">CARGO_TARGET_</span><span style="font-style:italic;color:#ab7967;">${</span><span style="font-style:italic;color:#bf616a;">normalized</span><span style="font-style:italic;color:#ab7967;">}</span><span style="color:#a3be8c;">_LINKER</span><span>&quot; = &quot;</span><span style="font-style:italic;color:#ab7967;">${</span><span style="font-style:italic;color:#bf616a;">stdenv</span><span style="font-style:italic;color:#c0c5ce;">.</span><span style="font-style:italic;color:#bf616a;">cc</span><span style="font-style:italic;color:#c0c5ce;">.</span><span style="font-style:italic;color:#bf616a;">targetPrefix</span><span style="font-style:italic;color:#ab7967;">}</span><span style="color:#a3be8c;">cc</span><span>&quot;;
+</span><span>                };
+</span><span>            });
+</span><span>          }) [&quot;</span><span style="color:#a3be8c;">x86_64-unknown-linux-musl</span><span>&quot; &quot;</span><span style="color:#a3be8c;">aarch64-unknown-linux-musl</span><span>&quot;]);
+</span><span>      }
+</span><span>    );
+</span><span>}
+</span></code></pre>
+</li>
+<li>
+<p>执行构建</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#65737e;"># 本地构建
+</span><span style="color:#bf616a;">nix</span><span> develop .#default</span><span style="color:#bf616a;"> --command </span><span>\
+</span><span> cargo build
+</span><span>
+</span><span style="color:#65737e;"># 跨平台构建
+</span><span style="color:#65737e;">#
+</span><span style="color:#65737e;"># 别忘了先安装对应的 rustup 组件
+</span><span style="color:#65737e;"># rustup target add aarch64-unknown-linux-musl
+</span><span style="color:#65737e;"># rustup target add x86_64-unknown-linux-musl
+</span><span>
+</span><span style="color:#bf616a;">TARGET</span><span>=</span><span style="color:#a3be8c;">x86_64-unknown-linux-musl </span><span style="color:#bf616a;">nix</span><span> develop .#$</span><span style="color:#bf616a;">TARGET --command </span><span>\
+</span><span> cargo build</span><span style="color:#bf616a;"> --target </span><span>$</span><span style="color:#bf616a;">TARGET
+</span></code></pre>
+</li>
+</ol>
+<h2 id="openssl-pq-deng-c-c-yi-lai-chu-li">openssl, pq 等 C/C++ 依赖处理</h2>
+<p>使用静态编译，并使用有 vendor （打包 C/C++ 源码 ）版本的 bindings 项目，把这些加入依赖管理，确保能稳定的可重复构建。</p>
+<ol>
+<li>
+<p>在 Cargo.toml 文件中增加对应 target 的依赖。</p>
+<pre data-lang="toml" style="background-color:#2b303b;color:#c0c5ce;" class="language-toml "><code class="language-toml" data-lang="toml"><span>[target.x86_64-unknown-linux-musl.dependencies]
+</span><span style="color:#bf616a;">openssl-sys </span><span>= { </span><span style="color:#bf616a;">version </span><span>= &quot;</span><span style="color:#a3be8c;">0.9</span><span>&quot;, </span><span style="color:#bf616a;">features </span><span>= [&quot;</span><span style="color:#a3be8c;">vendored</span><span>&quot;] }
+</span><span style="color:#bf616a;">pq-sys </span><span>= { </span><span style="color:#bf616a;">version </span><span>= &quot;</span><span style="color:#a3be8c;">0.7</span><span>&quot;, </span><span style="color:#bf616a;">features </span><span>= [&quot;</span><span style="color:#a3be8c;">bundled</span><span>&quot;] }
+</span><span>
+</span><span>[target.aarch64-unknown-linux-musl.dependencies]
+</span><span style="color:#bf616a;">openssl-sys </span><span>= { </span><span style="color:#bf616a;">version </span><span>= &quot;</span><span style="color:#a3be8c;">0.9</span><span>&quot;, </span><span style="color:#bf616a;">features </span><span>= [&quot;</span><span style="color:#a3be8c;">vendored</span><span>&quot;] }
+</span><span style="color:#bf616a;">pq-sys </span><span>= { </span><span style="color:#bf616a;">version </span><span>= &quot;</span><span style="color:#a3be8c;">0.7</span><span>&quot;, </span><span style="color:#bf616a;">features </span><span>= [&quot;</span><span style="color:#a3be8c;">bundled</span><span>&quot;] }
+</span></code></pre>
+</li>
+<li>
+<p>执行构建</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#65737e;"># 本地静态编译则需要指定 RUSTFLAGS。经实测，有些架构该配置无效
+</span><span style="color:#bf616a;">RUSTFLAGS</span><span>=&#39;</span><span style="color:#a3be8c;">-C target-feature=+crt-static</span><span>&#39; </span><span style="color:#bf616a;">cargo</span><span> build
+</span><span>
+</span><span style="color:#65737e;"># 而 x86_64-unknown-linux-musl 则不需要指定，默认启用
+</span><span style="color:#bf616a;">TARGET</span><span>=</span><span style="color:#a3be8c;">x86_64-unknown-linux-musl </span><span style="color:#bf616a;">nix</span><span> develop .#$</span><span style="color:#bf616a;">TARGET --command </span><span>\
+</span><span>  cargo build</span><span style="color:#bf616a;"> --target </span><span>$</span><span style="color:#bf616a;">TARGET
+</span></code></pre>
+</li>
+</ol>
+<blockquote>
+<p>CRT means standard C runtime.
+The default of <strong>crt-static</strong> will be different depending on the target.
+For example <strong>x86_64-unknown-linux-musl</strong> will have it on by default,
+whereas <strong>arm-unknown-linux-musleabi</strong> will have it turned off by default.
+<sup class="footnote-reference"><a href="#1">1</a></sup></p>
+</blockquote>
+<div class="footnote-definition" id="1"><sup class="footnote-definition-label">1</sup>
+<p><a href="https://rust-lang.github.io/rfcs/1721-crt-static.html">RFC 1721 crt-static</a></p>
+</div>
+
+        </div>
+
+    
+            <div class="pagination">
+                <div class="pagination__title">
+                    <span class="pagination__title-h">Thanks for reading! Read other posts?</span>
+                    <hr />
+                </div>
+                <div class="pagination__buttons">
+                        <span class="button previous">
+                            <a href="/my-dns/">
+                                <span class="button__icon">←</span>&nbsp;
+                                <span class="button__text">实现 DNS App</span>
+                            </a>
+                        </span>
+                    
+                    </div>
+            </div>
+        
+
+    <p id="license" xmlns:cc="http://creativecommons.org/ns#" >
+        This work by <span property="cc:attributionName">林玮 (Jade Lin)</span> is licensed under 
+        <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">
+            CC BY-NC-ND 4.0
+            <img src="/images/by-nc-nd.png" alt="">
+        </a>
+    </p>
+
+    <div class="giscus" style="margin-top: 4rem"></div>
+</div>
+
+    </div>
+
+    
+    <footer class="footer">
+        <div class="footer__inner">
+                <div class="copyright copyright--user"><b>Copyright ©</b>  &nbsp; 2025 linw1995</div>
+            </div>
+    </footer>
+    
+
+</div>
+<script type="text/javascript" src="/js/menu.js"></script>
+
+<script src="https://giscus.app/client.js"
+    data-repo="linw1995/linw1995.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnk3MDkyNjU4NA=="
+    data-category="General"
+    data-category-id="DIC_kwDOBDpA-M4CigfM"
+    data-mapping="og:title"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="top"
+    data-theme="dark"
+    data-lang="zh-CN"
+    data-loading="lazy"
+    crossorigin="anonymous"
+    async></script>
+
+</body>
+
+</html>

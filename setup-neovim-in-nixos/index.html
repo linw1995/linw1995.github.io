@@ -8,25 +8,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
     <meta name="robots" content="noodp"/>
 
-    <link rel="stylesheet" href="https://www.linw1995.com/style.css">
-    <link rel="stylesheet" href="https://www.linw1995.com/color/blue.css">
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/color/blue.css">
 
-    <link rel="stylesheet" href="https://www.linw1995.com/font-hack.css">
+    <link rel="stylesheet" href="/font-hack.css">
 
+        
     <meta name="description" content="">
 
     <meta property="og:description" content="">
     <meta property="og:title" content="在 NixOS 中配置 Neovim ">
     <meta property="og:type" content="article">
-    <meta property="og:url" content="https://www.linw1995.com/setup-neovim-in-nixos/">
+    <meta property="og:url" content="/setup-neovim-in-nixos/">
+
+    <meta property="og:image" content="/images/setup_neovim_in_nixos-mini_pc.jpg">
+    <meta name="twitter:image" content="/images/setup_neovim_in_nixos-mini_pc.jpg">
 
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:description" content="">
     <meta name="twitter:title" content="在 NixOS 中配置 Neovim ">
-    <meta property="twitter:domain" content="www.linw1995.com&#x2F;">
-    <meta property="twitter:url" content="https://www.linw1995.com/setup-neovim-in-nixos/">
+    <meta property="twitter:domain" content="&#x2F;">
+    <meta property="twitter:url" content="/setup-neovim-in-nixos/">
 
-    </head>
+                <link rel="alternate" type="application/atom+xml" title="linw1995&#x27;s blog Atom Feed" href="/atom.xml" />
+        <link rel="shortcut icon" type="image/png" href="/favicon.png">
+    
+    <link rel="stylesheet" href="/license.css">
+</head>
 
 <body class="">
 <div class="container">
@@ -35,7 +43,7 @@
         <div class="header__inner">
             <div class="header__logo">
                     
-                <a href="https://www.linw1995.com/" style="text-decoration: none;">
+                <a href="/" style="text-decoration: none;">
                     <div class="logo">
                       
                             linw1995
@@ -48,16 +56,18 @@
   <li class="menu__trigger">Chinese&nbsp;▾</li>
   <li>
     <ul class="menu__dropdown">
-        <li><a href="https:&#x2F;&#x2F;www.linw1995.com&#x2F;setup-neovim-in-nixos&#x2F;">中文</a></li>
-      </ul>
+      
+            <li><a href="&#x2F;en&#x2F;setup-neovim-in-nixos&#x2F;">English</a></li>
+          </ul>
   </li>
 </ul>
 </div>
 
         
-        <nav class="menu">
+        
+                <nav class="menu">
             <ul class="menu__inner">
-                <li><a href="/">blog</a></li>
+                <li class="active"><a href="/">blog</a></li>
             
                 <li><a href="/tags">tags</a></li>
             
@@ -78,7 +88,7 @@
         
 <div class="post">
     
-    <h1 class="post-title"><a href="https://www.linw1995.com/setup-neovim-in-nixos/">在 NixOS 中配置 Neovim </a></h1>
+    <h1 class="post-title"><a href="/setup-neovim-in-nixos/">在 NixOS 中配置 Neovim </a></h1>
     <div class="post-meta-inline">
         
     <span class="post-date">
@@ -90,9 +100,9 @@
     
         <span class="post-tags-inline">
                 :: tags:&nbsp;
-                <a class="post-tag" href="https://www.linw1995.com/tags/neovim/">#neovim</a>&nbsp;
-                <a class="post-tag" href="https://www.linw1995.com/tags/nixos/">#nixos</a>&nbsp;
-                <a class="post-tag" href="https://www.linw1995.com/tags/rust/">#rust</a></span>
+                <a class="post-tag" href="/tags/neovim/">#neovim</a>&nbsp;
+                <a class="post-tag" href="/tags/nixos/">#nixos</a>&nbsp;
+                <a class="post-tag" href="/tags/rust/">#rust</a></span>
     
 
     <div class="post-content">
@@ -105,10 +115,10 @@ So, 我决定购买一台新的迷你 PC 来专门处理这个问题。</p>
     
     
   
-  <img src="https://www.linw1995.com/images/setup_neovim_in_nixos-mini_pc.jpg" alt="mini PC is put on the left of my phone rack" class="left" style="border-radius: 8px;" decoding="async" loading="lazy"/>
+  <img src="/images/setup_neovim_in_nixos-mini_pc.jpg" alt="mini PC is put on the left of my phone rack" class="left" style="border-radius: 8px;" decoding="async" loading="lazy"/>
 
 <p>由于还是习惯在 MacOS 上开发，且又不想折腾 Hackintosh，
-我给这台新的迷你 PC 安装了 NixOS 。最早是打算继续使用 VSCode，
+我给这台新的迷你 PC 安装了 NixOS 。最早是打算继续使用 VSCode 远程开发，
 后面发现 Neovim 也是一个不错的选择。</p>
 <span id="continue-reading"></span><h2 id="an-zhuang-neovim">安装 Neovim</h2>
 <p>我是用 home-manager 做配置管理的，但通过 <code>programs.neovim = {}</code> 使用 nixos-unstable 会有构建失败的问题。
@@ -278,7 +288,32 @@ So, 我决定购买一台新的迷你 PC 来专门处理这个问题。</p>
         </div>
 
     
-    <div class="giscus"></div>
+            <div class="pagination">
+                <div class="pagination__title">
+                    <span class="pagination__title-h">Thanks for reading! Read other posts?</span>
+                    <hr />
+                </div>
+                <div class="pagination__buttons">
+                    
+                        <span class="button next">
+                            <a href="/keyboard-killer/">
+                                <span class="button__text">可乐是键盘杀手</span>&nbsp;
+                                <span class="button__icon">→</span>
+                            </a>
+                        </span>
+                    </div>
+            </div>
+        
+
+    <p id="license" xmlns:cc="http://creativecommons.org/ns#" >
+        This work by <span property="cc:attributionName">林玮 (Jade Lin)</span> is licensed under 
+        <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">
+            CC BY-NC-ND 4.0
+            <img src="/images/by-nc-nd.png" alt="">
+        </a>
+    </p>
+
+    <div class="giscus" style="margin-top: 4rem"></div>
 </div>
 
     </div>
@@ -286,13 +321,14 @@ So, 我决定购买一台新的迷你 PC 来专门处理这个问题。</p>
     
     <footer class="footer">
         <div class="footer__inner">
-                <div class="copyright copyright--user"><b>Copyright ©</b>  &nbsp; 2024 linw1995</div>
+                <div class="copyright copyright--user"><b>Copyright ©</b>  &nbsp; 2025 linw1995</div>
             </div>
     </footer>
     
 
 </div>
 <script type="text/javascript" src="/js/menu.js"></script>
+
 <script src="https://giscus.app/client.js"
     data-repo="linw1995/linw1995.github.io"
     data-repo-id="MDEwOlJlcG9zaXRvcnk3MDkyNjU4NA=="
@@ -308,6 +344,7 @@ So, 我决定购买一台新的迷你 PC 来专门处理这个问题。</p>
     data-loading="lazy"
     crossorigin="anonymous"
     async></script>
+
 </body>
 
 </html>

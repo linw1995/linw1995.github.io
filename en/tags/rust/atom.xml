@@ -157,8 +157,7 @@ So, I decided to buy a new mini-PC specifically for this task.&lt;&#x2F;p&gt;
 and didn’t want to go through the hassle of setting up a Hackintosh,
 I decided to install NixOS on my new mini PC.
 Initially, I planned to continue using VSCode for remote development,
-but later realized that Neovim is also a great option.&lt;&#x2F;p&gt;
-&lt;br&gt; &lt;a href=&quot;/en/setup-neovim-in-nixos/&quot; target=&quot;_blank&quot;&gt;Read more&lt;/a&gt;</summary>
+but later realized that Neovim is also a great option.&lt;&#x2F;p&gt;&lt;br&gt; &lt;a href=&quot;/en/setup-neovim-in-nixos/&quot; target=&quot;_blank&quot;&gt;Read more&lt;/a&gt;</summary>
         
         <content type="html" xml:base="/en/setup-neovim-in-nixos/">&lt;p&gt;Recently,
 I&#x27;ve been working on a large project in Rust,

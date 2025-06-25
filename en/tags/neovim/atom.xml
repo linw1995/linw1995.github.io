@@ -6,9 +6,67 @@
     <generator uri="https://www.getzola.org/">Zola</generator>
     <icon>/favicon.ico</icon>
     <logo>/favicon.png</logo>
-    <updated>2024-09-17T00:00:00+00:00</updated>
+    <updated>2025-06-25T00:00:00+00:00</updated>
     <id>/en/tags/neovim/atom.xml</id>
     <follow_challenge><feedId>72476326505512960</feedId><userId>57795710219398144</userId></follow_challenge>
+    <entry xml:lang="en"><title>Project-Level LSP Configuration in Neovim</title><published>2025-06-25T00:00:00+00:00</published><updated>2025-06-25T00:00:00+00:00</updated>
+        
+        <author><name>
+            
+              linw1995
+            
+          </name></author>
+        
+        <link rel="alternate" type="text/html" href="/en/nvim-lsp-project-config/"/>
+        <id>/en/nvim-lsp-project-config/</id>
+        
+        <summary type="html">&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;&#x2F;h2&gt;
+&lt;p&gt;Recently, while writing Golang code, I needed to isolate certain constants
+in the code during the build process by using Golang&#x27;s built-in build tags feature.
+To achieve this, specific startup parameters for gopls
+must be configured for correct code indexing.
+However, gopls configuration needs to be done at the project level,
+as global configuration might interfere with other projects.&lt;&#x2F;p&gt;
+&lt;p&gt;So, how can we configure it?&lt;&#x2F;p&gt;&lt;br&gt; &lt;a href=&quot;/en/nvim-lsp-project-config/&quot; target=&quot;_blank&quot;&gt;Read more&lt;/a&gt;</summary>
+        
+        <content type="html" xml:base="/en/nvim-lsp-project-config/">&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;&#x2F;h2&gt;
+&lt;p&gt;Recently, while writing Golang code, I needed to isolate certain constants
+in the code during the build process by using Golang&#x27;s built-in build tags feature.
+To achieve this, specific startup parameters for gopls
+must be configured for correct code indexing.
+However, gopls configuration needs to be done at the project level,
+as global configuration might interfere with other projects.&lt;&#x2F;p&gt;
+&lt;p&gt;So, how can we configure it?&lt;&#x2F;p&gt;
+&lt;span id=&quot;continue-reading&quot;&gt;&lt;&#x2F;span&gt;&lt;h2 id=&quot;configuration-methods&quot;&gt;Configuration Methods&lt;&#x2F;h2&gt;
+&lt;h3 id=&quot;using-neovim-s-built-in-exrc-feature&quot;&gt;Using Neovim&#x27;s Built-in exrc Feature&lt;&#x2F;h3&gt;
+&lt;p&gt;The &lt;code&gt;exrc&lt;&#x2F;code&gt; feature allows Neovim to read a &lt;code&gt;.exrc&lt;&#x2F;code&gt; file in the current directory
+to load local configurations (essentially achieving configuration by executing code).
+However, this method requires a deep understanding of Neovim
+and might conflict with other plugins. Therefore, it&#x27;s not highly recommended.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;using-lazy-nvim&quot;&gt;Using lazy.nvim&lt;&#x2F;h3&gt;
+&lt;p&gt;&lt;strong&gt;lazy.nvim&lt;&#x2F;strong&gt; is a powerful Neovim plugin manager
+that simplifies plugin management and configuration.
+It supports configuring plugins for specific projects through a &lt;code&gt;.lazy.lua&lt;&#x2F;code&gt; file.
+Although &lt;strong&gt;lazy.nvim&lt;&#x2F;strong&gt;&#x27;s official documentation barely (actually not at all) mentions this feature,
+experienced &lt;strong&gt;lazy.nvim&lt;&#x2F;strong&gt; users can usually adopt it with ease.&lt;&#x2F;p&gt;
+&lt;p&gt;Reference for configuration format: &lt;a href=&quot;https:&#x2F;&#x2F;lazy.folke.io&#x2F;spec&quot;&gt;https:&#x2F;&#x2F;lazy.folke.io&#x2F;spec&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;lua&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-lua &quot;&gt;&lt;code class=&quot;language-lua&quot; data-lang=&quot;lua&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;    &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;nvim&#x2F;nvim-lspconfig&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;,
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;opts &lt;&#x2F;span&gt;&lt;span&gt;= {
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;servers &lt;&#x2F;span&gt;&lt;span&gt;= {
+&lt;&#x2F;span&gt;&lt;span&gt;            &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;gopls &lt;&#x2F;span&gt;&lt;span&gt;= {
+&lt;&#x2F;span&gt;&lt;span&gt;                &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;settings &lt;&#x2F;span&gt;&lt;span&gt;= {
+&lt;&#x2F;span&gt;&lt;span&gt;                    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;gopls &lt;&#x2F;span&gt;&lt;span&gt;= {
+&lt;&#x2F;span&gt;&lt;span&gt;                        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;buildFlags &lt;&#x2F;span&gt;&lt;span&gt;= { &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;-tags=encrypt decrypt&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot; },
+&lt;&#x2F;span&gt;&lt;span&gt;                    },
+&lt;&#x2F;span&gt;&lt;span&gt;                },
+&lt;&#x2F;span&gt;&lt;span&gt;            },
+&lt;&#x2F;span&gt;&lt;span&gt;        },
+&lt;&#x2F;span&gt;&lt;span&gt;    },
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+</content>
+    </entry>
     <entry xml:lang="en"><title>Setup Neovim in NixOS</title><published>2024-09-16T00:00:00+00:00</published><updated>2024-09-17T00:00:00+00:00</updated>
         
         <author><name>
@@ -36,8 +94,7 @@ So, I decided to buy a new mini-PC specifically for this task.&lt;&#x2F;p&gt;
 and didn’t want to go through the hassle of setting up a Hackintosh,
 I decided to install NixOS on my new mini PC.
 Initially, I planned to continue using VSCode for remote development,
-but later realized that Neovim is also a great option.&lt;&#x2F;p&gt;
-&lt;br&gt; &lt;a href=&quot;/en/setup-neovim-in-nixos/&quot; target=&quot;_blank&quot;&gt;Read more&lt;/a&gt;</summary>
+but later realized that Neovim is also a great option.&lt;&#x2F;p&gt;&lt;br&gt; &lt;a href=&quot;/en/setup-neovim-in-nixos/&quot; target=&quot;_blank&quot;&gt;Read more&lt;/a&gt;</summary>
         
         <content type="html" xml:base="/en/setup-neovim-in-nixos/">&lt;p&gt;Recently,
 I&#x27;ve been working on a large project in Rust,

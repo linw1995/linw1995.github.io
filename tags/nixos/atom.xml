@@ -155,8 +155,7 @@ So, 我决定购买一台新的迷你 PC 来专门处理这个问题。&lt;&#x2F
 
 &lt;p&gt;由于还是习惯在 MacOS 上开发，且又不想折腾 Hackintosh，
 我给这台新的迷你 PC 安装了 NixOS 。最早是打算继续使用 VSCode 远程开发，
-后面发现 Neovim 也是一个不错的选择。&lt;&#x2F;p&gt;
-&lt;br&gt; &lt;a href=&quot;/setup-neovim-in-nixos/&quot; target=&quot;_blank&quot;&gt;Read more&lt;/a&gt;</summary>
+后面发现 Neovim 也是一个不错的选择。&lt;&#x2F;p&gt;&lt;br&gt; &lt;a href=&quot;/setup-neovim-in-nixos/&quot; target=&quot;_blank&quot;&gt;Read more&lt;/a&gt;</summary>
         
         <content type="html" xml:base="/setup-neovim-in-nixos/">&lt;h2 id=&quot;qian-yan&quot;&gt;前言&lt;&#x2F;h2&gt;
 &lt;p&gt;最近在需要在一个巨大的 Rust 项目中做开发工作，但我的笔记本已经不堪重负，无法做高效的开发。

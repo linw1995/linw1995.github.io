@@ -2,7 +2,7 @@
 <html lang="zh">
 
 <head>
-    <title>Neovim 项目级 LSP 配置</title>
+    <title>Project-Level LSP Configuration in Neovim</title>
     
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
@@ -16,17 +16,17 @@
     <meta name="description" content="">
 
     <meta property="og:description" content="">
-    <meta property="og:title" content="Neovim 项目级 LSP 配置">
+    <meta property="og:title" content="Project-Level LSP Configuration in Neovim">
     <meta property="og:type" content="article">
-    <meta property="og:url" content="/nvim-lsp-project-config/">
+    <meta property="og:url" content="/en/nvim-lsp-project-config/">
 
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:description" content="">
-    <meta name="twitter:title" content="Neovim 项目级 LSP 配置">
+    <meta name="twitter:title" content="Project-Level LSP Configuration in Neovim">
     <meta property="twitter:domain" content="&#x2F;">
-    <meta property="twitter:url" content="/nvim-lsp-project-config/">
+    <meta property="twitter:url" content="/en/nvim-lsp-project-config/">
 
-                <link rel="alternate" type="application/atom+xml" title="linw1995&#x27;s blog Atom Feed" href="/atom.xml" />
+                <link rel="alternate" type="application/atom+xml" title=" Atom Feed" href="/en/atom.xml" />
         <link rel="shortcut icon" type="image/png" href="/favicon.png">
     
     <link rel="stylesheet" href="/license.css">
@@ -49,11 +49,11 @@
             </div>
               
 <ul class="menu menu--desktop menu--language-selector">
-  <li class="menu__trigger">Chinese&nbsp;▾</li>
+  <li class="menu__trigger">English&nbsp;▾</li>
   <li>
     <ul class="menu__dropdown">
       
-            <li><a href="&#x2F;en&#x2F;nvim-lsp-project-config&#x2F;">English</a></li>
+            <li><a href="&#x2F;nvim-lsp-project-config&#x2F;">中文</a></li>
           </ul>
   </li>
 </ul>
@@ -84,7 +84,7 @@
         
 <div class="post">
     
-    <h1 class="post-title"><a href="/nvim-lsp-project-config/">Neovim 项目级 LSP 配置</a></h1>
+    <h1 class="post-title"><a href="/en/nvim-lsp-project-config/">Project-Level LSP Configuration in Neovim</a></h1>
     <div class="post-meta-inline">
         
     <span class="post-date">
@@ -96,29 +96,32 @@
     
         <span class="post-tags-inline">
                 :: tags:&nbsp;
-                <a class="post-tag" href="/tags/golang/">#golang</a>&nbsp;
-                <a class="post-tag" href="/tags/neovim/">#neovim</a></span>
+                <a class="post-tag" href="/en/tags/golang/">#golang</a>&nbsp;
+                <a class="post-tag" href="/en/tags/neovim/">#neovim</a></span>
     
 
     <div class="post-content">
-            <h2 id="qian-yan">前言</h2>
-<p>最近在编写 Golang 代码时，为了在构建时隔离某些代码中的常量，
-需要使用 Golang 内置的 build tags 功能。
-因此，需要为 gopls 配置特定的启动参数，以便正确解析代码。
-然而，gopls 的配置需要在项目级别完成，全局配置可能会影响其他项目。</p>
-<p>那么，该如何进行配置呢？</p>
-<span id="continue-reading"></span><h2 id="pei-zhi-fang-shi">配置方式</h2>
-<h3 id="shi-yong-neovim-nei-zhi-de-exrc-gong-neng">使用 Neovim 内置的 exrc 功能</h3>
-<p><code>exrc</code> 功能允许 Neovim 读取当前目录下的 <code>.exrc</code> 文件以加载本地配置
-（本质上是通过执行代码来实现配置的目的）。
-然而，这种方式需要对 Neovim 有深入的了解，并且可能与其他插件发生冲突。
-因此，不太推荐使用。</p>
-<h3 id="shi-yong-lazy-nvim">使用 lazy.nvim</h3>
-<p><strong>lazy.nvim</strong> 是一款强大的 Neovim 插件管理器，能够简化插件的管理和配置。
-它支持通过 <code>.lazy.lua</code> 文件为特定项目配置插件。
-尽管 <strong>lazy.nvim</strong> 的官方文档几乎没有涉及（实际上是完全没有）这一功能，
-但熟悉 <strong>lazy.nvim</strong> 的用户通常能轻松上手。</p>
-<p>配置格式参考文档: <a href="https://lazy.folke.io/spec">https://lazy.folke.io/spec</a></p>
+            <h2 id="introduction">Introduction</h2>
+<p>Recently, while writing Golang code, I needed to isolate certain constants
+in the code during the build process by using Golang's built-in build tags feature.
+To achieve this, specific startup parameters for gopls
+must be configured for correct code indexing.
+However, gopls configuration needs to be done at the project level,
+as global configuration might interfere with other projects.</p>
+<p>So, how can we configure it?</p>
+<span id="continue-reading"></span><h2 id="configuration-methods">Configuration Methods</h2>
+<h3 id="using-neovim-s-built-in-exrc-feature">Using Neovim's Built-in exrc Feature</h3>
+<p>The <code>exrc</code> feature allows Neovim to read a <code>.exrc</code> file in the current directory
+to load local configurations (essentially achieving configuration by executing code).
+However, this method requires a deep understanding of Neovim
+and might conflict with other plugins. Therefore, it's not highly recommended.</p>
+<h3 id="using-lazy-nvim">Using lazy.nvim</h3>
+<p><strong>lazy.nvim</strong> is a powerful Neovim plugin manager
+that simplifies plugin management and configuration.
+It supports configuring plugins for specific projects through a <code>.lazy.lua</code> file.
+Although <strong>lazy.nvim</strong>'s official documentation barely (actually not at all) mentions this feature,
+experienced <strong>lazy.nvim</strong> users can usually adopt it with ease.</p>
+<p>Reference for configuration format: <a href="https://lazy.folke.io/spec">https://lazy.folke.io/spec</a></p>
 <pre data-lang="lua" style="background-color:#2b303b;color:#c0c5ce;" class="language-lua "><code class="language-lua" data-lang="lua"><span style="color:#b48ead;">return </span><span>{
 </span><span>    &quot;</span><span style="color:#a3be8c;">nvim/nvim-lspconfig</span><span>&quot;,
 </span><span>    </span><span style="color:#a3be8c;">opts </span><span>= {
@@ -145,9 +148,9 @@
                 </div>
                 <div class="pagination__buttons">
                         <span class="button previous">
-                            <a href="/rust-cross-compilation-tips/">
+                            <a href="/en/rust-cross-compilation-tips/">
                                 <span class="button__icon">←</span>&nbsp;
-                                <span class="button__text">Rust 跨平台构建贴士</span>
+                                <span class="button__text">Rust Cross-compilation Tips</span>
                             </a>
                         </span>
                     
@@ -190,7 +193,7 @@
     data-emit-metadata="0"
     data-input-position="top"
     data-theme="dark"
-    data-lang="zh-CN"
+    data-lang="en"
     data-loading="lazy"
     crossorigin="anonymous"
     async></script>

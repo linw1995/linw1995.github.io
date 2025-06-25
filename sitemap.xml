@@ -13,6 +13,10 @@
         <loc>/en/about/</loc>
     </url>
     <url>
+        <loc>/en/nvim-lsp-project-config/</loc>
+        <lastmod>2025-06-25</lastmod>
+    </url>
+    <url>
         <loc>/en/rust-cross-compilation-tips/</loc>
         <lastmod>2025-04-05</lastmod>
     </url>
@@ -22,6 +26,9 @@
     </url>
     <url>
         <loc>/en/tags/</loc>
+    </url>
+    <url>
+        <loc>/en/tags/golang/</loc>
     </url>
     <url>
         <loc>/en/tags/neovim/</loc>

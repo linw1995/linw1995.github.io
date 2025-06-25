@@ -170,8 +170,8 @@
 </span><span style="color:#65737e;"># rustup target add aarch64-unknown-linux-musl
 </span><span style="color:#65737e;"># rustup target add x86_64-unknown-linux-musl
 </span><span>
-</span><span style="color:#bf616a;">TARGET</span><span>=</span><span style="color:#a3be8c;">x86_64-unknown-linux-musl </span><span style="color:#bf616a;">nix</span><span> develop .#$</span><span style="color:#bf616a;">TARGET --command </span><span>\
-</span><span> cargo build</span><span style="color:#bf616a;"> --target </span><span>$</span><span style="color:#bf616a;">TARGET
+</span><span style="color:#bf616a;">nix</span><span> develop .#x86_64-unknown-linux-musl</span><span style="color:#bf616a;"> --command </span><span>\
+</span><span>  cargo build</span><span style="color:#bf616a;"> --target</span><span> x86_64-unknown-linux-musl
 </span></code></pre>
 </li>
 </ol>
@@ -227,6 +227,13 @@ whereas <strong>arm-unknown-linux-musleabi</strong> will have it turned off by d
                             </a>
                         </span>
                     
+                    
+                        <span class="button next">
+                            <a href="/nvim-lsp-project-config/">
+                                <span class="button__text">Neovim 项目级 LSP 配置</span>&nbsp;
+                                <span class="button__icon">→</span>
+                            </a>
+                        </span>
                     </div>
             </div>
         

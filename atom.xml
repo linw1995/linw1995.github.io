@@ -6,10 +6,63 @@
     <generator uri="https://www.getzola.org/">Zola</generator>
     <icon>/favicon.ico</icon>
     <logo>/favicon.png</logo>
-    <updated>2025-04-02T00:00:00+00:00</updated>
+    <updated>2025-06-25T00:00:00+00:00</updated>
     <id>/atom.xml</id>
     <follow_challenge><feedId>72476326505512960</feedId><userId>57795710219398144</userId></follow_challenge>
-    <entry xml:lang="zh"><title>Rust 跨平台构建贴士</title><published>2025-04-02T00:00:00+00:00</published><updated>2025-04-02T00:00:00+00:00</updated>
+    <entry xml:lang="zh"><title>Neovim 项目级 LSP 配置</title><published>2025-06-25T00:00:00+00:00</published><updated>2025-06-25T00:00:00+00:00</updated>
+        
+        <author><name>
+            
+              linw1995
+            
+          </name></author>
+        
+        <link rel="alternate" type="text/html" href="/nvim-lsp-project-config/"/>
+        <id>/nvim-lsp-project-config/</id>
+        
+        <summary type="html">&lt;h2 id=&quot;qian-yan&quot;&gt;前言&lt;&#x2F;h2&gt;
+&lt;p&gt;最近写 golang 代码时，由于需要在构建时隔离一些代码中的常量，
+使用 golang 内置的 build tags 功能。
+这样就需要给 gopls 配置启动参数，才能正确解析代码。
+但是 gopls 的配置需要在项目级别进行，全局配置会影响到其它项目。&lt;&#x2F;p&gt;
+&lt;p&gt;那该如何配置呢？&lt;&#x2F;p&gt;&lt;br&gt; &lt;a href=&quot;/nvim-lsp-project-config/&quot; target=&quot;_blank&quot;&gt;Read more&lt;/a&gt;</summary>
+        
+        <content type="html" xml:base="/nvim-lsp-project-config/">&lt;h2 id=&quot;qian-yan&quot;&gt;前言&lt;&#x2F;h2&gt;
+&lt;p&gt;最近写 golang 代码时，由于需要在构建时隔离一些代码中的常量，
+使用 golang 内置的 build tags 功能。
+这样就需要给 gopls 配置启动参数，才能正确解析代码。
+但是 gopls 的配置需要在项目级别进行，全局配置会影响到其它项目。&lt;&#x2F;p&gt;
+&lt;p&gt;那该如何配置呢？&lt;&#x2F;p&gt;
+&lt;span id=&quot;continue-reading&quot;&gt;&lt;&#x2F;span&gt;&lt;h2 id=&quot;pei-zhi-fang-shi&quot;&gt;配置方式&lt;&#x2F;h2&gt;
+&lt;h2 id=&quot;shi-yong-neovim-nei-zhi-exrc-gong-neng&quot;&gt;使用 neovim 内置 exrc 功能&lt;&#x2F;h2&gt;
+&lt;p&gt;它的作用是允许 Neovim 读取当前目录下的 &lt;code&gt;.exrc&lt;&#x2F;code&gt; 文件来加载本地的配置
+（实际是通过执行代码来达到配置的目的）。
+缺点是对 Neovim 需要有深刻的了解，且有较大可能性会跟其它插件冲突。
+所以不推荐使用。&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;shi-yong-lazy-nvim&quot;&gt;使用 lazy.nvim&lt;&#x2F;h2&gt;
+&lt;p&gt;&lt;strong&gt;lazy.nvim&lt;&#x2F;strong&gt; 是一个 Neovim 插件管理器，可以方便地管理和配置 Neovim 插件。
+其支持通过 &lt;code&gt;.lazy.lua&lt;&#x2F;code&gt; 文件来配置项目级的插件配置。
+&lt;strong&gt;lazy.nvim&lt;&#x2F;strong&gt; 的文档没有过多地介绍（就是没有）这个功能。
+但这个配置的格式，用过 &lt;strong&gt;lazy.nvim&lt;&#x2F;strong&gt; 的应该都超熟悉的。&lt;&#x2F;p&gt;
+&lt;p&gt;配置格式: &lt;a href=&quot;https:&#x2F;&#x2F;lazy.folke.io&#x2F;spec&quot;&gt;https:&#x2F;&#x2F;lazy.folke.io&#x2F;spec&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;lua&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-lua &quot;&gt;&lt;code class=&quot;language-lua&quot; data-lang=&quot;lua&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;    &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;nvim&#x2F;nvim-lspconfig&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;,
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;opts &lt;&#x2F;span&gt;&lt;span&gt;= {
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;servers &lt;&#x2F;span&gt;&lt;span&gt;= {
+&lt;&#x2F;span&gt;&lt;span&gt;            &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;gopls &lt;&#x2F;span&gt;&lt;span&gt;= {
+&lt;&#x2F;span&gt;&lt;span&gt;                &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;settings &lt;&#x2F;span&gt;&lt;span&gt;= {
+&lt;&#x2F;span&gt;&lt;span&gt;                    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;gopls &lt;&#x2F;span&gt;&lt;span&gt;= {
+&lt;&#x2F;span&gt;&lt;span&gt;                        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;buildFlags &lt;&#x2F;span&gt;&lt;span&gt;= { &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;-tags=encrypt decrypt&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot; },
+&lt;&#x2F;span&gt;&lt;span&gt;                    },
+&lt;&#x2F;span&gt;&lt;span&gt;                },
+&lt;&#x2F;span&gt;&lt;span&gt;            },
+&lt;&#x2F;span&gt;&lt;span&gt;        },
+&lt;&#x2F;span&gt;&lt;span&gt;    },
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+</content>
+    </entry>
+    <entry xml:lang="zh"><title>Rust 跨平台构建贴士</title><published>2025-04-02T00:00:00+00:00</published><updated>2025-04-05T00:00:00+00:00</updated>
         
         <author><name>
             
@@ -89,8 +142,8 @@
 &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# rustup target add aarch64-unknown-linux-musl
 &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# rustup target add x86_64-unknown-linux-musl
 &lt;&#x2F;span&gt;&lt;span&gt;
-&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;TARGET&lt;&#x2F;span&gt;&lt;span&gt;=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;x86_64-unknown-linux-musl &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;nix&lt;&#x2F;span&gt;&lt;span&gt; develop .#$&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;TARGET --command &lt;&#x2F;span&gt;&lt;span&gt;\
-&lt;&#x2F;span&gt;&lt;span&gt; cargo build&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; --target &lt;&#x2F;span&gt;&lt;span&gt;$&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;TARGET
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;nix&lt;&#x2F;span&gt;&lt;span&gt; develop .#x86_64-unknown-linux-musl&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; --command &lt;&#x2F;span&gt;&lt;span&gt;\
+&lt;&#x2F;span&gt;&lt;span&gt;  cargo build&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; --target&lt;&#x2F;span&gt;&lt;span&gt; x86_64-unknown-linux-musl
 &lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
 &lt;&#x2F;li&gt;
 &lt;&#x2F;ol&gt;
@@ -159,8 +212,7 @@ whereas &lt;strong&gt;arm-unknown-linux-musleabi&lt;&#x2F;strong&gt; will have i
 但自己动手实现 DNS 也是种有益身心的消遣方式。&lt;&#x2F;p&gt;
 &lt;&#x2F;blockquote&gt;
 &lt;p&gt;需要实现的功能十分简单，只要类似 &lt;code&gt;&#x2F;etc&#x2F;hosts&lt;&#x2F;code&gt; 文件，但又能像 Surge 这样配置统配符。
-还能通过配置哪些行是在 WiFi SSID 为某个值时生效，就能实现我想要的功能了。&lt;&#x2F;p&gt;
-&lt;br&gt; &lt;a href=&quot;/my-dns/&quot; target=&quot;_blank&quot;&gt;Read more&lt;/a&gt;</summary>
+还能通过配置哪些行是在 WiFi SSID 为某个值时生效，就能实现我想要的功能了。&lt;&#x2F;p&gt;&lt;br&gt; &lt;a href=&quot;/my-dns/&quot; target=&quot;_blank&quot;&gt;Read more&lt;/a&gt;</summary>
         
         <content type="html" xml:base="/my-dns/">&lt;h2 id=&quot;qian-yan&quot;&gt;前言&lt;&#x2F;h2&gt;
 &lt;p&gt;&lt;img src=&quot;&#x2F;my-dns&#x2F;Logo_of_WireGuard.png&quot; alt=&quot;Logo of WireGuard&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
@@ -261,8 +313,7 @@ GitHub Discussions 来作为问题反馈的地方。&lt;&#x2F;p&gt;
         
         <summary type="html">&lt;p&gt;周五晚上和女票在玩游戏 &lt;strong&gt;Go-Go Town !&lt;&#x2F;strong&gt;  。游戏很上头，太专注了，不小心把可乐打翻了。
 可乐撒了一丢丢在键盘上，当时是擦干净了，使用也没啥问题。&lt;&#x2F;p&gt;
-&lt;p&gt;隔天早上起来用的时候，就发现它坏了。呜呜呜，陪伴5年的键盘。&lt;&#x2F;p&gt;
-&lt;br&gt; &lt;a href=&quot;/keyboard-killer/&quot; target=&quot;_blank&quot;&gt;Read more&lt;/a&gt;</summary>
+&lt;p&gt;隔天早上起来用的时候，就发现它坏了。呜呜呜，陪伴5年的键盘。&lt;&#x2F;p&gt;&lt;br&gt; &lt;a href=&quot;/keyboard-killer/&quot; target=&quot;_blank&quot;&gt;Read more&lt;/a&gt;</summary>
         
         <content type="html" xml:base="/keyboard-killer/">&lt;p&gt;周五晚上和女票在玩游戏 &lt;strong&gt;Go-Go Town !&lt;&#x2F;strong&gt;  。游戏很上头，太专注了，不小心把可乐打翻了。
 可乐撒了一丢丢在键盘上，当时是擦干净了，使用也没啥问题。&lt;&#x2F;p&gt;
@@ -370,8 +421,7 @@ So, 我决定购买一台新的迷你 PC 来专门处理这个问题。&lt;&#x2F
 
 &lt;p&gt;由于还是习惯在 MacOS 上开发，且又不想折腾 Hackintosh，
 我给这台新的迷你 PC 安装了 NixOS 。最早是打算继续使用 VSCode 远程开发，
-后面发现 Neovim 也是一个不错的选择。&lt;&#x2F;p&gt;
-&lt;br&gt; &lt;a href=&quot;/setup-neovim-in-nixos/&quot; target=&quot;_blank&quot;&gt;Read more&lt;/a&gt;</summary>
+后面发现 Neovim 也是一个不错的选择。&lt;&#x2F;p&gt;&lt;br&gt; &lt;a href=&quot;/setup-neovim-in-nixos/&quot; target=&quot;_blank&quot;&gt;Read more&lt;/a&gt;</summary>
         
         <content type="html" xml:base="/setup-neovim-in-nixos/">&lt;h2 id=&quot;qian-yan&quot;&gt;前言&lt;&#x2F;h2&gt;
 &lt;p&gt;最近在需要在一个巨大的 Rust 项目中做开发工作，但我的笔记本已经不堪重负，无法做高效的开发。

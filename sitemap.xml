@@ -14,7 +14,7 @@
     </url>
     <url>
         <loc>/en/rust-cross-compilation-tips/</loc>
-        <lastmod>2025-04-02</lastmod>
+        <lastmod>2025-04-05</lastmod>
     </url>
     <url>
         <loc>/en/setup-neovim-in-nixos/</loc>
@@ -41,8 +41,12 @@
         <lastmod>2024-12-25</lastmod>
     </url>
     <url>
+        <loc>/nvim-lsp-project-config/</loc>
+        <lastmod>2025-06-25</lastmod>
+    </url>
+    <url>
         <loc>/rust-cross-compilation-tips/</loc>
-        <lastmod>2025-04-02</lastmod>
+        <lastmod>2025-04-05</lastmod>
     </url>
     <url>
         <loc>/setup-neovim-in-nixos/</loc>
@@ -53,6 +57,9 @@
     </url>
     <url>
         <loc>/tags/equipment/</loc>
+    </url>
+    <url>
+        <loc>/tags/golang/</loc>
     </url>
     <url>
         <loc>/tags/keyboard/</loc>

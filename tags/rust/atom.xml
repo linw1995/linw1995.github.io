@@ -6,10 +6,10 @@
     <generator uri="https://www.getzola.org/">Zola</generator>
     <icon>/favicon.ico</icon>
     <logo>/favicon.png</logo>
-    <updated>2025-04-02T00:00:00+00:00</updated>
+    <updated>2025-04-05T00:00:00+00:00</updated>
     <id>/tags/rust/atom.xml</id>
     <follow_challenge><feedId>72476326505512960</feedId><userId>57795710219398144</userId></follow_challenge>
-    <entry xml:lang="zh"><title>Rust 跨平台构建贴士</title><published>2025-04-02T00:00:00+00:00</published><updated>2025-04-02T00:00:00+00:00</updated>
+    <entry xml:lang="zh"><title>Rust 跨平台构建贴士</title><published>2025-04-02T00:00:00+00:00</published><updated>2025-04-05T00:00:00+00:00</updated>
         
         <author><name>
             
@@ -89,8 +89,8 @@
 &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# rustup target add aarch64-unknown-linux-musl
 &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# rustup target add x86_64-unknown-linux-musl
 &lt;&#x2F;span&gt;&lt;span&gt;
-&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;TARGET&lt;&#x2F;span&gt;&lt;span&gt;=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;x86_64-unknown-linux-musl &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;nix&lt;&#x2F;span&gt;&lt;span&gt; develop .#$&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;TARGET --command &lt;&#x2F;span&gt;&lt;span&gt;\
-&lt;&#x2F;span&gt;&lt;span&gt; cargo build&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; --target &lt;&#x2F;span&gt;&lt;span&gt;$&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;TARGET
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;nix&lt;&#x2F;span&gt;&lt;span&gt; develop .#x86_64-unknown-linux-musl&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; --command &lt;&#x2F;span&gt;&lt;span&gt;\
+&lt;&#x2F;span&gt;&lt;span&gt;  cargo build&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; --target&lt;&#x2F;span&gt;&lt;span&gt; x86_64-unknown-linux-musl
 &lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
 &lt;&#x2F;li&gt;
 &lt;&#x2F;ol&gt;
@@ -155,8 +155,7 @@ So, 我决定购买一台新的迷你 PC 来专门处理这个问题。&lt;&#x2F
 
 &lt;p&gt;由于还是习惯在 MacOS 上开发，且又不想折腾 Hackintosh，
 我给这台新的迷你 PC 安装了 NixOS 。最早是打算继续使用 VSCode 远程开发，
-后面发现 Neovim 也是一个不错的选择。&lt;&#x2F;p&gt;
-&lt;br&gt; &lt;a href=&quot;/setup-neovim-in-nixos/&quot; target=&quot;_blank&quot;&gt;Read more&lt;/a&gt;</summary>
+后面发现 Neovim 也是一个不错的选择。&lt;&#x2F;p&gt;&lt;br&gt; &lt;a href=&quot;/setup-neovim-in-nixos/&quot; target=&quot;_blank&quot;&gt;Read more&lt;/a&gt;</summary>
         
         <content type="html" xml:base="/setup-neovim-in-nixos/">&lt;h2 id=&quot;qian-yan&quot;&gt;前言&lt;&#x2F;h2&gt;
 &lt;p&gt;最近在需要在一个巨大的 Rust 项目中做开发工作，但我的笔记本已经不堪重负，无法做高效的开发。

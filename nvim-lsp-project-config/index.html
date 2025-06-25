@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <title>Neovim 项目级 LSP 配置</title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="robots" content="noodp"/>
+
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/color/blue.css">
+
+    <link rel="stylesheet" href="/font-hack.css">
+
+    <meta name="description" content="">
+
+    <meta property="og:description" content="">
+    <meta property="og:title" content="Neovim 项目级 LSP 配置">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/nvim-lsp-project-config/">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:description" content="">
+    <meta name="twitter:title" content="Neovim 项目级 LSP 配置">
+    <meta property="twitter:domain" content="&#x2F;">
+    <meta property="twitter:url" content="/nvim-lsp-project-config/">
+
+                <link rel="alternate" type="application/atom+xml" title="linw1995&#x27;s blog Atom Feed" href="/atom.xml" />
+        <link rel="shortcut icon" type="image/png" href="/favicon.png">
+    
+    <link rel="stylesheet" href="/license.css">
+</head>
+
+<body class="">
+<div class="container">
+    
+    <header class="header">
+        <div class="header__inner">
+            <div class="header__logo">
+                    
+                <a href="/" style="text-decoration: none;">
+                    <div class="logo">
+                      
+                            linw1995
+                        
+                    </div>
+                </a>
+            </div>
+              
+<ul class="menu menu--desktop menu--language-selector">
+  <li class="menu__trigger">Chinese&nbsp;▾</li>
+  <li>
+    <ul class="menu__dropdown">
+      <li class="menu__disabled">English</li></ul>
+  </li>
+</ul>
+</div>
+
+        
+        
+                <nav class="menu">
+            <ul class="menu__inner">
+                <li class="active"><a href="/">blog</a></li>
+            
+                <li><a href="/tags">tags</a></li>
+            
+                <li><a href="/about">about me</a></li>
+            
+                <li><a href="https://old-blog.linw1995.com/" target="_blank" rel="noopener noreferrer">old blog</a></li>
+            
+                <li><a href="https://github.com/linw1995" target="_blank" rel="noopener noreferrer">github</a></li>
+            </ul>
+        </nav>
+    
+    
+        
+    </header>
+    
+
+    <div class="content">
+        
+<div class="post">
+    
+    <h1 class="post-title"><a href="/nvim-lsp-project-config/">Neovim 项目级 LSP 配置</a></h1>
+    <div class="post-meta-inline">
+        
+    <span class="post-date">
+            2025-06-25
+        </span>
+
+    </div>
+
+    
+        <span class="post-tags-inline">
+                :: tags:&nbsp;
+                <a class="post-tag" href="/tags/golang/">#golang</a>&nbsp;
+                <a class="post-tag" href="/tags/neovim/">#neovim</a></span>
+    
+
+    <div class="post-content">
+            <h2 id="qian-yan">前言</h2>
+<p>最近写 golang 代码时，由于需要在构建时隔离一些代码中的常量，
+使用 golang 内置的 build tags 功能。
+这样就需要给 gopls 配置启动参数，才能正确解析代码。
+但是 gopls 的配置需要在项目级别进行，全局配置会影响到其它项目。</p>
+<p>那该如何配置呢？</p>
+<span id="continue-reading"></span><h2 id="pei-zhi-fang-shi">配置方式</h2>
+<h2 id="shi-yong-neovim-nei-zhi-exrc-gong-neng">使用 neovim 内置 exrc 功能</h2>
+<p>它的作用是允许 Neovim 读取当前目录下的 <code>.exrc</code> 文件来加载本地的配置
+（实际是通过执行代码来达到配置的目的）。
+缺点是对 Neovim 需要有深刻的了解，且有较大可能性会跟其它插件冲突。
+所以不推荐使用。</p>
+<h2 id="shi-yong-lazy-nvim">使用 lazy.nvim</h2>
+<p><strong>lazy.nvim</strong> 是一个 Neovim 插件管理器，可以方便地管理和配置 Neovim 插件。
+其支持通过 <code>.lazy.lua</code> 文件来配置项目级的插件配置。
+<strong>lazy.nvim</strong> 的文档没有过多地介绍（就是没有）这个功能。
+但这个配置的格式，用过 <strong>lazy.nvim</strong> 的应该都超熟悉的。</p>
+<p>配置格式: <a href="https://lazy.folke.io/spec">https://lazy.folke.io/spec</a></p>
+<pre data-lang="lua" style="background-color:#2b303b;color:#c0c5ce;" class="language-lua "><code class="language-lua" data-lang="lua"><span style="color:#b48ead;">return </span><span>{
+</span><span>    &quot;</span><span style="color:#a3be8c;">nvim/nvim-lspconfig</span><span>&quot;,
+</span><span>    </span><span style="color:#a3be8c;">opts </span><span>= {
+</span><span>        </span><span style="color:#a3be8c;">servers </span><span>= {
+</span><span>            </span><span style="color:#a3be8c;">gopls </span><span>= {
+</span><span>                </span><span style="color:#a3be8c;">settings </span><span>= {
+</span><span>                    </span><span style="color:#a3be8c;">gopls </span><span>= {
+</span><span>                        </span><span style="color:#a3be8c;">buildFlags </span><span>= { &quot;</span><span style="color:#a3be8c;">-tags=encrypt decrypt</span><span>&quot; },
+</span><span>                    },
+</span><span>                },
+</span><span>            },
+</span><span>        },
+</span><span>    },
+</span><span>}
+</span></code></pre>
+
+        </div>
+
+    
+            <div class="pagination">
+                <div class="pagination__title">
+                    <span class="pagination__title-h">Thanks for reading! Read other posts?</span>
+                    <hr />
+                </div>
+                <div class="pagination__buttons">
+                        <span class="button previous">
+                            <a href="/rust-cross-compilation-tips/">
+                                <span class="button__icon">←</span>&nbsp;
+                                <span class="button__text">Rust 跨平台构建贴士</span>
+                            </a>
+                        </span>
+                    
+                    </div>
+            </div>
+        
+
+    <p id="license" xmlns:cc="http://creativecommons.org/ns#" >
+        This work by <span property="cc:attributionName">林玮 (Jade Lin)</span> is licensed under 
+        <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">
+            CC BY-NC-ND 4.0
+            <img src="/images/by-nc-nd.png" alt="">
+        </a>
+    </p>
+
+    <div class="giscus" style="margin-top: 4rem"></div>
+</div>
+
+    </div>
+
+    
+    <footer class="footer">
+        <div class="footer__inner">
+                <div class="copyright copyright--user"><b>Copyright ©</b>  &nbsp; 2025 linw1995</div>
+            </div>
+    </footer>
+    
+
+</div>
+<script type="text/javascript" src="/js/menu.js"></script>
+
+<script src="https://giscus.app/client.js"
+    data-repo="linw1995/linw1995.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnk3MDkyNjU4NA=="
+    data-category="General"
+    data-category-id="DIC_kwDOBDpA-M4CigfM"
+    data-mapping="og:title"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="top"
+    data-theme="dark"
+    data-lang="zh-CN"
+    data-loading="lazy"
+    crossorigin="anonymous"
+    async></script>
+
+</body>
+
+</html>

@@ -47,11 +47,11 @@ and might conflict with other plugins. Therefore, it&#x27;s not highly recommend
 &lt;p&gt;&lt;strong&gt;lazy.nvim&lt;&#x2F;strong&gt; is a powerful Neovim plugin manager
 that simplifies plugin management and configuration.
 It supports configuring plugins for specific projects through a &lt;code&gt;.lazy.lua&lt;&#x2F;code&gt; file.
-Although &lt;strong&gt;lazy.nvim&lt;&#x2F;strong&gt;&#x27;s official documentation barely (actually not at all) mentions this feature,
-experienced &lt;strong&gt;lazy.nvim&lt;&#x2F;strong&gt; users can usually adopt it with ease.&lt;&#x2F;p&gt;
-&lt;p&gt;Reference for configuration format: &lt;a href=&quot;https:&#x2F;&#x2F;lazy.folke.io&#x2F;spec&quot;&gt;https:&#x2F;&#x2F;lazy.folke.io&#x2F;spec&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+Although &lt;strong&gt;lazy.nvim&lt;&#x2F;strong&gt;&#x27;s official documentation barely (actually not at all) mentions
+this feature, experienced &lt;strong&gt;lazy.nvim&lt;&#x2F;strong&gt; users can usually adopt it with ease.&lt;&#x2F;p&gt;
+&lt;p&gt;Reference for configuration format: &lt;a href=&quot;https:&#x2F;&#x2F;lazy.folke.io&#x2F;spec&quot;&gt;lazy.nvim spec&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
 &lt;pre data-lang=&quot;lua&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-lua &quot;&gt;&lt;code class=&quot;language-lua&quot; data-lang=&quot;lua&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span&gt;{
-&lt;&#x2F;span&gt;&lt;span&gt;    &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;nvim&#x2F;nvim-lspconfig&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;,
+&lt;&#x2F;span&gt;&lt;span&gt;    &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;neovim&#x2F;nvim-lspconfig&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;,
 &lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;opts &lt;&#x2F;span&gt;&lt;span&gt;= {
 &lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;servers &lt;&#x2F;span&gt;&lt;span&gt;= {
 &lt;&#x2F;span&gt;&lt;span&gt;            &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;gopls &lt;&#x2F;span&gt;&lt;span&gt;= {

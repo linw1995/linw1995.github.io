@@ -46,7 +46,7 @@
 但熟悉 &lt;strong&gt;lazy.nvim&lt;&#x2F;strong&gt; 的用户通常能轻松上手。&lt;&#x2F;p&gt;
 &lt;p&gt;配置格式参考文档: &lt;a href=&quot;https:&#x2F;&#x2F;lazy.folke.io&#x2F;spec&quot;&gt;https:&#x2F;&#x2F;lazy.folke.io&#x2F;spec&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
 &lt;pre data-lang=&quot;lua&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-lua &quot;&gt;&lt;code class=&quot;language-lua&quot; data-lang=&quot;lua&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span&gt;{
-&lt;&#x2F;span&gt;&lt;span&gt;    &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;nvim&#x2F;nvim-lspconfig&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;,
+&lt;&#x2F;span&gt;&lt;span&gt;    &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;neovim&#x2F;nvim-lspconfig&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;,
 &lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;opts &lt;&#x2F;span&gt;&lt;span&gt;= {
 &lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;servers &lt;&#x2F;span&gt;&lt;span&gt;= {
 &lt;&#x2F;span&gt;&lt;span&gt;            &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;gopls &lt;&#x2F;span&gt;&lt;span&gt;= {

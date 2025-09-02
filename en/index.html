@@ -84,6 +84,57 @@
         <div class="posts">
                 <div class="post on-list">
                     
+    <h1 class="post-title"><a href="/en/claude-code-with-multi-api-providers/">Claude Code with Multiple API Providers on NixOS</a></h1>
+    <div class="post-meta-inline">
+        
+    <span class="post-date">
+            2025-09-02
+        </span>
+
+    </div>
+
+    
+        <span class="post-tags-inline">
+                :: tags:&nbsp;
+                <a class="post-tag" href="/en/tags/ai/">#AI</a>&nbsp;
+                <a class="post-tag" href="/en/tags/nixos/">#nixos</a></span>
+    
+
+
+                    
+        <div class="post-content">
+            <p>When experiencing various large models, managing configurations for different AI
+platforms (securely storing API keys) becomes a burden.
+However, if you use home-manager to manage dotfiles like me (which ensures
+consistent software and configuration across multiple devices),
+I recommend encrypting API keys with age and mounting the decrypted tokens as
+files during rebuild.
+Then use <code>pkgs.writeShellScriptBin</code> to wrap the original commands and configure
+the corresponding environment variables.</p>
+<h2 id="usage">Usage</h2>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#65737e;"># Run claude-code with subscription
+</span><span style="color:#bf616a;">claude
+</span><span>
+</span><span style="color:#65737e;"># Run claude-code with ZhiPu&#39;s large model
+</span><span style="color:#bf616a;">zhipu
+</span><span>
+</span><span style="color:#65737e;"># Temporarily run claude-code with ZhiPu&#39;s fast model
+</span><span style="color:#bf616a;">ANTHROPIC_MODEL</span><span>=</span><span style="color:#a3be8c;">glm-4.5-x </span><span style="color:#bf616a;">zhipu
+</span></code></pre>
+        </div>
+        <div>
+            <!-- &#xFE0E; -- force text style - some devices render this as emoji -->
+            <a class="read-more button" href="/en/claude-code-with-multi-api-providers/">
+                <span class="button__text">Read more</span>&nbsp;
+                <span class="button__icon">&#8617;&#xFE0E;</span>
+            </a>
+        </div>
+    
+
+                </div>
+            
+                <div class="post on-list">
+                    
     <h1 class="post-title"><a href="/en/nvim-lsp-project-config/">Project-Level LSP Configuration in Neovim</a></h1>
     <div class="post-meta-inline">
         

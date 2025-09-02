@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <title>Claude Code with Multiple API Providers on NixOS</title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="robots" content="noodp"/>
+
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/color/blue.css">
+
+    <link rel="stylesheet" href="/font-hack.css">
+
+    <meta name="description" content="">
+
+    <meta property="og:description" content="">
+    <meta property="og:title" content="Claude Code with Multiple API Providers on NixOS">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/en/claude-code-with-multi-api-providers/">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:description" content="">
+    <meta name="twitter:title" content="Claude Code with Multiple API Providers on NixOS">
+    <meta property="twitter:domain" content="&#x2F;">
+    <meta property="twitter:url" content="/en/claude-code-with-multi-api-providers/">
+
+                <link rel="alternate" type="application/atom+xml" title=" Atom Feed" href="/en/atom.xml" />
+        <link rel="shortcut icon" type="image/png" href="/favicon.png">
+    
+    <link rel="stylesheet" href="/license.css">
+</head>
+
+<body class="">
+<div class="container">
+    
+    <header class="header">
+        <div class="header__inner">
+            <div class="header__logo">
+                    
+                <a href="/" style="text-decoration: none;">
+                    <div class="logo">
+                      
+                            linw1995
+                        
+                    </div>
+                </a>
+            </div>
+              
+<ul class="menu menu--desktop menu--language-selector">
+  <li class="menu__trigger">English&nbsp;▾</li>
+  <li>
+    <ul class="menu__dropdown">
+      
+            <li><a href="&#x2F;claude-code-with-multi-api-providers&#x2F;">中文</a></li>
+          </ul>
+  </li>
+</ul>
+</div>
+
+        
+        
+                <nav class="menu">
+            <ul class="menu__inner">
+                <li class="active"><a href="/">blog</a></li>
+            
+                <li><a href="/tags">tags</a></li>
+            
+                <li><a href="/about">about me</a></li>
+            
+                <li><a href="https://old-blog.linw1995.com/" target="_blank" rel="noopener noreferrer">old blog</a></li>
+            
+                <li><a href="https://github.com/linw1995" target="_blank" rel="noopener noreferrer">github</a></li>
+            </ul>
+        </nav>
+    
+    
+        
+    </header>
+    
+
+    <div class="content">
+        
+<div class="post">
+    
+    <h1 class="post-title"><a href="/en/claude-code-with-multi-api-providers/">Claude Code with Multiple API Providers on NixOS</a></h1>
+    <div class="post-meta-inline">
+        
+    <span class="post-date">
+            2025-09-02
+        </span>
+
+    </div>
+
+    
+        <span class="post-tags-inline">
+                :: tags:&nbsp;
+                <a class="post-tag" href="/en/tags/ai/">#AI</a>&nbsp;
+                <a class="post-tag" href="/en/tags/nixos/">#nixos</a></span>
+    
+
+    <div class="post-content">
+            <p>When experiencing various large models, managing configurations for different AI
+platforms (securely storing API keys) becomes a burden.
+However, if you use home-manager to manage dotfiles like me (which ensures
+consistent software and configuration across multiple devices),
+I recommend encrypting API keys with age and mounting the decrypted tokens as
+files during rebuild.
+Then use <code>pkgs.writeShellScriptBin</code> to wrap the original commands and configure
+the corresponding environment variables.</p>
+<h2 id="usage">Usage</h2>
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#65737e;"># Run claude-code with subscription
+</span><span style="color:#bf616a;">claude
+</span><span>
+</span><span style="color:#65737e;"># Run claude-code with ZhiPu&#39;s large model
+</span><span style="color:#bf616a;">zhipu
+</span><span>
+</span><span style="color:#65737e;"># Temporarily run claude-code with ZhiPu&#39;s fast model
+</span><span style="color:#bf616a;">ANTHROPIC_MODEL</span><span>=</span><span style="color:#a3be8c;">glm-4.5-x </span><span style="color:#bf616a;">zhipu
+</span></code></pre>
+<span id="continue-reading"></span><h2 id="configuration-example">Configuration Example</h2>
+<blockquote>
+<p>The <code>config.age.secrets</code> comes from <a href="https://github.com/yaxitech/ragenix/tree/main">yaxitech/ragenix</a>.
+It uses asymmetric encryption algorithms to manage sensitive data like keys in
+the environment.</p>
+</blockquote>
+<pre data-lang="nix" style="background-color:#2b303b;color:#c0c5ce;" class="language-nix "><code class="language-nix" data-lang="nix"><span>{
+</span><span>  lib,
+</span><span>  config,
+</span><span>  inputs,
+</span><span>  ...
+</span><span style="color:#8fa1b3;">}</span><span>: </span><span style="color:#b48ead;">let
+</span><span>  </span><span style="color:#d08770;">pkgs </span><span>= </span><span style="color:#96b5b4;">import </span><span style="color:#bf616a;">inputs</span><span>.</span><span style="color:#bf616a;">nixpkgs-unstable </span><span>{
+</span><span>    </span><span style="color:#65737e;"># Allow proprietary/unfree software (like claude-code)
+</span><span>    </span><span style="color:#d08770;">config</span><span>.</span><span style="color:#d08770;">allowUnfree </span><span>= </span><span style="color:#d08770;">true</span><span>;
+</span><span>  };
+</span><span>  </span><span style="color:#d08770;">claude_alt </span><span>= {
+</span><span>    name,
+</span><span>    url,
+</span><span>    token_path,
+</span><span>    reasoner,
+</span><span>    chat,
+</span><span>  </span><span style="color:#8fa1b3;">}</span><span>: (
+</span><span>    </span><span style="color:#bf616a;">pkgs</span><span>.</span><span style="color:#bf616a;">writeShellScriptBin name </span><span>&#39;&#39;
+</span><span style="color:#a3be8c;">      # Environment variables for the Anthropic CLI tool.
+</span><span style="color:#a3be8c;">      # https://docs.anthropic.com/en/docs/claude-code/settings#environment-variables
+</span><span style="color:#a3be8c;">
+</span><span style="color:#a3be8c;">      export ANTHROPIC_AUTH_TOKEN=</span><span style="color:#96b5b4;">&#39;&#39;$</span><span style="color:#a3be8c;">{ANTHROPIC_AUTH_TOKEN-$(cat </span><span style="font-style:italic;color:#ab7967;">${</span><span style="font-style:italic;color:#bf616a;">token_path</span><span style="font-style:italic;color:#ab7967;">}</span><span style="color:#a3be8c;">)}
+</span><span style="color:#a3be8c;">      export ANTHROPIC_BASE_URL=</span><span style="font-style:italic;color:#ab7967;">${</span><span style="font-style:italic;color:#bf616a;">url</span><span style="font-style:italic;color:#ab7967;">}
+</span><span style="color:#a3be8c;">      export ANTHROPIC_MODEL=</span><span style="color:#96b5b4;">&#39;&#39;$</span><span style="color:#a3be8c;">{ANTHROPIC_MODEL-&quot;</span><span style="font-style:italic;color:#ab7967;">${</span><span style="font-style:italic;color:#bf616a;">reasoner</span><span style="font-style:italic;color:#ab7967;">}</span><span style="color:#a3be8c;">&quot;}
+</span><span style="color:#a3be8c;">      export ANTHROPIC_SMALL_FAST_MODEL=</span><span style="color:#96b5b4;">&#39;&#39;$</span><span style="color:#a3be8c;">{ANTHROPIC_SMALL_FAST_MODEL-&quot;</span><span style="font-style:italic;color:#ab7967;">${</span><span style="font-style:italic;color:#bf616a;">chat</span><span style="font-style:italic;color:#ab7967;">}</span><span style="color:#a3be8c;">&quot;}
+</span><span style="color:#a3be8c;">
+</span><span style="color:#a3be8c;">      exec claude &quot;$@&quot;
+</span><span style="color:#a3be8c;">    </span><span>&#39;&#39;
+</span><span>  );
+</span><span style="color:#b48ead;">in </span><span>{
+</span><span>  </span><span style="color:#d08770;">home</span><span>.</span><span style="color:#d08770;">packages </span><span>= </span><span style="color:#b48ead;">with </span><span style="color:#bf616a;">pkgs</span><span>; [
+</span><span>    </span><span style="color:#bf616a;">claude-code
+</span><span>
+</span><span>    (</span><span style="color:#bf616a;">claude_alt </span><span>{
+</span><span>      </span><span style="color:#d08770;">name </span><span>= &quot;</span><span style="color:#a3be8c;">zhipu</span><span>&quot;;
+</span><span>      </span><span style="color:#d08770;">url </span><span>= &quot;</span><span style="color:#a3be8c;">https://open.bigmodel.cn/api/anthropic</span><span>&quot;;
+</span><span>      </span><span style="color:#d08770;">token_path </span><span>= </span><span style="color:#bf616a;">config</span><span>.</span><span style="color:#bf616a;">age</span><span>.</span><span style="color:#bf616a;">secrets</span><span>.</span><span style="color:#bf616a;">zhipu</span><span>.</span><span style="color:#bf616a;">path</span><span>;
+</span><span>      </span><span style="color:#d08770;">reasoner </span><span>= &quot;</span><span style="color:#a3be8c;">glm-4.5</span><span>&quot;;
+</span><span>      </span><span style="color:#d08770;">chat </span><span>= &quot;</span><span style="color:#a3be8c;">glm-4.5-air</span><span>&quot;;
+</span><span>    })
+</span><span>    (</span><span style="color:#bf616a;">claude_alt </span><span>{
+</span><span>      </span><span style="color:#d08770;">name </span><span>= &quot;</span><span style="color:#a3be8c;">deepseek</span><span>&quot;;
+</span><span>      </span><span style="color:#d08770;">url </span><span>= &quot;</span><span style="color:#a3be8c;">https://api.deepseek.com/anthropic</span><span>&quot;;
+</span><span>      </span><span style="color:#d08770;">token_path </span><span>= </span><span style="color:#bf616a;">config</span><span>.</span><span style="color:#bf616a;">age</span><span>.</span><span style="color:#bf616a;">secrets</span><span>.</span><span style="color:#bf616a;">deepseek</span><span>.</span><span style="color:#bf616a;">path</span><span>;
+</span><span>      </span><span style="color:#d08770;">reasoner </span><span>= &quot;</span><span style="color:#a3be8c;">deepseek-reasoner</span><span>&quot;;
+</span><span>      </span><span style="color:#d08770;">chat </span><span>= &quot;</span><span style="color:#a3be8c;">deepseek-chat</span><span>&quot;;
+</span><span>    })
+</span><span>    (</span><span style="color:#bf616a;">claude_alt </span><span>{
+</span><span>      </span><span style="color:#d08770;">name </span><span>= &quot;</span><span style="color:#a3be8c;">kimi-turbo</span><span>&quot;;
+</span><span>      </span><span style="color:#d08770;">url </span><span>= &quot;</span><span style="color:#a3be8c;">https://api.moonshot.cn/anthropic</span><span>&quot;;
+</span><span>      </span><span style="color:#d08770;">token_path </span><span>= </span><span style="color:#bf616a;">config</span><span>.</span><span style="color:#bf616a;">age</span><span>.</span><span style="color:#bf616a;">secrets</span><span>.</span><span style="color:#bf616a;">kimi</span><span>.</span><span style="color:#bf616a;">path</span><span>;
+</span><span>      </span><span style="color:#d08770;">reasoner </span><span>= &quot;</span><span style="color:#a3be8c;">kimi-k2-turbo-preview</span><span>&quot;;
+</span><span>      </span><span style="color:#d08770;">chat </span><span>= &quot;</span><span style="color:#a3be8c;">moonshot-v1-8k</span><span>&quot;;
+</span><span>    })
+</span><span>    (</span><span style="color:#bf616a;">claude_alt </span><span>{
+</span><span>      </span><span style="color:#d08770;">name </span><span>= &quot;</span><span style="color:#a3be8c;">kimi</span><span>&quot;;
+</span><span>      </span><span style="color:#d08770;">url </span><span>= &quot;</span><span style="color:#a3be8c;">https://api.moonshot.cn/anthropic</span><span>&quot;;
+</span><span>      </span><span style="color:#d08770;">token_path </span><span>= </span><span style="color:#bf616a;">config</span><span>.</span><span style="color:#bf616a;">age</span><span>.</span><span style="color:#bf616a;">secrets</span><span>.</span><span style="color:#bf616a;">kimi</span><span>.</span><span style="color:#bf616a;">path</span><span>;
+</span><span>      </span><span style="color:#d08770;">reasoner </span><span>= &quot;</span><span style="color:#a3be8c;">kimi-k2-0711-preview</span><span>&quot;;
+</span><span>      </span><span style="color:#d08770;">chat </span><span>= &quot;</span><span style="color:#a3be8c;">moonshot-v1-8k</span><span>&quot;;
+</span><span>    })
+</span><span>  ];
+</span><span>}
+</span></code></pre>
+
+        </div>
+
+    
+            <div class="pagination">
+                <div class="pagination__title">
+                    <span class="pagination__title-h">Thanks for reading! Read other posts?</span>
+                    <hr />
+                </div>
+                <div class="pagination__buttons">
+                        <span class="button previous">
+                            <a href="/en/nvim-lsp-project-config/">
+                                <span class="button__icon">←</span>&nbsp;
+                                <span class="button__text">Project-Level LSP Configuration in Neovim</span>
+                            </a>
+                        </span>
+                    
+                    </div>
+            </div>
+        
+
+    <p id="license" xmlns:cc="http://creativecommons.org/ns#" >
+        This work by <span property="cc:attributionName">林玮 (Jade Lin)</span> is licensed under 
+        <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">
+            CC BY-NC-ND 4.0
+            <img src="/images/by-nc-nd.png" alt="">
+        </a>
+    </p>
+
+    <div class="giscus" style="margin-top: 4rem"></div>
+</div>
+
+    </div>
+
+    
+    <footer class="footer">
+        <div class="footer__inner">
+                <div class="copyright copyright--user"><b>Copyright ©</b>  &nbsp; 2025 linw1995</div>
+            </div>
+    </footer>
+    
+
+</div>
+<script type="text/javascript" src="/js/menu.js"></script>
+
+<script src="https://giscus.app/client.js"
+    data-repo="linw1995/linw1995.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnk3MDkyNjU4NA=="
+    data-category="General"
+    data-category-id="DIC_kwDOBDpA-M4CigfM"
+    data-mapping="og:title"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="top"
+    data-theme="dark"
+    data-lang="en"
+    data-loading="lazy"
+    crossorigin="anonymous"
+    async></script>
+
+</body>
+
+</html>

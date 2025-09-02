@@ -22,7 +22,7 @@
         
         <summary type="html">&lt;p&gt;在体验琳琅满目的大模型时，如何管理各个 AI 平台的配置（安全地保存 API_KEY ）就成为了一种负担。
 但如果你们像我一样使用 home-manager 来管理 dotfiles 的话（能保证在多设备上安装的软件及配置一致）。
-推荐像我这样，把 API_KEY 通过 age 加密，当 rebuild 是把解密后的 token 挂载成文件。
+推荐像我这样，把 API_KEY 通过 age 加密，当 rebuild 时把解密后的 token 挂载成文件。
 再使用 &lt;code&gt;pkgs.writeShellScriptBin&lt;&#x2F;code&gt; 包装一下原始命令，把对应的环境变量配置好。&lt;&#x2F;p&gt;
 &lt;h2 id=&quot;shi-yong-fang-shi&quot;&gt;使用方式&lt;&#x2F;h2&gt;
 &lt;pre data-lang=&quot;sh&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-sh &quot;&gt;&lt;code class=&quot;language-sh&quot; data-lang=&quot;sh&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# 运行使用订阅版的 claude-code
@@ -37,7 +37,7 @@
         
         <content type="html" xml:base="/claude-code-with-multi-api-providers/">&lt;p&gt;在体验琳琅满目的大模型时，如何管理各个 AI 平台的配置（安全地保存 API_KEY ）就成为了一种负担。
 但如果你们像我一样使用 home-manager 来管理 dotfiles 的话（能保证在多设备上安装的软件及配置一致）。
-推荐像我这样，把 API_KEY 通过 age 加密，当 rebuild 是把解密后的 token 挂载成文件。
+推荐像我这样，把 API_KEY 通过 age 加密，当 rebuild 时把解密后的 token 挂载成文件。
 再使用 &lt;code&gt;pkgs.writeShellScriptBin&lt;&#x2F;code&gt; 包装一下原始命令，把对应的环境变量配置好。&lt;&#x2F;p&gt;
 &lt;h2 id=&quot;shi-yong-fang-shi&quot;&gt;使用方式&lt;&#x2F;h2&gt;
 &lt;pre data-lang=&quot;sh&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-sh &quot;&gt;&lt;code class=&quot;language-sh&quot; data-lang=&quot;sh&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# 运行使用订阅版的 claude-code

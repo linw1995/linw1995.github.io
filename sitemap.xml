@@ -8,7 +8,7 @@
     </url>
     <url>
         <loc>/agent-native-system-notifications/</loc>
-        <lastmod>2026-01-15</lastmod>
+        <lastmod>2026-01-18</lastmod>
     </url>
     <url>
         <loc>/claude-code-with-multi-api-providers/</loc>
@@ -22,7 +22,7 @@
     </url>
     <url>
         <loc>/en/agent-native-system-notifications/</loc>
-        <lastmod>2026-01-15</lastmod>
+        <lastmod>2026-01-18</lastmod>
     </url>
     <url>
         <loc>/en/claude-code-with-multi-api-providers/</loc>
@@ -72,6 +72,9 @@
     </url>
     <url>
         <loc>/en/tags/terminal/</loc>
+    </url>
+    <url>
+        <loc>/en/tags/tmux/</loc>
     </url>
     <url>
         <loc>/keyboard-killer/</loc>
@@ -134,5 +137,8 @@
     </url>
     <url>
         <loc>/tags/terminal/</loc>
+    </url>
+    <url>
+        <loc>/tags/tmux/</loc>
     </url>
 </urlset>

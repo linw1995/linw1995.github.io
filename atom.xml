@@ -6,10 +6,10 @@
     <generator uri="https://www.getzola.org/">Zola</generator>
     <icon>/favicon.ico</icon>
     <logo>/favicon.png</logo>
-    <updated>2026-01-15T00:00:00+00:00</updated>
+    <updated>2026-01-18T00:00:00+00:00</updated>
     <id>/atom.xml</id>
     <follow_challenge><feedId>72476326505512960</feedId><userId>57795710219398144</userId></follow_challenge>
-    <entry xml:lang="zh"><title>Agent 原生系统通知实现总结（Claude、Codex 等）</title><published>2026-01-15T00:00:00+00:00</published><updated>2026-01-15T00:00:00+00:00</updated>
+    <entry xml:lang="zh"><title>Agent 原生系统通知实现总结（Claude、Codex 等）</title><published>2026-01-15T00:00:00+00:00</published><updated>2026-01-18T00:00:00+00:00</updated>
         
         <author><name>
             

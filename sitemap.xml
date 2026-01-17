@@ -7,6 +7,10 @@
         <loc>/about/</loc>
     </url>
     <url>
+        <loc>/agent-native-system-notifications/</loc>
+        <lastmod>2026-01-15</lastmod>
+    </url>
+    <url>
         <loc>/claude-code-with-multi-api-providers/</loc>
         <lastmod>2025-09-02</lastmod>
     </url>
@@ -15,6 +19,10 @@
     </url>
     <url>
         <loc>/en/about/</loc>
+    </url>
+    <url>
+        <loc>/en/agent-native-system-notifications/</loc>
+        <lastmod>2026-01-15</lastmod>
     </url>
     <url>
         <loc>/en/claude-code-with-multi-api-providers/</loc>
@@ -36,7 +44,19 @@
         <loc>/en/tags/</loc>
     </url>
     <url>
+        <loc>/en/tags/agent/</loc>
+    </url>
+    <url>
         <loc>/en/tags/ai/</loc>
+    </url>
+    <url>
+        <loc>/en/tags/claude/</loc>
+    </url>
+    <url>
+        <loc>/en/tags/codex/</loc>
+    </url>
+    <url>
+        <loc>/en/tags/ghostty/</loc>
     </url>
     <url>
         <loc>/en/tags/golang/</loc>
@@ -49,6 +69,9 @@
     </url>
     <url>
         <loc>/en/tags/rust/</loc>
+    </url>
+    <url>
+        <loc>/en/tags/terminal/</loc>
     </url>
     <url>
         <loc>/keyboard-killer/</loc>
@@ -74,10 +97,22 @@
         <loc>/tags/</loc>
     </url>
     <url>
+        <loc>/tags/agent/</loc>
+    </url>
+    <url>
         <loc>/tags/ai/</loc>
     </url>
     <url>
+        <loc>/tags/claude/</loc>
+    </url>
+    <url>
+        <loc>/tags/codex/</loc>
+    </url>
+    <url>
         <loc>/tags/equipment/</loc>
+    </url>
+    <url>
+        <loc>/tags/ghostty/</loc>
     </url>
     <url>
         <loc>/tags/golang/</loc>
@@ -96,5 +131,8 @@
     </url>
     <url>
         <loc>/tags/rust/</loc>
+    </url>
+    <url>
+        <loc>/tags/terminal/</loc>
     </url>
 </urlset>

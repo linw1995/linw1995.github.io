@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <title>Summary of Agent Native System Notifications Implementation (Claude, Codex, etc.)</title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="robots" content="noodp"/>
+
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/color/blue.css">
+
+    <link rel="stylesheet" href="/font-hack.css">
+
+    <meta name="description" content="">
+
+    <meta property="og:description" content="">
+    <meta property="og:title" content="Summary of Agent Native System Notifications Implementation (Claude, Codex, etc.)">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/en/agent-native-system-notifications/">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:description" content="">
+    <meta name="twitter:title" content="Summary of Agent Native System Notifications Implementation (Claude, Codex, etc.)">
+    <meta property="twitter:domain" content="&#x2F;">
+    <meta property="twitter:url" content="/en/agent-native-system-notifications/">
+
+                <link rel="alternate" type="application/atom+xml" title=" Atom Feed" href="/en/atom.xml" />
+        <link rel="shortcut icon" type="image/png" href="/favicon.png">
+    
+    <link rel="stylesheet" href="/license.css">
+</head>
+
+<body class="">
+<div class="container">
+    
+    <header class="header">
+        <div class="header__inner">
+            <div class="header__logo">
+                    
+                <a href="/" style="text-decoration: none;">
+                    <div class="logo">
+                      
+                            linw1995
+                        
+                    </div>
+                </a>
+            </div>
+              
+<ul class="menu menu--desktop menu--language-selector">
+  <li class="menu__trigger">English&nbsp;▾</li>
+  <li>
+    <ul class="menu__dropdown">
+      
+            <li><a href="&#x2F;agent-native-system-notifications&#x2F;">中文</a></li>
+          </ul>
+  </li>
+</ul>
+</div>
+
+        
+        
+                <nav class="menu">
+            <ul class="menu__inner">
+                <li class="active"><a href="/">blog</a></li>
+            
+                <li><a href="/tags">tags</a></li>
+            
+                <li><a href="/about">about me</a></li>
+            
+                <li><a href="https://old-blog.linw1995.com/" target="_blank" rel="noopener noreferrer">old blog</a></li>
+            
+                <li><a href="https://github.com/linw1995" target="_blank" rel="noopener noreferrer">github</a></li>
+            </ul>
+        </nav>
+    
+    
+        
+    </header>
+    
+
+    <div class="content">
+        
+<div class="post">
+    
+    <h1 class="post-title"><a href="/en/agent-native-system-notifications/">Summary of Agent Native System Notifications Implementation (Claude, Codex, etc.)</a></h1>
+    <div class="post-meta-inline">
+        
+    <span class="post-date">
+            2026-01-15
+        </span>
+
+    </div>
+
+    
+        <span class="post-tags-inline">
+                :: tags:&nbsp;
+                <a class="post-tag" href="/en/tags/agent/">#agent</a>&nbsp;
+                <a class="post-tag" href="/en/tags/claude/">#claude</a>&nbsp;
+                <a class="post-tag" href="/en/tags/codex/">#codex</a>&nbsp;
+                <a class="post-tag" href="/en/tags/ghostty/">#ghostty</a>&nbsp;
+                <a class="post-tag" href="/en/tags/terminal/">#terminal</a></span>
+    
+
+    <div class="post-content">
+            <p>When using Codex, whenever a complete conversation turn ends or when execution permission is requested, macOS's Notification Center immediately pushes a notification to me.</p>
+<p>At first, I didn't delve deeply into how this feature was implemented, until I used Codex through tmux and discovered that notifications had completely disappeared. This sparked my curiosity.
+Why is this happening?</p>
+<span id="continue-reading"></span><h2 id="how-codex-implements-native-system-notifications">How Codex Implements Native System Notifications</h2>
+<p>Let's start by understanding Codex's native system notification implementation mechanism.</p>
+<p>Codex triggers system notifications through <strong>OSC 9</strong> (Operating System Command sequences).</p>
+<p>This feature initially appears to be a <strong>iTerm2</strong>-specific implementation, but I can also use it normally in <strong>Ghostty</strong> terminal.
+If you use other terminal emulators, you can test whether system notifications can be properly triggered with the following command:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#96b5b4;">printf </span><span>&#39;</span><span style="color:#a3be8c;">\033]9;%s\a</span><span>&#39; &quot;</span><span style="color:#a3be8c;">This is the notification text</span><span>&quot;
+</span></code></pre>
+<p>Where <code>\033]</code> is the OSC (Operating System Command sequence) in ANSI Escape Sequences.
+<code>\a</code> corresponds to ASCII BEL (bell, 0x07), which is often used as a terminator in OSC.</p>
+<h2 id="why-does-it-fail-in-tmux">Why Does It Fail in tmux</h2>
+<p>This is because <strong>tmux</strong>'s OSC parser only "recognizes/processes" a few OSC numbers,
+and treats all others as "unknown" and discards them (only logging debug messages), without forwarding them to the outer terminal.</p>
+<p>Therefore, notifications cannot be delivered. However, <strong>tmux</strong> actually provides a solution. Let me explain in detail.</p>
+<h2 id="compromise-solutions">Compromise Solutions</h2>
+<h3 id="solution-1-dcs-passthrough">Solution 1: DCS Passthrough</h3>
+<p><strong>tmux</strong> provides a <strong>DCS passthrough</strong> feature. You just need to wrap the escape sequences to be passed through in the following format:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#96b5b4;">printf </span><span>&#39;</span><span style="color:#a3be8c;">\033Ptmux;\033%s\033\\</span><span>&#39; &quot;$</span><span style="color:#a3be8c;">(</span><span style="color:#96b5b4;">printf </span><span>&#39;</span><span style="color:#a3be8c;">\033]9;%s\a</span><span>&#39; &quot;</span><span style="color:#a3be8c;">This is the notification text</span><span>&quot;</span><span style="color:#a3be8c;">)</span><span>&quot;
+</span></code></pre>
+<p>Where <code>\033P</code> is the DCS (Device Control String) in ANSI escape sequences, which uses <code>\033\\</code> as a terminator.</p>
+<h3 id="solution-2-write-directly-to-client-tty">Solution 2: Write Directly to Client TTY</h3>
+<p>By obtaining the current tmux client's TTY address, write escape sequences directly to it:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">tty</span><span>=&quot;$</span><span style="color:#a3be8c;">(</span><span style="color:#bf616a;">tmux</span><span style="color:#a3be8c;"> display-message</span><span style="color:#bf616a;"> -p </span><span>&#39;</span><span style="color:#a3be8c;">#{client_tty}</span><span>&#39; </span><span style="color:#d08770;">2</span><span>&gt;</span><span style="color:#a3be8c;">/dev/null </span><span>|| </span><span style="color:#bf616a;">true</span><span style="color:#a3be8c;">)</span><span>&quot;
+</span><span style="color:#96b5b4;">printf </span><span>&#39;</span><span style="color:#a3be8c;">%b</span><span>&#39; &quot;$</span><span style="color:#a3be8c;">(</span><span style="color:#96b5b4;">printf </span><span>&#39;</span><span style="color:#a3be8c;">\033]9;%s\a</span><span>&#39; &quot;</span><span style="color:#a3be8c;">This is the notification text</span><span>&quot;</span><span style="color:#a3be8c;">)</span><span>&quot; &gt;&quot;$</span><span style="color:#bf616a;">tty</span><span>&quot;
+</span></code></pre>
+<blockquote>
+<p>If you need to define a notification title, you can use the <strong>OSC 777</strong> sequence:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#96b5b4;">printf </span><span>&#39;</span><span style="color:#a3be8c;">\033]777;notify;%s;%s\a</span><span>&#39; &quot;</span><span style="color:#a3be8c;">This is the title</span><span>&quot; &quot;</span><span style="color:#a3be8c;">This is the text</span><span>&quot;
+</span></code></pre>
+</blockquote>
+<p>Now we just need to figure out how to make Codex call these methods.</p>
+<h2 id="tl-dr">TL;DR</h2>
+<h3 id="codex-native-system-notification-configuration">Codex Native System Notification Configuration</h3>
+<p>Add a <code>notify.sh</code> script that is responsible for receiving calls from Codex and parsing its arguments.</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#65737e;">#!/usr/bin/env bash
+</span><span>
+</span><span style="color:#96b5b4;">set</span><span> -eo pipefail
+</span><span>
+</span><span style="color:#8fa1b3;">_write</span><span>() {
+</span><span>	</span><span style="color:#b48ead;">local </span><span style="color:#bf616a;">msg</span><span>=&quot;$</span><span style="color:#bf616a;">1</span><span>&quot;
+</span><span>	</span><span style="color:#b48ead;">if </span><span style="color:#96b5b4;">[ </span><span style="color:#bf616a;">-n </span><span>&quot;$</span><span style="color:#bf616a;">TMUX</span><span>&quot; </span><span style="color:#96b5b4;">]</span><span>; </span><span style="color:#b48ead;">then
+</span><span>		</span><span style="color:#65737e;"># tmux inside：write into tty directly
+</span><span>		</span><span style="color:#b48ead;">local </span><span style="color:#bf616a;">tty
+</span><span>		</span><span style="color:#bf616a;">tty</span><span>=&quot;$</span><span style="color:#a3be8c;">(</span><span style="color:#bf616a;">tmux</span><span style="color:#a3be8c;"> display-message</span><span style="color:#bf616a;"> -p </span><span>&#39;</span><span style="color:#a3be8c;">#{client_tty}</span><span>&#39; </span><span style="color:#d08770;">2</span><span>&gt;</span><span style="color:#a3be8c;">/dev/null </span><span>|| </span><span style="color:#bf616a;">true</span><span style="color:#a3be8c;">)</span><span>&quot;
+</span><span>		</span><span style="color:#b48ead;">if </span><span style="color:#96b5b4;">[[ </span><span style="color:#bf616a;">-n </span><span>&quot;$</span><span style="color:#bf616a;">tty</span><span>&quot; &amp;&amp; </span><span style="color:#bf616a;">-w </span><span>&quot;$</span><span style="color:#bf616a;">tty</span><span>&quot; </span><span style="color:#96b5b4;">]]</span><span>; </span><span style="color:#b48ead;">then
+</span><span>			</span><span style="color:#96b5b4;">printf </span><span>&#39;</span><span style="color:#a3be8c;">%b</span><span>&#39; &quot;$</span><span style="color:#bf616a;">msg</span><span>&quot; &gt;&quot;$</span><span style="color:#bf616a;">tty</span><span>&quot;
+</span><span>		</span><span style="color:#b48ead;">else
+</span><span>			</span><span style="color:#65737e;"># fallback: DCS passthrough + double ESC
+</span><span>			</span><span style="color:#96b5b4;">printf </span><span>&#39;</span><span style="color:#a3be8c;">\033Ptmux;\033%s\033\\</span><span>&#39; &quot;$</span><span style="color:#bf616a;">msg</span><span>&quot;
+</span><span>		</span><span style="color:#b48ead;">fi
+</span><span>	</span><span style="color:#b48ead;">else
+</span><span>		</span><span style="color:#65737e;"># tmux outside：direct OSC 9
+</span><span>		</span><span style="color:#96b5b4;">printf </span><span>&#39;</span><span style="color:#a3be8c;">%b</span><span>&#39; &quot;$</span><span style="color:#bf616a;">msg</span><span>&quot;
+</span><span>	</span><span style="color:#b48ead;">fi
+</span><span>}
+</span><span>
+</span><span style="color:#65737e;"># OSC 9: notify with a single message string.
+</span><span style="color:#8fa1b3;">notify_osc9</span><span>() {
+</span><span>	</span><span style="color:#b48ead;">local </span><span style="color:#bf616a;">msg</span><span>=&quot;$</span><span style="color:#bf616a;">1</span><span>&quot;
+</span><span>	</span><span style="color:#bf616a;">_write </span><span>$&#39;</span><span style="color:#96b5b4;">\033</span><span style="color:#a3be8c;">]9;</span><span>&#39;&quot;$</span><span style="color:#a3be8c;">{</span><span style="color:#bf616a;">msg</span><span style="color:#a3be8c;">}</span><span>&quot;$&#39;</span><span style="color:#96b5b4;">\a</span><span>&#39;
+</span><span>}
+</span><span>
+</span><span style="color:#65737e;"># OSC 777 (Blink-style): notify;Title;Body
+</span><span style="color:#65737e;"># Note: Title/Body must not contain unescaped &#39;;&#39; ideally.
+</span><span style="color:#8fa1b3;">notify_osc777</span><span>() {
+</span><span>	</span><span style="color:#b48ead;">local </span><span style="color:#bf616a;">title</span><span>=&quot;$</span><span style="color:#bf616a;">1</span><span>&quot;
+</span><span>	</span><span style="color:#b48ead;">local </span><span style="color:#bf616a;">body</span><span>=&quot;$</span><span style="color:#bf616a;">2</span><span>&quot;
+</span><span>
+</span><span>	</span><span style="color:#65737e;"># Basic sanitation: replace newlines with spaces; replace &#39;;&#39; to avoid field split.
+</span><span>	</span><span style="color:#bf616a;">title</span><span>=&quot;$</span><span style="color:#a3be8c;">{</span><span style="color:#bf616a;">title</span><span>/</span><span style="color:#bf616a;">/</span><span>$&#39;</span><span style="color:#96b5b4;">\n</span><span>&#39;/ </span><span style="color:#a3be8c;">}</span><span>&quot;
+</span><span>	</span><span style="color:#bf616a;">body</span><span>=&quot;$</span><span style="color:#a3be8c;">{</span><span style="color:#bf616a;">body</span><span>/</span><span style="color:#bf616a;">/</span><span>$&#39;</span><span style="color:#96b5b4;">\n</span><span>&#39;/ </span><span style="color:#a3be8c;">}</span><span>&quot;
+</span><span>	</span><span style="color:#bf616a;">title</span><span>=&quot;$</span><span style="color:#a3be8c;">{</span><span style="color:#bf616a;">title</span><span>/</span><span style="color:#bf616a;">/</span><span style="color:#a3be8c;">;</span><span>/</span><span style="color:#a3be8c;">：}</span><span>&quot;
+</span><span>	</span><span style="color:#bf616a;">body</span><span>=&quot;$</span><span style="color:#a3be8c;">{</span><span style="color:#bf616a;">body</span><span>/</span><span style="color:#bf616a;">/</span><span style="color:#a3be8c;">;</span><span>/</span><span style="color:#a3be8c;">：}</span><span>&quot;
+</span><span>
+</span><span>	</span><span style="color:#bf616a;">_write </span><span>$&#39;</span><span style="color:#96b5b4;">\033</span><span style="color:#a3be8c;">]777;notify;</span><span>&#39;&quot;$</span><span style="color:#a3be8c;">{</span><span style="color:#bf616a;">title</span><span style="color:#a3be8c;">}</span><span>&quot;$&#39;</span><span style="color:#a3be8c;">;</span><span>&#39;&quot;$</span><span style="color:#a3be8c;">{</span><span style="color:#bf616a;">body</span><span style="color:#a3be8c;">}</span><span>&quot;$&#39;</span><span style="color:#96b5b4;">\a</span><span>&#39;
+</span><span>}
+</span><span>
+</span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>	</span><span style="color:#96b5b4;">[[ </span><span>$</span><span style="color:#bf616a;"># -ge</span><span> 1 </span><span style="color:#96b5b4;">]] </span><span>|| </span><span style="color:#96b5b4;">exit</span><span> 0
+</span><span>
+</span><span>	</span><span style="color:#b48ead;">local </span><span style="color:#bf616a;">json</span><span>=&quot;$</span><span style="color:#bf616a;">1</span><span>&quot;
+</span><span>
+</span><span>	</span><span style="color:#65737e;"># Fast type check
+</span><span>	</span><span style="color:#b48ead;">local </span><span style="color:#bf616a;">type
+</span><span>	</span><span style="color:#bf616a;">type</span><span>=&quot;$</span><span style="color:#a3be8c;">(</span><span style="color:#bf616a;">jq -r </span><span>&#39;</span><span style="color:#a3be8c;">.type // empty</span><span>&#39; &lt;&lt;&lt;&quot;$</span><span style="color:#bf616a;">json</span><span>&quot; </span><span style="color:#d08770;">2</span><span>&gt;</span><span style="color:#a3be8c;">/dev/null </span><span>|| </span><span style="color:#bf616a;">true</span><span style="color:#a3be8c;">)</span><span>&quot;
+</span><span>	</span><span style="color:#96b5b4;">[[ </span><span>&quot;$</span><span style="color:#bf616a;">type</span><span>&quot; == &quot;</span><span style="color:#a3be8c;">agent-turn-complete</span><span>&quot; </span><span style="color:#96b5b4;">]] </span><span>|| </span><span style="color:#96b5b4;">exit</span><span> 0
+</span><span>
+</span><span>	</span><span style="color:#b48ead;">local </span><span style="color:#bf616a;">last_msg input_messages thread_id title message
+</span><span>
+</span><span>	</span><span style="color:#bf616a;">last_msg</span><span>=&quot;$</span><span style="color:#a3be8c;">(</span><span style="color:#bf616a;">jq -r </span><span>&#39;</span><span style="color:#a3be8c;">.\&quot;last-assistant-message\&quot; // &quot;Turn Complete!&quot;</span><span>&#39; &lt;&lt;&lt;&quot;$</span><span style="color:#bf616a;">json</span><span>&quot;</span><span style="color:#a3be8c;">)</span><span>&quot;
+</span><span>	</span><span style="color:#bf616a;">input_messages</span><span>=&quot;$</span><span style="color:#a3be8c;">(</span><span style="color:#bf616a;">jq -r </span><span>&#39;</span><span style="color:#a3be8c;">.\&quot;input-messages\&quot; // [] | join(&quot; &quot;)</span><span>&#39; &lt;&lt;&lt;&quot;$</span><span style="color:#bf616a;">json</span><span>&quot;</span><span style="color:#a3be8c;">)</span><span>&quot;
+</span><span>	</span><span style="color:#bf616a;">thread_id</span><span>=&quot;$</span><span style="color:#a3be8c;">(</span><span style="color:#bf616a;">jq -r </span><span>&#39;</span><span style="color:#a3be8c;">.\&quot;thread-id\&quot; // &quot;&quot;</span><span>&#39; &lt;&lt;&lt;&quot;$</span><span style="color:#bf616a;">json</span><span>&quot;</span><span style="color:#a3be8c;">)</span><span>&quot;
+</span><span>
+</span><span>	</span><span style="color:#bf616a;">title</span><span>=&quot;</span><span style="color:#a3be8c;">Codex: </span><span>$</span><span style="color:#a3be8c;">{</span><span style="color:#bf616a;">last_msg</span><span style="color:#a3be8c;">}</span><span>&quot;
+</span><span>	</span><span style="color:#bf616a;">message</span><span>=&quot;$</span><span style="color:#a3be8c;">{</span><span style="color:#bf616a;">input_messages</span><span style="color:#a3be8c;">}</span><span>&quot;
+</span><span>
+</span><span>	</span><span style="color:#65737e;"># Prefer OSC 777 (Title/Body)
+</span><span>	</span><span style="color:#bf616a;">notify_osc777 </span><span>&quot;$</span><span style="color:#bf616a;">title</span><span>&quot; &quot;$</span><span style="color:#bf616a;">message</span><span>&quot;
+</span><span>	</span><span style="color:#65737e;"># notify_osc9 &quot;${title}\n${message}&quot;
+</span><span>}
+</span><span>
+</span><span style="color:#bf616a;">main </span><span>&quot;$</span><span style="color:#bf616a;">@</span><span>&quot;
+</span></code></pre>
+<p>Then add the following configuration to Codex's configuration file (usually <code>~/.codex/config.yaml</code>):</p>
+<pre data-lang="yaml" style="background-color:#2b303b;color:#c0c5ce;" class="language-yaml "><code class="language-yaml" data-lang="yaml"><span style="color:#bf616a;">notifications</span><span>:
+</span><span>  </span><span style="color:#bf616a;">enabled</span><span>: </span><span style="color:#d08770;">true
+</span><span>  </span><span style="color:#bf616a;">command</span><span>: </span><span style="color:#a3be8c;">/path/to/your/notify.sh
+</span></code></pre>
+<p>This way, when Codex completes a conversation turn, it will call your script to send system notifications.</p>
+<h3 id="claude-native-system-notification-configuration">Claude Native System Notification Configuration</h3>
+<p>Replace the main function in the <code>notify.sh</code> script above with the following code, and create <code>~/.claude/scripts/notify.sh</code>.</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>	</span><span style="color:#b48ead;">local </span><span style="color:#bf616a;">json
+</span><span>	</span><span style="color:#bf616a;">json</span><span>=&quot;$</span><span style="color:#a3be8c;">(</span><span style="color:#bf616a;">cat</span><span style="color:#a3be8c;">)</span><span>&quot;
+</span><span>
+</span><span>	</span><span style="color:#65737e;"># Fast type check
+</span><span>	</span><span style="color:#b48ead;">local </span><span style="color:#bf616a;">type
+</span><span>	</span><span style="color:#bf616a;">type</span><span>=&quot;$</span><span style="color:#a3be8c;">(</span><span style="color:#bf616a;">jq -r </span><span>&#39;</span><span style="color:#a3be8c;">.hook_event_name // empty</span><span>&#39; &lt;&lt;&lt;&quot;$</span><span style="color:#bf616a;">json</span><span>&quot; </span><span style="color:#d08770;">2</span><span>&gt;</span><span style="color:#a3be8c;">/dev/null </span><span>|| </span><span style="color:#bf616a;">true</span><span style="color:#a3be8c;">)</span><span>&quot;
+</span><span>	</span><span style="color:#b48ead;">case </span><span>&quot;$</span><span style="color:#bf616a;">type</span><span>&quot; </span><span style="color:#b48ead;">in
+</span><span>	&quot;</span><span style="color:#a3be8c;">Notification</span><span>&quot;</span><span style="color:#b48ead;">)
+</span><span>		</span><span style="color:#b48ead;">local </span><span style="color:#bf616a;">notification_type title message
+</span><span>
+</span><span>		</span><span style="color:#bf616a;">notification_type</span><span>=&quot;$</span><span style="color:#a3be8c;">(</span><span style="color:#bf616a;">jq -r </span><span>&#39;</span><span style="color:#a3be8c;">.\&quot;notification_type\&quot; // &quot;Unknown&quot;</span><span>&#39; &lt;&lt;&lt;&quot;$</span><span style="color:#bf616a;">json</span><span>&quot;</span><span style="color:#a3be8c;">)</span><span>&quot;
+</span><span>
+</span><span>		</span><span style="color:#bf616a;">title</span><span>=&quot;</span><span style="color:#a3be8c;">Claude: </span><span>$</span><span style="color:#a3be8c;">{</span><span style="color:#bf616a;">notification_type</span><span style="color:#a3be8c;">}</span><span>&quot;
+</span><span>		</span><span style="color:#bf616a;">message</span><span>=&quot;$</span><span style="color:#a3be8c;">(</span><span style="color:#bf616a;">jq -r </span><span>&#39;</span><span style="color:#a3be8c;">.message // empty</span><span>&#39; &lt;&lt;&lt;&quot;$</span><span style="color:#bf616a;">json</span><span>&quot;</span><span style="color:#a3be8c;">)</span><span>&quot;
+</span><span>		;;
+</span><span>	&quot;</span><span style="color:#a3be8c;">Stop</span><span>&quot;</span><span style="color:#b48ead;">)
+</span><span>		</span><span style="color:#bf616a;">title</span><span>=&quot;</span><span style="color:#a3be8c;">Claude: </span><span>$</span><span style="color:#a3be8c;">{</span><span style="color:#bf616a;">type</span><span style="color:#a3be8c;">}</span><span>&quot;
+</span><span>		</span><span style="color:#bf616a;">message</span><span>=&quot;</span><span style="color:#a3be8c;">All done!</span><span>&quot;
+</span><span>		;;
+</span><span>	*</span><span style="color:#b48ead;">)
+</span><span>		</span><span style="color:#96b5b4;">exit</span><span> 0
+</span><span>		;;
+</span><span>	</span><span style="color:#b48ead;">esac
+</span><span>
+</span><span>	</span><span style="color:#65737e;"># Prefer OSC 777 (Title/Body)
+</span><span>	</span><span style="color:#bf616a;">notify_osc777 </span><span>&quot;$</span><span style="color:#bf616a;">title</span><span>&quot; &quot;$</span><span style="color:#bf616a;">message</span><span>&quot;
+</span><span>	</span><span style="color:#65737e;"># notify_osc9 &quot;${title}\n${message}&quot;
+</span><span>}
+</span><span>
+</span></code></pre>
+<p>Then add the following configuration snippet to Claude's configuration file (usually <code>~/.claude/settings.json</code>):</p>
+<pre data-lang="json" style="background-color:#2b303b;color:#c0c5ce;" class="language-json "><code class="language-json" data-lang="json"><span>{
+</span><span>  &quot;</span><span style="color:#a3be8c;">hooks</span><span>&quot;: {
+</span><span>    &quot;</span><span style="color:#a3be8c;">Stop</span><span>&quot;: [
+</span><span>      {
+</span><span>        &quot;</span><span style="color:#a3be8c;">matcher</span><span>&quot;: &quot;&quot;,
+</span><span>        &quot;</span><span style="color:#a3be8c;">hooks</span><span>&quot;: [
+</span><span>          {
+</span><span>            &quot;</span><span style="color:#a3be8c;">type</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">command</span><span>&quot;,
+</span><span>            &quot;</span><span style="color:#a3be8c;">command</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">~/.claude/scripts/notify.sh</span><span>&quot;
+</span><span>          }
+</span><span>        ]
+</span><span>      }
+</span><span>    ],
+</span><span>    &quot;</span><span style="color:#a3be8c;">Notification</span><span>&quot;: [
+</span><span>      {
+</span><span>        &quot;</span><span style="color:#a3be8c;">matcher</span><span>&quot;: &quot;&quot;,
+</span><span>        &quot;</span><span style="color:#a3be8c;">hooks</span><span>&quot;: [
+</span><span>          {
+</span><span>            &quot;</span><span style="color:#a3be8c;">type</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">command</span><span>&quot;,
+</span><span>            &quot;</span><span style="color:#a3be8c;">command</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">~/.claude/scripts/notify.sh</span><span>&quot;
+</span><span>          }
+</span><span>        ]
+</span><span>      }
+</span><span>    ]
+</span><span>  }
+</span><span>}
+</span></code></pre>
+<blockquote>
+<p>This article is based on personal practical experience and was polished and optimized using <strong>Avante</strong> + <strong>DeepSeek V3.2</strong>.</p>
+</blockquote>
+
+        </div>
+
+    
+            <div class="pagination">
+                <div class="pagination__title">
+                    <span class="pagination__title-h">Thanks for reading! Read other posts?</span>
+                    <hr />
+                </div>
+                <div class="pagination__buttons">
+                        <span class="button previous">
+                            <a href="/en/claude-code-with-multi-api-providers/">
+                                <span class="button__icon">←</span>&nbsp;
+                                <span class="button__text">Claude Code with Multiple API Providers on NixOS</span>
+                            </a>
+                        </span>
+                    
+                    </div>
+            </div>
+        
+
+    <p id="license" xmlns:cc="http://creativecommons.org/ns#" >
+        This work by <span property="cc:attributionName">林玮 (Jade Lin)</span> is licensed under 
+        <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">
+            CC BY-NC-ND 4.0
+            <img src="/images/by-nc-nd.png" alt="">
+        </a>
+    </p>
+
+    <div class="giscus" style="margin-top: 4rem"></div>
+</div>
+
+    </div>
+
+    
+    <footer class="footer">
+        <div class="footer__inner">
+                <div class="copyright copyright--user"><b>Copyright ©</b>  &nbsp; 2025 linw1995</div>
+            </div>
+    </footer>
+    
+
+</div>
+<script type="text/javascript" src="/js/menu.js"></script>
+
+<script src="https://giscus.app/client.js"
+    data-repo="linw1995/linw1995.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnk3MDkyNjU4NA=="
+    data-category="General"
+    data-category-id="DIC_kwDOBDpA-M4CigfM"
+    data-mapping="og:title"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="top"
+    data-theme="dark"
+    data-lang="en"
+    data-loading="lazy"
+    crossorigin="anonymous"
+    async></script>
+
+</body>
+
+</html>
